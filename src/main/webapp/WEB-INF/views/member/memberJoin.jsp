@@ -7,16 +7,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<c:import url="./template/boot.jsp"></c:import>
+<c:import url="../template/boot.jsp"></c:import>
 </head>
 <body>
-</head>
-<body>
-	<c:import url="./template/nav.jsp"></c:import>
-
+	<c:import url="../template/nav.jsp"></c:import>
 	<div class="container">
-		<h1>Index Page</h1>
+		<h1>member join</h1>
+		<a href="./check/sendSMS?phoneNumber=01033943097">전송</a>
 	</div>
-
 </body>
 </html>
