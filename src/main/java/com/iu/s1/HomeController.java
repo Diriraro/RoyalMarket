@@ -8,7 +8,6 @@ public class HomeController {
 
 	@GetMapping("/")
 	public String getHome() throws Exception{
-		System.out.println("index");
 		return "index";
 	}
 	
