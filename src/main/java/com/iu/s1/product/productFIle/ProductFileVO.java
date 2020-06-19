@@ -3,7 +3,7 @@ package com.iu.s1.product.productFIle;
 public class ProductFileVO {
 	
 	private int fileNum;
-	private int num;
+	private int sell_num;
 	private String fileName;
 	private String oriName;
 	
@@ -13,11 +13,11 @@ public class ProductFileVO {
 	public void setFileNum(int fileNum) {
 		this.fileNum = fileNum;
 	}
-	public int getNum() {
-		return num;
+	public int getSell_num() {
+		return sell_num;
 	}
-	public void setNum(int num) {
-		this.num = num;
+	public void setSell_num(int sell_num) {
+		this.sell_num = sell_num;
 	}
 	public String getFileName() {
 		return fileName;
@@ -32,6 +32,7 @@ public class ProductFileVO {
 		this.oriName = oriName;
 	}
 	
+
 	
 	
 }

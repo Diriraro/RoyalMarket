@@ -2,7 +2,15 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  <mapper namespace="com.iu.s1.product.ProductMapper">
-  	<insert id="">
-  	</insert>
-  </mapper>
+<mapper namespace="com.iu.s1.product.ProductDAO">
+	<insert id="setInsert" parameterType="ProductVO"
+	keyProperty="sell_num" useGeneratedKeys="true">
+		insert into store_product
+		(sell_num, mem_storeNum, sell_title,
+		sell_price, sell_info, sell_kind,
+		sell_tag, sell_date)
+		values (0,#{mem_storeNum},
+		#{sell_title}, #{sell_price},#{sell_kind}, 
+		#{sell_tag},now())
+	</insert>
+</mapper>
