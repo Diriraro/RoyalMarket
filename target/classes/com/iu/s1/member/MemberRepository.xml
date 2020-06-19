@@ -17,4 +17,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		insert into member values(#{mem_id},#{mem_pw},#{mem_name},#{mem_email},#{mem_phone},#{mem_storeNum},#{mem_id},#{mem_address},0)
 	</insert>
 	
+	<select id="memberList" resultType="MemberVO">
+		select * from member
+	</select>
+	
 </mapper>

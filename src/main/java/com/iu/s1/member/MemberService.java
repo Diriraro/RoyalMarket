@@ -1,6 +1,8 @@
 package com.iu.s1.member;
 
 import java.util.HashMap;
+import java.util.List;
+
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -70,6 +72,10 @@ public class MemberService {
 	
 	public MemberVO memberLogin(MemberVO memberVO) throws Exception{
 		return memberRepository.memberLogin(memberVO);
+	}
+	
+	public List<MemberVO> memberList() throws Exception{
+		return memberRepository.memberList();
 	}
 	
 	

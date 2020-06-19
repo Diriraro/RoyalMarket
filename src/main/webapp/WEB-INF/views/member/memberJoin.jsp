@@ -9,6 +9,20 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <c:import url="../template/boot.jsp"></c:import>
+<style type="text/css">
+.wmnsE {
+    width: 570px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 3px 6px 0px;
+    background: rgb(255, 255, 255);
+    padding: 60px;
+}
+.kHXIxY {
+    display: flex;
+    -webkit-box-pack: center;
+    justify-content: center;
+    padding: 100px 0px;
+}
+</style>
 </head>
 <body>
 	<c:import url="../template/nav.jsp"></c:import>
@@ -40,7 +54,6 @@
 					<form:errors path="pwCheck"></form:errors>
 				</div>
 			</div>
-			<div></div>
 			<div class="form-group">
 				<label class="control-label col-sm-2" for="mem_name">name:</label>
 				<div class="col-sm-10">
@@ -57,8 +70,15 @@
 					<form:errors path="mem_phone"></form:errors>
 				</div>
 			</div>
-			<button>인증하기</button>
-			<div style="display:none;"></div>
+			<a href="#" id="btnCheck" class="btn btn-default">인증번호 요청</a>
+			<div id="divCheck" style="display: none;">
+				<label class="control-label col-sm-2" for="check_num">인증번호:</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" id="check_num"
+						placeholder="인증번호" name="check_num" />
+				</div>
+			</div>
+			
 			<div class="form-group">
 				<label class="control-label col-sm-2" for="mem_address">Adress:</label>
 				<div class="col-sm-10">
@@ -81,7 +101,25 @@
 				</div>
 			</div>
 		</form:form>
-		<a href="./check/sendSMS?phoneNumber=01046265193">인증번호 전송</a>
 	</div>
+	<a href="./check/sendSMS?phoneNumber=01033943097" id="btnCheck" class="btn btn-default">인증번호 요청</a>
+<script type="text/javascript">
+	$("#btnCheck").click(function(){
+		var phoneNumber = $('#mem_phone').val();
+		
+		$("#divCheck").css("display","block");
+		 $.ajax({
+             type: "GET",
+             url: "/member/check/sendSMS",
+             data: {
+                 "phoneNumber" : phoneNumber
+             }
+		 })
+         
+		});
+	
+</script>
+
+
 </body>
 </html>
