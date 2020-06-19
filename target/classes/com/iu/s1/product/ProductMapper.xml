@@ -3,14 +3,21 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.iu.s1.product.ProductDAO">
-	<insert id="setInsert" parameterType="ProductVO"
-	keyProperty="sell_num" useGeneratedKeys="true">
+	<insert id="productInsert" parameterType="ProductVO"
+		keyProperty="sell_num" useGeneratedKeys="true">
 		insert into store_product
-		(sell_num, mem_storeNum, sell_title,
-		sell_price, sell_info, sell_kind,
+		(sell_num, mem_storeNum, sell_product,
+		sell_price, sell_info,
+		sell_kind,
 		sell_tag, sell_date)
-		values (0,#{mem_storeNum},
-		#{sell_title}, #{sell_price},#{sell_kind}, 
+		values (0,0,
+		#{sell_product},
+		#{sell_price},#{sell_kind},
 		#{sell_tag},now())
 	</insert>
+
+	<select id="storeListSelect" parameterType="java.lang.Long"
+		resultType="com.doom.s1.storeList.StoreListVO">
+		SELECT * FROM storeList WHERE sell_num=#{sell_num}
+	</select>
 </mapper>

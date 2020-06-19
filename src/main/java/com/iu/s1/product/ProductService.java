@@ -29,11 +29,11 @@ public class ProductService {
 	
 	private String filePath;
 	
-	public int setInsert(ProductVO productVO, MultipartFile[] files) throws Exception{
+	public int productInsert(ProductVO productVO, MultipartFile[] files) throws Exception{
 		
 		File file = filePathGenerator.getUseClassPathResource(filePath);
 		
-		int result = productDAO.setInsert(productVO);
+		int result = productDAO.productInsert(productVO);
 		
 		for (MultipartFile multipartFile : files) {
 			if (multipartFile.getSize()<=0) {
@@ -46,7 +46,7 @@ public class ProductService {
 		vo.setFileName(fileName);
 		vo.setOriName(multipartFile.getOriginalFilename());
 		
-		result = productFileDAO.setInsert(vo);
+		result = productFileDAO.productFileInsert(vo);
 		
 		
 		}

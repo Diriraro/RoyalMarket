@@ -25,19 +25,20 @@
 	<c:import url="../template/nav.jsp"></c:import>
 	<form action="productNew" method="post" enctype="multipart/form-data">
 
-		<a id="sellimg"><img src="${pageContext.request.contextPath}/resources/images/showimage.png"></a>
-		<div class="form-group" id="f"></div>
-		
-		<div class="imagePreview"></div> <input id="files" type="file" name="files" accept="image/jpg, image/jpeg, image/png" class="img" />
-		
+		<!-- <a id="sellimg"><img src="${pageContext.request.contextPath}/resources/images/showimage.png"></a>
+		<div class="form-group" id="f"></div> -->
 
+		<div class="imagePreview"></div>
+		
+		<input id="files" type="file" name="files" accept="image/jpg, image/jpeg, image/png" class="img" /> 
 			
-		<input type="hidden" name="mem_storeNum" value="${vo.mem_storeNum}" id="mem_storeNum">
-		<input type="hidden" name="sell_date" id="sell_date">
+		<input type="hidden" name="mem_storeNum" value="${vo.mem_storeNum}" id="mem_storeNum"> 
+			
+        <input type="hidden" name="sell_date" id="sell_date">
 
 		<div class="form-group">
-			<label for="sell_title">제목</label> <input type="text"
-				name="sell_title" class="form-control" id="sell_title">
+			<label for="sell_product">제목</label> <input type="text"
+				name="sell_product" class="form-control" id="sell_product">
 		</div>
 
 		<div style="overflow-y: scroll; width: 300px; height: 300px;">
@@ -67,41 +68,44 @@
 		</div>
 		선택한 카테고리 : <input type="text" id="sell_kind" value="">
 		<div class="form-group">
-			<div >
-					상태<span>*</span>
+			<div>
+				상태<span>*</span>
+			</div>
+			<div>
+				<div>
+					<label for="중고상품"> <input id="중고상품" type="radio" value="0"
+						checked="checked" onclick="doOpenCheck(this);" name="condition">중고상품
+					</label> <label for="새상품" class="sc-hBbWxd ldFYyE"> <input id="새상품"
+						type="radio" value="0" onclick="doOpenCheck(this);"
+						name="condition">새상품
+					</label>
 				</div>
-				<div >
-					<div >
-						<label for="중고상품" >
-						<input id="중고상품" type="radio" value="0" checked="checked" onclick="doOpenCheck(this);" name="condition">중고상품</label>
-						<label for="새상품" class="sc-hBbWxd ldFYyE">
-						<input id="새상품" type="radio" value="0" onclick="doOpenCheck(this);" name="condition">새상품</label>
-					</div>
-				</div>
+			</div>
 		</div>
+
+		<div class="form-group">
+			<div>
+				교환<span>*</span>
+			</div>
+			<div>
+				<div>
+					<label for="교환불가"> <input id="교환불가" type="radio" value="0"
+						checked="checked" onclick="doOpenCheck(this);" name="exchange">교환불가
+					</label> <label for="교환가능" class="sc-hBbWxd ldFYyE"> <input
+						id="교환가능" type="radio" value="0" onclick="doOpenCheck(this);"
+						name="exchange">교환가능
+					</label>
+				</div>
+			</div>
+		</div>
+		가격 <input type="text" id="sell_price">원 <br> 
 		
-				<div class="form-group">
-			<div >
-					교환<span>*</span>
-				</div>
-				<div >
-					<div >
-						<label for="교환불가" >
-						<input id="교환불가" type="radio" value="0" checked="checked" onclick="doOpenCheck(this);" name="exchange">교환불가</label>
-						<label for="교환가능" class="sc-hBbWxd ldFYyE">
-						<input id="교환가능" type="radio" value="0" onclick="doOpenCheck(this);" name="exchange">교환가능</label>
-					</div>
-				</div>
-		</div>
-		가격
-		<input type="text" id="sell_price">원
-		<br>
 		<label for="sell_info">설명</label>
 		<textarea name="sell_info" class="form-control" id="sell_info"
 			name="sell_info">
-			${vo.contents}
 			</textarea>
-
+			
+		태그 <input type="text" id="sell_tag"> <br> 
 
 
 		<button type="submit" class="btn btn-default">Submit</button>
@@ -113,9 +117,13 @@
 			$("#sell_kind").val($(this).val());
 		});
 
-		$("#sellimg").click(function() {
-			$("#f").append('<div class="imagePreview"></div> <input id="files" type="file" name="files" accept="image/jpg, image/jpeg, image/png" class="img" /> ')
-		});
+		$("#sellimg")
+				.click(
+						function() {
+							$("#f")
+									.append(
+											'<div class="imagePreview"></div> <input id="files" type="file" name="files" accept="image/jpg, image/jpeg, image/png" class="img" /> ')
+						});
 
 		$(function() {
 
@@ -136,22 +144,22 @@
 					});
 		});
 
-		function doOpenCheck(chk){
-		    var obj = document.getElementsByName("condition");
-		    for(var i=0; i<obj.length; i++){
-		        if(obj[i] != chk){
-		            obj[i].checked = false;
-		        }
-		    }
+		function doOpenCheck(chk) {
+			var obj = document.getElementsByName("condition");
+			for (var i = 0; i < obj.length; i++) {
+				if (obj[i] != chk) {
+					obj[i].checked = false;
+				}
+			}
 		}
 
-		function doOpenCheck(ch){
-		    var obj = document.getElementsByName("exchange");
-		    for(var i=0; i<obj.length; i++){
-		        if(obj[i] != chk){
-		            obj[i].checked = false;
-		        }
-		    }
+		function doOpenCheck(ch) {
+			var obj = document.getElementsByName("exchange");
+			for (var i = 0; i < obj.length; i++) {
+				if (obj[i] != chk) {
+					obj[i].checked = false;
+				}
+			}
 		}
 	</script>
 

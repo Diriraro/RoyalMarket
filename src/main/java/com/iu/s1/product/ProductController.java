@@ -19,21 +19,21 @@ public class ProductController {
 	private ProductService productService;
 	
 	@GetMapping("productNew")
-	public ModelAndView setInsert(ModelAndView mv)throws Exception{
+	public ModelAndView productInsert(ModelAndView mv)throws Exception{
 		mv.setViewName("product/productNew");
 		mv.addObject("productVO", new ProductVO());
 		return mv;
 	}
 	
 	@PostMapping("productNew")
-	public ModelAndView setInsert(@Valid ProductVO productVO, BindingResult bindingResult, MultipartFile[] files,
+	public ModelAndView productInsert(@Valid ProductVO productVO, BindingResult bindingResult, MultipartFile[] files,
 			RedirectAttributes rd) throws Exception {
 
 		ModelAndView mv = new ModelAndView();
 		if (bindingResult.hasErrors()) {
 			mv.setViewName("product/productNew");
 		} else {
-			int result = productService.setInsert(productVO, files);
+			int result = productService.productInsert(productVO, files);
 			rd.addFlashAttribute("result", result);
 			mv.setViewName("redirect:../");
 		}

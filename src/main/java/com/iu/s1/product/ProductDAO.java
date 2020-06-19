@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ProductDAO {
 
-	public int setInsert(ProductVO productVO) throws Exception;
+	public int productInsert(ProductVO productVO) throws Exception;
 	
 }

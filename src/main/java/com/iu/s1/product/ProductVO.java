@@ -8,7 +8,7 @@ public class ProductVO {
 	
 	private int mem_storeNum;
 	
-	private String sell_title;
+	private String sell_product;
 	
 	private int sell_price;
 	
@@ -19,6 +19,7 @@ public class ProductVO {
 	private String sell_tag;
 	
 	private Date sell_date;
+	
 
 	public int getSell_num() {
 		return sell_num;
@@ -36,12 +37,12 @@ public class ProductVO {
 		this.mem_storeNum = mem_storeNum;
 	}
 
-	public String getSell_title() {
-		return sell_title;
+	public String getSell_product() {
+		return sell_product;
 	}
 
-	public void setSell_title(String sell_title) {
-		this.sell_title = sell_title;
+	public void setSell_product(String sell_product) {
+		this.sell_product = sell_product;
 	}
 
 	public int getSell_price() {
@@ -83,6 +84,7 @@ public class ProductVO {
 	public void setSell_date(Date sell_date) {
 		this.sell_date = sell_date;
 	}
+
 
 	
 }
