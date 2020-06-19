@@ -3,12 +3,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 
-
+<!-- shop 페이지가 공통으로 가져갈곳  -->
 <div class="container">
 	<h1>test</h1>
 	<div style="border: 1px solid black; width: 1024px; height: 340px;">
-	
-		<!-- div 1번 -->		
+
+		<!-- div 1번 -->
 		<div style="width: 340px; float: left;">
 			<div style="border: 1px solid black; width: 330px; height: 330px;">
 				<!-- 사진  -->
@@ -16,10 +16,12 @@
 			</div>
 		</div>
 		<!-- div 2번  -->
-		<div style="border: 1px solid black; width: 680px; height: 330px; float: left;">
+		<div
+			style="border: 1px solid black; width: 680px; height: 330px; float: left;">
 
 			<div style="border: 1px solid black; height: 80px;">
-				<span>상점명</span>
+				<span>상점명</span><button>상점명 수정</button>
+				<a>${vo} </a>
 			</div>
 
 			<div style="border: 1px solid black; height: 80px;">
@@ -35,27 +37,4 @@
 		</div>
 	</div>
 
-	<button class="btn btn-info">
-		<a href="./myshop">상품</a>
-	</button>
-
-	<button class="btn btn-info">
-		<a href="./reviews">상점문의</a>
-	</button>
-
-	<button class="btn btn-info">
-		<a href="./favorites"> 찜</a>
-	</button>
-
-	<button class="btn btn-info">
-		<a href="./reviews">상점후기</a>
-	</button>
-
-	<button class="btn btn-info">
-		<a href="./followings">팔로잉</a>
-	</button>
-
-	<button class="btn btn-info">
-		<a href="./followers">팔로워</a>
-	</button>
 </div>
