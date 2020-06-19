@@ -49,6 +49,10 @@ public class PaymentController {
 		
 		return mv;
 	}
+	@GetMapping("productPay")
+	public String productPay()throws Exception{
+		return "/payment/productPay";
+	}
 	
 	
 	
