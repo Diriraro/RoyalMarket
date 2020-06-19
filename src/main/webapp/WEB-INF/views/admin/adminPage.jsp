@@ -220,6 +220,11 @@ section {
 					getNoticeList();
 				}
 			})
+			$("#content").on("click", "#frm", function() {
+				var kind = $("#kind").val();
+				var search = $("#search").val();
+				getMemberSearchList(kind, search);
+			})
 		})
 
 		function getMemberList() {
@@ -228,6 +233,17 @@ section {
 				$("#content").append(result);
 			})
 		}
+
+		function getMemberSearchList(kind, search) {
+			$("#content").empty();
+			$.post("./list/getMemberList", {
+				kind : kind,
+				search : search
+			}, function(result) {
+				$("#content").append(result);
+			})
+		}
+
 		function getProductList() {
 			$("#content").empty();
 			$.get("./list/getProductList", function(result) {

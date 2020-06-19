@@ -11,12 +11,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.iu.s1.MemberVO;
 import com.iu.s1.NoticeVO;
 import com.iu.s1.ProductVO;
+import com.iu.s1.member.MemberVO;
 
 
 @Controller
@@ -48,8 +49,19 @@ public class AdminController {
 	@GetMapping("getMemberList")
 	public void getMemberList (Model model) throws Exception {
 		List<MemberVO> ar = new ArrayList<MemberVO>();
-//		ar = adminService.getMemberList();
-		model.addAttribute("memberli",ar);
+		ar = adminService.getMemberList();
+		model.addAttribute("list",ar);
 	}
+	
+	@PostMapping("getMemberList")
+	public void getMemberList (Model model, String kind, String search) throws Exception {
+		List<MemberVO> ar = new ArrayList<MemberVO>();
+		ar = adminService.getMemberSearchList(kind, search);
+		for(int i = 0 ; i < ar.size(); i++) {
+			System.out.println("Post :" + ar.get(i).getMem_id());
+		}
+		model.addAttribute("list",ar);
+	}
+	
 	
 }

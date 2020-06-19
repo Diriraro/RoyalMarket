@@ -48,6 +48,10 @@ public class MemberVO {
 	
 	@Column
 	private long mem_point;
+	
+	private String kind;
+	
+	private String search;
 
 
 }
