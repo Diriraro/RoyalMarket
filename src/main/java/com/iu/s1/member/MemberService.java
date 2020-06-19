@@ -2,12 +2,19 @@ package com.iu.s1.member;
 
 import java.util.HashMap;
 import org.json.simple.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.BindingResult;
+
 import net.nurigo.java_sdk.api.Message;
 import net.nurigo.java_sdk.exceptions.CoolsmsException;
 
 @Service
 public class MemberService {
+	
+	@Autowired
+	private MemberRepository memberRepository;
+	
 	public void certifiedPhoneNumber(String phoneNumber, String numStr) {
 
 		String api_key ="NCSKDFS8HXUGJKD7";
@@ -31,4 +38,38 @@ public class MemberService {
 		}
 
 	}
+	
+	public int memberJoin(MemberVO memberVO) throws Exception{
+		return memberRepository.memberJoin(memberVO);
+	}
+	
+	
+	//검증 메서드 
+	public boolean memberCheck(MemberVO memberVO,BindingResult bindingResult) throws Exception{
+		boolean result = false; //false 에러X, true 에러O
+		
+		//1. 기본어노테이션 제공 검증 실행
+		result = bindingResult.hasErrors();
+		
+		//2.pw가 일치하는 지 검증
+		if(!memberVO.getMem_pw().equals(memberVO.getPwCheck())) {
+			bindingResult.rejectValue("pwCheck", "memberVO.mem_pw.notEqual");
+			result = true;
+		}
+		
+		//3.ID 중복검사
+		memberVO = memberRepository.memberIdCheck(memberVO);
+		if(memberVO != null) {
+			bindingResult.rejectValue("mem_id", "memberVO.mem_id.same");
+			result = true;
+		}
+		return result;
+	}
+	
+	public MemberVO memberLogin(MemberVO memberVO) throws Exception{
+		return memberRepository.memberLogin(memberVO);
+	}
+	
+	
+	
 }
