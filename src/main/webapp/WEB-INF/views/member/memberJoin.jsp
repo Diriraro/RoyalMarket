@@ -78,7 +78,7 @@
 				</div>
 			</div>
 		</form:form>
-		<a href="./check/sendSMS?phoneNumber=01033943097">인증번호 전송</a>
+		<a href="./check/sendSMS?phoneNumber=01046265193">인증번호 전송</a>
 	</div>
 </body>
 </html>
