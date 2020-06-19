@@ -30,6 +30,7 @@
 
 			<div style="border: 1px solid black; height: 80px;">
 				<span>상점코멘트</span>
+				<a>${vo2 }</a>
 			</div>
 			<div style="border: 1px solid black; height: 80px;">
 				<button>코멘트 수정</button>

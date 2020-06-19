@@ -8,12 +8,12 @@
 <meta charset="EUC-KR">
 <title>Insert title here</title>
 <c:import url="../template/boot.jsp"></c:import>
-
+<c:import url="../template/summer.jsp"></c:import>
 </head>
 <body>
 <c:import url="../template/nav.jsp"></c:import>
 
-		<h1> 코멘트페이지</h1>
+		<h1> 코멘트페이지 || 상점문의</h1>
 		
 		<c:import url="../template/shopmain.jsp"></c:import>
 	
@@ -50,7 +50,12 @@
 
 
 			<div>
-				<h2>내용</h2>
+				<h2>상점문의</h2>
+				<div>
+				<c:import url="../template/comentsForm.jsp"></c:import>
+				</div>
+				
+				
 
 			</div>
 

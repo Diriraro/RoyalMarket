@@ -7,7 +7,7 @@
   	<typeAliases>
   		<typeAlias type="java.util.List" alias="List"/>
   		<typeAlias type="java.lang.Long" alias="Long"/>
-  		
+  		<typeAlias type="com.iu.s1.shop.qna.StoreQnaVO" alias="StoreQnaVO"/>
   	</typeAliases>
   	
   </configuration>

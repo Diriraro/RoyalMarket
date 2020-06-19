@@ -5,22 +5,29 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.iu.s1.shop.qna.StoreQnaService;
+
 @Controller
 @RequestMapping("/shop/**")
 public class ShopController {
-
+	
+	private StoreQnaService storeQnaService;
+	
 	
 	// 내상점 누르면 기본으로 상품페이지 출력
 	@GetMapping("myshop")
 	public ModelAndView myshop(ModelAndView mv) throws Exception {
 		
 		mv.addObject("vo","test");
+		mv.addObject("vo2","코멘트");
 		mv.setViewName("shop/myshop");
 		return mv;
 	}
 	//상점문의
 	@GetMapping("comments")
 	public ModelAndView comments(ModelAndView mv) throws Exception {
+		
+		
 		mv.addObject("vo","test");
 		mv.setViewName("shop/comments");
 		return mv;
