@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 
+import net.nurigo.java_sdk.Coolsms;
 import net.nurigo.java_sdk.api.Message;
 import net.nurigo.java_sdk.exceptions.CoolsmsException;
 
@@ -28,7 +29,8 @@ public class MemberService {
 		params.put("type", "SMS");
 		params.put("text", "인증번호는" + "[" + numStr + "]" + "입니다.");
 		params.put("app_version", "test app 2.2"); // application name and version
-
+		
+   
 		try {
 			JSONObject obj = (JSONObject) coolsms.send(params);
 			System.out.println(obj.toString());

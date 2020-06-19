@@ -56,6 +56,8 @@
 					<form:errors path="mem_phone"></form:errors>
 				</div>
 			</div>
+			<button>인증하기</button>
+			<div style="display:none;"></div>
 			<div class="form-group">
 				<label class="control-label col-sm-2" for="mem_address">Adress:</label>
 				<div class="col-sm-10">
