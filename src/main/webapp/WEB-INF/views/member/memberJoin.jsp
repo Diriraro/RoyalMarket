@@ -40,6 +40,7 @@
 					<form:errors path="pwCheck"></form:errors>
 				</div>
 			</div>
+			<div></div>
 			<div class="form-group">
 				<label class="control-label col-sm-2" for="mem_name">name:</label>
 				<div class="col-sm-10">
