@@ -12,9 +12,11 @@
 <h1> 코인 결제</h1>
 	<div class="container">
 	
+	<form action="/payment/pay" method="get">
+		<input type="text" id="amount" name="amount">
+		<button type="submit">충전하기</button>
+	</form>
 	
-	<input type="text" class="form-control" id="usr">
-	<input type="submit" value="충전하기">
 	</div>
 </body>
 </html>

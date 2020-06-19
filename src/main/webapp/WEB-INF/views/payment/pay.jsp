@@ -26,7 +26,7 @@
             pay_method : 'card',
             merchant_uid : 'merchant_' + new Date().getTime(),
             name : 'WooJoo Market',
-            amount : 10000,					// 금액 
+            amount : ${amount},					// 금액 
             buyer_email : 'Test@naver.com', // 맴버의 이메일 받아오기    ${member.email}
             buyer_name : 'Test',			// 맴버의 이름 받아오기	   ${member.name}
             buyer_tel : '01012341234',		// 맴버의 전화번호 받아오기 ${member.tel}
@@ -60,8 +60,7 @@
                     }
                 });
                 //성공시 이동할 페이지
-              var key = $("#pf_key").attr("value");
-                location.href='<%=request.getContextPath()%>/payment/paySuccess?pf_key='+key;
+                location.href='<%=request.getContextPath()%>/payment/paySuccess?mem_point=${amount}';
             } else {
                 msg = '결제에 실패하였습니다.';
                 msg += '에러내용 : ' + rsp.error_msg;
