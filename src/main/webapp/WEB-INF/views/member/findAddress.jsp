@@ -100,8 +100,6 @@
 
 
 		 function setParentText(){
-			 var road_address = $("#sample4_roadAddress").val()
-			 alert(road_address);
              opener.document.getElementById("road_address").value = document.getElementById("sample4_roadAddress").value
              window.close();
         }

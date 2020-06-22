@@ -71,7 +71,6 @@
 						id="mem_phone" placeholder="Enter Phone" />
 				</div>
 			</div>
-			<a href="#" id="window" class="btn btn-default">핸드폰 인증하기</a>
 			
 			<a href="#" id="btnCheck" class="btn btn-default">인증번호 요청</a>
 			
@@ -83,16 +82,6 @@
 					<form:errors path="phoneCheck"></form:errors>
 				</div>
 			</div>
-			
-			<%-- <div class="form-group">
-				<label class="control-label col-sm-2" for="mem_address">Adress:</label>
-				<div class="col-sm-10">
-					<form:input path="mem_address" type="text" class="form-control"
-						id="mem_address" placeholder="Enter Address" value="${road_address}" />
-					<form:errors path="mem_address"></form:errors>
-				</div>
-			</div> --%>
-				
 			 
 			<div class="form-group">
 				<label class="control-label col-sm-2" for="road_address">주소:</label>
@@ -102,7 +91,7 @@
 				</div>
 			</div> 
 
-			<a href="" class="btn btn-default" onclick="openChild()">주소 검색</a>
+			<input type="button" value="주소 검색" class="btn btn-default" onclick="openChild()"><br>
 			
 			<div class="form-group">
 				<label class="control-label col-sm-2" for="detail_address">상세 주소:</label>
@@ -143,21 +132,6 @@
 			})
 
 		});
-
-		$("#window").click(function(){
-			var win = window.open("", "", "width=500,height=600");
-
-			win.document.write("<p>새창에 표시될 내용 입니다.</p>");
-
-			});
-
-		$("#findAddress").click(function(){
-			var win = window.open("./findAddress", "", "width=500,height=600");
-
-
-			});
-
-
 
 		var openWin;
 	    
