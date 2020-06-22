@@ -2,20 +2,26 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  <mapper namespace="com.iu.s1.shop.qna.StoreQnaRepository">
-  
-  
-  <insert id="setInsert" parameterType="com.iu.s1.shop.qna.StoreQnaVO">
-  	insert into store_qna(#{sq_num},#{mem_storeNum},#{sq_storeName},#{sq_contents},#{sq_regDate})
-  </insert>
+<mapper namespace="com.iu.s1.shop.qna.StoreQnaRepository">
 
-  
-  <delete id="setDelete" parameterType="com.iu.s1.shop.qna.StoreQnaVO">
-    delete from store_qna where sq_num = #{sq_num}
-  
-  </delete>
-  
-  
-  <select id="getSelectList" resultType="com.iu.s1.shop.qna.StoreQnaVO">
-  	select *from store_qna order by sq_num desc
-  </select>
+
+	<insert id="setInsert"
+		parameterType="com.iu.s1.shop.qna.StoreQnaVO">
+		insert into
+		store_qna(#{sq_num},#{mem_storeNum},#{sq_storeName},#{sq_contents},#{sq_regDate})
+	</insert>
+
+
+	<delete id="setDelete"
+		parameterType="com.iu.s1.shop.qna.StoreQnaVO">
+		delete from store_qna where sq_num = #{sq_num}
+
+	</delete>
+
+
+	<select id="getSelectList"
+		resultType="com.iu.s1.shop.qna.StoreQnaVO">
+		select *from store_qna order by sq_num desc
+	</select>
+
+</mapper>

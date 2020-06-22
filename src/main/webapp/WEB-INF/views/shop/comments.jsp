@@ -13,7 +13,7 @@
 <body>
 <c:import url="../template/nav.jsp"></c:import>
 
-		<h1> 코멘트페이지 || 상점문의</h1>
+		<h1> 코멘트페이지 || 상점문의 StoreQna</h1>
 		
 		<c:import url="../template/shopmain.jsp"></c:import>
 	
@@ -52,7 +52,7 @@
 			<div>
 				<h2>상점문의</h2>
 				<div>
-				<c:import url="../template/comentsForm.jsp"></c:import>
+				<%-- <c:import url="../template/comentsForm.jsp"></c:import> --%>  <!-- 잠깐 주석 -->
 				</div>
 				
 				

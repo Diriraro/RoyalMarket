@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>    
     <!-- modelattribute = 컨트롤에서 VO타입으로 보내줘야함  -->
-	<form:form modelAttribute="boardVO" action="${board}${path}" method="post">
+	<form:form modelAttribute="StoreQnaVO" action="${board}${path}" method="post">
 	
 	<!-- vo.num == path ="num" 같은형식 -->
 		<form:input path="num" type="hidden" id="num" />

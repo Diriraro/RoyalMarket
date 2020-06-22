@@ -1,19 +1,23 @@
 package com.iu.s1.shop;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.iu.s1.shop.qna.StoreQnaService;
+import com.iu.s1.shop.qna.StoreQnaVO;
 
 @Controller
 @RequestMapping("/shop/**")
 public class ShopController {
-	
+	@Autowired
 	private StoreQnaService storeQnaService;
 	
-	
+		
 	// 내상점 누르면 기본으로 상품페이지 출력
 	@GetMapping("myshop")
 	public ModelAndView myshop(ModelAndView mv) throws Exception {
@@ -25,10 +29,13 @@ public class ShopController {
 	}
 	//상점문의
 	@GetMapping("comments")
-	public ModelAndView comments(ModelAndView mv) throws Exception {
+	public ModelAndView comments(ModelAndView mv,StoreQnaVO storeQnaVO) throws Exception {
+		
+		List<StoreQnaVO> ar = storeQnaService.getSelectList(storeQnaVO);
 		
 		
 		mv.addObject("vo","test");
+		mv.addObject("list",ar);
 		mv.setViewName("shop/comments");
 		return mv;
 	}
