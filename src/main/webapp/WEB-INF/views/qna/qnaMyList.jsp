@@ -7,13 +7,14 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<c:import url="./template/boot.jsp"></c:import>
+<c:import url="../template/boot.jsp"></c:import>
 </head>
 <body>
-<c:import url="./template/nav.jsp"></c:import>
+<c:import url="../template/nav.jsp"></c:import>
 
 <div class="container">
-	<h1>Index PAGe</h1>	
+	<h1 style="display: inline-block;"><a href="./qnaWrite">1:1 상담하기</a></h1>
+	<h1 style="display: inline-block;" align="right">상담내역</h1>	
 	
 </div>
 
