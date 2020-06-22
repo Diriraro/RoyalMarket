@@ -1,66 +1,91 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
-    <%@taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 <c:import url="../template/boot.jsp"></c:import>
 <c:import url="../template/summer.jsp"></c:import>
 </head>
 <body>
-<c:import url="../template/nav.jsp"></c:import>
+	<c:import url="../template/nav.jsp"></c:import>
 
-		<h1> ÄÚ¸àÆ®ÆäÀÌÁö || »óÁ¡¹®ÀÇ StoreQna</h1>
-		
-		<c:import url="../template/shopmain.jsp"></c:import>
-	
+	<h1>ì½”ë©˜íŠ¸í˜ì´ì§€ || ìƒì ë¬¸ì˜ StoreQna</h1>
+	<h2>${mem_storeNum}</h2>
+
+	<c:import url="../template/shopmain.jsp"></c:import>
+
 	<div class="container">
-		<div style="border: 1px solid black; width: 1024px; height: 340px;">
-			<!-- °¢ÀÚ ÆäÀÌÁö¿¡ ÇÏ³ª¾¿ »ı¼º  -->
-			<!--¹öÆ° °¨½Î´Â div  -->
+		<div
+			style="border: 1px solid blue; width: 1024px; min-height: 34 0px;">
+			<!-- ê°ì í˜ì´ì§€ì— í•˜ë‚˜ì”© ìƒì„±  -->
+			<!--ë²„íŠ¼ ê°ì‹¸ëŠ” div  -->
 			<div>
 				<button class="btn btn-info">
-					<a href="./myshop">»óÇ°</a>
+					<a href="./myshop">ìƒí’ˆ</a>
 				</button>
 
 				<button class="btn btn-danger">
-					<a href="./comments">»óÁ¡¹®ÀÇ</a>
+					<a href="./comments">ìƒì ë¬¸ì˜</a>
 				</button>
 
 				<button class="btn btn-info">
-					<a href="./favorites"> Âò</a>
+					<a href="./favorites"> ì°œ</a>
 				</button>
 
 				<button class="btn btn-info">
-					<a href="./reviews">»óÁ¡ÈÄ±â</a>
+					<a href="./reviews">ìƒì í›„ê¸°</a>
 				</button>
 
 				<button class="btn btn-info">
-					<a href="./followings">ÆÈ·ÎÀ×</a>
+					<a href="./followings">íŒ”ë¡œì‰</a>
 				</button>
 
 				<button class="btn btn-info">
-					<a href="./followers">ÆÈ·Î¿ö</a>
+					<a href="./followers">íŒ”ë¡œì›Œ</a>
 				</button>
 
 			</div>
 
 
 			<div>
-				<h2>»óÁ¡¹®ÀÇ</h2>
-				<div>
-				<%-- <c:import url="../template/comentsForm.jsp"></c:import> --%>  <!-- Àá±ñ ÁÖ¼® -->
+				<h2>ìƒì ë¬¸ì˜</h2>
+
+				 <c:import url="../template/comentsForm.jsp"></c:import> 
+				
+			
+
+				<div style="border: 1px solid red;">
+					<c:forEach items="${list}" var="vo">
+						<tr>
+
+							<%-- <td>${vo.sq_num}</td>
+			<td>${vo.mem_storeNum }	</td> --%>
+							<td>${vo.sq_storeName}</td>
+							<br>
+							<td>${vo.sq_contents}</td>
+							<td>${vo.sq_regDate}</td>
+						</tr>
+						<br>
+						<br>
+					</c:forEach>
 				</div>
-				
-				
 
 			</div>
 
-		</div><!-- ¹öÆ°, ³»¿ë ³¡  -->
+		</div>
+		<!-- ë²„íŠ¼, ë‚´ìš© ë  -->
 
-	</div><!-- ÄÁÅ×ÀÌ³Ê ³¡  -->
+	</div>
+	<!-- ì»¨í…Œì´ë„ˆ ë  -->
+
+
+	<div>
+		<h1>footer</h1>
+	</div>
 </body>
 </html>

@@ -6,6 +6,7 @@
 <!-- shop 페이지가 공통으로 가져갈곳  -->
 <div class="container">
 	<h1>test</h1>
+	<h2>  님의 상점   </h2>
 	<div style="border: 1px solid black; width: 1024px; height: 340px;">
 
 		<!-- div 1번 -->
@@ -21,7 +22,7 @@
 
 			<div style="border: 1px solid black; height: 80px;">
 				<span>상점명</span><button>상점명 수정</button>
-				<a>${vo} </a>
+				<a> </a>
 			</div>
 
 			<div style="border: 1px solid black; height: 80px;">

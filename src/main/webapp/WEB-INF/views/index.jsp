@@ -18,5 +18,6 @@
 		<h1>Index Page</h1>
 	</div>
 
+<button><a href="../shop/myshop"> gg</a></button>
 </body>
 </html>
