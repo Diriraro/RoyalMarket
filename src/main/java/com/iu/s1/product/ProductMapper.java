@@ -19,6 +19,7 @@ public interface ProductMapper {
 	
 	public String selectFileName(long sell_num) throws Exception;
 	
+	public int productSelect(long sell_num) throws Exception;
 
 	
 	

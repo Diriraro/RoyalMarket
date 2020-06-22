@@ -45,7 +45,7 @@
 			<c:forEach items="${list}" var="vo" varStatus="i">
 				<div class="col-sm-4" style="display: inline-block;">
 					<div class="panel panel-info" style="height:100px; width:80px; cursor: pointer;"
-						onclick="location.href='./productListSelect?sell_num=${vo.sell_num}'">
+						onclick="location.href='./productSelect?sell_num=${vo.sell_num}'">
 						
 						<img style="height:100px; width:80px; cursor: pointer;" alt="" src="${pageContext.request.contextPath}/upload/product/${file[i.index]}">
 						<tr>
