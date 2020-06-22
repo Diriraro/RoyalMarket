@@ -16,6 +16,12 @@
 
 	<h1>코멘트페이지 || 상점문의 StoreQna</h1>
 	<h2>${mem_storeNum}</h2>
+	
+	
+	
+	<a>확인용 밑에 두개</a>
+	<a>${mem_storeName}</a>
+	<a></a>
 
 	<c:import url="../template/shopmain.jsp"></c:import>
 
@@ -55,21 +61,52 @@
 			<div>
 				<h2>상점문의</h2>
 
-				 <c:import url="../template/comentsForm.jsp"></c:import> 
-				
+				<%--  <c:import url="../template/comentsForm.jsp"></c:import>  --%>
+				<div class="container"> <!-- 폼태그  -->
+
+			<form action="./comments" id="frm" method="post">
+						
+			<div class="form-group">
+				<label for="sq_contents">Contents:</label>
+				<textarea rows="" cols="" class="form-control" id="sq_contents" name="sq_contents" style="width:900px; height: 150px; "></textarea>
+			</div>
 			
+			<!-- 추가한거  -->
+			<div class="form-group">
+				<input type="hidden" class="form-control" style="width: 342px;"
+					id="sq_storeName"  value="${sq_storeName}"
+					placeholder="Enter writer" name="sq_storeName">
+			</div>
+			
+			<div class="form-group">
+				<input type="hidden" class="form-control" style="width: 342px;"
+					id="sq_storeName"  value="${mem_storeNum}"
+					placeholder="Enter writer" name="sq_storeName">
+			</div>
+			
+			<!--  추가한거. -->
+			
+			
+			<input type="button" id="btn" class="btn btn-default" value="Write">
+			</form>
+			
+
+				</div>
 
 				<div style="border: 1px solid red;">
 					<c:forEach items="${list}" var="vo">
+					<c:if test="${mem_storeName eq vo.sq_storeName }">
+						<a>내글</a>
+					</c:if>
 						<tr>
-
 							<%-- <td>${vo.sq_num}</td>
-			<td>${vo.mem_storeNum }	</td> --%>
+							<td>${vo.mem_storeNum }	</td> --%>
 							<td>${vo.sq_storeName}</td>
 							<br>
 							<td>${vo.sq_contents}</td>
 							<td>${vo.sq_regDate}</td>
 						</tr>
+							<a href="./setDelete?sq_num=${vo.sq_num}"> </a>   <!-- 추가한거 -->
 						<br>
 						<br>
 					</c:forEach>

@@ -34,6 +34,8 @@ public class ShopController {
 		mv.addObject("mem_storeNum",num);
 		mv.addObject("vo2","코멘트");
 		
+		System.out.println(" myshop ");
+		
 		mv.setViewName("shop/myshop");
 		return mv;
 	}
@@ -50,7 +52,7 @@ public class ShopController {
 		
 		List<StoreQnaVO> ar = storeQnaService.getSelectList(storeQnaVO);
 		
-		
+		mv.addObject("mem_storeName",id);
 		mv.addObject("mem_storeNum",num);
 		mv.addObject("list",ar);
 		mv.setViewName("shop/comments");
@@ -61,7 +63,7 @@ public class ShopController {
 	@PostMapping("comments")
 	public ModelAndView comments(ModelAndView mv,StoreQnaVO storeQnaVO) throws Exception {
 		
-		int resert = storeQnaService.setInsert(storeQnaVO);
+		storeQnaService.setInsert(storeQnaVO);
 		
 		mv.setViewName("shop/comments");
 		

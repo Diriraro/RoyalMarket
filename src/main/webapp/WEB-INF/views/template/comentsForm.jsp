@@ -4,15 +4,12 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>    
     <div class="container">
 
-		<form action="comments" id="frm" method="post">
+		<form action="./comments" id="frm" method="post">
 						
 			<div class="form-group">
 				<label for="sq_contents">Contents:</label>
 				<textarea rows="" cols="" class="form-control" id="sq_contents" name="sq_contents" style="width:900px; height: 150px; "></textarea>
 			</div>
-			
-			
-			 <button><a href="./myshop"> 테스트버튼</a></button>	
 			
 			<input type="button" id="btn" class="btn btn-default" value="Write">
 		</form>

@@ -20,10 +20,10 @@ class StoreQnaRepositoryTest {
 		
 		StoreQnaVO qnaVO = new StoreQnaVO();
 		
-		qnaVO.setSq_num(i);
-		qnaVO.setMem_storeNum(15); // dyun95 상점 = 14    cotest상점은 15
-		qnaVO.setSq_storeName("dyun95");   // 지금은 이름. cotest의 이름 ==id
-		qnaVO.setSq_contents("dyun coment"+i);
+//		qnaVO.setSq_num(i);
+		qnaVO.setMem_storeNum(14); // dyun 상점 = 14    cotest상점은 15
+		qnaVO.setSq_storeName("dyun");   // 지금은 이름. cotest의 이름 ==id
+		qnaVO.setSq_contents("my cococotest"+i);
 		
 		
 		int result = storeQnaRepository.setInsert(qnaVO);
