@@ -7,10 +7,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
-
 <c:import url="./template/boot.jsp"></c:import>
-
+</head>
+<body>
 </head>
 <body>
 	<c:import url="./template/nav.jsp"></c:import>
@@ -51,5 +50,7 @@
 					location.href = "productList/searchProduct?kind=lk&search=패션잡화";
 				});
 	</script>
+
+
 </body>
 </html>
