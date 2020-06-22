@@ -34,10 +34,9 @@ public class ProductService {
 	
 	public int productInsert(ProductVO productVO, MultipartFile[] files) throws Exception{
 		
+		
 		File file = filePathGenerator.getUseClassPathResource(filePath);
-		
 		int result = productDAO.productInsert(productVO);
-		
 		for (MultipartFile multipartFile : files) {
 			if (multipartFile.getSize()<=0) {
 				continue;
@@ -47,12 +46,13 @@ public class ProductService {
 		ProductFileVO vo = new ProductFileVO();
 		vo.setSell_num(productVO.getSell_num());
 		vo.setFile_name(fileName);
-		vo.setOrl_name(multipartFile.getOriginalFilename());
+		vo.setOri_name(multipartFile.getOriginalFilename());
 		
 		result = productFileDAO.productFileInsert(vo);
 		System.out.println(fileName);
 		
 		}
+		
 		return result;
 	}
 	

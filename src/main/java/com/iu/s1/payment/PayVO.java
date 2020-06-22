@@ -7,8 +7,15 @@ public class PayVO {
 	private long pay_in;
 	private long pay_out;
 	private String mem_id;
+	private long point_rest;
 	
 	
+	public long getPoint_rest() {
+		return point_rest;
+	}
+	public void setPoint_rest(long point_rest) {
+		this.point_rest = point_rest;
+	}
 	public long getPay_num() {
 		return pay_num;
 	}
