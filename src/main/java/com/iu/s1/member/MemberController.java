@@ -1,5 +1,6 @@
 package com.iu.s1.member;
 
+import java.util.List;
 import java.util.Random;
 
 import javax.servlet.http.Cookie;
@@ -21,14 +22,23 @@ import org.springframework.web.servlet.ModelAndView;
 public class MemberController {
 	
 	@Autowired
-	MemberService memberService;
+	private MemberService memberService;
 	
+	
+	private String checkNum="";
 	
 	@PostMapping("memberJoin")
-	public ModelAndView memberJoin(@Valid MemberVO memberVO,BindingResult bindingResult) throws Exception{
+	public ModelAndView memberJoin(@Valid MemberVO memberVO,BindingResult bindingResult, String check_num) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		
 		boolean result = memberService.memberCheck(memberVO, bindingResult);
+		System.out.println(check_num);
+		System.out.println(checkNum);
+		if(check_num.equals(checkNum)) {
+			System.out.println("인증성공");
+		}else {
+			System.out.println("인증실패");
+		}
 		
 		if(result) {
 			mv.setViewName("member/memberJoin");
@@ -99,7 +109,7 @@ public class MemberController {
             String ran = Integer.toString(rand.nextInt(10));
             numStr+=ran;
         }
-
+        checkNum = numStr;
         System.out.println("수신자 번호 : " + phoneNumber);
         System.out.println("인증번호 : " + numStr);
         memberService.certifiedPhoneNumber(phoneNumber,numStr);
