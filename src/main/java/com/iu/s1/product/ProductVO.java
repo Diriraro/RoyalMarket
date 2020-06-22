@@ -19,7 +19,6 @@ public class ProductVO {
 	private String sell_tag;
 	
 	private Date sell_date;
-	
 
 	public Long getSell_num() {
 		return sell_num;
@@ -84,6 +83,8 @@ public class ProductVO {
 	public void setSell_date(Date sell_date) {
 		this.sell_date = sell_date;
 	}
+	
+
 
 
 	

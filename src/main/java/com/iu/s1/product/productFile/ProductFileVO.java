@@ -1,11 +1,11 @@
-package com.iu.s1.product.productFIle;
+package com.iu.s1.product.productFile;
 
 public class ProductFileVO {
 	
 	private int sefile_num;
 	private Long sell_num;
 	private String file_name;
-	private String orl_name;
+	private String ori_name;
 	
 	
 	public int getSefile_num() {
@@ -26,12 +26,13 @@ public class ProductFileVO {
 	public void setFile_name(String file_name) {
 		this.file_name = file_name;
 	}
-	public String getOrl_name() {
-		return orl_name;
+	public String getOri_name() {
+		return ori_name;
 	}
-	public void setOrl_name(String orl_name) {
-		this.orl_name = orl_name;
+	public void setOri_name(String ori_name) {
+		this.ori_name = ori_name;
 	}
+	
 	
 	
 	

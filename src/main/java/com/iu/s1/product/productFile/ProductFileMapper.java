@@ -1,11 +1,13 @@
-package com.iu.s1.product.productFIle;
+package com.iu.s1.product.productFile;
 
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Repository;
 
 @Mapper
-public interface ProductFileDAO {
+@Repository
+public interface ProductFileMapper {
 	public int productFileInsert(ProductFileVO productFileVO) throws Exception;
 	
 	public ProductFileVO fileDown(ProductFileVO productFileVO) throws Exception;

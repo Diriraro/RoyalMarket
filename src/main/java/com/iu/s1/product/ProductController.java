@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,6 +22,7 @@ import com.iu.s1.util.Pager;
 @RequestMapping("/product/**/")
 public class ProductController {
 	
+	@Autowired
 	private ProductService productService;
 	
 	@GetMapping("productNew")
@@ -65,9 +67,10 @@ public class ProductController {
 			index++;
 			
 		}
-		//mv.addObject("pager", pager);
-		mv.setViewName("product/productList");
 		mv.addObject("file", ar2);
+		mv.addObject("pager", pager);
+		mv.setViewName("product/productList");
+
 		return mv;
 	}
 }

@@ -16,7 +16,7 @@ import org.springframework.util.FileCopyUtils;
 import org.springframework.web.servlet.view.AbstractView;
 
 import com.iu.s1.product.ProductVO;
-import com.iu.s1.product.productFIle.ProductFileVO;
+import com.iu.s1.product.productFile.ProductFileVO;
 
 @Component
 public class FileDown extends AbstractView {
@@ -45,7 +45,7 @@ public class FileDown extends AbstractView {
 		response.setContentLengthLong(file.length());
 		
 		//다운로드 시 파일 이름을 인코딩 처리
-		String fileName = URLEncoder.encode(productFileVO.getOrl_name(),"UTF-8");
+		String fileName = URLEncoder.encode(productFileVO.getOri_name(),"UTF-8");
 		
 		//header 설정
 		response.setHeader("Content-Disposition", "attachment;filename=\""+fileName+"\"");

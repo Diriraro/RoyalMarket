@@ -9,11 +9,15 @@ import com.iu.s1.util.Pager;
 
 @Mapper
 @Repository
-public interface ProductDAO {
+public interface ProductMapper {
 
 	public int productInsert(ProductVO productVO) throws Exception;
 	
 	public List<ProductVO> productList(Pager pager) throws Exception;
+	
+	public long productCount(Pager pager) throws Exception;
+	
+	public String selectFileName(long sell_num) throws Exception;
 	
 
 	
