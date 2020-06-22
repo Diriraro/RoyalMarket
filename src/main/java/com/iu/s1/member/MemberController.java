@@ -28,17 +28,13 @@ public class MemberController {
 	private String checkNum="";
 	
 	@PostMapping("memberJoin")
-	public ModelAndView memberJoin(@Valid MemberVO memberVO,BindingResult bindingResult, String check_num) throws Exception{
-		ModelAndView mv = new ModelAndView();
+	public ModelAndView memberJoin(@Valid MemberVO memberVO,BindingResult bindingResult) throws Exception{
 		
-		boolean result = memberService.memberCheck(memberVO, bindingResult);
-		System.out.println(check_num);
-		System.out.println(checkNum);
-		if(check_num.equals(checkNum)) {
-			System.out.println("인증성공");
-		}else {
-			System.out.println("인증실패");
-		}
+		
+		ModelAndView mv = new ModelAndView();
+
+		
+		boolean result = memberService.memberCheck(memberVO, bindingResult, checkNum);
 		
 		if(result) {
 			mv.setViewName("member/memberJoin");
@@ -83,7 +79,7 @@ public class MemberController {
 		memberVO = memberService.memberLogin(memberVO);
 		
 		if(memberVO != null) {
-			session.setAttribute("memberVO", memberVO);
+			session.setAttribute("member", memberVO);
 			mv.addObject("result", "로그인 성공");
 			mv.addObject("path", "../");
 			mv.setViewName("common/result");
@@ -115,6 +111,18 @@ public class MemberController {
         memberService.certifiedPhoneNumber(phoneNumber,numStr);
         return numStr;
     }
+	
+	@GetMapping("findAddress")
+	public void findAddress()throws Exception{
+		
+	}
+	
+	
+	 @PostMapping("findAddress")
+	 public ModelAndView findAddress(String road_address)throws Exception{ ModelAndView mv = new ModelAndView();
+	 mv.addObject("road_address", road_address);
+	 mv.setViewName("member/memberJoin"); return mv; }
+	
 	
 	
 	
