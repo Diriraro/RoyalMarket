@@ -16,35 +16,48 @@
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 <!-- bootstrap library  -->
+<script src="https://kit.fontawesome.com/1a953cf392.js"
+	crossorigin="anonymous"></script>
+<!-- fontawesome library -->
 <title>Insert title here</title>
 <style>
-header {
-	margin-top: -10px;
-	height: 100px;
-	background-color: #8000ff;
-	width: 100%;
-	line-height: 100px;
-}
-
+/* Body */
 section {
 	float: left;
-	height: 800px; /* 추후 섹션 유동적 높이 처리  */
+	height: 969px; /* 추후 섹션 유동적 높이 처리  */
 	vertical-align: middle;
 }
 
+/* Body */
+/* Section 1 */
 #sc1 {
-	width: 10%;
+	width: 13%;
+	padding-top: 10px;
 	padding-left: 20px;
 	padding-right: 10px;
 	box-sizing: border-box;
-	border-right: 1px solid gray;
+	border-right: 1px solid silver;
 	line-height: 30px;
 	background-color: #b366ff;
+	font-size: 17px;
+	color: white;
+	padding-left: 20px
 }
 
-#sc2 {
-	width: 90%;
-	background-color: #f2f2f2;
+#logo {
+	height: 65px;
+	border: 1px solid white;
+}
+
+#stats {
+	margin-top: 20px;
+	padding-bottom: 20px;
+	border-bottom: 1px solid silver;
+	border-top: 1px solid silver;
+}
+
+.info {
+	margin: 10px 0px;
 }
 
 .focus_sub {
@@ -62,18 +75,84 @@ section {
 
 .contents {
 	display: none;
+	height: 200px;
+	width: 100%;
+	padding: 10px;
+	border-radius: 10px;
+	background-color: white;
 }
 
 .contents>a {
-	color: white;
+	color: #000066;
 	display: block;
+	line-height: 30px;
 }
 
 .contents>a:hover {
 	text-decoration: underline;
 	font-weight: bold;
 }
-/* ==================== getList Search Form ==================== */
+
+/* Section 1 */
+/* Section 2 */
+#sc2 {
+	background-color: #f2f2f2;
+	padding: 5px 5px;
+	width: 87%;
+	height: 95px;
+}
+
+#section_head {
+	padding: 0 30px;
+	background-color: white;
+	width: 100%;
+	height: 100%;
+	border-radius: 10px;
+}
+
+#admin_set {
+	line-height: 75px;
+	font-size: 20px;
+	float: right;
+	margin-left: 10px;
+}
+
+#admin_set>i {
+	color: purple;
+}
+
+.new {
+	margin-right: 10px;
+	line-height: 75px;
+	font-size: 13px;
+	float: right;
+	color: red;
+	visibility: hidden;
+}
+
+#QnaAndManToMan {
+	margin-right: 10px;
+	line-height: 75px;
+	font-size: 13px;
+	float: right;
+}
+
+#QnaAndManToMan>a {
+	color: black;
+}
+
+.check {
+	cursor: pointer;
+}
+/* Section 2 */
+
+/* Section 3 */
+#sc3 {
+	width: 87%;
+	background-color: #f2f2f2;
+	height: 874px;
+}
+/* Section 3 ==================== getList Search Form ==================== */
 .listSection {
 	width: 100%;
 }
@@ -82,6 +161,7 @@ section {
 	width: 100%;
 	overflow: hidden;
 	background-color: #e9e9e9;
+	text-align: center;
 }
 
 .topnav a {
@@ -115,6 +195,15 @@ section {
 	border: none;
 }
 
+.topnav .search-container select {
+	margin-top: 8px;
+	background: #ddd;
+	font-size: 17px;
+	border: none;
+	cursor: pointer;
+	height: 36px;
+}
+
 .topnav .search-container button {
 	float: right;
 	padding: 6px 10px;
@@ -146,66 +235,89 @@ section {
 		border: 1px solid #ccc;
 	}
 }
+
 /* ==================== getList Search Form ==================== */
+/* Section 3 */
 </style>
 </head>
 <body>
-	<header>
-		<div>
-			<div style="witdh: 20%; float: left;">logo</div>
-			<div style="width: 80%; float: right;">관리자</div>
-		</div>
-	</header>
+	<header></header>
 	<section id="sc1">
+		<div id="logo">logo</div>
 		<div class="sidenav">
-			<div class="stats">
-				<label>통계 정보</label>
+			<div id="stats">
+				<label><i class="far fa-file-alt"></i> 통합 정보</label>
+				<!-- pdf파일로 불러들이기 (회원수,하루 상품등록 및 판매량, 하루 접속인원수) -->
 			</div>
 			<!-- 목록을 제외한 다른 호출은 각 Controller로 보내서 처리 -->
+			<div style="font-size: 13px;"> MENU </div>
 			<div class="info">
-				<label class="focus">공지 사항 관리</label>
+				<label class="focus"><i class="far fa-folder"></i> 회원 관리</label>
 				<div class="contents">
-					<a href="#" class="check" title="NoticeList">공지 사항 목록</a> <a
-						href="../notice/noticeWrite" class="check">공지 사항 등록</a>
+					<a href="#" class="check" title="MemberList"><i
+						class="far fa-file-alt"></i> 일반 회원 관리</a> <a href="#" class="check"
+						title="MemberBlockList"><i class="far fa-file-alt"></i> 차단 회원
+						관리</a>
 				</div>
 			</div>
 			<div class="info">
-				<label class="focus">질문과 답변 및 문의</label>
+				<label class="focus"><i class="far fa-folder"></i> 상품 관리</label>
 				<div class="contents">
-					<a href="#" class="check">질문과 답변 관리</a> <a href="#" class="check">1:1
-						문의 관리</a>
+					<a href="#" class="check" title="ProductList"><i
+						class="far fa-file-alt"></i> 상품 정보 관리</a> <a href="#" class="check"><i
+						class="far fa-file-alt"></i> 상품 거래 관리</a>
 				</div>
 			</div>
 			<div class="info">
-				<label class="focus">회원 관리</label>
+				<label class="focus"><i class="far fa-folder"></i> 공지 사항 관리</label>
 				<div class="contents">
-					<a href="#" class="check" title="MemberList">일반 회원 관리</a> <a
-						href="#" class="check">차단 회원 관리</a>
+					<a href="#" class="check" title="NoticeList"><i
+						class="far fa-file-alt"></i> 공지 사항 목록</a> <a
+						href="../notice/noticeWrite" class="check"><i
+						class="far fa-file-alt"></i> 공지 사항 등록</a>
 				</div>
 			</div>
-			<div class="info">
-				<label class="focus">상품 관리</label>
+			<!-- 			<div class="info">
+				<label class="focus"><i class="far fa-folder"></i> 질문과 답변 및
+					문의</label>
 				<div class="contents">
-					<a href="#" class="check" title="ProductList">상품 정보 관리</a> <a
-						href="#" class="check">상품 거래 진행 관리</a>
+					<a href="#" class="check"><i class="far fa-file-alt"></i> 질문과
+						답변 관리</a> <a href="#" class="check"><i class="far fa-file-alt"></i>
+						1:1 문의 관리</a>
 				</div>
-			</div>
+			</div>  // head에서 관리  -->
 		</div>
 	</section>
 	<section id="sc2">
+		<div id="section_head">
+			<div id="admin_set">
+				관리자 님
+				<!-- ${member.id} == admin 추후 설정 -->
+				<i class="fas fa-user-cog"></i>
+			</div>
+			<div class="new">
+				<i class="fas fa-comment-medical"></i>
+			</div>
+			<div id="QnaAndManToMan">
+				<i class="fas fa-envelope"></i><a title="manToman" class="check">
+					질문과 답변 및 1:1문의 </a>
+			</div>
+		</div>
+	</section>
+	<section id="sc3">
 		<div id="content">
-			<h1>리스트 받아올 공간</h1>
+			<h1> 관리자 페이지 통합 정보 </h1>
 		</div>
 	</section>
 	<script type="text/javascript">
 		$(function() {
 			$(".info").on("mouseover", function() {
 				$(this).find(".contents").css("display", "block");
-				$(this).find(".focus").addClass("focus_sub")
+				$(this).find(".focus").addClass("focus_sub");
 			})
 			$(".info").on("mouseout", function() {
 				$(this).find(".contents").css("display", "none");
-				$(this).find(".focus").removeClass("focus_sub")
+				$(this).find(".focus").removeClass("focus_sub");
 			})
 			/* 			$(".stats").click(function() {
 			 $(this).find(".contents").css("display", "none");
@@ -218,18 +330,51 @@ section {
 					getProductList();
 				} else if (path == 'NoticeList') {
 					getNoticeList();
+				} else if (path == 'MemberBlockList') {
+					getBlockList();
+				} else if (path == 'manToman') {
+					getManToManList();
 				}
-			})
-			$("#content").on("click", "#frm", function() {
-				var kind = $("#kind").val();
-				var search = $("#search").val();
-				getMemberSearchList(kind, search);
+				/* 컨텐츠를 추가시 함수 + else if 추가 */
 			})
 		})
 
+		$("#content").on("click", ".check", function() {
+			var path = $(this).prop("title");
+			if (path == 'qna') {
+				getQnaList();
+			} else if (path == 'manToman') {
+				getManToManList();
+			}
+		})
+		$("#content").on("click", "#frm", function() {
+			var kind = $("#kind").val();
+			var search = $("#search").val();
+			getMemberSearchList(kind, search);
+		})
+
+		function getManToManList() {
+			$("#content").empty();
+			$.get("./list/getManToManList", function(result) {
+				$("#content").append(result);
+			})
+		}
+		function getQnaList() {
+			$("#content").empty();
+			$.get("./list/getQnaList", function(result) {
+				$("#content").append(result);
+			})
+		}
+		function getBlockList() {
+			$("#content").empty();
+			$.get("./list/getMemberList?mem_access=1", function(result) {
+				$("#content").append(result);
+			})
+		}
+
 		function getMemberList() {
 			$("#content").empty();
-			$.get("./list/getMemberList", function(result) {
+			$.get("./list/getMemberList?mem_access=0", function(result) {
 				$("#content").append(result);
 			})
 		}
@@ -240,6 +385,7 @@ section {
 				kind : kind,
 				search : search
 			}, function(result) {
+				console.log(result);
 				$("#content").append(result);
 			})
 		}

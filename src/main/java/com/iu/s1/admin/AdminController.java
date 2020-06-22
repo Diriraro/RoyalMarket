@@ -47,9 +47,9 @@ public class AdminController {
 	}
 	
 	@GetMapping("getMemberList")
-	public void getMemberList (Model model) throws Exception {
+	public void getMemberList (Model model, long mem_access) throws Exception {
 		List<MemberVO> ar = new ArrayList<MemberVO>();
-		ar = adminService.getMemberList();
+		ar = adminService.getMemberList(mem_access);
 		model.addAttribute("list",ar);
 	}
 	
@@ -57,11 +57,19 @@ public class AdminController {
 	public void getMemberList (Model model, String kind, String search) throws Exception {
 		List<MemberVO> ar = new ArrayList<MemberVO>();
 		ar = adminService.getMemberSearchList(kind, search);
-		for(int i = 0 ; i < ar.size(); i++) {
-			System.out.println("Post :" + ar.get(i).getMem_id());
-		}
 		model.addAttribute("list",ar);
 	}
 	
-	
+	@GetMapping("getManToManList")
+	public void getManToManList(Model model) throws Exception {
+		List<MemberVO> ar = new ArrayList<MemberVO>();
+//		ar = adminService.getManToManList();
+		model.addAttribute("list",ar);
+	}
+	@GetMapping("getQnaList")
+	public void getQnaList(Model model) throws Exception {
+		List<MemberVO> ar = new ArrayList<MemberVO>();
+//		ar = adminService.getQnaList();
+		model.addAttribute("list",ar);
+	}
 }

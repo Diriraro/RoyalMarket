@@ -23,27 +23,29 @@
 	<table class="table">
 		<thead>
 			<tr>
+				<td>회원 번호</td>
 				<td>회원 아이디</td>
 				<td>회원 비밀번호</td>
 				<td>회원 이름</td>
 				<td>회원 이메일</td>
 				<td>회원 핸드폰</td>
-				<td>회원 번호</td>
 				<td>회원 주소</td>
 				<td>회원 잔여포인트</td>
+				<td>회원 접속 차단</td>
 			</tr>
 		</thead>
 		<tbody>
 			<c:forEach items="${list}" var="vo">
 				<tr>
+					<td>${vo.mem_storeNum}</td>
 					<td>${vo.mem_id}</td>
 					<td>${vo.mem_pw}</td>
 					<td>${vo.mem_name}</td>
 					<td>${vo.mem_email}</td>
 					<td>${vo.mem_phone}</td>
-					<td>${vo.mem_storeNum}</td>
 					<td>${vo.mem_address}</td>
 					<td>${vo.mem_point}</td>
+					<td><button class="AccessGrant">X</button></td>
 				</tr>
 			</c:forEach>
 		</tbody>

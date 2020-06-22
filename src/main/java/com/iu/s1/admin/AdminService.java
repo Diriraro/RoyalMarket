@@ -19,14 +19,17 @@ public class AdminService {
 	// 노티스 Repository ( 삭제 분류 )
 	
 	
-	public List<MemberVO> getMemberList() throws Exception {
-		return memberRepository.getMemberList();
+	public List<MemberVO> getMemberList(long mem_access) throws Exception {
+		if(mem_access == 1) {
+			return memberRepository.getMemberList(); // mem_access = 0 인 멤버 검색
+		} else {
+			return memberRepository.getMemberList(); // mem_access = 1 인 멤버 검색
+		}
 	}
 	public List<MemberVO> getMemberSearchList(String kind, String search) throws Exception {
 		MemberVO memberVO = new MemberVO();
 		memberVO.setKind(kind);
 		memberVO.setSearch(search);
-		
 		return memberRepository.getMemberSearchList(memberVO);
 	}
 }
