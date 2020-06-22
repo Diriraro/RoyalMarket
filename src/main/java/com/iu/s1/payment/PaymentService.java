@@ -15,5 +15,12 @@ public class PaymentService {
 		return paymentMapper.pointUpdate(memberVO);
 	}
 	
+	public long pointSelect(String mem_id)throws Exception{
+		return paymentMapper.pointSelect(mem_id);
+	}
 	
+	
+	public int paymentCharge(PayVO payVO)throws Exception{
+		return paymentMapper.paymentCharge(payVO);
+	}
 }

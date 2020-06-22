@@ -6,7 +6,7 @@ public class PayVO {
 	private long pay_price;
 	private long pay_in;
 	private long pay_out;
-	private String member_id;
+	private String mem_id;
 	
 	
 	public long getPay_num() {
@@ -33,12 +33,12 @@ public class PayVO {
 	public void setPay_out(long pay_out) {
 		this.pay_out = pay_out;
 	}
-	public String getMember_id() {
-		return member_id;
+	public String getMem_id() {
+		return mem_id;
 	}
-	public void setMember_id(String member_id) {
-		this.member_id = member_id;
+	public void setMem_id(String mem_id) {
+		this.mem_id = mem_id;
 	}
-	
+
 
 }

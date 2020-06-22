@@ -9,9 +9,12 @@
 <c:import url="../template/boot.jsp"></c:import>
 </head>
 <body>
-<h1> ${member.mem_id}님의 코인 결제</h1>
+
+	<c:import url="../template/nav.jsp"></c:import>
+	
+<h1> ${memberVO.mem_id}님의 코인 결제</h1>
 	<div class="container">
-	<h1>${member.mem_point}코인</h1>
+	<h1>${point}코인</h1>
 	<form action="/payment/pay" method="get">
 		<input type="text" id="amount" name="amount">
 		<button type="submit">충전하기</button>

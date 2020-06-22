@@ -7,5 +7,11 @@
  	<update id="pointUpdate" parameterType="com.iu.s1.member.MemberVO">
  		update member set mem_point=#{mem_point} where mem_id=#{mem_id}
  	</update>
+ 	<select id="pointSelect" parameterType="java.lang.String" resultType="java.lang.Long">
+ 		select mem_point from member where mem_id=#{mem_id}
+ 	</select>
+ 	<insert id="paymentCharge" parameterType="com.iu.s1.payment.PayVO">
+ 		insert into payment values(0,#{pay_price},1,0,#{mem_id})
+ 	</insert>
  
  </mapper>

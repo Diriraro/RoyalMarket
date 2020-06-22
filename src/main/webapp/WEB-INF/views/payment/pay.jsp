@@ -14,7 +14,6 @@
 </head>
 <body>
 
-
 <script>   
     $(function(){
         var IMP = window.IMP; // 생략가능
@@ -27,10 +26,10 @@
             merchant_uid : 'merchant_' + new Date().getTime(),
             name : 'WooJoo Market',
             amount : ${amount},					// 금액 
-            buyer_email : ${member.mem_email}, // 맴버의 이메일 받아오기    ${member.email}
-            buyer_name : ${member.mem_name},			// 맴버의 이름 받아오기	   ${member.name}
-            buyer_tel : ${member.mem_phone},		// 맴버의 전화번호 받아오기 ${member.tel}
-            buyer_addr : ${member.mem_address},			// 맴버의 주소 받아오기	   ${member.address}
+            buyer_email : '${memberVO.mem_email}', // 맴버의 이메일 받아오기    ${member.email}
+            buyer_name : '${memberVO.mem_name}',			// 맴버의 이름 받아오기	   ${member.name}
+            buyer_tel : '${memberVO.mem_phone}',		// 맴버의 전화번호 받아오기 ${member.tel}
+            buyer_addr : '${memberVO.mem_address}',			// 맴버의 주소 받아오기	   ${member.address}
             buyer_postcode : '123-456',     // 우편번호 ???
            // m_redirect_url : 'www.naver.com'
         }, function(rsp) {
@@ -60,7 +59,7 @@
                     }
                 });
                 //성공시 이동할 페이지
-                location.href='<%=request.getContextPath()%>/payment/paySuccess?mem_point=${amount}';
+                location.href='<%=request.getContextPath()%>/payment/paySuccess?amount=${amount}&mem_point=${memberVO.mem_point}&mem_id=${memberVO.mem_id}';
             } else {
                 msg = '결제에 실패하였습니다.';
                 msg += '에러내용 : ' + rsp.error_msg;
