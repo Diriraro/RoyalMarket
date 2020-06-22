@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.iu.s1.member.MemberVO;
@@ -67,6 +68,25 @@ public class ShopController {
 		
 		mv.setViewName("shop/comments");
 		
+		return mv;
+	}
+	
+	
+	
+	//상점문의 delete
+	@RequestMapping(value = "setDelete", method = RequestMethod.GET)
+	public ModelAndView setDelete(StoreQnaVO storeQnaVO, ModelAndView mv)throws Exception{
+		
+			
+	int	result = storeQnaService.setDelete(storeQnaVO);
+		
+		if(result>0) {
+			mv.addObject("result", "Delete Success");
+		}else {
+			mv.addObject("result", "Delete Fail");
+		}
+		mv.addObject("path", "./noticeList");
+		mv.setViewName("common/result");
 		return mv;
 	}
 	
