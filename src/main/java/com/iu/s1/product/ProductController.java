@@ -73,4 +73,14 @@ public class ProductController {
 
 		return mv;
 	}
+	
+	public ModelAndView productSelect(long sell_num) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		ProductVO productVO = productService.productSelect(sell_num);
+		mv.addObject("vo",productVO);
+		mv.setViewName("product/productSelect");
+		
+		return mv;
+		
+	}
 }

@@ -32,7 +32,7 @@ public class ProductService {
 	@Value("${product.filePath}")
 	private String filePath;
 	
-	public int productSelect(long sell_num) throws Exception{
+	public ProductVO productSelect(long sell_num) throws Exception{
 		return productMapper.productSelect(sell_num);
 	}
 

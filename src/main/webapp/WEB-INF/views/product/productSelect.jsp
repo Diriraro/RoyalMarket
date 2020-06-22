@@ -12,5 +12,10 @@
 </head>
 <body>
 	<c:import url="../template/nav.jsp"></c:import>
+	
+<h3>Title : ${vo.sell_product}</h3>
+<h3>Writer : ${vo.sell_price}</h3>
+<h3>contents : ${memberVO.mem_addres}</h3>
+	
 </body>
 </html>
