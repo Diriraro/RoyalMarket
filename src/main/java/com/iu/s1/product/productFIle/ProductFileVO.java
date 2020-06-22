@@ -2,16 +2,17 @@ package com.iu.s1.product.productFIle;
 
 public class ProductFileVO {
 	
-	private int fileNum;
+	private int sefile_num;
 	private Long sell_num;
-	private String fileName;
-	private String oriName;
+	private String file_name;
+	private String orl_name;
 	
-	public int getFileNum() {
-		return fileNum;
+	
+	public int getSefile_num() {
+		return sefile_num;
 	}
-	public void setFileNum(int fileNum) {
-		this.fileNum = fileNum;
+	public void setSefile_num(int sefile_num) {
+		this.sefile_num = sefile_num;
 	}
 	public Long getSell_num() {
 		return sell_num;
@@ -19,20 +20,19 @@ public class ProductFileVO {
 	public void setSell_num(Long sell_num) {
 		this.sell_num = sell_num;
 	}
-	public String getFileName() {
-		return fileName;
+	public String getFile_name() {
+		return file_name;
 	}
-	public void setFileName(String fileName) {
-		this.fileName = fileName;
+	public void setFile_name(String file_name) {
+		this.file_name = file_name;
 	}
-	public String getOriName() {
-		return oriName;
+	public String getOrl_name() {
+		return orl_name;
 	}
-	public void setOriName(String oriName) {
-		this.oriName = oriName;
+	public void setOrl_name(String orl_name) {
+		this.orl_name = orl_name;
 	}
 	
-
 	
 	
 }
