@@ -67,6 +67,7 @@ public class ShopController {
 	@GetMapping("followers")
 	public ModelAndView followers(ModelAndView mv) throws Exception {
 		mv.addObject("vo","test");
+		System.out.println("ss");
 		mv.setViewName("shop/followers");
 		return mv;
 	}
