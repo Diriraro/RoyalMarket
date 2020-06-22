@@ -12,5 +12,6 @@
 </head>
 <body>
 	<c:import url="../template/nav.jsp"></c:import>
+
 </body>
 </html>

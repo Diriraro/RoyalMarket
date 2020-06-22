@@ -1,6 +1,7 @@
 package com.iu.s1.product;
 
 import java.io.File;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -11,6 +12,7 @@ import com.iu.s1.product.productFIle.ProductFileDAO;
 import com.iu.s1.product.productFIle.ProductFileVO;
 import com.iu.s1.util.FileManager;
 import com.iu.s1.util.FilePathGenerator;
+import com.iu.s1.util.Pager;
 
 @Service
 public class ProductService {
@@ -52,4 +54,17 @@ public class ProductService {
 		}
 		return result;
 	}
+	
+	public List<ProductFileVO> productFileSelect(long sell_num)throws Exception{
+		return productFileDAO.productFileSelect(sell_num);
+	}
+	
+	public String selectFileName(long sell_num)throws Exception{
+		return productFileDAO.selectFileName(sell_num);
+	}
+	
+	public List<ProductVO> productList(Pager pager) throws Exception{
+		return productDAO.productList(pager);
+	}
+	
 }

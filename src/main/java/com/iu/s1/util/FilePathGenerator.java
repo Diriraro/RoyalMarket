@@ -63,22 +63,5 @@ public class FilePathGenerator {
 		System.out.println(file.getAbsolutePath());
 		return file;
 	}
-	//3번쨰 방법 (사용권장X)
-	public File getUseServletContext(String path)throws Exception{
-		//servlet context
-		//classpath가 아니라 webapp 하위에 만들어짐
-		//생성할 디렉토리가 static이라면
-		//web하위에 static 폴더가 하나더 만들어짐
-		path = servletContext.getRealPath(path);
-		
-		File file = new File(path);
-		
-		if (!file.exists()) {
-			file.mkdirs();
-		}
-		
-		System.out.println(path);
-		
-		return file;
-	}
+
 }

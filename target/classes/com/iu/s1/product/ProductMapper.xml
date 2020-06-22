@@ -10,14 +10,32 @@
 		sell_price, sell_info,
 		sell_kind,
 		sell_tag, sell_date)
-		values (0,0,
+		values (0,#{mem_storeNum},
 		#{sell_product},
 		#{sell_price},#{sell_kind},
 		#{sell_tag},now())
 	</insert>
 
-	<select id="storeListSelect" parameterType="java.lang.Long"
-		resultType="com.doom.s1.storeList.StoreListVO">
-		SELECT * FROM storeList WHERE sell_num=#{sell_num}
+	<select id="productSelect" parameterType="java.lang.Long"
+		resultType="ProductVO">
+		SELECT * FROM store_product WHERE sell_num=#{sell_num}
+	</select>
+	
+	<select id="productList" parameterType="Pager"
+		resultType="ProductVO">
+		select * from store_product where
+		<choose>
+			<when test="kind=='sp'">
+				sell_product
+			</when>
+			<when test="kind=='sk'">
+				sell_kind
+			</when>
+			<otherwise>
+				sell_tag
+			</otherwise>
+		</choose>
+		like concat('%',#{search},'%')
+		order by num desc limit #{startRow},10
 	</select>
 </mapper>

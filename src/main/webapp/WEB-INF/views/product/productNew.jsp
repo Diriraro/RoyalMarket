@@ -32,9 +32,7 @@
 		
 		<input id="files" type="file" name="files" accept="image/jpg, image/jpeg, image/png" class="img" /> 
 			
-		<input type="hidden" name="mem_storeNum" value="${vo.mem_storeNum}" id="mem_storeNum"> 
-			
-        <input type="hidden" name="sell_date" id="sell_date">
+		<input type="hidden" name="mem_storeNum" value="${member.mem_storeNum}" id="mem_storeNum"> 
 
 		<div class="form-group">
 			<label for="sell_product">제목</label> <input type="text"
@@ -61,8 +59,7 @@
 				<li><input type="button" class="kind" value="번개나눔"></li>
 				<li><input type="button" class="kind" value="지역 서비스"></li>
 				<li><input type="button" class="kind" value="커뮤니티"></li>
-				<li><input type="button" class="kind" value="원룸/함께살아요">
-				</li>
+				<li><input type="button" class="kind" value="원룸/함께살아요"></li>
 
 			</ul>
 		</div>
@@ -117,13 +114,10 @@
 			$("#sell_kind").val($(this).val());
 		});
 
-		$("#sellimg")
-				.click(
-						function() {
-							$("#f")
-									.append(
-											'<div class="imagePreview"></div> <input id="files" type="file" name="files" accept="image/jpg, image/jpeg, image/png" class="img" /> ')
-						});
+		//$("#sellimg")
+				//.click(
+						//function() {
+							//$("#f").append('<div class="imagePreview"></div> <input id="files" type="file" name="files" accept="image/jpg, image/jpeg, image/png" class="img" /> ')});
 
 		$(function() {
 

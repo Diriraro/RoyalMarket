@@ -1,5 +1,8 @@
 package com.iu.s1.product;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.stereotype.Controller;
@@ -10,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.iu.s1.util.Pager;
 
 
 @Controller
@@ -41,4 +46,24 @@ public class ProductController {
 		return mv;
 	}
 
+	@GetMapping("productList")
+	public ModelAndView productList(ProductVO productVO, Pager pager) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		List<ProductVO> ar = productService.productList(pager);
+		mv.addObject("list", ar);
+		
+		List<String> ar2 = new ArrayList<String>();
+		int index=0;
+		for (ProductVO productVOs : ar) {
+			long sell_num = productVOs.getSell_num();
+			ar2.add(productService.selectFileName(sell_num));
+			
+			index++;
+			
+		}
+		//mv.addObject("pager", pager);
+		mv.setViewName("product/productList");
+		mv.addObject("file", ar2);
+		return mv;
+	}
 }

@@ -4,7 +4,7 @@ import java.sql.Date;
 
 public class ProductVO {
 	
-	private int sell_num;
+	private Long sell_num;
 	
 	private int mem_storeNum;
 	
@@ -21,11 +21,11 @@ public class ProductVO {
 	private Date sell_date;
 	
 
-	public int getSell_num() {
+	public Long getSell_num() {
 		return sell_num;
 	}
 
-	public void setSell_num(int sell_num) {
+	public void setSell_num(Long sell_num) {
 		this.sell_num = sell_num;
 	}
 
