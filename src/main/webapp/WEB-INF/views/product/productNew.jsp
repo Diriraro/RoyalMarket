@@ -32,7 +32,7 @@
 		
 		<input id="files" type="file" name="files" accept="image/jpg, image/jpeg, image/png" class="img" /> 
 			
-		<input type="hidden" name="mem_storeNum" value="${member.mem_storeNum}" id="mem_storeNum"> 
+		<input type="hidden" name="mem_storeNum" value="${memberVO.mem_storeNum}" id="mem_storeNum"> 
 
 		<div class="form-group">
 			<label for="sell_product">제목</label> <input type="text"
@@ -63,7 +63,7 @@
 
 			</ul>
 		</div>
-		선택한 카테고리 : <input type="text" id="sell_kind" value="">
+		선택한 카테고리 : <input type="text" id="sell_kind" name="sell_kind" value="">
 		<div class="form-group">
 			<div>
 				상태<span>*</span>
@@ -95,14 +95,14 @@
 				</div>
 			</div>
 		</div>
-		가격 <input type="text" id="sell_price">원 <br> 
+		가격 <input type="text" name="sell_price" id="sell_price">원 <br> 
 		
 		<label for="sell_info">설명</label>
 		<textarea name="sell_info" class="form-control" id="sell_info"
 			name="sell_info">
 			</textarea>
 			
-		태그 <input type="text" id="sell_tag"> <br> 
+		태그 <input type="text" name="sell_tag" id="sell_tag"> <br> 
 
 
 		<button type="submit" class="btn btn-default">Submit</button>

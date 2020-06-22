@@ -6,13 +6,10 @@
 	<insert id="productInsert" parameterType="ProductVO"
 		keyProperty="sell_num" useGeneratedKeys="true">
 		insert into store_product
-		(sell_num, mem_storeNum, sell_product,
-		sell_price, sell_info,
-		sell_kind,
-		sell_tag, sell_date)
-		values (0,#{mem_storeNum},
-		#{sell_product},
-		#{sell_price},#{sell_kind},
+		values 
+		(0,#{mem_storeNum},#{sell_product},
+		#{sell_price},#{sell_info},
+		#{sell_kind},
 		#{sell_tag},now())
 	</insert>
 

@@ -29,6 +29,7 @@ public class ProductService {
 	@Autowired
 	private FileManager fileManager;
 	
+	@Value("${product.filePath}")
 	private String filePath;
 	
 	public int productInsert(ProductVO productVO, MultipartFile[] files) throws Exception{
@@ -45,11 +46,11 @@ public class ProductService {
 		String fileName=fileManager.saveFileCopy(multipartFile, file);
 		ProductFileVO vo = new ProductFileVO();
 		vo.setSell_num(productVO.getSell_num());
-		vo.setFileName(fileName);
-		vo.setOriName(multipartFile.getOriginalFilename());
+		vo.setFile_name(fileName);
+		vo.setOrl_name(multipartFile.getOriginalFilename());
 		
 		result = productFileDAO.productFileInsert(vo);
-		
+		System.out.println(fileName);
 		
 		}
 		return result;

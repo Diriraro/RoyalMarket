@@ -34,7 +34,7 @@ public class FileDown extends AbstractView {
 		path = path + (String)model.get("path");
 		ProductFileVO productFileVO = (ProductFileVO)model.get("fileVO");
 		
-		path = path+productFileVO.getFileName();
+		path = path+productFileVO.getFile_name();
 		
 		File file = resourceLoader.getResource(path).getFile();
 		
@@ -45,7 +45,7 @@ public class FileDown extends AbstractView {
 		response.setContentLengthLong(file.length());
 		
 		//다운로드 시 파일 이름을 인코딩 처리
-		String fileName = URLEncoder.encode(productFileVO.getOriName(),"UTF-8");
+		String fileName = URLEncoder.encode(productFileVO.getOrl_name(),"UTF-8");
 		
 		//header 설정
 		response.setHeader("Content-Disposition", "attachment;filename=\""+fileName+"\"");

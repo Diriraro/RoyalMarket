@@ -11,36 +11,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class FilePathGenerator {
-	@Autowired
-	private ResourceLoader resourceLoader;
-	
-	@Autowired
-	private ServletContext servletContext;
-	//static/upload/notice
-	//static/upload/qna
-	
-	//1번쨰 방법
-	public File getUseResourceLoader (String path) throws Exception{
-		//resourceLoader
-		//classes 경로를 받아오기위해 사용
-		//생성하려는 디렉토리가 없으면 에러발생
-		//Default로 만들어진 static 를 이용해서 File객체를 생성
-		//하위 디렉토리를 child로 사용해 디렉토리 생성
-		
-		String dafaultPath="classpath:/static/";
-		
-		File file = resourceLoader.getResource(dafaultPath).getFile();
-		
-		file = new File(file, path);
-		
-		if(!file.exists()) {
-			file.mkdirs();
-		}
-		
-		System.out.println(file.getAbsolutePath());
-		
-		return file;
-	}
+
 	//2번쨰방법
 	public File getUseClassPathResource(String path) throws Exception{
 		//ClassPathResource
