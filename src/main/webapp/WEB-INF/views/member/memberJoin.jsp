@@ -84,23 +84,23 @@
 				</div>
 			</div>
 			
-			<div class="form-group">
+			<%-- <div class="form-group">
 				<label class="control-label col-sm-2" for="mem_address">Adress:</label>
 				<div class="col-sm-10">
 					<form:input path="mem_address" type="text" class="form-control"
 						id="mem_address" placeholder="Enter Address" value="${road_address}" />
 					<form:errors path="mem_address"></form:errors>
 				</div>
-			</div>
+			</div> --%>
 				
-			<%-- 
+			 
 			<div class="form-group">
 				<label class="control-label col-sm-2" for="road_address">주소:</label>
 				<div class="col-sm-10">
 					<form:input path="road_address" type="text" class="form-control"
 						id="road_address" placeholder="Enter Address"/>
 				</div>
-			</div> --%>
+			</div> 
 
 			<a href="" class="btn btn-default" onclick="openChild()">주소 검색</a>
 			
