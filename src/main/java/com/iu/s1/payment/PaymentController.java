@@ -30,7 +30,8 @@ public class PaymentController {
 	@GetMapping("paySuccess")
 	public String paySuccess(HttpServletRequest httpServletRequest,MemberVO memberVO)throws Exception{
 		memberVO.setMem_point(Long.parseLong(httpServletRequest.getParameter("mem_point")));
-		memberVO.setMem_id((String)httpServletRequest.getSession().getAttribute("member"));
+		
+		memberVO.setMem_id((String)httpServletRequest.getSession().getAttribute("member_id"));
 		
 		paymentService.pointUpdate(memberVO);
 		
@@ -46,6 +47,7 @@ public class PaymentController {
 	@PostMapping("pointCharge")
 	public ModelAndView pointCharge(long point)throws Exception{
 		ModelAndView mv = new ModelAndView();
+		mv.setViewName("/payment/pay");
 		
 		return mv;
 	}

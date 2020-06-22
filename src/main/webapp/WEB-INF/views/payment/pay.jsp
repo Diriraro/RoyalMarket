@@ -27,10 +27,10 @@
             merchant_uid : 'merchant_' + new Date().getTime(),
             name : 'WooJoo Market',
             amount : ${amount},					// 금액 
-            buyer_email : 'Test@naver.com', // 맴버의 이메일 받아오기    ${member.email}
-            buyer_name : 'Test',			// 맴버의 이름 받아오기	   ${member.name}
-            buyer_tel : '01012341234',		// 맴버의 전화번호 받아오기 ${member.tel}
-            buyer_addr : '테스트',			// 맴버의 주소 받아오기	   ${member.address}
+            buyer_email : ${member.mem_email}, // 맴버의 이메일 받아오기    ${member.email}
+            buyer_name : ${member.mem_name},			// 맴버의 이름 받아오기	   ${member.name}
+            buyer_tel : ${member.mem_phone},		// 맴버의 전화번호 받아오기 ${member.tel}
+            buyer_addr : ${member.mem_address},			// 맴버의 주소 받아오기	   ${member.address}
             buyer_postcode : '123-456',     // 우편번호 ???
            // m_redirect_url : 'www.naver.com'
         }, function(rsp) {
