@@ -19,11 +19,12 @@ public class MemberService {
 	@Autowired
 	private MemberRepository memberRepository;
 	
-	public void certifiedPhoneNumber(String phoneNumber, String numStr) {
+	public String certifiedPhoneNumber(String phoneNumber, String numStr) {
 
 		String api_key ="NCSYCJIG3YIWY3QA";
 		String api_secret ="UXRXDHID18TDWF5PJKZWZFASIXDZU2W9";
 		Message coolsms = new Message(api_key, api_secret);
+		String error_count = "1";
 
 		// 4 params(to, from, type, text) are mandatory. must be filled
 		HashMap<String, String> params = new HashMap<String, String>();
@@ -33,14 +34,15 @@ public class MemberService {
 		params.put("text", "인증번호는" + "[" + numStr + "]" + "입니다.");
 		params.put("app_version", "test app 2.2"); // application name and version
 		
-   
 		try {
 			JSONObject obj = (JSONObject) coolsms.send(params);
+			error_count = obj.get("error_count").toString();
 			System.out.println(obj.toString());
 		} catch (CoolsmsException e) {
 			System.out.println(e.getMessage());
 			System.out.println(e.getCode());
 		}
+		return error_count;
 
 	}
 	
@@ -71,8 +73,6 @@ public class MemberService {
 		}
 		
 		// 인증번호가 맞는지 확인
-		System.out.println("mm"+memberVO.getPhoneCheck());
-		System.out.println("mc"+checkNum);
 		if(!memberVO.getPhoneCheck().equals(checkNum)) {
 			bindingResult.rejectValue("phoneCheck", "memberVO.phoneCheck.notEqual");
 			result = true;

@@ -1,5 +1,7 @@
 package com.iu.s1.member;
 
+import java.sql.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -58,14 +60,17 @@ public class MemberVO {
 	@Column
 	private long mem_point;
 	
-	//멤버 추가사항
+	@Transient
 	private String kind;
 		
-	//멤버 추가사항
+	@Transient
 	private String search;
 		
 	@Column
 	private long mem_access;
+	
+	@Column
+	private Date mem_regDate;
 
 
 }
