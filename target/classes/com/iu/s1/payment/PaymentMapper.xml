@@ -39,5 +39,59 @@
  		select mem_id from member where mem_storeNum
  		=(select mem_storeNum from store_product where sell_num=#{sell_num})
  	</select>
- 
+ 	
+ 	<!-- 구매내역 추가 -->
+ 	<insert id="buy_his" parameterType="com.iu.s1.paymentHistory.Buy_HistoryVO">
+ 		insert into buy_history values(#{mem_id},#{sell_num},#{sell_price},0)
+ 	</insert>
+ 	
+ 	<!-- 판매내역 추가 -->
+ 	<insert id="sell_his" parameterType="com.iu.s1.paymentHistory.Sell_HistoryVO">
+ 		insert into sell_history values(#{mem_id},#{sell_num},#{sell_price},0)
+ 	</insert>
+ 	
+ 	<!-- 구매 내역 출력 -->
+ 	<select id="buy_hisSelect" parameterType="java.lang.String" resultType="com.iu.s1.paymentHistory.Buy_HistoryVO">
+ 		select * from buy_history where mem_id=#{mem_id}
+ 	</select>
+ 	
+ 	<!-- 판매 내역 출력 -->
+  	<select id="sell_hisSelect" parameterType="java.lang.String" resultType="com.iu.s1.paymentHistory.Sell_HistoryVO">
+ 		select * from sell_history where mem_id=#{mem_id}
+ 	</select>
+ 	
+ 	<!-- 판매자 포인트 업데이트 -->
+ 	<update id="sellerPointUpdate">
+ 	
+ 	</update>
+ 	
+ 	<!-- 인수 업데이트 -->
+ 	<update id="tradingReceiveUp" parameterType="java.lang.Long">
+ 		update Trading set receive=#{receive}
+ 	</update>
+ 	
+ 	<!-- 인수 업데이트2 -->
+ 	<update id="buy_statusUp" parameterType="java.lang.Long">
+ 		update buy_history set status=#{status}
+ 	</update>
+ 	
+ 	<!-- 인계 업데이트 -->
+ 	<update id="tradingGiveUp" parameterType="java.lang.Long">
+ 		update Trading set give=#{give}
+ 	</update>
+ 	
+ 	<!-- 인수 업데이트2 -->
+ 	<update id="sell_statusUp" parameterType="java.lang.Long">
+ 		update sell_history set status=#{status}
+ 	</update>
+ 	
+ 	<!-- trading Select -->
+ 	<select id="tradingSelect" parameterType="java.lang.Long" resultType="com.iu.s1.trading.TradingVO">
+ 		select * from Trading where sell_num=#{sell_num}
+ 	</select>
+ 	
+ 	<!--  trading Delete -->
+ 	<delete id="tradingDelete" parameterType="java.lang.Long">
+ 		delete from Trading where sell_num=#{sell_num} 
+ 	</delete>
  </mapper>

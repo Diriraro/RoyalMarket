@@ -6,6 +6,8 @@ import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
 import com.iu.s1.member.MemberVO;
+import com.iu.s1.paymentHistory.Buy_HistoryVO;
+import com.iu.s1.paymentHistory.Sell_HistoryVO;
 import com.iu.s1.trading.TradingVO;
 
 @Repository
@@ -25,4 +27,24 @@ public interface PaymentMapper {
 	public String seller_id_select(long sell_num)throws Exception;
 	
 	public int paymentOut(PayVO payVO)throws Exception;
+	
+	public int buy_his(Buy_HistoryVO buy_HistoryVO)throws Exception;
+	
+	public int sell_his(Sell_HistoryVO sell_HistoryVO)throws Exception;
+	
+	public List<Buy_HistoryVO> buy_hisSelect(String mem_id)throws Exception;
+	
+	public List<Sell_HistoryVO> sell_hisSelect(String mem_id)throws Exception;
+	
+	public int tradingReceiveUp(long receive)throws Exception;
+	
+	public int buy_statusUp(long status)throws Exception;
+	
+	public int tradingGiveUp(long give)throws Exception;
+	
+	public int sell_statusUp(long status)throws Exception;
+	
+	public TradingVO tradingSelect(long sell_num)throws Exception;
+	
+	public int tradingDelete(long sell_num)throws Exception;
 }
