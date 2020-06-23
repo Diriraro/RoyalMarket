@@ -18,9 +18,9 @@
 			<a href="./qnaMyList">상담내역</a>
 		</h1>
 		<%
-			String seop = "";
+			String seop = ""; // 스크립틀릿으로 변수명줘보기 테스트
 		%>
-		<form action="qnaWrite">
+		<form action="./qnaWrite" method="post" enctype="multipart/form-data">
 			<div align="center" id="qna_kind">
 				<select id="qna_kind_1">
 					<option value="">문의할 내용을 선택해주세요</option>
@@ -43,9 +43,10 @@
 				</textarea>
 				<br>
 				<input type="hidden" id="qnak" name="qna_kind" value="계정문의>회원가입">
-				<input type="hidden" id="mem_id" name="mem_id" value="${member.mem_id }">
+				<input type="hidden" id="mem_id" name="mem_id" value="iu">			<!-- 아이디 세션에서 받아서 value 바꾸기 -->
 			</div>
-
+			<input type="button" class="btn btn-success" id="qnaFileAdd" value="사진추가">
+			<button type="submit" class="btn btn-primary">작성하기</button>
 		</form>
 	</div>
 	<script type="text/javascript">

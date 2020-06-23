@@ -10,7 +10,7 @@
 	</select>
 	
 	<insert id="qnaWrite" parameterType="com.iu.s1.qna.QnaVO">
-		INSERT INTO qna VALUES(0,#{qna_kind},#{mem_id},#{qna_contents},now(),0,0)
+		INSERT INTO qna VALUES(0,#{qna_kind},#{mem_id},#{qna_contents},now(),0,null)
 	</insert>
 	
 	<update id="qnaUpdate" parameterType="com.iu.s1.qna.QnaVO">
