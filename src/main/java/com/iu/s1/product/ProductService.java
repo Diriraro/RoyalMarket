@@ -8,8 +8,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.iu.s1.product.productFIle.ProductFileDAO;
-import com.iu.s1.product.productFIle.ProductFileVO;
+import com.iu.s1.member.MemberVO;
+import com.iu.s1.product.productFile.ProductFileMapper;
+import com.iu.s1.product.productFile.ProductFileVO;
 import com.iu.s1.util.FileManager;
 import com.iu.s1.util.FilePathGenerator;
 import com.iu.s1.util.Pager;
@@ -18,54 +19,62 @@ import com.iu.s1.util.Pager;
 public class ProductService {
 
 	@Autowired
-	private ProductDAO productDAO;
-	
+	private ProductMapper productMapper;
+
 	@Autowired
-	private ProductFileDAO productFileDAO;
-	
+	private ProductFileMapper productFileMapper;
+
 	@Autowired
 	private FilePathGenerator filePathGenerator;
-	
+
 	@Autowired
 	private FileManager fileManager;
-	
+
 	@Value("${product.filePath}")
 	private String filePath;
 	
-	public int productInsert(ProductVO productVO, MultipartFile[] files) throws Exception{
-		
-		
+	public ProductVO productSelect(long sell_num) throws Exception{
+		productMapper.hitUpdate(sell_num);
+		return productMapper.productSelect(sell_num);
+	}
+
+	public int productInsert(ProductVO productVO, MultipartFile[] files) throws Exception {
+
 		File file = filePathGenerator.getUseClassPathResource(filePath);
-		int result = productDAO.productInsert(productVO);
+
+		int result = productMapper.productInsert(productVO);
+
 		for (MultipartFile multipartFile : files) {
-			if (multipartFile.getSize()<=0) {
+			if (multipartFile.getSize() <= 0) {
 				continue;
-			
+
+			}
+			String fileName = fileManager.saveFileCopy(multipartFile, file);
+			ProductFileVO vo = new ProductFileVO();
+			vo.setSell_num(productVO.getSell_num());
+			vo.setFile_name(fileName);
+			vo.setOri_name(multipartFile.getOriginalFilename());
+
+			result = productFileMapper.productFileInsert(vo);
+			System.out.println(fileName);
+
 		}
-		String fileName=fileManager.saveFileCopy(multipartFile, file);
-		ProductFileVO vo = new ProductFileVO();
-		vo.setSell_num(productVO.getSell_num());
-		vo.setFile_name(fileName);
-		vo.setOri_name(multipartFile.getOriginalFilename());
-		
-		result = productFileDAO.productFileInsert(vo);
-		System.out.println(fileName);
-		
-		}
-		
 		return result;
 	}
-	
-	public List<ProductFileVO> productFileSelect(long sell_num)throws Exception{
-		return productFileDAO.productFileSelect(sell_num);
+
+	public String selectFileName(long sell_num) throws Exception {
+		return productMapper.selectFileName(sell_num);
 	}
-	
-	public String selectFileName(long sell_num)throws Exception{
-		return productFileDAO.selectFileName(sell_num);
+
+	public List<ProductVO> productList(Pager pager) throws Exception {
+		pager.makeRow();
+		long totalCount = productMapper.productCount(pager);
+		pager.makePage(totalCount);
+		return productMapper.productList(pager);
 	}
-	
-	public List<ProductVO> productList(Pager pager) throws Exception{
-		return productDAO.productList(pager);
+
+	public MemberVO productAddress(long sell_num) throws Exception{
+		return productMapper.productAddress(sell_num);
 	}
 	
 }

@@ -6,9 +6,16 @@
 <configuration>
 	<typeAliases>
 		<typeAlias type="java.util.List" alias="List" />
-		<typeAlias type="com.iu.s1.product.ProductVO" alias="ProductVO" />
-		<typeAlias type="com.iu.s1.product.productFile.ProductFileVO" alias="ProductFileVO"/>
+		<typeAlias type="java.lang.Long" alias="Long" />
+		<typeAlias type="java.lang.String" alias="String" />
+		<typeAlias type="com.iu.s1.product.ProductVO"
+			alias="ProductVO" />
+		<typeAlias
+			type="com.iu.s1.product.productFile.ProductFileVO"
+			alias="ProductFileVO" />
+		<typeAlias type="com.iu.s1.product.qna.QnaVO" alias="QnaVO" />
 		<typeAlias type="com.iu.s1.util.Pager" alias="Pager" />
 		<typeAlias type="com.iu.s1.member.MemberVO" alias="MemberVO" />
+
 	</typeAliases>
 </configuration>

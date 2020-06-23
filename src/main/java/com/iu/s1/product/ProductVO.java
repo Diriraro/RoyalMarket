@@ -20,6 +20,25 @@ public class ProductVO {
 	
 	private Date sell_date;
 	
+	private Long sell_status;
+	
+	private Long sell_hit;
+
+	public Long getSell_status() {
+		return sell_status;
+	}
+
+	public void setSell_status(Long sell_status) {
+		this.sell_status = sell_status;
+	}
+
+	public Long getSell_hit() {
+		return sell_hit;
+	}
+
+	public void setSell_hit(Long sell_hit) {
+		this.sell_hit = sell_hit;
+	}
 
 	public Long getSell_num() {
 		return sell_num;
@@ -84,6 +103,8 @@ public class ProductVO {
 	public void setSell_date(Date sell_date) {
 		this.sell_date = sell_date;
 	}
+	
+
 
 
 	

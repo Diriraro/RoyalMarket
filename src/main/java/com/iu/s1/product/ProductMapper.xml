@@ -2,23 +2,40 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.iu.s1.product.ProductDAO">
+<mapper namespace="com.iu.s1.product.ProductMapper">
 
-
-	<insert id="productInsert" parameterType="ProductVO">
+	<insert id="productInsert" parameterType="ProductVO"
+		keyProperty="sell_num" useGeneratedKeys="true">
 		insert into store_product
-		values 
+		values
 		(0,#{mem_storeNum},#{sell_product},
 		#{sell_price},#{sell_info},
 		#{sell_kind},
-		#{sell_tag},now())
+		#{sell_tag},now(),0,0)
 	</insert>
 
 	<select id="productSelect" parameterType="java.lang.Long"
 		resultType="ProductVO">
 		SELECT * FROM store_product WHERE sell_num=#{sell_num}
 	</select>
-	
+
+	<select id="productCount" parameterType="Pager"
+		resultType="java.lang.Long">
+		select count(sell_num) from store_product where
+		<choose>
+			<when test="kind=='sp'">
+				sell_product
+			</when>
+			<when test="kind=='sk'">
+				sell_kind
+			</when>
+			<otherwise>
+				sell_tag
+			</otherwise>
+		</choose>
+		like concat('%',#{search},'%')
+	</select>
+
 	<select id="productList" parameterType="Pager"
 		resultType="ProductVO">
 		select * from store_product where
@@ -34,6 +51,26 @@
 			</otherwise>
 		</choose>
 		like concat('%',#{search},'%')
-		order by num desc limit #{startRow},10
+		order by sell_num desc limit
+		#{startRow},10
 	</select>
+
+
+	<select id="selectFileName" parameterType="Long"
+		resultType="String">
+		select file_name from sell_file where sell_num=#{sell_num}
+	</select>
+
+	<select id="productAddress" parameterType="Long"
+		resultType="MemberVO">
+		select mem_address from member where mem_storeNum=(select
+		mem_storeNum from store_product where sell_num=#{sell_num})
+	</select>
+
+	<update id="hitUpdate" parameterType="Long">
+		update store_product set sell_hit = sell_hit+1
+		where sell_num=#{sell_num}
+	</update>
+
+
 </mapper>

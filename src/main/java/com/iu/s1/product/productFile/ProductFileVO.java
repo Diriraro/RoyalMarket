@@ -1,4 +1,4 @@
-package com.iu.s1.product.productFIle;
+package com.iu.s1.product.productFile;
 
 public class ProductFileVO {
 	
@@ -33,6 +33,7 @@ public class ProductFileVO {
 		this.ori_name = ori_name;
 	}
 
+	
 	
 	
 }

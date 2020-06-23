@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.iu.s1.member.MemberVO;
 import com.iu.s1.util.Pager;
 
 
@@ -64,9 +65,24 @@ public class ProductController {
 			index++;
 			
 		}
-		//mv.addObject("pager", pager);
-		mv.setViewName("product/productList");
 		mv.addObject("file", ar2);
+		mv.addObject("pager", pager);
+		mv.setViewName("product/productList");
+
 		return mv;
 	}
+	@GetMapping("productSelect")
+	public ModelAndView productSelect(long sell_num) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		ProductVO productVO = productService.productSelect(sell_num);
+		mv.addObject("vo",productVO);
+		
+		sell_num = productVO.getSell_num();
+		MemberVO memberVO = productService.productAddress(sell_num);
+		mv.addObject("mvo",memberVO);
+		mv.setViewName("product/productSelect");		
+		return mv;	
+	}
+
+	
 }

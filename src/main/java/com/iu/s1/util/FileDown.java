@@ -16,7 +16,7 @@ import org.springframework.util.FileCopyUtils;
 import org.springframework.web.servlet.view.AbstractView;
 
 import com.iu.s1.product.ProductVO;
-import com.iu.s1.product.productFIle.ProductFileVO;
+import com.iu.s1.product.productFile.ProductFileVO;
 
 @Component
 public class FileDown extends AbstractView {
