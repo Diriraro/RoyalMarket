@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.iu.s1.NoticeVO;
 import com.iu.s1.ProductVO;
 import com.iu.s1.member.MemberVO;
+import com.iu.s1.notice.NoticeVO;
 
 
 @Controller
@@ -32,10 +32,10 @@ public class AdminController {
 		return "admin/adminPage";
 	}
 	
-	@GetMapping("getNoticeList")
+	@GetMapping("getNoticeList") 
 	public void getNoticeList (Model model) throws Exception {
 		List<NoticeVO> ar = new ArrayList<NoticeVO>();
-//		ar = noticeService.getNoticeList();
+		ar = adminService.getNoticeList();
 		model.addAttribute("list",ar);
 	}
 	
@@ -62,9 +62,9 @@ public class AdminController {
 	}
 	
 	@PostMapping("getMemberList")
-	public void getMemberList (Model model, String kind, String search) throws Exception {
+	public void getMemberList (Model model, String kind, String search, int mem_access) throws Exception {
 		List<MemberVO> ar = new ArrayList<MemberVO>();
-		ar = adminService.getMemberSearchList(kind, search);
+		ar = adminService.getMemberSearchList(kind, search, mem_access);
 		model.addAttribute("check","accept");
 		model.addAttribute("list",ar);
 	}
@@ -80,5 +80,17 @@ public class AdminController {
 		List<MemberVO> ar = new ArrayList<MemberVO>();
 //		ar = adminService.getQnaList();
 		model.addAttribute("list",ar);
+	}
+	@GetMapping("getDashBoard")
+	public void getDashBoard(Model model) throws Exception {
+		// DashBoard 에서 필요한 데이터는 model 로 key,value 형태로 DashBoard에 addAttribute
+		double memberCount = (double)adminService.getMemberCount();
+		double dailyNewMemberCount = (double)adminService.getDailyNewMember();
+		long rate = (long)((dailyNewMemberCount/memberCount)*100);
+		List<NoticeVO> ar = adminService.getNoticeList();
+		model.addAttribute("increaseRate", rate);
+		model.addAttribute("memberCount",(int)memberCount);
+		model.addAttribute("list",ar);
+		
 	}
 }

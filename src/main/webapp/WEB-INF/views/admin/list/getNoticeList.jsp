@@ -24,12 +24,14 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr>
-				<td>sample1</td>
-				<td><a>sample1</a></td>
-				<td>sample1</td>
-				<td>sample1</td>
-			</tr>
+			<c:forEach items="${list}" var="li">
+				<tr>
+					<td>${li.no_num}</td>
+					<td><a href="../notice/noticeSelect?no_num=${li.no_num}" class="pointCursor">${li.no_title}</a></td>
+					<td>${li.no_contents}</td>
+					<td>${li.no_regDate}</td>
+				</tr>
+			</c:forEach>
 		</tbody>
 	</table>
 </div>

@@ -67,7 +67,7 @@
 						<option value="mem_name">회원이름</option>
 					</select> <input type="text" placeholder="Member Search.." name="search"
 						id="search">
-					<button type="submit" id="frm">
+					<button type="submit" id="frm1">
 						<i class="fa fa-search"></i>
 					</button>
 				</form>
