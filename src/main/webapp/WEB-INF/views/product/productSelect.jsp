@@ -18,7 +18,17 @@
 <h3>info : ${vo.sell_info}</h3>
 <h3>hit : ${vo.sell_hit}</h3>
 <h3>date : ${vo.sell_date}</h3>
+<h3>num : ${vo.sell_num}</h3>
 <h3>address : ${mvo.mem_address}</h3>
 
+<button class="btn btn-primary" id="productPay">구매하기</button>
+
+
+<script type="text/javascript">
+	$("#productPay").click(function() {
+			location.href="../payment/productPay?sell_product=${vo.sell_product}&sell_price=${vo.sell_price}&sell_num=${vo.sell_num}";
+	});
+		
+</script>
 </body>
 </html>

@@ -93,6 +93,9 @@ public class PaymentController {
 	public ModelAndView productPay(HttpServletRequest request)throws Exception{
 		ModelAndView mv = new ModelAndView();
 		MemberVO memberVO = (MemberVO)request.getSession().getAttribute("memberVO");
+		String sell_product = request.getParameter("sell_product");
+		long sell_price = Long.parseLong(request.getParameter("sell_price"));
+		long sell_num = Long.parseLong(request.getParameter("sell_num"));
 		
 		//맴버테이블에서 포인트 조회
 		String mem_id = memberVO.getMem_id();
@@ -100,7 +103,10 @@ public class PaymentController {
 	
 		
 		mv.addObject("point", point);
-	
+		mv.addObject("sell_product", sell_product);
+		mv.addObject("sell_price", sell_price);
+		mv.addObject("sell_num",sell_num);
+		
 		mv.setViewName("/payment/productPay");
 		
 		return mv;
@@ -113,14 +119,16 @@ public class PaymentController {
 		ModelAndView mv = new ModelAndView();
 		
 		//productSelect에서 넘길때 파라미터 값으로 sell넘을 넘겨 받아서 상품에 대한 정보 조회
+		long sell_num = Long.parseLong(request.getParameter("sell_num"));
+		long sell_price = Long.parseLong(request.getParameter("sell_price"));
 		
 		// 결제 진행 테이블 입력
 		MemberVO memberVO = (MemberVO)request.getSession().getAttribute("memberVO");
 		TradingVO tradingVO = new TradingVO();
-		tradingVO.setSell_price(10);
-		tradingVO.setSell_num(10);
+		tradingVO.setSell_price(sell_price);
+		tradingVO.setSell_num(sell_num);
 		tradingVO.setBuyer_id(memberVO.getMem_id());
-		String seller_id=paymentService.seller_id_select(10);
+		String seller_id=paymentService.seller_id_select(sell_num);
 		
 		tradingVO.setSeller_id(seller_id);
 		
@@ -132,28 +140,28 @@ public class PaymentController {
 		long nowPoint = paymentService.pointSelect(memberVO.getMem_id());
 		System.out.println(nowPoint);
 		payVO.setMem_id(memberVO.getMem_id());
-		payVO.setPay_price(10);
-		payVO.setPoint_rest(nowPoint-10); //test용으로 10 상품가격을 받아와야함 !
+		payVO.setPay_price(sell_price);
+		payVO.setPoint_rest(nowPoint-sell_price); //test용으로 10 상품가격을 받아와야함 !
 		paymentService.paymentOut(payVO);
 		
 		// member point 업데이트
-		memberVO.setMem_point(nowPoint-10);
+		memberVO.setMem_point(nowPoint-sell_price);
 		paymentService.pointUpdate(memberVO);
 		
 		// 구매내역 입력 (임시로 상품 번호 10, 상품 가격 10)
 		Buy_HistoryVO buy_HistoryVO = new Buy_HistoryVO();
 		
 		buy_HistoryVO.setMem_id(memberVO.getMem_id());
-		buy_HistoryVO.setSell_num(10);
-		buy_HistoryVO.setSell_price(10);
+		buy_HistoryVO.setSell_num(sell_num);
+		buy_HistoryVO.setSell_price(sell_price);
 		paymentService.buy_his(buy_HistoryVO);
 		
 		// 판매 내역 입력 (임시로 상품 번호 10, 상품 가격 10)
 		Sell_HistoryVO sell_HistoryVO = new Sell_HistoryVO();
 		
 		sell_HistoryVO.setMem_id(seller_id);
-		sell_HistoryVO.setSell_num(10);
-		sell_HistoryVO.setSell_price(10);
+		sell_HistoryVO.setSell_num(sell_num);
+		sell_HistoryVO.setSell_price(sell_price);
 		paymentService.sell_his(sell_HistoryVO);
 		
 		mv.addObject("tradingVO", tradingVO);
@@ -181,9 +189,9 @@ public class PaymentController {
 		ModelAndView mv = new ModelAndView();
 		MemberVO memberVO = (MemberVO)request.getSession().getAttribute("memberVO");
 		
-		List<Buy_HistoryVO> ar = paymentService.buy_hisSelect(memberVO.getMem_id());
+		List<Buy_HistoryVO> vo = paymentService.buy_hisSelect(memberVO.getMem_id());
 
-		mv.addObject("buy", ar);
+		mv.addObject("buy", vo);
 		mv.setViewName("/payment/buy_History");
 		
 		return mv;
@@ -208,17 +216,21 @@ public class PaymentController {
 	public ModelAndView productTake(HttpServletRequest request)throws Exception{
 		ModelAndView mv = new ModelAndView();
 		
-		// trading의 recieve 업데이트
-		paymentService.tradingReceiveUp(1);
-		// buy_history status 업데이트
-		paymentService.buy_statusUp(1);
-		
 		
 		long sell_num=Long.parseLong(request.getParameter("sell_num"));
 		String seller_id=paymentService.seller_id_select(sell_num);
 		long curPoint = paymentService.pointSelect(seller_id);
 		
-		TradingVO tradingVO = paymentService.trandingSelect(sell_num);
+		TradingVO tradingVO = new TradingVO();
+		tradingVO.setReceive(1);
+		tradingVO.setSell_num(sell_num);
+		
+		// trading의 recieve 업데이트
+		paymentService.tradingReceiveUp(tradingVO);
+		// buy_history status 업데이트
+		paymentService.buy_statusUp(1);
+		
+		tradingVO = paymentService.trandingSelect(sell_num);
 		
 		long receive = tradingVO.getReceive();
 		long give = tradingVO.getGive();
@@ -243,24 +255,28 @@ public class PaymentController {
 	public ModelAndView productGive(HttpServletRequest request)throws Exception{
 		ModelAndView mv = new ModelAndView();
 		
-		// trading의 recieve 업데이트
-		paymentService.tradingGiveUp(1);
-		// buy_history status 업데이트
-		paymentService.sell_statusUp(1);
 		
 		
 		long sell_num=Long.parseLong(request.getParameter("sell_num"));
 		String seller_id=paymentService.seller_id_select(sell_num);
 		long curPoint = paymentService.pointSelect(seller_id);
 		
-		TradingVO tradingVO = paymentService.trandingSelect(sell_num);
+		TradingVO tradingVO = new TradingVO();
+		
+		tradingVO.setGive(1);
+		tradingVO.setSell_num(sell_num);
+		// trading의 recieve 업데이트
+		paymentService.tradingGiveUp(tradingVO);
+		// buy_history status 업데이트
+		paymentService.sell_statusUp(1);
+		
+		tradingVO = paymentService.trandingSelect(sell_num);
 		
 		long receive = tradingVO.getReceive();
 		long give = tradingVO.getGive();
 		
 		//인수 인계가 모두 1이면 판매자 포인트 업데이트
 		if(receive==1 && give==1) {		
-			System.out.println("ttttttt");
 			long total=curPoint+tradingVO.getSell_price();
 			MemberVO memberVO = new MemberVO();
 			memberVO.setMem_id(seller_id);
@@ -274,5 +290,22 @@ public class PaymentController {
 		return mv;
 	}
 
+	@GetMapping("buyer_page")
+	public ModelAndView buyer_page(HttpServletRequest request)throws Exception{
+		ModelAndView mv = new ModelAndView();
+		long sell_num = Long.parseLong(request.getParameter("sell_num"));
+		
+		mv.addObject("sell_num", sell_num);
+		mv.setViewName("/payment/buyer_page");
+		return mv;
+	}
 	
+	@GetMapping("seller_page")
+	public ModelAndView seller_page()throws Exception{
+		ModelAndView mv = new ModelAndView();
+		
+		
+		mv.setViewName("/payment/seller_page");
+		return mv;
+	}
 }

@@ -36,11 +36,11 @@ public interface PaymentMapper {
 	
 	public List<Sell_HistoryVO> sell_hisSelect(String mem_id)throws Exception;
 	
-	public int tradingReceiveUp(long receive)throws Exception;
+	public int tradingReceiveUp(TradingVO tradingVO)throws Exception;
 	
 	public int buy_statusUp(long status)throws Exception;
 	
-	public int tradingGiveUp(long give)throws Exception;
+	public int tradingGiveUp(TradingVO tradingVO)throws Exception;
 	
 	public int sell_statusUp(long status)throws Exception;
 	

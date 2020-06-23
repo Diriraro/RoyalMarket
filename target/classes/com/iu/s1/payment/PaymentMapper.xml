@@ -31,7 +31,7 @@
  	
  	<!--거래중 테이블 -->
  	<insert id="tradingInsert" parameterType="com.iu.s1.trading.TradingVO">
- 		insert into Trading values(#{sell_num},#{sell_price},#{buyer_id},#{seller_id},0,0)
+ 		insert into trading values(#{sell_num},#{sell_price},#{buyer_id},#{seller_id},0,0)
  	</insert>
  	
  	<!-- 판매자 아이디 조회 -->
@@ -42,12 +42,12 @@
  	
  	<!-- 구매내역 추가 -->
  	<insert id="buy_his" parameterType="com.iu.s1.paymentHistory.Buy_HistoryVO">
- 		insert into buy_history values(#{mem_id},#{sell_num},#{sell_price},0)
+ 		insert into buy_history values(#{mem_id},#{sell_num},#{sell_price},0,0)
  	</insert>
  	
  	<!-- 판매내역 추가 -->
  	<insert id="sell_his" parameterType="com.iu.s1.paymentHistory.Sell_HistoryVO">
- 		insert into sell_history values(#{mem_id},#{sell_num},#{sell_price},0)
+ 		insert into sell_history values(#{mem_id},#{sell_num},#{sell_price},0,0)
  	</insert>
  	
  	<!-- 구매 내역 출력 -->
@@ -66,18 +66,18 @@
  	</update>
  	
  	<!-- 인수 업데이트 -->
- 	<update id="tradingReceiveUp" parameterType="java.lang.Long">
- 		update Trading set receive=#{receive}
+ 	<update id="tradingReceiveUp" parameterType="com.iu.s1.trading.TradingVO">
+ 		update trading set receive=#{receive} where sell_num=#{sell_num}
  	</update>
  	
  	<!-- 인수 업데이트2 -->
  	<update id="buy_statusUp" parameterType="java.lang.Long">
- 		update buy_history set status=#{status}
+ 		update buy_history set status=#{status} where sell_num=#{sell_num}
  	</update>
  	
  	<!-- 인계 업데이트 -->
- 	<update id="tradingGiveUp" parameterType="java.lang.Long">
- 		update Trading set give=#{give}
+ 	<update id="tradingGiveUp" parameterType="com.iu.s1.trading.TradingVO">
+ 		update trading set give=#{give}
  	</update>
  	
  	<!-- 인수 업데이트2 -->
@@ -87,11 +87,11 @@
  	
  	<!-- trading Select -->
  	<select id="tradingSelect" parameterType="java.lang.Long" resultType="com.iu.s1.trading.TradingVO">
- 		select * from Trading where sell_num=#{sell_num}
+ 		select * from trading where sell_num=#{sell_num}
  	</select>
  	
  	<!--  trading Delete -->
  	<delete id="tradingDelete" parameterType="java.lang.Long">
- 		delete from Trading where sell_num=#{sell_num} 
+ 		delete from trading where sell_num=#{sell_num} 
  	</delete>
  </mapper>

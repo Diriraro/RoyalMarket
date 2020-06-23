@@ -60,16 +60,16 @@ public class PaymentService {
 		return paymentMapper.sell_hisSelect(mem_id);
 	}
 	
-	public int tradingReceiveUp(long receive)throws Exception{
-		return paymentMapper.tradingReceiveUp(receive);
+	public int tradingReceiveUp(TradingVO tradingVO)throws Exception{
+		return paymentMapper.tradingReceiveUp(tradingVO);
 	}
 	
 	public int buy_statusUp(long status)throws Exception{
 		return paymentMapper.buy_statusUp(status);
 	}
 	
-	public int tradingGiveUp(long give)throws Exception{
-		return paymentMapper.tradingGiveUp(give);
+	public int tradingGiveUp(TradingVO tradingVO)throws Exception{
+		return paymentMapper.tradingGiveUp(tradingVO);
 	}
 	
 	public int sell_statusUp(long status)throws Exception{

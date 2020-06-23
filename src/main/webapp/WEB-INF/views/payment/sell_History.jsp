@@ -37,23 +37,6 @@
 		</table>
 	</div>
 	
-	<script type="text/javascript">
-
-	$("#productCancel").click(function(){
-		var check = confirm("상품 거래을 취소하시겠습니까?");
-		if(check){
-			location.href="./productCancel";
-		}
-	})	
-	$("#productGive").click(function() {
-		var check = confirm("상품 인계완료를 하시겠습니까?");
-		var num = $("#productGive").attr("title");
-		if(check){
-			location.href="./productGive?sell_num="+num;
-		}
-	});
-		
-</script>
-
+	
 </body>
 </html>
