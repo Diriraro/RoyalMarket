@@ -47,7 +47,7 @@
 	<script type="text/javascript">
 		$("#category0").click(
 				function() {
-					location.href = "productList/searchProduct?kind=lk&search=패션잡화";
+					location.href = "/product/productList?kind=sk&search=패션잡화";
 				});
 	</script>
 

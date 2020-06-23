@@ -47,6 +47,7 @@
 					<div class="panel panel-info" style="height:100px; width:80px; cursor: pointer;"
 						onclick="location.href='./productSelect?sell_num=${vo.sell_num}'">
 						
+						
 						<img style="height:100px; width:80px; cursor: pointer;" alt="" src="${pageContext.request.contextPath}/upload/product/${file[i.index]}">
 						<tr>
 							<td>${vo.sell_num}</td>

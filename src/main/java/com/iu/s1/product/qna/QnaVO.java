@@ -8,11 +8,21 @@ public class QnaVO {
 	
 	private long sell_num;
 	
-	private String pq_storeName;
+	private long pq_storeNum;
 	
 	private String pq_contents;
 	
 	private Date pq_regDate;
+	
+	private String pq_storeName;
+
+	public String getPq_storeName() {
+		return pq_storeName;
+	}
+
+	public void setPq_storeName(String pq_storeName) {
+		this.pq_storeName = pq_storeName;
+	}
 
 	public long getPq_num() {
 		return pq_num;
@@ -30,12 +40,12 @@ public class QnaVO {
 		this.sell_num = sell_num;
 	}
 
-	public String getPq_storeName() {
-		return pq_storeName;
+	public long getPq_storeNum() {
+		return pq_storeNum;
 	}
 
-	public void setPq_storeName(String pq_storeName) {
-		this.pq_storeName = pq_storeName;
+	public void setPq_storeNum(long pq_storeNum) {
+		this.pq_storeNum = pq_storeNum;
 	}
 
 	public String getPq_contents() {

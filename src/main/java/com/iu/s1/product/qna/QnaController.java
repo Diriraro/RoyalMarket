@@ -1,6 +1,10 @@
 package com.iu.s1.product.qna;
 
+import java.util.List;
+
+import org.apache.maven.model.Model;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.querydsl.QPageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -11,8 +15,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.iu.s1.member.MemberVO;
+
 @Controller
-@RequestMapping("/qna/**/")
+@RequestMapping("/qna")
 public class QnaController {
 	
 	@Autowired
@@ -32,24 +38,34 @@ public class QnaController {
 //		return mv;
 //	}
 
-    @RequestMapping("qnaInsert") //댓글 작성 
+    @RequestMapping("/qnaInsert") //댓글 작성 
     @ResponseBody
-    private int mCommentServiceInsert(@RequestParam long sell_num, @RequestParam String pq_contents) throws Exception{
+    private long qnaInsert(@RequestParam long sell_num,@RequestParam long pq_storeNum, @RequestParam String pq_contents,@RequestParam String pq_storeName) throws Exception{
         
         QnaVO qnaVO = new QnaVO();
         qnaVO.setSell_num(sell_num);
+        qnaVO.setPq_storeNum(pq_storeNum);
         qnaVO.setPq_contents(pq_contents);
+        qnaVO.setPq_storeName(pq_storeName);
        // ~~.setWriter("test");  
         
         return qnaService.qnaInsert(qnaVO);
     }
     
-    @RequestMapping("qnaDelete") //댓글 삭제  
+    @RequestMapping("/qnaDelete/{pq_num}") //댓글 삭제  
     @ResponseBody
-    private int mCommentServiceDelete(@PathVariable int cno) throws Exception{
+    private long qnaDelete(@PathVariable long pq_num) throws Exception{
         
-        return mCommentService.commentDeleteService(cno);
+        return qnaService.qnaDelete(pq_num);
     }
+    
+    @RequestMapping("/qnaList") //댓글 리스트
+    @ResponseBody
+    private List<QnaVO> qnaList(Model model,@RequestParam long sell_num) throws Exception{
+
+        return qnaService.qnaList(sell_num);
+    }
+
 
 
 
