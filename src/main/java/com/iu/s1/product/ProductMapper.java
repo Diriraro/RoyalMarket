@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
+import com.iu.s1.member.MemberVO;
 import com.iu.s1.util.Pager;
 
 @Mapper
@@ -20,7 +21,10 @@ public interface ProductMapper {
 	public String selectFileName(long sell_num) throws Exception;
 	
 	public ProductVO productSelect(long sell_num) throws Exception;
+	
+	public MemberVO productAddress(long sell_num) throws Exception;
 
+	public long hitUpdate(long sell_num)throws Exception;
 	
 	
 }

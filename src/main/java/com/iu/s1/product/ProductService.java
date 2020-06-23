@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.iu.s1.member.MemberVO;
 import com.iu.s1.product.productFile.ProductFileMapper;
 import com.iu.s1.product.productFile.ProductFileVO;
 import com.iu.s1.util.FileManager;
@@ -33,6 +34,7 @@ public class ProductService {
 	private String filePath;
 	
 	public ProductVO productSelect(long sell_num) throws Exception{
+		productMapper.hitUpdate(sell_num);
 		return productMapper.productSelect(sell_num);
 	}
 
@@ -71,4 +73,8 @@ public class ProductService {
 		return productMapper.productList(pager);
 	}
 
+	public MemberVO productAddress(long sell_num) throws Exception{
+		return productMapper.productAddress(sell_num);
+	}
+	
 }
