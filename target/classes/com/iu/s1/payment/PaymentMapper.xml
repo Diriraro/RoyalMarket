@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="com.iu.s1.payment.PaymentMapper">
+ 	<!-- point 입 출금 업데이트 -->
+ 	<update id="pointUpdate" parameterType="com.iu.s1.member.MemberVO">
+ 		update member set mem_point=#{mem_point} where mem_id=#{mem_id}
+ 	</update>
+ 	
+ 	<!-- 포인트 검색 -->
+ 	<select id="pointSelect" parameterType="java.lang.String" resultType="java.lang.Long">
+ 		select mem_point from member where mem_id=#{mem_id}
+ 	</select>
+ 	
+ 	<!-- 입금 입력-->
+ 	<insert id="paymentCharge" parameterType="com.iu.s1.payment.PayVO">
+ 		insert into payment values(0,#{pay_price},1,0,#{mem_id},#{point_rest})
+ 	</insert>
+ 	
+ 	<!-- 출금 입력 -->
+ 	<insert id="paymentOut" parameterType="com.iu.s1.payment.PayVO">
+ 		insert into payment values(0,#{pay_price},0,1,#{mem_id},#{point_rest})
+ 	</insert>
+ 	
+ 	<!-- 입출금 거래 내역 검색 -->
+ 	<select id="pointManage" parameterType="java.lang.String" resultType="com.iu.s1.payment.PayVO">
+ 		select * from payment where mem_id=#{id}
+ 	</select>
+ 	
+ 	<!--거래중 테이블 -->
+ 	<insert id="tradingInsert" parameterType="com.iu.s1.trading.TradingVO">
+ 		insert into Trading values(#{sell_num},#{sell_price},#{buyer_id},#{seller_id},0,0)
+ 	</insert>
+ 	
+ 	<!-- 판매자 아이디 조회 -->
+ 	<select id="seller_id_select" parameterType="java.lang.Long" resultType="java.lang.String">
+ 		select mem_id from member where mem_storeNum
+ 		=(select mem_storeNum from store_product where sell_num=#{sell_num})
+ 	</select>
+ 	
+ 	<!-- 구매내역 추가 -->
+ 	<insert id="buy_his" parameterType="com.iu.s1.paymentHistory.Buy_HistoryVO">
+ 		insert into buy_history values(#{mem_id},#{sell_num},#{sell_price},0)
+ 	</insert>
+ 	
+ 	<!-- 판매내역 추가 -->
+ 	<insert id="sell_his" parameterType="com.iu.s1.paymentHistory.Sell_HistoryVO">
+ 		insert into sell_history values(#{mem_id},#{sell_num},#{sell_price},0)
+ 	</insert>
+ 	
+ 	<!-- 구매 내역 출력 -->
+ 	<select id="buy_hisSelect" parameterType="java.lang.String" resultType="com.iu.s1.paymentHistory.Buy_HistoryVO">
+ 		select * from buy_history where mem_id=#{mem_id}
+ 	</select>
+ 	
+ 	<!-- 판매 내역 출력 -->
+  	<select id="sell_hisSelect" parameterType="java.lang.String" resultType="com.iu.s1.paymentHistory.Sell_HistoryVO">
+ 		select * from sell_history where mem_id=#{mem_id}
+ 	</select>
+ 	
+ 	<!-- 판매자 포인트 업데이트 -->
+ 	<update id="sellerPointUpdate">
+ 	
+ 	</update>
+ 	
+ 	<!-- 인수 업데이트 -->
+ 	<update id="tradingReceiveUp" parameterType="java.lang.Long">
+ 		update Trading set receive=#{receive}
+ 	</update>
+ 	
+ 	<!-- 인수 업데이트2 -->
+ 	<update id="buy_statusUp" parameterType="java.lang.Long">
+ 		update buy_history set status=#{status}
+ 	</update>
+ 	
+ 	<!-- 인계 업데이트 -->
+ 	<update id="tradingGiveUp" parameterType="java.lang.Long">
+ 		update Trading set give=#{give}
+ 	</update>
+ 	
+ 	<!-- 인수 업데이트2 -->
+ 	<update id="sell_statusUp" parameterType="java.lang.Long">
+ 		update sell_history set status=#{status}
+ 	</update>
+ 	
+ 	<!-- trading Select -->
+ 	<select id="tradingSelect" parameterType="java.lang.Long" resultType="com.iu.s1.trading.TradingVO">
+ 		select * from Trading where sell_num=#{sell_num}
+ 	</select>
+ 	
+ 	<!--  trading Delete -->
+ 	<delete id="tradingDelete" parameterType="java.lang.Long">
+ 		delete from Trading where sell_num=#{sell_num} 
+ 	</delete>
+ </mapper>
