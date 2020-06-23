@@ -6,9 +6,9 @@ import org.apache.ibatis.annotations.Mapper;
 public interface QnaMapper {
 	
 	//댓글작성
-	public int qnaInsert(QnaVO qnaVO) throws Exception;
+	public long qnaInsert(QnaVO qnaVO) throws Exception;
 	
 	//댓글삭제
-	public int qnaDelete(QnaVO qnaVO) throws Exception;
+	public long qnaDelete(long pq_num) throws Exception;
 
 }

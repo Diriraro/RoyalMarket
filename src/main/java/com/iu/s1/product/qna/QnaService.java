@@ -11,12 +11,12 @@ public class QnaService {
 	
 	//작성
 	
-	public int qnaInsert(QnaVO qnaVO)throws Exception{
+	public long qnaInsert(QnaVO qnaVO)throws Exception{
 		return qnaMapper.qnaInsert(qnaVO);
 	}
 	
-	public int qnaDelete(QnaVO qnaVO)throws Exception{
-		return qnaMapper.qnaDelete(qnaVO);
+	public long qnaDelete(long pq_num)throws Exception{
+		return qnaMapper.qnaDelete(pq_num);
 	}
 
 }
