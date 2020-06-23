@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.iu.s1.product.qna.QnaMapper">
+
+	<insert id="qnaInsert" parameterType="QnaVO">
+		insert into product_qna
+		values(0,#{sell_num},#{pq_storeNum},#{pq_contents},#{pq_regDate})
+	</insert>
+
+	<delete id="qnaDelete" parameterType="Long">
+		delete from product_qna where pq_num=#{pq_num}
+	</delete>
+
+
+</mapper>
