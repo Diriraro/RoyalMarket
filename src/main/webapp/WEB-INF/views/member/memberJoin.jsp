@@ -71,37 +71,42 @@
 						id="mem_phone" placeholder="Enter Phone" />
 				</div>
 			</div>
-			
-			<a href="#" id="btnCheck" class="btn btn-default">인증번호 요청</a>
-			
+
+			<input type="button" value="인증번호 요청" class="btn btn-default"
+				onclick="checkPhone()">
+			<!-- <a href="" id="btnCheck" class="btn btn-default">인증번호 요청</a> -->
+
 			<div id="divCheck">
 				<label class="control-label col-sm-2" for="phoneCheck">인증번호:</label>
 				<div class="col-sm-10">
-					<form:input path="phoneCheck" type="text" class="form-control" id="phoneCheck"
-						placeholder="인증번호"/>
+					<form:input path="phoneCheck" type="text" class="form-control"
+						id="phoneCheck" placeholder="인증번호" />
 					<form:errors path="phoneCheck"></form:errors>
 				</div>
 			</div>
-			 
+
 			<div class="form-group">
 				<label class="control-label col-sm-2" for="road_address">주소:</label>
 				<div class="col-sm-10">
 					<form:input path="road_address" type="text" class="form-control"
-						id="road_address" placeholder="Enter Address"/>
-				</div>
-			</div> 
-
-			<input type="button" value="주소 검색" class="btn btn-default" onclick="openChild()"><br>
-			
-			<div class="form-group">
-				<label class="control-label col-sm-2" for="detail_address">상세 주소:</label>
-				<div class="col-sm-10">
-					<form:input path="detail_address" type="text" class="form-control"
-						id="detail_address" placeholder="Enter Address"/>
+						id="road_address" placeholder="Enter Address" />
 				</div>
 			</div>
-	
-				
+
+			<input type="button" value="주소 검색" class="btn btn-default"
+				onclick="openChild()">
+			<br>
+
+			<div class="form-group">
+				<label class="control-label col-sm-2" for="detail_address">상세
+					주소:</label>
+				<div class="col-sm-10">
+					<form:input path="detail_address" type="text" class="form-control"
+						id="detail_address" placeholder="Enter Address" />
+				</div>
+			</div>
+			<h1>${msg}</h1>
+
 			<div class="form-group">
 				<label class="control-label col-sm-2" for="mem_email">Email:</label>
 				<div class="col-sm-10">
@@ -117,33 +122,43 @@
 			</div>
 		</form:form>
 	</div>
-	
-	<script type="text/javascript"> 
-		$("#btnCheck").click(function() {
-			var phoneNumber = $('#mem_phone').val();
 
-			$("#divCheck").css("display", "block");
-			$.ajax({
+	<script type="text/javascript">
+		var error_count = "";
+		function checkPhone(){
+			var phoneNumber = $('#mem_phone').val();
+			
+			$.post("./check/sendSMS",{
+				phoneNumber : phoneNumber
+			},function(result){
+				alert(result.trim())
+				})
+				
+		
+			/* $.ajax({
 				type : "GET",
 				url : "/member/check/sendSMS",
 				data : {
 					"phoneNumber" : phoneNumber
-				}
-			})
+				},
+				
+			})	
+			error_count = ${msg};
+			alert(error_count); */
+				
+			}
 
-		});
+	
 
 		var openWin;
-	    
-        function openChild()
-        {
-            // window.name = "부모창 이름"; 
-            window.name = "parentForm";
-            // window.open("open할 window", "자식창 이름", "팝업창 옵션");
-            openWin = window.open("./findAddress",
-                    "childForm", "width=570, height=350, resizable = no, scrollbars = no");    
-        }
 
+		function openChild() {
+			// window.name = "부모창 이름"; 
+			window.name = "parentForm";
+			// window.open("open할 window", "자식창 이름", "팝업창 옵션");
+			openWin = window.open("./findAddress", "childForm",
+					"width=570, height=350, resizable = no, scrollbars = no");
+		}
 	</script>
 
 
