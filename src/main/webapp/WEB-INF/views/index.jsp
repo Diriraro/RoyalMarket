@@ -19,9 +19,9 @@
 	</div>
 
 <button><a href="../shop/myshop">내상점</a></button>
-
 <button><a href="../shop2/myshop2?mem_storeNum=25&mem_storeName=cotest"> cotest상점</a></button>
-
 <button><a href="../shop2/myshop2?mem_storeNum=27&mem_storeName=yhlim12">yhlim12 상점 </a></button>
+
+
 </body>
 </html>

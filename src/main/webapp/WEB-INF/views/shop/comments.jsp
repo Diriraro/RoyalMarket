@@ -18,7 +18,7 @@
 
 	<div class="container">
 		<div
-			style="border: 1px solid blue; width: 1024px; min-height: 34 0px;">
+			style="border: 1px solid blue; width: 1024px; min-height: 340px;">
 			<!-- 각자 페이지에 하나씩 생성  -->
 			<!--버튼 감싸는 div  -->
 			<div>
@@ -92,18 +92,8 @@
 						<tr>
 							<%-- <td>${vo.sq_num}</td>
 							<td>${vo.mem_storeNum }	</td> --%>
-							<td><a>${vo.sq_storeName}</a></td>
-							<!-- 나의 아이디면 shop링크로 , 다른사람이면 shop2링크로  -->
-								<c:if test="${msname eq vo.sq_storeName }">
-									<td><a href="./myshop">${vo.sq_storeName}</a></td>						
-								</c:if>
-								
-								<c:if test="${msname ne vo.sq_storeName }">
-									<a>확인 ${vo.mem_storeNum}</a>
-									
-									<td><a href="../shop2/myshop2?mem_storeNum=${vo.mem_storeNum}&mem_storeName=${vo.sq_storeName}">${vo.sq_storeName}</a></td>
-								</c:if>
-							<!-- 나의 아이디면 shop링크로 , 다른사람이면 shop2링크로   -->
+							<td>${vo.sq_storeName}</td>
+						
 							<br>
 							<td>${vo.sq_contents}</td>
 							<td>${vo.sq_regDate}</td>

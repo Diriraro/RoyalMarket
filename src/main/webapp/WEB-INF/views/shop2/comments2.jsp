@@ -16,7 +16,7 @@
 
 	<h1>코멘트페이지 다른사람 페이지 StoreQna</h1>
 	
-	
+	<!-- 파라미터의 페이지  -->
 	<h2>${mem_storeName} 의 페이지</h2>
 	
 
@@ -92,7 +92,7 @@
 
 				<div style="border: 1px solid red;">
 					<c:forEach items="${list}" var="vo">
-					<c:if test="${mem_storeName eq vo.sq_storeName }">
+					<c:if test="${msname eq vo.sq_storeName }">
 						<a>내글</a>
 					</c:if>
 						<tr>
