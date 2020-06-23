@@ -14,14 +14,11 @@
 <body>
 	<c:import url="../template/nav.jsp"></c:import>
 
-	<h1>코멘트페이지 || 상점문의 StoreQna</h1>
-	<h2>${mem_storeNum}</h2>
+	<h1>코멘트페이지 다른사람 페이지 StoreQna</h1>
 	
 	
+	<h2>${mem_storeName} 의 페이지</h2>
 	
-	<a>확인용 밑에 두개</a>
-	<a>${mem_storeName}</a>
-	<a></a>
 
 	<c:import url="../template/shopmain.jsp"></c:import>
 
@@ -32,27 +29,27 @@
 			<!--버튼 감싸는 div  -->
 			<div>
 				<button class="btn btn-info">
-					<a href="./myshop">상품</a>
+					<a href="./myshop2">상품</a>
 				</button>
 
 				<button class="btn btn-danger">
-					<a href="./comments">상점문의</a>
+					<a href="./comments2">상점문의x</a>
 				</button>
 
 				<button class="btn btn-info">
-					<a href="./favorites"> 찜</a>
+					<a href="./favorites2"> 찜x</a>
 				</button>
 
 				<button class="btn btn-info">
-					<a href="./reviews">상점후기</a>
+					<a href="./reviews2">상점후기x</a>
 				</button>
 
 				<button class="btn btn-info">
-					<a href="./followings">팔로잉</a>
+					<a href="./followings2">팔로잉x</a>
 				</button>
 
 				<button class="btn btn-info">
-					<a href="./followers">팔로워</a>
+					<a href="./followers2">팔로워x</a>
 				</button>
 
 			</div>
@@ -107,11 +104,12 @@
 							<td>${vo.sq_regDate}</td>
 						</tr>
 						
-							
+							<c:if test="${ids eq vo.sq_storeName }">
 							
 							<a href="./setDelete?sq_num=${vo.sq_num}"
 						class="btn btn-danger pull-right"><span
 						class="	glyphicon glyphicon-remove-sign"></span>Delete</a>
+							</c:if>
 						
 						<br>
 						<br>

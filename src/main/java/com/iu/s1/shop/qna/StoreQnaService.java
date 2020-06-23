@@ -13,25 +13,25 @@ public class StoreQnaService {
 	private StoreQnaRepository storeQnaRepository;
 	
 	//insert
-	public int setInsert(StoreQnaVO storeQnaVO) throws Exception {
+	public int setInsertQna(StoreQnaVO storeQnaVO) throws Exception {
 		
-		int result = storeQnaRepository.setInsert(storeQnaVO);
+		int result = storeQnaRepository.setInsertQna(storeQnaVO);
 		
 		return result;
 	}
 	//setDelete
 	
-	public int setDelete(StoreQnaVO storeQnaVO) throws Exception{
+	public int setDeleteQna(StoreQnaVO storeQnaVO) throws Exception{
 		
-		return storeQnaRepository.setDelete(storeQnaVO);
+		return storeQnaRepository.setDeleteQna(storeQnaVO);
 	}
 	
 	
 	// getSelectList
 	
-	public List<StoreQnaVO> getSelectList(StoreQnaVO storeQnaVO) throws Exception {
+	public List<StoreQnaVO> getSelectListQna(StoreQnaVO storeQnaVO) throws Exception {
 		
-		return storeQnaRepository.getSelectList(storeQnaVO);
+		return storeQnaRepository.getSelectListQna(storeQnaVO);
 	}
 	
 	

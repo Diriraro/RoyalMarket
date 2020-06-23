@@ -8,13 +8,13 @@ import org.apache.ibatis.annotations.Mapper;
 public interface StoreQnaRepository {
 	
 	//insert
-	public int setInsert(StoreQnaVO storeQnaVO) throws Exception;
+	public int setInsertQna(StoreQnaVO storeQnaVO) throws Exception;
 		
 	//delete
-	public int setDelete(StoreQnaVO storeQnaVO) throws Exception;
+	public int setDeleteQna(StoreQnaVO storeQnaVO) throws Exception;
 	
 	//selectList
-	public List<StoreQnaVO> getSelectList(StoreQnaVO storeQnaVO) throws Exception;
+	public List<StoreQnaVO> getSelectListQna(StoreQnaVO storeQnaVO) throws Exception;
 	
 	
 	

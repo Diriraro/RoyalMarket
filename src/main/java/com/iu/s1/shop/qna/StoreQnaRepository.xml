@@ -5,19 +5,19 @@
 <mapper namespace="com.iu.s1.shop.qna.StoreQnaRepository">
 
 
-	<insert id="setInsert"	parameterType="com.iu.s1.shop.qna.StoreQnaVO" useGeneratedKeys="true" keyProperty="sq_num">
+	<insert id="setInsertQna"	parameterType="com.iu.s1.shop.qna.StoreQnaVO" useGeneratedKeys="true" keyProperty="sq_num">
 		insert into	store_qna values (#{sq_num},#{mem_storeNum},#{sq_storeName},#{sq_contents},now())
 	</insert>
 
 
-	<delete id="setDelete"
+	<delete id="setDeleteQna"
 		parameterType="com.iu.s1.shop.qna.StoreQnaVO">
 		delete from store_qna where sq_num = #{sq_num}
 
 	</delete>
 
 
-	<select id="getSelectList"
+	<select id="getSelectListQna"
 		resultType="com.iu.s1.shop.qna.StoreQnaVO">
 		<!-- select * from store_qna order by sq_num desc -->
 		select * from store_qna where mem_storeNum = #{mem_storeNum}  order by sq_num desc
