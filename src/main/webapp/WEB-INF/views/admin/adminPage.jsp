@@ -8,8 +8,9 @@
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <!-- icon font -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <!-- jqery library -->
@@ -19,6 +20,8 @@
 <script src="https://kit.fontawesome.com/1a953cf392.js"
 	crossorigin="anonymous"></script>
 <!-- fontawesome library -->
+
+
 <title>Insert title here</title>
 <style>
 /* Body */
@@ -51,7 +54,7 @@ section {
 
 #stats {
 	margin-top: 20px;
-	padding-bottom: 20px;
+	line-height: 45px;
 	border-bottom: 1px solid silver;
 	border-top: 1px solid silver;
 }
@@ -148,9 +151,12 @@ section {
 
 /* Section 3 */
 #sc3 {
+	padding: 15px 30px;
 	width: 87%;
 	background-color: #f2f2f2;
 	height: 874px;
+	overflow: auto;
+	width: 87%;
 }
 /* Section 3 ==================== getList Search Form ==================== */
 .listSection {
@@ -236,6 +242,12 @@ section {
 	}
 }
 
+/* Section 3 Dash board */
+
+
+
+
+
 /* ==================== getList Search Form ==================== */
 /* Section 3 */
 </style>
@@ -246,11 +258,11 @@ section {
 		<div id="logo">logo</div>
 		<div class="sidenav">
 			<div id="stats">
-				<label><i class="far fa-file-alt"></i> 통합 정보</label>
+				<label><i class="far fa-file-alt"></i> Dash Board </label>
 				<!-- pdf파일로 불러들이기 (회원수,하루 상품등록 및 판매량, 하루 접속인원수) -->
 			</div>
 			<!-- 목록을 제외한 다른 호출은 각 Controller로 보내서 처리 -->
-			<div style="font-size: 13px;"> MENU </div>
+			<div style="font-size: 13px;">MENU</div>
 			<div class="info">
 				<label class="focus"><i class="far fa-folder"></i> 회원 관리</label>
 				<div class="contents">
@@ -277,22 +289,13 @@ section {
 						class="far fa-file-alt"></i> 공지 사항 등록</a>
 				</div>
 			</div>
-			<!-- 			<div class="info">
-				<label class="focus"><i class="far fa-folder"></i> 질문과 답변 및
-					문의</label>
-				<div class="contents">
-					<a href="#" class="check"><i class="far fa-file-alt"></i> 질문과
-						답변 관리</a> <a href="#" class="check"><i class="far fa-file-alt"></i>
-						1:1 문의 관리</a>
-				</div>
-			</div>  // head에서 관리  -->
 		</div>
 	</section>
 	<section id="sc2">
 		<div id="section_head">
 			<div id="admin_set">
 				관리자 님
-				<!-- ${member.id} == admin 추후 설정 -->
+				<!-- ${member.mem_id} == admin 추후 설정 -->
 				<i class="fas fa-user-cog"></i>
 			</div>
 			<div class="new">
@@ -306,8 +309,157 @@ section {
 	</section>
 	<section id="sc3">
 		<div id="content">
-			<h1> 관리자 페이지 통합 정보 </h1>
+			<div class="w3-main">
+
+				<!-- Header -->
+				<header class="w3-container" style="padding-top: 22px">
+					<h5>
+						<b><i class="fa fa-dashboard"></i> My Dashboard</b>
+					</h5>
+				</header>
+
+				<div class="w3-row-padding w3-margin-bottom">
+					<div class="w3-quarter">
+						<div class="w3-container w3-red w3-padding-16">
+							<div class="w3-left">
+								<i class="fa fa-comment w3-xxxlarge"></i>
+							</div>
+							<div class="w3-right">
+								<h3>문의수</h3>
+							</div>
+							<div class="w3-clear"></div>
+							<h4>1:1 문의 </h4>
+						</div>
+					</div>
+					<div class="w3-quarter">
+						<div class="w3-container w3-blue w3-padding-16">
+							<div class="w3-left">
+								<i class="fa fa-eye w3-xxxlarge"></i>
+							</div>
+							<div class="w3-right">
+								<h3>방문자수</h3>
+							</div>
+							<div class="w3-clear"></div>
+							<h4>방문자 수 </h4>
+						</div>
+					</div>
+					<div class="w3-quarter">
+						<div class="w3-container w3-teal w3-padding-16">
+							<div class="w3-left">
+								<i class="fa fa-share-alt w3-xxxlarge"></i>
+							</div>
+							<div class="w3-right">
+								<h3>거래량</h3>
+							</div>
+							<div class="w3-clear"></div>
+							<h4>일일 거래량</h4>
+						</div>
+					</div>
+					<div class="w3-quarter">
+						<div class="w3-container w3-orange w3-text-white w3-padding-16">
+							<div class="w3-left">
+								<i class="fa fa-users w3-xxxlarge"></i>
+							</div>
+							<div class="w3-right">
+								<h3>총 회원수</h3>
+							</div>
+							<div class="w3-clear"></div>
+							<h4>총 회원수</h4>
+						</div>
+					</div>
+				</div>
+
+				
+				<div class="w3-container">
+					<h5>General Stats</h5>
+					<p>전일 대비 총회원 수</p>
+					<div class="w3-grey">
+						<div class="w3-container w3-center w3-padding w3-green"
+							style="width: 10%">10%</div>
+					</div>
+
+					<p>전일 대비 거래량</p>
+					<div class="w3-grey">
+						<div class="w3-container w3-center w3-padding w3-orange"
+							style="width: 50%">50%</div>
+					</div>
+
+					<p>전일 대비 방문자수</p>
+					<div class="w3-grey">
+						<div class="w3-container w3-center w3-padding w3-red"
+							style="width: 75%">75%</div>
+					</div>
+				</div>
+				<hr>
+
+				<div class="w3-container">
+					<h5>지역별 거래량</h5>
+					<table
+						class="w3-table w3-striped w3-bordered w3-border w3-hoverable w3-white">
+						<tr>
+							<td>United States</td>
+							<td>65%</td>
+						</tr>
+						<tr>
+							<td>UK</td>
+							<td>15.7%</td>
+						</tr>
+						<tr>
+							<td>Russia</td>
+							<td>5.6%</td>
+						</tr>
+						<tr>
+							<td>Spain</td>
+							<td>2.1%</td>
+						</tr>
+						<tr>
+							<td>India</td>
+							<td>1.9%</td>
+						</tr>
+						<tr>
+							<td>France</td>
+							<td>1.5%</td>
+						</tr>
+					</table>
+				</div>
+				<div class="w3-container">
+					<h5> 최신 상품게시글 </h5>
+					<div class="w3-row">
+						<div class="w3-col m2 text-center">
+							<img class="w3-circle" src="/w3images/avatar3.png"
+								style="width: 96px; height: 96px">
+						</div>
+						<div class="w3-col m10 w3-container">
+							<h4>
+								John <span class="w3-opacity w3-medium">Sep 29, 2014,
+									9:12 PM</span>
+							</h4>
+							<p>Keep up the GREAT work! I am cheering for you!! Lorem
+								ipsum dolor sit amet, consectetur adipiscing elit, sed do
+								eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+							<br>
+						</div>
+					</div>
+
+					<div class="w3-row">
+						<div class="w3-col m2 text-center">
+							<img class="w3-circle" src="/w3images/avatar1.png"
+								style="width: 96px; height: 96px">
+						</div>
+						<div class="w3-col m10 w3-container">
+							<h4>
+								Bo <span class="w3-opacity w3-medium">Sep 28, 2014, 10:15
+									PM</span>
+							</h4>
+							<p>Sed do eiusmod tempor incididunt ut labore et dolore magna
+								aliqua.</p>
+							<br>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
+
 	</section>
 	<script type="text/javascript">
 		$(function() {

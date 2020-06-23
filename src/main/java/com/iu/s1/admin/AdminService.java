@@ -21,9 +21,9 @@ public class AdminService {
 	
 	public List<MemberVO> getMemberList(long mem_access) throws Exception {
 		if(mem_access == 1) {
-			return memberRepository.getMemberList(); // mem_access = 0 인 멤버 검색
+			return memberRepository.getMemberList(mem_access); // mem_access = 0 인 멤버 검색
 		} else {
-			return memberRepository.getMemberList(); // mem_access = 1 인 멤버 검색
+			return memberRepository.getMemberList(mem_access); // mem_access = 1 인 멤버 검색
 		}
 	}
 	public List<MemberVO> getMemberSearchList(String kind, String search) throws Exception {

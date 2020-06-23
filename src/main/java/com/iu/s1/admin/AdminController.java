@@ -48,8 +48,16 @@ public class AdminController {
 	
 	@GetMapping("getMemberList")
 	public void getMemberList (Model model, long mem_access) throws Exception {
+		System.out.println(mem_access);
 		List<MemberVO> ar = new ArrayList<MemberVO>();
 		ar = adminService.getMemberList(mem_access);
+		String check = "";
+		if(mem_access == 0) {
+			check = "accept";
+		} else if (mem_access == 1){
+			check = "denied";
+		}
+		model.addAttribute("check",check);
 		model.addAttribute("list",ar);
 	}
 	
@@ -57,6 +65,7 @@ public class AdminController {
 	public void getMemberList (Model model, String kind, String search) throws Exception {
 		List<MemberVO> ar = new ArrayList<MemberVO>();
 		ar = adminService.getMemberSearchList(kind, search);
+		model.addAttribute("check","accept");
 		model.addAttribute("list",ar);
 	}
 	
