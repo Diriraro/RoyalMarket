@@ -13,7 +13,7 @@
 		<typeAlias
 			type="com.iu.s1.product.productFile.ProductFileVO"
 			alias="ProductFileVO" />
-		<typeAlias type="com.iu.s1.product.qna.QnaVO" alias="QnaVO" />
+		
 		<typeAlias type="com.iu.s1.util.Pager" alias="Pager" />
 		<typeAlias type="com.iu.s1.member.MemberVO" alias="MemberVO" />
 
