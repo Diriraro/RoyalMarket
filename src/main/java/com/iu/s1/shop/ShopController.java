@@ -29,11 +29,13 @@ public class ShopController {
 	@GetMapping("myshop")
 	public ModelAndView myshop(ModelAndView mv,HttpSession session) throws Exception {
 		
-		String id = ((MemberVO)session.getAttribute("member")).getMem_storeName();
-		long num = ((MemberVO)session.getAttribute("member")).getMem_storeNum();
+		String msname = ((MemberVO)session.getAttribute("member")).getMem_storeName();
+		long msnum = ((MemberVO)session.getAttribute("member")).getMem_storeNum();
+
 
 		
-		mv.addObject("mem_storeNum",num);
+		mv.addObject("msname",msname);
+		mv.addObject("msnum",msnum);
 		mv.addObject("vo2","코멘트");
 		
 		System.out.println(" myshop ");
@@ -45,17 +47,17 @@ public class ShopController {
 	//상점문의
 	@GetMapping("comments")
 	public ModelAndView comments(ModelAndView mv,StoreQnaVO storeQnaVO,HttpSession session) throws Exception {
-		String id = ((MemberVO)session.getAttribute("member")).getMem_storeName();
-		long num = ((MemberVO)session.getAttribute("member")).getMem_storeNum();
+		String msname = ((MemberVO)session.getAttribute("member")).getMem_storeName();
+		long msnum = ((MemberVO)session.getAttribute("member")).getMem_storeNum();
 		
 		
-		storeQnaVO.setMem_storeNum(num); // 멤버의 mem_storeNum을 저장.
+		storeQnaVO.setMem_storeNum(msnum); // 멤버의 mem_storeNum을 저장.
 		
 		
 		List<StoreQnaVO> ar = storeQnaService.getSelectListQna(storeQnaVO);
 		
-		mv.addObject("mem_storeName",id);
-		mv.addObject("mem_storeNum",num);
+		mv.addObject("msname",msname);
+		mv.addObject("msnum",msnum);
 		mv.addObject("list",ar);
 		mv.setViewName("shop/comments");
 		return mv;
@@ -76,7 +78,7 @@ public class ShopController {
 	//상점문의 delete 완료
 	
 	@RequestMapping(value = "setDelete", method = RequestMethod.GET)
-	public ModelAndView setDelete(long sq_num, ModelAndView mv)throws Exception{
+	public ModelAndView setDeleteQna(long sq_num, ModelAndView mv)throws Exception{
 		
 		StoreQnaVO storeQnaVO = new StoreQnaVO();
 		
@@ -100,11 +102,11 @@ public class ShopController {
 	// 찜목록
 	@GetMapping("favorites")
 	public ModelAndView favorites(ModelAndView mv,HttpSession session) throws Exception {
-		String id = ((MemberVO)session.getAttribute("member")).getMem_storeName();
-		long num = ((MemberVO)session.getAttribute("member")).getMem_storeNum();
+		String msname = ((MemberVO)session.getAttribute("member")).getMem_storeName();
+		long msnum = ((MemberVO)session.getAttribute("member")).getMem_storeNum();
 
 		
-		mv.addObject("mem_storeNum",num);
+		mv.addObject("msnum",msnum);
 		
 		mv.setViewName("shop/favorites");
 		return mv;
@@ -113,11 +115,11 @@ public class ShopController {
 	//상점후기
 	@GetMapping("reviews")
 	public ModelAndView reviews(ModelAndView mv,HttpSession session) throws Exception {
-		String id = ((MemberVO)session.getAttribute("member")).getMem_storeName();
-		long num = ((MemberVO)session.getAttribute("member")).getMem_storeNum();
+		String msname = ((MemberVO)session.getAttribute("member")).getMem_storeName();
+		long msnum = ((MemberVO)session.getAttribute("member")).getMem_storeNum();
 
 		
-		mv.addObject("mem_storeNum",num);
+		mv.addObject("msnum",msnum);
 		
 		mv.setViewName("shop/reviews");
 		return mv;
@@ -126,11 +128,11 @@ public class ShopController {
 	@GetMapping("followings")
 	public ModelAndView followings(ModelAndView mv,HttpSession session) throws Exception {
 		
-		String id = ((MemberVO)session.getAttribute("member")).getMem_storeName();
-		long num = ((MemberVO)session.getAttribute("member")).getMem_storeNum();
+		String msname = ((MemberVO)session.getAttribute("member")).getMem_storeName();
+		long msnum = ((MemberVO)session.getAttribute("member")).getMem_storeNum();
 
 		
-		mv.addObject("mem_storeNum",num);
+		mv.addObject("msnum",msnum);
 		
 		mv.setViewName("shop/followings");
 		return mv;
@@ -140,11 +142,10 @@ public class ShopController {
 	@GetMapping("followers")
 	public ModelAndView followers(ModelAndView mv,HttpSession session) throws Exception {
 		
-		String id = ((MemberVO)session.getAttribute("member")).getMem_storeName();
-		long num = ((MemberVO)session.getAttribute("member")).getMem_storeNum();
-
+		String msname = ((MemberVO)session.getAttribute("member")).getMem_storeName();
+		long msnum = ((MemberVO)session.getAttribute("member")).getMem_storeNum();
 		
-		mv.addObject("mem_storeNum",num);
+		mv.addObject("msnum",msnum);
 		
 		mv.setViewName("shop/followers");
 		return mv;

@@ -5,7 +5,7 @@
 
 <!-- shop 페이지가 공통으로 가져갈곳  -->
 <div class="container">
-	<h2>${msname} 님의 상점   </h2>
+	<h2>${mem_storeName} 님의 상점   </h2>
 	<div style="border: 1px solid black; width: 1024px; height: 340px;">
 
 		<!-- div 1번 -->

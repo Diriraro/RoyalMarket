@@ -12,8 +12,6 @@
 <body>
 	<c:import url="../template/nav.jsp"></c:import>
 	<!-- 내상점 버튼 누르면 처음으로 들어오는 곳  -->
-	<h1>main pp</h1>
-	<h2>?mem_storeNum=${mem_storeNum}</h2>
 
 	<c:import url="../template/shopmain.jsp"></c:import>
 

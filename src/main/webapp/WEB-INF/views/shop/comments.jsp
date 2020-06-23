@@ -14,15 +14,6 @@
 <body>
 	<c:import url="../template/nav.jsp"></c:import>
 
-	<h1>코멘트페이지 || 상점문의 StoreQna</h1>
-	<h2>${mem_storeNum}</h2>
-	
-	
-	
-	<a>확인용 밑에 두개</a>
-	<a>${mem_storeName}</a>
-	<a></a>
-
 	<c:import url="../template/shopmain.jsp"></c:import>
 
 	<div class="container">
@@ -74,13 +65,13 @@
 			<!-- 추가한거  -->
 			<div class="form-group">
 				<input type="hidden" class="form-control" style="width: 342px;"
-					id="sq_storeName"  value="${mem_storeName}"
+					id="sq_storeName"  value="${msname}"
 					placeholder="Enter writer" name="sq_storeName">
 			</div>
 			
 			<div class="form-group">
 				<input type="hidden" class="form-control" style="width: 342px;"
-					id="mem_storeNum"  value="${mem_storeNum}"
+					id="mem_storeNum"  value="${msnum}"
 					placeholder="Enter writer" name="mem_storeNum">
 			</div>
 			
@@ -95,13 +86,24 @@
 
 				<div style="border: 1px solid red;">
 					<c:forEach items="${list}" var="vo">
-					<c:if test="${mem_storeName eq vo.sq_storeName }">
-						<a>내글</a>
+					<c:if test="${msname eq vo.sq_storeName }">
+						<a class="btn btn-info">내글</a>
 					</c:if>
 						<tr>
 							<%-- <td>${vo.sq_num}</td>
 							<td>${vo.mem_storeNum }	</td> --%>
-							<td>${vo.sq_storeName}</td>
+							<td><a>${vo.sq_storeName}</a></td>
+							<!-- 나의 아이디면 shop링크로 , 다른사람이면 shop2링크로  -->
+								<c:if test="${msname eq vo.sq_storeName }">
+									<td><a href="./myshop">${vo.sq_storeName}</a></td>						
+								</c:if>
+								
+								<c:if test="${msname ne vo.sq_storeName }">
+									<a>확인 ${vo.mem_storeNum}</a>
+									
+									<td><a href="../shop2/myshop2?mem_storeNum=${vo.mem_storeNum}&mem_storeName=${vo.sq_storeName}">${vo.sq_storeName}</a></td>
+								</c:if>
+							<!-- 나의 아이디면 shop링크로 , 다른사람이면 shop2링크로   -->
 							<br>
 							<td>${vo.sq_contents}</td>
 							<td>${vo.sq_regDate}</td>

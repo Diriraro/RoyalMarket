@@ -20,7 +20,7 @@
 	<h2>${mem_storeName} 의 페이지</h2>
 	
 
-	<c:import url="../template/shopmain.jsp"></c:import>
+	<c:import url="../template/shopmain2.jsp"></c:import>
 
 	<div class="container">
 		<div
@@ -29,27 +29,27 @@
 			<!--버튼 감싸는 div  -->
 			<div>
 				<button class="btn btn-info">
-					<a href="./myshop2">상품</a>
+					<a href="./myshop2?mem_storeNum=${mem_storeNum }&mem_storeName=${mem_storeName}">상품</a>
 				</button>
 
 				<button class="btn btn-danger">
-					<a href="./comments2">상점문의x</a>
+					<a href="./comments2?mem_storeNum=${mem_storeNum }&mem_storeName=${mem_storeName}">상점문의x</a>
 				</button>
 
 				<button class="btn btn-info">
-					<a href="./favorites2"> 찜x</a>
+					<a href="./favorites2?mem_storeNum=${mem_storeNum }&mem_storeName=${mem_storeName}"> 찜x</a>
 				</button>
 
 				<button class="btn btn-info">
-					<a href="./reviews2">상점후기x</a>
+					<a href="./reviews2?mem_storeNum=${mem_storeNum }&mem_storeName=${mem_storeName}">상점후기x</a>
 				</button>
 
 				<button class="btn btn-info">
-					<a href="./followings2">팔로잉x</a>
+					<a href="./followings2?mem_storeNum=${mem_storeNum }&mem_storeName=${mem_storeName}">팔로잉x</a>
 				</button>
 
 				<button class="btn btn-info">
-					<a href="./followers2">팔로워x</a>
+					<a href="./followers2?mem_storeNum=${mem_storeNum }&mem_storeName=${mem_storeName}">팔로워x</a>
 				</button>
 
 			</div>
@@ -60,8 +60,8 @@
 
 				<%--  <c:import url="../template/comentsForm.jsp"></c:import>  --%>
 				<div class="container"> <!-- 폼태그  -->
-
-			<form action="./comments" id="form" name=from method="post">
+					<!-- 다른사람 페이지에 접속하면 본인 member = ids 에 값들 꺼내서 밸류에 집어넣기  -->
+			<form action="./comments2" id="form" name=from method="post">
 						
 			<div class="form-group">
 				<label for="sq_contents">Contents:</label>
@@ -70,14 +70,14 @@
 			
 			<!-- 추가한거  -->
 			<div class="form-group">
-				<input type="hidden" class="form-control" style="width: 342px;"
-					id="sq_storeName"  value="${mem_storeName}"
+				<input type="text" class="form-control" style="width: 342px;"
+					id="sq_storeName"  value="${msname}"
 					placeholder="Enter writer" name="sq_storeName">
 			</div>
 			
 			<div class="form-group">
-				<input type="hidden" class="form-control" style="width: 342px;"
-					id="mem_storeNum"  value="${mem_storeNum}"
+				<input type="text" class="form-control" style="width: 342px;"
+					id="mem_storeNum"  value="${msnum }"
 					placeholder="Enter writer" name="mem_storeNum">
 			</div>
 			
