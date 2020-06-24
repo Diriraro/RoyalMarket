@@ -22,8 +22,8 @@ class StoreQnaRepositoryTest {
 		
 //		qnaVO.setSq_num(i);
 		qnaVO.setMem_storeNum(27); // dyun95 상점 = 24    cotest상점은 25      retest = 26   yhlim 27
-		qnaVO.setSq_storeName("dyun95");   // 지금은 이름.   cotest의 이름 ==id
-		qnaVO.setSq_contents("이쿠 "+i+" 번");
+		qnaVO.setSq_storeNum(27);   // .   cotest의 상점번호 ==25     
+		qnaVO.setSq_contents("yhlim이  yhlim에게 글 작성. "+i+"" );
 		
 		
 		int result = storeQnaRepository.setInsertQna(qnaVO);

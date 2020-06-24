@@ -23,27 +23,27 @@
 			<!--버튼 감싸는 div  -->
 			<div>
 				<button class="btn btn-info">
-					<a href="./myshop">상품</a>
+					<a href="./myshop?mem_storeNum=${mem_storeNum}">상품</a>
 				</button>
 
 				<button class="btn btn-danger">
-					<a href="./comments">상점문의</a>
+					<a href="./comments?mem_storeNum=${mem_storeNum}">상점문의</a>
 				</button>
 
 				<button class="btn btn-info">
-					<a href="./favorites"> 찜</a>
+					<a href="./favorites?mem_storeNum=${mem_storeNum}"> 찜</a>
 				</button>
 
 				<button class="btn btn-info">
-					<a href="./reviews">상점후기</a>
+					<a href="./reviews?mem_storeNum=${mem_storeNum}">상점후기</a>
 				</button>
 
 				<button class="btn btn-info">
-					<a href="./followings">팔로잉</a>
+					<a href="./followings?mem_storeNum=${mem_storeNum}">팔로잉</a>
 				</button>
 
 				<button class="btn btn-info">
-					<a href="./followers">팔로워</a>
+					<a href="./followers?mem_storeNum=${mem_storeNum}">팔로워</a>
 				</button>
 
 			</div>
@@ -62,19 +62,20 @@
 				<textarea rows="" cols="" class="form-control" id="sq_contents" name="sq_contents" style="width:900px; height: 150px; "></textarea>
 			</div>
 			
-			<!-- 추가한거  -->
+			<!--  작성자의 번호는 로그인한사람의 -->
 			<div class="form-group">
 				<input type="hidden" class="form-control" style="width: 342px;"
-					id="sq_storeName"  value="${msname}"
-					placeholder="Enter writer" name="sq_storeName">
+					id="sq_storeNum"  value="${msnum}"
+					placeholder="Enter writer" name="sq_storeNum">
 			</div>
 			
+			<!-- 답글 작성하는곳의 번호는 파라미터 받아와서.  -->
 			<div class="form-group">
 				<input type="hidden" class="form-control" style="width: 342px;"
-					id="mem_storeNum"  value="${msnum}"
+					id="mem_storeNum"  value="${mem_storeNum}"
 					placeholder="Enter writer" name="mem_storeNum">
 			</div>
-			
+			<a>확인용 ${mem_storeNum}</a>
 			<!--  추가한거. -->
 			
 			
@@ -86,13 +87,14 @@
 
 				<div style="border: 1px solid red;">
 					<c:forEach items="${list}" var="vo">
-					<c:if test="${msname eq vo.sq_storeName }">
+					<c:if test="${msnum eq vo.sq_storeNum }">
 						<a class="btn btn-info">내글</a>
 					</c:if>
 						<tr>
 							<%-- <td>${vo.sq_num}</td>
 							<td>${vo.mem_storeNum }	</td> --%>
-							<td>${vo.sq_storeName}</td>
+							<td>${vo.sq_storeNum}작성자번호</td>
+							<td> <a href="./myshop?mem_storeNum=${vo.sq_storeNum}">${vo.mem_storeName } </a></td>
 						
 							<br>
 							<td>${vo.sq_contents}</td>
@@ -101,7 +103,7 @@
 						
 							
 							
-							<a href="./setDelete?sq_num=${vo.sq_num}"
+							<a href="./setDelete?sq_num=${vo.sq_num}&mem_storeNum=${vo.mem_storeNum}"
 						class="btn btn-danger pull-right"><span
 						class="	glyphicon glyphicon-remove-sign"></span>Delete</a>
 						

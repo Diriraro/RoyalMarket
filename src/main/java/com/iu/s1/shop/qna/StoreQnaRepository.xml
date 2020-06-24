@@ -6,7 +6,7 @@
 
 
 	<insert id="setInsertQna"	parameterType="com.iu.s1.shop.qna.StoreQnaVO" useGeneratedKeys="true" keyProperty="sq_num">
-		insert into	store_qna values (#{sq_num},#{mem_storeNum},#{sq_storeName},#{sq_contents},now())
+		insert into	store_qna values (0,#{mem_storeNum},#{sq_storeNum},#{sq_contents},now())
 	</insert>
 
 
@@ -21,6 +21,10 @@
 		resultType="com.iu.s1.shop.qna.StoreQnaVO">
 		<!-- select * from store_qna order by sq_num desc -->
 		select * from store_qna where mem_storeNum = #{mem_storeNum}  order by sq_num desc
+	</select>
+	
+	<select id="getSelectStoreName" parameterType="com.iu.s1.shop.qna.StoreQnaVO" resultType="String">
+		SELECT mem_storeName FROM member WHERE mem_storeNum=#{sq_storeNum}
 	</select>
 
 </mapper>

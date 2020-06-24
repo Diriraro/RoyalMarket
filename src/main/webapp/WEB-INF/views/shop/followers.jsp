@@ -22,27 +22,27 @@
 			<!--¹öÆ° °¨½Î´Â div  -->
 			<div>
 				<button class="btn btn-info">
-					<a href="./myshop">»óÇ°</a>
+					<a href="./myshop?mem_storeNum=${mem_storeNum}">»óÇ°</a>
 				</button>
 
 				<button class="btn btn-info">
-					<a href="./comments">»óÁ¡¹®ÀÇ</a>
+					<a href="./comments?mem_storeNum=${mem_storeNum}">»óÁ¡¹®ÀÇ</a>
 				</button>
 
 				<button class="btn btn-info">
-					<a href="./favorites"> Âò</a>
+					<a href="./favorites?mem_storeNum=${mem_storeNum}"> Âò</a>
 				</button>
 
 				<button class="btn btn-info">
-					<a href="./reviews">»óÁ¡ÈÄ±â</a>
+					<a href="./reviews?mem_storeNum=${mem_storeNum}">»óÁ¡ÈÄ±â</a>
 				</button>
 
 				<button class="btn btn-info">
-					<a href="./followings">ÆÈ·ÎÀ×</a>
+					<a href="./followings?mem_storeNum=${mem_storeNum}">ÆÈ·ÎÀ×</a>
 				</button>
 
 				<button class="btn btn-danger">
-					<a href="./followers">ÆÈ·Î¿ö</a>
+					<a href="./followers?mem_storeNum=${mem_storeNum}">ÆÈ·Î¿ö</a>
 				</button>
 
 			</div>

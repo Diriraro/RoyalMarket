@@ -23,27 +23,27 @@
 			<!--버튼 감싸는 div  -->
 			<div>
 				<button class="btn btn-danger">
-					<a href="./myshop">상품</a>
+					<a href="./myshop?mem_storeNum=${mem_storeNum}">상품</a>
 				</button>
 
 				<button class="btn btn-info">
-					<a href="./comments">상점문의</a>
+					<a href="./comments?mem_storeNum=${mem_storeNum}">상점문의</a>
 				</button>
 
 				<button class="btn btn-info">
-					<a href="./favorites"> 찜</a>
+					<a href="./favorites?mem_storeNum=${mem_storeNum}"> 찜</a>
 				</button>
 
 				<button class="btn btn-info">
-					<a href="./reviews">상점후기</a>
+					<a href="./reviews?mem_storeNum=${mem_storeNum}">상점후기</a>
 				</button>
 
 				<button class="btn btn-info">
-					<a href="./followings">팔로잉</a>
+					<a href="./followings?mem_storeNum=${mem_storeNum}">팔로잉</a>
 				</button>
 
 				<button class="btn btn-info">
-					<a href="./followers">팔로워</a>
+					<a href="./followers?mem_storeNum=${mem_storeNum}">팔로워</a>
 				</button>
 
 			</div>

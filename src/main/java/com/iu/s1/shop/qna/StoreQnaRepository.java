@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.iu.s1.member.MemberVO;
+
 @Mapper
 public interface StoreQnaRepository {
 	
@@ -16,6 +18,8 @@ public interface StoreQnaRepository {
 	//selectList
 	public List<StoreQnaVO> getSelectListQna(StoreQnaVO storeQnaVO) throws Exception;
 	
+	//getSelectStoreName
+	public String getSelectStoreName(StoreQnaVO storeQnaVO) throws Exception;
 	
 	
 }
