@@ -68,7 +68,8 @@
 				<label class="control-label col-sm-2" for="mem_phone">Phone:</label>
 				<div class="col-sm-10">
 					<form:input path="mem_phone" type="text" class="form-control"
-						id="mem_phone" placeholder="Enter Phone" />
+						id="mem_phone" placeholder="휴대폰 번호(숫자만 허용)" />
+						<form:errors path="mem_phone"></form:errors>
 				</div>
 			</div>
 
@@ -81,6 +82,7 @@
 				<div class="col-sm-10">
 					<form:input path="phoneCheck" type="text" class="form-control"
 						id="phoneCheck" placeholder="인증번호" />
+					<div id="ViewTimer"></div>
 					<form:errors path="phoneCheck"></form:errors>
 				</div>
 			</div>
@@ -90,6 +92,7 @@
 				<div class="col-sm-10">
 					<form:input path="road_address" type="text" class="form-control"
 						id="road_address" placeholder="Enter Address" />
+						<form:errors path="road_address"></form:errors>
 				</div>
 			</div>
 
@@ -105,7 +108,7 @@
 						id="detail_address" placeholder="Enter Address" />
 				</div>
 			</div>
-			<h1>${msg}</h1>
+			
 
 			<div class="form-group">
 				<label class="control-label col-sm-2" for="mem_email">Email:</label>
@@ -115,39 +118,44 @@
 					<form:errors path="mem_email"></form:errors>
 				</div>
 			</div>
-			
-			<input type="button" value="인증번호 요청" class="btn btn-default"
-				onclick="checkEmail()">
-			
-			<div id="divCheck">
-				<label class="control-label col-sm-2" for="emailCheck">인증번호:</label>
+
+			<select name="email1" onchange="getText(this)" id="email1">
+				<option>@gmail.com</option>
+				<option>@naver.com</option>
+				<option>@nate.com</option>
+				<option>@daum.net</option>
+				<option value="">직접입력</option>
+			</select>
+
+
+			<div class="form-group" id="email" style="display: none;">
+				<label class="control-label col-sm-2" for="email">상세 Email:</label>
 				<div class="col-sm-10">
-					<form:input path="emailCheck" type="text" class="form-control"
-						id="emailCheck" placeholder="인증번호" />
-					<form:errors path="phoneCheck"></form:errors>
+					<input name="email2" id="email2" path="email" type="text" class="form-control"
+						id="email" placeholder="Enter Email" />
 				</div>
-			</div>	
-			
+			</div>
+
 			<div class="form-group">
 				<div class="col-sm-offset-2 col-sm-10">
-					<button type="submit" class="btn btn-default">Submit</button>
+					<button type="submit" class="btn btn-default" id="btn_submit" onclick="makeEmail()">Submit</button>
 				</div>
 			</div>
 		</form:form>
 	</div>
 
 	<script type="text/javascript">
-		var error_count = "";
-		function checkPhone(){
-			var phoneNumber = $('#mem_phone').val();
 			
-			$.post("./check/sendSMS",{
+		 function checkPhone() {
+			var phoneNumber = $('#mem_phone').val();
+
+			$.post("./check/sendSMS", {
 				phoneNumber : phoneNumber
-			},function(result){
+			}, function(result) {
 				alert(result.trim())
-				})
-				
-			}
+			}) 
+
+		} 
 
 		var openWin;
 
@@ -158,6 +166,45 @@
 			openWin = window.open("./findAddress", "childForm",
 					"width=570, height=350, resizable = no, scrollbars = no");
 		}
+
+		function getText(obj) {
+			if (obj.options[obj.selectedIndex].text == "직접입력") {
+				$("#email").css("display", "block");
+			}else{
+				$("#email").css("display", "none");
+				}
+		}
+
+		function makeEmail(){
+			var email = $("#mem_email").val()+$("#email1").val()+$("#email2").val();
+			$("#mem_email").val(email);
+		}
+
+
+		var SetTime = 300;		// 최초 설정 시간(기본 : 초)
+
+		function msg_time() {	// 1초씩 카운트
+			
+			m = Math.floor(SetTime / 60) + ":" + (SetTime % 60);	// 남은 시간 계산
+			
+			var msg = "<font color='red'>" + m + "</font>";
+			
+			document.all.ViewTimer.innerHTML = msg;		// div 영역에 보여줌 
+					
+			SetTime--;					// 1초씩 감소
+			
+			if (SetTime < 0) {			// 시간이 종료 되었으면..
+				
+				clearInterval(tid);		// 타이머 해제
+				alert("종료");
+			}
+			
+		}
+
+		window.onload = function TimerStart(){ tid=setInterval('msg_time()',1000) };
+	
+		
+
 	</script>
 
 

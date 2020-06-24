@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
@@ -31,14 +32,15 @@ public class MemberVO {
 	private String pwCheck;
 	
 	@Column
+	@NotEmpty
 	private String mem_name;
 	
 	@Column
+	@NotEmpty
+	@Email
 	private String mem_email;
 	
-	@Transient
-	private String emailCheck;
-	
+	@Size(min = 10, max = 11)
 	@Column
 	private String mem_phone;
 	
@@ -55,6 +57,7 @@ public class MemberVO {
 	private String mem_address;
 	
 	@Transient
+	@NotEmpty
 	private String road_address;
 	
 	@Transient

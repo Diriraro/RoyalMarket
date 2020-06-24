@@ -27,11 +27,14 @@
 					type="password" class="form-control" name="mem_pw"
 					placeholder="mem_pw">
 			</div>
-			<div class="checkbox">
+			
+			<!-- <div class="checkbox">
 				<label><input type="checkbox" name="remember">
 					Remember me</label>
-			</div>
+			</div> -->
+			
 			<button type="submit" class="btn btn-default">로그인</button>
+			<a href="./findMember">비밀번호를 잊어버리셨나요?</a>
 		</form>
 	</div>
 	
