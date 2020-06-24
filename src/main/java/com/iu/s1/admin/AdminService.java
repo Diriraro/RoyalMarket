@@ -54,11 +54,12 @@ public class AdminService {
 		MemberVO memberVO = new MemberVO();
 		memberVO.setMem_regDate(date1);
 		List<MemberVO> ar = memberRepository.getDailyNewMember(memberVO);
-		
+		System.out.println(ar.size());
 		return ar.size();
 	}
 	
 	public List<NoticeVO> getNoticeList() throws Exception {
 		return noticeRepository.findAll();
 	}
+
 }
