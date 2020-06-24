@@ -60,29 +60,23 @@
 			<div style="border: 1px solid black; width: 330px; height: 330px;">
 				<!-- 사진  -->
 				<span>사진</span>
-				<button class="btn btn-danger">팔로우</button>
-				<a href="./setinsertFollow?give_storeNum=${msnum}&take_storeNum=${mem_storeNum}&mem_storeNum=${mem_storeNum}"
+				<!-- 팔로우가 아니면 팔로우버튼 출력 -->
+				<c:if test="${fonum.follow_Num eq null}">
+					<a href="./setinsertFollow?give_storeNum=${msnum}&take_storeNum=${mem_storeNum}&mem_storeNum=${mem_storeNum}"
 						class="btn btn-danger pull-right"><span
 						class="	glyphicon glyphicon-remove-sign"></span>팔로우링크</a>
-						
-				<a href="./setDeleteFollow?"
-						class="btn btn-danger pull-right"><span
-						class="	glyphicon glyphicon-remove-sign"></span>언팔링크</a>		
-						
-						
-						
-						
-						
-						
-						<h2>${pageContext.request.requestURL}</h2>
-						<button></button>						
-						<h2>${pageContext.request.requestURI}</h2>
-						<button></button>
-						<h2>${pageContext.request.contextPath}</h2>
-						<button></button>
-						
+				</c:if>
 				
-				<button class="btn btn-info ">언팔</button>
+				<!-- 팔로우 상태라면 언팔버튼 출력  -->
+				<c:if test="${fonum.follow_Num ne null}">
+				<a href="./setDeleteFollow?follow_Num=${fonum.follow_Num}&mem_storeNum=${mem_storeNum}"
+						class="btn btn-danger pull-right"><span
+						class="	glyphicon glyphicon-remove-sign"></span>언팔링크</a>
+				</c:if>
+	
+						
+						<a>${fonum.follow_Num}</a><!-- 팔로우 번호   ******  -->
+				
 			</div>
 		</div>
 		<!-- div 2번  -->

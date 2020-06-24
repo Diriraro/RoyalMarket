@@ -29,7 +29,7 @@ public interface StoreFollowRepository {
 	//위에 재껴보고 
 	// follow num 검색.
 	
-	public StoreFollowVO selectnum(StoreFollowVO storeFollowVO)throws Exception;
+	public StoreFollowVO selectnum(long give_storeNum,long take_storeNum)throws Exception;
 	
 	
 	

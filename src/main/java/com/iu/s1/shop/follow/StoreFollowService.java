@@ -52,10 +52,10 @@ public class StoreFollowService {
 	
 	// 번호검색
 	
-	public StoreFollowVO selectnum(StoreFollowVO storeFollowVO) throws Exception{
+	public StoreFollowVO selectnum(long give_storeNum,long take_storeNum) throws Exception{
 		
 				
-		return storeFollowRepository.selectnum(storeFollowVO);
+		return storeFollowRepository.selectnum(give_storeNum,take_storeNum);
 		
 	}
 	

@@ -47,6 +47,21 @@ public class ShopController {
 		
 		
 		
+		/// 팔로우영역
+		long give_storeNum=msnum;
+		long take_storeNum=mem_storeNum;
+		
+		StoreFollowVO storeFollowVO = new StoreFollowVO();
+		storeFollowVO = storeFollowService.selectnum(give_storeNum,take_storeNum);
+		//System.out.println(storeFollowVO+"::::::: 팔로우 번호 확인  없으면 널 있으면 번호생성");
+		
+		mv.addObject("fonum",storeFollowVO); // 팔로우번호 있으면 전송 없으면 null
+			
+		///  팔로우영역
+		
+		
+		
+		
 		mv.addObject("mem_storeNum",mem_storeNum);//파라미터  모든 상점 페이지는 mem_storeNum으로 들어가야함,
 		mv.addObject("mem_storeName",para); // 파라미터의 상점이름
 		mv.addObject("msname",msname);
@@ -74,6 +89,19 @@ public class ShopController {
 		StoreQnaVO qnaVO = new StoreQnaVO();
 		qnaVO.setSq_storeNum(mem_storeNum);
 		String para = storeQnaService.getSelectStoreName(qnaVO); // mem_storeNum의 상점 이름 출력
+		//
+		
+		/// 팔로우영역
+		long give_storeNum=msnum;
+		long take_storeNum=mem_storeNum;
+		
+		StoreFollowVO storeFollowVO = new StoreFollowVO();
+		storeFollowVO = storeFollowService.selectnum(give_storeNum,take_storeNum);
+		//System.out.println(storeFollowVO+"::::::: 팔로우 번호 확인  없으면 널 있으면 번호생성");
+		
+		mv.addObject("fonum",storeFollowVO); // 팔로우번호 있으면 전송 없으면 null
+			
+		///  팔로우영역
 		
 		
 		
@@ -126,12 +154,25 @@ public class ShopController {
 		StoreQnaVO qnaVO = new StoreQnaVO();
 		qnaVO.setSq_storeNum(mem_storeNum);
 		String para = storeQnaService.getSelectStoreName(qnaVO); // mem_storeNum의 상점 이름 출력
-		mv.addObject("mem_storeName",para); // 파라미터의 상점이름
+		//
+		
+		/// 팔로우영역
+		long give_storeNum=msnum;
+		long take_storeNum=mem_storeNum;
+		
+		StoreFollowVO storeFollowVO = new StoreFollowVO();
+		storeFollowVO = storeFollowService.selectnum(give_storeNum,take_storeNum);
+		//System.out.println(storeFollowVO+"::::::: 팔로우 번호 확인  없으면 널 있으면 번호생성");
+		
+		mv.addObject("fonum",storeFollowVO); // 팔로우번호 있으면 전송 없으면 null
+			
+		///  팔로우영역
 		
 		
 
 		
 		
+		mv.addObject("mem_storeName",para); // 파라미터의 상점이름
 		mv.addObject("mem_storeNum",mem_storeNum);//파라미터  모든 상점 페이지는 storeNum으로 들어가야함,
 		mv.addObject("msname",msname);
 		mv.addObject("msnum",msnum);
@@ -150,8 +191,22 @@ public class ShopController {
 		StoreQnaVO qnaVO = new StoreQnaVO();
 		qnaVO.setSq_storeNum(mem_storeNum);
 		String para = storeQnaService.getSelectStoreName(qnaVO); // mem_storeNum의 상점 이름 출력
-		mv.addObject("mem_storeName",para); // 파라미터의 상점이름
+		
+		/// 팔로우영역
+		long give_storeNum=msnum;
+		long take_storeNum=mem_storeNum;
+		
+		StoreFollowVO storeFollowVO = new StoreFollowVO();
+		storeFollowVO = storeFollowService.selectnum(give_storeNum,take_storeNum);
+		//System.out.println(storeFollowVO+"::::::: 팔로우 번호 확인  없으면 널 있으면 번호생성");
+		
+		mv.addObject("fonum",storeFollowVO); // 팔로우번호 있으면 전송 없으면 null
+			
+		///  팔로우영역
+		
+		
 
+		mv.addObject("mem_storeName",para); // 파라미터의 상점이름
 		mv.addObject("mem_storeNum",mem_storeNum);//파라미터  모든 상점 페이지는 storeNum으로 들어가야함,
 		mv.addObject("msname",msname);
 		mv.addObject("msnum",msnum);
@@ -171,10 +226,24 @@ public class ShopController {
 		StoreQnaVO qnaVO = new StoreQnaVO();
 		qnaVO.setSq_storeNum(mem_storeNum);
 		String para = storeQnaService.getSelectStoreName(qnaVO); // mem_storeNum의 상점 이름 출력
-		mv.addObject("mem_storeName",para); // 파라미터의 상점이름
+		//
+		
+		/// 팔로우영역
+		long give_storeNum=msnum;
+		long take_storeNum=mem_storeNum;
+		
+		StoreFollowVO storeFollowVO = new StoreFollowVO();
+		storeFollowVO = storeFollowService.selectnum(give_storeNum,take_storeNum);
+		//System.out.println(storeFollowVO+"::::::: 팔로우 번호 확인  없으면 널 있으면 번호생성");
+		
+		mv.addObject("fonum",storeFollowVO); // 팔로우번호 있으면 전송 없으면 null
+			
+		///  팔로우영역
+		
 		
 		
 
+		mv.addObject("mem_storeName",para); // 파라미터의 상점이름
 		mv.addObject("mem_storeNum",mem_storeNum);//파라미터  모든 상점 페이지는 storeNum으로 들어가야함,
 		mv.addObject("msname",msname);
 		mv.addObject("msnum",msnum);
@@ -195,11 +264,21 @@ public class ShopController {
 		StoreQnaVO qnaVO = new StoreQnaVO();
 		qnaVO.setSq_storeNum(mem_storeNum);
 		String para = storeQnaService.getSelectStoreName(qnaVO); // mem_storeNum의 상점 이름 출력
+//
+		
+		/// 팔로우영역
+		long give_storeNum=msnum;
+		long take_storeNum=mem_storeNum;
+		
+		StoreFollowVO storeFollowVO = new StoreFollowVO();
+		storeFollowVO = storeFollowService.selectnum(give_storeNum,take_storeNum);
+		//System.out.println(storeFollowVO+"::::::: 팔로우 번호 확인  없으면 널 있으면 번호생성");
+		
+		mv.addObject("fonum",storeFollowVO); // 팔로우번호 있으면 전송 없으면 null
+			
+		///  팔로우영역
+		
 		mv.addObject("mem_storeName",para); // 파라미터의 상점이름
-		
-		
-		
-		
 		mv.addObject("mem_storeNum",mem_storeNum);//파라미터  모든 상점 페이지는 storeNum으로 들어가야함,
 		mv.addObject("msname",msname);
 		mv.addObject("msnum",msnum);
@@ -215,18 +294,38 @@ public class ShopController {
 		System.out.println("확인3"+mem_storeNum);
 		
 		
-//		StoreFollowVO storeFollowVO = new StoreFollowVO();
+		StoreFollowVO storeFollowVO = new StoreFollowVO();
 //		
-//		storeFollowVO.setGive_storeNum(give_storeNum); // 파라미터 세팅
-//		storeFollowVO.setTake_storeNum(take_storeNum); // 파리미터 세팅
+		storeFollowVO.setGive_storeNum(give_storeNum); // 파라미터 세팅
+		storeFollowVO.setTake_storeNum(take_storeNum); // 파리미터 세팅
 //		
-//		int result = storeFollowService.setInsertFollow(storeFollowVO); // 받아온 파라미터로 삽입
+		int result = storeFollowService.setInsertFollow(storeFollowVO); // 받아온 파라미터로 삽입
 //		
 		mv.setViewName("redirect:./comments?mem_storeNum="+mem_storeNum);
 	
 	
 		return mv;
 	}
+	
+	@RequestMapping(value = "setDeleteFollow", method = RequestMethod.GET)
+	public ModelAndView setDeleteFollow(long mem_storeNum, ModelAndView mv,long follow_Num)throws Exception{
+	
+		System.out.println("확인3"+mem_storeNum);
+		
+		
+		StoreFollowVO storeFollowVO = new StoreFollowVO();
+//		
+		storeFollowVO.setFollow_Num(follow_Num);
+		
+		int result2= storeFollowService.setDeleteFollow(storeFollowVO); // 팔로우번호 받아와서 지우기
+//		
+		mv.setViewName("redirect:./comments?mem_storeNum="+mem_storeNum);
+	
+	
+		return mv;
+	}
+	
+	
 	
 	
 }
