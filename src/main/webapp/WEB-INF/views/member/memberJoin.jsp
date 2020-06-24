@@ -115,6 +115,19 @@
 					<form:errors path="mem_email"></form:errors>
 				</div>
 			</div>
+			
+			<input type="button" value="인증번호 요청" class="btn btn-default"
+				onclick="checkEmail()">
+			
+			<div id="divCheck">
+				<label class="control-label col-sm-2" for="emailCheck">인증번호:</label>
+				<div class="col-sm-10">
+					<form:input path="emailCheck" type="text" class="form-control"
+						id="emailCheck" placeholder="인증번호" />
+					<form:errors path="phoneCheck"></form:errors>
+				</div>
+			</div>	
+			
 			<div class="form-group">
 				<div class="col-sm-offset-2 col-sm-10">
 					<button type="submit" class="btn btn-default">Submit</button>
@@ -134,21 +147,7 @@
 				alert(result.trim())
 				})
 				
-		
-			/* $.ajax({
-				type : "GET",
-				url : "/member/check/sendSMS",
-				data : {
-					"phoneNumber" : phoneNumber
-				},
-				
-			})	
-			error_count = ${msg};
-			alert(error_count); */
-				
 			}
-
-	
 
 		var openWin;
 

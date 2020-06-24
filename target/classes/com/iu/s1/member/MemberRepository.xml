@@ -44,7 +44,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT count(mem_storeNum) from member;
 	</select>
 	<select id="getDailyNewMember" resultType="MemberVO" parameterType="MemberVO">
-		SELECT * FROM member where mem_regDate = #{mem_regDate}
+		SELECT * FROM member where mem_regDate > #{mem_regDate}
 	</select>
 	
 </mapper>

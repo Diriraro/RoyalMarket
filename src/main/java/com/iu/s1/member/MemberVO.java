@@ -36,6 +36,9 @@ public class MemberVO {
 	@Column
 	private String mem_email;
 	
+	@Transient
+	private String emailCheck;
+	
 	@Column
 	private String mem_phone;
 	
@@ -71,6 +74,7 @@ public class MemberVO {
 	
 	@Column
 	private Date mem_regDate;
+	
 
 
 }
