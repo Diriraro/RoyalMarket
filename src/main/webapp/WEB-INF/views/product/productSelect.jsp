@@ -9,12 +9,16 @@
 <title>Insert title here</title>
 <c:import url="../template/boot.jsp"></c:import>
 
+
+
 </head>
 <body>
-	<c:import url="../template/nav.jsp"></c:import>
+	<c:import url="../template/woozoo_nav.jsp"></c:import>
+	<div style="border-bottom: solid 1px black;width: 1024px;margin-left: 440px;height: 78px;"></div>
+	<br>
 	<!-------------------------------------------------------------------------------------------  -->
-	
-		<div id="myCarousel" class="carousel slide" data-ride="carousel" style="width: 428px;">
+	<main>
+		<div id="myCarousel" class="carousel slide" data-ride="carousel" style="width: 428px;margin-left: 440px;" >
 
 			<!-- Indicators //현재 사용 안함-->
 			<ol class="carousel-indicators">
@@ -80,6 +84,7 @@
 	<h3>hit : ${vo.sell_hit}</h3>
 	<h3>date : ${vo.sell_date}</h3>
 	<h3>address : ${mvo.mem_address}</h3>
+	</main>
 
 	<script type="text/javascript">
 		$(document).on('click', '.reply', function() {
