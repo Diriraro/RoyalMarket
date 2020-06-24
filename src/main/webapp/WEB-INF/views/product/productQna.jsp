@@ -35,7 +35,8 @@ function qnaList(){
                 a += '<a href='+"./productSelect?sell_num=${vo.sell_num}"+'> 작성자 :'+value.pq_storeName+'  </a>'+value.pq_regDate+' ';
                 a += '<a onclick="qnaDelete('+value.pq_num+');"> 삭제 </a> </div>';
                 a += '<div class="qnaContents'+value.pq_num+'"> <p> 내용 : '+value.pq_contents +'</p>';
-                a += '<button id="reply">답글달기</button>';
+                a += '<button class="reply" value="'+value.pq_storeName+'" >답글달기</button>';
+                a +=  '<button value="'+value.pq_storeName+'"></button>';
                 a += '</div></div>';
             });
             
@@ -86,20 +87,8 @@ $(document).ready(function(){
 </script>
 
 
-<script type="text/javascript">
 
 
-$("#relpy").click(function(){
-	alert("asdasd")
-	$("#pq_contents").val($("#pq_storeName").val());
-});
-
-var qnaArea = document.querySelector('.qnaArea');
-qnaArea.addEventListener('click', function(event) {
-	alert('clicked');
-});
- 
-</script> 
 
 </body>
 </html>
