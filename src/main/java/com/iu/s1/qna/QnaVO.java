@@ -13,11 +13,4 @@ public class QnaVO {
 	private String qna_contents;
 	private Date qna_regDate;
 	private int qna_check;
-<<<<<<< HEAD
-=======
-	private Date qna_checkDate;
-	private String qna_title;
-	private int fileCheck;
-	
->>>>>>> YYSSHH
 }
