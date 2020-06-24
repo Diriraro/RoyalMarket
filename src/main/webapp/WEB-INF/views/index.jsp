@@ -15,8 +15,12 @@
 	<c:import url="./template/nav.jsp"></c:import>
 
 
+
+
 	<div class="container">
 		<h1>Index PAGe</h1>
+		
+		<a href="./product/productNew"><button>판매하기</button></a>
 
 		<ul class="allKind">
 			<li><input type="button" class="kind" id="category0" value="패션잡화"></li>

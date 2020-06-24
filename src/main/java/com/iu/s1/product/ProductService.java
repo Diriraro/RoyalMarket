@@ -65,6 +65,10 @@ public class ProductService {
 	public String selectFileName(long sell_num) throws Exception {
 		return productMapper.selectFileName(sell_num);
 	}
+	
+	public List<ProductFileVO> productFileSelect(long sell_num)throws Exception{
+		return productFileMapper.productFileSelect(sell_num);
+	}
 
 	public List<ProductVO> productList(Pager pager) throws Exception {
 		pager.makeRow();

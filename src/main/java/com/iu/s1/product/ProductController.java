@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.iu.s1.member.MemberVO;
+import com.iu.s1.product.productFile.ProductFileVO;
 import com.iu.s1.util.Pager;
 
 
@@ -83,7 +84,11 @@ public class ProductController {
 		sell_num = productVO.getSell_num();
 		MemberVO memberVO = productService.productAddress(sell_num);
 		mv.addObject("mvo",memberVO);
-		mv.setViewName("product/productSelect");		
+		mv.setViewName("product/productSelect");	
+		
+		List<ProductFileVO> productFileVOs = productService.productFileSelect(sell_num);
+		mv.addObject("pfile", productFileVOs);	// store 사진 출력
+		
 		return mv;	
 	}
 

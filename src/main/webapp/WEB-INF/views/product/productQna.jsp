@@ -36,7 +36,6 @@ function qnaList(){
                 a += '<a onclick="qnaDelete('+value.pq_num+');"> 삭제 </a> </div>';
                 a += '<div class="qnaContents'+value.pq_num+'"> <p> 내용 : '+value.pq_contents +'</p>';
                 a += '<button class="reply" value="'+value.pq_storeName+'" >답글달기</button>';
-                a +=  '<button value="'+value.pq_storeName+'"></button>';
                 a += '</div></div>';
             });
             

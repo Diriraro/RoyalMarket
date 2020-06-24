@@ -58,7 +58,7 @@
 
 	<select id="selectFileName" parameterType="Long"
 		resultType="String">
-		select file_name from sell_file where sell_num=#{sell_num}
+		select file_name from sell_file where sell_num=#{sell_num} LIMIT 1
 	</select>
 
 	<select id="productAddress" parameterType="Long"

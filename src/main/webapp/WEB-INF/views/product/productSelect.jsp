@@ -12,6 +12,66 @@
 </head>
 <body>
 	<c:import url="../template/nav.jsp"></c:import>
+	<!-------------------------------------------------------------------------------------------  -->
+	
+		<div id="myCarousel" class="carousel slide" data-ride="carousel" style="width: 428px;">
+
+			<!-- Indicators //현재 사용 안함-->
+			<ol class="carousel-indicators">
+				<c:forEach items="${pfile}" var="pfile" varStatus="status">
+
+					<c:if test="${status.index eq 0}">
+						<li data-target="#myCarousel" data-slide-to="${status.index}"
+							class="active"></li>
+					</c:if>
+					<c:if test="${status.index ne 0}">
+						<li data-target="#myCarousel" data-slide-to="${status.index}"></li>
+					</c:if>
+				</c:forEach>
+
+			</ol>
+
+			<!-- Wrapper for slides -->
+			<div class="carousel-inner">
+
+				<c:forEach items="${pfile}" var="pfile" varStatus="status">
+
+					<c:if test="${status.count eq 1}">
+						<div class="item active">
+							<img src="../upload/product/${pfile.file_name}"
+								alt="${pfile.ori_name}"
+								style="overflow: hidden; display: flex; align-items: center; justify-content: center; width: 428px; height: 428px;">
+							<div class="carousel-caption">
+								<p></p>
+							</div>
+						</div>
+					</c:if>
+
+					<c:if test="${status.count ne 1}">
+						<div class="item">
+							<img src="../upload/product/${pfile.file_name}"
+								alt="${pfile.ori_name}"
+								style="overflow: hidden; display: flex; align-items: center; justify-content: center; width: 428px; height: 428px;">
+							<div class="carousel-caption">
+								<p></p>
+							</div>
+						</div>
+					</c:if>
+
+				</c:forEach>
+
+			</div>
+
+			<!-- Left and right controls -->
+			<a class="left carousel-control" href="#myCarousel" data-slide="prev">
+				<span class="glyphicon glyphicon-chevron-left"></span> <span
+				class="sr-only">Previous</span>
+			</a> <a class="right carousel-control" href="#myCarousel"
+				data-slide="next"> <span
+				class="glyphicon glyphicon-chevron-right"></span> <span
+				class="sr-only">Next</span>
+			</a>
+		</div>
 
 
 	<h3>Title : ${vo.sell_product}</h3>
@@ -24,7 +84,7 @@
 	<script type="text/javascript">
 		$(document).on('click', '.reply', function() {
 			alert("asdasd");
-			$("#pq_contents").val("@"+$(this).val()+":");
+			$("#pq_contents").val("@" + $(this).val() + " : ");
 		});
 	</script>
 

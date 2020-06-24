@@ -10,6 +10,6 @@
 
 	<select id="productFileSelect" parameterType="Long"
 		resultType="ProductFileVO">
-		SELECT * FROM productPage WHERE sell_num=#{sell_num}
+		SELECT * FROM sell_file WHERE sell_num=#{sell_num}
 	</select>
 </mapper>
