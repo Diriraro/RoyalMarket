@@ -10,11 +10,17 @@
 	</select>
 	
 	<insert id="qnaWrite" parameterType="com.iu.s1.qna.QnaVO">
-		INSERT INTO qna VALUES(0,#{qna_kind},#{mem_id},#{qna_contents},now(),0,null)
+		INSERT INTO qna VALUES(0,#{qna_kind},#{mem_id},#{qna_contents},now(),0,null,#{qna_title})
 	</insert>
 	
-	<update id="qnaUpdate" parameterType="com.iu.s1.qna.QnaVO">
+	<update id="qnaAnswer" parameterType="com.iu.s1.qna.QnaVO">
 		UPDATE qna SET qna_contents=#{qna_contents}, qna_check=1, qna_checkDate=now()
 	</update>
+	
+	<select id="qnaAdminList" resultType="com.iu.s1.qna.QnaVO">
+		SELECT * FROM qna
+	</select>
+	
+	
 
 </mapper>

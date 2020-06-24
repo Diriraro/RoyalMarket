@@ -22,7 +22,7 @@
 		%>
 		<form action="./qnaWrite" method="post" enctype="multipart/form-data">
 			<div align="center" id="qna_kind">
-				<select id="qna_kind_1">
+				<select id="qna_kind_1" style="width: 1174px; height: 35px">
 					<option value="">문의할 내용을 선택해주세요</option>
 					<option value="계정문의">계정문의</option>
 					<option value="차단">차단(제제)</option>
@@ -32,17 +32,18 @@
 					<option value="서비스장애">서비스 장애</option>
 					<option value="제안">제안</option>
 					<option value="기타">기타 신고</option>
-				</select> <br>
-				<h1></h1>
-				<select id="qna_kind_2">
+				</select>
+				<select id="qna_kind_2" style="width: 1174px; height: 35px">
 					<option value="">상위 항목을 선택해주세요</option>
 				</select>
-				<br>
+				<br><br>
+				<input type="text" id="qna_title" name="qna_title" style="width: 1174px;" placeholder="제목을 입력해 주세요">
+				<br><br>
 				<textarea style="margin: 0px; width: 1174px; height: 448px;" name="qna_contents" id="qna_contents">
 				
 				</textarea>
 				<br>
-				<input type="hidden" id="qnak" name="qna_kind" value="계정문의>회원가입">
+				<input type="hidden" id="qnak" name="qna_kind" >
 				<input type="hidden" id="mem_id" name="mem_id" value="iu">			<!-- 아이디 세션에서 받아서 value 바꾸기 -->
 			</div>
 			<input type="button" class="btn btn-success" id="qnaFileAdd" value="사진추가">

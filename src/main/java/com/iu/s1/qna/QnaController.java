@@ -1,6 +1,5 @@
 package com.iu.s1.qna;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,11 +22,12 @@ public class QnaController {
 	public ModelAndView qnaMyList()throws Exception{
 		ModelAndView mv = new ModelAndView();
 		QnaVO qnaVO = new QnaVO();
-		qnaVO.setMem_id("1111");
+		qnaVO.setMem_id("iu");			//테스트용 아이디=iu ** 나중에 세션에서 로그인한사람 아이디 집어넣어야함
 		List<QnaVO> ar = qnaService.qnaMyList(qnaVO);
-		if(ar!=null) {					//로그인한 사용자의 아이디로 상담내역이 있는지 확인
+		System.out.println("================================================================="+ar);
+		if(!ar.isEmpty()) {					//로그인한 사용자의 아이디로 상담내역이 있는지 확인
 			mv.addObject("qna_list", ar);
-			mv.setViewName("qna/qnaMyList");			
+			mv.setViewName("qna/qnaMyList");
 		}else {
 			mv.addObject("result", "문의 내역이 없습니다.");
 			mv.addObject("path", "../");
