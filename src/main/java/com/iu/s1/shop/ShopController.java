@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.iu.s1.member.MemberVO;
+import com.iu.s1.shop.follow.StoreFollowService;
+import com.iu.s1.shop.follow.StoreFollowVO;
 import com.iu.s1.shop.qna.StoreQnaService;
 import com.iu.s1.shop.qna.StoreQnaVO;
 
@@ -24,6 +26,10 @@ import com.iu.s1.shop.qna.StoreQnaVO;
 public class ShopController {
 	@Autowired
 	private StoreQnaService storeQnaService;
+	@Autowired
+	private StoreFollowService storeFollowService;
+	
+	
 	
 		
 	// 내상점 누르면 기본으로 상품페이지 출력
@@ -108,9 +114,6 @@ public class ShopController {
 		return mv;
 	}
 	
-
-	
-	
 	
 	// 찜목록
 	@GetMapping("favorites")
@@ -180,7 +183,7 @@ public class ShopController {
 		return mv;
 	}
 	
-	//파ㅣㄹ로워ㅗ
+	//팔로워
 	@GetMapping("followers")
 	public ModelAndView followers(ModelAndView mv,HttpSession session,long mem_storeNum) throws Exception {
 		
@@ -202,6 +205,26 @@ public class ShopController {
 		mv.addObject("msnum",msnum);
 		
 		mv.setViewName("shop/followers");
+		return mv;
+	}
+	
+	@RequestMapping(value = "setinsertFollow", method = RequestMethod.GET)
+	public ModelAndView setInsertFollow(long give_storeNum,long take_storeNum,long mem_storeNum, ModelAndView mv)throws Exception{
+		System.out.println("확인1"+give_storeNum);
+		System.out.println("확인2"+take_storeNum);
+		System.out.println("확인3"+mem_storeNum);
+		
+		
+//		StoreFollowVO storeFollowVO = new StoreFollowVO();
+//		
+//		storeFollowVO.setGive_storeNum(give_storeNum); // 파라미터 세팅
+//		storeFollowVO.setTake_storeNum(take_storeNum); // 파리미터 세팅
+//		
+//		int result = storeFollowService.setInsertFollow(storeFollowVO); // 받아온 파라미터로 삽입
+//		
+		mv.setViewName("redirect:./comments?mem_storeNum="+mem_storeNum);
+	
+	
 		return mv;
 	}
 	

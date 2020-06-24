@@ -61,6 +61,28 @@
 				<!-- 사진  -->
 				<span>사진</span>
 				<button class="btn btn-danger">팔로우</button>
+				<a href="./setinsertFollow?give_storeNum=${msnum}&take_storeNum=${mem_storeNum}&mem_storeNum=${mem_storeNum}"
+						class="btn btn-danger pull-right"><span
+						class="	glyphicon glyphicon-remove-sign"></span>팔로우링크</a>
+						
+				<a href="./setDeleteFollow?"
+						class="btn btn-danger pull-right"><span
+						class="	glyphicon glyphicon-remove-sign"></span>언팔링크</a>		
+						
+						
+						
+						
+						
+						
+						<h2>${pageContext.request.requestURL}</h2>
+						<button></button>						
+						<h2>${pageContext.request.requestURI}</h2>
+						<button></button>
+						<h2>${pageContext.request.contextPath}</h2>
+						<button></button>
+						
+				
+				<button class="btn btn-info ">언팔</button>
 			</div>
 		</div>
 		<!-- div 2번  -->
