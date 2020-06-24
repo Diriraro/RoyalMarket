@@ -9,7 +9,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.iu.s1.qna.file.QnaFileVO;
 
 @Controller
 @RequestMapping("/qna/**")
@@ -44,9 +47,9 @@ public class QnaController {
 	}
 	
 	@PostMapping("qnaWrite")
-	public ModelAndView qnaWrite(QnaVO qnaVO)throws Exception{
+	public ModelAndView qnaWrite(QnaVO qnaVO, MultipartFile [] files)throws Exception{
 		ModelAndView mv = new ModelAndView();
-		int result = qnaService.qnaWrite(qnaVO);
+		int result = qnaService.qnaWrite(qnaVO, files);
 		if(result!=0) {
 			mv.addObject("result", "1:1 상담문의 완료");
 			mv.addObject("path", "../");
@@ -56,9 +59,48 @@ public class QnaController {
 			mv.addObject("path", "notice/noticeWrite");
 			mv.setViewName("common/result");
 		}
-		
-		
 		return mv;
 	}
 	
+	@GetMapping("qnaAdminList")
+	public ModelAndView qnaAdminList()throws Exception{
+		ModelAndView mv = new ModelAndView();
+		List<QnaVO> ar = qnaService.qnaAdminList();
+		for (QnaVO qnaVO : ar) {
+			int fileCheck = qnaService.fileCheck(qnaVO.getQna_num());
+			qnaVO.setFileCheck(fileCheck);
+		}
+		mv.addObject("qna_adlist", ar);
+		mv.setViewName("qna/qnaAdminList");
+		return mv;
+	}
+	
+	@GetMapping("qnaAnswer")
+	public ModelAndView qnaAnswer(long qna_num)throws Exception{
+		ModelAndView mv = new ModelAndView();
+		QnaVO qnaVO = new QnaVO();
+		qnaVO = qnaService.selectQna(qna_num);
+		List<QnaFileVO> qnaFileVOs = qnaService.selectQnaFile(qna_num);
+		mv.addObject("qvo", qnaVO);
+		mv.addObject("qfvo", qnaFileVOs);
+		mv.setViewName("qna/qnaAnswer");
+		return mv;
+	}
+	
+	@PostMapping("qnaAnswer")
+	public ModelAndView qnaAnswer(QnaVO qnaVO)throws Exception{
+		ModelAndView mv = new ModelAndView();
+		int result = qnaService.qnaAnswer(qnaVO);
+		if(result!=0) {
+			mv.addObject("result", "상담문의 답변작성 완료");
+			mv.addObject("path", "../");
+			mv.setViewName("common/result");
+		}else {
+			mv.addObject("result", "에러발생");
+			mv.addObject("path", "qna/qnaAdminList");
+			mv.setViewName("common/result");
+		}
+		
+		return mv;
+	}
 }

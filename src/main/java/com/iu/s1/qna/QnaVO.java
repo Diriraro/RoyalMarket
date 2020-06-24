@@ -15,5 +15,6 @@ public class QnaVO {
 	private int qna_check;
 	private Date qna_checkDate;
 	private String qna_title;
+	private int fileCheck;
 	
 }

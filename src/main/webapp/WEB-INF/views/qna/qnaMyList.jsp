@@ -22,12 +22,12 @@
 				<td>문의 날짜</td>
 				<td>문의 상황</td>
 				<td>문의 답변날짜</td>
+				<td></td>
 			</tr>
-			<% int a=0; %>
-		<c:forEach items="${qna_list}" var="list" varStatus="">
-			<% a++; %>
-			<tr id="more<%=a%>">
-				<td>${list.qna_kind}</td>
+		
+		<c:forEach items="${qna_list}" var="list" varStatus="i">
+			<tr class="more" id="${i.count}">				<!-- 리스트중 어디를 눌러도 문의내역이 뜰수있게 세팅 -->
+				<td>${list.qna_kind}</td>					<!-- 스크립트에서 this를 쓸수 있게 id에 count세팅 -->
 				<td> ${list.qna_title} </td>
 				<td>${list.qna_regDate}</td>
 				<td><c:if test="${list.qna_check eq 0}">답변대기중</c:if>
@@ -35,26 +35,26 @@
 				<td><c:if test="${list.qna_checkDate eq null}">답변대기중</c:if>
 				<c:if test="${list.qna_checkDate ne null}">${list.qna_checkDate}</c:if></td>
 			</tr>
+			
 			<tr>
-				<td><textarea id="hiddenCont<%=a%>" readonly="readonly" style="margin: 0px; width: 740px; height: 240px; display: none;">${list.qna_contents}</textarea></td>
+				<td>										<!-- 같은 숫자를 문의내역 뒤에 붙여서 각각 다른 id로 설정 -->
+				<textarea id="hiddenCont${i.count}" readonly="readonly" style="margin: 0px; width: 740px; height: 240px; display: none;">${list.qna_contents}</textarea>
+				</td>
 			</tr>
+			
 		</c:forEach>
 	</table>
 	
 </div>
 
 <script type="text/javascript">
-var a = <%=a%>;
-$(document).ready(function(){
-	for(var i=1; i<=a; i++){
-		$("#more"+i).click(function(){ 
-			if($("#hiddenCont"+i).is(":visible")){ 
-				$("#hiddenCont"+i).slideUp(); 
-				}else{ 
-					$("#hiddenCont"+i).slideDown(); 
-				} 
-		}); 
-	}
+$(".more").click(function(){							// 모든 리스트가 같은 click이벤트를 사용하므로 class식별자로 받아옴
+	var i = $(this).attr("id");							// 문의내역은 1,2,3 순으로 증가함 / more클래스의 id도 같은식으로 증가함 / 클릭이벤트가 나왔을때 변수에 id값 넣기
+	if($("#hiddenCont"+i).is(":visible")){ 				// 실행
+		$("#hiddenCont"+i).slideUp(); 
+		}else{ 
+			$("#hiddenCont"+i).slideDown(); 
+		} 
 });
 
 </script>
