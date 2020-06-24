@@ -55,6 +55,20 @@
 
 			<div>
 				<h2>내용</h2>
+				
+				<div style="border: 1px solid red;">
+					<c:forEach items="${list}" var="vo">
+						<tr>
+							<td>${vo.take_storeNum}</td>
+						</tr>
+						
+						<br>
+						<br>
+					</c:forEach>
+				</div>
+				
+				
+				
 
 			</div>
 

@@ -9,4 +9,5 @@ public class StoreFollowVO {
 	private long give_storeNum;
 	private long take_storeNum;
 	
+	private String mem_storeName; //멤버에서 조회해서 담을곳	
 }

@@ -238,7 +238,14 @@ public class ShopController {
 		
 		mv.addObject("fonum",storeFollowVO); // 팔로우번호 있으면 전송 없으면 null
 			
-		///  팔로우영역
+		///  팔로우영역 끝
+		
+		// 팔로우 리스트 영역    06 25 오자마자  리스트 출력 
+		StoreFollowVO storeFollowVO2 = new StoreFollowVO();
+		storeFollowVO2.setGive_storeNum(mem_storeNum);
+		List<StoreFollowVO> ar = storeFollowService.getSelectListFollowings(storeFollowVO2);
+		// 팔로우 리스트 영역 끝
+		
 		
 		
 		
@@ -247,6 +254,7 @@ public class ShopController {
 		mv.addObject("mem_storeNum",mem_storeNum);//파라미터  모든 상점 페이지는 storeNum으로 들어가야함,
 		mv.addObject("msname",msname);
 		mv.addObject("msnum",msnum);
+		mv.addObject("list",ar);// 팔로잉 리스트
 		
 		mv.setViewName("shop/followings");
 		return mv;
@@ -287,12 +295,13 @@ public class ShopController {
 		return mv;
 	}
 	
+	
+	
+	//============================================================================================
+	
+	// 팔로우 인설트, 딜리트 할때 주소를 현재주소로 오게끔 바꾸기	
 	@RequestMapping(value = "setinsertFollow", method = RequestMethod.GET)
 	public ModelAndView setInsertFollow(long give_storeNum,long take_storeNum,long mem_storeNum, ModelAndView mv)throws Exception{
-		System.out.println("확인1"+give_storeNum);
-		System.out.println("확인2"+take_storeNum);
-		System.out.println("확인3"+mem_storeNum);
-		
 		
 		StoreFollowVO storeFollowVO = new StoreFollowVO();
 //		
@@ -309,9 +318,6 @@ public class ShopController {
 	
 	@RequestMapping(value = "setDeleteFollow", method = RequestMethod.GET)
 	public ModelAndView setDeleteFollow(long mem_storeNum, ModelAndView mv,long follow_Num)throws Exception{
-	
-		System.out.println("확인3"+mem_storeNum);
-		
 		
 		StoreFollowVO storeFollowVO = new StoreFollowVO();
 //		
