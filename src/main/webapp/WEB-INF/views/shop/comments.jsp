@@ -30,9 +30,14 @@
 					<a href="./comments?mem_storeNum=${mem_storeNum}">상점문의</a>
 				</button>
 
+			
+				<!-- 찜페이지 버튼은 나의 상점에서만 가능  -->
+			<c:if test="${msnum eq mem_storeNum }">
 				<button class="btn btn-info">
 					<a href="./favorites?mem_storeNum=${mem_storeNum}"> 찜</a>
 				</button>
+			</c:if>
+		
 
 				<button class="btn btn-info">
 					<a href="./reviews?mem_storeNum=${mem_storeNum}">상점후기</a>

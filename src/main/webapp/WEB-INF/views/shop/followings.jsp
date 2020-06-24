@@ -1,7 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
-    <%@taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,49 +14,52 @@
 <body>
 <c:import url="../template/nav.jsp"></c:import>
 
-		<h1> ÆÈ·ÎÀ×ÆäÀÌÁö</h1>
+		<h1> íŒ”ë¡œìž‰íŽ˜ì´ì§€</h1>
 		
 		<c:import url="../template/shopmain.jsp"></c:import>
 
 	<div class="container">
 		<div style="border: 1px solid black; width: 1024px; height: 340px;">
-			<!-- °¢ÀÚ ÆäÀÌÁö¿¡ ÇÏ³ª¾¿ »ý¼º  -->
-			<!--¹öÆ° °¨½Î´Â div  -->
+			<!-- ê°ìž íŽ˜ì´ì§€ì— í•˜ë‚˜ì”© ìƒì„±  -->
+			<!--ë²„íŠ¼ ê°ì‹¸ëŠ” div  -->
 			<div>
 				<button class="btn btn-info">
-					<a href="./myshop?mem_storeNum=${mem_storeNum}">»óÇ°</a>
+					<a href="./myshop?mem_storeNum=${mem_storeNum}">ìƒí’ˆ</a>
 				</button>
 
 				<button class="btn btn-info">
-					<a href="./comments?mem_storeNum=${mem_storeNum}">»óÁ¡¹®ÀÇ</a>
+					<a href="./comments?mem_storeNum=${mem_storeNum}">ìƒì ë¬¸ì˜</a>
 				</button>
 
+			<!-- ì°œíŽ˜ì´ì§€ ë²„íŠ¼ì€ ë‚˜ì˜ ìƒì ì—ì„œë§Œ ê°€ëŠ¥  -->
+			<c:if test="${msnum eq mem_storeNum }">
 				<button class="btn btn-info">
-					<a href="./favorites?mem_storeNum=${mem_storeNum}"> Âò</a>
+					<a href="./favorites?mem_storeNum=${mem_storeNum}"> ì°œ</a>
 				</button>
+			</c:if>
 
 				<button class="btn btn-info">
-					<a href="./reviews?mem_storeNum=${mem_storeNum}">»óÁ¡ÈÄ±â</a>
+					<a href="./reviews?mem_storeNum=${mem_storeNum}">ìƒì í›„ê¸°</a>
 				</button>
 
 				<button class="btn btn-danger">
-					<a href="./followings?mem_storeNum=${mem_storeNum}">ÆÈ·ÎÀ×</a>
+					<a href="./followings?mem_storeNum=${mem_storeNum}">íŒ”ë¡œìž‰</a>
 				</button>
 
 				<button class="btn btn-info">
-					<a href="./followers?mem_storeNum=${mem_storeNum}">ÆÈ·Î¿ö</a>
+					<a href="./followers?mem_storeNum=${mem_storeNum}">íŒ”ë¡œì›Œ</a>
 				</button>
 
 			</div>
 
 
 			<div>
-				<h2>³»¿ë</h2>
+				<h2>ë‚´ìš©</h2>
 
 			</div>
 
-		</div><!-- ¹öÆ°, ³»¿ë ³¡  -->
+		</div><!-- ë²„íŠ¼, ë‚´ìš© ë  -->
 
-	</div><!-- ÄÁÅ×ÀÌ³Ê ³¡  -->
+	</div><!-- ì»¨í…Œì´ë„ˆ ë  -->
 </body>
 </html>

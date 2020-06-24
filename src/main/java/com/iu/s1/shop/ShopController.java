@@ -41,7 +41,7 @@ public class ShopController {
 		
 		
 		
-		mv.addObject("mem_storeNum",mem_storeNum);//파라미터  모든 상점 페이지는 storeNum으로 들어가야함,
+		mv.addObject("mem_storeNum",mem_storeNum);//파라미터  모든 상점 페이지는 mem_storeNum으로 들어가야함,
 		mv.addObject("mem_storeName",para); // 파라미터의 상점이름
 		mv.addObject("msname",msname);
 		mv.addObject("msnum",msnum);
