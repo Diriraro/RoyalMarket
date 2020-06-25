@@ -236,19 +236,19 @@ public class ShopController {
 		storeFollowVO = storeFollowService.selectnum(give_storeNum,take_storeNum);
 		//System.out.println(storeFollowVO+"::::::: 팔로우 번호 확인  없으면 널 있으면 번호생성");
 		
-		mv.addObject("fonum",storeFollowVO); // 팔로우번호 있으면 전송 없으면 null
+		mv.addObject("fonum",storeFollowVO); // 팔로우번호 있으면 전송 없으면 null   팔로우, 언팔 기능 이용하기위해
 			
 		///  팔로우영역 끝
 		
-		// 팔로우 리스트 영역    06 25 오자마자  리스트 출력 
+		// 팔로우 리스트 영역     <<<<<<<
 		StoreFollowVO storeFollowVO2 = new StoreFollowVO();
-		storeFollowVO2.setGive_storeNum(mem_storeNum);
-		List<StoreFollowVO> ar = storeFollowService.getSelectListFollowings(storeFollowVO2);
+		storeFollowVO2.setGive_storeNum(mem_storeNum); //파라미터의 번호로 팔로우 리스트 확인
+		
+		List<StoreFollowVO> ar = storeFollowService.getSelectListFollowers(storeFollowVO2);
+		for (StoreFollowVO storeFollowVO3 :ar) {
+			storeFollowVO3.setTake_storeName(storeFollowService.getSelecttakeStoreName(storeFollowVO3));// 작성자의 번호로 이름을 출력 한것을 ar안에 담고.
+		}	
 		// 팔로우 리스트 영역 끝
-		
-		
-		
-		
 
 		mv.addObject("mem_storeName",para); // 파라미터의 상점이름
 		mv.addObject("mem_storeNum",mem_storeNum);//파라미터  모든 상점 페이지는 storeNum으로 들어가야함,

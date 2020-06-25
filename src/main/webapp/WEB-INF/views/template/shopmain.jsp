@@ -63,15 +63,15 @@
 				<!-- 팔로우가 아니면 팔로우버튼 출력 -->
 				<c:if test="${fonum.follow_Num eq null}">
 					<a href="./setinsertFollow?give_storeNum=${msnum}&take_storeNum=${mem_storeNum}&mem_storeNum=${mem_storeNum}"
-						class="btn btn-danger pull-right"><span
-						class="	glyphicon glyphicon-remove-sign"></span>팔로우링크</a>
+						class="btn btn-info pull-right"><span
+						class="	glyphicon glyphicon glyphicon-plus-sign"></span>팔로우</a>
 				</c:if>
 				
 				<!-- 팔로우 상태라면 언팔버튼 출력  -->
 				<c:if test="${fonum.follow_Num ne null}">
 				<a href="./setDeleteFollow?follow_Num=${fonum.follow_Num}&mem_storeNum=${mem_storeNum}"
 						class="btn btn-danger pull-right"><span
-						class="	glyphicon glyphicon-remove-sign"></span>언팔링크</a>
+						class="	glyphicon glyphicon-remove-sign"></span>언팔</a>
 				</c:if>
 	
 						

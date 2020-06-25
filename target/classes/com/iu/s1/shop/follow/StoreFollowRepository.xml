@@ -33,6 +33,11 @@
 	<select id="selectnum" parameterType="com.iu.s1.shop.follow.StoreFollowVO" resultType="com.iu.s1.shop.follow.StoreFollowVO">
 		select follow_Num from follow where give_storeNum = #{give_storeNum} and take_storeNum = #{take_storeNum};
 	</select>
+
+<!-- take 이름 검색  -->	
+	<select id="getSelecttakeStoreName" parameterType="com.iu.s1.shop.follow.StoreFollowVO" resultType="String">
+		SELECT mem_storeName FROM member WHERE mem_storeNum=#{take_storeNum}
+	</select>
 	
 	
 	  
