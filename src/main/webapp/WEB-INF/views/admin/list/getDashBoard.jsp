@@ -29,7 +29,7 @@
 					<i class="fa fa-eye w3-xxxlarge"></i>
 				</div>
 				<div class="w3-right">
-					<h3>방문자수</h3>
+					<h3>${visitors}</h3>
 				</div>
 				<div class="w3-clear"></div>
 				<h4>방문자 수</h4>
@@ -77,8 +77,10 @@
 
 		<p>전일 대비 방문자 비율</p>
 		<div class="w3-grey">
-			<div class="w3-container w3-center w3-padding w3-red"
-				style="width: 75%">75%</div>
+			<c:catch>
+				<div class="w3-container w3-center w3-padding w3-red"
+					style="width: ${dailyRate}%">${dailyRate}%</div>
+			</c:catch>
 		</div>
 	</div>
 	<hr>

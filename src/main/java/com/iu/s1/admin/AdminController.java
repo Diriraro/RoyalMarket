@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.iu.s1.ProductVO;
 import com.iu.s1.member.MemberVO;
 import com.iu.s1.notice.NoticeVO;
+import com.iu.s1.visitor.VisitorVO;
 
 
 @Controller
@@ -87,6 +88,11 @@ public class AdminController {
 		double dailyNewMemberCount = (double)adminService.getDailyNewMember();
 		long rate = (long)((dailyNewMemberCount/memberCount)*100);
 		List<NoticeVO> ar = adminService.getNoticeList();
+		VisitorVO visitorVO = adminService.getTodayVisitorCount();
+		VisitorVO visitorVO2 = adminService.getlastVisitorCount();
+		long rate2 = (long)((visitorVO.getCount()*100)/visitorVO2.getCount());
+		model.addAttribute("visitors",visitorVO.getCount());
+		model.addAttribute("dailyRate",(int)rate2);
 		model.addAttribute("increaseRate", rate);
 		model.addAttribute("memberCount",(int)memberCount);
 		model.addAttribute("list",ar);
