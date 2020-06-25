@@ -35,16 +35,19 @@ public class HomeController {
 			throws Exception {
 		boolean check = false;
 		// 쿠키들을 가져옴
-		Cookie[] cookies = request.getCookies();
-		if (cookies.length - 1 > 0) {
-			System.out.println(cookies.length);
-			String str[] = new String[cookies.length];
-			for (int i = 0; i < cookies.length; i++) {
-				str[i] = cookies[i].getName();
-				System.out.println(str[i]);
+		System.out.println(request.getCookies());
+		if (request.getCookies() != null) {
+			Cookie[] cookies = request.getCookies();
+			if (cookies.length > 0) {
+				System.out.println(cookies.length);
+				String str[] = new String[cookies.length];
+				for (int i = 0; i < cookies.length; i++) {
+					str[i] = cookies[i].getName();
+					System.out.println(str[i]);
+				}
+				// 쿠키들중에 해당 쿠키 키네임이 visitor의 존재여부
+				check = Arrays.stream(str).anyMatch("visitor"::equals);
 			}
-			// 쿠키들중에 해당 쿠키 키네임이 visitor의 존재여부
-			check = Arrays.stream(str).anyMatch("visitor"::equals);
 		}
 		System.out.println("존재 여부 :" + check);
 		if (!check) {
@@ -74,6 +77,8 @@ public class HomeController {
 				} else {
 					// 방문일에 대한 데이터가 없으면 추가
 					System.out.println("New DAY");
+					visitorVO.setDay(daily);
+					visitorVO.setCount(1);
 					adminRepository.save(visitorVO);
 				}
 
