@@ -24,6 +24,9 @@ public class PaymentService {
 		return paymentMapper.pointSelect(mem_id);
 	}
 	
+	public String productName(long sell_num)throws Exception{
+		return paymentMapper.productName(sell_num);
+	}
 	
 	public int paymentCharge(PayVO payVO)throws Exception{
 		return paymentMapper.paymentCharge(payVO);
@@ -64,23 +67,38 @@ public class PaymentService {
 		return paymentMapper.tradingReceiveUp(tradingVO);
 	}
 	
-	public int buy_statusUp(long status)throws Exception{
-		return paymentMapper.buy_statusUp(status);
+	public int buy_statusUp(Buy_HistoryVO buy_HistoryVO)throws Exception{
+		return paymentMapper.buy_statusUp(buy_HistoryVO);
 	}
 	
 	public int tradingGiveUp(TradingVO tradingVO)throws Exception{
 		return paymentMapper.tradingGiveUp(tradingVO);
 	}
 	
-	public int sell_statusUp(long status)throws Exception{
-		return paymentMapper.sell_statusUp(status);
+	public int sell_statusUp(Sell_HistoryVO sell_HistoryVO)throws Exception{
+		return paymentMapper.sell_statusUp(sell_HistoryVO);
 	}
 	
-	public TradingVO trandingSelect(long sell_num)throws Exception{
+	public TradingVO tradingSelect(long sell_num)throws Exception{
 		return paymentMapper.tradingSelect(sell_num);
 	}
 	public int tradingDelete(long sell_num)throws Exception{
 		return paymentMapper.tradingDelete(sell_num);
 	}
 	
+	public List<Sell_HistoryVO>  seller_check(String seller_id)throws Exception{
+		return paymentMapper.seller_check(seller_id);
+	}
+	
+	public int del_buyHistory(long sell_num)throws Exception{
+		return paymentMapper.del_buyHistory(sell_num);
+	}
+	
+	public int del_sellHistory(long sell_num)throws Exception{
+		return paymentMapper.del_sellHistory(sell_num);
+	}
+	
+	public int product_sell_statusUp(long sell_num)throws Exception{
+		return paymentMapper.product_sell_statusUp(sell_num);
+	}
 }

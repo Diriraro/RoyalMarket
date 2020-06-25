@@ -13,14 +13,15 @@
 	
 	<div class="container">
 		<button class="btn btn-primary" id="productTake" title="${sell_num}">상품 인수완료</button>
-		<button class="btn btn-danger" id="productCancel">상품 거래 취소</button>
+		<button class="btn btn-danger" id="productCancel" title="${sell_num}">상품 거래 취소</button>
 	</div>
 
 	<script type="text/javascript">
 	$("#productCancel").click(function(){
 		var check = confirm("상품 주문을 취소하시겠습니까?");
+		var num = $("#productCancel").attr("title");
 		if(check){
-			location.href="./productCancel";
+			location.href="./productCancel?sell_num="+num+"&check=buy";
 		}
 	})	
 	$("#productTake").click(function() {

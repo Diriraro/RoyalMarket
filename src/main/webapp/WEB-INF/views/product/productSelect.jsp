@@ -120,5 +120,13 @@
 	<%@ include file="productQna.jsp"%>
 
 
+<button class="btn btn-primary" id="productPay">구매하기</button>
+<script type="text/javascript">
+	$("#productPay").click(function() {
+			location.href="../payment/productPay?sell_product=${vo.sell_product}&sell_price=${vo.sell_price}&sell_num=${vo.sell_num}";
+	});
+		
+</script>
+
 </body>
 </html>

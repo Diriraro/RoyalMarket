@@ -6,6 +6,14 @@ public class Sell_HistoryVO {
 	private long sell_num;
 	private long sell_price;
 	private long status;
+	private String sell_product;
+	
+	public String getSell_product() {
+		return sell_product;
+	}
+	public void setSell_product(String sell_product) {
+		this.sell_product = sell_product;
+	}
 	public String getMem_id() {
 		return mem_id;
 	}

@@ -18,6 +18,8 @@ public interface PaymentMapper {
 	
 	public long pointSelect(String mem_id)throws Exception;
 	
+	public String productName(long sell_num)throws Exception;
+	
 	public int paymentCharge(PayVO payVO)throws Exception;
 	
 	public List<PayVO> pointManage(String mem_id)throws Exception;
@@ -38,13 +40,21 @@ public interface PaymentMapper {
 	
 	public int tradingReceiveUp(TradingVO tradingVO)throws Exception;
 	
-	public int buy_statusUp(long status)throws Exception;
+	public int buy_statusUp(Buy_HistoryVO buy_HistoryVO)throws Exception;
 	
 	public int tradingGiveUp(TradingVO tradingVO)throws Exception;
 	
-	public int sell_statusUp(long status)throws Exception;
+	public int sell_statusUp(Sell_HistoryVO sell_HistoryVO)throws Exception;
 	
 	public TradingVO tradingSelect(long sell_num)throws Exception;
 	
 	public int tradingDelete(long sell_num)throws Exception;
+	
+	public List<Sell_HistoryVO> seller_check(String seller_id)throws Exception;
+	
+	public int del_buyHistory(long sell_num)throws Exception;
+	
+	public int del_sellHistory(long sell_num)throws Exception;
+	
+	public int product_sell_statusUp(long sell_num)throws Exception;
 }

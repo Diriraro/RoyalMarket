@@ -17,12 +17,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.iu.s1.payment.PaymentService;
+import com.iu.s1.paymentHistory.Sell_HistoryVO;
+import com.iu.s1.trading.TradingVO;
+
 @Controller
 @RequestMapping("/member/**")
 public class MemberController {
 	
 	@Autowired
 	private MemberService memberService;
+	
+	@Autowired
+	private PaymentService paymentService;
 	
 	
 	private String checkNum="";
@@ -79,14 +86,23 @@ public class MemberController {
 		 Cookie cookie = new Cookie("cId", memberVO.getMem_id());
 		 response.addCookie(cookie);
 		 
-		
+		 
 		memberVO = memberService.memberLogin(memberVO);
 		
+		List<Sell_HistoryVO> sell =paymentService.seller_check(memberVO.getMem_id());
+		int sellProduct = sell.size();
+		
 		if(memberVO != null) {
-			session.setAttribute("memberVO", memberVO);
-			mv.addObject("result", "로그인 성공");
-			mv.addObject("path", "../");
-			mv.setViewName("common/result");
+				session.setAttribute("memberVO", memberVO);
+			if(sell.isEmpty()) {
+				mv.addObject("result", "로그인 성공");
+				mv.addObject("path", "../");
+				mv.setViewName("common/result");
+			}else {
+				mv.addObject("result", sellProduct+"개의 판매중인 상품이 있습니다.");
+				mv.addObject("path", "../payment/sell_History");
+				mv.setViewName("common/result");
+			}
 		}
 		return mv;
 	}
