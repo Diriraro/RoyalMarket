@@ -14,10 +14,12 @@
 </head>
 <body>
 	<c:import url="../template/woozoo_nav.jsp"></c:import>
-	<div style="border-bottom: solid 1px black;width: 1024px;margin-left: 440px;height: 78px;"></div>
+	<div style="border-bottom: solid 1px black;width: 1024px;margin-left: 440px;height: 78px;">
 	<br>
-	<!-------------------------------------------------------------------------------------------  -->
-	<main>
+	<br>
+	</div>
+	<br>
+	<!-----------------------------------사진---------------------------------  -->
 		<div id="myCarousel" class="carousel slide" data-ride="carousel" style="width: 428px;margin-left: 440px;" >
 
 			<!-- Indicators //현재 사용 안함-->
@@ -84,7 +86,6 @@
 	<h3>hit : ${vo.sell_hit}</h3>
 	<h3>date : ${vo.sell_date}</h3>
 	<h3>address : ${mvo.mem_address}</h3>
-	</main>
 
 	<script type="text/javascript">
 		$(document).on('click', '.reply', function() {
