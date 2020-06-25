@@ -3,11 +3,14 @@ package com.iu.s1.member;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 
 import net.nurigo.java_sdk.Coolsms;
 import net.nurigo.java_sdk.api.Message;
@@ -21,15 +24,15 @@ public class MemberService {
 
 	public String certifiedPhoneNumber(String phoneNumber, String numStr) {
 
-		String api_key = "NCSYCJIG3YIWY3QA";
-		String api_secret = "UXRXDHID18TDWF5PJKZWZFASIXDZU2W9";
+		String api_key = "NCSYFVQLACVOHA9V";
+		String api_secret = "ZFAGHRHOSCLEPAXTQXYVDCLLWF6RJ0XC";
 		Message coolsms = new Message(api_key, api_secret);
 		String error_count = "1";
 
 		// 4 params(to, from, type, text) are mandatory. must be filled
 		HashMap<String, String> params = new HashMap<String, String>();
 		params.put("to", phoneNumber); // 수신전화번호
-		params.put("from", "01045338794"); // 발신전화번호. 테스트시에는 발신,수신 둘다 본인 번호로 하면 됨
+		params.put("from", "01046265193"); // 발신전화번호. 테스트시에는 발신,수신 둘다 본인 번호로 하면 됨
 		params.put("type", "SMS");
 		params.put("text", "인증번호는" + "[" + numStr + "]" + "입니다.");
 		params.put("app_version", "test app 2.2"); // application name and version
@@ -46,78 +49,67 @@ public class MemberService {
 
 	}
 
-	public int memberPwUpdate(MemberVO memberVO)throws Exception{
+	public int memberPwUpdate(MemberVO memberVO) throws Exception {
 		return memberRepository.memberPwUpdate(memberVO);
 	}
-	
+
 	public int memberJoin(MemberVO memberVO) throws Exception {
 		memberVO.setMem_address(memberVO.getRoad_address() + " " + memberVO.getDetail_address());
 		return memberRepository.memberJoin(memberVO);
 	}
 
 	public boolean findMemberByPhone(MemberVO memberVO, BindingResult bindingResult, String checkNum) throws Exception {
-		boolean result = false;
-		System.out.println(checkNum);
+		boolean result = bindingResult.hasErrors();
 		// 인증번호가 맞는지 확인
-		if (!memberVO.getPhoneCheck().equals(checkNum)) {
-			bindingResult.rejectValue("phoneCheck", "memberVO.phoneCheck.notEqual");
-			result = true;
-		}
-		MemberVO memberVO2 = memberRepository.memberIdCheck(memberVO);
 		
-		if (!memberVO.getMem_pw().equals(memberVO.getPwCheck())) {
-			bindingResult.rejectValue("pwCheck", "memberVO.mem_pw.notEqual");
-			result = true;
+		List<ObjectError> err = bindingResult.getAllErrors();
+		System.out.println(err);
+		if (!result) {
+			if (!memberVO.getPhoneCheck().equals(checkNum)) {
+				bindingResult.rejectValue("phoneCheck", "memberVO.phoneCheck.notEqual");
+				result = true;
+			}
+
+			if (!memberVO.getMem_pw().equals(memberVO.getPwCheck())) {
+				bindingResult.rejectValue("pwCheck", "memberVO.mem_pw.notEqual");
+				result = true;
+			}
 		}
-		
-		if (memberVO2 == null) {
-			bindingResult.rejectValue("mem_id", "memberVO.mem_id.notExist");
-			result = true;
-			return result;
-		}
-		
+
 		MemberVO memberVO3 = memberRepository.selectMember(memberVO);
-		System.out.println(memberVO3.getMem_phone());
-		System.out.println(memberVO.getMem_phone());
-		if(!memberVO3.getMem_phone().equals(memberVO.getMem_phone())) {
+
+		if (!memberVO3.getMem_phone().equals(memberVO.getMem_phone())) {
 			bindingResult.rejectValue("mem_phone", "memberVO.mem_phone.notEqual");
 			result = true;
 		}
 		return result;
 	}
-	
+
 	public boolean findMemberByEmail(MemberVO memberVO, BindingResult bindingResult, String checkNum) throws Exception {
-		boolean result = false;
+
+		List<ObjectError> err = bindingResult.getAllErrors();
+		System.out.println(err);
+
+		boolean result = bindingResult.hasErrors();
 		
 		// 인증번호가 맞는지 확인
-		if (!memberVO.getPhoneCheck().equals(checkNum)) {
-			bindingResult.rejectValue("phoneCheck", "memberVO.phoneCheck.notEqual");
-			result = true;
-		}
-		MemberVO memberVO2 = memberRepository.memberIdCheck(memberVO);
-		
-		if (!memberVO.getMem_pw().equals(memberVO.getPwCheck())) {
-			bindingResult.rejectValue("pwCheck", "memberVO.mem_pw.notEqual");
-			result = true;
-		}
-		
-		if (memberVO2 == null) {
-			bindingResult.rejectValue("mem_id", "memberVO.mem_id.notExist");
-			result = true;
-			return result;
-		}
-		
-		MemberVO memberVO3 = memberRepository.selectMember(memberVO);
+		if (!result) {
+			if (!memberVO.getPhoneCheck().equals(checkNum)) {
+				bindingResult.rejectValue("phoneCheck", "memberVO.phoneCheck.notEqual");
+				result = true;
+				
+			} else if (!memberVO.getMem_pw().equals(memberVO.getPwCheck())) {
+				bindingResult.rejectValue("pwCheck", "memberVO.mem_pw.notEqual");
+				result = true;
+				
+			} else {
+			
+			}
 
-		System.out.println(memberVO3.getMem_email());
-		System.out.println(memberVO.getMem_email());
-		if(!memberVO3.getMem_email().equals(memberVO.getMem_email())) {
-			bindingResult.rejectValue("mem_email", "memberVO.mem_email.notEqual");
-			result = true;
 		}
+
 		return result;
 	}
-	
 
 	// 검증 메서드
 	public boolean memberCheck(MemberVO memberVO, BindingResult bindingResult, String checkNum) throws Exception {
@@ -150,6 +142,10 @@ public class MemberService {
 
 	public MemberVO memberLogin(MemberVO memberVO) throws Exception {
 		return memberRepository.memberLogin(memberVO);
+	}
+
+	public MemberVO selectMember(MemberVO memberVO) throws Exception {
+		return memberRepository.selectMember(memberVO);
 	}
 
 }

@@ -10,16 +10,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</sql>
 	
 	<update id="memberPwUpdate" parameterType="MemberVO">
-		update member set mem_pw=#{mem_pw} where mem_phone=#{mem_phone} or mem_email=#{mem_email}
+		update member set mem_pw=#{mem_pw} where mem_id=#{mem_id}
 	</update>
 	
 	
 	<select id="memberLogin" parameterType="MemberVO" resultType="MemberVO">
 		select * from member where mem_id=#{mem_id} and mem_pw=#{mem_pw}
-	</select>
-	
-	<select id="memberIdCheck" parameterType="MemberVO" resultType="MemberVO">
-		select * from member where mem_id=#{mem_id}
 	</select>
 	
 	<select id="selectMember" parameterType="MemberVO" resultType="MemberVO">

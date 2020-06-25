@@ -24,6 +24,7 @@
 	padding: 100px 0px;
 }
 </style>
+
 </head>
 <body>
 	<c:import url="../template/nav.jsp"></c:import>
@@ -69,12 +70,12 @@
 				<div class="col-sm-10">
 					<form:input path="mem_phone" type="text" class="form-control"
 						id="mem_phone" placeholder="휴대폰 번호(숫자만 허용)" />
-						<form:errors path="mem_phone"></form:errors>
+					<form:errors path="mem_phone"></form:errors>
 				</div>
 			</div>
 
 			<input type="button" value="인증번호 요청" class="btn btn-default"
-				onclick="checkPhone()">
+				id="rq_num" onclick="checkPhone()">
 			<!-- <a href="" id="btnCheck" class="btn btn-default">인증번호 요청</a> -->
 
 			<div id="divCheck">
@@ -92,7 +93,7 @@
 				<div class="col-sm-10">
 					<form:input path="road_address" type="text" class="form-control"
 						id="road_address" placeholder="Enter Address" />
-						<form:errors path="road_address"></form:errors>
+					<form:errors path="road_address"></form:errors>
 				</div>
 			</div>
 
@@ -108,7 +109,7 @@
 						id="detail_address" placeholder="Enter Address" />
 				</div>
 			</div>
-			
+
 
 			<div class="form-group">
 				<label class="control-label col-sm-2" for="mem_email">Email:</label>
@@ -120,6 +121,7 @@
 			</div>
 
 			<select name="email1" onchange="getText(this)" id="email1">
+				<option value="">선택</option>
 				<option>@gmail.com</option>
 				<option>@naver.com</option>
 				<option>@nate.com</option>
@@ -131,32 +133,40 @@
 			<div class="form-group" id="email" style="display: none;">
 				<label class="control-label col-sm-2" for="email">상세 Email:</label>
 				<div class="col-sm-10">
-					<input name="email2" id="email2" path="email" type="text" class="form-control"
-						id="email" placeholder="Enter Email" />
+					<input name="email2" id="email2" path="email" type="text"
+						class="form-control" id="email" placeholder="Enter Email" />
 				</div>
 			</div>
 
 			<div class="form-group">
 				<div class="col-sm-offset-2 col-sm-10">
-					<button type="submit" class="btn btn-default" id="btn_submit" onclick="makeEmail()">Submit</button>
+					<button type="submit" class="btn btn-default" id="btn_submit"
+						onclick="makeEmail()">Submit</button>
 				</div>
 			</div>
 		</form:form>
 	</div>
 
 	<script type="text/javascript">
-			
-		 function checkPhone() {
+		var check = false;
+		
+		function checkPhone(result2) {
 			var phoneNumber = $('#mem_phone').val();
 
 			$.post("./check/sendSMS", {
 				phoneNumber : phoneNumber
 			}, function(result) {
-				alert(result.trim())
-			}) 
-
+				alert(result.trim());
+				if(result.trim()=="인증 메세지를 전송했습니다") {
+					TimerStart();
+				} else {
+					return;
+				}
+			}) 		
 		} 
 
+		function TimerStart(){ tid=setInterval('msg_time()',1000) };
+	
 		var openWin;
 
 		function openChild() {
@@ -176,6 +186,7 @@
 		}
 
 		function makeEmail(){
+		
 			var email = $("#mem_email").val()+$("#email1").val()+$("#email2").val();
 			$("#mem_email").val(email);
 		}
@@ -194,14 +205,14 @@
 			SetTime--;					// 1초씩 감소
 			
 			if (SetTime < 0) {			// 시간이 종료 되었으면..
-				
 				clearInterval(tid);		// 타이머 해제
-				alert("종료");
+				alert("인증번호가 만료되었습니다.");
 			}
 			
 		}
+		
 
-		window.onload = function TimerStart(){ tid=setInterval('msg_time()',1000) };
+		
 	
 		
 

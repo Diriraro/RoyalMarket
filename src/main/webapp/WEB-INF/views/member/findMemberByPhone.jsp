@@ -12,7 +12,7 @@
 <title>Insert title here</title>
 <style type="text/css">
 .pw {
-	display: none;
+	/* display: none; */
 }
 </style>
 </head>
@@ -21,6 +21,9 @@
 	<h1>phone</h1>
 	<form:form modelAttribute="memberVO" action="./findMemberByPhone"
 		method="post">
+		<input name="mem_name" value="name" type="hidden">
+		<input name="road_address" value="road_address" type="hidden">
+		<input name="mem_email" value="email@email.com" type="hidden">
 
 		<div class="form-group">
 			<label class="control-label col-sm-2" for="mem_id">ID:</label>
@@ -78,11 +81,14 @@
 	</div>
 
 	<script type="text/javascript">
-		function checkPhone() {
+
+	function checkPhone() {
 			var phoneNumber = $('#mem_phone').val();
+			var id = $('#mem_id').val();
 			$(".pw").css("display", "block")
 
 			$.post("./check/sendSMS", {
+				id : id,
 				phoneNumber : phoneNumber
 			}, function(result) {
 				alert(result.trim())

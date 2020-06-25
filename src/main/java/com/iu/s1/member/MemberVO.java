@@ -26,6 +26,7 @@ public class MemberVO {
 	
 	@Size(min = 6, max = 16)
 	@Column
+	@NotEmpty
 	private String mem_pw;
 	
 	@Transient

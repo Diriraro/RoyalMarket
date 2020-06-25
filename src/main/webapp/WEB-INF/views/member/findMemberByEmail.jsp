@@ -14,7 +14,9 @@
 	<h1>phone</h1>
 	<form:form modelAttribute="memberVO" action="./findMemberByEmail"
 		method="post">
-
+		<input name="mem_name" value="name" type="hidden">
+		<input name="road_address" value="road_address" type="hidden">
+		
 		<div class="form-group">
 			<label class="control-label col-sm-2" for="mem_id">ID:</label>
 			<div class="col-sm-10">
