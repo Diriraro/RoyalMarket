@@ -87,9 +87,6 @@
 						<br>
 					</c:forEach>
 				</div>
-				
-				
-				
 
 			</div>
 

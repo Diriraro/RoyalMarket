@@ -52,8 +52,47 @@
 			</div>
 
 
-			<div>
-				<h2>내용</h2>
+				<div>  <!-- 내용보여줄 div -->
+				<h2>${mem_storeName } 의 팔로워 목록</h2>
+				
+				<div style="border: 1px solid red;">
+					<c:forEach items="${list}" var="vo">
+							<%--<td>${vo.follow_Num}</td> --%>
+							<%-- <td>${vo.give_storeNum}</td> --%>
+							<%-- <td>${vo.take_storeNum}</td> --%>
+							
+					<div style="border: 1px solid blue; height: 250px;">
+														
+						<div style="border: 1px solid red; width: 250px; height: 250px; float:left;"> <!-- 왼쪽 작은박스  -->
+							
+							<div style="align-content: center; margin-left: 28%; margin-top: 10%;"  >
+							<img src="${pageContext.request.contextPath}/resources/images/showimage.png" alt="main" style="width: 100px; height: 100px;">
+							</div>
+							<br>
+							<br>
+							<div style="align-content: center; margin-left: 28%;">
+							<a href="" class="btn btn-info">${vo.give_storeName}</a>
+							<a>${vo.follow_Num}</a>
+							<a>${vo.give_storeNum }</a>
+							<a>${vo.take_storeNum }</a>
+							<a>${vo.give_storeName }</a>
+							<a>${vo.take_storeName }</a>
+							
+							</div>
+												
+							
+						</div>  <!-- 옆에 팔로우목록의 대표상품  -->
+						<div style="border: 3px solid red; width: 750px; height: 250px; float: left;" >
+						</div>
+							
+							
+						
+						
+					</div>	
+						<br>
+						<br>
+					</c:forEach>
+				</div>
 
 			</div>
 

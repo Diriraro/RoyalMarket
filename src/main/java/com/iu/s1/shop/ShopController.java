@@ -214,7 +214,7 @@ public class ShopController {
 		mv.setViewName("shop/reviews");
 		return mv;
 	}
-	//팔로잉
+	//팔로잉  상점 주인이 친추한거
 	@GetMapping("followings")
 	public ModelAndView followings(ModelAndView mv,HttpSession session,long mem_storeNum) throws Exception {
 		
@@ -260,7 +260,7 @@ public class ShopController {
 		return mv;
 	}
 	
-	//팔로워
+	//팔로워    상점주인이 친추 받은거
 	@GetMapping("followers")
 	public ModelAndView followers(ModelAndView mv,HttpSession session,long mem_storeNum) throws Exception {
 		
@@ -286,10 +286,22 @@ public class ShopController {
 			
 		///  팔로우영역
 		
+		// 팔로워 리스트 영역     <<<<<<<
+		StoreFollowVO storeFollowVO2 = new StoreFollowVO();
+		storeFollowVO2.setTake_storeNum(mem_storeNum); //파라미터의 번호로 팔로우 리스트 확인
+		
+		List<StoreFollowVO> ar = storeFollowService.getSelectListFollowings(storeFollowVO2);
+		for (StoreFollowVO storeFollowVO3 :ar) {
+			storeFollowVO3.setGive_storeName(storeFollowService.getSelectgiveStoreName(storeFollowVO3));// 작성자의 번호로 이름을 출력 한것을 ar안에 담고.
+		}	
+		// 팔로워 리스트 영역 끝
+		
+		
 		mv.addObject("mem_storeName",para); // 파라미터의 상점이름
 		mv.addObject("mem_storeNum",mem_storeNum);//파라미터  모든 상점 페이지는 storeNum으로 들어가야함,
 		mv.addObject("msname",msname);
 		mv.addObject("msnum",msnum);
+		mv.addObject("list",ar);// 팔로워 리스트
 		
 		mv.setViewName("shop/followers");
 		return mv;

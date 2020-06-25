@@ -66,6 +66,13 @@ public class StoreFollowService {
 	}
 	
 	
+	// getSelectgiveStoreName take 이름 출력
+	public String getSelectgiveStoreName(StoreFollowVO storeFollowVO) throws Exception {
+			
+			return storeFollowRepository.getSelectgiveStoreName(storeFollowVO);
+		}
+	
+	
 	
 	
 

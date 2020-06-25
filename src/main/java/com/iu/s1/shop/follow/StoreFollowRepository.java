@@ -34,5 +34,8 @@ public interface StoreFollowRepository {
 	// takestore num의 이름 출력:
 	public String getSelecttakeStoreName(StoreFollowVO storeFollowVO)throws Exception;
 	
+	// givestore num의 이름 출력:
+		public String getSelectgiveStoreName(StoreFollowVO storeFollowVO)throws Exception;
+	
 	
 }
