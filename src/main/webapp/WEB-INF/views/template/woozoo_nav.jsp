@@ -4,7 +4,7 @@
 
 <style type="text/css">
 #header_top {
-	width: 2000px;
+	width: 1900px;
 	height: 39px;
 	position: absolute;
 	top: 0px;
@@ -21,7 +21,7 @@
 #header_wrap {
 	position: absolute;
 	top: 39px;
-	width: 2000px;
+	width: 1900px;
 	height: 146px;
 	background-color: white;
 	border-bottom: 1px solid rgba(255, 255, 255, .3);

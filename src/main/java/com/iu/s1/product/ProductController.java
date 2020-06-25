@@ -111,7 +111,7 @@ public class ProductController {
 		
 		if (result>0) {
 			
-			mv.setViewName("");
+			mv.setViewName("redirect:./productSelect?sell_num="+productVO.getSell_num());
 		}
 		
 		return mv;

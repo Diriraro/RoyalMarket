@@ -78,6 +78,10 @@
 		sell_kind=#{sell_kind}, sell_tag=#{sell_tag}
 		where sell_num=#{sell_num}
 	</update>
+	
+	<insert id="zzim" parameterType="com.iu.s1.member.ZzimVO">
+	
+	</insert>
 
 
 </mapper>
