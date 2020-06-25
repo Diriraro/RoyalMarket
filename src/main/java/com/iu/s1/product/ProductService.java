@@ -81,4 +81,8 @@ public class ProductService {
 		return productMapper.productAddress(sell_num);
 	}
 	
+	public long productUpdate(ProductVO productVO) throws Exception{
+		return productMapper.productUpdate(productVO);
+	}
+	
 }

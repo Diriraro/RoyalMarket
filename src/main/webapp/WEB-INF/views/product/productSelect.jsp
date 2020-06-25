@@ -19,6 +19,11 @@
 	<br>
 	</div>
 	<br>
+	
+	<div class="panel panel-info" style="height:100px; width:80px; cursor: pointer;background-color: black;"
+						onclick="location.href='./productUpdate?sell_num=${vo.sell_num}'"></div>
+	
+	
 	<!-----------------------------------사진---------------------------------  -->
 		<div id="myCarousel" class="carousel slide" data-ride="carousel" style="width: 428px;margin-left: 440px;" >
 
@@ -114,6 +119,8 @@
 	<div class="container">
 		<div class="qnaList"></div>
 	</div>
+	
+	
 
 
 	<!--                     추가                         -->

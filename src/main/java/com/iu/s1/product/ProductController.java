@@ -91,6 +91,31 @@ public class ProductController {
 		
 		return mv;	
 	}
+	
+	@GetMapping("productUpdate")
+	public ModelAndView productUpdate(ModelAndView mv,ProductVO productVO,long sell_num) throws Exception{
+		productVO = productService.productSelect(sell_num);
+		List<ProductFileVO> productFileVOs = productService.productFileSelect(sell_num);
+		mv.addObject("vvo", productVO);
+		mv.addObject("fvvo", productFileVOs);
+		
+		return mv;
+	}
+	
+
+	@PostMapping("productUpdate")
+	public ModelAndView productUpdate(ProductVO productVO) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		
+		long result = productService.productUpdate(productVO);
+		
+		if (result>0) {
+			
+			mv.setViewName("");
+		}
+		
+		return mv;
+	}
 
 	
 }
