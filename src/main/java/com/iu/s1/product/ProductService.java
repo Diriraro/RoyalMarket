@@ -11,6 +11,8 @@ import org.springframework.web.multipart.MultipartFile;
 import com.iu.s1.member.MemberVO;
 import com.iu.s1.product.productFile.ProductFileMapper;
 import com.iu.s1.product.productFile.ProductFileVO;
+import com.iu.s1.product.zzim.ZzimMapper;
+import com.iu.s1.product.zzim.ZzimVO;
 import com.iu.s1.util.FileManager;
 import com.iu.s1.util.FilePathGenerator;
 import com.iu.s1.util.Pager;
@@ -23,6 +25,9 @@ public class ProductService {
 
 	@Autowired
 	private ProductFileMapper productFileMapper;
+	
+	@Autowired
+	private ZzimMapper zzimMapper;
 
 	@Autowired
 	private FilePathGenerator filePathGenerator;
@@ -83,6 +88,10 @@ public class ProductService {
 	
 	public long productUpdate(ProductVO productVO) throws Exception{
 		return productMapper.productUpdate(productVO);
+	}
+	
+	public int zzimInsert(ZzimVO zzimVO) throws Exception{
+		return zzimMapper.zzimInsert(zzimVO);
 	}
 	
 }

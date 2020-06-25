@@ -17,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.iu.s1.member.MemberVO;
 import com.iu.s1.product.productFile.ProductFileVO;
+import com.iu.s1.product.zzim.ZzimVO;
 import com.iu.s1.util.Pager;
 
 
@@ -114,6 +115,23 @@ public class ProductController {
 			mv.setViewName("redirect:./productSelect?sell_num="+productVO.getSell_num());
 		}
 		
+		return mv;
+	}
+	
+	@GetMapping("zzimInsert")
+	public ModelAndView zzimInsert(ModelAndView mv)throws Exception{
+		return mv;
+	}
+	
+	@PostMapping("zzimInsert")
+	public ModelAndView zzimInsert(ZzimVO zzimVO,ProductVO productVO, RedirectAttributes rd)throws Exception{
+		ModelAndView mv = new ModelAndView();
+		System.out.println(zzimVO.getMem_storeNum());
+		System.out.println(zzimVO.getSell_num());
+		int result = productService.zzimInsert(zzimVO);
+	
+			rd.addFlashAttribute("result", result);
+			mv.setViewName("redirect:./productSelect?sell_num="+productVO.getSell_num());
 		return mv;
 	}
 

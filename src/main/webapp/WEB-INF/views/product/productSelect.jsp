@@ -106,6 +106,11 @@
 			src="${pageContext.request.contextPath}/resources/images/ad_logo.png">
 		<font style="font-weight: 600; font-size: 15px;">&nbsp;${mvo.mem_address}</font>
 		<br><br><br><br>
+		<form action="zzimInsert" method="post">
+		<input type="hidden" name="mem_storeNum" value="${memberVO.mem_storeNum}"/>
+		<input type="hidden" name="sell_num" value="${vo.sell_num}"/>
+		<button type="submit" class="btn btn-default">Submit</button>
+		</form>
 		<a><img style="margin-top: 7px;cursor: pointer;" alt="" src="${pageContext.request.contextPath}/resources/images/zzim_button.png"></a>
 		<a><img style="margin-top: 7px;cursor: pointer;" alt="" src="${pageContext.request.contextPath}/resources/images/phone_button.png"></a>
 		<a><img style="margin-top: 7px;cursor: pointer;" alt="" src="${pageContext.request.contextPath}/resources/images/buy_button.png"></a>
