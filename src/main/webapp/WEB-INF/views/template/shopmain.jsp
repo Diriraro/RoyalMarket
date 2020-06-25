@@ -6,9 +6,11 @@
 
 
 <!-- shop 페이지가 공통으로 가져갈곳  -->
+
 <div class="container">
 <!-- 모든 컨트롤에서는 이름을 출력해줘야함.  -->
 	<h2>${mem_storeName} 님의 상점   </h2>  
+	<a class="btn btn-warning" id="te">ss</a>
 	
 	<h2>${msname}님 접속중 </h2>
 		<c:if test="${msnum eq mem_storeNum }">
@@ -63,14 +65,14 @@
 				<!-- 팔로우가 아니면 팔로우버튼 출력 -->
 				<c:if test="${fonum.follow_Num eq null}">
 					<a href="./setinsertFollow?give_storeNum=${msnum}&take_storeNum=${mem_storeNum}&mem_storeNum=${mem_storeNum}"
-						class="btn btn-info pull-right"><span
+						class="btn btn-info pull-right" id="pi"><span
 						class="	glyphicon glyphicon glyphicon-plus-sign"></span>팔로우</a>
 				</c:if>
 				
 				<!-- 팔로우 상태라면 언팔버튼 출력  -->
 				<c:if test="${fonum.follow_Num ne null}">
 				<a href="./setDeleteFollow?follow_Num=${fonum.follow_Num}&mem_storeNum=${mem_storeNum}"
-						class="btn btn-danger pull-right"><span
+						class="btn btn-danger pull-right" id="mi"><span
 						class="	glyphicon glyphicon-remove-sign"></span>언팔</a>
 				</c:if>
 	
@@ -105,3 +107,11 @@
 		</c:if>
 
 </div>
+
+<script type="text/javascript">
+
+
+
+
+
+</script>

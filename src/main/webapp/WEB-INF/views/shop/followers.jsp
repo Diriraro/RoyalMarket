@@ -71,12 +71,8 @@
 							<br>
 							<br>
 							<div style="align-content: center; margin-left: 28%;">
-							<a href="" class="btn btn-info">${vo.give_storeName}</a>
-							<a>${vo.follow_Num}</a>
-							<a>${vo.give_storeNum }</a>
-							<a>${vo.take_storeNum }</a>
-							<a>${vo.give_storeName }</a>
-							<a>${vo.take_storeName }</a>
+							<a href="./myshop?mem_storeNum=${vo.give_storeNum }" class="btn btn-info">${vo.give_storeName}</a>
+						
 							
 							</div>
 												
@@ -99,5 +95,9 @@
 		</div><!-- 버튼, 내용 끝  -->
 
 	</div><!-- 컨테이너 끝  -->
+	
+	
+	
+	
 </body>
 </html>

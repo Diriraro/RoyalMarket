@@ -36,6 +36,9 @@ public class ShopController {
 	@GetMapping("myshop")
 	public ModelAndView myshop(ModelAndView mv,HttpSession session,long mem_storeNum) throws Exception {
 		
+			
+		
+		
 		StoreQnaVO qnaVO = new StoreQnaVO();
 		
 		String msname = ((MemberVO)session.getAttribute("member")).getMem_storeName();
@@ -313,7 +316,11 @@ public class ShopController {
 	
 	// 팔로우 인설트, 딜리트 할때 주소를 현재주소로 오게끔 바꾸기	
 	@RequestMapping(value = "setinsertFollow", method = RequestMethod.GET)
-	public ModelAndView setInsertFollow(long give_storeNum,long take_storeNum,long mem_storeNum, ModelAndView mv)throws Exception{
+	public ModelAndView setInsertFollow(long give_storeNum,long take_storeNum,long mem_storeNum, ModelAndView mv,HttpServletRequest request)throws Exception{
+		// 이전페이지 주소찾기
+		String referer = request.getHeader("referer");
+		//이전페이지 주소찾기 끝
+		
 		
 		StoreFollowVO storeFollowVO = new StoreFollowVO();
 //		
@@ -322,14 +329,21 @@ public class ShopController {
 //		
 		int result = storeFollowService.setInsertFollow(storeFollowVO); // 받아온 파라미터로 삽입
 //		
-		mv.setViewName("redirect:./comments?mem_storeNum="+mem_storeNum);
+		//mv.setViewName("redirect:./myshop?mem_storeNum="+mem_storeNum);
+		mv.setViewName("redirect:"+referer);    // 마지막 요청한 페이지로
 	
 	
 		return mv;
 	}
 	
 	@RequestMapping(value = "setDeleteFollow", method = RequestMethod.GET)
-	public ModelAndView setDeleteFollow(long mem_storeNum, ModelAndView mv,long follow_Num)throws Exception{
+	public ModelAndView setDeleteFollow(long mem_storeNum, ModelAndView mv,long follow_Num,HttpServletRequest request)throws Exception{
+		
+		// 이전페이지 주소찾기
+		String referer = request.getHeader("referer");
+		System.out.println(referer);
+		//이전페이지 주소찾기 끝
+
 		
 		StoreFollowVO storeFollowVO = new StoreFollowVO();
 //		
@@ -337,7 +351,9 @@ public class ShopController {
 		
 		int result2= storeFollowService.setDeleteFollow(storeFollowVO); // 팔로우번호 받아와서 지우기
 //		
-		mv.setViewName("redirect:./comments?mem_storeNum="+mem_storeNum);
+		//mv.setViewName("redirect:./myshop?mem_storeNum="+mem_storeNum);
+		
+		mv.setViewName("redirect:"+referer);    // 마지막 요청한 페이지로
 	
 	
 		return mv;

@@ -64,7 +64,8 @@
 						
 			<div class="form-group">
 				<label for="sq_contents">Contents:</label>
-				<textarea rows="" cols="" class="form-control" id="sq_contents" name="sq_contents" style="width:900px; height: 150px; "></textarea>
+				<textarea rows="" cols="" class="form-control" id="sq_contents" name="sq_contents" placeholder="선택하신 서류사항 항목에 대한 내용을 30자 이내로 기재해주세요." style="width:900px; height: 150px;pla "></textarea>
+				<span style="color:#aaa;" id="counter">(0 / 최대 30자)</span>
 			</div>
 			
 			<!--  작성자의 번호는 로그인한사람의 -->
@@ -132,12 +133,37 @@
 	
 	<script type="text/javascript">
 	$("#btn").click(function() {
+		var content = $('#sq_contents').val();
+		console.log(content);
+		console.log(content.length);
 		
-			$("#form").submit();
+		/* 	if () {
+				alert("결제 페이지로 이동합니다.");
+				//$("#form").submit();
+				
+			} else {
+				alert("구매내역이 없습니다.");
+				 event.preventDefault();//이벤트 막기
+			} */
 
 	
 
 	});
+
+
+	$('#sq_contents').keyup(function (e){
+	    var content = $(this).val();
+	    $('#counter').html("("+content.length+" / 최대 30자)");    //글자수 실시간 카운팅
+
+	    if (content.length > 30){
+	        alert("최대 30자까지 입력 가능합니다.");
+	        $(this).val(content.substring(0, 30));
+	        $('#counter').html("(30 / 최대 30자)");
+	    }
+	});
+
+
+	
 
 	</script>
 	
