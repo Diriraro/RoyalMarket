@@ -32,7 +32,7 @@ public class ProductFileVO {
 	public void setOri_name(String ori_name) {
 		this.ori_name = ori_name;
 	}
-	
+
 	
 	
 	

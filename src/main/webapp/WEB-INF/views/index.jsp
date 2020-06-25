@@ -45,6 +45,12 @@
 		</ul>
 
 
+${member.mem_storeNum}
+<button><a href="../shop/myshop?mem_storeNum=${member.mem_storeNum}">내상점</a></button>
+<button><a href="../shop/myshop">영호상점</a></button>
+<button><a href="../shop2/myshop2?mem_storeNum=25"> cotest상점</a></button>
+<button><a href="../shop2/myshop2?mem_storeNum=27&mem_storeName=yhlim12">yhlim12 상점 </a></button>
+
 
 	</div>
 
