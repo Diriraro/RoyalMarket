@@ -9,12 +9,10 @@
 
 <div class="container">
 <!-- 모든 컨트롤에서는 이름을 출력해줘야함.  -->
-	<h2>${mem_storeName} 님의 상점   </h2>  
-	<a class="btn btn-warning" id="te">ss</a>
-	
+	<h2>${mem_storeName}</h2>  
 	<h2>${msname}님 접속중 </h2>
 		<c:if test="${msnum eq mem_storeNum }">
-						<a class="btn btn-info">내글</a>
+						<a class="btn btn-info">myshop</a>
 	<div style="border: 1px solid black; width: 1024px; height: 340px;">
 
 		<!-- div 1번 -->

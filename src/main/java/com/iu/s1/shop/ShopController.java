@@ -36,9 +36,6 @@ public class ShopController {
 	@GetMapping("myshop")
 	public ModelAndView myshop(ModelAndView mv,HttpSession session,long mem_storeNum) throws Exception {
 		
-			
-		
-		
 		StoreQnaVO qnaVO = new StoreQnaVO();
 		
 		String msname = ((MemberVO)session.getAttribute("member")).getMem_storeName();

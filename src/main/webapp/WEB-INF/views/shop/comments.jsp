@@ -64,7 +64,7 @@
 						
 			<div class="form-group">
 				<label for="sq_contents">Contents:</label>
-				<textarea rows="" cols="" class="form-control" id="sq_contents" name="sq_contents" placeholder="선택하신 서류사항 항목에 대한 내용을 30자 이내로 기재해주세요." style="width:900px; height: 150px;pla "></textarea>
+				<textarea rows="" cols="" class="form-control" id="sq_contents" name="sq_contents" placeholder="문의사항은 30자 이내에 작성해 주세요." style="width:900px; height: 150px;pla "></textarea>
 				<span style="color:#aaa;" id="counter">(0 / 최대 30자)</span>
 			</div>
 			
@@ -93,25 +93,29 @@
 
 				<div style="border: 1px solid red;">
 					<c:forEach items="${list}" var="vo">
+					
 					<c:if test="${msnum eq vo.sq_storeNum }">
-						<a class="btn btn-info">내글</a>
+						<a class="btn btn-info">내글</a><br>
 					</c:if>
 						<tr>
 							<%-- <td>${vo.sq_num}</td>
 							<td>${vo.mem_storeNum }	</td> --%>
-							<td>${vo.sq_storeNum}작성자번호</td>
+							<%-- <td>${vo.sq_storeNum}작성자번호</td> --%>
 							<td> <a href="./myshop?mem_storeNum=${vo.sq_storeNum}">${vo.mem_storeName } </a></td>
 						
 							<br>
 							<td>${vo.sq_contents}</td>
-							<td>${vo.sq_regDate}</td>
+							<td> ${vo.sq_regDate}</td>
 						</tr>
 						
-							
-							
+							<!--본인이 작성한 댓글 또는  상점 주인만 삭제하는 쿼리 작성  -->
+					<c:if test="${msnum eq vo.sq_storeNum or msnum eq vo.mem_storeNum}">
 							<a href="./setDelete?sq_num=${vo.sq_num}&mem_storeNum=${vo.mem_storeNum}"
 						class="btn btn-danger pull-right"><span
 						class="	glyphicon glyphicon-remove-sign"></span>Delete</a>
+					</c:if>
+					
+					
 						
 						<br>
 						<br>
@@ -137,16 +141,14 @@
 		console.log(content);
 		console.log(content.length);
 		
-		/* 	if () {
-				alert("결제 페이지로 이동합니다.");
-				//$("#form").submit();
+		 	if (content.length >0 && content.length<31) {
+				console.log("적정값");
+				$("#form").submit();
 				
 			} else {
-				alert("구매내역이 없습니다.");
+				alert("규격에 맞게 작성하세요");
 				 event.preventDefault();//이벤트 막기
-			} */
-
-	
+			} 
 
 	});
 
