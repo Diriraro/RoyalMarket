@@ -7,11 +7,7 @@
   	<typeAliases>
   		<typeAlias type="java.util.List" alias="List"/>
   		<typeAlias type="java.lang.Long" alias="Long"/>
-<<<<<<< HEAD
   		<typeAlias type="com.iu.s1.member.MemberVO" alias="MemberVO"/>
-=======
-  		
->>>>>>> YYSSHH
   	</typeAliases>
   	
   </configuration>

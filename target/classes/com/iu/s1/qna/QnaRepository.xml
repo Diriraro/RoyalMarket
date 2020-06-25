@@ -9,15 +9,11 @@
 		SELECT * FROM qna WHERE mem_id=#{mem_id}	
 	</select>
 	
-	<insert id="qnaWrite" parameterType="com.iu.s1.qna.QnaVO">
-<<<<<<< HEAD
-		INSERT INTO qna VALUES(0,#{qna_kind},#{mem_id},#{qna_contents},now(),0,0)
-	</insert>
 	
 	<update id="qnaUpdate" parameterType="com.iu.s1.qna.QnaVO">
 		UPDATE qna SET qna_contents=#{qna_contents}, qna_check=1, qna_checkDate=now()
 	</update>
-=======
+	<insert id="qnaWrite" parameterType="com.iu.s1.qna.QnaVO">
 		INSERT INTO qna VALUES(0,#{qna_kind},#{mem_id},#{qna_contents},now(),0,null,#{qna_title})
 	</insert>
 	
@@ -36,6 +32,5 @@
 	<select id="lastNum" resultType="java.lang.Long">
 		SELECT qna_num FROM qna ORDER BY qna_num DESC LIMIT 0,1
 	</select>
->>>>>>> YYSSHH
 
 </mapper>
