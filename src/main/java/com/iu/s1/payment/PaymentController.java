@@ -50,6 +50,8 @@ public class PaymentController {
 		//현재 포인트 조회
 		long nowPoint = paymentService.pointSelect(httpServletRequest.getParameter("mem_id"));
 		
+		
+		
 		//충전 내역 업데이트
 		payVO.setMem_id(httpServletRequest.getParameter("mem_id"));
 		payVO.setPay_price(amount);
