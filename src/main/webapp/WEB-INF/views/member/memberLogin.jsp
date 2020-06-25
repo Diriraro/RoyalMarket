@@ -34,8 +34,5 @@
 			<button type="submit" class="btn btn-default">로그인</button>
 		</form>
 	</div>
-	
-	
-
 </body>
 </html>

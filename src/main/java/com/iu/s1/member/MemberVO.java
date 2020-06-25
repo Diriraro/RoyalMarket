@@ -37,9 +37,6 @@ public class MemberVO {
 	@Column
 	private String mem_phone;
 	
-	@Transient
-	private String phoneCheck;
-	
 	@Column
 	private long mem_storeNum;
 	
@@ -49,23 +46,8 @@ public class MemberVO {
 	@Column
 	private String mem_address;
 	
-	@Transient
-	private String road_address;
-	
-	@Transient
-	private String detail_address;
-	
 	@Column
 	private long mem_point;
-	
-	//멤버 추가사항
-	private String kind;
-		
-	//멤버 추가사항
-	private String search;
-		
-	@Column
-	private long mem_access;
 
 
 }

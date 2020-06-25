@@ -38,12 +38,15 @@ public class ProductController {
 	@PostMapping("productNew")
 	public ModelAndView productInsert(@Valid ProductVO productVO, BindingResult bindingResult, MultipartFile[] files,
 			RedirectAttributes rd) throws Exception {
+
 		ModelAndView mv = new ModelAndView();
 		
 		if (bindingResult.hasErrors()) {
 			mv.setViewName("product/productNew");
 		} else {
-		
+			System.out.println("a");
+			System.out.println(files);
+			System.out.println(productVO);
 			int result = productService.productInsert(productVO, files);
 			rd.addFlashAttribute("result", result);
 			mv.setViewName("redirect:../");
