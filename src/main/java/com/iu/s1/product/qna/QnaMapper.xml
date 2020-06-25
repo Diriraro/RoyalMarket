@@ -6,12 +6,16 @@
 
 	<insert id="qnaInsert" parameterType="QnaVO">
 		insert into product_qna
-		values(0,#{sell_num},#{pq_storeNum},#{pq_contents},#{pq_regDate})
+		values(0,#{sell_num},#{pq_storeNum},#{pq_contents},now(),#{pq_storeName})
 	</insert>
 
 	<delete id="qnaDelete" parameterType="Long">
 		delete from product_qna where pq_num=#{pq_num}
 	</delete>
 
+    <select id="qnaList" parameterType="Long" resultType="QnaVO">
+        SELECT * FROM product_qna where sell_num=#{sell_num} ORDER BY pq_num desc
+    </select>
+    
 
 </mapper>

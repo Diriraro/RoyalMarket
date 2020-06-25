@@ -16,6 +16,15 @@
 	-webkit-box-shadow: 0 0 1px 1px rgba(0, 0, 0, .3);
 	display: inline-block;
 }
+
+.imagePreview2 {
+	width: 180px;
+	height: 180px;
+	background-position: center center;
+	background-size: cover;
+	-webkit-box-shadow: 0 0 1px 1px rgba(0, 0, 0, .3);
+	display: inline-block;
+}
 </style>
 
 <c:import url="../template/boot.jsp"></c:import>
@@ -31,6 +40,12 @@
 		<div class="imagePreview"></div>
 		
 		<input id="files" type="file" name="files" accept="image/jpg, image/jpeg, image/png" class="img" /> 
+		
+		<div class="imagePreview2"></div>
+		
+		<input id="files2" type="file" name="files" accept="image/jpg, image/jpeg, image/png" class="img" /> 
+		
+
 			
 		<input type="hidden" name="mem_storeNum" value="${memberVO.mem_storeNum}" id="mem_storeNum"> 
 
@@ -121,9 +136,7 @@
 
 		$(function() {
 
-			$("#files").on(
-					"change",
-					function() {
+			$("#files").on( "change", function() {
 						var files = !!this.files ? this.files : [];
 						if (!files.length || !window.FileReader)
 							return;
@@ -137,6 +150,27 @@
 						}
 					});
 		});
+
+		$(function() {
+
+			$("#files2").on( "change", function() {
+						var files = !!this.files ? this.files : [];
+						if (!files.length || !window.FileReader)
+							return;
+						if (/^image/.test(files[0].type)) {
+							var reader = new FileReader();
+							reader.readAsDataURL(files[0]);
+							reader.onloadend = function() {
+								$('.imagePreview2').css("background-image",
+										"url(" + this.result + ")");
+							};
+						}
+					});
+		});
+		
+
+
+
 
 		function doOpenCheck(chk) {
 			var obj = document.getElementsByName("condition");
