@@ -4,7 +4,14 @@ public class ZzimVO {
 	
 	private long mem_storeNum;
 	private long sell_num;
+	private long zzim_num;
 	
+	public long getZzim_num() {
+		return zzim_num;
+	}
+	public void setZzim_num(long zzim_num) {
+		this.zzim_num = zzim_num;
+	}
 	public long getMem_storeNum() {
 		return mem_storeNum;
 	}

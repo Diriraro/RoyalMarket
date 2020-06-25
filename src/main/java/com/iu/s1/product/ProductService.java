@@ -94,4 +94,8 @@ public class ProductService {
 		return zzimMapper.zzimInsert(zzimVO);
 	}
 	
+	public long zzimCheck(ZzimVO zzimVO) throws Exception{
+		return zzimMapper.zzimCheck(zzimVO);
+	}
+	
 }

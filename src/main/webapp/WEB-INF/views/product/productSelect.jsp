@@ -106,17 +106,25 @@
 			src="${pageContext.request.contextPath}/resources/images/ad_logo.png">
 		<font style="font-weight: 600; font-size: 15px;">&nbsp;${mvo.mem_address}</font>
 		<br><br><br><br>
+		<input type="text" value="${zc.zzim_num}">
+		<!--  찜구현    -->
+		
 		<form action="zzimInsert" method="post">
+		<input type="text" value="${zc.zzim_num}">
 		<input type="hidden" name="mem_storeNum" value="${memberVO.mem_storeNum}"/>
 		<input type="hidden" name="sell_num" value="${vo.sell_num}"/>
+
+		<c:if test="${empty zc.zzim_num}">
 		<button type="submit" class="btn btn-default">Submit</button>
+		</c:if>
 		</form>
+		
 		<a><img style="margin-top: 7px;cursor: pointer;" alt="" src="${pageContext.request.contextPath}/resources/images/zzim_button.png"></a>
 		<a><img style="margin-top: 7px;cursor: pointer;" alt="" src="${pageContext.request.contextPath}/resources/images/phone_button.png"></a>
 		<a><img style="margin-top: 7px;cursor: pointer;" alt="" src="${pageContext.request.contextPath}/resources/images/buy_button.png"></a>
 	</div>
 	</div>
-	<div>asdas</div>
+
 	
 		<div  >
 	<h3>info : ${vo.sell_info}</h3>

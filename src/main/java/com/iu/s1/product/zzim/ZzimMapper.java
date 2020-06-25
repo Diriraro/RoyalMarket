@@ -8,5 +8,8 @@ public interface ZzimMapper {
 	//찜추가
 	public int zzimInsert(ZzimVO zzimVO)throws Exception;
 	
+	//찜체크
+	public long zzimCheck(ZzimVO zzimVO)throws Exception;
+	
 
 }

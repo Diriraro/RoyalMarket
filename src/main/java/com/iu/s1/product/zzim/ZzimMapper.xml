@@ -4,8 +4,12 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.iu.s1.product.zzim.ZzimMapper">
 	<insert id="zzimInsert" parameterType="com.iu.s1.product.zzim.ZzimVO">
-		insert into zzim values(#{mem_storeNum},#{sell_num})
+		insert into zzim values(#{mem_storeNum},#{sell_num},0)
 	</insert>
+	
+	<select id="zzimCheck" parameterType="com.iu.s1.product.zzim.ZzimVO" resultType="com.iu.s1.product.zzim.ZzimVO">
+		select zzim_num from zzim where mem_storeNum=#{mem_storeNum} and sell_num=#{sell_num}
+	</select>
 
 
 </mapper>

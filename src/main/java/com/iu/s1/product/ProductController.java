@@ -90,6 +90,7 @@ public class ProductController {
 		List<ProductFileVO> productFileVOs = productService.productFileSelect(sell_num);
 		mv.addObject("pfile", productFileVOs);	// store 사진 출력
 		
+		
 		return mv;	
 	}
 	
@@ -134,6 +135,16 @@ public class ProductController {
 			mv.setViewName("redirect:./productSelect?sell_num="+productVO.getSell_num());
 		return mv;
 	}
+	
+//	@GetMapping("zzimCheck")
+//	public ModelAndView zzimCheck(ZzimVO zzimVO)throws Exception{
+//		ModelAndView mv = new ModelAndView();
+//		int result = productService.zzimCheck(zzimVO);
+//		if (result>0) {
+//			mv.addObject("zc", zzimVO);
+//		}
+//		return mv;
+//	}
 
 	
 }
