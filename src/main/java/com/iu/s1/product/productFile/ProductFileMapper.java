@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 @Mapper
 @Repository
 public interface ProductFileMapper {
+	
 	public int productFileInsert(ProductFileVO productFileVO) throws Exception;
 	
 	public ProductFileVO fileDown(ProductFileVO productFileVO) throws Exception;

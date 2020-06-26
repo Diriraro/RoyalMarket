@@ -9,7 +9,13 @@ public interface ZzimMapper {
 	public int zzimInsert(ZzimVO zzimVO)throws Exception;
 	
 	//찜체크
-	public long zzimCheck(ZzimVO zzimVO)throws Exception;
+	public ZzimVO zzimCheck(long mem_storeNum, long sell_num)throws Exception;
+	
+	//찜삭제
+	public int zzimDelete(ZzimVO zzimVO)throws Exception;
+	
+	//찜카운트
+	public long zzimCount(long sell_num)throws Exception;
 	
 
 }

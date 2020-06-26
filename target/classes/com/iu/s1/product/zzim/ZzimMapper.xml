@@ -7,8 +7,16 @@
 		insert into zzim values(#{mem_storeNum},#{sell_num},0)
 	</insert>
 	
-	<select id="zzimCheck" parameterType="com.iu.s1.product.zzim.ZzimVO" resultType="com.iu.s1.product.zzim.ZzimVO">
+	<select id="zzimCheck" parameterType="Long" resultType="com.iu.s1.product.zzim.ZzimVO">
 		select zzim_num from zzim where mem_storeNum=#{mem_storeNum} and sell_num=#{sell_num}
+	</select>
+	
+	<delete id="zzimDelete" parameterType="com.iu.s1.product.zzim.ZzimVO">
+		delete from zzim where zzim_num=#{zzim_num}
+	</delete>
+	
+	<select id="zzimCount" parameterType="Long" resultType="Long">
+		select count(zzim_num) from zzim where sell_num=#{sell_num}
 	</select>
 
 

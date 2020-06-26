@@ -1,6 +1,7 @@
 package com.iu.s1.product;
 
 import java.io.File;
+import java.nio.channels.SeekableByteChannel;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -94,8 +95,15 @@ public class ProductService {
 		return zzimMapper.zzimInsert(zzimVO);
 	}
 	
-	public long zzimCheck(ZzimVO zzimVO) throws Exception{
-		return zzimMapper.zzimCheck(zzimVO);
+	public ZzimVO zzimCheck(long mem_storeNum,long sell_num) throws Exception{
+		return zzimMapper.zzimCheck(mem_storeNum,sell_num);
 	}
 	
+	public int zzimDelete(ZzimVO zzimVO) throws Exception{
+		return zzimMapper.zzimDelete(zzimVO);
+	}
+	
+	public long zzimCount(long sell_num)throws Exception{
+		return zzimMapper.zzimCount(sell_num);
+	}
 }

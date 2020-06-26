@@ -29,7 +29,7 @@ function qnaList(){
         success : function(data){
             var a =''; 
             $.each(data, function(key, value){ 
-                a += '<div class="qnaArea" style="border-bottom:1px solid darkgray; margin-bottom: 15px;">';
+                a += '<div class="qnaArea" style="width=550px; border-bottom:1px solid darkgray; margin-bottom: 15px;">';
                 a += '<div class="qnaInfo'+value.pq_num+'">'+'댓글번호 : '+value.pq_num+' ';
                 //상점연결하기
                 a += '<a href='+"./productSelect?sell_num=${vo.sell_num}"+'> 작성자 :'+value.pq_storeName+'  </a>'+value.pq_regDate+' ';

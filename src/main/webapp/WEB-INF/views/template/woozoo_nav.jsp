@@ -36,7 +36,10 @@ body {
 <div>
 	<header>
 		<nav id="header_top">
-		<div style="margin-right: 720px;display: inline-block;">
+		<div style="float: left;width: 450px;">
+		&nbsp;
+		</div>
+		<div style="margin-right: 600px;float: left;">
 			<a style="margin-right:;" href="/splash"><img
 				src="${pageContext.request.contextPath}/resources/images/nav_logo.png"
 				width="26" height="39" alt="앱다운로드버튼 이미지"> &nbsp;<font
@@ -50,14 +53,19 @@ body {
 		<div style="display: inline-block; margin-right: 100px;">
 		
 	<c:if test="${empty sessionScope.memberVO}">
+	<div style="margin-right: 250px;margin-top: 9px;">
 	  <a href="${pageContext.request.contextPath}/member/memberLogin"><font style="font-weight: 800; font-size: 13px;color: #666666;">로그인</font></a>
       <font>&nbsp;ㅣ&nbsp;</font>
       <a href="${pageContext.request.contextPath}/member/memberJoin"><font style="font-weight: 800; font-size: 13px;color: #666666;">회원가입</font></a>
+    </div>
     </c:if>
+    
      <c:if test="${not empty sessionScope.memberVO}">
+     <div style="margin-right: 250px;margin-top: 9px;">
       <a href="${pageContext.request.contextPath}/member/memberLogout"> <font style="font-weight: 800; font-size: 13px;color: #666666;">로그아웃</font></a>
       <font>&nbsp;ㅣ&nbsp;</font>
       <a href="${pageContext.request.contextPath}/member/memberPage"> <font style="font-weight: 800; font-size: 13px;color: #666666;">내 상점</font></a>
+      </div>
     </c:if>
 		</div>
 

@@ -14,7 +14,7 @@
 	</delete>
 
     <select id="qnaList" parameterType="Long" resultType="QnaVO">
-        SELECT * FROM product_qna where sell_num=#{sell_num} ORDER BY pq_num desc
+        SELECT * FROM product_qna where sell_num=#{sell_num} ORDER BY pq_num desc limit 5
     </select>
     
 
