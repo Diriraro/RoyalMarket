@@ -16,9 +16,6 @@
 	<h1 style="display: inline-block;"><a href="./qnaWrite">1:1 상담하기</a></h1>
 	<h1 style="display: inline-block;" align="right">상담내역</h1>	
 
-	
-
-
 	<table class="table table-hover">
 			<tr>
 				<td>상담 카테고리</td>
