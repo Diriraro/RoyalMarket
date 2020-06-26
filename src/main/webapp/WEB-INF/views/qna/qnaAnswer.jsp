@@ -13,12 +13,10 @@
 <c:import url="../template/nav.jsp"></c:import>
 
 <div class="container">
-<<<<<<< HEAD
 	<h1>Index PAGe</h1>	
 	
-</div>
 
-=======
+
 	<h1>문의 답변</h1><br><br>
 	<form action="./qnaAnswer" method="post">
 	<h2 align="center">고객님이 작성한 문의글</h2>
@@ -41,6 +39,6 @@
 </div>
 
 
->>>>>>> YYSSHH
+
 </body>
 </html>

@@ -1,9 +1,9 @@
 package com.iu.s1.qna.file;
 
 <<<<<<< HEAD
-public class QnaFileVO {
-
 =======
+
+>>>>>>> aaa1fb684ee50e6d8db4bcfeca0f335f44a460cc
 import lombok.Data;
 
 @Data
@@ -14,5 +14,8 @@ public class QnaFileVO {
 	private String file_name;
 	private String ori_name;
 	
->>>>>>> YYSSHH
+<<<<<<< HEAD
+
+=======
+>>>>>>> aaa1fb684ee50e6d8db4bcfeca0f335f44a460cc
 }

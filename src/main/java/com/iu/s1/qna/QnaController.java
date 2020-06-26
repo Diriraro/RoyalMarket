@@ -10,15 +10,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 <<<<<<< HEAD
+=======
 import org.springframework.web.servlet.ModelAndView;
 
-=======
+>>>>>>> aaa1fb684ee50e6d8db4bcfeca0f335f44a460cc
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.iu.s1.qna.file.QnaFileVO;
+<<<<<<< HEAD
 
->>>>>>> YYSSHH
+=======
+>>>>>>> aaa1fb684ee50e6d8db4bcfeca0f335f44a460cc
 @Controller
 @RequestMapping("/qna/**")
 public class QnaController {
@@ -30,20 +32,12 @@ public class QnaController {
 	public ModelAndView qnaMyList()throws Exception{
 		ModelAndView mv = new ModelAndView();
 		QnaVO qnaVO = new QnaVO();
-<<<<<<< HEAD
-		qnaVO.setMem_id("1111");
-		List<QnaVO> ar = qnaService.qnaMyList(qnaVO);
-		if(ar!=null) {					//로그인한 사용자의 아이디로 상담내역이 있는지 확인
-			mv.addObject("qna_list", ar);
-			mv.setViewName("qna/qnaMyList");			
-=======
 		qnaVO.setMem_id("iu");			//테스트용 아이디=iu ** 나중에 세션에서 로그인한사람 아이디 집어넣어야함
 		List<QnaVO> ar = qnaService.qnaMyList(qnaVO);
 		System.out.println("================================================================="+ar);
 		if(!ar.isEmpty()) {					//로그인한 사용자의 아이디로 상담내역이 있는지 확인
 			mv.addObject("qna_list", ar);
 			mv.setViewName("qna/qnaMyList");
->>>>>>> YYSSHH
 		}else {
 			mv.addObject("result", "문의 내역이 없습니다.");
 			mv.addObject("path", "../");
@@ -60,15 +54,9 @@ public class QnaController {
 	}
 	
 	@PostMapping("qnaWrite")
-<<<<<<< HEAD
-	public ModelAndView qnaWrite(QnaVO qnaVO)throws Exception{
-		ModelAndView mv = new ModelAndView();
-		int result = qnaService.qnaWrite(qnaVO);
-=======
 	public ModelAndView qnaWrite(QnaVO qnaVO, MultipartFile [] files)throws Exception{
 		ModelAndView mv = new ModelAndView();
 		int result = qnaService.qnaWrite(qnaVO, files);
->>>>>>> YYSSHH
 		if(result!=0) {
 			mv.addObject("result", "1:1 상담문의 완료");
 			mv.addObject("path", "../");
@@ -78,13 +66,6 @@ public class QnaController {
 			mv.addObject("path", "notice/noticeWrite");
 			mv.setViewName("common/result");
 		}
-<<<<<<< HEAD
-		
-		
-		return mv;
-	}
-	
-=======
 		return mv;
 	}
 	
@@ -129,5 +110,4 @@ public class QnaController {
 		
 		return mv;
 	}
->>>>>>> YYSSHH
 }

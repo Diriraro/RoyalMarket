@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: com.iu.s1.RoyalMarketApplicationTests
+-------------------------------------------------------------------------------
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.872 s - in com.iu.s1.RoyalMarketApplicationTests

@@ -1,12 +1,5 @@
 package com.iu.s1.qna;
 
-<<<<<<< HEAD
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-=======
 import java.io.File;
 import java.util.List;
 
@@ -20,7 +13,6 @@ import com.iu.s1.qna.file.QnaFileRepository;
 import com.iu.s1.qna.file.QnaFileVO;
 import com.iu.s1.util.FileManager;
 import com.iu.s1.util.FilePathGenerator;
->>>>>>> YYSSHH
 
 @Service
 @Transactional(rollbackFor = Exception.class)
@@ -28,8 +20,6 @@ public class QnaService {
 
 	@Autowired
 	private QnaRepository qnaRepository;
-<<<<<<< HEAD
-=======
 	@Autowired
 	private FilePathGenerator pathGenerator;	// 저장할 폴더의 경로
 	@Autowired
@@ -39,16 +29,11 @@ public class QnaService {
 	
 	@Value("${qna.filePath}")
 	private String filePath;					//application.properties에서 키 값을 받아와 value값을 집어넣음
->>>>>>> YYSSHH
 	
 	public List<QnaVO> qnaMyList(QnaVO qnaVO)throws Exception{
 		return qnaRepository.qnaMyList(qnaVO);
 	}
 	
-<<<<<<< HEAD
-	public int qnaWrite(QnaVO qnaVO)throws Exception{
-		return qnaRepository.qnaWrite(qnaVO);
-=======
 	public int qnaWrite(QnaVO qnaVO, MultipartFile [] files)throws Exception{
 		File file = pathGenerator.getUseClassPathResource(filePath);
 		int result = qnaRepository.qnaWrite(qnaVO);
@@ -96,7 +81,6 @@ public class QnaService {
 	
 	public List<QnaFileVO> selectQnaFile(long qna_num)throws Exception{
 		return qnaFileRepository.fileCheck(qna_num);
->>>>>>> YYSSHH
 	}
 	
 }

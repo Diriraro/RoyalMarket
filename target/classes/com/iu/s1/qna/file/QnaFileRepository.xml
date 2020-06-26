@@ -1,6 +1,3 @@
-<<<<<<< HEAD
-<?xml version="1.0" encoding="UTF-8"?>
-=======
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
@@ -16,5 +13,8 @@
 		SELECT * FROM qna_file WHERE qna_num=#{qna_num}
 	</select>
 
+<<<<<<< HEAD
 </mapper>
->>>>>>> YYSSHH
+=======
+</mapper>
+>>>>>>> aaa1fb684ee50e6d8db4bcfeca0f335f44a460cc

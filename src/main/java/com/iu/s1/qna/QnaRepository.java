@@ -5,11 +5,8 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
-<<<<<<< HEAD
-=======
 import com.iu.s1.qna.file.QnaFileVO;
 
->>>>>>> YYSSHH
 @Repository //생략가능
 @Mapper
 public interface QnaRepository {
@@ -17,8 +14,6 @@ public interface QnaRepository {
 	public List<QnaVO> qnaMyList(QnaVO qnaVO)throws Exception;
 	
 	public int qnaWrite(QnaVO qnaVO)throws Exception;
-<<<<<<< HEAD
-=======
 	
 	public List<QnaVO> qnaAdminList()throws Exception;
 	
@@ -26,7 +21,9 @@ public interface QnaRepository {
 	
 	public int qnaAnswer(QnaVO qnaVO)throws Exception;
 	public long lastNum()throws Exception;
+<<<<<<< HEAD
 	
->>>>>>> YYSSHH
+=======
+>>>>>>> aaa1fb684ee50e6d8db4bcfeca0f335f44a460cc
 
 }

@@ -36,7 +36,7 @@
 			<attribute name="m2e-apt" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/SIST/Desktop/java-sdk v2.2/lib/javaSDK-2.2.jar"/>
+	<classpathentry exported="true" kind="lib" path="C:/Users/SIST/Desktop/java-sdk v2.2/lib/javaSDK-2.2.jar"/>
 	<classpathentry kind="src" output="target/test-classes" path="target/generated-test-sources/test-annotations">
 		<attributes>
 			<attribute name="optional" value="true"/>

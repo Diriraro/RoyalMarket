@@ -12,13 +12,8 @@
 <body>
 <c:import url="../template/nav.jsp"></c:import>
 
-<<<<<<< HEAD
-<div class="container">
-	<h1>Index PAGe</h1>	
-	
-</div>
-=======
 
+	
 	<h1>전체 상담내역</h1>	
 	<table class="table table-hover">
 			<tr>
@@ -67,6 +62,7 @@
 		</c:forEach>
 	</table>
 	
+	
 
 
 <script type="text/javascript">
@@ -80,7 +76,6 @@ $(".more").click(function(){							// 모든 리스트가 같은 click이벤트�
 });
 
 </script>
->>>>>>> YYSSHH
 
 </body>
 </html>

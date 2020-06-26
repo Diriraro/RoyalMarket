@@ -15,11 +15,10 @@
 <div class="container">
 	<h1 style="display: inline-block;"><a href="./qnaWrite">1:1 상담하기</a></h1>
 	<h1 style="display: inline-block;" align="right">상담내역</h1>	
-<<<<<<< HEAD
-	
-</div>
 
-=======
+	
+
+
 	<table class="table table-hover">
 			<tr>
 				<td>상담 카테고리</td>
@@ -64,6 +63,6 @@ $(".more").click(function(){							// 모든 리스트가 같은 click이벤트�
 
 </script>
 
->>>>>>> YYSSHH
+
 </body>
 </html>
