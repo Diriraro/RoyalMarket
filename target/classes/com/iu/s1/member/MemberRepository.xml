@@ -15,15 +15,23 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	
 	<select id="memberLogin" parameterType="MemberVO" resultType="MemberVO">
-		select * from member where mem_id=#{mem_id} and mem_pw=#{mem_pw}
+		select * from member where mem_id=#{mem_id} and mem_pw=#{mem_pw} and mem_access=0
 	</select>
 	
 	<select id="selectMember" parameterType="MemberVO" resultType="MemberVO">
 		select * from member where mem_id=#{mem_id}
 	</select>
 	
+	<select id="selectMemberByEmail" parameterType="MemberVO" resultType="MemberVO">
+		select * from member where mem_email=#{mem_email}
+	</select>
+	
+	<select id="selectMemberByPhone" parameterType="MemberVO" resultType="MemberVO">
+		select * from member where mem_phone=#{mem_phone}
+	</select>
+	
 	<insert id="memberJoin" parameterType="MemberVO">
-		insert into member values(#{mem_id},#{mem_pw},#{mem_name},#{mem_email},#{mem_phone},#{mem_storeNum},#{mem_id},#{mem_address},0,0,now())
+		insert into member values(#{mem_id},#{mem_pw},#{mem_name},#{mem_email},#{mem_phone},#{mem_storeNum},#{mem_id},#{mem_address},0,0,now(),#{mem_kakao})
 	</insert>
 	
 	<select id="getMemberList" resultType="MemberVO" parameterType="Long">
@@ -51,5 +59,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getDailyNewMember" resultType="MemberVO" parameterType="MemberVO">
 		SELECT * FROM member where mem_regDate > #{mem_regDate}
 	</select>
+	
+	<update id="blackMember" parameterType="MemberVO">
+		update member set mem_access=1 where mem_id=#(mem_id)
+	</update>
+	
+	<update id="whiteMember" parameterType="MemberVO">
+		update member set mem_access=0 where mem_id=#(mem_id)
+	</update>
+	
+	
 	
 </mapper>

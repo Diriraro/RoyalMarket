@@ -49,6 +49,33 @@ public class MemberService {
 
 	}
 
+	public String findIdByPhone(String phoneNumber, String id) {
+
+		String api_key = "NCSYFVQLACVOHA9V";
+		String api_secret = "ZFAGHRHOSCLEPAXTQXYVDCLLWF6RJ0XC";
+		Message coolsms = new Message(api_key, api_secret);
+		String error_count = "1";
+
+		// 4 params(to, from, type, text) are mandatory. must be filled
+		HashMap<String, String> params = new HashMap<String, String>();
+		params.put("to", phoneNumber); // 수신전화번호
+		params.put("from", "01046265193"); // 발신전화번호. 테스트시에는 발신,수신 둘다 본인 번호로 하면 됨
+		params.put("type", "SMS");
+		params.put("text", "회원님의 아이디는" + "[" + id + "]" + "입니다.");
+		params.put("app_version", "test app 2.2"); // application name and version
+
+		try {
+			JSONObject obj = (JSONObject) coolsms.send(params);
+			error_count = obj.get("error_count").toString();
+			System.out.println(obj.toString());
+		} catch (CoolsmsException e) {
+			System.out.println(e.getMessage());
+			System.out.println(e.getCode());
+		}
+		return error_count;
+
+	}
+
 	public int memberPwUpdate(MemberVO memberVO) throws Exception {
 		return memberRepository.memberPwUpdate(memberVO);
 	}
@@ -58,10 +85,10 @@ public class MemberService {
 		return memberRepository.memberJoin(memberVO);
 	}
 
-	public boolean findMemberByPhone(MemberVO memberVO, BindingResult bindingResult, String checkNum) throws Exception {
+	public boolean findPwByPhone(MemberVO memberVO, BindingResult bindingResult, String checkNum) throws Exception {
 		boolean result = bindingResult.hasErrors();
 		// 인증번호가 맞는지 확인
-		
+
 		List<ObjectError> err = bindingResult.getAllErrors();
 		System.out.println(err);
 		if (!result) {
@@ -75,35 +102,28 @@ public class MemberService {
 				result = true;
 			}
 		}
-
-		MemberVO memberVO3 = memberRepository.selectMember(memberVO);
-
-		if (!memberVO3.getMem_phone().equals(memberVO.getMem_phone())) {
-			bindingResult.rejectValue("mem_phone", "memberVO.mem_phone.notEqual");
-			result = true;
-		}
 		return result;
 	}
 
-	public boolean findMemberByEmail(MemberVO memberVO, BindingResult bindingResult, String checkNum) throws Exception {
+	public boolean findPwByEmail(MemberVO memberVO, BindingResult bindingResult, String checkNum) throws Exception {
 
 		List<ObjectError> err = bindingResult.getAllErrors();
 		System.out.println(err);
 
 		boolean result = bindingResult.hasErrors();
-		
+
 		// 인증번호가 맞는지 확인
 		if (!result) {
 			if (!memberVO.getPhoneCheck().equals(checkNum)) {
 				bindingResult.rejectValue("phoneCheck", "memberVO.phoneCheck.notEqual");
 				result = true;
-				
+
 			} else if (!memberVO.getMem_pw().equals(memberVO.getPwCheck())) {
 				bindingResult.rejectValue("pwCheck", "memberVO.mem_pw.notEqual");
 				result = true;
-				
+
 			} else {
-			
+
 			}
 
 		}
@@ -125,11 +145,32 @@ public class MemberService {
 		}
 
 		// 3.ID 중복검사
-		MemberVO memberVO2 = memberRepository.memberIdCheck(memberVO);
+		MemberVO memberVO2 = memberRepository.selectMember(memberVO);
 		if (memberVO2 != null) {
 			bindingResult.rejectValue("mem_id", "memberVO.mem_id.same");
 			result = true;
 		}
+		
+		// phone 중복검사
+		MemberVO memberVO3 = memberRepository.selectMemberByPhone(memberVO);
+		if (memberVO3 != null) {
+			bindingResult.rejectValue("mem_phone", "memberVO.mem_phone.same");
+			result = true;
+		}
+		
+		// email 중복검사
+		MemberVO memberVO4 = memberRepository.selectMemberByEmail(memberVO3);
+		if (memberVO4 != null) {
+			bindingResult.rejectValue("mem_email", "memberVO.mem_email.same");
+			result = true;
+		}
+
+		/*
+		 * // 3.phone 중복검사 MemberVO memberVO3 = memberRepository.selectMember(memberVO);
+		 * if (memberVO3 != null) { bindingResult.rejectValue("mem_id",
+		 * "memberVO.mem_id.same"); result = true; }
+		 */
+		
 
 		// 인증번호가 맞는지 확인
 		if (!memberVO.getPhoneCheck().equals(checkNum)) {
@@ -146,6 +187,14 @@ public class MemberService {
 
 	public MemberVO selectMember(MemberVO memberVO) throws Exception {
 		return memberRepository.selectMember(memberVO);
+	}
+
+	public MemberVO selectMemberByEmail(MemberVO memberVO) throws Exception {
+		return memberRepository.selectMemberByEmail(memberVO);
+	}
+
+	public MemberVO selectMemberByPhone(MemberVO memberVO) throws Exception {
+		return memberRepository.selectMemberByPhone(memberVO);
 	}
 
 }

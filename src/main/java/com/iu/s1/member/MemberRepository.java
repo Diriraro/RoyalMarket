@@ -18,6 +18,9 @@ public interface MemberRepository {
 	
 	public MemberVO selectMember(MemberVO memberVO)throws Exception;
 	
+	public MemberVO selectMemberByEmail(MemberVO memberVO)throws Exception;
+	
+	public MemberVO selectMemberByPhone(MemberVO memberVO)throws Exception;
 	
 	// 관리자 페이지 필요한 매퍼
 	public List<MemberVO> getMemberList(long mem_access)throws Exception;

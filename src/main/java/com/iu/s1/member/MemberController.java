@@ -40,81 +40,103 @@ public class MemberController {
 
 	@Autowired
 	private MemberService memberService;
-	
+
 	@Autowired
 	private JavaMailSender mailSender;
 
 	private String checkNum = "";
 
-	
-	
-	@GetMapping("findMemberByEmail")
-	public ModelAndView findMemberByEmail(HttpSession session, MemberVO memberVO)throws Exception{
-		ModelAndView mv= new ModelAndView();
+	@GetMapping("findPwByEmail")
+	public ModelAndView findPwByEmail(HttpSession session, MemberVO memberVO) throws Exception {
+		ModelAndView mv = new ModelAndView();
 		mv.addObject("memberVO", new MemberVO());
-		mv.setViewName("member/findMemberByEmail");
+		mv.setViewName("member/findPwByEmail");
 		return mv;
 	}
-	
-	@PostMapping("findMemberByEmail")
-	public ModelAndView findMemberByEmail(@Valid MemberVO memberVO, BindingResult bindingResult)throws Exception{
-		ModelAndView mv = new ModelAndView();
-			
-		boolean result = memberService.findMemberByEmail(memberVO, bindingResult, checkNum);
-	
-		if(result) {
-			mv.setViewName("member/findMemberByEmail");
-		}else {
-			int result2 = memberService.memberPwUpdate(memberVO);
-			if(result2 >0) {
-				mv.addObject("result", "비밀번호가 변경되었습니다. 다시 로그인 해주세요");
-				mv.addObject("path", "../");
-				mv.setViewName("common/result");
-			}
-		}
-		return mv;
-	}
-	
-	@PostMapping("findMemberByPhone")
-	public ModelAndView findMemberByPhone(@Valid MemberVO memberVO, BindingResult bindingResult, Model model)throws Exception{
-		ModelAndView mv = new ModelAndView();
-		
-		boolean result = memberService.findMemberByPhone(memberVO, bindingResult, checkNum);
-		System.out.println(result);
-		if(result) {
-			//model.addAttribute("result","인증번호를 다시 확인해주세요");
-					mv.setViewName("member/findMemberByPhone");
-		}else {
-			int result2 = memberService.memberPwUpdate(memberVO);
-			if(result2 >0) {
-		//		model.addAttribute("result","비밀번호가 성공적으로 변경되었습니다.");
-				mv.addObject("result", "비밀번호가 변경되었습니다. 다시 로그인 해주세요");
-				mv.addObject("path", "../");
-				mv.setViewName("common/result");
-			}
-		}
-		return mv;
-	}
-	
-	
-	@PostMapping("memberJoin")
-	public ModelAndView memberJoin(@Valid MemberVO memberVO, BindingResult bindingResult, HttpSession session) throws Exception {
 
+	@PostMapping("findPwByEmail")
+	public ModelAndView findPwByEmail(@Valid MemberVO memberVO, BindingResult bindingResult,HttpSession session) throws Exception {
 		ModelAndView mv = new ModelAndView();
-		
+
 		Calendar cal = Calendar.getInstance();
 		long now = cal.getTimeInMillis();
-		long now_now = now - (long)session.getAttribute("now");
+		long now_now = now - (long) session.getAttribute("now");
 		
+		boolean result = memberService.findPwByEmail(memberVO, bindingResult, checkNum);
+
+		if (result) {
+			mv.setViewName("member/findPwByEmail");
+		}else if(now_now > 300) {
+			System.out.println("ddd");
+			mv.addObject("result", "인증번호 유효기간이 지났습니다.");
+			mv.addObject("path", "./findPwByEmail");
+			
+			mv.setViewName("common/result");	
+		} else {
+			int result2 = memberService.memberPwUpdate(memberVO);
+			if (result2 > 0) {
+				mv.addObject("result", "비밀번호가 변경되었습니다. 다시 로그인 해주세요");
+				mv.addObject("path", "../");
+				mv.addObject("close",1);
+				mv.setViewName("common/result2");
+			}
+		}
+		return mv;
+	}
+
+	@PostMapping("findPwByPhone")
+	public ModelAndView findPwByPhone(@Valid MemberVO memberVO, BindingResult bindingResult, Model model,HttpSession session)
+			throws Exception {
+		ModelAndView mv = new ModelAndView();
+
+		Calendar cal = Calendar.getInstance();
+		long now = cal.getTimeInMillis();
+		long now_now = now - (long) session.getAttribute("now");
+		
+		boolean result = memberService.findPwByPhone(memberVO, bindingResult, checkNum);
+		System.out.println(result);
+		System.out.println(now_now);
+		if (result){
+			// model.addAttribute("result","인증번호를 다시 확인해주세요");
+			mv.setViewName("member/findPwByPhone");
+		}else if(now_now > 300000){
+			mv.addObject("result", "인증번호 유효기간이 지났습니다.");
+			mv.addObject("path", "./findPwByPhone");
+			
+			mv.setViewName("common/result");	
+		}else {
+			int result2 = memberService.memberPwUpdate(memberVO);
+			if (result2 > 0) {
+				// model.addAttribute("result","비밀번호가 성공적으로 변경되었습니다.");
+				mv.addObject("result", "비밀번호가 변경되었습니다. 다시 로그인 해주세요");
+				mv.addObject("path", "../");
+				mv.addObject("close",1);
+				mv.setViewName("common/result2");
+			}
+			session.invalidate();
+		}
+		return mv;
+	}
+
+	@PostMapping("memberJoin")
+	public ModelAndView memberJoin(@Valid MemberVO memberVO, BindingResult bindingResult, HttpSession session)
+			throws Exception {
+
+		ModelAndView mv = new ModelAndView();
+
+		Calendar cal = Calendar.getInstance();
+		long now = cal.getTimeInMillis();
+		long now_now = now - (long) session.getAttribute("now");
+
 		boolean result = memberService.memberCheck(memberVO, bindingResult, checkNum);
-		
+
 		if (result) {
 			mv.setViewName("member/memberJoin");
-		}else if(now_now>300000){
+		} else if (now_now > 300000) {
 			mv.addObject("result", "인증번호 유효기간이 지났습니다.");
 			mv.addObject("path", "./memberJoin");
 			mv.setViewName("common/result");
-		}else {
+		} else {
 			// 정상작동
 			int result2 = memberService.memberJoin(memberVO);
 			if (result2 > 0) {
@@ -133,10 +155,10 @@ public class MemberController {
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("memberVO", new MemberVO());
 		mv.setViewName("member/memberJoin");
-		
+
 		session.setAttribute("numStr", "");
 		session.setAttribute("now", 0L);
-		
+
 		return mv;
 	}
 
@@ -151,7 +173,13 @@ public class MemberController {
 
 		Cookie cookie = new Cookie("cId", memberVO.getMem_id());
 		response.addCookie(cookie);
-
+		memberVO = memberService.selectMember(memberVO);
+		if(memberVO.getMem_access()==1L) {
+			mv.addObject("result", "차단 회원입니다");
+			mv.addObject("path", "./memberLogin");
+			mv.setViewName("common/result");
+			return mv;
+		}
 		memberVO = memberService.memberLogin(memberVO);
 
 		if (memberVO != null) {
@@ -170,48 +198,96 @@ public class MemberController {
 	}
 
 	@PostMapping("sendSMS")
-	public void sendSMS(String phoneNumber, Model model,HttpSession session,String id)throws Exception{
-		
+	public void sendSMS(String phoneNumber, Model model, HttpSession session, String id) throws Exception {
+		String msg = "";
+
 		MemberVO mem = new MemberVO();
-        mem.setMem_id(id);
-        mem = memberService.selectMember(mem);
-        
-        String msg = "";
-        
-        if(mem.getMem_phone().equals(phoneNumber)){
-        	
-    		Random rand = new Random();
-    		String numStr = "";
-    		for (int i = 0; i < 4; i++) {
-    			String ran = Integer.toString(rand.nextInt(10));
-    			numStr += ran;
-    		}
-    		
-    		Calendar nowCal = Calendar.getInstance();
-    		long now = nowCal.getTimeInMillis();
-    		System.out.println("sendSMS"+now);
-    		checkNum = numStr;
-    		
-    		session.setAttribute("numStr", numStr);
-    		session.setAttribute("now", now);
-    		
-    		System.out.println("수신자 번호 : " + phoneNumber);
-    		System.out.println("인증번호 : " + numStr);
-    		String error_count = memberService.certifiedPhoneNumber(phoneNumber, numStr);
-    		System.out.println("에러카운트" + error_count);
-    	
-    		if (error_count.equals("0")) {
-    			msg = "인증 메세지를 전송했습니다";
-    		} else {
-    			msg = "인증 메세지 전송 실패했습니다";
-    		}
-        	
-        }else {
-        	msg="등록된 번호와 다릅니다.";
-        }
+		mem.setMem_id(id);
+		if (memberService.selectMember(mem) == null) {
+			msg = "존재하지 않는 아이디입니다.";
+		} else {
+
+			mem = memberService.selectMember(mem);
+
+			if (mem.getMem_phone().equals(phoneNumber)) {
+
+				Random rand = new Random();
+				String numStr = "";
+				for (int i = 0; i < 4; i++) {
+					String ran = Integer.toString(rand.nextInt(10));
+					numStr += ran;
+				}
+				
+				Calendar nowCal = Calendar.getInstance();
+				long now = nowCal.getTimeInMillis();
+				System.out.println("sendSMS" + now);
+				checkNum = numStr;
+
+				session.setAttribute("numStr", numStr);
+				session.setAttribute("now", now);
+				
+
+				System.out.println("수신자 번호 : " + phoneNumber);
+				System.out.println("인증번호 : " + numStr);
+				String error_count = memberService.certifiedPhoneNumber(phoneNumber, numStr);
+				System.out.println("에러카운트" + error_count);
+
+				if (error_count.equals("0")) {
+					msg = "인증 메세지를 전송했습니다";
+				} else {
+					msg = "인증 메세지 전송 실패했습니다";
+				}
+
+			} else {
+				msg = "등록된 번호와 다릅니다.";
+			}
+
+		}
+
+		model.addAttribute("result", msg);
+	}
+
+	@PostMapping("sendSMS2")
+	public void sendSMS2(String phoneNumber, Model model, HttpSession session, String id) throws Exception {
+		String msg = "";
+
+		Random rand = new Random();
+		String numStr = "";
+		for (int i = 0; i < 4; i++) {
+			String ran = Integer.toString(rand.nextInt(10));
+			numStr += ran;
+		}
 		
+		MemberVO memberVO2 = new MemberVO();
+		memberVO2.setMem_phone(phoneNumber);
+		memberVO2 = memberService.selectMemberByPhone(memberVO2);
+		if(memberVO2 != null) {
+			msg= "이미 가입한 전화번호입니다";
+			model.addAttribute("result", msg);
+			return;
+		}
+
+		Calendar nowCal = Calendar.getInstance();
+		long now = nowCal.getTimeInMillis();
+		System.out.println("sendSMS" + now);
+		checkNum = numStr;
 		
+		session.setAttribute("numStr", numStr);
+		session.setAttribute("now", now);
 		
+		System.out.println(session.getAttribute("now"));
+
+		System.out.println("수신자 번호 : " + phoneNumber);
+		System.out.println("인증번호 : " + numStr);
+		String error_count = memberService.certifiedPhoneNumber(phoneNumber, numStr);
+		System.out.println("에러카운트" + error_count);
+
+		if (error_count.equals("0")) {
+			msg = "인증 메세지를 전송했습니다";
+		} else {
+			msg = "인증 메세지 전송 실패했습니다";
+		}
+
 		model.addAttribute("result", msg);
 	}
 
@@ -227,73 +303,174 @@ public class MemberController {
 		mv.setViewName("member/memberJoin");
 		return mv;
 	}
-	
+
 	@GetMapping("findMember")
-	public void findMember()throws Exception{
-		
+	public void findMember() throws Exception {
+
 	}
-	
-	@GetMapping("findMemberByPhone")
-	public ModelAndView findMemberByPhone()throws Exception{
-		ModelAndView mv= new ModelAndView();
+
+	@GetMapping("findPwByPhone")
+	public ModelAndView findPwByPhone() throws Exception {
+		ModelAndView mv = new ModelAndView();
 		mv.addObject("memberVO", new MemberVO());
-		mv.setViewName("member/findMemberByPhone");
-		
+		mv.setViewName("member/findPwByPhone");
+
 		return mv;
 	}
-	
 
-	
 	@PostMapping("sendEmail")
-    public void sendEmailAction (@RequestParam Map<String, Object> paramMap, String id, String email, ModelMap model, ModelAndView mv, Model model2) throws Exception {
-	
+	public void sendEmailAction(@RequestParam Map<String, Object> paramMap, String id, String email, ModelMap model,
+			ModelAndView mv, Model model2,HttpSession session) throws Exception {
+
 		paramMap.put("username", id);
 		paramMap.put("email", email);
-		
+
 		MemberVO mem = new MemberVO();
-        mem.setMem_id(id);
-        String msg2="";
-        if(memberService.selectMember(mem)==null) {
-        	msg2="존재하지 않는 아이디입니다.";
-        }else {
-        
-        	mem = memberService.selectMember(mem);
-		
-        if(!mem.getMem_email().equals(email)){
-        	msg2 = "등록된 이메일과 다릅니다.";
-		}
-		else{
-			String USERNAME = (String) paramMap.get("username");
-	        String EMAIL = (String) paramMap.get("email");
-	        String PASSWORD = "";
-	        Random rand  = new Random();
-	        for(int i=0; i<4; i++) {
-	            String ran = Integer.toString(rand.nextInt(10));
-	            PASSWORD += ran;
-	        }
-	        System.out.println(PASSWORD);
-	        checkNum = PASSWORD;
-	             
-	        try {
-	            MimeMessage msg = mailSender.createMimeMessage();
-	            MimeMessageHelper messageHelper = new MimeMessageHelper(msg, true, "UTF-8");
-	             
-	            messageHelper.setSubject(USERNAME+"님 비밀번호 찾기 메일입니다.");
-	            messageHelper.setText("비밀번호는 "+PASSWORD+" 입니다.");
-	            messageHelper.setTo(EMAIL);
-	            msg.setRecipients(MimeMessage.RecipientType.TO , InternetAddress.parse(EMAIL));
-	            mailSender.send(msg);
-	             
-	        }catch(MessagingException e) {
-	            System.out.println("MessagingException");
-	            e.printStackTrace();
-	        }
-			
-	        msg2 = "인증 메세지를 전송했습니다";
+		mem.setMem_id(id);
+		String msg2 = "";
+		if (memberService.selectMember(mem) == null) {
+			msg2 = "존재하지 않는 아이디입니다.";
+		} else {
+
+			mem = memberService.selectMember(mem);
+
+			if (!mem.getMem_email().equals(email)) {
+				msg2 = "등록된 이메일과 다릅니다.";
+			} else {
+				String USERNAME = (String) paramMap.get("username");
+				String EMAIL = (String) paramMap.get("email");
+				String PASSWORD = "";
+				Random rand = new Random();
+				for (int i = 0; i < 4; i++) {
+					String ran = Integer.toString(rand.nextInt(10));
+					PASSWORD += ran;
+				}
+				System.out.println(PASSWORD);
+				checkNum = PASSWORD;
+				
+				Calendar nowCal = Calendar.getInstance();
+				long now = nowCal.getTimeInMillis();
+
+				session.setAttribute("numStr", PASSWORD);
+				session.setAttribute("now", now);
+
+				try {
+					MimeMessage msg = mailSender.createMimeMessage();
+					MimeMessageHelper messageHelper = new MimeMessageHelper(msg, true, "UTF-8");
+
+					messageHelper.setSubject(USERNAME + "님 비밀번호 찾기 메일입니다.");
+					messageHelper.setText("비밀번호는 " + PASSWORD + " 입니다.");
+					messageHelper.setTo(EMAIL);
+					msg.setRecipients(MimeMessage.RecipientType.TO, InternetAddress.parse(EMAIL));
+					mailSender.send(msg);
+
+				} catch (MessagingException e) {
+					System.out.println("MessagingException");
+					e.printStackTrace();
+				}
+
+				msg2 = "인증 메일을 전송했습니다";
 			}
-        }
-         model2.addAttribute("result", msg2);
-    }
-	
+		}
+		model2.addAttribute("result", msg2);
+	}
+
+	@PostMapping("findIdByEmail")
+	public void findIdByEmail(@RequestParam Map<String, Object> paramMap, String name, String email, ModelMap model,
+			ModelAndView mv, Model model2) throws Exception {
+
+		paramMap.put("username", name);
+		paramMap.put("email", email);
+
+		MemberVO mem = new MemberVO();
+		mem.setMem_email(email);
+
+		String msg2 = "";
+		if (memberService.selectMemberByEmail(mem) == null) {
+			msg2 = "존재하지 않는 이메일입니다.";
+		} else {
+			mem = memberService.selectMemberByEmail(mem);
+			if (mem.getMem_name() != name) {
+				msg2 = "등록된 이메일과 다릅니다.";
+				model2.addAttribute("result", msg2);
+				return;
+			}
+
+			String USERNAME = (String) paramMap.get("username");
+			String EMAIL = (String) paramMap.get("email");
+			String ID = mem.getMem_id();
+
+			try {
+				MimeMessage msg = mailSender.createMimeMessage();
+				MimeMessageHelper messageHelper = new MimeMessageHelper(msg, true, "UTF-8");
+
+				messageHelper.setSubject(USERNAME + "님 아이디 찾기 메일입니다.");
+				messageHelper.setText("회원님의 아이디는  " + ID + " 입니다.");
+				messageHelper.setTo(EMAIL);
+				msg.setRecipients(MimeMessage.RecipientType.TO, InternetAddress.parse(EMAIL));
+				mailSender.send(msg);
+
+			} catch (MessagingException e) {
+				System.out.println("MessagingException");
+				e.printStackTrace();
+			}
+
+			msg2 = "인증 메세지를 전송했습니다";
+
+		}
+		model2.addAttribute("result", msg2);
+	}
+
+	@GetMapping("findIdByEmail")
+	public ModelAndView findIdByEmail() throws Exception {
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("memberVO", new MemberVO());
+		mv.setViewName("member/findIdByEmail");
+
+		return mv;
+	}
+
+	@GetMapping("findIdByPhone")
+	public ModelAndView findIdByPhone() throws Exception {
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("memberVO", new MemberVO());
+		mv.setViewName("member/findIdByPhone");
+		return mv;
+	}
+
+	@PostMapping("findIdByPhone")
+	public void findIdByPhone(String phoneNumber, Model model, HttpSession session, String name) throws Exception {
+		String msg = "";
+
+		MemberVO mem = new MemberVO();
+		mem.setMem_phone(phoneNumber);
+		System.out.println(phoneNumber);
+		if (memberService.selectMemberByPhone(mem) == null) {
+			msg = "존재하지 않는 전화번호입니다.";
+		}else {
+			mem = memberService.selectMemberByPhone(mem);
+
+			if(mem.getMem_name().equals(name)) {
+
+				String id = mem.getMem_id();
+
+				System.out.println("수신자 번호 : " + phoneNumber);
+				System.out.println("아이디 : " + id);
+				String error_count = memberService.findIdByPhone(phoneNumber, id);
+				System.out.println("에러카운트" + error_count);
+
+				if (error_count.equals("0")) {
+					msg = "인증 메세지를 전송했습니다";
+				} else {
+					msg = "인증 메세지 전송 실패했습니다";
+				}
+
+			}else {
+				msg = "등록된 번호와 다릅니다.";
+			}
+		}
+
+		model.addAttribute("result", msg);
+	}
 
 }

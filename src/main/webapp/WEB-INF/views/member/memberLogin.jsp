@@ -34,11 +34,19 @@
 			</div> -->
 			
 			<button type="submit" class="btn btn-default">로그인</button>
-			<a href="./findMember">비밀번호를 잊어버리셨나요?</a>
+			<a onclick="openChild()">아이디 또는 비밀번호를 잊어버리셨나요?</a>
 		</form>
 	</div>
-	
-	
+	<script type="text/javascript">
+	var openWin;
+	function openChild() {
+			// window.name = "부모창 이름"; 
+			window.name = "parentForm";
+			// window.open("open할 window", "자식창 이름", "팝업창 옵션");
+			openWin = window.open("./findMember", "childForm",
+					"width=600, height=800, resizable = no, scrollbars = no");
+		}
+	</script>
 
 </body>
 </html>

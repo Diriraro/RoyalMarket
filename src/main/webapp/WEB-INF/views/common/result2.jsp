@@ -9,6 +9,10 @@
 	alert('${result}');
 	location.href="${path}";
 
+	
+	if(${close}==1){
+		window.close();
+		}
 </script>
 </head>
 <body>

@@ -76,7 +76,7 @@
 
 			<input type="button" value="인증번호 요청" class="btn btn-default"
 				id="rq_num" onclick="checkPhone()">
-			<!-- <a href="" id="btnCheck" class="btn btn-default">인증번호 요청</a> -->
+			
 
 			<div id="divCheck">
 				<label class="control-label col-sm-2" for="phoneCheck">인증번호:</label>
@@ -149,15 +149,19 @@
 
 	<script type="text/javascript">
 		var check = false;
+		var SetTime = 300;		// 최초 설정 시간(기본 : 초)
+		var tid = 0;
 		
 		function checkPhone(result2) {
 			var phoneNumber = $('#mem_phone').val();
 
-			$.post("./check/sendSMS", {
+			$.post("./check/sendSMS2", {
 				phoneNumber : phoneNumber
 			}, function(result) {
 				alert(result.trim());
+				SetTime = 300;
 				if(result.trim()=="인증 메세지를 전송했습니다") {
+					clearInterval(tid);
 					TimerStart();
 				} else {
 					return;
@@ -192,7 +196,6 @@
 		}
 
 
-		var SetTime = 300;		// 최초 설정 시간(기본 : 초)
 
 		function msg_time() {	// 1초씩 카운트
 			

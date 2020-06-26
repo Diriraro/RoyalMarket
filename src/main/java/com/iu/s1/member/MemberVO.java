@@ -79,6 +79,9 @@ public class MemberVO {
 	@Column
 	private Date mem_regDate;
 	
+	@Column
+	private long mem_kakao;
+	
 
 
 }
