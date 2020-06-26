@@ -152,6 +152,8 @@
 		var SetTime = 300;		// 최초 설정 시간(기본 : 초)
 		var tid = 0;
 		
+		
+		
 		function checkPhone(result2) {
 			var phoneNumber = $('#mem_phone').val();
 
@@ -187,10 +189,10 @@
 			}else{
 				$("#email").css("display", "none");
 				}
+			
 		}
 
 		function makeEmail(){
-		
 			var email = $("#mem_email").val()+$("#email1").val()+$("#email2").val();
 			$("#mem_email").val(email);
 		}

@@ -32,9 +32,13 @@
 				<label><input type="checkbox" name="remember">
 					Remember me</label>
 			</div> -->
-			
+			<br>
 			<button type="submit" class="btn btn-default">로그인</button>
 			<a onclick="openChild()">아이디 또는 비밀번호를 잊어버리셨나요?</a>
+			<br>
+			<br>
+			<img alt="kakao" src="../images/kakao_login_medium_narrow.png">
+			
 		</form>
 	</div>
 	<script type="text/javascript">
