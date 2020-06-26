@@ -13,10 +13,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.iu.s1.ProductVO;
 import com.iu.s1.member.MemberVO;
 import com.iu.s1.notice.NoticeVO;
+import com.iu.s1.qna.QnaService;
+import com.iu.s1.qna.QnaVO;
+import com.iu.s1.qna.file.QnaFileVO;
 
 
 @Controller
@@ -25,6 +29,8 @@ public class AdminController {
 	
 	@Autowired
 	private AdminService adminService;
+	@Autowired
+	private QnaService qnaService;
 	
 	@GetMapping("adminPage")
 	public String adminPage() throws Exception {
@@ -72,6 +78,8 @@ public class AdminController {
 	public void getManToManList(Model model) throws Exception {
 		List<MemberVO> ar = new ArrayList<MemberVO>();
 //		ar = adminService.getManToManList();
+		List<QnaVO> ar2 = qnaService.qnaAdminList();
+		model.addAttribute("qna_adlist", ar2);
 		model.addAttribute("list",ar);
 	}
 	@GetMapping("getQnaList")
@@ -91,5 +99,16 @@ public class AdminController {
 		model.addAttribute("memberCount",(int)memberCount);
 		model.addAttribute("list",ar);
 		
+	}
+	@GetMapping("qnaAnswer")
+	public ModelAndView qnaAnswer(long qna_num)throws Exception{
+		ModelAndView mv = new ModelAndView();
+		QnaVO qnaVO = new QnaVO();
+		qnaVO = qnaService.selectQna(qna_num);
+		List<QnaFileVO> qnaFileVOs = qnaService.selectQnaFile(qna_num);
+		mv.addObject("qvo", qnaVO);
+		mv.addObject("qfvo", qnaFileVOs);
+		mv.setViewName("admin/list/qnaAnswer");
+		return mv;
 	}
 }

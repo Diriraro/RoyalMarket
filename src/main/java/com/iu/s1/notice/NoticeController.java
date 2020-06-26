@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.iu.s1.notice.NoticeVO;
+import com.iu.s1.qna.QnaService;
+import com.iu.s1.qna.QnaVO;
 
 @Controller
 @RequestMapping("/notice/**")
@@ -23,12 +25,16 @@ public class NoticeController {
 	
 	@Autowired
 	private NoticeService noticeService;
+	@Autowired
+	private QnaService qnaService;
 	
 	@GetMapping("noticeList")
 	public ModelAndView noticeList()throws Exception{	//list 받아오기 기본문법
 		ModelAndView mv = new ModelAndView();
 		List<NoticeVO> ar = noticeService.noticeList();
+		List<QnaVO> ar2 = qnaService.qnaAdminList();
 		mv.addObject("no_list", ar);
+		mv.addObject("test", ar2);
 		mv.setViewName("notice/noticeList");
 		return mv;
 	}

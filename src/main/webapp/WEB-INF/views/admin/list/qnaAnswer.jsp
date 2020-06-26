@@ -7,10 +7,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<c:import url="../template/boot.jsp"></c:import>
+<c:import url="../../template/boot.jsp"></c:import>
 </head>
 <body>
-<c:import url="../template/nav.jsp"></c:import>
+<c:import url="../../template/nav.jsp"></c:import>
 
 <div class="container">
 	<h1>Index PAGe</h1>	
