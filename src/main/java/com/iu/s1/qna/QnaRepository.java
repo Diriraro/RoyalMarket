@@ -21,9 +21,5 @@ public interface QnaRepository {
 	
 	public int qnaAnswer(QnaVO qnaVO)throws Exception;
 	public long lastNum()throws Exception;
-<<<<<<< HEAD
-	
-=======
->>>>>>> aaa1fb684ee50e6d8db4bcfeca0f335f44a460cc
 
 }

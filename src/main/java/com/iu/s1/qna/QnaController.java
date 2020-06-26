@@ -9,18 +9,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-<<<<<<< HEAD
-=======
+import com.iu.s1.qna.file.QnaFileVO;
 import org.springframework.web.servlet.ModelAndView;
-
->>>>>>> aaa1fb684ee50e6d8db4bcfeca0f335f44a460cc
 import org.springframework.web.multipart.MultipartFile;
 
-import com.iu.s1.qna.file.QnaFileVO;
-<<<<<<< HEAD
-
-=======
->>>>>>> aaa1fb684ee50e6d8db4bcfeca0f335f44a460cc
 @Controller
 @RequestMapping("/qna/**")
 public class QnaController {

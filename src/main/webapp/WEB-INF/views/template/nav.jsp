@@ -18,10 +18,6 @@
       <li><a href="#">Page 2</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
-<<<<<<< HEAD
-
-=======
->>>>>>> aaa1fb684ee50e6d8db4bcfeca0f335f44a460cc
     <c:if test="${empty member}">
       <li><a href="${pageContext.request.contextPath}/member/memberJoin"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
       <li><a href="${pageContext.request.contextPath}/member/memberLogin"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>

@@ -8,10 +8,6 @@
   		<typeAlias type="java.util.List" alias="List"/>
   		<typeAlias type="java.lang.Long" alias="Long"/>
   		<typeAlias type="com.iu.s1.member.MemberVO" alias="MemberVO"/>
-<<<<<<< HEAD
-  		
-=======
->>>>>>> aaa1fb684ee50e6d8db4bcfeca0f335f44a460cc
   	</typeAliases>
   	
   </configuration>
