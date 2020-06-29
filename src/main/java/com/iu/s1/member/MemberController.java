@@ -34,34 +34,34 @@ public class MemberController {
 	
 	private String checkNum="";
 	
-	@PostMapping("memberJoin")
-	public ModelAndView memberJoin(@Valid MemberVO memberVO,BindingResult bindingResult, String check_num) throws Exception{
-		ModelAndView mv = new ModelAndView();
-		
-		boolean result = memberService.memberCheck(memberVO, bindingResult);
-		System.out.println(check_num);
-		System.out.println(checkNum);
-		if(check_num.equals(checkNum)) {
-			System.out.println("인증성공");
-		}else {
-			System.out.println("인증실패");
-		}
-		
-		if(result) {
-			mv.setViewName("member/memberJoin");
-		}else {
-			//정상작동
-			int result2 = memberService.memberJoin(memberVO);
-			if(result2 > 0) {
-				mv.addObject("result", "회원가입 성공");
-				mv.addObject("path","../");
-				mv.setViewName("common/result");
-			}
-		}
-		
-		return mv;
-	}
-	
+//	@PostMapping("memberJoin")
+//	public ModelAndView memberJoin(@Valid MemberVO memberVO,BindingResult bindingResult, String check_num) throws Exception{
+//		ModelAndView mv = new ModelAndView();
+//		
+//		boolean result = memberService.memberCheck(memberVO, bindingResult);
+//		System.out.println(check_num);
+//		System.out.println(checkNum);
+//		if(check_num.equals(checkNum)) {
+//			System.out.println("인증성공");
+//		}else {
+//			System.out.println("인증실패");
+//		}
+//		
+//		if(result) {
+//			mv.setViewName("member/memberJoin");
+//		}else {
+//			//정상작동
+//			int result2 = memberService.memberJoin(memberVO);
+//			if(result2 > 0) {
+//				mv.addObject("result", "회원가입 성공");
+//				mv.addObject("path","../");
+//				mv.setViewName("common/result");
+//			}
+//		}
+//		
+//		return mv;
+//	}
+//	
 	
 	@GetMapping("memberJoin")
 	public ModelAndView memberJoin()throws Exception{
