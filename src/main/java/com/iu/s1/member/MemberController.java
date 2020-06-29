@@ -43,8 +43,11 @@ public class MemberController {
 
 	@Autowired
 	private JavaMailSender mailSender;
-
+	
 	private String checkNum = "";
+	
+	
+	
 
 	@GetMapping("findPwByEmail")
 	public ModelAndView findPwByEmail(HttpSession session, MemberVO memberVO) throws Exception {

@@ -60,12 +60,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT * FROM member where mem_regDate > #{mem_regDate}
 	</select>
 	
-	<update id="blackMember" parameterType="MemberVO">
-		update member set mem_access=1 where mem_id=#(mem_id)
-	</update>
-	
-	<update id="whiteMember" parameterType="MemberVO">
-		update member set mem_access=0 where mem_id=#(mem_id)
+	<update id="accessManage" parameterType="MemberVO">
+		update member set mem_access=#{mem_access} where mem_storeNum=#{mem_storeNum}
 	</update>
 	
 	

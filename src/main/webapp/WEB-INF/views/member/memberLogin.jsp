@@ -2,12 +2,14 @@
 	pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <c:import url="../template/boot.jsp"></c:import>
+<script type="text/javascript" src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
 </head>
 <body>
 	<c:import url="../template/nav.jsp"></c:import>
@@ -37,7 +39,7 @@
 			<a onclick="openChild()">아이디 또는 비밀번호를 잊어버리셨나요?</a>
 			<br>
 			<br>
-			<img alt="kakao" src="../images/kakao_login_medium_narrow.png">
+			<button id="kakao-login-btn"></button>
 			
 		</form>
 	</div>
@@ -50,6 +52,38 @@
 			openWin = window.open("./findMember", "childForm",
 					"width=600, height=800, resizable = no, scrollbars = no");
 		}
+
+
+
+	Kakao.init('c2cd7ce11b81faeb246f1a9397ca16a4');
+	Kakao.Auth.createLoginButton({
+		container : '#kakao-login-btn',
+		success : function(authObj) {
+			Kakao.API.request({
+				url : '/v2/user/me',
+				success : function(res) {
+					$.ajax({
+						type : "post",
+						url : "./MemberKakaoLogin",
+						data : {
+							id : res.kakao_account['email'],
+							name : res.kakao_account.profile['nickname'],
+						},
+						success : function(result) {
+							result = result.trim();
+							if (result != null && result != 'newMember') {
+								location.href = Referer;
+							} else if (result == 'newMember') {
+								location.href = "./MemberNewKakao";
+							}
+						}
+					});
+				}
+			});
+		},
+		fail : function(err) {
+		}
+	});
 	</script>
 
 </body>
