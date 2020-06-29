@@ -14,5 +14,9 @@ public interface MemberRepository {
 	
 	public MemberVO memberLogin(MemberVO memberVO) throws Exception;
 	
-	public List<MemberVO> memberList()throws Exception;
+	public List<MemberVO> getMemberList(long mem_access)throws Exception;
+	
+	public List<MemberVO> getMemberSearchList(MemberVO memberVO) throws Exception;
+	
+	
 }

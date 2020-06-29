@@ -45,6 +45,11 @@
 		</ul>
 
 
+<button><a href="../shop/myshop?mem_storeNum=${member.mem_storeNum}">내상점</a></button>
+<button><a href="../shop/myshop?mem_storeNum=1">iu</a></button>
+<button><a href="../shop/myshop?mem_storeNum=23">admin </a></button>
+<button><a href="../shop/myshop?mem_storeNum=4">retest </a></button>
+
 
 	</div>
 
