@@ -38,7 +38,7 @@ public class MemberController {
 	public ModelAndView memberJoin(@Valid MemberVO memberVO,BindingResult bindingResult, String check_num) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		
-		boolean result = memberService.memberCheck(memberVO, bindingResult);
+		boolean result = memberService.memberCheck(memberVO, bindingResult,check_num);
 		System.out.println(check_num);
 		System.out.println(checkNum);
 		if(check_num.equals(checkNum)) {
