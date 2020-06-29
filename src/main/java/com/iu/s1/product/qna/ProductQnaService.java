@@ -8,14 +8,14 @@ import org.springframework.stereotype.Service;
 import com.iu.s1.member.MemberVO;
 
 @Service
-public class QnaService {
+public class ProductQnaService {
 	
 	@Autowired
-	QnaMapper qnaMapper;
+	ProductQnaMapper qnaMapper;
 	
 	//작성
 	
-	public long qnaInsert(QnaVO qnaVO)throws Exception{
+	public long qnaInsert(ProductQnaVO qnaVO)throws Exception{
 		return qnaMapper.qnaInsert(qnaVO);
 	}
 	
@@ -23,7 +23,7 @@ public class QnaService {
 		return qnaMapper.qnaDelete(pq_num);
 	}
 	
-    public List<QnaVO> qnaList(long sell_num) throws Exception{
+    public List<ProductQnaVO> qnaList(long sell_num) throws Exception{
         
         return qnaMapper.qnaList(sell_num);
     }

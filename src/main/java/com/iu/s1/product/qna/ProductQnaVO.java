@@ -2,7 +2,9 @@ package com.iu.s1.product.qna;
 
 import java.sql.Date;
 
-public class QnaVO {
+import lombok.Data;
+
+public class ProductQnaVO {
 	
 	private long pq_num;
 	

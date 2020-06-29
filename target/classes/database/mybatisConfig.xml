@@ -3,6 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-config.dtd">
 
+
 <configuration>
 	<typeAliases>
 		<typeAlias type="java.util.List" alias="List" />
@@ -13,9 +14,10 @@
 		<typeAlias
 			type="com.iu.s1.product.productFile.ProductFileVO"
 			alias="ProductFileVO" />
-		<typeAlias type="com.iu.s1.product.qna.QnaVO" alias="QnaVO" />
+		<typeAlias type="com.iu.s1.product.qna.ProductQnaVO" alias="ProductQnaVO" />
 		<typeAlias type="com.iu.s1.util.Pager" alias="Pager" />
 		<typeAlias type="com.iu.s1.member.MemberVO" alias="MemberVO" />
+
 
 	</typeAliases>
 </configuration>

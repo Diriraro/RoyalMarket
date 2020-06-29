@@ -9,8 +9,8 @@
 <title>Insert title here</title>
 <style type="text/css">
 .imagePreview {
-	width: 180px;
-	height: 180px;
+	width: 200px;
+	height: 200px;
 	background-position: center center;
 	background-size: cover;
 	-webkit-box-shadow: 0 0 1px 1px rgba(0, 0, 0, .3);
@@ -18,8 +18,17 @@
 }
 
 .imagePreview2 {
-	width: 180px;
-	height: 180px;
+	width: 200px;
+	height: 200px;
+	background-position: center center;
+	background-size: cover;
+	-webkit-box-shadow: 0 0 1px 1px rgba(0, 0, 0, .3);
+	display: inline-block;
+}
+
+.imagePreview3 {
+	width: 200px;
+	height: 200px;
 	background-position: center center;
 	background-size: cover;
 	-webkit-box-shadow: 0 0 1px 1px rgba(0, 0, 0, .3);
@@ -31,32 +40,64 @@
 
 </head>
 <body>
-	<c:import url="../template/nav.jsp"></c:import>
-	<form action="productNew" method="post" enctype="multipart/form-data">
-
-		<!-- <a id="sellimg"><img src="${pageContext.request.contextPath}/resources/images/showimage.png"></a>
-		<div class="form-group" id="f"></div> -->
-
-		<div class="imagePreview"></div>
+	<c:import url="../template/woozoo_nav.jsp"></c:import>
+	
+	<div style="width: 1024px; margin-left: 440px; margin-top:50px; height: 1315px;">
 		
-		<input id="files" type="file" name="files" accept="image/jpg, image/jpeg, image/png" class="img" /> 
+		<form action="productNew" method="post" enctype="multipart/form-data">
 		
-		<div class="imagePreview2"></div>
+		<font style="font-size: 25px;font-weight: bold;">기본정보</font>
+		<font style="font-size: 15px;font-weight: lighter;color: #ff5d4a">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*필수항목</font>
+		<hr style="border: solid 1.2px black;">
+		<br>
+		<div style="width: 168px;height:380px; float: left;">
+		<font style="font-size: 18px;font-weight: 900;">상품이미지</font> <font style="color: #ff5d4a;font-size: 18px;">*</font>
+		</div>
 		
-		<input id="files2" type="file" name="files" accept="image/jpg, image/jpeg, image/png" class="img" /> 
+		<div style="width: 856px;height:380px; float: left;">
 		
-
-			
-		<input type="hidden" name="mem_storeNum" value="${memberVO.mem_storeNum}" id="mem_storeNum"> 
-
-		<div class="form-group">
-			<label for="sell_product">제목</label> <input type="text"
-				name="sell_product" class="form-control" id="sell_product">
+		<div style="float: left;">
+		<div class="imagePreview" style="background-image: url('${pageContext.request.contextPath}/resources/images/showimage_logo.png');"></div>
+		<input id="files" type="file" name="files" accept="image/jpg, image/jpeg, image/png" class="img"/> 
+		</div>
+		
+		<div style="float: left;">
+		<div class="imagePreview2" style="background-image: url('${pageContext.request.contextPath}/resources/images/showimage_logo.png');"></div>
+ 		<input id="files2" type="file" name="files" accept="image/jpg, image/jpeg, image/png" class="img" />
+ 		</div>
+ 		
+ 		<div>
+		<div class="imagePreview3" style="background-image: url('${pageContext.request.contextPath}/resources/images/showimage_logo.png');"></div>
+ 		<input id="files3" type="file" name="files" accept="image/jpg, image/jpeg, image/png" class="img" />
+ 		</div>
+ 		
+ 		<br>
+ 		<font style="font-weight: bold; color: #4aadff;">* 상품 이미지는 640x640에 최적화 되어 있습니다.<br></font> 
+		<font style="color: #4aadff;">- 이미지는 상품등록 시 정사각형으로 짤려서 등록됩니다.<br>
+		- 이미지를 클릭 할 경우 원본이미지를 확인할 수 있습니다.<br>
+		- 이미지를 클릭 후 이동하여 등록순서를 변경할 수 있습니다.<br>
+		- 큰 이미지일경우 이미지가 깨지는 경우가 발생할 수 있습니다.<br>
+		최대 지원 사이즈인 640 X 640 으로 리사이즈 해서 올려주세요.(개당 이미지 최대 10M)</font>
+ 		
+		</div>
+		<hr>
+		<input type="hidden" name="mem_storeNum" value="${member.mem_storeNum}" id="mem_storeNum"> 
+		
+		<div style="width: 168px;height:113px; float: left;text-align: left;line-height: 113px;border-top:solid 1px #dcdbe4; ">
+		<font style="font-size: 18px;font-weight: 900;">제목</font> <font style="color: #ff5d4a;font-size: 18px;">*</font>
 		</div>
 
-		<div style="overflow-y: scroll; width: 300px; height: 300px;">
-			카테고리
-			<ul class="allKind">
+		<div style="width: 856px;height:113px; float: left;border-top:solid 1px #dcdbe4;border-top:solid 1px #dcdbe4;">
+		<input style="margin-top: 32px;width: 856px;height: 48px;" type="text" name="sell_product" class="form-control" id="sell_product">
+		</div>
+		
+		<div style="width: 168px;height:250px; float: left;text-align: left;line-height: 113px;border-top:solid 1px #dcdbe4;">
+		<font style="font-size: 18px;font-weight: 900;">카테고리</font> <font style="color: #ff5d4a;font-size: 18px;">*</font>
+		</div>
+		
+		<div style="width: 856px;height:250px; float: left;border-top:solid 1px #dcdbe4;">
+		<div style="overflow-y: scroll; width: 300px; height: 200px;">
+			<ul class="allKind" ">
 				<li><input type="button" class="kind" value="패션잡화"></li>
 				<li><input type="button" class="kind" value="여성의류"></li>
 				<li><input type="button" class="kind" value="남성의류"></li>
@@ -78,8 +119,58 @@
 
 			</ul>
 		</div>
-		선택한 카테고리 : <input type="text" id="sell_kind" name="sell_kind" value="">
+		선택한 카테고리 : <input type="text" id="sell_kind" name="sell_kind" value="" readonly="readonly">
+		</div>
+		<div style="width: 168px;height:113px; float: left;text-align: left;line-height: 113px;border-top:solid 1px #dcdbe4;">
+		<font style="font-size: 18px;font-weight: 900;">가격</font> <font style="color: #ff5d4a;font-size: 18px;">*</font>
+		</div>
+		
+		<div style="width: 856px;height:113px; float: left;border-top:solid 1px #dcdbe4;">
+		<input style="margin-top: 32px;width: 240px;height: 48px;float: left;" class="form-control" type="text" name="sell_price" id="sell_price">
+		<font style="text-align: center;line-height: 113px;font-size: 18px;font-weight: 900;">원</font> 
+		</div>
+		
+		<div style="width: 168px;height:250px; float: left;text-align: left;line-height: 113px;border-top:solid 1px #dcdbe4;">
+		<font style="font-size: 18px;font-weight: 900;">설명</font> <font style="color: #ff5d4a;font-size: 18px;">*</font>
+		</div>
+		
+		<div style="width: 856px;height:250px; float: left;border-top:solid 1px #dcdbe4;">
+		<textarea style="margin-top: 32px;width: 856px;height: 160px;" name="sell_info" class="form-control" id="sell_info" name="sell_info"></textarea>
+		</div>
+		
+		<div style="width: 168px;height:113px; float: left;text-align: left;line-height: 113px;border-top:solid 1px #dcdbe4;border-bottom:solid 1px #dcdbe4;">
+		<font style="font-size: 18px;font-weight: 900;">연관태그</font> 
+		</div>
+		
+		<div style="width: 856px;height:113px; float: left;border-top:solid 1px #dcdbe4;border-bottom:solid 1px #dcdbe4;"> 
+		<input style="margin-top: 32px;width: 856px;height: 48px;" class="form-control" type="text" name="sell_tag" id="sell_tag"> 
+		</div>
+
+	</form>
+
+		</div>
+		<div style="height: 88px; background-color: #fafafd;">
+		<button style="margin-left: 1302px;margin-top: 16px; width: 160px;height: 56px;border: 0px;background-image: url('${pageContext.request.contextPath}/resources/images/regi_logo.png');" type="submit" class="btn btn-default" id="productNew"></button>
+		</div>
+		
+	
+	
+	
+
+		<!-- <a id="sellimg"><img src="${pageContext.request.contextPath}/resources/images/showimage.png"></a>
+		<div class="form-group" id="f"></div> -->
+<!-- 
+		
+		
+
+			
+		
+
 		<div class="form-group">
+			<label for="sell_product">제목</label>  -->
+
+		
+		<!-- <div class="form-group">
 			<div>
 				상태<span>*</span>
 			</div>
@@ -93,9 +184,9 @@
 					</label>
 				</div>
 			</div>
-		</div>
+		</div> -->
 
-		<div class="form-group">
+		<!-- <div class="form-group">
 			<div>
 				교환<span>*</span>
 			</div>
@@ -109,25 +200,21 @@
 					</label>
 				</div>
 			</div>
-		</div>
-		가격 <input type="text" name="sell_price" id="sell_price">원 <br> 
+		</div> -->
 		
-		<label for="sell_info">설명</label>
-		<textarea name="sell_info" class="form-control" id="sell_info"
-			name="sell_info">
-			</textarea>
-			
-		태그 <input type="text" name="sell_tag" id="sell_tag"> <br> 
-
-
-		<button type="submit" class="btn btn-default">Submit</button>
-	</form>
-
 
 	<script type="text/javascript">
+/* 	$("#black").mouseover(function() {
+		$("#files").attr("type","file");
+	}); */
+	
 		$(".kind").click(function() {
 			$("#sell_kind").val($(this).val());
 		});
+
+	$(document).on('click', '#black', function() {
+		$("input[name='files']").click();
+	});
 
 		//$("#sellimg")
 				//.click(
@@ -167,9 +254,55 @@
 						}
 					});
 		});
+
+		$(function() {
+
+			$("#files3").on( "change", function() {
+						var files = !!this.files ? this.files : [];
+						if (!files.length || !window.FileReader)
+							return;
+						if (/^image/.test(files[0].type)) {
+							var reader = new FileReader();
+							reader.readAsDataURL(files[0]);
+							reader.onloadend = function() {
+								$('.imagePreview3').css("background-image",
+										"url(" + this.result + ")");
+							};
+						}
+					});
+		});
+		
 		
 
-
+		$("#productNew").click(function() {
+			var files = $("#files").val();
+			var files2 = $("#files2").val();
+			var sell_product = $("#sell_product").val();
+			var sell_kind = $("#sell_kind").val();
+			var sell_price = $("#sell_price").val();
+			var sell_info = $("#sell_info").val();
+			var sell_tag = $("#sell_tag").val();
+			
+			if (files==""&&files2=="") {
+				alert("사진을 1개 이상 올려주세요");
+				return false;
+			}else if (sell_product=="") {
+				alert("제목을 입력해주세요")
+				return false;
+			}else if (sell_kind=="") {
+				alert("카테고리를 설정해주세요")
+				return false;
+			}else if (sell_price=="") {
+				alert("가격을 입력해주세요")
+				return false;
+			}else if (sell_price=="") {
+				alert("상품정보에 대해 입력해주세요")
+				return false;
+			}else if (sell_price=="") {
+				alert("태그를 입력해주세요")
+				return false;
+			}
+		});
 
 
 		function doOpenCheck(chk) {

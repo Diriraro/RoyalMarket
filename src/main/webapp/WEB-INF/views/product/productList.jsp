@@ -8,36 +8,6 @@
 <title>Insert title here</title>
 <c:import url="../template/boot.jsp"></c:import>
 <link href="./css/test.css" rel="stylesheet" type="text/css">
-<style type="text/css">
-
-	 .img{
-        position: relative;
-        background-image: url('${pageContext.request.contextPath}/resources/qna_images/${file[i.index]}');                                                               
-        height: 100px;
-        width: 80px;
-        background-size: cover;
-    }
-
-    .img-cover{
-       position: absolute;
-       height: 100%;
-       width: 100%;
-       background-color: rgba(0, 0, 0, 0.7);                                                                 
-       z-index:1;
-    }
-
-    .img .content{
-         position: absolute;
-         top:50%;
-         left:50%;
-         transform: translate(-50%, -50%);                                                                   
-         font-size:1rem;
-         color: white;
-         z-index: 2;
-         text-align: center;
-    }
-	
-</style>
 </head>
 <body>
 	<c:import url="../template/nav.jsp"></c:import>
@@ -80,31 +50,13 @@
 						onclick="location.href='./productSelect?sell_num=${vo.sell_num}'">
 						
 						
-				<%-- 		<img style="height:100px; width:80px; cursor: pointer;" alt="" src="${pageContext.request.contextPath}/upload/product/${file[i.index]}">
+						<img style="height:100px; width:80px; cursor: pointer;" alt="" src="${pageContext.request.contextPath}/upload/product/${file[i.index]}">
 						<tr>
 							<td>${vo.sell_num}</td>
 							<td>${vo.sell_product}</td>
 							<td>${vo.sell_price}</td>
 						</tr>
- --%>
- 				<tr>
- 				<c:if test="${vo.sell_status eq 1}">
-	 				<td><div class="img" style="background-image: url('${pageContext.request.contextPath}/upload/product/${file[i.index]}')">
-					<div class="content">
-						<h5 style="margin-bottom: 30px;">예약완료</h5>
-					</div>
-					<div class="img-cover"></div></td>
-				</c:if>
-				<c:if test="${vo.sell_status eq 0 }">
-				<td><div class="img" style="cursor:pointer; background-image: url('${pageContext.request.contextPath}/upload/product/${file[i.index]}')" onclick="location.href='./productSelect?sell_num=${vo.sell_num}'"></td>
-				
-				</c:if>
-				
-				<td>${vo.sell_num}</td>
-				<td>${vo.sell_product}</td>
-				<td>${vo.sell_price}</td>
-				</tr>
-			</div>
+
 
 
 
