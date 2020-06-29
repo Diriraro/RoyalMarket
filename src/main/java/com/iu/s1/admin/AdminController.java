@@ -13,6 +13,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.iu.s1.ProductVO;
 import com.iu.s1.member.MemberVO;
@@ -46,18 +48,38 @@ public class AdminController {
 	}
 
 	@GetMapping("getMemberList")
-	public void getMemberList(Model model, long mem_access) throws Exception {
-		System.out.println(mem_access);
+	public void getMemberList(Model model, MemberVO memberVO, long handling) throws Exception {
 		List<MemberVO> ar = new ArrayList<MemberVO>();
-		ar = adminService.getMemberList(mem_access);
-		String check = "";
-		if (mem_access == 0) {
-			check = "accept";
-		} else if (mem_access == 1) {
-			check = "denied";
+		// handling == 0 일시,  해당 access에 대한 리스트만 출력
+		if (handling == 0) {
+			long mem_access = memberVO.getMem_access();
+			ar = adminService.getMemberList(mem_access);
+			String check = "";
+			if (mem_access == 0) {
+				check = "accept";
+			} else if (mem_access == 1) {
+				check = "denied";
+			}
+			model.addAttribute("check", check);
+			model.addAttribute("list", ar);
+		} else if (handling == 1) { // handling == 1 일시,  회원로그인 차단/허용 관리 
+			long mem_access = memberVO.getMem_access();
+			ar = adminService.getMemberList(mem_access);
+			if (memberVO.getMem_access() == 1) {
+				memberVO.setMem_access(0);
+			} else if (memberVO.getMem_access() == 0) {
+				memberVO.setMem_access(1);
+			}
+			int result = adminService.accessManage(memberVO);
+			String check = "";
+			if (mem_access == 0) {
+				check = "accept";
+			} else if (mem_access == 1) {
+				check = "denied";
+			}
+			model.addAttribute("check", check);
+			model.addAttribute("list", ar);
 		}
-		model.addAttribute("check", check);
-		model.addAttribute("list", ar);
 	}
 
 	@PostMapping("getMemberList")
@@ -104,4 +126,17 @@ public class AdminController {
 		model.addAttribute("list", ar);
 
 	}
+//	@GetMapping("accessManage")
+//	public ModelAndView accessManage(MemberVO memberVO, ModelAndView mav) throws Exception {
+//		System.out.println(memberVO.getMem_access());
+//		if (memberVO.getMem_access() == 1) {
+//			memberVO.setMem_access(0);
+//		} else if (memberVO.getMem_access() == 0) {
+//			memberVO.setMem_access(1);
+//		}
+////		List<MemberVO> ar = adminService.getAccessManage();
+////		model.addAttribute("list", ar);
+//		mav.setViewName("redirect:./adminPage");
+//		return mav;
+//	}
 }

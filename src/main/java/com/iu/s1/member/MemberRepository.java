@@ -19,5 +19,5 @@ public interface MemberRepository {
 	public List<MemberVO> getMemberSearchList(MemberVO memberVO) throws Exception;
 	public List<MemberVO> getDailyNewMember(MemberVO membeRVO) throws Exception;
 	public long memberCount() throws Exception;
-	
+	public int accessManage(MemberVO membeRVO) throws Exception; 
 }

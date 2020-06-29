@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,8 +15,10 @@
 		<div id="logo">logo</div>
 		<div class="sidenav">
 			<div id="stats">
-			<div style="font-size: 13px;">STATS</div>
-				<label class="check" title="dashBoard"><a style="color : white;"><i class="far fa-file-alt"></i> Dash Board </a></label>
+				<div style="font-size: 13px;">STATS</div>
+				<label class="check" title="dashBoard"><a
+					style="color: white;"><i class="far fa-file-alt"></i> Dash
+						Board </a></label>
 				<!-- pdf파일로 불러들이기 (회원수,하루 상품등록 및 판매량, 하루 접속인원수) -->
 			</div>
 			<!-- 목록을 제외한 다른 호출은 각 Controller로 보내서 처리 -->
@@ -100,6 +102,34 @@
 				}
 				/* 컨텐츠를 추가시 함수 + else if 추가 */
 			})
+			$("#content").on(
+					"click",
+					".AccessGrant1",
+					function() {
+						if (confirm("정말 차단하시겠습니까?")) {
+							var storeNum = $(this).prop("title");
+							$("#content").empty();
+							$.get("./list/getMemberList?mem_storeNum="
+									+ storeNum + "&handling=1&mem_access=0",
+									function(result) {
+										$("#content").append(result);
+									})
+						}
+					})
+			$("#content").on(
+					"click",
+					".AccessGrant0",
+					function() {
+						if (confirm("정말 차단을 해제하시겠습니까?")) {
+							var storeNum = $(this).prop("title");
+							$("#content").empty();
+							$.get("./list/getMemberList?mem_storeNum="
+									+ storeNum + "&handling=1&mem_access=1",
+									function(result) {
+										$("#content").append(result);
+									})
+						}
+					})
 		})
 
 		$("#content").on("click", ".check", function() {
@@ -144,14 +174,16 @@
 		}
 		function getBlockList() {
 			$("#content").empty();
-			$.get("./list/getMemberList?mem_access=1", function(result) {
+			$.get("./list/getMemberList?mem_access=1&handling=0", function(
+					result) {
 				$("#content").append(result);
 			})
 		}
 
 		function getMemberList() {
 			$("#content").empty();
-			$.get("./list/getMemberList?mem_access=0", function(result) {
+			$.get("./list/getMemberList?mem_access=0&handling=0", function(
+					result) {
 				$("#content").append(result);
 			})
 		}
@@ -163,7 +195,6 @@
 				kind : kind,
 				search : search
 			}, function(result) {
-				console.log(result);
 				$("#content").append(result);
 			})
 		}
@@ -179,6 +210,8 @@
 				$("#content").append(result)
 			})
 		}
+		/* function accessManage() {
+			} */
 	</script>
 </body>
 </html>

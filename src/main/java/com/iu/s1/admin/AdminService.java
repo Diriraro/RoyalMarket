@@ -125,5 +125,10 @@ public class AdminService {
 		}
 		return visitorVO;
 	}
+	
+	public int accessManage(MemberVO memberVO) throws Exception {
+		return memberRepository.accessManage(memberVO);
+		
+	}
 
 }
