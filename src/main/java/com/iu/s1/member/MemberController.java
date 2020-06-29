@@ -93,7 +93,7 @@ public class MemberController {
 		int sellProduct = sell.size();
 		
 		if(memberVO != null) {
-				session.setAttribute("memberVO", memberVO);
+				session.setAttribute("member", memberVO);
 			if(sell.isEmpty()) {
 				mv.addObject("result", "로그인 성공");
 				mv.addObject("path", "../");

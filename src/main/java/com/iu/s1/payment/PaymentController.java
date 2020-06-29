@@ -32,14 +32,14 @@ public class PaymentController {
 	public ModelAndView pay(long amount,HttpServletRequest request) throws Exception{
 		ModelAndView mv = new ModelAndView();
 		String key =UUID.randomUUID().toString();	
-		MemberVO memberVO = (MemberVO)request.getSession().getAttribute("memberVO");
+		MemberVO memberVO = (MemberVO)request.getSession().getAttribute("member");
 		
 		//결제창 들어갈 때 UUID로 paycheckID 생성 
 		PayCheckVO payCheckVO = new PayCheckVO();
 		payCheckVO.setMem_id(memberVO.getMem_id());
 		payCheckVO.setPay_checkId(key);
-		
 		paymentService.paycheckInsert(payCheckVO);
+		
 		mv.addObject("key", key);
 		mv.addObject("amount", amount);
 		mv.setViewName("/payment/pay");
@@ -99,7 +99,7 @@ public class PaymentController {
 	@GetMapping("pointCharge")
 	public ModelAndView pointCharge(HttpServletRequest request)throws Exception{
 		ModelAndView mv = new ModelAndView();
-		MemberVO memberVO = (MemberVO)request.getSession().getAttribute("memberVO");
+		MemberVO memberVO = (MemberVO)request.getSession().getAttribute("member");
 	
 		//맴버테이블에서 포인트 조회
 		String mem_id = memberVO.getMem_id();
@@ -123,7 +123,7 @@ public class PaymentController {
 	@GetMapping("productPay")
 	public ModelAndView productPay(HttpServletRequest request)throws Exception{
 		ModelAndView mv = new ModelAndView();
-		MemberVO memberVO = (MemberVO)request.getSession().getAttribute("memberVO");
+		MemberVO memberVO = (MemberVO)request.getSession().getAttribute("member");
 		String sell_product = request.getParameter("sell_product");
 		long sell_price = Long.parseLong(request.getParameter("sell_price"));
 		long sell_num = Long.parseLong(request.getParameter("sell_num"));
@@ -155,7 +155,7 @@ public class PaymentController {
 		
 		// 결제 진행 테이블 입력
 		paymentService.product_sell_statusUp(sell_num);
-		MemberVO memberVO = (MemberVO)request.getSession().getAttribute("memberVO");
+		MemberVO memberVO = (MemberVO)request.getSession().getAttribute("member");
 		TradingVO tradingVO = new TradingVO();
 		tradingVO.setSell_price(sell_price);
 		tradingVO.setSell_num(sell_num);
@@ -209,7 +209,7 @@ public class PaymentController {
 	@GetMapping("pointManage")
 	public ModelAndView pointManage(HttpServletRequest request)throws Exception{
 		ModelAndView mv = new ModelAndView();
-		MemberVO memberVO = (MemberVO)request.getSession().getAttribute("memberVO");
+		MemberVO memberVO = (MemberVO)request.getSession().getAttribute("member");
 	
 		
 		List<PayVO> ar =paymentService.pointManage(memberVO.getMem_id());
@@ -223,7 +223,7 @@ public class PaymentController {
 	@GetMapping("buy_History")
 	public ModelAndView buy_History(HttpServletRequest request)throws Exception{
 		ModelAndView mv = new ModelAndView();
-		MemberVO memberVO = (MemberVO)request.getSession().getAttribute("memberVO");
+		MemberVO memberVO = (MemberVO)request.getSession().getAttribute("member");
 		
 		List<Buy_HistoryVO> vo = paymentService.buy_hisSelect(memberVO.getMem_id());
 		
@@ -237,7 +237,7 @@ public class PaymentController {
 	@GetMapping("sell_History")
 	public ModelAndView sell_History(HttpServletRequest request)throws Exception{
 		ModelAndView mv = new ModelAndView();
-		MemberVO memberVO = (MemberVO)request.getSession().getAttribute("memberVO");
+		MemberVO memberVO = (MemberVO)request.getSession().getAttribute("member");
 		
 		List<Sell_HistoryVO> ar = paymentService.sell_hisSelect(memberVO.getMem_id());
 	

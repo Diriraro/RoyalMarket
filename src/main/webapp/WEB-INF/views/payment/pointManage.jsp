@@ -11,7 +11,7 @@
 <body>
 	<c:import url="../template/nav.jsp"></c:import>
 	<div class="container">
-		<h1>${memberVO.mem_id}님의 Point 내역</h1>
+		<h1>${member.mem_id}님의 Point 내역</h1>
 		<table class="table table-hover">
 			<tr>
 				<td>구분</td>
