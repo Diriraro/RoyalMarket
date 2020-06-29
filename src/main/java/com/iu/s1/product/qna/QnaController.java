@@ -18,7 +18,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.iu.s1.member.MemberVO;
 
 @Controller
-@RequestMapping("/qna")
+@RequestMapping("/productQna/**/")
 public class QnaController {
 	
 	@Autowired

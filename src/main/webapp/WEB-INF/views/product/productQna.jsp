@@ -22,7 +22,7 @@
 		function qnaList() {
 			$
 					.ajax({
-						url : '/qna/qnaList',
+						url : '/productQna/qnaList',
 						type : 'get',
 						data : {
 							'sell_num' : sell_num
@@ -62,11 +62,11 @@
 		function qnaInsert(insertData) {
 			var qnacontents = $("#pq_contents").val().trim();
 			if(qnacontents==""){
-				alert("사진을 1개 이상 올려주세요");
+				alert("문의사항을 입력해주세요");
 				stopPropagation();
 				}else{
 			$.ajax({
-				url : '/qna/qnaInsert',
+				url : '/productQna/qnaInsert',
 				type : 'post',
 				data : insertData,
 				success : function(data) {
@@ -82,7 +82,7 @@
 		//댓글 삭제 
 		function qnaDelete(sell_num) {
 			$.ajax({
-				url : '/qna/qnaDelete/' + sell_num,
+				url : '/productQna/qnaDelete/' + sell_num,
 				type : 'post',
 				success : function(data) {
 					if (data == 1)
