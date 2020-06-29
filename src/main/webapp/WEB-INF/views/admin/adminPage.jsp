@@ -73,7 +73,6 @@
 	<script type="text/javascript">
 		$(function() {
 			getDashBoard();
-			$("#content").append()
 			$(".info").on("mouseover", function() {
 				$(this).find(".contents").css("display", "block");
 				$(this).find(".focus").addClass("focus_sub");
@@ -82,9 +81,6 @@
 				$(this).find(".contents").css("display", "none");
 				$(this).find(".focus").removeClass("focus_sub");
 			})
-			/* 			$(".stats").click(function() {
-			 $(this).find(".contents").css("display", "none");
-			 }) */
 			$(".check").click(function() {
 				var path = $(this).prop("title");
 				if (path == 'MemberList') {
@@ -112,6 +108,7 @@
 							$.get("./list/getMemberList?mem_storeNum="
 									+ storeNum + "&handling=1&mem_access=0",
 									function(result) {
+										alert("변경되었습니다.");
 										$("#content").append(result);
 									})
 						}
@@ -126,6 +123,7 @@
 							$.get("./list/getMemberList?mem_storeNum="
 									+ storeNum + "&handling=1&mem_access=1",
 									function(result) {
+										alert("변경되었습니다.");
 										$("#content").append(result);
 									})
 						}
@@ -198,20 +196,21 @@
 				$("#content").append(result);
 			})
 		}
+		
 		function getProductList() {
 			$("#content").empty();
 			$.get("./list/getProductList", function(result) {
 				$("#content").append(result);
 			})
 		}
+		
 		function getNoticeList() {
 			$("#content").empty();
 			$.get("./list/getNoticeList", function(result) {
 				$("#content").append(result)
 			})
 		}
-		/* function accessManage() {
-			} */
+
 	</script>
 </body>
 </html>
