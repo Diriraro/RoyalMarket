@@ -10,9 +10,9 @@
       <li class="active"><a href="${pageContext.request.contextPath}/">Home</a></li>
       <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Page 1 <span class="caret"></span></a>
         <ul class="dropdown-menu">
-          <li><a href="${pageContext.request.contextPath}/notice/noticeList">Notice</a></li>
           <li><a href="${pageContext.request.contextPath}/qna/qnaList">QNA</a></li>
-          <li><a href="#">Page 1-3</a></li>
+
+          <li><a href="javascript:popup()">포인트 충전</a></li>
         </ul>
       </li>
       <li><a href="#">Page 2</a></li>
@@ -23,9 +23,17 @@
       <li><a href="${pageContext.request.contextPath}/member/memberLogin"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
     </c:if>
      <c:if test="${not empty member}">
-      <li><a href="${pageContext.request.contextPath}/member/memberPage"><span class="glyphicon glyphicon-user"></span> MyPAge</a></li>
+      <li><a href="${pageContext.request.contextPath}/member/memberPage"><span class="glyphicon glyphicon-user"></span> MyPage</a></li>
       <li><a href="${pageContext.request.contextPath}/member/memberLogout"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
     </c:if>
     </ul>
   </div>
 </nav>
+<script type="text/javascript">
+	function popup(){
+	    var url = "payment/pointCharge";
+	    var name = "포인트 충전";
+	    var option = "width = 500, height = 500, top = 100, left = 200, location = no"
+	    window.open(url, name, option);
+	}
+</script>

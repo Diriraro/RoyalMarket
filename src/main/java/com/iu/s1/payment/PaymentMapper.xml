@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+ <mapper namespace="com.iu.s1.payment.PaymentMapper">
+ 	<!-- point 입 출금 업데이트 -->
+ 	<update id="pointUpdate" parameterType="com.iu.s1.member.MemberVO">
+ 		update member set mem_point=#{mem_point} where mem_id=#{mem_id}
+ 	</update>
+ 	
+ 	<!-- 포인트 검색 -->
+ 	<select id="pointSelect" parameterType="java.lang.String" resultType="java.lang.Long">
+ 		select mem_point from member where mem_id=#{mem_id}
+ 	</select>
+ 	
+ 	<!-- 상품의 이름 검색 -->
+ 	<select id="productName" parameterType="java.lang.Long" resultType="java.lang.String">
+ 		select sell_product from store_product where sell_num=#{sell_num}
+ 	</select>
+ 	
+ 	<!-- 입금 입력-->
+ 	<insert id="paymentCharge" parameterType="com.iu.s1.payment.PayVO">
+ 		insert into payment values(0,#{pay_price},1,0,#{mem_id},#{point_rest})
+ 	</insert>
+ 	
+ 	<!-- 출금 입력 -->
+ 	<insert id="paymentOut" parameterType="com.iu.s1.payment.PayVO">
+ 		insert into payment values(0,#{pay_price},0,1,#{mem_id},#{point_rest})
+ 	</insert>
+ 	
+ 	<!-- 입출금 거래 내역 검색 -->
+ 	<select id="pointManage" parameterType="java.lang.String" resultType="com.iu.s1.payment.PayVO">
+ 		select * from payment where mem_id=#{id}
+ 	</select>
+ 	
+ 	<!--거래중 테이블 -->
+ 	<insert id="tradingInsert" parameterType="com.iu.s1.trading.TradingVO">
+ 		insert into trading values(#{sell_num},#{sell_price},#{buyer_id},#{seller_id},0,0,0)
+ 	</insert>
+ 	
+ 	<!-- 판매자 아이디 조회 -->
+ 	<select id="seller_id_select" parameterType="java.lang.Long" resultType="java.lang.String">
+ 		select mem_id from member where mem_storeNum
+ 		=(select mem_storeNum from store_product where sell_num=#{sell_num})
+ 	</select>
+ 	
+ 	<!-- 구매내역 추가 -->
+ 	<insert id="buy_his" parameterType="com.iu.s1.paymentHistory.Buy_HistoryVO">
+ 		insert into buy_history values(#{mem_id},#{sell_num},#{sell_price},0,0,#{sell_product})
+ 	</insert>
+ 	
+ 	<!-- 판매내역 추가 -->
+ 	<insert id="sell_his" parameterType="com.iu.s1.paymentHistory.Sell_HistoryVO">
+ 		insert into sell_history values(#{mem_id},#{sell_num},#{sell_price},0,0,#{sell_product})
+ 	</insert>
+ 	
+ 	<!-- 구매 내역 출력 -->
+ 	<select id="buy_hisSelect" parameterType="java.lang.String" resultType="com.iu.s1.paymentHistory.Buy_HistoryVO">
+ 		select * from buy_history where mem_id=#{mem_id}
+ 	</select>
+ 	
+ 	<!-- 판매 내역 출력 -->
+  	<select id="sell_hisSelect" parameterType="java.lang.String" resultType="com.iu.s1.paymentHistory.Sell_HistoryVO">
+ 		select * from sell_history where mem_id=#{mem_id}
+ 	</select>
+ 	
+ 	<!-- 판매자 포인트 업데이트 -->
+ 	<update id="sellerPointUpdate">
+ 	
+ 	</update>
+ 	
+ 	<!-- 인수 업데이트 -->
+ 	<update id="tradingReceiveUp" parameterType="com.iu.s1.trading.TradingVO">
+ 		update trading set receive=#{receive} where sell_num=#{sell_num}
+ 	</update>
+ 	
+ 	<!-- 인수 업데이트2 -->
+ 	<update id="buy_statusUp" parameterType="com.iu.s1.paymentHistory.Buy_HistoryVO">
+ 		update buy_history set status=#{status} where sell_num=#{sell_num}
+ 	</update>
+ 	
+ 	<!-- 인계 업데이트 -->
+ 	<update id="tradingGiveUp" parameterType="com.iu.s1.trading.TradingVO">
+ 		update trading set give=#{give} where sell_num=#{sell_num}
+ 	</update>
+ 	
+ 	<!-- 인수 업데이트2 -->
+ 	<update id="sell_statusUp" parameterType="com.iu.s1.paymentHistory.Sell_HistoryVO">
+ 		update sell_history set status=#{status} where sell_num=#{sell_num}
+ 	</update>
+ 	
+ 	<!-- trading Select -->
+ 	<select id="tradingSelect" parameterType="java.lang.Long" resultType="com.iu.s1.trading.TradingVO">
+ 		select * from trading where sell_num=#{sell_num}
+ 	</select>
+ 	
+ 	<!--  trading Delete -->
+ 	<delete id="tradingDelete" parameterType="java.lang.Long">
+ 		delete from trading where sell_num=#{sell_num} 
+ 	</delete>
+ 	
+ 	<!-- 판매자가 로그인 했을 때 판매가 들어온 상품이 있는지 없는지 확인 -->
+ 	<select id="seller_check" parameterType="java.lang.String" resultType="com.iu.s1.paymentHistory.Sell_HistoryVO">
+ 		select * from sell_history where mem_id=#{seller_id} and status=0
+ 	</select>
+ 	
+ 	<!-- buy_history 삭제 -->
+ 	<delete id="del_buyHistory" parameterType="java.lang.Long">
+ 		delete from buy_history where sell_num=#{sell_num}
+ 	</delete>
+ 	
+ 	<!-- sell_history 삭제 -->
+ 	<delete id="del_sellHistory" parameterType="java.lang.Long">
+ 		delete from sell_history where sell_num=#{sell_num}
+ 	</delete>
+ 	
+ 	<!-- 거래를 시작 할때 예약중으로 바꾸기 -->
+ 	<update id="product_sell_statusUp" parameterType="java.lang.Long">
+ 		update store_product set sell_status=1 where sell_num=#{sell_num};
+ 	</update>
+ 	
+ 	<!-- paycheckId 생성 -->
+ 	<insert id="paycheckInsert" parameterType="com.iu.s1.paycheck.PayCheckVO">
+ 		insert into paycheck values(#{mem_id},#{pay_checkId})
+ 	</insert>
+  	<!-- paycheckId 조회 -->
+  	<select id="paycheckSelect" parameterType="java.lang.String" resultType="java.lang.String">
+  		select pay_checkId from paycheck where mem_id=#{mem_id}
+  	</select>
+  	<!-- paycheckId 삭제 -->
+  	<delete id="paycheckDel" parameterType="java.lang.String">
+  		delete from paycheck where mem_id=#{mem_id}
+  	</delete>
+  		
+ </mapper>
