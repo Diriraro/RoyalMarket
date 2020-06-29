@@ -2,9 +2,9 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.iu.s1.product.qna.QnaMapper">
+<mapper namespace="com.iu.s1.product.qna.ProductQnaMapper">
 
-	<insert id="qnaInsert" parameterType="QnaVO">
+	<insert id="qnaInsert" parameterType="ProductQnaVO">
 		insert into product_qna
 		values(0,#{sell_num},#{pq_storeNum},#{pq_contents},now(),#{pq_storeName})
 	</insert>
@@ -13,7 +13,7 @@
 		delete from product_qna where pq_num=#{pq_num}
 	</delete>
 
-    <select id="qnaList" parameterType="Long" resultType="QnaVO">
+    <select id="qnaList" parameterType="Long" resultType="ProductQnaVO">
         SELECT * FROM product_qna where sell_num=#{sell_num} ORDER BY pq_num desc limit 5
     </select>
     
