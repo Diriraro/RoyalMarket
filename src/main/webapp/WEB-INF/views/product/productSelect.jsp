@@ -131,7 +131,7 @@
 
 			<form action="zzimInsert" method="post">
 				<input type="hidden" value="${zc.zzim_num}"> <input
-					type="hidden" name="mem_storeNum" value="${memberVO.mem_storeNum}" />
+					type="hidden" name="mem_storeNum" value="${member.mem_storeNum}" />
 				<input type="hidden" name="sell_num" value="${vo.sell_num}" />
 
 				<c:if test="${empty zc.zzim_num}">
@@ -164,7 +164,7 @@
 	
 	<div style="width: 348px;margin-left: 440px;margin-top:100px;" > </div>
 	
-	<div style="width: 1024px; height: 360px; margin-left: 440px;border-bottom: solid 1px #e4e4e4;">
+	<div style="width: 1024px; height: 360px; margin-left: 440px;">
 	
 	<div style="float:left; height: 50px;width: 348px;
 	border-left:solid 1px black;border-right:solid 1px black;border-top:solid 1px black;
@@ -175,7 +175,7 @@
 	<br><br><br><br><br>
 	<font style="font-size: 18px;font-weight: 900;">상품정보</font>
 	<hr><br>
-	<font>${vo.sell_info}</font>
+	<pre style="background-color: white; border-color: white;">${vo.sell_info}</pre>
 	<br><br><hr>
 	
 	<div style="float:left; height: 70px;width: 341px;">
@@ -198,8 +198,6 @@
 	<br>
 	<div style="text-align:center; color: #4d555e; font-size: 14px; font-weight: 600;margin-top: 10px;">${vo.sell_tag}</div>
 	</div>
-	
-<hr>
 	</div>
 
 	
@@ -211,7 +209,8 @@
 		onclick="location.href='./productUpdate?sell_num=${vo.sell_num}'"></div>
 		
 	<!--  상품문의  -->
-	<div style="width: 663px; height:650px;margin-left:440px; background-color: yellow;">
+	<hr style="width: 1024px;">
+	<div style="width: 663px; height:700px;margin-left:440px; background-color: yellow;">
 	<font style="font-size: 18px;font-weight: 900;">상품문의</font>
 	<hr>
 
@@ -219,12 +218,12 @@
 		<form name="qnaInsertForm">
 			<div class="input-group">
 				<input type="hidden" name="sell_num" value="${vo.sell_num}" /> 
-				<input type="hidden" name="pq_storeNum" value="${memberVO.mem_storeNum}" />
-				<input type="hidden" id="pq_storeName" name="pq_storeName" value="${memberVO.mem_storeName}" /> 
-					<textarea style="width: 645px;height: 80px;" class="form-control" id="pq_contents" name="pq_contents"placeholder="내용을 입력하세요.">
-			         </textarea><span class="input-group-btn"> 
-					<button class="btn btn-default" type="button" name="qnaInsertBtn">등록</button>
-				</span>
+				<input type="hidden" name="pq_storeNum" value="${member.mem_storeNum}" />
+				<input type="hidden" id="pq_storeName" name="pq_storeName" value="${member.mem_storeName}" /> 
+					<textarea style="width: 630px;height: 80px;" class="form-control" id="pq_contents" name="pq_contents"placeholder="내용을 입력하세요."></textarea>
+					<div>
+					<button id="qnaInsert" class="btn btn-default" type="button" name="qnaInsertBtn">등록</button>
+					</div>
 			</div>
 		</form>
 	</div>
@@ -239,6 +238,11 @@
 			alert("asdasd");
 			$("#pq_contents").val("@" + $(this).val() + " : ");
 		});
+
+		
+
+
+		
 	</script>
 
 	<!--                     추가                         -->

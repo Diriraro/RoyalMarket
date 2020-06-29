@@ -93,7 +93,7 @@ public class ProductController {
 		List<ProductFileVO> productFileVOs = productService.productFileSelect(sell_num);
 		mv.addObject("pfile", productFileVOs); // store 사진 출력
 		
-		long mem_storeNum = ((MemberVO)session.getAttribute("memberVO")).getMem_storeNum();
+		long mem_storeNum = ((MemberVO)session.getAttribute("member")).getMem_storeNum();
 		ZzimVO zzimVO = productService.zzimCheck(mem_storeNum,sell_num);
 		mv.addObject("zc", zzimVO);
 		

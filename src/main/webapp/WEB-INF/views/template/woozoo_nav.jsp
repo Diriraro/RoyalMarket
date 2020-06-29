@@ -52,7 +52,7 @@ body {
 		</div>
 		<div style="display: inline-block; margin-right: 100px;">
 		
-	<c:if test="${empty sessionScope.memberVO}">
+	<c:if test="${empty sessionScope.member}">
 	<div style="margin-right: 250px;margin-top: 9px;">
 	  <a href="${pageContext.request.contextPath}/member/memberLogin"><font style="font-weight: 800; font-size: 13px;color: #666666;">로그인</font></a>
       <font>&nbsp;ㅣ&nbsp;</font>
@@ -60,7 +60,7 @@ body {
     </div>
     </c:if>
     
-     <c:if test="${not empty sessionScope.memberVO}">
+     <c:if test="${not empty sessionScope.member}">
      <div style="margin-right: 250px;margin-top: 9px;">
       <a href="${pageContext.request.contextPath}/member/memberLogout"> <font style="font-weight: 800; font-size: 13px;color: #666666;">로그아웃</font></a>
       <font>&nbsp;ㅣ&nbsp;</font>

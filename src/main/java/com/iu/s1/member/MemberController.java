@@ -83,7 +83,7 @@ public class MemberController {
 		memberVO = memberService.memberLogin(memberVO);
 		
 		if(memberVO != null) {
-			session.setAttribute("memberVO", memberVO);
+			session.setAttribute("member", memberVO);
 			mv.addObject("result", "로그인 성공");
 			mv.addObject("path", "../");
 			mv.setViewName("common/result");
