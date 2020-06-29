@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
 import com.iu.s1.member.MemberVO;
+import com.iu.s1.paycheck.PayCheckVO;
 import com.iu.s1.paymentHistory.Buy_HistoryVO;
 import com.iu.s1.paymentHistory.Sell_HistoryVO;
 import com.iu.s1.trading.TradingVO;
@@ -57,4 +58,10 @@ public interface PaymentMapper {
 	public int del_sellHistory(long sell_num)throws Exception;
 	
 	public int product_sell_statusUp(long sell_num)throws Exception;
+	
+	public int paycheckInsert(PayCheckVO payCheckVO)throws Exception;
+	
+	public String paycheckSelect(String mem_id)throws Exception;
+	
+	public int paycheckDel(String mem_id)throws Exception;
 }

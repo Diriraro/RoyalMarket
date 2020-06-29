@@ -2,6 +2,7 @@ package com.iu.s1.payment;
 
 
 import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.iu.s1.member.MemberVO;
+import com.iu.s1.paycheck.PayCheckVO;
 import com.iu.s1.paymentHistory.Buy_HistoryVO;
 import com.iu.s1.paymentHistory.Sell_HistoryVO;
 import com.iu.s1.trading.TradingVO;
@@ -27,8 +29,18 @@ public class PaymentController {
 	
 	//결제로 들어가는 페이지
 	@GetMapping("pay")
-	public ModelAndView pay(long amount) throws Exception{
+	public ModelAndView pay(long amount,HttpServletRequest request) throws Exception{
 		ModelAndView mv = new ModelAndView();
+		String key =UUID.randomUUID().toString();	
+		MemberVO memberVO = (MemberVO)request.getSession().getAttribute("memberVO");
+		
+		//결제창 들어갈 때 UUID로 paycheckID 생성 
+		PayCheckVO payCheckVO = new PayCheckVO();
+		payCheckVO.setMem_id(memberVO.getMem_id());
+		payCheckVO.setPay_checkId(key);
+		
+		paymentService.paycheckInsert(payCheckVO);
+		mv.addObject("key", key);
 		mv.addObject("amount", amount);
 		mv.setViewName("/payment/pay");
 		
@@ -40,30 +52,47 @@ public class PaymentController {
 	public String paySuccess(HttpServletRequest httpServletRequest,MemberVO memberVO)throws Exception{
 		PayVO payVO = new PayVO();
 		
+		
 		long amount = Long.parseLong(httpServletRequest.getParameter("amount"));
 		long mem_point = Long.parseLong(httpServletRequest.getParameter("mem_point"));
+		String key = httpServletRequest.getParameter("key");
+		String checkKey=paymentService.paycheckSelect(httpServletRequest.getParameter("mem_id"));
 		
-		//완료페이지를 갈때 맴버 포인트 업데이트
-		mem_point = mem_point + amount;
-		memberVO.setMem_point(mem_point);
-		memberVO.setMem_id(httpServletRequest.getParameter("mem_id"));
+		if(key.equals(checkKey)) {
+
+			//완료페이지를 갈때 맴버 포인트 업데이트
+			mem_point = mem_point + amount;
+			memberVO.setMem_point(mem_point);
+			memberVO.setMem_id(httpServletRequest.getParameter("mem_id"));
+		
+			//현재 포인트 조회
+			long nowPoint = paymentService.pointSelect(httpServletRequest.getParameter("mem_id"));
+
+			
+			//충전 내역 업데이트
+			payVO.setMem_id(httpServletRequest.getParameter("mem_id"));
+			payVO.setPay_price(amount);
+			payVO.setPoint_rest(nowPoint+amount);
+			paymentService.paymentCharge(payVO);
+			
+			paymentService.pointUpdate(memberVO);
 	
-		//현재 포인트 조회
-		long nowPoint = paymentService.pointSelect(httpServletRequest.getParameter("mem_id"));
-		
-		
-		
-		//충전 내역 업데이트
-		payVO.setMem_id(httpServletRequest.getParameter("mem_id"));
-		payVO.setPay_price(amount);
-		payVO.setPoint_rest(nowPoint+amount);
-		paymentService.paymentCharge(payVO);
-		
-		int result = paymentService.pointUpdate(memberVO);
-		
-		System.out.println(result);
-		
-		return("payment/paySuccess");
+			//paycheckId 삭제
+			paymentService.paycheckDel(httpServletRequest.getParameter("mem_id"));
+			
+			return("payment/paySuccess");
+		}else {
+			//paycheckId 삭제
+			paymentService.paycheckDel(httpServletRequest.getParameter("mem_id"));
+			return "payment/payFail";
+	
+		}
+	}
+	
+	@GetMapping("payFail")
+	public String payFail()throws Exception{
+		System.out.println("test");
+		return "payment/payFail"; 
 	}
 	
 	// 포인트 충전 
@@ -75,7 +104,6 @@ public class PaymentController {
 		//맴버테이블에서 포인트 조회
 		String mem_id = memberVO.getMem_id();
 		long point = paymentService.pointSelect(mem_id);
-		
 		
 		mv.addObject("point", point);
 		mv.setViewName("/payment/pointCharge");

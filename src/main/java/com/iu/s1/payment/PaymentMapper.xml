@@ -120,5 +120,17 @@
  		update store_product set sell_status=1 where sell_num=#{sell_num};
  	</update>
  	
- 	
+ 	<!-- paycheckId 생성 -->
+ 	<insert id="paycheckInsert" parameterType="com.iu.s1.paycheck.PayCheckVO">
+ 		insert into paycheck values(#{mem_id},#{pay_checkId})
+ 	</insert>
+  	<!-- paycheckId 조회 -->
+  	<select id="paycheckSelect" parameterType="java.lang.String" resultType="java.lang.String">
+  		select pay_checkId from paycheck where mem_id=#{mem_id}
+  	</select>
+  	<!-- paycheckId 삭제 -->
+  	<delete id="paycheckDel" parameterType="java.lang.String">
+  		delete from paycheck where mem_id=#{mem_id}
+  	</delete>
+  		
  </mapper>

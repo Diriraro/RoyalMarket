@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.iu.s1.member.MemberVO;
+import com.iu.s1.paycheck.PayCheckVO;
 import com.iu.s1.paymentHistory.Buy_HistoryVO;
 import com.iu.s1.paymentHistory.Sell_HistoryVO;
 import com.iu.s1.trading.TradingVO;
@@ -101,4 +102,14 @@ public class PaymentService {
 	public int product_sell_statusUp(long sell_num)throws Exception{
 		return paymentMapper.product_sell_statusUp(sell_num);
 	}
+	public int paycheckInsert(PayCheckVO payCheckVO)throws Exception{
+		return paymentMapper.paycheckInsert(payCheckVO);
+	}
+	public String paycheckSelect(String mem_id)throws Exception{
+		return paymentMapper.paycheckSelect(mem_id);
+	}
+	public int paycheckDel(String mem_id)throws Exception{
+		return paymentMapper.paycheckDel(mem_id);
+	}
+	
 }

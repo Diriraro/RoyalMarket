@@ -12,7 +12,7 @@
         <ul class="dropdown-menu">
           <li><a href="${pageContext.request.contextPath}/qna/qnaList">QNA</a></li>
 
-          <li><a href="#">Page 1-3</a></li>
+          <li><a href="javascript:popup()">포인트 충전</a></li>
         </ul>
       </li>
       <li><a href="#">Page 2</a></li>
@@ -30,3 +30,11 @@
     </ul>
   </div>
 </nav>
+<script type="text/javascript">
+	function popup(){
+	    var url = "payment/pointCharge";
+	    var name = "포인트 충전";
+	    var option = "width = 500, height = 500, top = 100, left = 200, location = no"
+	    window.open(url, name, option);
+	}
+</script>

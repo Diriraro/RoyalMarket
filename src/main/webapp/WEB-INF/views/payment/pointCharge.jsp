@@ -7,19 +7,39 @@
 <meta charset="UTF-8">
 <title>Test님의 코인 충전</title>
 <c:import url="../template/boot.jsp"></c:import>
+<style type="text/css">
+.wrap1{
+	width: 100%;
+	
+}
+
+</style>
 </head>
 <body>
-
-	<c:import url="../template/nav.jsp"></c:import>
-	
-<h1> ${memberVO.mem_id}님의 코인 결제</h1>
-	<div class="container">
-	<h1>${point}코인</h1>
-	<form action="/payment/pay" method="get">
-		<input type="text" id="amount" name="amount">
-		<button type="submit">충전하기</button>
-	</form>
-	
+	<div style="width: 100%; height:50px ;background-color: #5c2392;"class="wrap1" >
+		<div style="color:white; font-size: x-large; text-align: center; line-height:50px;"><b style="margin-top: 100px;">포인트 충전하기</b></div>
 	</div>
+	
+	<div class="container">
+	
+		<div style="border: 1px solid black; display: block; height:50px; border-radius: 4px; margin-top:30px;">
+			<div style="display: inline-block; float: left; margin-top: 4px; margin-left: 3px;"><h4><b>현재 ${memberVO.mem_id}님의 보유 포인트</b></h4></div>
+			<div style="display: inline-block; float: right; margin-top: 4px; margin-right: 3px; "> <h4><b> ${point}원 </b></h4></div>
+		</div>
+		
+		<h3>충전 선택</h3>
+		<div style="float: left; height: 30px; width: 80px; border-radius:4px; background-color: #00e6e6; text-align: center; line-height: 30px; ">카카오페이</div>
+		<div style="width: 400px;"></div>
+	
+		<div style=" height: 20px; width: 70px; margin-top: 50px; float: left;">충전 금액 </div>
+		<input type="text" id="amount" name="amount" style="height:50px; border-radius: 4px; margin-top:30px;">
+		
+		
+		<form action="/payment/pay" method="get">
+			<button type="submit" style="background-color: #5c2392; height: 30px; margin-top: 30px; color: white; float: left">충전하기</button>
+		</form>
+
+	</div>
+	
 </body>
 </html>
