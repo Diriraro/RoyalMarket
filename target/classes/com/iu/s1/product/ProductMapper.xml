@@ -71,6 +71,16 @@
 		update store_product set sell_hit = sell_hit+1
 		where sell_num=#{sell_num}
 	</update>
-
+	
+	<update id="productUpdate" parameterType="ProductVO">
+		update store_product set sell_product=#{sell_product}, 
+		sell_price=#{sell_price}, sell_info=#{sell_info},
+		sell_kind=#{sell_kind}, sell_tag=#{sell_tag}
+		where sell_num=#{sell_num}
+	</update>
+	
+	<delete id="productDelete" parameterType="ProductVO">
+		delete from store_product where sell_num=#{sell_num}
+	</delete>
 
 </mapper>

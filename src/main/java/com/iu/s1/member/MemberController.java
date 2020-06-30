@@ -36,13 +36,19 @@ public class MemberController {
 	private String checkNum = "";
 
 	@PostMapping("memberJoin")
-	public ModelAndView memberJoin(@Valid MemberVO memberVO, BindingResult bindingResult) throws Exception {
-
+	public ModelAndView memberJoin(@Valid MemberVO memberVO,BindingResult bindingResult, String check_num) throws Exception{
 		ModelAndView mv = new ModelAndView();
-
-		boolean result = memberService.memberCheck(memberVO, bindingResult, checkNum);
-
-		if (result) {
+		
+		boolean result = memberService.memberCheck(memberVO, bindingResult,check_num);
+		System.out.println(check_num);
+		System.out.println(checkNum);
+		if(check_num.equals(checkNum)) {
+			System.out.println("인증성공");
+		}else {
+			System.out.println("인증실패");
+		}
+		
+		if(result) {
 			mv.setViewName("member/memberJoin");
 		} else {
 			// 정상작동
@@ -79,12 +85,13 @@ public class MemberController {
 		response.addCookie(cookie);
 
 		memberVO = memberService.memberLogin(memberVO);
-
-		if (memberVO != null) {
-			List<Sell_HistoryVO> sell = paymentService.seller_check(memberVO.getMem_id());
-			int sellProduct = sell.size();
-			session.setAttribute("member", memberVO);
-			if (sell.isEmpty()) {
+		
+		List<Sell_HistoryVO> sell =paymentService.seller_check(memberVO.getMem_id());
+		int sellProduct = sell.size();
+		
+		if(memberVO != null) {
+				session.setAttribute("member", memberVO);
+			if(sell.isEmpty()) {
 				mv.addObject("result", "로그인 성공");
 				mv.addObject("path", "../");
 				mv.setViewName("common/result");
@@ -146,3 +153,4 @@ public class MemberController {
 	}
 
 }
+	

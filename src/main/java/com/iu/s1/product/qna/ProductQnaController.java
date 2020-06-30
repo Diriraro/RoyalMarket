@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
+import com.iu.s1.product.qna.ProductQnaService;
 import com.iu.s1.member.MemberVO;
 import com.iu.s1.product.qna.ProductQnaService;
 

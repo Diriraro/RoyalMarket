@@ -26,5 +26,9 @@ public interface ProductMapper {
 
 	public long hitUpdate(long sell_num)throws Exception;
 	
+	public long productUpdate(ProductVO productVO) throws Exception;
+	
+	public int productDelete(ProductVO productVO) throws Exception;
+	
 	
 }
