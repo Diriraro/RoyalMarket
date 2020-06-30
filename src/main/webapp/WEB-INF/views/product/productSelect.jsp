@@ -208,6 +208,14 @@
 		style="height: 100px; width: 80px; cursor: pointer; background-color: black;"
 		onclick="location.href='./productUpdate?sell_num=${vo.sell_num}'"></div>
 		
+		
+			<div class="panel panel-info"
+		style="height: 100px; width: 80px; cursor: pointer; background-color: red;"
+		onclick="location.href='./productDelete?sell_num=${vo.sell_num}'"></div>
+		
+		
+		
+		
 	<!--  상품문의  -->
 	<hr style="width: 1024px;">
 	<div style="width: 663px; margin-left:440px; background-color: yellow;float: left;">

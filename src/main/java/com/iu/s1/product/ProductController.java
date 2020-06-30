@@ -68,11 +68,13 @@ public class ProductController {
 		for (ProductVO productVOs : ar) {
 			long sell_num = productVOs.getSell_num();
 			ar2.add(productService.selectFileName(sell_num));
-
+			productVOs.setMem_address(productService.productAddress(sell_num).getMem_address());
 			index++;
 
 		}
+		
 		mv.addObject("file", ar2);
+
 		mv.addObject("pager", pager);
 		mv.setViewName("product/productList");
 
@@ -150,6 +152,16 @@ public class ProductController {
 		System.out.println(old_url);
 		rd.addFlashAttribute("result", result);
 		mv.setViewName("redirect:"+old_url);
+		return mv;
+		
+	}
+	
+	@GetMapping("productDelete")
+	public ModelAndView productDelete(ProductVO productVO,RedirectAttributes rd,HttpServletRequest request) throws Exception{
+		ModelAndView mv = new ModelAndView();
+		int result = productService.productDelete(productVO);
+		rd.addFlashAttribute("result", result);
+		mv.setViewName("redirect:../");
 		return mv;
 		
 	}

@@ -106,4 +106,8 @@ public class ProductService {
 	public long zzimCount(long sell_num)throws Exception{
 		return zzimMapper.zzimCount(sell_num);
 	}
+	
+	public int productDelete(ProductVO productVO)throws Exception{
+		return productMapper.productDelete(productVO);
+	}
 }
