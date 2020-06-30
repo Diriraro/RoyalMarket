@@ -21,21 +21,22 @@
 	</div>
 	
 	<div class="container">
-	
 		<div style="border: 1px solid black; display: block; height:50px; border-radius: 4px; margin-top:30px;">
 			<div style="display: inline-block; float: left; margin-top: 4px; margin-left: 3px;"><h4><b>현재 ${member.mem_id}님의 보유 포인트</b></h4></div>
 			<div style="display: inline-block; float: right; margin-top: 4px; margin-right: 3px; "> <h4><b> ${point}원 </b></h4></div>
 		</div>
 		
 		<h3>충전 선택</h3>
-		<div style="float: left; height: 30px; width: 80px; border-radius:4px; background-color: #00e6e6; text-align: center; line-height: 30px; ">카카오페이</div>
-		<div style="width: 400px;"></div>
-	
-
+		<div style="width: 100%; height: 50px;">
+			<div style="float: left; height: 30px; width: 80px; border-radius:4px; background-color: #00e6e6; text-align: center; line-height: 30px; ">카카오페이</div>
+		</div>
+		
 		<form action="/payment/pay" method="get">
-			<div style=" height: 20px; width: 70px; margin-top: 50px; float: left;">충전 금액 </div>
-			<input type="text" id="amount" name="amount" style="height:50px; border-radius: 4px; margin-top:30px;">
-			<button type="submit" style="background-color: #5c2392; height: 30px; margin-top: 30px; color: white; float: left">충전하기</button>
+			<div style=" height: 20px; width: 70px; margin-top: 35px; float: left;"><b>충전 금액</b> </div>
+			<div><input type="text" id="amount" name="amount" style="height:40px; border-radius: 4px; margin-top:30px;"></div>
+			<hr>
+			<div>ㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇㅇ</div>
+			<div><button type="submit" style="background-color: #5c2392; height: 30px; color: white; float: left">충전하기</button></div>
 		</form>
 
 	</div>

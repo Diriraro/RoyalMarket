@@ -89,6 +89,7 @@ public class MemberController {
 		 
 		memberVO = memberService.memberLogin(memberVO);
 		
+		
 		List<Sell_HistoryVO> sell =paymentService.seller_check(memberVO.getMem_id());
 		int sellProduct = sell.size();
 		
