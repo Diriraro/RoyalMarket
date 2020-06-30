@@ -44,7 +44,7 @@ public class ProductController {
 		ModelAndView mv = new ModelAndView();
 
 		if (bindingResult.hasErrors()) {
-			mv.setViewName("product/productNew");
+			mv.setViewName("redirect:../");
 		} else {
 			System.out.println("a");
 			System.out.println(files);

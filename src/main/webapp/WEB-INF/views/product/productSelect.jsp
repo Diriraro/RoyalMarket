@@ -101,6 +101,7 @@
 				class="sr-only">Next</span>
 			</a>
 		</div>
+		<!-- 사진끝 -->
 
 		<div style="display: inline-block; margin-left: 50px; width: 545px;">
 			<font style="font-size: 25px; font-weight: 800;">${vo.sell_product}</font>
@@ -124,6 +125,8 @@
 				style="width: 16px; height: 20px; margin-bottom: 3px;" alt=""
 				src="${pageContext.request.contextPath}/resources/images/ad_logo.png">
 			<font style="font-weight: 600; font-size: 15px;">&nbsp;${mvo.mem_address}</font>
+			
+			
 			<!--  찜구현    -->
 
 			<form action="zzimInsert" method="post">

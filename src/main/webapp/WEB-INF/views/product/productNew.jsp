@@ -146,25 +146,18 @@
 		<input style="margin-top: 32px;width: 856px;height: 48px;" class="form-control" type="text" name="sell_tag" id="sell_tag"> 
 		</div>
 
+		<button style="margin-left: 860px;margin-top: 16px; width: 160px;height: 56px;border: 0px;background-image: url('${pageContext.request.contextPath}/resources/images/regi_logo.png');" type="submit" class="btn btn-default" id="productNew"></button>            
+
+
 	</form>
 
 		</div>
-		<div style="height: 88px; background-color: #fafafd;">
-		<button style="margin-left: 1302px;margin-top: 16px; width: 160px;height: 56px;border: 0px;background-image: url('${pageContext.request.contextPath}/resources/images/regi_logo.png');" type="submit" class="btn btn-default" id="productNew"></button>
-		</div>
 		
-	
-	
-	
+
 
 		<!-- <a id="sellimg"><img src="${pageContext.request.contextPath}/resources/images/showimage.png"></a>
 		<div class="form-group" id="f"></div> -->
 <!-- 
-		
-		
-
-			
-		
 
 		<div class="form-group">
 			<label for="sell_product">제목</label>  -->
@@ -277,13 +270,14 @@
 		$("#productNew").click(function() {
 			var files = $("#files").val();
 			var files2 = $("#files2").val();
+			var files3 = $("#files3").val();
 			var sell_product = $("#sell_product").val();
 			var sell_kind = $("#sell_kind").val();
 			var sell_price = $("#sell_price").val();
 			var sell_info = $("#sell_info").val();
 			var sell_tag = $("#sell_tag").val();
 			
-			if (files==""&&files2=="") {
+			if (files==""&&files2==""&&files3=="") {
 				alert("사진을 1개 이상 올려주세요");
 				return false;
 			}else if (sell_product=="") {
