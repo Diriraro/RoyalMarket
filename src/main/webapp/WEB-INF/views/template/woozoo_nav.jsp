@@ -64,7 +64,7 @@ body {
      <div style="margin-right: 250px;margin-top: 9px;">
       <a href="${pageContext.request.contextPath}/member/memberLogout"> <font style="font-weight: 800; font-size: 13px;color: #666666;">로그아웃</font></a>
       <font>&nbsp;ㅣ&nbsp;</font>
-      <a href="${pageContext.request.contextPath}/member/memberPage"> <font style="font-weight: 800; font-size: 13px;color: #666666;">내 상점</font></a>
+      <a href="${pageContext.request.contextPath}/shop/myshop?mem_storeNum=${member.mem_storeNum}"> <font style="font-weight: 800; font-size: 13px;color: #666666;">내 상점</font></a>
       </div>
     </c:if>
 		</div>
@@ -124,7 +124,7 @@ body {
 				width="23" height="26" alt="판매하기 이미지"> &nbsp;<font
 				style="color: #2a2a2a; font-size: 13px; font-weight: 600;">판매하기</font></a>
 				<font>&nbsp;ㅣ&nbsp;</font>
-			<a style="margin-right: ;" href="/splash"><img
+			<a style="margin-right: ;" href="../shop/myshop?mem_storeNum=${member.mem_storeNum}"><img
 				src="${pageContext.request.contextPath}/resources/images/ms_logo.png"
 				width="23" height="24" alt="나의상점 이미지"> &nbsp;<font
 				style="color: #2a2a2a; font-size: 13px; font-weight: 600;">내상점</font></a>
