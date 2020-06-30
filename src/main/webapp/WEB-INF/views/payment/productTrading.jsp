@@ -9,7 +9,7 @@
 <c:import url="../template/boot.jsp"></c:import>
 </head>
 <body>
-	<c:import url="../template/nav.jsp"></c:import>
+	<c:import url="../template/woozoo_nav.jsp"></c:import>
 	<div class="container">
 		<font style="font-size: x-large;"><b>주문 완료</b></font>
 		<hr style="border: solid 1px gray">
