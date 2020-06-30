@@ -25,6 +25,7 @@
      <c:if test="${not empty member}">
       <li><a href="${pageContext.request.contextPath}/payment/sell_History"><span class="glyphicon glyphicon-user"></span> 판매내역</a></li>
       <li><a href="${pageContext.request.contextPath}/payment/buy_History"><span class="glyphicon glyphicon-user"></span> 구매내역</a></li>
+      <li><a href="${pageContext.request.contextPath}/shop/myshop?mem_storeNum=${member.mem_storeNum}"><span class="glyphicon glyphicon-user"></span> 내상점</a></li>
       <li><a href="${pageContext.request.contextPath}/member/memberLogout"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
     </c:if>
     
