@@ -133,8 +133,8 @@
 				<input type="hidden" value="${zc.zzim_num}"> <input
 					type="hidden" name="mem_storeNum" value="${member.mem_storeNum}" />
 				<input type="hidden" name="sell_num" value="${vo.sell_num}" />
-
-				<c:if test="${empty zc.zzim_num} ">
+				
+				<c:if test="${empty zc.zzim_num and (vo.mem_storeNum ne member.mem_storeNum)}">
 					<button type="submit"
 						style="margin-top: 65px; border-radius:0px 0px 0px 0px;width: 176px; height: 56px;background-image: url('${pageContext.request.contextPath}/resources/images/zzim_button.png');"
 						class="btn btn-default zzimbtn"></button>
@@ -145,7 +145,7 @@
 				</c:if>
 			</form>
 
-			<c:if test="${not empty zc.zzim_num}">
+			<c:if test="${not empty zc.zzim_num and (vo.mem_storeNum ne member.mem_storeNum)}">
 				<a class="zzimbtn"  href="zzimDelete?zzim_num=${zc.zzim_num}"><img
 					style="margin-top: 65px; cursor: pointer;" alt=""
 					src="${pageContext.request.contextPath}/resources/images/zzimaft_button.png"></a>
@@ -154,7 +154,12 @@
 				<a><img style="margin-top: 65px; cursor: pointer;" alt=""
 					src="${pageContext.request.contextPath}/resources/images/buy_button.png"></a>
 			</c:if>
-  
+
+			<c:if test="${vo.mem_storeNum eq member.mem_storeNum}">
+				<a class="zzimbtn"  href="zzimDelete?zzim_num=${zc.zzim_num}"><img
+					style="margin-top: 65px; cursor: pointer;" alt=""
+					src="${pageContext.request.contextPath}/resources/images/myshopgo_logo.png"></a>
+			</c:if>
   <div id="myModal2" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 
 </div>	

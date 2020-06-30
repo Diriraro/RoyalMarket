@@ -29,6 +29,9 @@
 			<when test="kind=='sk'">
 				sell_kind
 			</when>
+			<when test="kind=='smn'">
+				mem_storeNum
+			</when>
 			<otherwise>
 				sell_tag
 			</otherwise>
@@ -45,6 +48,9 @@
 			</when>
 			<when test="kind=='sk'">
 				sell_kind
+			</when>
+			<when test="kind=='smn'">
+				mem_storeNum
 			</when>
 			<otherwise>
 				sell_tag
