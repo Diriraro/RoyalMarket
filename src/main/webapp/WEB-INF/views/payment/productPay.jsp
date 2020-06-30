@@ -14,12 +14,12 @@
 
 	<div class="container">
 		<font style="font-size: x-large;"><b>주문</b></font>
-		<hr style="border: solid 1px gray">
+		<hr style="border: solid 1px #e4e4e4;">
 		<br><br><br><br>
 		
 		<div style="border: 1px solid white">
 			<font style="font-size: x-large;"><b>상품 정보</b></font>
-			<hr style="border: solid 1px gray">
+			<hr style="border: solid 1px #e4e4e4;">
 			<div style="width: 400px; height: 500px; border: solid 1px black; display: inline-block; float: right;">
 			
 				<div style="margin-top: 10px;">
