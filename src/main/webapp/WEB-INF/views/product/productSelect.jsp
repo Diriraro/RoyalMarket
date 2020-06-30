@@ -134,7 +134,7 @@
 					type="hidden" name="mem_storeNum" value="${member.mem_storeNum}" />
 				<input type="hidden" name="sell_num" value="${vo.sell_num}" />
 
-				<c:if test="${vo.mem_storeNum eq member.mem_storeNum} ">
+				<c:if test="${empty zc.zzim_num} ">
 					<button type="submit"
 						style="margin-top: 65px; border-radius:0px 0px 0px 0px;width: 176px; height: 56px;background-image: url('${pageContext.request.contextPath}/resources/images/zzim_button.png');"
 						class="btn btn-default zzimbtn"></button>
