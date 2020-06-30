@@ -9,8 +9,36 @@
 <c:import url="../template/boot.jsp"></c:import>
 <link href="./css/test.css" rel="stylesheet" type="text/css">
 </head>
-<body>
-	<c:import url="../template/nav.jsp"></c:import>
+<body> 
+	<c:import url="../template/woozoo_nav.jsp"></c:import>
+	
+	<div style="height: 88px; background-color: #fafafd;">
+		<div style="width: 300px; height: 300px;">
+			<img style="width: 20px;height: 20px;float: left;margin-top: 30px;" alt="홈이미지" src="${pageContext.request.contextPath}/resources/images/home_logo.png">
+			<font style="float: left;color: #4d555e;margin-top: 31px;">&nbsp;홈&nbsp;&nbsp;</font>
+			<img style="width: 16px;height: 15px;float: left;margin-top: 33px;" alt="방향이미지" src="${pageContext.request.contextPath}/resources/images/arrow_logo2.png">
+			<div style="float: left;margin-top: 24px;" class="dropdown">
+				<button id="d" style="width: 164px; color: #4d555e" class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+
+					<span class="caret"></span>
+				</button>
+				<ul class="dropdown-menu">
+					<li><a id="c1" href="${pageContext.request.contextPath}/product/productList?kind=sk&search=패션잡화">패션잡화</a></li>
+					<li><a href="${pageContext.request.contextPath}/product/productList?kind=sk&search=여성의류">여성의류</a></li>
+					<li><a href="${pageContext.request.contextPath}/product/productList?kind=sk&search=남성의류">남성의류</a></li>
+					<li><a href="${pageContext.request.contextPath}/product/productList?kind=sk&search=디지털/가전">디지털/가전</a></li>
+					<li><a href="${pageContext.request.contextPath}/product/productList?kind=sk&search=생활/문구/가구/식품">생활/문구/가구/식품</a></li>
+					<li><a href="${pageContext.request.contextPath}/product/productList?kind=sk&search=유아동/출산">유아동/출산</a></li>
+					<li><a href="${pageContext.request.contextPath}/product/productList?kind=sk&search=스타굿즈">스타굿즈</a></li>
+					<li><a href="${pageContext.request.contextPath}/product/productList?kind=sk&search=스포츠/레저">스포츠/레저</a></li>
+					<li><a href="${pageContext.request.contextPath}/product/productList?kind=sk&search=뷰티/미용">뷰티/미용</a></li>
+				</ul>
+			</div>
+
+
+
+		</div>
+		</div>
 
 	<div class="container">
 
@@ -88,6 +116,14 @@
 		</ul>
 	</div>
 
+<script type="text/javascript">
+
+$("#c1").click(function(){
+	$( "#d" ).append( "<font>패션잡화</font>" );
+
+});
+
+</script>
 
 
 </body>

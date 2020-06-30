@@ -36,9 +36,6 @@
 					<li><a href="${pageContext.request.contextPath}/product/productList?kind=sk&search=뷰티/미용">뷰티/미용</a></li>
 				</ul>
 			</div>
-
-
-
 		</div>
 		<br> <br>
 	</div>
@@ -210,9 +207,9 @@
 		
 	<!--  상품문의  -->
 	<hr style="width: 1024px;">
-	<div style="width: 663px; height:700px;margin-left:440px; background-color: yellow;">
+	<div style="width: 663px; margin-left:440px; background-color: yellow;float: left;">
 	<font style="font-size: 18px;font-weight: 900;">상품문의</font>
-	<hr>
+	<hr style="width: 630px;">
 
 	<div class="container">
 		<form name="qnaInsertForm">
@@ -233,6 +230,13 @@
 	</div>
 	
 	</div>
+	
+	<div style="background-color: blue;float: left;width: 360px;">
+	<font style="font-size: 18px;font-weight: 900;">상점정보</font>
+	<hr style="width: 330px;">
+	</div>
+	
+	
 	<script type="text/javascript">
 		$(document).on('click', '.reply', function() {
 			alert("asdasd");
