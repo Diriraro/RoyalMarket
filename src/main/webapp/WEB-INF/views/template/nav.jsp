@@ -23,7 +23,8 @@
       <li><a href="${pageContext.request.contextPath}/member/memberLogin"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
     </c:if>
      <c:if test="${not empty member}">
-      <li><a href="${pageContext.request.contextPath}/member/memberPage"><span class="glyphicon glyphicon-user"></span> MyPage</a></li>
+      <li><a href="${pageContext.request.contextPath}/payment/sell_History"><span class="glyphicon glyphicon-user"></span> 판매내역</a></li>
+      <li><a href="${pageContext.request.contextPath}/payment/buy_History"><span class="glyphicon glyphicon-user"></span> 구매내역</a></li>
       <li><a href="${pageContext.request.contextPath}/member/memberLogout"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
     </c:if>
     
