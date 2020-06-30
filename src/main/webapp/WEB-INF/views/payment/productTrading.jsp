@@ -10,20 +10,47 @@
 </head>
 <body>
 	<c:import url="../template/nav.jsp"></c:import>
-	<!-- 구매자용 페이지? -->
-	<h1>결제완료</h1>
-	
 	<div class="container">
-		<h3>상품가격 : ${tradingVO.sell_price}</h3>
-		<h3>구매자 아이디 : ${tradingVO.buyer_id}</h3>
-		
-		<button class="btn btn-primary" id="buy_History">구매내역</button>
+		<font style="font-size: x-large;"><b>주문 완료</b></font>
+		<hr style="border: solid 1px gray">
+		<div style="width: 100%; height: 300px;">
+			<div class="container">	
+				<div style="display: inline-block;"><img alt="" src="${pageContext.request.contextPath}/resources/images/pay_complete.png" style="width: 200px;height: 250px;"></div>
+				<div style="display: inline-block; margin-left: 40px; margin-top: 50px; border-bottom: 1px solid black; width: 850px;"><h1> ${member.mem_id}님 주문이 성공적으로 완료 되었습니다.</h1>
+					<button class="btn btn-primary" id="buy_History" style="margin-top: 20px; margin-bottom: 20px;">나의 구매내역 가기</button>
+					<button class="btn btn-primary" id="home" style="margin-top: 20px; margin-bottom: 20px;">홈으로 가기</button>
+				</div>	
+			</div>
+		</div>
+		<div style="width:100%; height:100px; ">
+			<div style="display: inline-block;"><h2>주문 상품 내역</h2></div>
+			<div>
+				<table class="table table-bordered">
+					<tr>
+						<td>상품 구분</td>
+						<td>상품명</td>
+						<td>가격</td>
+					</tr>
+					<tr>
+						<td>카테고리넣어라</td>
+						<td>상품명넣어라</td>
+						<td>${tradingVO.sell_price}</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	
 	</div>
 
 <script type="text/javascript">
 
 	$("#buy_History").click(function() {
 		location.href="./buy_History";
+		
+	}); 
+
+	$("#home").click(function() {
+		location.href="../";
 		
 	}); 
 		

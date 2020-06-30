@@ -13,7 +13,7 @@
 	<c:import url="../template/nav.jsp"></c:import>
 
 	<div class="container">
-		<font style="font-size: x-large;"><b>로고</b></font>
+		<font style="font-size: x-large;"><b>주문</b></font>
 		<hr style="border: solid 1px gray">
 		<br><br><br><br>
 		
@@ -80,8 +80,9 @@
 					</tr>
 					<tr>
 						<td>
-							<div><img alt="images" src="${pageContext.request.contextPath}/upload/product/${image}"></div>					
-							${sell_product}</td>
+							${sell_product}
+							<div><img alt="images" src="${pageContext.request.contextPath}/upload/product/${image}" style="width: 200px; height: 200px;"></div>					
+							</td>
 						<td>${sell_price}</td>
 						<td> test</td>
 						<td>2500</td>

@@ -128,7 +128,7 @@
 			
 			
 			<!--  찜구현    -->
-
+		
 			<form action="zzimInsert" method="post">
 				<input type="hidden" value="${zc.zzim_num}"> <input
 					type="hidden" name="mem_storeNum" value="${member.mem_storeNum}" />
@@ -151,7 +151,7 @@
 					src="${pageContext.request.contextPath}/resources/images/zzimaft_button.png"></a>
 				<a><img style="margin-top: 65px; cursor: pointer;" alt=""
 					src="${pageContext.request.contextPath}/resources/images/phone_button.png"></a>
-				<a><img style="margin-top: 65px; cursor: pointer;" alt=""
+				<a href="../payment/productPay?sell_product=${vo.sell_product}&sell_price=${vo.sell_price}&sell_num=${vo.sell_num}"><img style="margin-top: 65px; cursor: pointer;" alt=""
 					src="${pageContext.request.contextPath}/resources/images/buy_button.png"></a>
 			</c:if>
 			<!-- 찜 끝 -->
