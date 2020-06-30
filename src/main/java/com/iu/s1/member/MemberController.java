@@ -90,10 +90,10 @@ public class MemberController {
 		memberVO = memberService.memberLogin(memberVO);
 		
 		
+		if(memberVO != null) {
 		List<Sell_HistoryVO> sell =paymentService.seller_check(memberVO.getMem_id());
 		int sellProduct = sell.size();
 		
-		if(memberVO != null) {
 				session.setAttribute("member", memberVO);
 			if(sell.isEmpty()) {
 				mv.addObject("result", "로그인 성공");

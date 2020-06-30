@@ -64,4 +64,10 @@ public interface PaymentMapper {
 	public String paycheckSelect(String mem_id)throws Exception;
 	
 	public int paycheckDel(String mem_id)throws Exception;
+	
+	public String seller_address(String mem_id)throws Exception;
+	
+	public int paystatsInsert(PayStatsVO payStatsVO) throws Exception;
+	
+	
 }

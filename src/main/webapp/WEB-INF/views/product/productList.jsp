@@ -8,134 +8,120 @@
 <title>Insert title here</title>
 <c:import url="../template/boot.jsp"></c:import>
 <link href="./css/test.css" rel="stylesheet" type="text/css">
-<style type="text/css">
-
-	 .img{
-        position: relative;
-        background-image: url('${pageContext.request.contextPath}/resources/qna_images/${file[i.index]}');                                                               
-        height: 100px;
-        width: 80px;
-        background-size: cover;
-    }
-
-    .img-cover{
-       position: absolute;
-       height: 100%;
-       width: 100%;
-       background-color: rgba(0, 0, 0, 0.7);                                                                 
-       z-index:1;
-    }
-
-    .img .content{
-         position: absolute;
-         top:50%;
-         left:50%;
-         transform: translate(-50%, -50%);                                                                   
-         font-size:1rem;
-         color: white;
-         z-index: 2;
-         text-align: center;
-    }
-	
-</style>
 </head>
-<body>
-	<c:import url="../template/nav.jsp"></c:import>
+<body style="background-color: #fafafd;">
+	<c:import url="../template/woozoo_nav.jsp"></c:import>
+	<!-- 전체시작 -->
+	<div style="height: 88px;">
 
-	<div class="container">
+		<div
+			style="width: 1024px; margin-left: 440px; ">
 
-		<div class="row">
-			<h1>productList</h1>
-			<form action="./productList" class="form-inline">
-				<div class="input-group input-group-sm col-xs-2">
-					<select class="form-control" id="sel1" name="kind">
-						<option value="sp">product</option>
-						<option value="sk">kind</option>
-						<option value="st">tag</option>
-					</select>
+			<div style="width: 1024px; height: 90px;">
+				<img
+					style="width: 20px; height: 20px; float: left; margin-top: 30px;"
+					alt="홈이미지"
+					src="${pageContext.request.contextPath}/resources/images/home_logo.png">
+				<font style="float: left; color: #4d555e; margin-top: 31px;">&nbsp;홈&nbsp;&nbsp;</font>
+				<img
+					style="width: 16px; height: 15px; float: left; margin-top: 33px;"
+					alt="방향이미지"
+					src="${pageContext.request.contextPath}/resources/images/arrow_logo2.png">
+				<div style="float: left; margin-top: 24px;" class="dropdown">
+					<button id="d" style="width: 164px; color: #4d555e"
+						class="btn btn-default dropdown-toggle" type="button"
+						data-toggle="dropdown">${list[0].sell_kind}
+
+						<span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu">
+						<li><a
+							href="${pageContext.request.contextPath}/product/productList?kind=sk&search=패션잡화">패션잡화</a></li>
+						<li><a
+							href="${pageContext.request.contextPath}/product/productList?kind=sk&search=여성의류">여성의류</a></li>
+						<li><a
+							href="${pageContext.request.contextPath}/product/productList?kind=sk&search=남성의류">남성의류</a></li>
+						<li><a
+							href="${pageContext.request.contextPath}/product/productList?kind=sk&search=디지털/가전">디지털/가전</a></li>
+						<li><a
+							href="${pageContext.request.contextPath}/product/productList?kind=sk&search=생활/문구/가구/식품">생활/문구/가구/식품</a></li>
+						<li><a
+							href="${pageContext.request.contextPath}/product/productList?kind=sk&search=유아동/출산">유아동/출산</a></li>
+						<li><a
+							href="${pageContext.request.contextPath}/product/productList?kind=sk&search=스타굿즈">스타굿즈</a></li>
+						<li><a
+							href="${pageContext.request.contextPath}/product/productList?kind=sk&search=스포츠/레저">스포츠/레저</a></li>
+						<li><a
+							href="${pageContext.request.contextPath}/product/productList?kind=sk&search=뷰티/미용">뷰티/미용</a></li>
+					</ul>
 				</div>
-				<div class="input-group input-group-sm col-xs-4">
 
-					<input type="text" class="form-control" placeholder="Search"
-						name="search">
-					<div class="input-group-btn">
-						<button class="btn btn-default" type="submit">
-							<i class="glyphicon glyphicon-search"></i>
-						</button>
-					</div>
-				</div>
-			</form>
-		</div>
-
-
-
-		<br>
-
-
-		<table class="table table-hover">
+			</div>
+			<div style="width: 1024px;">
+				<font style="color: #ff5d4a; font-size: 15px;font-weight: 600;">${list[0].sell_kind}</font>
+				<font style="font-size: 15px;font-weight: 600">의 추천상품</font>
+			</div>
+			<br>
 
 			<c:forEach items="${list}" var="vo" varStatus="i">
-				<div class="col-sm-4" style="display: inline-block;">
-					<div class="panel panel-info" style="height:100px; width:80px; cursor: pointer;"
+				<div style="float: left; margin-left: 9px; margin-bottom: 129px;">
+					<div style="height: 194px; width: 194px; cursor: pointer;"
 						onclick="location.href='./productSelect?sell_num=${vo.sell_num}'">
-						
-						
-				<%-- 		<img style="height:100px; width:80px; cursor: pointer;" alt="" src="${pageContext.request.contextPath}/upload/product/${file[i.index]}">
-						<tr>
-							<td>${vo.sell_num}</td>
-							<td>${vo.sell_product}</td>
-							<td>${vo.sell_price}</td>
-						</tr>
- --%>
- 				<tr>
- 				<c:if test="${vo.sell_status eq 1}">
-	 				<td><div class="img" style="background-image: url('${pageContext.request.contextPath}/upload/product/${file[i.index]}')">
-					<div class="content">
-						<h5 style="margin-bottom: 30px;">예약완료</h5>
+
+
+						<img style="height: 194px; width: 194px; cursor: pointer;" alt=""
+							src="${pageContext.request.contextPath}/upload/product/${file[i.index]}">
+						<div style="width: 194px; background-color: white;">
+							<div style="height: 80px;">
+								<div ><br>
+									<font style="font-size: 14px;font-weight: 700;margin-left: 8px;">${vo.sell_product}</font>
+								</div>
+								<div style="text-align: left;; line-height: 40px;margin-left: 8px;">
+									<font style="font-size: 18px;font-weight: bold;">${vo.sell_price}</font>
+									<font style="font-weight: bold;">원</font>
+								</div>
+							</div>
+							<div style="height: 40px; border-top: solid 1px #e4e4e4;text-align: left;line-height: 40px;">
+								<img style="margin-left: 8px;width: 16px; height: 20px; margin-bottom: 3px;" alt="" 
+									src="${pageContext.request.contextPath}/resources/images/ad_logo.png">
+								<font style="font-weight: 600; font-size: 12px;color: gray;">${vo.mem_address}</font>
+							</div>
+
+						</div>
+
 					</div>
-					<div class="img-cover"></div></td>
-				</c:if>
-				<c:if test="${vo.sell_status eq 0 }">
-				<td><div class="img" style="cursor:pointer; background-image: url('${pageContext.request.contextPath}/upload/product/${file[i.index]}')" onclick="location.href='./productSelect?sell_num=${vo.sell_num}'"></td>
-				
-				</c:if>
-				
-				<td>${vo.sell_num}</td>
-				<td>${vo.sell_product}</td>
-				<td>${vo.sell_price}</td>
-				</tr>
+				</div>
+
+			</c:forEach>
+
+			<div>
+				<ul class="pagination" >
+					<c:if test="${pager.curBlock gt 1}">
+						<li><a
+							href="./${board}List?curPage=${pager.startNum-1}&kind=${pager.kind}&search=${pager.search}">이전</a></li>
+					</c:if>
+					<c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
+						<li><a
+							href="./${board}List?curPage=${i}&kind=${pager.kind}&search=${pager.search}">${i}</a></li>
+					</c:forEach>
+					<c:if test="${pager.curBlock lt pager.totalBlock}">
+						<li><a
+							href="./${board}List?curPage=${pager.lastNum+1}&kind=${pager.kind}&search=${pager.search}">다음</a></li>
+					</c:if>
+				</ul>
 			</div>
 
 
-
-
-					</div>
-				</div>
-			</c:forEach>
-
-
-		</table>
+		</div>
 
 	</div>
+	<!-- 전체끝 -->
 
 
-	<div>
-		<ul class="pagination">
-			<c:if test="${pager.curBlock gt 1}">
-				<li><a
-					href="./${board}List?curPage=${pager.startNum-1}&kind=${pager.kind}&search=${pager.search}">이전</a></li>
-			</c:if>
-			<c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
-				<li><a
-					href="./${board}List?curPage=${i}&kind=${pager.kind}&search=${pager.search}">${i}</a></li>
-			</c:forEach>
-			<c:if test="${pager.curBlock lt pager.totalBlock}">
-				<li><a
-					href="./${board}List?curPage=${pager.lastNum+1}&kind=${pager.kind}&search=${pager.search}">다음</a></li>
-			</c:if>
-		</ul>
-	</div>
 
+	<script type="text/javascript">
+		
+	</script>
 
 
 </body>
