@@ -5,9 +5,9 @@
 
 	<!-- Header -->
 	<header class="w3-container" style="padding-top: 22px">
-		<h5>
+		<h2>
 			<b><i class="fa fa-dashboard"></i> My Dashboard</b>
-		</h5>
+		</h2>
 	</header>
 	<br>
 	<div class="w3-row-padding w3-margin-bottom">
@@ -17,10 +17,13 @@
 					<i class="fa fa-comment w3-xxxlarge"></i>
 				</div>
 				<div class="w3-right">
-					<h3>문의수</h3>
+					<h3>${qnaCount}<span style="font-size: 12px;">(${qnaNACount})</span>
+					</h3>
 				</div>
 				<div class="w3-clear"></div>
-				<h4>1:1 문의</h4>
+				<h4>
+					문의 수<span style="font-size: 12px;">(미답변)</span>
+				</h4>
 			</div>
 		</div>
 		<div class="w3-quarter">
@@ -41,7 +44,7 @@
 					<i class="fa fa-share-alt w3-xxxlarge"></i>
 				</div>
 				<div class="w3-right">
-					<h3>거래량</h3>
+					<h3>${tradeCount}</h3>
 				</div>
 				<div class="w3-clear"></div>
 				<h4>일일 거래량</h4>
@@ -62,20 +65,23 @@
 	</div>
 	<br>
 	<div class="w3-container">
-		<h5>General Stats</h5>
-		<p>전일 대비 총회원 증가비율</p>
+		<h3>
+			<b>전일 대비 사이트 이용 상승치 </b>
+		</h3>
+		<br>
+		<p class="ct">전일 대비 총회원 증가비율</p>
 		<div class="w3-grey">
 			<div class="w3-container w3-center w3-padding w3-green"
 				style="width: ${increaseRate}%">${increaseRate}%</div>
 		</div>
 
-		<p>전일 대비 거래량 비율</p>
+		<p class="ct">전일 대비 거래량 비율</p>
 		<div class="w3-grey">
 			<div class="w3-container w3-center w3-padding w3-orange"
-				style="width: 50%">50%</div>
+				style="width: ${tradeRate}%">${tradeRate}%</div>
 		</div>
 
-		<p>전일 대비 방문자 비율</p>
+		<p class="ct">전일 대비 방문자 비율</p>
 		<div class="w3-grey">
 			<c:catch>
 				<div class="w3-container w3-center w3-padding w3-red"
@@ -86,39 +92,34 @@
 	<hr>
 	<br>
 	<div class="w3-container">
-		<h5>지역별 거래량</h5>
+		<h3>
+			<b>지역별 거래량</b>
+		</h3>
 		<br>
 		<table
 			class="w3-table w3-striped w3-bordered w3-border w3-hoverable w3-white">
-			<tr>
-				<td>United States</td>
-				<td>65%</td>
-			</tr>
-			<tr>
-				<td>UK</td>
-				<td>15.7%</td>
-			</tr>
-			<tr>
-				<td>Russia</td>
-				<td>5.6%</td>
-			</tr>
-			<tr>
-				<td>Spain</td>
-				<td>2.1%</td>
-			</tr>
-			<tr>
-				<td>India</td>
-				<td>1.9%</td>
-			</tr>
-			<tr>
-				<td>France</td>
-				<td>1.5%</td>
-			</tr>
+			<thead>
+				<tr>
+					<td>지역</td>
+					<td>누적거래량</td>
+				</tr>
+			</thead>
+			<!-- 비율이 가장 높은 순으로 6개 지역만  -->
+			<tbody>
+				<c:forEach items="${tradeAr}" var="list" end="5">
+					<tr>
+						<td>${list.getKey()}</td>
+						<td>${list.getValue()}</td>
+					</tr>
+				</c:forEach>
+			</tbody>
 		</table>
 	</div>
 	<br> <br>
 	<div class="w3-container">
-		<h5>최신 상품게시글</h5>
+		<h3>
+			<b>최신 상품게시글</b>
+		</h3>
 		<br>
 		<div class="w3-row">
 			<div class="w3-col m2 text-center">
@@ -152,7 +153,9 @@
 	</div>
 	<br>
 	<div class="w3-container">
-		<h5>최근 공지사항</h5>
+		<h3>
+			<b>최근 공지사항</b>
+		</h3>
 		<br>
 		<div class="w3-row">
 			<!-- 추후에 테이블말고 블럭형태로 변경 -->

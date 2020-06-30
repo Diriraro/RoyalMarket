@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <!-- icon font -->
@@ -8,7 +8,8 @@
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <!-- jqery library -->
@@ -21,6 +22,16 @@
 
 
 <style>
+thead {
+	font-weight : bold;
+	background-color: #e6e6e6;
+}
+tbody {
+	background-color : none;	
+}
+body {
+	font-family: "Times New Roman", Times, sans-serif;
+}
 /* Body */
 section {
 	float: left;
@@ -46,7 +57,7 @@ section {
 
 #logo {
 	height: 65px;
-	border: 1px solid white;
+	cursor: pointer;
 }
 
 #stats {
@@ -127,7 +138,6 @@ section {
 	font-size: 13px;
 	float: right;
 	color: red;
-	visibility: hidden;
 }
 
 #QnaAndManToMan {
@@ -148,7 +158,7 @@ section {
 
 /* Section 3 */
 #sc3 {
-	border-top : 1px solid white;
+	border-top: 1px solid white;
 	padding: 20px 30px;
 	width: 87%;
 	background-color: #f2f2f2;
@@ -240,14 +250,19 @@ section {
 	}
 }
 
+.ct {
+	font-size: 12px;
+	font-weight: bold;
+}
+
 /* Section 3 Dash board */
 
 /* ==================== getList Search Form ==================== */
 /* Section 3 */
 
 /* all Section */
-.pointCursor{
-cursor: pointer;
+.pointCursor {
+	cursor: pointer;
 }
 
 /* all Section */

@@ -2,6 +2,7 @@ package com.iu.s1.admin;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -13,8 +14,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.iu.s1.ProductVO;
 import com.iu.s1.member.MemberVO;
@@ -29,7 +28,18 @@ public class AdminController {
 	private AdminService adminService;
 
 	@GetMapping("adminPage")
-	public String adminPage() throws Exception {
+	public String adminPage(Model model) throws Exception {
+		long qnaCount = adminService.qnaCount();
+		long qnaNACount = adminService.qnaNACount();
+		
+		long newArrival = qnaCount - qnaNACount;
+		boolean check = true;
+		if ( newArrival != 0 ) {
+			check = false;
+		}
+		model.addAttribute("check", check);
+		model.addAttribute("qnaCount", qnaCount);
+		model.addAttribute("qnaNACount", qnaNACount);
 		return "admin/adminPage";
 	}
 	
@@ -37,11 +47,19 @@ public class AdminController {
 	@GetMapping("getDashBoard")
 	public void getDashBoard(Model model) throws Exception {
 		// DashBoard 에서 필요한 데이터는 model 로 key,value 형태로 DashBoard에 addAttribute
+		// 회원 수
 		double memberCount = (double) adminService.getMemberCount();
 		double dailyNewMemberCount = (double) adminService.getDailyNewMember();
 		long rate = (long) ((dailyNewMemberCount / memberCount) * 100);
 		long rate2 = 0;
+		model.addAttribute("increaseRate", rate);
+		model.addAttribute("memberCount", (int) memberCount);
+		
+		// 공지사항 리스트 (최신순 2개만 출력함)
 		List<NoticeVO> ar = adminService.getNoticeList();
+		model.addAttribute("list", ar);
+		
+		// 방문자 수 
 		VisitorVO visitorVO = adminService.getTodayVisitorCount();
 		VisitorVO visitorVO2 = adminService.getlastVisitorCount();
 		if (visitorVO2.getCount() == 0) {
@@ -51,9 +69,29 @@ public class AdminController {
 		}
 		model.addAttribute("visitors", visitorVO.getCount());
 		model.addAttribute("dailyRate", (int) rate2);
-		model.addAttribute("increaseRate", rate);
-		model.addAttribute("memberCount", (int) memberCount);
-		model.addAttribute("list", ar);
+		
+		// 문의수 , 미답변수
+		long qnaCount = adminService.qnaCount();
+		long qnaNACount = adminService.qnaNACount();
+		
+		model.addAttribute("qnaCount", qnaCount);
+		model.addAttribute("qnaNACount", qnaNACount);
+		
+		// 당일 거래량 및 지역별 거래량, 총 회사 수익
+		long tradeCount = adminService.getDailyTradeCount();
+		System.out.println(tradeCount);
+		List<Map.Entry<String, Long>> tradeAr = adminService.getLocateTradeCount();
+		long profit = adminService.getProfit();
+		long tradeCountYD = adminService.getRateForTradeCountYD();
+		long tradeRate = (tradeCount/tradeCountYD)*100;
+		if(tradeRate >100) {
+			tradeRate = 100;
+		}
+		model.addAttribute("tradeRate", tradeRate);
+		model.addAttribute("tradeCount", tradeCount);
+		model.addAttribute("tradeAr", tradeAr);
+		model.addAttribute("profit", profit);
+		
 		
 	}
 	
@@ -81,7 +119,7 @@ public class AdminController {
 			} else if (memberVO.getMem_access() == 0) {
 				memberVO.setMem_access(1);
 			}
-			int result = adminService.accessManage(memberVO);
+			adminService.accessManage(memberVO);
 			String check = "";
 			if (mem_access == 0) {
 				check = "accept";

@@ -23,7 +23,7 @@ $('[name=qnaInsertBtn]').click(function(){ //댓글 등록 버튼 클릭시
 //댓글 목록 
 function qnaList(){
     $.ajax({
-        url : '/qna/qnaList',
+        url : '/productQna/qnaList',
         type : 'get',
         data : {'sell_num':sell_num},
         success : function(data){
@@ -47,7 +47,7 @@ function qnaList(){
 //댓글 등록
 function qnaInsert(insertData){
     $.ajax({
-        url : '/qna/qnaInsert',
+        url : '/productQna/qnaInsert',
         type : 'post',
         data : insertData,
         success : function(data){
@@ -64,7 +64,7 @@ function qnaInsert(insertData){
 //댓글 삭제 
 function qnaDelete(sell_num){
     $.ajax({
-        url : '/qna/qnaDelete/'+sell_num,
+        url : '/productQna/qnaDelete/'+sell_num,
         type : 'post',
         success : function(data){
             if(data == 1) qnaList(sell_num); //댓글 삭제후 목록 출력 

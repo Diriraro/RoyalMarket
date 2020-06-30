@@ -12,7 +12,10 @@
 <body>
 	<header></header>
 	<section id="sc1">
-		<div id="logo">logo</div>
+		<div id="logo">
+			<img alt="로고" src="../resources/images/nav_logo_nonback2.png"
+				width="100%" height="100%">
+		</div>
 		<div class="sidenav">
 			<div id="stats">
 				<div style="font-size: 13px;">STATS</div>
@@ -53,17 +56,17 @@
 	</section>
 	<section id="sc2">
 		<div id="section_head">
+			<div style="float: left; line-height : 75px;"><a style="color : black;" href="../"><i class="fas fa-home"></i>Home</a></div>
 			<div id="admin_set">
 				관리자 님
 				<!-- ${member.mem_id} == admin 추후 설정 -->
 				<i class="fas fa-user-cog"></i>
 			</div>
-			<div class="new">
-				<i class="fas fa-comment-medical"></i>
-			</div>
 			<div id="QnaAndManToMan">
-				<i class="fas fa-envelope"></i><a title="manToman" class="check">
-					질문과 답변 및 1:1문의 </a>
+				<a title="manToman" class="check"> 질문과 답변 및 1:1문의 </a>
+			</div>
+			<div class="new">
+				<span id="new">new</span> <i class="fas fa-envelope"></i>
 			</div>
 		</div>
 	</section>
@@ -72,6 +75,16 @@
 	</section>
 	<script type="text/javascript">
 		$(function() {
+			var check = ${check};
+			if (!check) {
+				$(".new").children(".fas").removeClass("fa-envelope");
+				$(".new").children(".fas").addClass("fa-envelope-open-text");
+			} else {
+				$(".new").children("#new").remove();
+				$(".new").children(".fas").css("color", "black");
+			}
+
+			// id : content 내용
 			getDashBoard();
 			$(".info").on("mouseover", function() {
 				$(this).find(".contents").css("display", "block");
@@ -129,7 +142,9 @@
 						}
 					})
 		})
-
+		$("#logo").click(function() {
+			location.href="./adminPage";
+			})
 		$("#content").on("click", ".check", function() {
 			var path = $(this).prop("title");
 			if (path == 'qna') {
@@ -196,21 +211,20 @@
 				$("#content").append(result);
 			})
 		}
-		
+
 		function getProductList() {
 			$("#content").empty();
 			$.get("./list/getProductList", function(result) {
 				$("#content").append(result);
 			})
 		}
-		
+
 		function getNoticeList() {
 			$("#content").empty();
 			$.get("./list/getNoticeList", function(result) {
 				$("#content").append(result)
 			})
 		}
-
 	</script>
 </body>
 </html>

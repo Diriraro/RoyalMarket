@@ -40,7 +40,4 @@ public class FileManager {
 	
 
 }
-<<<<<<< HEAD
 // save
-=======
->>>>>>> Limyh

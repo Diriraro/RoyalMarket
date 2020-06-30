@@ -32,5 +32,11 @@
 	<select id="lastNum" resultType="java.lang.Long">
 		SELECT qna_num FROM qna ORDER BY qna_num DESC LIMIT 0,1
 	</select>
+	<select id="qnaCount" resultType="Long">
+		SELECT count(*) from qna
+	</select>
+	<select id="qnaNACount" resultType="Long">
+		SELECT count(*) from qna where qna_check = 0
+	</select>
 
 </mapper>

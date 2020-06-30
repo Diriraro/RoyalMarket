@@ -1,43 +1,6 @@
 package com.iu.s1.util;
 
 public class Pager {
-<<<<<<< HEAD
-	
-	private Long curPage;
-	private Integer perPage;
-	
-	private long startRow;
-	private long lastRow;
-	
-	private long totalPage;
-	private long totalBlock;
-	private	long curBlock;
-	private long startNum;
-	private long lastNum;
-	
-	private String kind;
-	private String search;
-	
-	
-	public void makeRow() {
-		this.startRow = (this.getCurPage()-1)*this.getPerPage();
-		this.lastRow = this.getCurPage()*this.getPerPage();
-	}
-	
-	public void makePage(long totalCount) {
-		this.totalPage = totalCount/this.getPerPage();
-		if(totalCount%this.getPerPage()!=0) {
-			this.totalPage++;
-		}
-		
-		long perBlock = 5L;
-		this.totalBlock = totalPage/perBlock;
-		if(totalPage%perBlock!=0) {
-			this.totalBlock++;
-		}
-		
-=======
-
 	private Long curPage;
 	private Integer perPage;
 
@@ -58,110 +21,36 @@ public class Pager {
 
 		this.lastRow = this.getCurPage() * this.getPerPage();
 	}
-	
+
 	public void makePage(long totalCount) {
-		//1. totalCount : 전체 글의 갯수
-		
-		//2. totalCount로 totalPage 계산
-		this.totalPage = totalCount/this.getPerPage();
-		if(totalCount % this.getPerPage() != 0) {
+		// 1. totalCount : 전체 글의 갯수
+
+		// 2. totalCount로 totalPage 계산
+		this.totalPage = totalCount / this.getPerPage();
+		if (totalCount % this.getPerPage() != 0) {
 			this.totalPage++;
 		}
-		//3. totalPage로 totalBlock 계산
-		//totalBlock 다음 출력의 여부, curBlock이 마지막 Block 여부
-		long perBlock=5L; //block Page 수
-		this.totalBlock = totalPage/perBlock;
-		if(totalPage%perBlock != 0) {
+		// 3. totalPage로 totalBlock 계산
+		// totalBlock 다음 출력의 여부, curBlock이 마지막 Block 여부
+		long perBlock = 5L; // block Page 수
+		this.totalBlock = totalPage / perBlock;
+		if (totalPage % perBlock != 0) {
 			this.totalBlock++;
 		}
-		
-		//4. curPage 로 curBlock 찾기
->>>>>>> Limyh
-		this.curBlock = this.curPage/perBlock;
-		if(this.curPage%perBlock !=0) {
+
+		// 4. curPage 로 curBlock 찾기
+		this.curBlock = this.curPage / perBlock;
+		if (this.curPage % perBlock != 0) {
 			this.curBlock++;
 		}
-		
-<<<<<<< HEAD
-=======
-		//5. curBlock으로  startNum, lastNum 계산
->>>>>>> Limyh
-		this.startNum = (this.curBlock-1)*perBlock+1;
-		this.lastNum = this.curBlock*perBlock;
-		
-		if(this.curBlock==this.totalBlock) {
-			this.lastNum=this.totalPage;
-		}
-<<<<<<< HEAD
-	}
-	
-	
-	
-	
-	
-	
-	
-	public Long getCurPage() {
-		if(this.curPage == null || this.curPage==0) {
-			this.curPage=1L;	
-		}
-		return curPage;
-	}
-	public Integer getPerPage() {
-		if(this.perPage == null || this.perPage==0) {
-			this.perPage=10;
-		}
-		return perPage;
-	}
-	public long getStartRow() {
-		return startRow;
-	}
-	public long getLastRow() {
-		return lastRow;
-	}
-	public long getTotalPage() {
-		return totalPage;
-	}
-	public long getTotalBlock() {
-		return totalBlock;
-	}
-	public long getCurBlock() {
-		return curBlock;
-	}
-	public long getStartNum() {
-		return startNum;
-	}
-	public long getLastNum() {
-		return lastNum;
-	}
-	public String getKind() {
-		return kind;
-	}
-	public String getSearch() {
-		if(this.search==null) {
-			this.search="";
-		}
-		return search;
-	}
-	public void setCurPage(Long curPage) {
-		this.curPage = curPage;
-	}
-	public void setPerPage(Integer perPage) {
-		this.perPage = perPage;
-	}
-	public void setKind(String kind) {
-		this.kind = kind;
-	}
-	public void setSearch(String search) {
-		this.search = search;
-	}
-	
-	
 
-}
-//save
-=======
-		
+		// 5. curBlock으로 startNum, lastNum 계산
+		this.startNum = (this.curBlock - 1) * perBlock + 1;
+		this.lastNum = this.curBlock * perBlock;
+
+		if (this.curBlock == this.totalBlock) {
+			this.lastNum = this.totalPage;
+		}
 	}
 
 	public long getTotalBlock() {
@@ -234,4 +123,3 @@ public class Pager {
 	}
 
 }
->>>>>>> Limyh

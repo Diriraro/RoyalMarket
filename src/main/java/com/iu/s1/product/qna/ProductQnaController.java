@@ -16,13 +16,14 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.iu.s1.member.MemberVO;
+import com.iu.s1.product.qna.ProductQnaService;
 
 @Controller
-@RequestMapping("/qna")
-public class QnaController {
+@RequestMapping("/productQna/**/")
+public class ProductQnaController {
 	
 	@Autowired
-	QnaService qnaService;
+	private ProductQnaService qnaService;
 	
 //	@GetMapping("qnaInsert")
 //	public ModelAndView qnaInsert(ModelAndView mv)throws Exception{
@@ -42,7 +43,7 @@ public class QnaController {
     @ResponseBody
     private long qnaInsert(@RequestParam long sell_num,@RequestParam long pq_storeNum, @RequestParam String pq_contents,@RequestParam String pq_storeName) throws Exception{
         
-        QnaVO qnaVO = new QnaVO();
+        ProductQnaVO qnaVO = new ProductQnaVO();
         qnaVO.setSell_num(sell_num);
         qnaVO.setPq_storeNum(pq_storeNum);
         qnaVO.setPq_contents(pq_contents);
@@ -61,7 +62,7 @@ public class QnaController {
     
     @RequestMapping("/qnaList") //댓글 리스트
     @ResponseBody
-    private List<QnaVO> qnaList(Model model,@RequestParam long sell_num) throws Exception{
+    private List<ProductQnaVO> qnaList(Model model,@RequestParam long sell_num) throws Exception{
 
         return qnaService.qnaList(sell_num);
     }

@@ -21,5 +21,7 @@ public interface QnaRepository {
 	
 	public int qnaAnswer(QnaVO qnaVO)throws Exception;
 	public long lastNum()throws Exception;
+	public long qnaCount() throws Exception;
+	public long qnaNACount() throws Exception;
 
 }
