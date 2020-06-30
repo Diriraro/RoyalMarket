@@ -21,12 +21,7 @@
 	</div>
 
 <script type="text/javascript">
-	$("#productCancel").click(function(){
-		var check = confirm("상품 주문을 취소하시겠습니까?");
-		if(check){
-			location.href="./productCancel";
-		}
-	})	
+
 	$("#buy_History").click(function() {
 		location.href="./buy_History";
 		
