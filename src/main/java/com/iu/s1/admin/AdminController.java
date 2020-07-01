@@ -2,6 +2,7 @@ package com.iu.s1.admin;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -13,8 +14,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.iu.s1.ProductVO;
 import com.iu.s1.member.MemberVO;
@@ -22,89 +21,147 @@ import com.iu.s1.notice.NoticeVO;
 import com.iu.s1.qna.QnaService;
 import com.iu.s1.qna.QnaVO;
 import com.iu.s1.qna.file.QnaFileVO;
-
+import com.iu.s1.visitor.VisitorVO;
 
 @Controller
 @RequestMapping("/admin/**/")
 public class AdminController {
-	
 	@Autowired
 	private AdminService adminService;
 	@Autowired
 	private QnaService qnaService;
-	
+
 	@GetMapping("adminPage")
-	public String adminPage() throws Exception {
+	public String adminPage(Model model) throws Exception {
+		long qnaCount = adminService.qnaCount();
+		long qnaNACount = adminService.qnaNACount();
+		
+		boolean check = false;
+		if ( qnaNACount > 0 ) {
+			check = true;
+		}
+		model.addAttribute("check", check);
+		model.addAttribute("qnaCount", qnaCount);
+		model.addAttribute("qnaNACount", qnaNACount);
 		return "admin/adminPage";
 	}
 	
-	@GetMapping("getNoticeList") 
-	public void getNoticeList (Model model) throws Exception {
-		List<NoticeVO> ar = new ArrayList<NoticeVO>();
-		ar = adminService.getNoticeList();
-		model.addAttribute("list",ar);
-	}
-	
-	@GetMapping("getProductList")
-	public void getProductList (Model model) throws Exception {
-		List<ProductVO> ar = new ArrayList<ProductVO>();
-//		ar = adminService.getProductList();
-		model.addAttribute("list",ar);
-	}
-	
-	@GetMapping("getMemberList")
-	public void getMemberList (Model model, long mem_access) throws Exception {
-		System.out.println(mem_access);
-		List<MemberVO> ar = new ArrayList<MemberVO>();
-		ar = adminService.getMemberList(mem_access);
-		String check = "";
-		if(mem_access == 0) {
-			check = "accept";
-		} else if (mem_access == 1){
-			check = "denied";
+	// Dash Board
+	@GetMapping("getDashBoard")
+	public void getDashBoard(Model model) throws Exception {
+		// DashBoard 에서 필요한 데이터는 model 로 key,value 형태로 DashBoard에 addAttribute
+		// 회원 수
+		double memberCount = (double) adminService.getMemberCount();
+		double dailyNewMemberCount = (double) adminService.getDailyNewMember();
+		long rate = (long) ((dailyNewMemberCount / memberCount) * 100);
+		long rate2 = 0;
+		model.addAttribute("increaseRate", rate);
+		model.addAttribute("memberCount", (int) memberCount);
+		
+		// 공지사항 리스트 (최신순 2개만 출력함)
+		List<NoticeVO> ar = adminService.getNoticeList();
+		model.addAttribute("list", ar);
+		
+		// 방문자 수 
+		VisitorVO visitorVO = adminService.getTodayVisitorCount();
+		VisitorVO visitorVO2 = adminService.getlastVisitorCount();
+		if (visitorVO2.getCount() == 0) {
+			rate2 = 100;
+		} else {
+			rate2 = (long) ((visitorVO.getCount() * 100) / visitorVO2.getCount());
 		}
-		model.addAttribute("check",check);
-		model.addAttribute("list",ar);
+		model.addAttribute("visitors", visitorVO.getCount());
+		model.addAttribute("dailyRate", (int) rate2);
+		
+		// 문의수 , 미답변수
+		long qnaCount = adminService.qnaCount();
+		long qnaNACount = adminService.qnaNACount();
+		
+		model.addAttribute("qnaCount", qnaCount);
+		model.addAttribute("qnaNACount", qnaNACount);
+		
+		// 당일 거래량 및 지역별 거래량, 총 회사 수익
+		long tradeCount = adminService.getDailyTradeCount();
+		System.out.println(tradeCount);
+		List<Map.Entry<String, Long>> tradeAr = adminService.getLocateTradeCount();
+		long profit = adminService.getProfit();
+		long tradeCountYD = adminService.getRateForTradeCountYD();
+		long tradeRate = (tradeCount/tradeCountYD)*100;
+		if(tradeRate >100) {
+			tradeRate = 100;
+		}
+		model.addAttribute("tradeRate", tradeRate);
+		model.addAttribute("tradeCount", tradeCount);
+		model.addAttribute("tradeAr", tradeAr);
+		model.addAttribute("profit", profit);
+		
+		
+	}
+	
+	// Member
+	@GetMapping("getMemberList")
+	public void getMemberList(Model model, MemberVO memberVO, long handling) throws Exception {
+		List<MemberVO> ar = new ArrayList<MemberVO>();
+		// handling == 0 일시,  해당 access에 대한 리스트만 출력
+		if (handling == 0) {
+			long mem_access = memberVO.getMem_access();
+			ar = adminService.getMemberList(mem_access);
+			String check = "";
+			if (mem_access == 0) {
+				check = "accept";
+			} else if (mem_access == 1) {
+				check = "denied";
+			}
+			model.addAttribute("check", check);
+			model.addAttribute("list", ar);
+		} else if (handling == 1) { // handling == 1 일시,  회원로그인 차단/허용 관리 
+			long mem_access = memberVO.getMem_access();
+			ar = adminService.getMemberList(mem_access);
+			if (memberVO.getMem_access() == 1) {
+				memberVO.setMem_access(0);
+			} else if (memberVO.getMem_access() == 0) {
+				memberVO.setMem_access(1);
+			}
+			adminService.accessManage(memberVO);
+			String check = "";
+			if (mem_access == 0) {
+				check = "accept";
+			} else if (mem_access == 1) {
+				check = "denied";
+			}
+			model.addAttribute("check", check);
+			model.addAttribute("list", ar);
+		}
 	}
 	
 	@PostMapping("getMemberList")
-	public void getMemberList (Model model, String kind, String search, int mem_access) throws Exception {
+	public void getMemberList(Model model, String kind, String search, int mem_access) throws Exception {
 		List<MemberVO> ar = new ArrayList<MemberVO>();
 		ar = adminService.getMemberSearchList(kind, search, mem_access);
-		model.addAttribute("check","accept");
-		model.addAttribute("list",ar);
+		String check = "accept";
+		if(mem_access == 1) {
+			check = "denied";
+		}
+		model.addAttribute("check", check);
+		model.addAttribute("list", ar);
 	}
 	
-	@GetMapping("getManToManList")
-	public void getManToManList(Model model) throws Exception {
-		List<MemberVO> ar = new ArrayList<MemberVO>();
-//		ar = adminService.getManToManList();
-		List<QnaVO> ar2 = qnaService.qnaAdminList();
-		for (QnaVO qnaVO : ar2) {
-			int fileCheck = qnaService.fileCheck(qnaVO.getQna_num());
-			qnaVO.setFileCheck(fileCheck);
-		}
-		model.addAttribute("qna_adlist", ar2);
-		model.addAttribute("list",ar);
+	// Product 
+	@GetMapping("getProductList")
+	public void getProductList(Model model) throws Exception {
+		List<ProductVO> ar = new ArrayList<ProductVO>();
+//		ar = adminService.getProductList();
+		model.addAttribute("list", ar);
 	}
+	
+	// Qna
 	@GetMapping("getQnaList")
 	public void getQnaList(Model model) throws Exception {
 		List<MemberVO> ar = new ArrayList<MemberVO>();
 //		ar = adminService.getQnaList();
-		model.addAttribute("list",ar);
+		model.addAttribute("list", ar);
 	}
-	@GetMapping("getDashBoard")
-	public void getDashBoard(Model model) throws Exception {
-		// DashBoard 에서 필요한 데이터는 model 로 key,value 형태로 DashBoard에 addAttribute
-		double memberCount = (double)adminService.getMemberCount();
-		double dailyNewMemberCount = (double)adminService.getDailyNewMember();
-		long rate = (long)((dailyNewMemberCount/memberCount)*100);
-		List<NoticeVO> ar = adminService.getNoticeList();
-		model.addAttribute("increaseRate", rate);
-		model.addAttribute("memberCount",(int)memberCount);
-		model.addAttribute("list",ar);
-		
-	}
+	
 	@GetMapping("qnaAnswer")
 	public void qnaAnswer(long qna_num, Model model)throws Exception{
 //		ModelAndView mv = new ModelAndView();
@@ -120,6 +177,18 @@ public class AdminController {
 		int result = qnaService.qnaAnswer(qnaVO);
 	}
 	
+	@GetMapping("getManToManList")
+	public void getManToManList(Model model) throws Exception {
+		List<MemberVO> ar = new ArrayList<MemberVO>();
+//		ar = adminService.getManToManList();
+		List<QnaVO> ar2 = qnaService.qnaAdminList();
+		for (QnaVO qnaVO : ar2) {
+			int fileCheck = qnaService.fileCheck(qnaVO.getQna_num());
+			qnaVO.setFileCheck(fileCheck);
+		}
+		model.addAttribute("qna_adlist", ar2);
+		model.addAttribute("list",ar);
+	}
 	@PostMapping("getManToManList")
 	public void qnaMemberSearch(Model model, String search)throws Exception{
 		if(search==null) {
@@ -135,6 +204,13 @@ public class AdminController {
 		model.addAttribute("list",ar);
 	}
 	
+	// Notice
+	@GetMapping("getNoticeList")
+	public void getNoticeList(Model model) throws Exception {
+		List<NoticeVO> ar = new ArrayList<NoticeVO>();
+		ar = adminService.getNoticeList();
+		model.addAttribute("list", ar);
+	}
 	@PostMapping("getNoticeList")
 	public void getNoticeList(Model model, String search)throws Exception{
 		if(search==null) {

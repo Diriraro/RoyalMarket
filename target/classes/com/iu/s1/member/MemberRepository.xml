@@ -18,11 +18,11 @@
 	</select>
 	
 	<insert id="memberJoin" parameterType="MemberVO">
-		insert into member values(#{mem_id},#{mem_pw},#{mem_name},#{mem_email},#{mem_phone},#{mem_storeNum},#{mem_id},#{mem_address},0,0)
+		insert into member values(#{mem_id},#{mem_pw},#{mem_name},#{mem_email},#{mem_phone},#{mem_storeNum},#{mem_id},#{mem_address},0,0,now())
 	</insert>
 	
 	<select id="getMemberList" resultType="MemberVO" parameterType="Long">
-		SELECT * FROM member where mem_access = #{mem_access}
+		SELECT * FROM member where mem_access = #{mem_access} order by mem_storeNum desc
 	</select>
 	
 	<select id="getMemberSearchList" resultType="MemberVO" parameterType="MemberVO">
@@ -45,5 +45,7 @@
 	<select id="getDailyNewMember" resultType="MemberVO" parameterType="MemberVO">
 		SELECT * FROM member where mem_regDate > #{mem_regDate}
 	</select>
-	
+	<update id="accessManage" parameterType="MemberVO">
+		UPDATE member SET mem_access = #{mem_access} where mem_storeNum = #{mem_storeNum}
+	</update>
 </mapper>

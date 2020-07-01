@@ -46,7 +46,7 @@
 						<td>${vo.mem_phone}</td>
 						<td>${vo.mem_address}</td>
 						<td>${vo.mem_point}</td>
-						<td><button class="AccessGrant">X</button></td>
+						<td><button class="AccessGrant1" title="${vo.mem_storeNum}">X</button></td>
 					</tr>
 				</c:forEach>
 			</tbody>
@@ -56,7 +56,7 @@
 <c:if test="${check eq 'denied'}">
 	<div class="listSection">
 		<div class="topnav">
-			<a class="active" href="#home">회원관리</a>
+			<a class="active" href="#home">차단회원관리</a>
 			<!-- <a href="#about">About</a> <a
 			href="#contact">Contact</a> -->
 			<div class="search-container">
@@ -98,7 +98,7 @@
 						<td>${vo.mem_phone}</td>
 						<td>${vo.mem_address}</td>
 						<td>${vo.mem_point}</td>
-						<td><button class="AccessGrant">O</button></td>
+						<td><button class="AccessGrant0" title="${vo.mem_storeNum}">O</button></td>
 					</tr>
 				</c:forEach>
 			</tbody>

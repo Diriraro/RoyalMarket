@@ -134,10 +134,10 @@
 					type="hidden" name="mem_storeNum" value="${member.mem_storeNum}" />
 				<input type="hidden" name="sell_num" value="${vo.sell_num}" />
 
-				<c:if test="${empty zc.zzim_num}">
+				<c:if test="${empty zc.zzim_num} ">
 					<button type="submit"
 						style="margin-top: 65px; border-radius:0px 0px 0px 0px;width: 176px; height: 56px;background-image: url('${pageContext.request.contextPath}/resources/images/zzim_button.png');"
-						class="btn btn-default"></button>
+						class="btn btn-default zzimbtn"></button>
 					<a><img style="margin-top: 65px; cursor: pointer;" alt=""
 						src="${pageContext.request.contextPath}/resources/images/phone_button.png"></a>
 					<a><img style="margin-top: 65px; cursor: pointer;" alt=""
@@ -146,7 +146,7 @@
 			</form>
 
 			<c:if test="${not empty zc.zzim_num}">
-				<a href="zzimDelete?zzim_num=${zc.zzim_num}"><img
+				<a class="zzimbtn"  href="zzimDelete?zzim_num=${zc.zzim_num}"><img
 					style="margin-top: 65px; cursor: pointer;" alt=""
 					src="${pageContext.request.contextPath}/resources/images/zzimaft_button.png"></a>
 				<a><img style="margin-top: 65px; cursor: pointer;" alt=""
@@ -154,8 +154,11 @@
 				<a href="../payment/productPay?sell_product=${vo.sell_product}&sell_price=${vo.sell_price}&sell_num=${vo.sell_num}"><img style="margin-top: 65px; cursor: pointer;" alt=""
 					src="${pageContext.request.contextPath}/resources/images/buy_button.png"></a>
 			</c:if>
-			<!-- 찜 끝 -->
+  
+  <div id="myModal2" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 
+</div>	
+			<!-- 찜 끝 -->
 
 		</div>
 	</div>
@@ -241,6 +244,9 @@
 	</div>
 	
 	</div>
+	<!-- 상품문의끝 -->
+	
+	
 	
 	<div style="background-color: blue;float: left;width: 360px;">
 	<font style="font-size: 18px;font-weight: 900;">상점정보</font>
@@ -253,6 +259,19 @@
 			alert("asdasd");
 			$("#pq_contents").val("@" + $(this).val() + " : ");
 		});
+
+		$('.zzimbtn').on('click', function(){
+			$('#myModal2').modal('show');
+			});
+		
+			$('#closebtn').on('click', function(){
+			$('#myModal2').modal('hide');
+			});
+
+
+
+		
+					
 
 		
 
