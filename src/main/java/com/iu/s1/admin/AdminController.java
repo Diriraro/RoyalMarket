@@ -18,6 +18,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.iu.s1.ProductVO;
 import com.iu.s1.member.MemberVO;
 import com.iu.s1.notice.NoticeVO;
+import com.iu.s1.qna.QnaService;
+import com.iu.s1.qna.QnaVO;
+import com.iu.s1.qna.file.QnaFileVO;
 import com.iu.s1.visitor.VisitorVO;
 
 @Controller
@@ -26,6 +29,8 @@ public class AdminController {
 
 	@Autowired
 	private AdminService adminService;
+	@Autowired
+	private QnaService qnaService;
 
 	@GetMapping("adminPage")
 	public String adminPage(Model model) throws Exception {
@@ -158,11 +163,47 @@ public class AdminController {
 //		ar = adminService.getQnaList();
 		model.addAttribute("list", ar);
 	}
+	
+	@GetMapping("qnaAnswer")
+	public void qnaAnswer(long qna_num, Model model)throws Exception{
+//		ModelAndView mv = new ModelAndView();
+		QnaVO qnaVO = new QnaVO();
+		qnaVO = qnaService.selectQna(qna_num);
+		List<QnaFileVO> qnaFileVOs = qnaService.selectQnaFile(qna_num);
+		model.addAttribute("qvo", qnaVO);
+		model.addAttribute("qfvo", qnaFileVOs);
+	}
+	
+	@PostMapping("qnaAnswer")
+	public void qnaAnswer(QnaVO qnaVO, Model model)throws Exception{
+		int result = qnaService.qnaAnswer(qnaVO);
+	}
+	
 	@GetMapping("getManToManList")
 	public void getManToManList(Model model) throws Exception {
 		List<MemberVO> ar = new ArrayList<MemberVO>();
 //		ar = adminService.getManToManList();
-		model.addAttribute("list", ar);
+		List<QnaVO> ar2 = qnaService.qnaAdminList();
+		for (QnaVO qnaVO : ar2) {
+			int fileCheck = qnaService.fileCheck(qnaVO.getQna_num());
+			qnaVO.setFileCheck(fileCheck);
+		}
+		model.addAttribute("qna_adlist", ar2);
+		model.addAttribute("list",ar);
+	}
+	@PostMapping("getManToManList")
+	public void qnaMemberSearch(Model model, String search)throws Exception{
+		if(search==null) {
+			search="";
+		}
+		List<QnaVO> ar = qnaService.qnaMemberSearch(search);
+		List<QnaVO> ar2 = qnaService.qnaAdminList();
+		for (QnaVO qnaVO : ar2) {
+			int fileCheck = qnaService.fileCheck(qnaVO.getQna_num());
+			qnaVO.setFileCheck(fileCheck);
+		}
+		model.addAttribute("qna_adlist", ar2);
+		model.addAttribute("list",ar);
 	}
 	
 	// Notice
@@ -172,7 +213,14 @@ public class AdminController {
 		ar = adminService.getNoticeList();
 		model.addAttribute("list", ar);
 	}
-
-
+	@PostMapping("getNoticeList")
+	public void getNoticeList(Model model, String search)throws Exception{
+		if(search==null) {
+			search="";
+		}
+		List<NoticeVO> ar = adminService.noticeTitleSearch(search);
+		model.addAttribute("list", ar);
+	}
+	
 
 }

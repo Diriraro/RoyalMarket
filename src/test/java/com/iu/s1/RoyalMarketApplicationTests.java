@@ -1,5 +1,6 @@
 package com.iu.s1;
 
+import java.util.Calendar;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -31,6 +32,8 @@ class RoyalMarketApplicationTests {
 //	}
 	@Test
 	void test() throws Exception {
-		System.out.println(adminService.getRateForTradeCountYD());
+		Calendar cal = Calendar.getInstance();
+		cal.set(cal.get(Calendar.YEAR),cal.get(Calendar.MONTH));
+		System.out.println(cal.getActualMaximum(cal.DATE));
 	}
 }

@@ -13,11 +13,11 @@
 <c:import url="../template/nav.jsp"></c:import>
 	<div class="container">
 		<form action="noticeUpdate" method="post" enctype="multipart/form-data">
-		<input type="hidden" id="no_num" name="no_num" value="${no_select.no_num}">
+		<input type="hidden" id="no_num" name="no_num" value="${no_select.nonum}">
 		<input type="hidden" id="no_regDate" name="no_regDate" value="${no_select.no_regDate}">
 			<div class="form-group">
 				<label for="title">Title:</label> <input type="text"
-					class="form-control" id="no_title" name="no_title" value="${no_select.no_title}">
+					class="form-control" id="no_title" name="no_title" value="${no_select.notitle}">
 			</div>
 			<div class="form-group">
 				<label for="contents">Contents:</label>

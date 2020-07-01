@@ -21,12 +21,12 @@
 		</tr>
 		
 		<tr>
-			<td>${no_select.no_title}</td>
+			<td>${no_select.notitle}</td>
 			<td>${no_select.no_regDate}</td>
 			<td>${no_select.no_contents}</td>
 		</tr>
 	</table>
-	<a href="./noticeUpdate?no_num=${no_select.no_num}">
+	<a href="./noticeUpdate?nonum=${no_select.nonum}">
 		<button class="btn btn-success">수정하기</button>
 	</a>
 	

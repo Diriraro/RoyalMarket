@@ -19,17 +19,19 @@
 			<tr>
 				<td>글 번호</td>
 				<td>공지 제목</td>
-				<td>공지 내용</td>
 				<td>공지 게시일</td>
+				<td>공지 삭제</td>
+				<td>공지 수정</td>
 			</tr>
 		</thead>
 		<tbody>
 			<c:forEach items="${list}" var="li">
 				<tr>
-					<td>${li.no_num}</td>
-					<td><a href="../notice/noticeSelect?no_num=${li.no_num}" class="pointCursor">${li.no_title}</a></td>
-					<td>${li.no_contents}</td>
+					<td>${li.nonum}</td>
+					<td><a href="#" title="NoticeSelect" class="check pointCursor" id="${li.nonum}">${li.notitle}</a></td>
 					<td>${li.no_regDate}</td>
+					<td width="50px"><button id="noticeDel" title="${li.nonum}" class="btn btn-danger">공지 삭제</button> </td>
+					<td width="50px"><button id="noticeUpd" title="${li.nonum}" class="btn btn-success">공지 수정</button> </td>
 				</tr>
 			</c:forEach>
 		</tbody>

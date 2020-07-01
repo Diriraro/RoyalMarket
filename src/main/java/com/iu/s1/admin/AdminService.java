@@ -81,7 +81,11 @@ public class AdminService {
 	}
 
 	public List<NoticeVO> getNoticeList() throws Exception {
-		return noticeRepository.findAll();
+		return noticeRepository.findAllByOrderByNonumDesc();
+	}
+	
+	public List<NoticeVO> noticeTitleSearch(String search)throws Exception{
+		return noticeRepository.findByNotitleContainingOrderByNonumDesc(search);
 	}
 
 	public VisitorVO getTodayVisitorCount() throws Exception {
@@ -122,11 +126,13 @@ public class AdminService {
 			lastDay = cal.getTime().getDate() - 1;
 			// *월 1일 일때
 		} else if (year == lastYear && month == lastMonth && day == 1) {
+			cal.add(cal.MONTH, -1);
 			lastMonth = lastMonth - 1;
-			lastDay = cal.getMaximum(lastMonth);
+			lastDay = cal.getActualMaximum(cal.DAY_OF_MONTH);
 			// 1월 1일 일때
 		} else if (month == 1 && day == 1) {
-			lastMonth = 31;
+			lastDay = 31;
+			lastMonth = 12;
 			lastYear = year - 1;
 		}
 		String daily = lastYear + "/" + lastMonth + "/" + lastDay;
@@ -145,7 +151,7 @@ public class AdminService {
 	}
 
 	public long qnaCount() throws Exception {
-		return qnaRepository.qnaCount();
+		return qnaRepository.qnaTotalCount();
 	}
 
 	public long qnaNACount() throws Exception {
@@ -167,11 +173,13 @@ public class AdminService {
 			lastDay = cal.getTime().getDate() - 1;
 			// *월 1일 일때
 		} else if (year == lastYear && month == lastMonth && day == 1) {
+			cal.add(cal.MONTH, -1);
 			lastMonth = lastMonth - 1;
-			lastDay = cal.getMaximum(lastMonth);
+			lastDay = cal.getActualMaximum(cal.DAY_OF_MONTH);
 			// 1월 1일 일때
 		} else if (month == 1 && day == 1) {
-			lastMonth = 31;
+			lastDay = 31;
+			lastMonth = 12;
 			lastYear = year - 1;
 		}
 		String sell_date2 = lastYear + "/" + lastMonth + "/" + lastDay;
@@ -217,4 +225,5 @@ public class AdminService {
 	public long getProfit() throws Exception {
 		return paymentHistoryRepository.getProfit();
 	}
+	
 }

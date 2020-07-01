@@ -56,7 +56,9 @@
 	</section>
 	<section id="sc2">
 		<div id="section_head">
-			<div style="float: left; line-height : 75px;"><a style="color : black;" href="../"><i class="fas fa-home"></i>Home</a></div>
+			<div style="float: left; line-height: 75px;">
+				<a style="color: black;" href="../"><i class="fas fa-home"></i>Home</a>
+			</div>
 			<div id="admin_set">
 				관리자 님
 				<!-- ${member.mem_id} == admin 추후 설정 -->
@@ -108,7 +110,9 @@
 					getManToManList();
 				} else if (path == 'dashBoard') {
 					getDashBoard();
-				}
+				} else if (path == 'NoticeWrite'){
+					getNoticeWrite();
+				} 
 				/* 컨텐츠를 추가시 함수 + else if 추가 */
 			})
 			$("#content").on(
@@ -151,8 +155,53 @@
 				getQnaList();
 			} else if (path == 'manToman') {
 				getManToManList();
+			} else if (path == 'NoticeSelect'){
+				var nonum = $(this).attr("id");
+				console.log(nonum);
+				getNoticeSelect(nonum);
 			}
 		})
+		$("#content").on("click", ".qna_num", function(){		// 답변 페이지 진입
+			var qna_num = $(this).attr("id");					// 글 번호 받아오기
+			getQnaAnswer(qna_num);								// 함수로 보냄
+		})
+		
+		$("#content").on("click", "#answerO", function(){		// 답변완료 누를시 진입
+			getQnaAnswerOK();									// 함수로 바로 보냄 > 함수에서 변수받아옴
+		})
+		
+		$("#content").on("click", "#qnaMemSearch", function(){	// 글 목록에서 작성자 아이디 검색
+			var search = $("#qnaSearch").val();					// 아이디 변수로 받아옴
+			getQnaMemSearch(search);							// 함수로 보냄
+		})
+		
+		$("#content").on("click","#noticeSubmit", function(){
+			getNoticeWriteOK();
+		})
+		
+		$("#content").on("click","#noticeDel", function(){
+			var check = confirm("삭제하면 복구할수 없습니다. 정말로 삭제할까요?");
+			if(check){
+				var nonum = $(this).attr("title");
+				getNoticeDelete(nonum);
+			}else{
+				event.stopPropagation();
+			}
+		})
+		$("#content").on("click","#noticeUpd", function(){
+			var nonum = $(this).attr("title");
+			getNoticeUpdate(nonum);
+		})
+		
+		$("#content").on("click","#noticeUpdate", function(){
+			getNoticeUpdateOK();
+		})
+		
+		$("#content").on("click", "#noticeTitleSearch", function(){	
+			var search = $("#noticeSearch").val();					
+			getNoticeSearch(search);							
+		})
+		
 		$("#content").on("click", "#frm", function() {
 			var kind = $("#kind").val();
 			var search = $("#search").val();
@@ -165,7 +214,8 @@
 			var mem_access = 1;
 			getMemberSearchList(kind, search, mem_access);
 		})
-
+		
+		// dashboard
 		function getDashBoard() {
 			$("#content").empty();
 			$.get("./list/getDashBoard", function(result) {
@@ -173,10 +223,44 @@
 			})
 		}
 
+		// qna
 		function getManToManList() {
 			$("#content").empty();
 			$.get("./list/getManToManList", function(result) {
 				$("#content").append(result);
+			})
+		}
+		function getQnaMemSearch(search) {						// qna에서 글작성자 검색 함수
+			$("#content").empty();
+			$.post("./list/getManToManList",{					// post로 보냄 (controller에는 같은 이름의 메서드가 get방식으로 있어서 post로 보냄)
+					search : search
+				}, function(result) {
+				$("#content").append(result);					// callback
+			})
+		}
+		function getQnaAnswer(qna_num) {
+			$("#content").empty();
+			$.get("./list/qnaAnswer?qna_num="+qna_num, function(result) {
+				$("#content").append(result);
+			})
+		}	
+		function getQnaAnswerOK() {
+			var form = {										// 변수 한번에 넘겨주기위해 변수하나에 필요한 내용 다 담기			
+					qna_num : $("#qna_numAnswer").val(),
+					qna_contents : $("#qna_contents").val()
+			};
+			$("#content").empty();
+			$.ajax({
+				type: 'POST',  
+				  url: './list/qnaAnswer',  					// post로 보냄
+				  data: form,									// 담은 변수명 보냄
+				  success: function(data){
+					  alert("작성 성공");							// 성공하면 alert 출력
+					  $("#content").empty();
+						$.get("./list/getManToManList", function(result) {	// qna list 함수를 그대로 가져옴
+							$("#content").append(result);
+					})
+				  }
 			})
 		}
 		function getQnaList() {
@@ -185,6 +269,8 @@
 				$("#content").append(result);
 			})
 		}
+
+		// member
 		function getBlockList() {
 			$("#content").empty();
 			$.get("./list/getMemberList?mem_access=1&handling=0", function(
@@ -211,7 +297,8 @@
 				$("#content").append(result);
 			})
 		}
-
+		
+		// product
 		function getProductList() {
 			$("#content").empty();
 			$.get("./list/getProductList", function(result) {
@@ -219,10 +306,89 @@
 			})
 		}
 
+
+		// notice
 		function getNoticeList() {
 			$("#content").empty();
 			$.get("./list/getNoticeList", function(result) {
 				$("#content").append(result)
+			})
+			
+		}
+		function getNoticeWrite(){
+			$("#content").empty();
+			$.get("../notice/noticeWrite", function(result) {
+				$("#content").append(result);
+			})
+		}
+
+		function getNoticeWriteOK(){
+			var form = {										// 변수 한번에 넘겨주기위해 변수하나에 필요한 내용 다 담기			
+					notitle : $("#notitle").val(),
+					no_contents : $("#summernote").val()
+			};
+			$("#content").empty();
+			$.ajax({
+				type: 'POST',  
+				  url: '/notice/noticeWrite',  					// post로 보냄
+				  data: form,									// 담은 변수명 보냄
+				  success: function(result){
+					  alert("공지 작성 완료");						// 성공하면 alert 출력
+					  $("#content").empty();
+						$.get("/admin/list/getNoticeList", function(result) {
+							$("#content").append(result)
+						})
+				  }
+			})
+		}
+		function getNoticeDelete(nonum){
+			$("#content").empty();
+			$.get("../notice/noticeDelete?nonum="+nonum, function(result) {
+				alert("삭제 완료");
+				$("#content").empty();
+				$.get("./list/getNoticeList", function(result) {
+					$("#content").append(result)
+				})
+			})
+		}
+		function getNoticeUpdate(nonum){
+			$("#content").empty();
+			$.get("../notice/noticeUpdate?nonum="+nonum, function(result) {
+				$("#content").append(result);
+			})
+		}
+		function getNoticeUpdateOK(){
+			var form = {			
+					nonum : $("#nonum").val(),							// 변수 한번에 넘겨주기위해 변수하나에 필요한 내용 다 담기			
+					notitle : $("#notitle").val(),
+					no_contents : $("#summernote").val()
+			};
+			$("#content").empty();
+			$.ajax({
+				type: 'POST',  
+				  url: '/notice/noticeUpdate',  					// post로 보냄
+				  data: form,									// 담은 변수명 보냄
+				  success: function(result){
+					  alert("공지 수정 완료");						// 성공하면 alert 출력
+					  $("#content").empty();
+						$.get("/admin/list/getNoticeList", function(result) {
+							$("#content").append(result)
+						})
+				  }
+			})
+		}
+		function getNoticeSelect(nonum){
+			$("#content").empty();
+			$.get("../notice/noticeSelect?nonum="+nonum, function(result) {
+				$("#content").append(result);
+			})
+		}
+		function getNoticeSearch(search) {						// qna에서 글작성자 검색 함수
+			$("#content").empty();
+			$.post("./list/getNoticeList",{						// post로 보냄 (controller에는 같은 이름의 메서드가 get방식으로 있어서 post로 보냄)
+					search : search
+				}, function(result) {
+				$("#content").append(result);					// callback
 			})
 		}
 	</script>
