@@ -18,6 +18,7 @@
 				<td>상품명</td>
 				<td>상품 가격</td>
 				<td>상태</td>
+				<td>　</td>
 		<%-- 		<c:if test="${buy.status eq 0}">
 					<td>결제 취소</td>
 				</c:if> --%>
@@ -34,9 +35,11 @@
 					</c:if>
 					<c:if test="${vo.status eq 1}">
 						<td>인수 완료</td>
+						<td>　</td>
 					</c:if>
 					<c:if test="${vo.status eq 2}">
 						<td>구매 완료</td>
+						<td><a href="../shop/rei?sell_num=${vo.sell_num}"> 리뷰남기기</a>　</td>
 					</c:if>
 					<c:if test="${vo.status eq 3}">
 						<td>취소된 거래입니다.</td>

@@ -19,5 +19,12 @@
 		select count(zzim_num) from zzim where sell_num=#{sell_num}
 	</select>
 
+	<!-- shop에서 보여줄 목록  -->
+	<select id="myzzim" parameterType="Long" resultType="com.iu.s1.product.zzim.ZzimVO">
+		select * from zzim where mem_storeNum=#{mem_storeNum}		
+	
+	</select>
+
+
 
 </mapper>

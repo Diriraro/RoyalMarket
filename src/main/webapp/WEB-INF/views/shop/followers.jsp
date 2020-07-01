@@ -5,8 +5,26 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE html>
 <html>
+<style type="text/css">
+td{
+width: 220px;
+font-size: large;
+text-align: center;
+font-weight: bold;
+
+}
+
+.td1{
+border-bottom: 2px solid white;
+border-left: 2px solid black;
+border-right: 2px solid black;
+border-top: 2px solid black;
+
+}
+
+</style>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 <c:import url="../template/boot.jsp"></c:import>
 </head>
@@ -18,39 +36,29 @@
 		<c:import url="../template/shopmain.jsp"></c:import>
 
 	<div class="container">
-		<div style="border: 1px solid black; width: 1024px; height: 340px;">
+		<div style="border: 1px solid black; width: 1024px; min-height: 340px;">
 			<!-- 각자 페이지에 하나씩 생성  -->
 			<!--버튼 감싸는 div  -->
 			<div>
-				<button class="btn btn-info">
-					<a href="./myshop?mem_storeNum=${mem_storeNum}">상품</a>
-				</button>
-
-				<button class="btn btn-info">
-					<a href="./comments?mem_storeNum=${mem_storeNum}">상점문의</a>
-				</button>
-
-				<!-- 찜페이지 버튼은 나의 상점에서만 가능  -->
-			<c:if test="${msnum eq mem_storeNum }">
-				<button class="btn btn-info">
+			<!-- 이동버튼  -->
+			<hr>
+			<table border="1" style="height: 80px;">
+				<tr>
+				<td bgcolor="#f2f2f2" ><a href="./myshop?mem_storeNum=${mem_storeNum}">상품</a></td>
+				<td bgcolor="#f2f2f2"><a href="./comments?mem_storeNum=${mem_storeNum}">상점문의</a></td>
+				<c:if test="${msnum eq mem_storeNum }">
+				<td bgcolor="#f2f2f2">
 					<a href="./favorites?mem_storeNum=${mem_storeNum}"> 찜</a>
-				</button>
-			</c:if>
-
-				<button class="btn btn-info">
-					<a href="./reviews?mem_storeNum=${mem_storeNum}">상점후기</a>
-				</button>
-
-				<button class="btn btn-info">
-					<a href="./followings?mem_storeNum=${mem_storeNum}">팔로잉</a>
-				</button>
-
-				<button class="btn btn-danger">
-					<a href="./followers?mem_storeNum=${mem_storeNum}">팔로워</a>
-				</button>
-
+				</td>
+				</c:if>
+				<td bgcolor="#f2f2f2"><a href="./reviews?mem_storeNum=${mem_storeNum}">상점후기</a></td>
+				<td bgcolor="#f2f2f2"><a href="./followings?mem_storeNum=${mem_storeNum}">팔로잉</a></td>
+				<td class="td1"><a href="./followers?mem_storeNum=${mem_storeNum}">팔로워</a></td>
+				</tr>
+			
+			</table>
+			<!--  -->
 			</div>
-
 
 				<div>  <!-- 내용보여줄 div -->
 				<h2>${mem_storeName } 의 팔로워 목록</h2>

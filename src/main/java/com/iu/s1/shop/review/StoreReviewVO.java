@@ -12,7 +12,7 @@ public class StoreReviewVO {
 	private String re_context;
 	private long re_rate;
 	private String re_wDate;
-	private String re_sotreName;
+	private String re_storeName;
 	private long re_storeNum;
 	
 	

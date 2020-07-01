@@ -106,4 +106,18 @@ public class ProductService {
 	public long zzimCount(long sell_num)throws Exception{
 		return zzimMapper.zzimCount(sell_num);
 	}
+	
+	// shop에서 쓸꺼
+	public List<ProductVO> myList(long mem_storeNum) throws Exception {
+		return productMapper.myList(mem_storeNum);
+	}
+	
+	// shop에서 쓸 찜
+	public List<ZzimVO> myzzim(long mem_storeNum) throws Exception{
+		return zzimMapper.myzzim(mem_storeNum);
+		
+	}
+	
+	
+	
 }

@@ -1,5 +1,6 @@
 package com.iu.s1.shop;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,10 +17,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.iu.s1.member.MemberVO;
+import com.iu.s1.product.ProductService;
+import com.iu.s1.product.ProductVO;
+import com.iu.s1.product.zzim.ZzimVO;
 import com.iu.s1.shop.follow.StoreFollowService;
 import com.iu.s1.shop.follow.StoreFollowVO;
 import com.iu.s1.shop.qna.StoreQnaService;
 import com.iu.s1.shop.qna.StoreQnaVO;
+import com.iu.s1.shop.review.StoreReviewService;
+import com.iu.s1.shop.review.StoreReviewVO;
+import com.iu.s1.shop.review.reviewFile.StoreReviewFileVO;
 
 @Controller
 @RequestMapping("/shop/**")
@@ -28,6 +35,12 @@ public class ShopController {
 	private StoreQnaService storeQnaService;
 	@Autowired
 	private StoreFollowService storeFollowService;
+	@Autowired
+	private StoreReviewService storeReviewService;
+	
+	@Autowired
+	private ProductService productService;
+	
 	
 	
 	
@@ -37,15 +50,10 @@ public class ShopController {
 	public ModelAndView myshop(ModelAndView mv,HttpSession session,long mem_storeNum) throws Exception {
 		
 		StoreQnaVO qnaVO = new StoreQnaVO();
-		
 		String msname = ((MemberVO)session.getAttribute("member")).getMem_storeName();
 		long msnum = ((MemberVO)session.getAttribute("member")).getMem_storeNum();
-		
 		qnaVO.setSq_storeNum(mem_storeNum);
-		
 		String para = storeQnaService.getSelectStoreName(qnaVO); // mem_storeNum의 상점 이름 출력
-		
-		
 		
 		/// 팔로우영역
 		long give_storeNum=msnum;
@@ -59,9 +67,12 @@ public class ShopController {
 			
 		///  팔로우영역
 		
+		// 상품 리스트 영역
+		List<ProductVO> ar = productService.myList(mem_storeNum);
 		
 		
 		
+		mv.addObject("mylist", ar);
 		mv.addObject("mem_storeNum",mem_storeNum);//파라미터  모든 상점 페이지는 mem_storeNum으로 들어가야함,
 		mv.addObject("mem_storeName",para); // 파라미터의 상점이름
 		mv.addObject("msname",msname);
@@ -168,10 +179,12 @@ public class ShopController {
 			
 		///  팔로우영역
 		
+		// 찜 리스트
+		List<ZzimVO> ar = productService.myzzim(mem_storeNum);
+		// 찜 리스트 끝
 		
-
 		
-		
+		mv.addObject("zilist",ar);
 		mv.addObject("mem_storeName",para); // 파라미터의 상점이름
 		mv.addObject("mem_storeNum",mem_storeNum);//파라미터  모든 상점 페이지는 storeNum으로 들어가야함,
 		mv.addObject("msname",msname);
@@ -202,10 +215,27 @@ public class ShopController {
 		
 		mv.addObject("fonum",storeFollowVO); // 팔로우번호 있으면 전송 없으면 null
 			
-		///  팔로우영역
+		///  팔로우영역 끝
+		
+		// 리뷰 리스트 확인    ******
+		StoreReviewVO storeReviewVO = new StoreReviewVO();
+		storeReviewVO.setMem_storeNum(mem_storeNum);
+		List<StoreReviewVO> rear = storeReviewService.getSelectListReview(storeReviewVO);
+		
+		//리뷰 사진 출력 : 리뷰 번호와 연결해서    // 뒤에 값 조정 하기     두개이상일떄 확인하기 나오는지 
+		List<StoreReviewFileVO> storeReviewFileVOs = new ArrayList<StoreReviewFileVO>();
+		for (StoreReviewVO storeReviewVO2 :rear) {
+			long sss= storeReviewVO2.getRe_num();
+			
+			storeReviewFileVOs.addAll(storeReviewService.reviewFileSelect(sss));
+		}
+		
+		mv.addObject("pfile", storeReviewFileVOs); // store 사진 출력
+	
+		// 리뷰 리스트 끝*******
 		
 		
-
+		mv.addObject("reli",rear);
 		mv.addObject("mem_storeName",para); // 파라미터의 상점이름
 		mv.addObject("mem_storeNum",mem_storeNum);//파라미터  모든 상점 페이지는 storeNum으로 들어가야함,
 		mv.addObject("msname",msname);
