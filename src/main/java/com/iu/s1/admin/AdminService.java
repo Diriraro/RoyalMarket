@@ -157,7 +157,7 @@ public class AdminService {
 	public long qnaNACount() throws Exception {
 		return qnaRepository.qnaNACount();
 	}
-	public long getRateForTradeCountYD() throws Exception {
+	public Long getRateForTradeCountYD() throws Exception {
 		Calendar cal = Calendar.getInstance();
 		// 오늘
 		int year = cal.getTime().getYear() + 1900;
@@ -187,7 +187,7 @@ public class AdminService {
 		return daily;
 	}
 
-	public long getDailyTradeCount() throws Exception {
+	public Long getDailyTradeCount() throws Exception {
 		Date date = new Date();
 		int year = date.getYear();
 		int month = date.getMonth();
@@ -222,14 +222,17 @@ public class AdminService {
 		return list;
 	}
 
-	public long getProfit() throws Exception {
+	public Long getProfit() throws Exception {
 		return paymentHistoryRepository.getProfit();
 	}
 	
-	public List<ProductVO> productList(Pager pager) throws Exception {
+	public List<ProductVO> productList() throws Exception {
+		Pager pager = new Pager();
+		pager.setCurPage(1L);
 		pager.makeRow();
 		long totalCount = productMapper.productCount(pager);
 		pager.makePage(totalCount);
 		return productMapper.productList(pager);
 	}
+	
 }

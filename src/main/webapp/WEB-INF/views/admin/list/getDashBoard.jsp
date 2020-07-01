@@ -122,19 +122,22 @@
 		</h3>
 		<br>
 		<c:catch>
-			<div class="w3-row">
-				<div class="w3-col m2 text-center">
-					<img class="w3-circle" alt="상품이미지1"
-						style="width: 96px; height: 96px">
+			<c:forEach items="${productList}" var="list" end="3" varStatus="i">
+				<div class="w3-row">
+					<div class="w3-col m2 text-center">
+						<img class="w3-circle" alt="상품이미지${i.index +1}"
+							src="${pageContext.request.contextPath}/upload/product/${productFileMain[i.index]}"
+							style="width: 96px; height: 96px">
+					</div>
+					<div class="w3-col m10 w3-container">
+						<h4>
+							${list.sell_product} <span class="w3-opacity w3-medium">${list.sell_date}</span>
+						</h4>
+						<p>${list.sell_info}</p>
+						<br>
+					</div>
 				</div>
-				<div class="w3-col m10 w3-container">
-					<h4>
-						상품 제목 <span class="w3-opacity w3-medium">상품 게시일</span>
-					</h4>
-					<p>info</p>
-					<br>
-				</div>
-			</div>
+			</c:forEach>
 		</c:catch>
 	</div>
 	<br>
