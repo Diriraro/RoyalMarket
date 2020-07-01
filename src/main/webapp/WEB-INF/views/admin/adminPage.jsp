@@ -78,11 +78,16 @@
 	<script type="text/javascript">
 		$(function() {
 			var check = ${check};
-			if (!check) {
+			alert(check);
+			if (check) {
+				// 미답변 문의가 있으면
 				$(".new").children(".fas").removeClass("fa-envelope");
 				$(".new").children(".fas").addClass("fa-envelope-open-text");
 			} else {
+				// 미답변 문의가 없을시
 				$(".new").children("#new").remove();
+				$(".new").children(".fas").removeClass("fa-envelope-open-text")
+				$(".new").children(".fas").addClass("fa-envelope");
 				$(".new").children(".fas").css("color", "black");
 			}
 

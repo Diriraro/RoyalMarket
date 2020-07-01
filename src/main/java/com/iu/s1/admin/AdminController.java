@@ -37,10 +37,9 @@ public class AdminController {
 		long qnaCount = adminService.qnaCount();
 		long qnaNACount = adminService.qnaNACount();
 		
-		long newArrival = qnaCount - qnaNACount;
-		boolean check = true;
-		if ( newArrival != 0 ) {
-			check = false;
+		boolean check = false;
+		if ( qnaNACount > 0 ) {
+			check = true;
 		}
 		model.addAttribute("check", check);
 		model.addAttribute("qnaCount", qnaCount);
