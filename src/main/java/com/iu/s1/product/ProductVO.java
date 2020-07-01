@@ -27,6 +27,16 @@ public class ProductVO {
 	private String mem_address;
 	
 	private String mem_storeName;
+	
+	
+
+	public String getMem_storeName() {
+		return mem_storeName;
+	}
+
+	public void setMem_storeName(String mem_storeName) {
+		this.mem_storeName = mem_storeName;
+	}
 
 	public String getMem_address() {
 		return mem_address;
