@@ -39,11 +39,17 @@
 			<a onclick="openChild()">아이디 또는 비밀번호를 잊어버리셨나요?</a>
 			<br>
 			<br>
-			<button id="kakao-login-btn"></button>
 			
 		</form>
+			<div id="kakao-login-btn"></div>
+			
+			
+			
+
+
 	</div>
 	<script type="text/javascript">
+	
 	var openWin;
 	function openChild() {
 			// window.name = "부모창 이름"; 
@@ -53,10 +59,15 @@
 					"width=600, height=800, resizable = no, scrollbars = no");
 		}
 
+	
 
 
-	Kakao.init('c2cd7ce11b81faeb246f1a9397ca16a4');
-	Kakao.Auth.createLoginButton({
+
+	Kakao.init('59e57c59aff3a79eda4531bb82ae7989');
+
+	var Referer = '${Referer}';
+	
+	 Kakao.Auth.createLoginButton({
 		container : '#kakao-login-btn',
 		success : function(authObj) {
 			Kakao.API.request({
@@ -64,26 +75,32 @@
 				success : function(res) {
 					$.ajax({
 						type : "post",
-						url : "./MemberKakaoLogin",
+						url : "./kakaoLogin",
 						data : {
-							id : res.kakao_account['email'],
-							name : res.kakao_account.profile['nickname'],
+							mem_id : res.id,
+							mem_email : res.kakao_account['email'],
+							mem_name : res.kakao_account.profile['nickname'],
+							profile : res.properties.profile_image,
 						},
 						success : function(result) {
 							result = result.trim();
 							if (result != null && result != 'newMember') {
-								location.href = Referer;
+								location.href = "../"+Referer;
 							} else if (result == 'newMember') {
-								location.href = "./MemberNewKakao";
+								location.href = "./kakaoMemberJoin";
 							}
 						}
 					});
 				}
+				
 			});
 		},
 		fail : function(err) {
 		}
-	});
+	}); 
+
+
+
 	</script>
 
 </body>

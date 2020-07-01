@@ -27,6 +27,7 @@
 
 </head>
 <body>
+
 	<c:import url="../template/nav.jsp"></c:import>
 	<div class="container">
 		<h1>member join</h1>
@@ -101,7 +102,7 @@
 				onclick="openChild()">
 			<br>
 
-			<div class="form-group">
+			<div class="form-group" >
 				<label class="control-label col-sm-2" for="detail_address">상세
 					주소:</label>
 				<div class="col-sm-10">
@@ -144,10 +145,20 @@
 						onclick="makeEmail()">Submit</button>
 				</div>
 			</div>
+		
 		</form:form>
 	</div>
+	 
+
 
 	<script type="text/javascript">
+
+	var kakao = <%= kakao %>;
+
+	if(kakao==1){
+			$("#email1").css("hidden",true);
+		}
+	
 		var check = false;
 		var SetTime = 300;		// 최초 설정 시간(기본 : 초)
 		var tid = 0;

@@ -176,9 +176,27 @@ public class MemberController {
 
 		Cookie cookie = new Cookie("cId", memberVO.getMem_id());
 		response.addCookie(cookie);
-		memberVO = memberService.selectMember(memberVO);
-		if(memberVO.getMem_access()==1L) {
+		MemberVO memberVO2 = new MemberVO();
+		memberVO2 = memberService.selectMember(memberVO);
+		
+		if(memberVO2==null){
+			mv.addObject("result", "아이디 또는 패스워드를 입력해주세요");
+			mv.addObject("path", "./memberLogin");
+			mv.setViewName("common/result");
+			return mv;
+		}else if(!memberVO2.getMem_pw().equals(memberVO.getMem_pw())){
+			mv.addObject("result", "잘못된 비밀번호입니다");
+			mv.addObject("path", "./memberLogin");
+			mv.setViewName("common/result");
+			return mv;
+		}
+		else if(memberVO2.getMem_access()==1L ) {
 			mv.addObject("result", "차단 회원입니다");
+			mv.addObject("path", "./memberLogin");
+			mv.setViewName("common/result");
+			return mv;
+		}else if(memberVO2.getMem_kakao()==1L) {
+			mv.addObject("result", "카카오 회원은 카카오 로그인을 이용해주세요");
 			mv.addObject("path", "./memberLogin");
 			mv.setViewName("common/result");
 			return mv;
@@ -323,7 +341,7 @@ public class MemberController {
 
 	@PostMapping("sendEmail")
 	public void sendEmailAction(@RequestParam Map<String, Object> paramMap, String id, String email, ModelMap model,
-			ModelAndView mv, Model model2,HttpSession session) throws Exception {
+		ModelAndView mv, Model model2,HttpSession session) throws Exception {
 
 		paramMap.put("username", id);
 		paramMap.put("email", email);
@@ -475,5 +493,69 @@ public class MemberController {
 
 		model.addAttribute("result", msg);
 	}
+	
+	@PostMapping("kakaoLogin")
+	public ModelAndView kakaoLogin(MemberVO memberVO, HttpSession session, ModelAndView mv,String profile)throws Exception{
+		
+		/* memberVO.setKind(profile); */
+		session.setAttribute("memberVO", memberVO);		
+		memberVO = memberService.kakaoLogin(memberVO);
+		mv.addObject("result", "newMember");
+		// Cookie작업
+		if (memberVO != null) {
+			mv.addObject("result", memberVO);
+			session.setAttribute("member", memberVO);
+		}
+		mv.setViewName("common/ajaxResult");
+		return mv;
+	}
+	
+	@GetMapping("kakaoMemberJoin")
+	public ModelAndView memberNewKakao(HttpSession session) throws Exception {		
+		ModelAndView mv = new ModelAndView();
+		/*
+		 * MemberVO memberVO2 = (MemberVO) session.getAttribute("memberVO");
+		 * mv.addObject("profile", memberVO2.getKind());
+		 */
+		mv.addObject("memberVO", new MemberVO());
+		mv.setViewName("member/kakaoMemberJoin");
+		return mv;
+	}
+	
+	@PostMapping("kakaoMemberJoin")
+	public ModelAndView kakaoMemberJoin(@Valid MemberVO memberVO, BindingResult bindingResult,HttpSession session)throws Exception{
+		MemberVO memberVO2 = (MemberVO) session.getAttribute("memberVO");
+		String email = memberVO2.getMem_email();
+		String name = memberVO2.getMem_name();
+		String kind = memberVO2.getKind();
+		memberVO.setMem_name(name);
+		memberVO.setMem_id(email);
+		memberVO.setMem_email(email);
+		memberVO.setMem_pw("kakaoPw");
+		memberVO.setMem_kakao(1);
+		memberVO.setKind(kind);
+		
+		ModelAndView mv = new ModelAndView();
+		boolean result = memberService.kakaoMemberCheck(memberVO, bindingResult, checkNum);
+		System.out.println(result);
+		if (result) {
+			mv.setViewName("member/kakaoMemberJoin");
+		}else {
+			// 정상작동
+			int result2 = memberService.memberJoin(memberVO);
+			if (result2 > 0) {
+				mv.addObject("result", "회원가입 성공");
+				mv.addObject("path", "../");
+				mv.setViewName("common/result");
+			}
+			session.invalidate();
+		}
+
+		return mv;
+	}
+	
+	
+
+	
 
 }

@@ -150,14 +150,14 @@ public class MemberService {
 			bindingResult.rejectValue("mem_id", "memberVO.mem_id.same");
 			result = true;
 		}
-		
+
 		// phone 중복검사
 		MemberVO memberVO3 = memberRepository.selectMemberByPhone(memberVO);
 		if (memberVO3 != null) {
 			bindingResult.rejectValue("mem_phone", "memberVO.mem_phone.same");
 			result = true;
 		}
-		
+
 		// email 중복검사
 		MemberVO memberVO4 = memberRepository.selectMemberByEmail(memberVO3);
 		if (memberVO4 != null) {
@@ -170,12 +170,36 @@ public class MemberService {
 		 * if (memberVO3 != null) { bindingResult.rejectValue("mem_id",
 		 * "memberVO.mem_id.same"); result = true; }
 		 */
-		
 
 		// 인증번호가 맞는지 확인
 		if (!memberVO.getPhoneCheck().equals(checkNum)) {
 			bindingResult.rejectValue("phoneCheck", "memberVO.phoneCheck.notEqual");
 			result = true;
+		}
+
+		return result;
+	}
+
+	public boolean kakaoMemberCheck(MemberVO memberVO, BindingResult bindingResult, String checkNum) throws Exception {
+		boolean result = false; // false 에러X, true 에러O
+
+		// 1. 기본어노테이션 제공 검증 실행
+		result = bindingResult.hasErrors();
+		System.out.println(bindingResult.getAllErrors());
+
+		if (!result) {
+			// phone 중복검사
+			MemberVO memberVO3 = memberRepository.selectMemberByPhone(memberVO);
+			if (memberVO3 != null) {
+				bindingResult.rejectValue("mem_phone", "memberVO.mem_phone.same");
+				result = true;
+			}
+
+			// 인증번호가 맞는지 확인
+			if (!memberVO.getPhoneCheck().equals(checkNum)) {
+				bindingResult.rejectValue("phoneCheck", "memberVO.phoneCheck.notEqual");
+				result = true;
+			}
 		}
 
 		return result;
@@ -195,6 +219,10 @@ public class MemberService {
 
 	public MemberVO selectMemberByPhone(MemberVO memberVO) throws Exception {
 		return memberRepository.selectMemberByPhone(memberVO);
+	}
+
+	public MemberVO kakaoLogin(MemberVO memberVO) throws Exception {
+		return memberRepository.kakaoLogin(memberVO);
 	}
 
 }

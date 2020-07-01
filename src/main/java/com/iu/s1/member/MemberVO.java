@@ -67,10 +67,8 @@ public class MemberVO {
 	@Column
 	private long mem_point;
 	
-	@Transient
 	private String kind;
 		
-	@Transient
 	private String search;
 		
 	@Column
@@ -81,6 +79,7 @@ public class MemberVO {
 	
 	@Column
 	private long mem_kakao;
+	
 	
 
 
