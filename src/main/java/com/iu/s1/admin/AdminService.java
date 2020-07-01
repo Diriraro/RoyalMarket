@@ -218,7 +218,7 @@ public class AdminService {
 		return list;
 	}
 
-	public long getProfit() throws Exception {
+	public Long getProfit() throws Exception {
 		return paymentHistoryRepository.getProfit();
 	}
 	

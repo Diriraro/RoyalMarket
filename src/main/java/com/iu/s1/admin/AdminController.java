@@ -84,7 +84,10 @@ public class AdminController {
 		long tradeCount = adminService.getDailyTradeCount();
 		System.out.println(tradeCount);
 		List<Map.Entry<String, Long>> tradeAr = adminService.getLocateTradeCount();
-		long profit = adminService.getProfit();
+		long profit = 0;
+		if(adminService.getProfit() !=null) {
+			profit = adminService.getProfit();
+		}
 		long tradeCountYD = adminService.getRateForTradeCountYD();
 		long tradeRate = (tradeCount/tradeCountYD)*100;
 		if(tradeRate >100) {
