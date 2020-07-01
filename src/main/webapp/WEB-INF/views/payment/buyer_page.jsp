@@ -14,9 +14,9 @@
 	<div class="container"> 
 		<h2><b>주문 상세정보</b></h2>
 		<div style="width: 100%; height: 50px; border: 4px solid #cccccc;">
-			<div style="display: inline-block; margin-top: 10px;margin-left: 20px;"><b style="font-size: large;">주문자</b> <font style="font-size: large;">: TEST</font></div>
-			<div style="display: inline-block; margin-left: 100px;"><b style="font-size: large;">주문 일자</b> <font style="font-size: large;">: 2020.02.02 11:11:11</font></div>
-			<div style="display: inline-block; margin-left: 100px;"><b style="font-size: large;">주문 번호</b> <font style="font-size: large;">: 10</font></div>
+			<div style="display: inline-block; margin-top: 10px;margin-left: 20px;"><b style="font-size: large;">주문자</b> <font style="font-size: large;">: ${mem_id }</font></div>
+			<div style="display: inline-block; margin-left: 100px;"><b style="font-size: large;">주문 일자</b> <font style="font-size: large;">: ${buy_date}</font></div>
+			<div style="display: inline-block; margin-left: 100px;"><b style="font-size: large;">주문 번호</b> <font style="font-size: large;">: ${productVO.sell_num }</font></div>
 		</div>
 		<table style="width: 100%; margin-top: 20px;">
 			<tr style="text-align: center; height: 50px; border-top: 3px solid black; border-bottom: 2px solid #cccccc">

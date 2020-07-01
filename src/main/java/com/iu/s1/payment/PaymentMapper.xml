@@ -133,10 +133,11 @@
   		delete from paycheck where mem_id=#{mem_id}
   	</delete>
   	
-  	<!-- member 주소 가져오기 -->
-  	<select id="seller_address" parameterType="java.lang.String" resultType="java.lang.String">
-  		select mem_address from member where mem_id=#{mem_id}
+  	<!-- member정보 아이디로 가져오기-->
+  	<select id="memberVOSel" parameterType="java.lang.String" resultType="com.iu.s1.member.MemberVO">
+  		select * from member where mem_id=#{mem_id}
   	</select>
+  	
   	
   	<!-- paystats insert -->
   	<insert id="paystatsInsert" parameterType="com.iu.s1.payment.PayStatsVO">
@@ -146,6 +147,16 @@
   	<!-- sellnum으로 buy_history에서 status 가져오기 -->
   	<select id="buy_status" parameterType="java.lang.Long" resultType="java.lang.Long">
   		select status from buy_history where sell_num=#{sell_num}
+  	</select>
+  	  
+  	<!-- sellnum으로 sell_history에서 status 가져오기 -->
+  	<select id="sell_status" parameterType="java.lang.Long" resultType="java.lang.Long">
+  		select status from sell_history where sell_num=#{sell_num}
+  	</select>
+  	
+  	<!-- buy_his 검색 -->
+  	<select id="buy_Sel" parameterType="java.lang.Long" resultType="com.iu.s1.paymentHistory.Buy_HistoryVO">
+  		select * from buy_history where sell_num=#{sell_num}
   	</select>
   		
  </mapper>

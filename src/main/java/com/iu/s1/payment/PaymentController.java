@@ -334,8 +334,8 @@ public class PaymentController {
 			PayStatsVO payStatsVO = new PayStatsVO();
 			
 			//판매자 아이디 조회 후 paystatus에 인서트
-			String seller_address = paymentService.seller_address(seller_id);			
-			payStatsVO.setSeller_address(seller_address);
+			MemberVO memberVO2 = paymentService.memberVOSel(seller_id);			
+			payStatsVO.setSeller_address(memberVO2.getMem_address());
 			
 			//수익 계산
 			long profit = (total/10);
@@ -402,8 +402,8 @@ public class PaymentController {
 			PayStatsVO payStatsVO = new PayStatsVO();
 			
 			// 판매자 아이디 조회후 paystatus에 인서트
-			String seller_address = paymentService.seller_address(seller_id);
-			payStatsVO.setSeller_address(seller_address);
+			MemberVO memberVO2 = paymentService.memberVOSel(seller_id);			
+			payStatsVO.setSeller_address(memberVO2.getMem_address());
 			
 			// 수익 계산
 			long profit = (total/10);
@@ -437,6 +437,7 @@ public class PaymentController {
 	@GetMapping("buyer_page")
 	public ModelAndView buyer_page(HttpServletRequest request)throws Exception{
 		ModelAndView mv = new ModelAndView();
+		MemberVO memberVO = (MemberVO)request.getSession().getAttribute("member");
 		long sell_num = Long.parseLong(request.getParameter("sell_num"));
 		
 		// productVo 가져오기
@@ -445,9 +446,13 @@ public class PaymentController {
 		String image =productService.selectFileName(sell_num);
 		// status(주문상태 가져오기 )
 		long status = paymentService.buy_status(sell_num);
-	
+		// 주문자추가
+		String mem_id=memberVO.getMem_id();
+		//날짜 가져오기
+		Buy_HistoryVO buy_HistoryVO= paymentService.buy_Sel(sell_num);
 		
-
+		mv.addObject("buy_date", buy_HistoryVO.getBuy_date());
+		mv.addObject("mem_id", mem_id);
 		mv.addObject("status", status);
 		mv.addObject("image", image);
 		mv.addObject("productVO", productVO);
@@ -460,9 +465,32 @@ public class PaymentController {
 	public ModelAndView seller_page(HttpServletRequest request)throws Exception{
 		ModelAndView mv = new ModelAndView();
 		long sell_num = Long.parseLong(request.getParameter("sell_num"));
+		MemberVO memberVO = (MemberVO)request.getSession().getAttribute("member");
+		// productVo 가져오기
+		ProductVO productVO =paymentService.productSelect(sell_num);
+		// 이미지 불러오기
+		String image =productService.selectFileName(sell_num);
+		// status(주문상태 가져오기 )
+		long status = paymentService.sell_status(sell_num);
+		// 주문자추가
+		String mem_id=memberVO.getMem_id();
+		//날짜 가져오기
+		Buy_HistoryVO buy_HistoryVO= paymentService.buy_Sel(sell_num);
+		// 구매자 전화번호와 주소 검색
+		String buyer_id = buy_HistoryVO.getMem_id();
+		MemberVO memberVO2=paymentService.memberVOSel(buyer_id);
 		
+		mv.addObject("memberVO", memberVO2);
+		mv.addObject("buy_date", buy_HistoryVO.getBuy_date());
+		mv.addObject("mem_id", mem_id);
+		mv.addObject("status", status);
+		mv.addObject("image", image);
+		mv.addObject("productVO", productVO);
+		mv.addObject("sell_num", sell_num);
+		mv.setViewName("/payment/buyer_page");
 		mv.addObject("sell_num", sell_num);
 		mv.setViewName("/payment/seller_page");
+		
 		return mv;
 	}
 	
