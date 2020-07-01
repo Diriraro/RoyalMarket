@@ -26,15 +26,15 @@
 			<div style="display: inline-block;"><h2>주문 상품 내역</h2></div>
 			<div>
 				<table class="table table-bordered">
-					<tr>
-						<td>상품 구분</td>
-						<td>상품명</td>
-						<td>가격</td>
+					<tr style="background-color:#f0e6ff; font-size: large;text-align: center;">
+						<td><b>상품 구분</b></td>
+						<td><b>상품명</b></td>
+						<td><b>가격</b></td>
 					</tr>
-					<tr>
-						<td>카테고리넣어라</td>
-						<td>상품명넣어라</td>
-						<td>${tradingVO.sell_price}</td>
+					<tr style="font-size: medium; text-align: center;">
+						<td><b>${productVO.sell_kind}</b></td>
+						<td><b>${productVO.sell_product}</b></td>
+						<td><font style="color: red"><b>${tradingVO.sell_price}</b></font></td>
 					</tr>
 				</table>
 			</div>
@@ -53,6 +53,8 @@
 		location.href="../";
 		
 	}); 
+
+ 
 		
 </script>
 </body>
