@@ -37,7 +37,13 @@
 						mem_name
 					</otherwise>
 				</choose>
-				<include refid="search"></include>
+				<include refid="search"></include>and mem_access = #{mem_access} order by mem_storeNum desc
+	</select>
+	<select id="memberCount" resultType="Long">
+		SELECT count(mem_storeNum) from member;
+	</select>
+	<select id="getDailyNewMember" resultType="MemberVO" parameterType="MemberVO">
+		SELECT * FROM member where mem_regDate > #{mem_regDate}
 	</select>
 	
 </mapper>
