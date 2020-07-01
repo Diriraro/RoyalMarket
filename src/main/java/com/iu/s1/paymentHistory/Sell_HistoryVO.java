@@ -7,7 +7,28 @@ public class Sell_HistoryVO {
 	private long sell_price;
 	private long status;
 	private String sell_product;
+	private String file_name;
+	private String buyer_id;
+	private String sell_date;
 	
+	public String getBuyer_id() {
+		return buyer_id;
+	}
+	public void setBuyer_id(String buyer_id) {
+		this.buyer_id = buyer_id;
+	}
+	public String getSell_date() {
+		return sell_date;
+	}
+	public void setSell_date(String sell_date) {
+		this.sell_date = sell_date;
+	}
+	public String getFile_name() {
+		return file_name;
+	}
+	public void setFile_name(String file_name) {
+		this.file_name = file_name;
+	}
 	public String getSell_product() {
 		return sell_product;
 	}

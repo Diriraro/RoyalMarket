@@ -9,6 +9,7 @@ import com.iu.s1.member.MemberVO;
 import com.iu.s1.paycheck.PayCheckVO;
 import com.iu.s1.paymentHistory.Buy_HistoryVO;
 import com.iu.s1.paymentHistory.Sell_HistoryVO;
+import com.iu.s1.product.ProductVO;
 import com.iu.s1.trading.TradingVO;
 
 @Repository
@@ -19,7 +20,7 @@ public interface PaymentMapper {
 	
 	public long pointSelect(String mem_id)throws Exception;
 	
-	public String productName(long sell_num)throws Exception;
+	public ProductVO productSelect(long sell_num)throws Exception;
 	
 	public int paymentCharge(PayVO payVO)throws Exception;
 	
@@ -69,5 +70,5 @@ public interface PaymentMapper {
 	
 	public int paystatsInsert(PayStatsVO payStatsVO) throws Exception;
 	
-	
+	public long buy_status(long sell_num)throws Exception;
 }

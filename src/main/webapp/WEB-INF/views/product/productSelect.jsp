@@ -140,9 +140,9 @@
 						class="btn btn-default zzimbtn"></button>
 					<a><img style="margin-top: 65px; cursor: pointer;" alt=""
 						src="${pageContext.request.contextPath}/resources/images/phone_button.png"></a>
-					<a><img style="margin-top: 65px; cursor: pointer;" alt=""
+					<a href="../payment/productPay?sell_product=${vo.sell_product}&sell_price=${vo.sell_price}&sell_num=${vo.sell_num}"><img style="margin-top: 65px; cursor: pointer;" alt=""
 						src="${pageContext.request.contextPath}/resources/images/buy_button.png"></a>
-				</c:if>
+				</c:if> 
 			</form>
 
 			<c:if test="${not empty zc.zzim_num}">

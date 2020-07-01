@@ -10,16 +10,16 @@
 <c:import url="../template/boot.jsp"></c:import>
 </head>
 <body>
-	<c:import url="../template/nav.jsp"></c:import>
+	<c:import url="../template/woozoo_nav.jsp"></c:import>
 
 	<div class="container">
 		<font style="font-size: x-large;"><b>주문</b></font>
-		<hr style="border: solid 1px gray">
+		<hr style="border: solid 1px #e4e4e4;">
 		<br><br><br><br>
 		
 		<div style="border: 1px solid white">
 			<font style="font-size: x-large;"><b>상품 정보</b></font>
-			<hr style="border: solid 1px gray">
+			<hr style="border: solid 1px #e4e4e4;">
 			<div style="width: 400px; height: 500px; border: solid 1px black; display: inline-block; float: right;">
 			
 				<div style="margin-top: 10px;">
@@ -31,25 +31,25 @@
 					<font style="color: black; font-size: large; margin-left: 10px; float: left"><b>배송비</b></font>
 					<font style="color: red; font-size: large; margin-right: 10px; float: right;"><b>2500  원</b></font> 	
 				</div>
-				<hr style="border: solid 1px gray">
+				<hr style="border: solid 1px #e4e4e4;">
 				
 				<div style="margin-top:40px; height: 20px;">
 					<font style="color: black; font-size: large; margin-left: 10px; float: left"><b>특별 할인 5%</b></font>
 					<font style="color: blue; font-size: large; margin-right: 10px; float: right;"><b><fmt:parseNumber var="test" value="${sell_price*0.05 }" integerOnly="true"/>${test}  원</b></font> 	
 				</div>
-				<hr style="border: solid 1px gray">
+				<hr style="border: solid 1px #e4e4e4;">
 				
 				<div style="margin-top:40px; height: 20px;">
 					<font style="color: black; font-size: large; margin-left: 10px; float: left"><b>보유하신 포인트</b></font>
 					<font style="color: blue; font-size: large; margin-right: 10px; float: right;"><b>${point}  원</b></font> 	
 				</div>
-				<hr style="border: solid 1px gray">
+				<hr style="border: solid 1px #e4e4e4;">
 				
 				<div style="margin-top:20px; height: 20px;">
 					<font style="color: black; font-size: large; margin-left: 10px; float: left"><b>결제 예정 포인트</b></font>
 					<font style="color: red; font-size: large; margin-right: 10px; float: right;"><b>${sell_price-test+2500}  원</b></font> 	
 				</div>
-				
+				   
 				<c:if test="${point lt sell_price-test+2500}">
 					<div style="margin-top:20px; height: 20px;">
 						<font style="color: red; font-size: large; margin-left: 10px; float: left;"><b>포인트가 부족합니다!!</b></font> 	

@@ -15,8 +15,8 @@
  	</select>
  	
  	<!-- 상품의 이름 검색 -->
- 	<select id="productName" parameterType="java.lang.Long" resultType="java.lang.String">
- 		select sell_product from store_product where sell_num=#{sell_num}
+ 	<select id="productSelect" parameterType="java.lang.Long" resultType="com.iu.s1.product.ProductVO">
+ 		select * from store_product where sell_num=#{sell_num}
  	</select>
  	
  	<!-- 입금 입력-->
@@ -47,12 +47,12 @@
  	
  	<!-- 구매내역 추가 -->
  	<insert id="buy_his" parameterType="com.iu.s1.paymentHistory.Buy_HistoryVO">
- 		insert into buy_history values(#{mem_id},#{sell_num},#{sell_price},0,0,#{sell_product})
+ 		insert into buy_history values(#{mem_id},#{sell_num},#{sell_price},0,0,#{sell_product},#{file_name},#{seller_id},#{buy_date})
  	</insert>
  	
  	<!-- 판매내역 추가 -->
  	<insert id="sell_his" parameterType="com.iu.s1.paymentHistory.Sell_HistoryVO">
- 		insert into sell_history values(#{mem_id},#{sell_num},#{sell_price},0,0,#{sell_product})
+ 		insert into sell_history values(#{mem_id},#{sell_num},#{sell_price},0,0,#{sell_product},#{file_name},#{buyer_id},#{sell_date})
  	</insert>
  	
  	<!-- 구매 내역 출력 -->
@@ -142,5 +142,10 @@
   	<insert id="paystatsInsert" parameterType="com.iu.s1.payment.PayStatsVO">
   		insert into paystats values(0,now(),#{seller_address},#{sell_commition})
   	</insert>
+  	
+  	<!-- sellnum으로 buy_history에서 status 가져오기 -->
+  	<select id="buy_status" parameterType="java.lang.Long" resultType="java.lang.Long">
+  		select status from buy_history where sell_num=#{sell_num}
+  	</select>
   		
  </mapper>
