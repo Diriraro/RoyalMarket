@@ -13,6 +13,7 @@
 <c:import url="../template/nav.jsp"></c:import>
 
 
+	
 	<h1>전체 상담내역</h1>	
 	<table class="table table-hover">
 			<tr>
@@ -60,6 +61,7 @@
 			
 		</c:forEach>
 	</table>
+	
 	
 
 

@@ -1,21 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<c:import url="../template/boot.jsp"></c:import>
-</head>
-<body>
-<c:import url="../template/nav.jsp"></c:import>
+	pageEncoding="UTF-8"%>
+	
 	<div class="container">
-		<form action="noticeWrite" method="post" enctype="multipart/form-data">
+		<form> <!-- action="noticeWrite" method="post" enctype="multipart/form-data" -->
 			<div class="form-group">
 				<label for="title">Title:</label> <input type="text"
-					class="form-control" id="no_title" name="no_title">
+					class="form-control" id="notitle" name="notitle">
 			</div>
 			<div class="form-group">
 				<label for="contents">Contents:</label>
@@ -23,10 +13,22 @@
 					name="no_contents"></textarea>
 			</div>
 	
-			<button type="submit" class="btn btn-default">Submit</button>
+			<button type="submit" id="noticeSubmit" class="btn btn-default">Submit</button>
 		</form>
 	</div>
 
-
-</body>
-</html>
+<script>
+		$('#summernote').summernote(
+				{
+					
+					tabsize : 2,
+					height : 500,
+					toolbar : [ [ 'style', [ 'style' ] ],
+							[ 'font', [ 'bold', 'underline', 'clear' ] ],
+							[ 'color', [ 'color' ] ],
+							[ 'para', [ 'ul', 'ol', 'paragraph' ] ],
+							[ 'table', [ 'table' ] ],
+							[ 'insert', [ 'link', 'picture', 'video' ] ],
+							[ 'view', [ 'fullscreen', 'codeview', 'help' ] ] ]
+				});
+	</script>

@@ -8,7 +8,10 @@
 	<select id="qnaMyList" parameterType="com.iu.s1.qna.QnaVO" resultType="com.iu.s1.qna.QnaVO">
 		SELECT * FROM qna WHERE mem_id=#{mem_id}	
 	</select>
-	
+		
+	<update id="qnaUpdate" parameterType="com.iu.s1.qna.QnaVO">
+		UPDATE qna SET qna_contents=#{qna_contents}, qna_check=1, qna_checkDate=now()
+	</update>
 	<insert id="qnaWrite" parameterType="com.iu.s1.qna.QnaVO">
 		INSERT INTO qna VALUES(0,#{qna_kind},#{mem_id},#{qna_contents},now(),0,null,#{qna_title})
 	</insert>
@@ -28,5 +31,16 @@
 	<select id="lastNum" resultType="java.lang.Long">
 		SELECT qna_num FROM qna ORDER BY qna_num DESC LIMIT 0,1
 	</select>
-
+	
+	<select id="qnaMemberSearch" parameterType="java.lang.String" resultType="com.iu.s1.qna.QnaVO">
+		SELECT * FROM qna WHERE mem_id like CONCAT('%', #{mem_id}, '%') ORDER BY qna_check ASC, qna_regDate ASC
+	</select>
+	
+	<select id="qnaTotalCount" resultType="Long">
+		SELECT COUNT(*) FROM qna
+	</select>
+	
+	<select id="qnaNACount" resultType="Long">
+		SELECT COUNT(*) FROM qna WHERE qna_check=0
+	</select>
 </mapper>

@@ -10,12 +10,14 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.iu.s1.payment.PaymentService;
 import com.iu.s1.paymentHistory.Sell_HistoryVO;
@@ -116,10 +118,10 @@ public class MemberController {
 	}
 	
 	
-	@GetMapping("/check/sendSMS")
-    public @ResponseBody
-    String sendSMS(String phoneNumber) {
-
+	@PostMapping("sendSMS")
+    public void sendSMS(String phoneNumber,Model model) {
+	
+		String msg ="";
         Random rand  = new Random();
         String numStr = "";
         for(int i=0; i<4; i++) {
@@ -129,9 +131,33 @@ public class MemberController {
         checkNum = numStr;
         System.out.println("수신자 번호 : " + phoneNumber);
         System.out.println("인증번호 : " + numStr);
-        memberService.certifiedPhoneNumber(phoneNumber,numStr);
-        return numStr;
+        String error_count = memberService.certifiedPhoneNumber(phoneNumber,numStr);
+        System.out.println("에러카운트"+error_count);
+        
+        if(error_count.equals("0")){
+        	msg = "인증 메세지를 전송했습니다";
+        	System.out.println("00");
+        }else {
+        	msg = "인증 메세지 전송 실패했습니다";
+        	System.out.println("11");
+        }
+        
+        System.out.println(msg);
+        model.addAttribute("result", msg);
+   
+        
     }
+	@GetMapping("findAddress")
+	public void findAddress()throws Exception{
+		
+	}
+	
+	
+	 @PostMapping("findAddress")
+	 public ModelAndView findAddress(String road_address)throws Exception{ ModelAndView mv = new ModelAndView();
+	 mv.addObject("road_address", road_address);
+	 mv.setViewName("member/memberJoin"); return mv; }
+	
 	
 	
 	

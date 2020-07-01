@@ -30,7 +30,7 @@ public class NoticeService {
 	}
 	
 	public NoticeVO noticeSelect(NoticeVO noticeVO)throws Exception{
-		Optional<NoticeVO> opt = noticeRepository.findById(noticeVO.getNo_num());
+		Optional<NoticeVO> opt = noticeRepository.findById(noticeVO.getNonum());
 		noticeVO = opt.get();
 		return noticeVO;
 	}
@@ -42,6 +42,10 @@ public class NoticeService {
 			result=1;
 		}
 		return result;
+	}
+	
+	public void noticeDelete(long nonum)throws Exception{
+		noticeRepository.deleteById(nonum);
 	}
 
 }

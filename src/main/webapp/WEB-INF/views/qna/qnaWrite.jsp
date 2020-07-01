@@ -14,6 +14,7 @@
 
 	<div class="container">
 		<h1 style="display: inline-block;">1:1 상담하기</h1>
+
 		<h1 style="display: inline-block;">
 			<a href="./qnaMyList">상담내역</a>
 		</h1>
@@ -42,7 +43,7 @@
 				<textarea style="margin: 0px; width: 1174px; height: 448px;" name="qna_contents" id="qna_contents">템플릿 양식에 맞춰 작성해주세요.</textarea>
 				<br>
 				<input type="hidden" id="qnak" name="qna_kind" >
-				<input type="hidden" id="mem_id" name="mem_id" value="iu">			<!-- 아이디 세션에서 받아서 value 바꾸기 -->
+				<input type="hidden" id="mem_id" name="mem_id" value="${member.mem_id }">			<!-- 아이디 세션에서 받아서 value 바꾸기 -->
 			</div>
 			<div align="center" id="fd">
 				<input type="button" class="btn btn-success" id="qnaFileAdd" value="사진추가" style="width:200px;">
