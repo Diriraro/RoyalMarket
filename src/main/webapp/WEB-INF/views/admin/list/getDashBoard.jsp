@@ -121,35 +121,21 @@
 			<b>최신 상품게시글</b>
 		</h3>
 		<br>
-		<div class="w3-row">
-			<div class="w3-col m2 text-center">
-				<img class="w3-circle" alt="사진" style="width: 96px; height: 96px">
+		<c:catch>
+			<div class="w3-row">
+				<div class="w3-col m2 text-center">
+					<img class="w3-circle" alt="상품이미지1"
+						style="width: 96px; height: 96px">
+				</div>
+				<div class="w3-col m10 w3-container">
+					<h4>
+						상품 제목 <span class="w3-opacity w3-medium">상품 게시일</span>
+					</h4>
+					<p>info</p>
+					<br>
+				</div>
 			</div>
-			<div class="w3-col m10 w3-container">
-				<h4>
-					John <span class="w3-opacity w3-medium">Sep 29, 2014, 9:12
-						PM</span>
-				</h4>
-				<p>Keep up the GREAT work! I am cheering for you!! Lorem ipsum
-					dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-					incididunt ut labore et dolore magna aliqua.</p>
-				<br>
-			</div>
-		</div>
-
-		<div class="w3-row">
-			<div class="w3-col m2 text-center">
-				<img class="w3-circle" alt="사진" style="width: 96px; height: 96px">
-			</div>
-			<div class="w3-col m10 w3-container">
-				<h4>
-					Bo <span class="w3-opacity w3-medium">Sep 28, 2014, 10:15 PM</span>
-				</h4>
-				<p>Sed do eiusmod tempor incididunt ut labore et dolore magna
-					aliqua.</p>
-				<br>
-			</div>
-		</div>
+		</c:catch>
 	</div>
 	<br>
 	<div class="w3-container">

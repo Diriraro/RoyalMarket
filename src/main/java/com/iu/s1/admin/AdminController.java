@@ -96,6 +96,7 @@ public class AdminController {
 		model.addAttribute("tradeAr", tradeAr);
 		model.addAttribute("profit", profit);
 		
+		// 상품
 		
 	}
 	

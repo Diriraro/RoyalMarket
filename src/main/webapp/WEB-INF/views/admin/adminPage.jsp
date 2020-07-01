@@ -78,7 +78,6 @@
 	<script type="text/javascript">
 		$(function() {
 			var check = ${check};
-			alert(check);
 			if (check) {
 				// 미답변 문의가 있으면
 				$(".new").children(".fas").removeClass("fa-envelope");

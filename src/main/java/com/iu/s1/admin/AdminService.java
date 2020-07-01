@@ -20,14 +20,18 @@ import com.iu.s1.member.MemberVO;
 import com.iu.s1.notice.NoticeRepository;
 import com.iu.s1.notice.NoticeVO;
 import com.iu.s1.paymentHistory.PaymentHistoryRepository;
+import com.iu.s1.product.ProductMapper;
+import com.iu.s1.product.ProductVO;
 import com.iu.s1.qna.QnaRepository;
+import com.iu.s1.util.Pager;
 import com.iu.s1.visitor.VisitorVO;
 
 @Service
 public class AdminService {
 
 	// 상품 Repository ( 상품 분류 및 삭제 )
-
+	@Autowired
+	private ProductMapper productMapper;
 	// 문의 Repository ( 1:1 문의 답변 )
 	@Autowired
 	private QnaRepository qnaRepository;
@@ -226,4 +230,10 @@ public class AdminService {
 		return paymentHistoryRepository.getProfit();
 	}
 	
+	public List<ProductVO> productList(Pager pager) throws Exception {
+		pager.makeRow();
+		long totalCount = productMapper.productCount(pager);
+		pager.makePage(totalCount);
+		return productMapper.productList(pager);
+	}
 }
