@@ -25,6 +25,8 @@ public class ProductVO {
 	private Long sell_hit;
 	
 	private String mem_address;
+	
+	private String mem_storeName;
 
 	public String getMem_address() {
 		return mem_address;

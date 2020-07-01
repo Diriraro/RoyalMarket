@@ -80,6 +80,30 @@ public class ProductController {
 
 		return mv;
 	}
+	
+	@GetMapping("myProductList")
+	public ModelAndView myProductList(ProductVO productVO, Pager pager) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		pager.setMem_storeNum(productVO.getMem_storeNum());
+		List<ProductVO> ar = productService.myProductList(pager);
+		mv.addObject("mylist", ar);
+
+		List<String> ar2 = new ArrayList<String>();
+		int index = 0;
+		for (ProductVO productVOs : ar) {
+			long sell_num = productVOs.getSell_num();
+			ar2.add(productService.selectFileName(sell_num));
+			index++;
+
+		}
+		
+		mv.addObject("myfile", ar2);
+
+		mv.addObject("pager", pager);
+		mv.setViewName("product/myProductList");
+
+		return mv;
+	}
 
 	@GetMapping("productSelect")
 	public ModelAndView productSelect(long sell_num,HttpSession session) throws Exception {

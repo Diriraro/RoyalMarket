@@ -34,6 +34,12 @@
 	-webkit-box-shadow: 0 0 1px 1px rgba(0, 0, 0, .3);
 	display: inline-block;
 }
+.kind {
+	background-color: white;
+}
+.kind:hover {
+	background-color: #e6dffe;
+}
 </style>
 
 <c:import url="../template/boot.jsp"></c:import>
@@ -95,31 +101,33 @@
 		<font style="font-size: 18px;font-weight: 900;">카테고리</font> <font style="color: #ff5d4a;font-size: 18px;">*</font>
 		</div>
 		
-		<div style="width: 856px;height:250px; float: left;border-top:solid 1px #dcdbe4;">
-		<div style="overflow-y: scroll; width: 300px; height: 200px;">
-			<ul class="allKind" ">
-				<li><input type="button" class="kind" value="패션잡화"></li>
-				<li><input type="button" class="kind" value="여성의류"></li>
-				<li><input type="button" class="kind" value="남성의류"></li>
-				<li><input type="button" class="kind" value="디지털/가전"></li>
-				<li><input type="button" class="kind" value="도서/티켓/취미/애완"></li>
-				<li><input type="button" class="kind" value="생활/문구/가구/식품"></li>
-				<li><input type="button" class="kind" value="유아동/출산"></li>
-				<li><input type="button" class="kind" value="스타굿즈"></li>
-				<li><input type="button" class="kind" value="스포츠/레저"></li>
-				<li><input type="button" class="kind" value="뷰티/미용"></li>
-				<li><input type="button" class="kind" value="기타"></li>
-				<li><input type="button" class="kind" value="차량/오토바이"></li>
-				<li><input type="button" class="kind" value="구인구직"></li>
-				<li><input type="button" class="kind" value="재능"></li>
-				<li><input type="button" class="kind" value="번개나눔"></li>
-				<li><input type="button" class="kind" value="지역 서비스"></li>
-				<li><input type="button" class="kind" value="커뮤니티"></li>
-				<li><input type="button" class="kind" value="원룸/함께살아요"></li>
+		<div style="width: 856px; float: left;border-top:solid 1px #dcdbe4;">
+		<br>
+		<div style="overflow-y: scroll; width: 300px; height: 200px;font-size: 15px;font-weight: 400;border: solid 1px #e4e4e4;">
 
-			</ul>
+				<button type="button" class="kind" value="패션잡화" style="width: 280px;height: 40px;outline: 0;border: 0px;">
+				<font style="margin-right: 170px;">패션잡화</font></button>
+				<button type="button" class="kind" value="여성의류" style="width: 280px;height: 40px;outline: 0;border: 0px;">
+				<font style="margin-right: 170px;">여성의류</font></button>
+				<button type="button" class="kind" value="남성의류" style="width: 280px;height: 40px;outline: 0;border: 0px;">
+				<font style="margin-right: 170px;">남성의류</font></button>
+				<button type="button" class="kind" value="디지털/가전" style="width: 280px;height: 40px;outline: 0;border: 0px;">
+				<font style="margin-right: 152px;">디지털/가전</font></button>
+				<button type="button" class="kind" value="생활/문구/가구/식품" style="width: 280px;height: 40px;outline: 0;border: 0px;">
+				<font style="margin-right: 98px;">생활/문구/가구/식품</font></button>
+				<button type="button" class="kind" value="유아동/출산" style="width: 280px;height: 40px;outline: 0;border: 0px;">
+				<font style="margin-right: 152px;">유아동/출산</font></button>
+				<button type="button" class="kind" value="스타굿즈" style="width: 280px;height: 40px;outline: 0;border: 0px;">
+				<font style="margin-right: 170px;">스타굿즈</font></button>
+				<button type="button" class="kind" value="스포츠/레저" style="width: 280px;height: 40px;outline: 0;border: 0px;">
+				<font style="margin-right: 152px;">스포츠/레저</font></button>
+				<button type="button" class="kind" value="뷰티/미용" style="width: 280px;height: 40px;outline: 0;border: 0px;">
+				<font style="margin-right: 166px;">뷰티/미용</font></button>
+
 		</div>
-		선택한 카테고리 : <input type="text" id="sell_kind" name="sell_kind" value="" readonly="readonly">
+		<font style="font-size: 15px;color: #5c2392;font-weight: 400;">선택한 카테고리 : </font>
+		<input type="text" id="sell_kind" name="sell_kind" value="" readonly="readonly" 
+		style="height: 70px;font-size: 15px;font-weight: 900;color: #5c2392;outline: 0;border: 0px;">
 		</div>
 		<div style="width: 168px;height:113px; float: left;text-align: left;line-height: 113px;border-top:solid 1px #dcdbe4;">
 		<font style="font-size: 18px;font-weight: 900;">가격</font> <font style="color: #ff5d4a;font-size: 18px;">*</font>
@@ -264,6 +272,11 @@
 						}
 					});
 		});
+
+
+		$("#sell_price").on("keyup", function() {
+		    $(this).val($(this).val().replace(/[^0-9]/g,""));
+		});
 		
 		
 
@@ -297,6 +310,8 @@
 				return false;
 			}
 		});
+
+
 
 
 		function doOpenCheck(chk) {

@@ -156,7 +156,8 @@
 			</c:if>
 
 			<c:if test="${vo.mem_storeNum eq member.mem_storeNum}">
-				<a class="zzimbtn"  href="zzimDelete?zzim_num=${zc.zzim_num}"><img
+				<a class="zzimbtn"  href="myProductList?kind=sp&mem_storeNum=${member.mem_storeNum}&search=
+				"><img
 					style="margin-top: 65px; cursor: pointer;" alt=""
 					src="${pageContext.request.contextPath}/resources/images/myshopgo_logo.png"></a>
 			</c:if>
@@ -210,17 +211,7 @@
 
 	
 	<!-- 상품정보 끝 -->
-	
 
-	<div class="panel panel-info"
-		style="height: 100px; width: 80px; cursor: pointer; background-color: black;"
-		onclick="location.href='./productUpdate?sell_num=${vo.sell_num}'"></div>
-		
-		
-			<div class="panel panel-info"
-		style="height: 100px; width: 80px; cursor: pointer; background-color: red;"
-		onclick="location.href='./productDelete?sell_num=${vo.sell_num}'"></div>
-		
 		
 		
 		
@@ -252,12 +243,12 @@
 	<!-- 상품문의끝 -->
 	
 	
-	
-	<div style="background-color: blue;float: left;width: 360px;">
+	<!-- 상점정보 -->
+	<div style="background-color: pink;float: left;width: 360px;">
 	<font style="font-size: 18px;font-weight: 900;">상점정보</font>
 	<hr style="width: 330px;">
 	</div>
-	
+	<!-- 상점정보끝 -->
 	
 	<script type="text/javascript">
 		$(document).on('click', '.reply', function() {
