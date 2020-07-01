@@ -72,7 +72,20 @@ border-top: 2px solid black;
 					
 					
 					<div style="width: 200px; height: 300px; border: 1px solid; float: left; margin-left: 4px; margin-bottom: 4px;">
-					<img alt="" src="${pageContext.request.contextPath}/resources/images/showimage_logo.png" width="190px">
+					
+					
+					
+				<c:forEach items="${pfile}" var="pfile" varStatus="status">
+				
+				<c:if test="${vo.sell_num eq pfile.sell_num}">
+				<div>
+					<img src="../upload/product/${pfile.file_name}"	alt="${pfile.ori_name}"	style="overflow: hidden; display: flex; align-items: center; justify-content: center; width: 70px; height: 70px; float: left;">
+				</div>
+				
+				</c:if>
+				</c:forEach>
+					
+					
 					<div>
 					<br>
 					<br>
