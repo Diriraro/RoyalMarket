@@ -23,6 +23,28 @@ public class ProductVO {
 	private Long sell_status;
 	
 	private Long sell_hit;
+	
+	private String mem_address;
+	
+	private String mem_storeName;
+	
+	
+
+	public String getMem_storeName() {
+		return mem_storeName;
+	}
+
+	public void setMem_storeName(String mem_storeName) {
+		this.mem_storeName = mem_storeName;
+	}
+
+	public String getMem_address() {
+		return mem_address;
+	}
+
+	public void setMem_address(String mem_address) {
+		this.mem_address = mem_address;
+	}
 
 	public Long getSell_status() {
 		return sell_status;

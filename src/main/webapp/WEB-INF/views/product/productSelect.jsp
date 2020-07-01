@@ -101,6 +101,7 @@
 				class="sr-only">Next</span>
 			</a>
 		</div>
+		<!-- 사진끝 -->
 
 		<div style="display: inline-block; margin-left: 50px; width: 545px;">
 			<font style="font-size: 25px; font-weight: 800;">${vo.sell_product}</font>
@@ -124,17 +125,19 @@
 				style="width: 16px; height: 20px; margin-bottom: 3px;" alt=""
 				src="${pageContext.request.contextPath}/resources/images/ad_logo.png">
 			<font style="font-weight: 600; font-size: 15px;">&nbsp;${mvo.mem_address}</font>
+			
+			
 			<!--  찜구현    -->
 
 			<form action="zzimInsert" method="post">
 				<input type="hidden" value="${zc.zzim_num}"> <input
 					type="hidden" name="mem_storeNum" value="${member.mem_storeNum}" />
 				<input type="hidden" name="sell_num" value="${vo.sell_num}" />
-
-				<c:if test="${empty zc.zzim_num}">
+				
+				<c:if test="${empty zc.zzim_num and (vo.mem_storeNum ne member.mem_storeNum)}">
 					<button type="submit"
 						style="margin-top: 65px; border-radius:0px 0px 0px 0px;width: 176px; height: 56px;background-image: url('${pageContext.request.contextPath}/resources/images/zzim_button.png');"
-						class="btn btn-default"></button>
+						class="btn btn-default zzimbtn"></button>
 					<a><img style="margin-top: 65px; cursor: pointer;" alt=""
 						src="${pageContext.request.contextPath}/resources/images/phone_button.png"></a>
 					<a><img style="margin-top: 65px; cursor: pointer;" alt=""
@@ -142,8 +145,8 @@
 				</c:if>
 			</form>
 
-			<c:if test="${not empty zc.zzim_num}">
-				<a href="zzimDelete?zzim_num=${zc.zzim_num}"><img
+			<c:if test="${not empty zc.zzim_num and (vo.mem_storeNum ne member.mem_storeNum)}">
+				<a class="zzimbtn"  href="zzimDelete?zzim_num=${zc.zzim_num}"><img
 					style="margin-top: 65px; cursor: pointer;" alt=""
 					src="${pageContext.request.contextPath}/resources/images/zzimaft_button.png"></a>
 				<a><img style="margin-top: 65px; cursor: pointer;" alt=""
@@ -151,8 +154,17 @@
 				<a><img style="margin-top: 65px; cursor: pointer;" alt=""
 					src="${pageContext.request.contextPath}/resources/images/buy_button.png"></a>
 			</c:if>
-			<!-- 찜 끝 -->
 
+			<c:if test="${vo.mem_storeNum eq member.mem_storeNum}">
+				<a class="zzimbtn"  href="myProductList?kind=sp&mem_storeNum=${member.mem_storeNum}&search=
+				"><img
+					style="margin-top: 65px; cursor: pointer;" alt=""
+					src="${pageContext.request.contextPath}/resources/images/myshopgo_logo.png"></a>
+			</c:if>
+  <div id="myModal2" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+
+</div>	
+			<!-- 찜 끝 -->
 
 		</div>
 	</div>
@@ -199,11 +211,9 @@
 
 	
 	<!-- 상품정보 끝 -->
-	
 
-	<div class="panel panel-info"
-		style="height: 100px; width: 80px; cursor: pointer; background-color: black;"
-		onclick="location.href='./productUpdate?sell_num=${vo.sell_num}'"></div>
+		
+		
 		
 	<!--  상품문의  -->
 	<hr style="width: 1024px;">
@@ -230,18 +240,34 @@
 	</div>
 	
 	</div>
+	<!-- 상품문의끝 -->
 	
-	<div style="background-color: blue;float: left;width: 360px;">
+	
+	<!-- 상점정보 -->
+	<div style="background-color: pink;float: left;width: 360px;">
 	<font style="font-size: 18px;font-weight: 900;">상점정보</font>
 	<hr style="width: 330px;">
 	</div>
-	
+	<!-- 상점정보끝 -->
 	
 	<script type="text/javascript">
 		$(document).on('click', '.reply', function() {
 			alert("asdasd");
 			$("#pq_contents").val("@" + $(this).val() + " : ");
 		});
+
+		$('.zzimbtn').on('click', function(){
+			$('#myModal2').modal('show');
+			});
+		
+			$('#closebtn').on('click', function(){
+			$('#myModal2').modal('hide');
+			});
+
+
+
+		
+					
 
 		
 

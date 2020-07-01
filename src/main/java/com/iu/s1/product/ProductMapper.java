@@ -16,6 +16,10 @@ public interface ProductMapper {
 	
 	public List<ProductVO> productList(Pager pager) throws Exception;
 	
+	public List<ProductVO> myProductList(Pager pager) throws Exception;
+	
+	public long myProductCount(Pager pager) throws Exception;
+	
 	public long productCount(Pager pager) throws Exception;
 	
 	public String selectFileName(long sell_num) throws Exception;
@@ -30,6 +34,7 @@ public interface ProductMapper {
 	
 	// shop에서 쓸거
 	public List<ProductVO> myList(long mem_storeNum) throws Exception;
+	public int productDelete(ProductVO productVO) throws Exception;
 	
 	
 }

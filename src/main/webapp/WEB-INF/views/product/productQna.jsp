@@ -37,7 +37,7 @@
 												a += '<div class="qnaInfo'+value.pq_num+'">';
 												//상점연결하기
 												a += '<a href='
-														+ "./productSelect?sell_num=${vo.sell_num}"
+														+ "../shop/myshop?mem_storeNum=${member.mem_storeNum}"
 														+ ' style="color: #ababab; font-size: 14px; font-weight: 600;">'
 														+ value.pq_storeName
 														+ '  </a>'

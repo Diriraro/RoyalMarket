@@ -82,6 +82,13 @@ public class ProductService {
 		pager.makePage(totalCount);
 		return productMapper.productList(pager);
 	}
+	
+	public List<ProductVO> myProductList(Pager pager) throws Exception {
+		pager.makeRow();
+		long totalCount = productMapper.myProductCount(pager);
+		pager.makePage(totalCount);
+		return productMapper.myProductList(pager);
+	}
 
 	public MemberVO productAddress(long sell_num) throws Exception{
 		return productMapper.productAddress(sell_num);
@@ -120,4 +127,7 @@ public class ProductService {
 	
 	
 	
+	public int productDelete(ProductVO productVO)throws Exception{
+		return productMapper.productDelete(productVO);
+	}
 }
