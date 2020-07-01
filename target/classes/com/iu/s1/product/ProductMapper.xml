@@ -102,6 +102,12 @@
 		select mem_address from member where mem_storeNum=(select
 		mem_storeNum from store_product where sell_num=#{sell_num})
 	</select>
+	
+		<select id="productStoreName" parameterType="Long"
+		resultType="MemberVO">
+		select mem_storeName from member where mem_storeNum=(select
+		mem_storeNum from store_product where sell_num=#{sell_num})
+	</select>
 
 	<update id="hitUpdate" parameterType="Long">
 		update store_product set

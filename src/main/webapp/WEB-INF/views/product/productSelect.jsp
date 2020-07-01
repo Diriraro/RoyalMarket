@@ -247,6 +247,8 @@
 	<div style="background-color: pink;float: left;width: 360px;">
 	<font style="font-size: 18px;font-weight: 900;">상점정보</font>
 	<hr style="width: 330px;">
+	  <a href="${pageContext.request.contextPath}/shop/myshop?mem_storeNum=${vo.mem_storeNum}"> 
+	  <font style="font-weight: 800; font-size: 13px;color: #666666;">${mvo2.mem_storeName}</font></a>
 	</div>
 	<!-- 상점정보끝 -->
 	

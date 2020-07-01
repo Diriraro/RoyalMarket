@@ -94,6 +94,10 @@ public class ProductService {
 		return productMapper.productAddress(sell_num);
 	}
 	
+	public MemberVO productStoreName(long sell_num) throws Exception{
+		return productMapper.productStoreName(sell_num);
+	}
+	
 	public long productUpdate(ProductVO productVO) throws Exception{
 		return productMapper.productUpdate(productVO);
 	}

@@ -27,6 +27,8 @@ public interface ProductMapper {
 	public ProductVO productSelect(long sell_num) throws Exception;
 	
 	public MemberVO productAddress(long sell_num) throws Exception;
+	
+	public MemberVO productStoreName(long sell_num) throws Exception;
 
 	public long hitUpdate(long sell_num)throws Exception;
 	

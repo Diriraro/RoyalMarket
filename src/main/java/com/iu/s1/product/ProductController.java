@@ -115,6 +115,12 @@ public class ProductController {
 		MemberVO memberVO = productService.productAddress(sell_num);
 		mv.addObject("mvo", memberVO);
 		mv.setViewName("product/productSelect");
+		
+		sell_num = productVO.getSell_num();
+		MemberVO memberVOs = productService.productStoreName(sell_num);
+		mv.addObject("mvo2", memberVOs);
+		mv.setViewName("product/productSelect");
+		
 
 		List<ProductFileVO> productFileVOs = productService.productFileSelect(sell_num);
 		mv.addObject("pfile", productFileVOs); // store 사진 출력
