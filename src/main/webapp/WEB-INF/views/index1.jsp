@@ -8,6 +8,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <c:import url="./template/boot.jsp"></c:import>
+
 </head>
 <body>
 </head>
@@ -16,6 +17,12 @@
 
 	<div class="container">
 		<h1>Index Page</h1>
+		<div id="summernote"><p>Hello Summernote</p></div>
+  <script>
+    $(document).ready(function() {
+        $('#summernote').summernote();
+    });
+  </script>
 	</div>
 
 </body>

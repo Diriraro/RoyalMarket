@@ -59,7 +59,11 @@ public class AdminService {
 	}
 	
 	public List<NoticeVO> getNoticeList() throws Exception {
-		return noticeRepository.findAll();
+		return noticeRepository.findAllByOrderByNonumDesc();
+	}
+	
+	public List<NoticeVO> noticeTitleSearch(String search)throws Exception{
+		return noticeRepository.findByNotitleContainingOrderByNonumDesc(search);
 	}
 
 }

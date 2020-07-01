@@ -168,8 +168,8 @@
 						<c:forEach items="${list}" var="li" begin="${list.size()-2}"
 							end="${list.size()}">
 							<tr>
-								<td>${li.no_num}</td>
-								<td><a href="../notice/noticeSelect?no_num=${li.no_num}">${li.no_title}</a></td>
+								<td>${li.nonum}</td>
+								<td><a href="../notice/noticeSelect?nonum=${li.nonum}">${li.notitle}</a></td>
 								<td>${li.no_contents}</td>
 								<td>${li.no_regDate}</td>
 							</tr>

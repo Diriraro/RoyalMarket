@@ -83,4 +83,8 @@ public class QnaService {
 		return qnaFileRepository.fileCheck(qna_num);
 	}
 	
+	public List<QnaVO> qnaMemberSearch(String mem_id)throws Exception{
+		return qnaRepository.qnaMemberSearch(mem_id);
+	}
+	
 }

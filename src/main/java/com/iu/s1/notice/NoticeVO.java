@@ -30,9 +30,10 @@ public class NoticeVO {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long no_num;
-	@Column
-	private String no_title;
+	@Column(name="no_num")
+	private long nonum;
+	@Column(name="no_title")
+	private String notitle;
 	@Column
 	@CreationTimestamp
 	private Date no_regDate;

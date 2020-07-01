@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.iu.s1.ProductVO;
@@ -79,6 +80,10 @@ public class AdminController {
 		List<MemberVO> ar = new ArrayList<MemberVO>();
 //		ar = adminService.getManToManList();
 		List<QnaVO> ar2 = qnaService.qnaAdminList();
+		for (QnaVO qnaVO : ar2) {
+			int fileCheck = qnaService.fileCheck(qnaVO.getQna_num());
+			qnaVO.setFileCheck(fileCheck);
+		}
 		model.addAttribute("qna_adlist", ar2);
 		model.addAttribute("list",ar);
 	}
@@ -101,14 +106,41 @@ public class AdminController {
 		
 	}
 	@GetMapping("qnaAnswer")
-	public ModelAndView qnaAnswer(long qna_num)throws Exception{
-		ModelAndView mv = new ModelAndView();
+	public void qnaAnswer(long qna_num, Model model)throws Exception{
+//		ModelAndView mv = new ModelAndView();
 		QnaVO qnaVO = new QnaVO();
 		qnaVO = qnaService.selectQna(qna_num);
 		List<QnaFileVO> qnaFileVOs = qnaService.selectQnaFile(qna_num);
-		mv.addObject("qvo", qnaVO);
-		mv.addObject("qfvo", qnaFileVOs);
-		mv.setViewName("admin/list/qnaAnswer");
-		return mv;
+		model.addAttribute("qvo", qnaVO);
+		model.addAttribute("qfvo", qnaFileVOs);
+	}
+	
+	@PostMapping("qnaAnswer")
+	public void qnaAnswer(QnaVO qnaVO, Model model)throws Exception{
+		int result = qnaService.qnaAnswer(qnaVO);
+	}
+	
+	@PostMapping("getManToManList")
+	public void qnaMemberSearch(Model model, String search)throws Exception{
+		if(search==null) {
+			search="";
+		}
+		List<QnaVO> ar = qnaService.qnaMemberSearch(search);
+		List<QnaVO> ar2 = qnaService.qnaAdminList();
+		for (QnaVO qnaVO : ar2) {
+			int fileCheck = qnaService.fileCheck(qnaVO.getQna_num());
+			qnaVO.setFileCheck(fileCheck);
+		}
+		model.addAttribute("qna_adlist", ar2);
+		model.addAttribute("list",ar);
+	}
+	
+	@PostMapping("getNoticeList")
+	public void getNoticeList(Model model, String search)throws Exception{
+		if(search==null) {
+			search="";
+		}
+		List<NoticeVO> ar = adminService.noticeTitleSearch(search);
+		model.addAttribute("list", ar);
 	}
 }

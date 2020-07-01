@@ -22,7 +22,7 @@
 		
 		<c:forEach items="${no_list}" var="list">
 			<tr>
-				<td><a href="./noticeSelect?no_num=${list.no_num}">${list.no_title}</a></td>
+				<td><a href="./noticeSelect?nonum=${list.nonum}">${list.notitle}</a></td>
 				<td>${list.no_regDate}</td>
 				<td>${list.no_contents}</td>
 			</tr>
