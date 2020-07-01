@@ -26,7 +26,6 @@ import com.iu.s1.visitor.VisitorVO;
 @Controller
 @RequestMapping("/admin/**/")
 public class AdminController {
-
 	@Autowired
 	private AdminService adminService;
 	@Autowired
@@ -221,6 +220,4 @@ public class AdminController {
 		List<NoticeVO> ar = adminService.noticeTitleSearch(search);
 		model.addAttribute("list", ar);
 	}
-	
-
 }

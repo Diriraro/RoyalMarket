@@ -59,7 +59,6 @@ public class HomeController {
 				int year = cal.getTime().getYear() + 1900;
 				int month = cal.getTime().getMonth() + 1;
 				int day = cal.getTime().getDate();
-
 				String daily = year + "/" + month + "/" + day;
 
 				if (adminRepository.existsById(daily)) {
@@ -80,7 +79,7 @@ public class HomeController {
 			}
 		}
 
-		return "index1";
+		return "index";
 	}
 
 }

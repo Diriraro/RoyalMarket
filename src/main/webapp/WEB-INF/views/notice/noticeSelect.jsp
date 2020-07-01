@@ -1,37 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<c:import url="../template/boot.jsp"></c:import>
-</head>
-<body>
-<c:import url="../template/nav.jsp"></c:import>
+    
 
 <div class="container">
-	<table class="table table-hover">
+	<table class="table table-hover" style="width: 1170px">
 		<tr>
-			<td>제목</td>
-			<td>날짜</td>
-			<td>내용</td>
+			<td width="70%" align="center" style="background: black; color: white; font-size: medium;" >SUBJECT</td>
+			<td align="center" style="background: black; color: white; font-size: medium;">DATE</td>
 		</tr>
-		
+			<tr>
+			<td></td>
+			</tr>
 		<tr>
-			<td>${no_select.notitle}</td>
-			<td>${no_select.no_regDate}</td>
-			<td>${no_select.no_contents}</td>
+			<td width="70%" align="center" style="border: 1px solid white; background: white;">${no_select.notitle}</td>
+			<td align="center" style="border: 1px solid white; background: white;">${no_select.no_regDate}</td>
 		</tr>
 	</table>
-	<a href="./noticeUpdate?nonum=${no_select.nonum}">
-		<button class="btn btn-success">수정하기</button>
-	</a>
-	
-	
+	<div class="container" style="border: 1px solid white; background: white;">
+			${no_select.no_contents}
+	</div>
 </div>
-
-</body>
-</html>

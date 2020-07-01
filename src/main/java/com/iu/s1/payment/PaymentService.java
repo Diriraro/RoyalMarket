@@ -112,4 +112,11 @@ public class PaymentService {
 		return paymentMapper.paycheckDel(mem_id);
 	}
 	
+	public String seller_address(String mem_id)throws Exception{
+		return paymentMapper.seller_address(mem_id);
+	}
+	
+	public int paystatsInsert(PayStatsVO payStatsVO) throws Exception{
+		return paymentMapper.paystatsInsert(payStatsVO);
+	}
 }

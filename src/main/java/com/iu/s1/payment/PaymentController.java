@@ -18,6 +18,7 @@ import com.iu.s1.member.MemberVO;
 import com.iu.s1.paycheck.PayCheckVO;
 import com.iu.s1.paymentHistory.Buy_HistoryVO;
 import com.iu.s1.paymentHistory.Sell_HistoryVO;
+import com.iu.s1.product.ProductService;
 import com.iu.s1.trading.TradingVO;
 
 @Controller
@@ -26,6 +27,8 @@ public class PaymentController {
 
 	@Autowired
 	private PaymentService paymentService;
+	@Autowired
+	private ProductService productService;
 	
 	//결제로 들어가는 페이지
 	@GetMapping("pay")
@@ -101,6 +104,14 @@ public class PaymentController {
 		ModelAndView mv = new ModelAndView();
 		MemberVO memberVO = (MemberVO)request.getSession().getAttribute("member");
 	
+		String check= paymentService.paycheckSelect(memberVO.getMem_id());
+		
+		
+		if(check !=null) {
+	
+			paymentService.paycheckDel(memberVO.getMem_id());
+		}
+		
 		//맴버테이블에서 포인트 조회
 		String mem_id = memberVO.getMem_id();
 		long point = paymentService.pointSelect(mem_id);
@@ -131,8 +142,10 @@ public class PaymentController {
 		//맴버테이블에서 포인트 조회
 		String mem_id = memberVO.getMem_id();
 		long point = paymentService.pointSelect(mem_id);
-	
 		
+		String image = productService.selectFileName(sell_num);
+		
+		mv.addObject("image", image);
 		mv.addObject("point", point);
 		mv.addObject("sell_product", sell_product);
 		mv.addObject("sell_price", sell_price);
@@ -280,16 +293,31 @@ public class PaymentController {
 			long total=curPoint+tradingVO.getSell_price();
 			MemberVO memberVO = new MemberVO();
 			memberVO.setMem_id(seller_id);
+			PayStatsVO payStatsVO = new PayStatsVO();
+			
+			//판매자 아이디 조회 후 paystatus에 인서트
+			String seller_address = paymentService.seller_address(seller_id);			
+			payStatsVO.setSeller_address(seller_address);
+			
+			//수익 계산
 			long profit = (total/10);
+			long commition= tradingVO.getSell_price()/10;
 			memberVO.setMem_point(total-profit);
 			buy_HistoryVO.setSell_num(sell_num);
 			buy_HistoryVO.setStatus(2);
+			payStatsVO.setSell_commition(commition);
+			
+			// 판매통계 업데이트
+			paymentService.paystatsInsert(payStatsVO);
+			
+			// buy상태 sell 상태 바꾸기
 			paymentService.buy_statusUp(buy_HistoryVO);
 			Sell_HistoryVO sell_HistoryVO = new Sell_HistoryVO();
 			sell_HistoryVO.setSell_num(sell_num);
 			sell_HistoryVO.setStatus(2);
 			paymentService.sell_statusUp(sell_HistoryVO);
 			
+			// 포인트 업데이트 및 trading에서 삭제
 			paymentService.pointUpdate(memberVO);
 			paymentService.tradingDelete(sell_num);
 		}		
@@ -329,19 +357,36 @@ public class PaymentController {
 		
 		//인수 인계가 모두 1이면 판매자 포인트 업데이트
 		if(receive==1 && give==1) {		
+			
 			long total=curPoint+tradingVO.getSell_price();
 			MemberVO memberVO = new MemberVO();
 			memberVO.setMem_id(seller_id);
+			PayStatsVO payStatsVO = new PayStatsVO();
+			
+			// 판매자 아이디 조회후 paystatus에 인서트
+			String seller_address = paymentService.seller_address(seller_id);
+			payStatsVO.setSeller_address(seller_address);
+			
+			// 수익 계산
 			long profit = (total/10);
+			long commition = tradingVO.getSell_price()/10;
+			payStatsVO.setSell_commition(commition);
 			memberVO.setMem_point(total-profit);
+			
+			//판매 통계 업데이트
+			paymentService.paystatsInsert(payStatsVO);
+			
+			//buy상태 sell상태 바꾸기
 			Buy_HistoryVO buy_HistoryVO = new Buy_HistoryVO();
 			buy_HistoryVO.setSell_num(sell_num);
-			buy_HistoryVO.setStatus(2);
+			buy_HistoryVO.setStatus(2);			
 			paymentService.buy_statusUp(buy_HistoryVO);
 			sell_HistoryVO = new Sell_HistoryVO();
 			sell_HistoryVO.setSell_num(sell_num);
 			sell_HistoryVO.setStatus(2);
 			paymentService.sell_statusUp(sell_HistoryVO);
+			
+			// 포인트 업데이트 및 trading에서 삭제
 			paymentService.pointUpdate(memberVO);
 			paymentService.tradingDelete(sell_num);
 		}		

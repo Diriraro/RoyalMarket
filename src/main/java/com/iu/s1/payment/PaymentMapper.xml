@@ -132,5 +132,15 @@
   	<delete id="paycheckDel" parameterType="java.lang.String">
   		delete from paycheck where mem_id=#{mem_id}
   	</delete>
+  	
+  	<!-- member 주소 가져오기 -->
+  	<select id="seller_address" parameterType="java.lang.String" resultType="java.lang.String">
+  		select mem_address from member where mem_id=#{mem_id}
+  	</select>
+  	
+  	<!-- paystats insert -->
+  	<insert id="paystatsInsert" parameterType="com.iu.s1.payment.PayStatsVO">
+  		insert into paystats values(0,now(),#{seller_address},#{sell_commition})
+  	</insert>
   		
  </mapper>

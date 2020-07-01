@@ -48,7 +48,7 @@
 				<div class="contents">
 					<a href="#" class="check" title="NoticeList"><i
 						class="far fa-file-alt"></i> 공지 사항 목록</a> <a
-						href="../notice/noticeWrite" class="check"><i
+						href="#" class="check" title="NoticeWrite"><i
 						class="far fa-file-alt"></i> 공지 사항 등록</a>
 				</div>
 			</div>
@@ -309,7 +309,6 @@
 				$("#content").append(result);
 			})
 		}
-
 
 		// notice
 		function getNoticeList() {

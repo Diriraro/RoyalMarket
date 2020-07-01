@@ -3,17 +3,19 @@ package com.iu.s1.qna;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 
+import com.iu.s1.member.MemberVO;
+import com.iu.s1.qna.file.QnaFileVO;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.iu.s1.qna.file.QnaFileVO;
 @Controller
 @RequestMapping("/qna/**")
 public class QnaController {
@@ -22,10 +24,11 @@ public class QnaController {
 	private QnaService qnaService;
 	
 	@GetMapping("qnaMyList")			//사용자가 로그인 한 후 본인의 상담내역을 보는 곳
-	public ModelAndView qnaMyList()throws Exception{
+	public ModelAndView qnaMyList(HttpSession session)throws Exception{
 		ModelAndView mv = new ModelAndView();
 		QnaVO qnaVO = new QnaVO();
-		qnaVO.setMem_id("iu");			//테스트용 아이디=iu ** 나중에 세션에서 로그인한사람 아이디 집어넣어야함
+		String id = ((MemberVO)session.getAttribute("member")).getMem_id();
+		qnaVO.setMem_id(id);			//테스트용 아이디=iu ** 나중에 세션에서 로그인한사람 아이디 집어넣어야함
 		List<QnaVO> ar = qnaService.qnaMyList(qnaVO);
 		System.out.println("================================================================="+ar);
 		if(!ar.isEmpty()) {					//로그인한 사용자의 아이디로 상담내역이 있는지 확인

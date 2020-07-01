@@ -55,7 +55,6 @@ public class AdminService {
 			return memberRepository.getMemberList(mem_access); // mem_access = 1 인 멤버 검색
 		}
 	}
-
 	public List<MemberVO> getMemberSearchList(String kind, String search, int mem_access) throws Exception {
 		MemberVO memberVO = new MemberVO();
 		memberVO.setMem_access(mem_access);
@@ -63,12 +62,10 @@ public class AdminService {
 		memberVO.setSearch(search);
 		return memberRepository.getMemberSearchList(memberVO);
 	}
-
 	// DashBoard need Data
 	public long getMemberCount() throws Exception {
 		return memberRepository.memberCount();
 	}
-
 	public long getDailyNewMember() throws Exception {
 		// 현재 시간 (년 월 일 시 분 초 )
 		Date date = new Date();
@@ -83,7 +80,6 @@ public class AdminService {
 		System.out.println(ar.size());
 		return ar.size();
 	}
-
 	public List<NoticeVO> getNoticeList() throws Exception {
 		return noticeRepository.findAllByOrderByNonumDesc();
 	}

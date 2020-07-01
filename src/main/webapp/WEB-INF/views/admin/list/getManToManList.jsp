@@ -7,12 +7,12 @@
 		<a class="check active" title="manToman" style="cursor: pointer;">1:1
 			문의</a> <a class="check" title="qna" style="cursor: pointer;">질문과 답변</a>
 		<div class="search-container">
-			<form action="/">
-				<input type="text" placeholder="MemberName..." name="search">
-				<button type="submit">
+				<input type="text" placeholder="MemberName..." name="search" id="qnaSearch">
+				<button type="submit" id="qnaMemSearch">
 					<i class="fa fa-search"></i>
 				</button>
-			</form>
+			<!-- <form action="./qnaMemberSearch">
+			</form> -->
 		</div>
 	</div>
 	<table class="table">
@@ -41,10 +41,10 @@
 							test="${list.qna_check ne 0}">답변완료</c:if></td>
 					<td><c:if test="${list.qna_checkDate eq null}">답변대기중</c:if> <c:if
 							test="${list.qna_checkDate ne null}">${list.qna_checkDate}</c:if></td>
-					<td><c:if test="${list.qna_check eq 0}">
-							<a title="qnaAnswer" class="check"><button class="qna_num"
-									id="${list.qna_num}">답변하기</button></a>
-						</c:if></td>
+					<td>
+					<c:if test="${list.qna_check eq 0}">
+						<a title="qnaAnswer" class="check"><button class="qna_num" id="${list.qna_num}">답변하기</button></a>
+					</c:if></td>
 
 				</tr>
 
@@ -81,9 +81,5 @@
 				$("#hiddenCont" + i).slideDown();
 			}
 		});
-	</script>
-
-	<script type="text/javascript">
-		
 	</script>
 </div>
