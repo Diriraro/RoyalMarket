@@ -18,6 +18,7 @@
 
 </style>
 <c:import url="../template/boot.jsp"></c:import>
+<c:import url="../template/style.jsp"></c:import>
 </head>
 <body>
 	<c:import url="../template/woozoo_nav.jsp"></c:import>
@@ -78,7 +79,7 @@
 	}); 
 		
 </script>
-
+	<c:import url="../template/footer.jsp"></c:import>
 
 </body>
 </html>
