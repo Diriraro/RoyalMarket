@@ -113,8 +113,8 @@ public class PaymentService {
 		return paymentMapper.paycheckDel(mem_id);
 	}
 	
-	public String seller_address(String mem_id)throws Exception{
-		return paymentMapper.seller_address(mem_id);
+	public MemberVO memberVOSel(String mem_id)throws Exception{
+		return paymentMapper.memberVOSel(mem_id);
 	}
 	
 	public int paystatsInsert(PayStatsVO payStatsVO) throws Exception{
@@ -123,5 +123,13 @@ public class PaymentService {
 	
 	public long buy_status(long sell_num)throws Exception{
 		return paymentMapper.buy_status(sell_num);
+	}
+	
+	public long sell_status(long sell_num)throws Exception{
+		return paymentMapper.sell_status(sell_num);
+	}
+	
+	public Buy_HistoryVO buy_Sel(long sell_num)throws Exception{
+		return paymentMapper.buy_Sel(sell_num);
 	}
 }
