@@ -19,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.iu.s1.member.MemberVO;
 import com.iu.s1.product.ProductService;
 import com.iu.s1.product.ProductVO;
+import com.iu.s1.product.productFile.ProductFileVO;
 import com.iu.s1.product.zzim.ZzimVO;
 import com.iu.s1.shop.follow.StoreFollowService;
 import com.iu.s1.shop.follow.StoreFollowVO;
@@ -69,7 +70,18 @@ public class ShopController {
 		
 		// 상품 리스트 영역
 		List<ProductVO> ar = productService.myList(mem_storeNum);
+		// 상품리스트 사진 추력
+		List<ProductFileVO> productFileVOs = new ArrayList<ProductFileVO>();
+		for(ProductVO productVO2 : ar) {
+			long sell_num = productVO2.getSell_num();
+			
+			productFileVOs.addAll(productService.productFileSelect(sell_num));
+		}
 		
+		
+		//
+		mv.addObject("pfile", productFileVOs); // 상품들의  사진 출력
+		//
 		
 		
 		mv.addObject("mylist", ar);

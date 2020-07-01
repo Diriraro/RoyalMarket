@@ -29,22 +29,22 @@
 		<!-- div 2번  -->
 		
 		<div
-			style="border: 1px solid black; width: 680px; height: 330px; float: left;">
+			style="border: 0px solid black; width: 680px; height: 330px; float: left;">
 
-			<div style="border: 1px solid black; height: 80px;">
+			<div style="border: 1px solid black; height: 80px;margin-bottom: 1px; margin-top: 2px;">
 				<span>상점명</span><button>상점명 수정</button>
 				<a> </a>
 			</div>
 
-			<div style="border: 1px solid black; height: 80px;">
+			<div style="border: 1px solid black; height: 80px; margin-bottom: 1px; margin-top: 2px;">
 				<span>상점오픈일 \상점방문수\상품판매 \택배발송 </span>
 			</div>
 
-			<div style="border: 1px solid black; height: 80px;">
+			<div style="border: 1px solid black; height: 80px; margin-bottom: 1px; margin-top: 2px;">
 				<span>상점코멘트</span>
 				<a>${vo2 }</a>
 			</div>
-			<div style="border: 1px solid black; height: 80px;">
+			<div style="border: 1px solid black; height: 80px; margin-bottom: 1px; margin-top: 2px;">
 				<button>코멘트 수정</button>
 			</div>
 		</div>

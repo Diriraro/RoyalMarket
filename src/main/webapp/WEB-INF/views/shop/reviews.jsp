@@ -61,12 +61,12 @@ border-top: 2px solid black;
 
 
 			<div>
-				<h2>내용</h2>
+				<h2>${mem_storeName } 의 리뷰목록</h2>
 			<c:forEach items="${reli}" var="vo" varStatus="i">
 				 <!-- 리스트 감쌀디아이브이  -->
-				<div style="border: 1px solid yellow; min-height: 150px; overflow: auto;">
+				<div style="border: 1px solid ; min-height: 150px; overflow: auto;">
 				
-				<div style="float: left; width: 80px; height: 250px; border: 1px solid red;">
+				<div style="float: left; width: 80px; height: 250px;">
 					<img alt="" src="${pageContext.request.contextPath}/resources/images/user11.png" width="80px;">			
 				</div><!-- 왼쪽 옆에 이미지 박스  -->
 				
@@ -91,7 +91,9 @@ border-top: 2px solid black;
 				<br>
 				
 				<div>
+					<p style="font-size: large;">
 					${vo.re_context}
+					</p>
 				</div>
 				
 				

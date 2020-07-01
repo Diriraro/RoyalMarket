@@ -86,16 +86,9 @@ border-top: 2px solid black;
 					</div>
 					
 					
-					
-					
-					
 					</div>
 					</c:forEach>
-					
-					
-					
-					
-					
+									
 					
 				</div>
 
@@ -107,8 +100,6 @@ border-top: 2px solid black;
 		</div><!-- 버튼, 내용 끝  -->
 
 	</div><!-- 컨테이너 끝  -->
-	
-	
 	
 	
 	
