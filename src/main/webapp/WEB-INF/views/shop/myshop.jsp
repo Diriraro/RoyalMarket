@@ -75,7 +75,7 @@ border-top: 2px solid black;
 					
 					
 					
-				<c:forEach items="${pfile}" var="pfile" varStatus="status">
+				<c:forEach items="${pfile}" var="pfile" varStatus="status" >
 				
 				<c:if test="${vo.sell_num eq pfile.sell_num}">
 				<div>
