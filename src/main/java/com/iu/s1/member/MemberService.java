@@ -159,7 +159,7 @@ public class MemberService {
 		}
 
 		// email 중복검사
-		MemberVO memberVO4 = memberRepository.selectMemberByEmail(memberVO3);
+		MemberVO memberVO4 = memberRepository.selectMemberByEmail(memberVO);
 		if (memberVO4 != null) {
 			bindingResult.rejectValue("mem_email", "memberVO.mem_email.same");
 			result = true;

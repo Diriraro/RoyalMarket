@@ -11,7 +11,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>Find ID By E-mail</h1>
+	<h1>Find ID By Phone</h1>
 	<form:form modelAttribute="memberVO" action="./findIdByEmail"
 		method="post">
 		<input name="mem_name" value="name" type="hidden">

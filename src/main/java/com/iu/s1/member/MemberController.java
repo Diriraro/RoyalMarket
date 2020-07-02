@@ -45,9 +45,7 @@ public class MemberController {
 	private JavaMailSender mailSender;
 	
 	private String checkNum = "";
-	
-	
-	
+
 
 	@GetMapping("findPwByEmail")
 	public ModelAndView findPwByEmail(HttpSession session, MemberVO memberVO) throws Exception {
@@ -69,7 +67,7 @@ public class MemberController {
 
 		if (result) {
 			mv.setViewName("member/findPwByEmail");
-		}else if(now_now > 300) {
+		}else if(now_now > 300000) {
 			System.out.println("ddd");
 			mv.addObject("result", "인증번호 유효기간이 지났습니다.");
 			mv.addObject("path", "./findPwByEmail");
@@ -180,7 +178,7 @@ public class MemberController {
 		memberVO2 = memberService.selectMember(memberVO);
 		
 		if(memberVO2==null){
-			mv.addObject("result", "아이디 또는 패스워드를 입력해주세요");
+			mv.addObject("result", "존재하지 않는 회원입니다.");
 			mv.addObject("path", "./memberLogin");
 			mv.setViewName("common/result");
 			return mv;
@@ -201,6 +199,7 @@ public class MemberController {
 			mv.setViewName("common/result");
 			return mv;
 		}
+		
 		memberVO = memberService.memberLogin(memberVO);
 
 		if (memberVO != null) {
@@ -380,7 +379,7 @@ public class MemberController {
 					MimeMessageHelper messageHelper = new MimeMessageHelper(msg, true, "UTF-8");
 
 					messageHelper.setSubject(USERNAME + "님 비밀번호 찾기 메일입니다.");
-					messageHelper.setText("비밀번호는 " + PASSWORD + " 입니다.");
+					messageHelper.setText("인증번호는 " + PASSWORD + " 입니다.");
 					messageHelper.setTo(EMAIL);
 					msg.setRecipients(MimeMessage.RecipientType.TO, InternetAddress.parse(EMAIL));
 					mailSender.send(msg);
@@ -411,7 +410,7 @@ public class MemberController {
 			msg2 = "존재하지 않는 이메일입니다.";
 		} else {
 			mem = memberService.selectMemberByEmail(mem);
-			if (mem.getMem_name() != name) {
+			if (!mem.getMem_name().equals(name)) {
 				msg2 = "등록된 이메일과 다릅니다.";
 				model2.addAttribute("result", msg2);
 				return;
