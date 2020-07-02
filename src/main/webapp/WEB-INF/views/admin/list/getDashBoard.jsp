@@ -173,4 +173,15 @@
 			</table>
 		</div>
 	</div>
+	<div class="w3-container">
+		<h3>
+			<b>월별 이윤 총액 </b>
+		</h3>
+		<br>
+		<p class="ct">전일 대비 총회원 증가비율</p>
+		<div class="w3-grey">
+			<div class="w3-container w3-center w3-padding w3-green"
+				style="width: 100%">${profit}원</div>
+		</div>
+	</div>
 </div>

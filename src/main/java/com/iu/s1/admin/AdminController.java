@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.properties.bind.DefaultValue;
 
 //import java.util.ArrayList;
 //import java.util.List;
@@ -22,6 +23,8 @@ import com.iu.s1.product.ProductVO;
 import com.iu.s1.qna.QnaService;
 import com.iu.s1.qna.QnaVO;
 import com.iu.s1.qna.file.QnaFileVO;
+import com.iu.s1.trading.TradingVO;
+import com.iu.s1.util.Pager;
 import com.iu.s1.visitor.VisitorVO;
 
 @Controller
@@ -73,6 +76,9 @@ public class AdminController {
 		} else {
 			rate2 = (long) ((visitorVO.getCount() * 100) / visitorVO2.getCount());
 		}
+		if ( rate2 > 100) {
+			rate2 = 100;
+		}
 		model.addAttribute("visitors", visitorVO.getCount());
 		model.addAttribute("dailyRate", (int) rate2);
 
@@ -88,7 +94,6 @@ public class AdminController {
 		if (adminService.getDailyTradeCount() != null) {
 			tradeCount = adminService.getDailyTradeCount();
 		}
-		System.out.println(tradeCount);
 		List<Map.Entry<String, Long>> tradeAr = adminService.getLocateTradeCount();
 		long profit = 0;
 		if (adminService.getProfit() != null) {
@@ -98,7 +103,6 @@ public class AdminController {
 		if(adminService.getRateForTradeCountYD() != null) {
 			tradeCountYD = adminService.getRateForTradeCountYD();
 		}
-		System.out.println(tradeCount + "" + tradeCountYD);
 		long tradeRate = 0;
 		if(tradeCountYD != 0 && tradeCount != 0) {
 			tradeRate= (tradeCount / tradeCountYD) * 100;
@@ -113,13 +117,12 @@ public class AdminController {
 		model.addAttribute("profit", profit);
 
 		// 상품
-		List<ProductVO> proList = adminService.productList();
+		List<ProductVO> proList = adminService.productRecentList();
 		List<String> proFileList = new ArrayList<String>();
 		int index = 0;
 		for (ProductVO productVOs : proList) {
 			long sell_num = productVOs.getSell_num();
 			proFileList.add(productService.selectFileName(sell_num));
-			productVOs.setMem_address(productService.productAddress(sell_num).getMem_address());
 			index++;
 		}
 		model.addAttribute("productFileMain", proFileList);
@@ -176,11 +179,25 @@ public class AdminController {
 
 	// Product
 	@GetMapping("getProductList")
-	public void getProductList(Model model) throws Exception {
+	public void productList(Model model,@DefaultValue(value = "1") long curPage, Pager pager) throws Exception {
+		pager.setCurPage(curPage);
+		System.out.println("컨트롤러 입장");
 		List<ProductVO> ar = new ArrayList<ProductVO>();
-		ar = adminService.productList();
-		model.addAttribute("productList", ar);
+		ar = adminService.productList(pager);
+		model.addAttribute("list", ar);
 	}
+	@GetMapping("productDelete")
+	public void productDelete(ProductVO productVO, Model model) throws Exception {
+		int result = adminService.productDelete(productVO); 
+		model.addAttribute("result", result);
+	}
+	
+	@GetMapping("getTradingProductList")
+	public void tradingList(Model model) throws Exception {
+		List<TradingVO> tradeVO = adminService.tradingList();
+		model.addAttribute("list", tradeVO);
+	}
+	
 
 	// Qna
 	@GetMapping("getQnaList")
@@ -214,6 +231,14 @@ public class AdminController {
 			int fileCheck = qnaService.fileCheck(qnaVO.getQna_num());
 			qnaVO.setFileCheck(fileCheck);
 		}
+		long qnaNACount = adminService.qnaNACount();
+
+		boolean check = false;
+		if (qnaNACount > 0) {
+			check = true;
+		}
+
+		model.addAttribute("check",check);
 		model.addAttribute("qna_adlist", ar2);
 		model.addAttribute("list", ar);
 	}
@@ -224,13 +249,14 @@ public class AdminController {
 			search = "";
 		}
 		List<QnaVO> ar = qnaService.qnaMemberSearch(search);
-		List<QnaVO> ar2 = qnaService.qnaAdminList();
-		for (QnaVO qnaVO : ar2) {
-			int fileCheck = qnaService.fileCheck(qnaVO.getQna_num());
-			qnaVO.setFileCheck(fileCheck);
-		}
-		model.addAttribute("qna_adlist", ar2);
-		model.addAttribute("list", ar);
+//		List<QnaVO> ar2 = qnaService.qnaAdminList();
+//		for (QnaVO qnaVO : ar2) {
+//			int fileCheck = qnaService.fileCheck(qnaVO.getQna_num());
+//			qnaVO.setFileCheck(fileCheck);
+//		}
+//		model.addAttribute("list", ar);
+
+		model.addAttribute("qna_adlist", ar);
 	}
 
 	// Notice

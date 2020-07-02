@@ -19,10 +19,12 @@ import com.iu.s1.member.MemberRepository;
 import com.iu.s1.member.MemberVO;
 import com.iu.s1.notice.NoticeRepository;
 import com.iu.s1.notice.NoticeVO;
+import com.iu.s1.payment.PaymentMapper;
 import com.iu.s1.paymentHistory.PaymentHistoryRepository;
 import com.iu.s1.product.ProductMapper;
 import com.iu.s1.product.ProductVO;
 import com.iu.s1.qna.QnaRepository;
+import com.iu.s1.trading.TradingVO;
 import com.iu.s1.util.Pager;
 import com.iu.s1.visitor.VisitorVO;
 
@@ -47,6 +49,9 @@ public class AdminService {
 	// 거래량
 	@Autowired
 	private PaymentHistoryRepository paymentHistoryRepository;
+	// 거래중
+	@Autowired
+	private PaymentMapper paymentMapper;
 
 	public List<MemberVO> getMemberList(long mem_access) throws Exception {
 		if (mem_access == 1) {
@@ -226,13 +231,27 @@ public class AdminService {
 		return paymentHistoryRepository.getProfit();
 	}
 	
-	public List<ProductVO> productList() throws Exception {
+	public List<ProductVO> productRecentList() throws Exception {
 		Pager pager = new Pager();
 		pager.setCurPage(1L);
 		pager.makeRow();
 		long totalCount = productMapper.productCount(pager);
 		pager.makePage(totalCount);
 		return productMapper.productList(pager);
+	}
+	
+	public List<ProductVO> productList(Pager pager) throws Exception {
+		pager.makeRow();
+		long totalCount = productMapper.productCount(pager);
+		pager.makePage(totalCount);
+		return  productMapper.productList(pager);
+	}
+	public int productDelete(ProductVO productVO) throws Exception {
+		return productMapper.productDelete(productVO);
+	}
+	
+	public List<TradingVO> tradingList() throws Exception {
+		return paymentMapper.tradingList();
 	}
 	
 }

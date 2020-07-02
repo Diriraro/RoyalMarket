@@ -1,13 +1,21 @@
 package com.iu.s1.trading;
 
 public class TradingVO {
-	
+	private long trading_num;
 	private long sell_num;
 	private long sell_price;
 	private String buyer_id;
 	private String seller_id;
 	private long receive;
 	private long give;
+	
+	
+	public long getTrading_num() {
+		return trading_num;
+	}
+	public void setTrading_num(long trading_num) {
+		this.trading_num = trading_num;
+	}
 	public long getSell_num() {
 		return sell_num;
 	}

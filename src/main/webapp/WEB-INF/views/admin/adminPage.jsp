@@ -11,6 +11,7 @@
 </head>
 <body>
 	<header></header>
+	<input type="hidden" value="${check}" id="NAcheck">
 	<section id="sc1">
 		<div id="logo">
 			<img alt="로고" src="../resources/images/nav_logo_nonback2.png"
@@ -39,17 +40,16 @@
 				<label class="focus"><i class="far fa-folder"></i> 상품 관리</label>
 				<div class="contents">
 					<a href="#" class="check" title="ProductList"><i
-						class="far fa-file-alt"></i> 상품 정보 관리</a> <a href="#" class="check"><i
-						class="far fa-file-alt"></i> 상품 거래 관리</a>
+						class="far fa-file-alt"></i> 상품 정보 관리</a> <a href="#" class="check"
+						title="TradingList"><i class="far fa-file-alt"></i> 상품 거래 관리</a>
 				</div>
 			</div>
 			<div class="info">
 				<label class="focus"><i class="far fa-folder"></i> 공지 사항 관리</label>
 				<div class="contents">
 					<a href="#" class="check" title="NoticeList"><i
-						class="far fa-file-alt"></i> 공지 사항 목록</a> <a
-						href="#" class="check" title="NoticeWrite"><i
-						class="far fa-file-alt"></i> 공지 사항 등록</a>
+						class="far fa-file-alt"></i> 공지 사항 목록</a> <a href="#" class="check"
+						title="NoticeWrite"><i class="far fa-file-alt"></i> 공지 사항 등록</a>
 				</div>
 			</div>
 		</div>
@@ -76,20 +76,19 @@
 		<div id="content"></div>
 	</section>
 	<script type="text/javascript">
+		var check = $("#NAcheck").val();
+		if (check == 'true') {
+			// 미답변 문의가 있으면
+			$(".new").children(".fas").removeClass("fa-envelope");
+			$(".new").children(".fas").addClass("fa-envelope-open-text");
+		} else {
+			// 미답변 문의가 없을시
+			$(".new").children("#new").remove();
+			$(".new").children(".fas").removeClass("fa-envelope-open-text")
+			$(".new").children(".fas").addClass("fa-envelope");
+			$(".new").children(".fas").css("color", "black");
+		}
 		$(function() {
-			var check = ${check};
-			if (check) {
-				// 미답변 문의가 있으면
-				$(".new").children(".fas").removeClass("fa-envelope");
-				$(".new").children(".fas").addClass("fa-envelope-open-text");
-			} else {
-				// 미답변 문의가 없을시
-				$(".new").children("#new").remove();
-				$(".new").children(".fas").removeClass("fa-envelope-open-text")
-				$(".new").children(".fas").addClass("fa-envelope");
-				$(".new").children(".fas").css("color", "black");
-			}
-
 			// id : content 내용
 			getDashBoard();
 			$(".info").on("mouseover", function() {
@@ -114,9 +113,11 @@
 					getManToManList();
 				} else if (path == 'dashBoard') {
 					getDashBoard();
-				} else if (path == 'NoticeWrite'){
+				} else if (path == 'NoticeWrite') {
 					getNoticeWrite();
-				} 
+				} else if (path == 'TradingList') {
+					getTradingProductList();
+				}
 				/* 컨텐츠를 추가시 함수 + else if 추가 */
 			})
 			$("#content").on(
@@ -151,61 +152,90 @@
 					})
 		})
 		$("#logo").click(function() {
-			location.href="./adminPage";
-			})
+			location.href = "./adminPage";
+		})
 		$("#content").on("click", ".check", function() {
 			var path = $(this).prop("title");
 			if (path == 'qna') {
 				getQnaList();
 			} else if (path == 'manToman') {
 				getManToManList();
-			} else if (path == 'NoticeSelect'){
+			} else if (path == 'NoticeSelect') {
 				var nonum = $(this).attr("id");
 				console.log(nonum);
 				getNoticeSelect(nonum);
 			}
 		})
-		$("#content").on("click", ".qna_num", function(){		// 답변 페이지 진입
-			var qna_num = $(this).attr("id");					// 글 번호 받아오기
-			getQnaAnswer(qna_num);								// 함수로 보냄
+		$("#content").on(
+				"click",
+				"#productSearchbtn",
+				function() {
+					var kind = $("#sel1").val().trim();
+					var search = $("#selSearch").val().trim();
+					$.get("./list/getProductList?curPage=1&kind=" + kind
+							+ "&search=" + search, function(result) {
+						$("#content").empty();
+						$("#content").append(result);
+					})
+				})
+		$("#content").on("click", ".deletebtn", function() {
+			if (confirm("정말 삭제하시겠습니까?")) {
+				var html = $(this).attr("title");
+				$.get(html, function(result) {
+					if (result > 0) {
+						getProductList();
+					}
+				})
+			}
 		})
-		
-		$("#content").on("click", "#answerO", function(){		// 답변완료 누를시 진입
-			getQnaAnswerOK();									// 함수로 바로 보냄 > 함수에서 변수받아옴
+		$("#content").on("click", "a", function() {
+			$("#content").empty();
+			var pager = $(this).attr("title");
+			$.get(pager, function(result) {
+				$("#content").append(result);
+			})
 		})
-		
-		$("#content").on("click", "#qnaMemSearch", function(){	// 글 목록에서 작성자 아이디 검색
-			var search = $("#qnaSearch").val();					// 아이디 변수로 받아옴
-			getQnaMemSearch(search);							// 함수로 보냄
+		$("#content").on("click", ".qna_num", function() { // 답변 페이지 진입
+			var qna_num = $(this).attr("id"); // 글 번호 받아오기
+			getQnaAnswer(qna_num); // 함수로 보냄
 		})
-		
-		$("#content").on("click","#noticeSubmit", function(){
+
+		$("#content").on("click", "#answerO", function() { // 답변완료 누를시 진입
+			getQnaAnswerOK(); // 함수로 바로 보냄 > 함수에서 변수받아옴
+		})
+
+		$("#content").on("click", "#qnaMemSearch", function() { // 글 목록에서 작성자 아이디 검색
+			var search = $("#qnaSearch").val(); // 아이디 변수로 받아옴
+			getQnaMemSearch(search); // 함수로 보냄
+		})
+
+		$("#content").on("click", "#noticeSubmit", function() {
 			getNoticeWriteOK();
 		})
-		
-		$("#content").on("click","#noticeDel", function(){
+
+		$("#content").on("click", "#noticeDel", function() {
 			var check = confirm("삭제하면 복구할수 없습니다. 정말로 삭제할까요?");
-			if(check){
+			if (check) {
 				var nonum = $(this).attr("title");
 				getNoticeDelete(nonum);
-			}else{
+			} else {
 				event.stopPropagation();
 			}
 		})
-		$("#content").on("click","#noticeUpd", function(){
+		$("#content").on("click", "#noticeUpd", function() {
 			var nonum = $(this).attr("title");
 			getNoticeUpdate(nonum);
 		})
-		
-		$("#content").on("click","#noticeUpdate", function(){
+
+		$("#content").on("click", "#noticeUpdate", function() {
 			getNoticeUpdateOK();
 		})
-		
-		$("#content").on("click", "#noticeTitleSearch", function(){	
-			var search = $("#noticeSearch").val();					
-			getNoticeSearch(search);							
+
+		$("#content").on("click", "#noticeTitleSearch", function() {
+			var search = $("#noticeSearch").val();
+			getNoticeSearch(search);
 		})
-		
+
 		$("#content").on("click", "#frm", function() {
 			var kind = $("#kind").val();
 			var search = $("#search").val();
@@ -218,54 +248,96 @@
 			var mem_access = 1;
 			getMemberSearchList(kind, search, mem_access);
 		})
-		
-		// dashboard
+
 		function getDashBoard() {
-			$("#content").empty();
-			$.get("./list/getDashBoard", function(result) {
-				$("#content").append(result);
+			$.ajax({
+				type : "GET",
+				url : "./list/getDashBoard",
+				beforeSend : function() {
+				    var loadingHtml = '<div id="loading" style="z-index: 1005;position: absolute; top:50%;left:50%; text-align:center;"> ';
+				    loadingHtml += '<div class="loading_box"><img src="${pageContext.request.contextPath}/resources/images/loading.gif">"</div></div>';
+				    $('#content').fadeTo( "fast", 0.4 ).append(loadingHtml);
+				},
+				success : function(result) {
+					$('#content').fadeTo( "slow", 1 ).find('#loading').remove();
+					$("#content").empty();
+					$("#content").append(result);
+				}
 			})
 		}
 
 		// qna
 		function getManToManList() {
-			$("#content").empty();
-			$.get("./list/getManToManList", function(result) {
-				$("#content").append(result);
-			})
+			$.ajax({
+				type:"GET",
+				url: "./list/getManToManList",
+				beforeSend : function() {
+				    var loadingHtml = '<div id="loading" style="z-index: 1005;position: absolute; top:50%;left:50%; text-align:center;"> ';
+				    loadingHtml += '<div class="loading_box"><img src="${pageContext.request.contextPath}/resources/images/loading.gif">"</div></div>';
+				    $('#content').fadeTo( "fast", 0.4 ).append(loadingHtml);
+				},
+				success : function(result) {
+					$('#content').fadeTo( "slow", 1 ).find('#loading').remove();
+					$("#content").empty();
+					$("#content").append(result);
+				}
+				})
 		}
-		function getQnaMemSearch(search) {						// qna에서 글작성자 검색 함수
+		function getQnaMemSearch(search) { // qna에서 글작성자 검색 함수
 			$("#content").empty();
-			$.post("./list/getManToManList",{					// post로 보냄 (controller에는 같은 이름의 메서드가 get방식으로 있어서 post로 보냄)
-					search : search
-				}, function(result) {
-				$("#content").append(result);					// callback
+			$.post("./list/getManToManList", { // post로 보냄 (controller에는 같은 이름의 메서드가 get방식으로 있어서 post로 보냄)
+				search : search
+			}, function(result) {
+				$("#content").append(result); // callback
 			})
 		}
 		function getQnaAnswer(qna_num) {
 			$("#content").empty();
-			$.get("./list/qnaAnswer?qna_num="+qna_num, function(result) {
+			$.get("./list/qnaAnswer?qna_num=" + qna_num, function(result) {
 				$("#content").append(result);
 			})
-		}	
+		}
 		function getQnaAnswerOK() {
-			var form = {										// 변수 한번에 넘겨주기위해 변수하나에 필요한 내용 다 담기			
-					qna_num : $("#qna_numAnswer").val(),
-					qna_contents : $("#qna_contents").val()
+			var form = { // 변수 한번에 넘겨주기위해 변수하나에 필요한 내용 다 담기			
+				qna_num : $("#qna_numAnswer").val(),
+				qna_contents : $("#qna_contents").val()
 			};
 			$("#content").empty();
 			$.ajax({
-				type: 'POST',  
-				  url: './list/qnaAnswer',  					// post로 보냄
-				  data: form,									// 담은 변수명 보냄
-				  success: function(data){
-					  alert("작성 성공");							// 성공하면 alert 출력
-					  $("#content").empty();
-						$.get("./list/getManToManList", function(result) {	// qna list 함수를 그대로 가져옴
-							$("#content").append(result);
+				type : 'POST',
+				url : './list/qnaAnswer', // post로 보냄
+				data : form, // 담은 변수명 보냄
+				beforeSend : function() {
+				    var loadingHtml = '<div id="loading" style="z-index: 1005;position: absolute; top:50%;left:50%; text-align:center;"> ';
+				    loadingHtml += '<div class="loading_box"><img src="${pageContext.request.contextPath}/resources/images/loading.gif">"</div></div>';
+				    $('#content').fadeTo( "fast", 0.4 ).append(loadingHtml);
+				},
+				success : function(data) {
+					$('#content').fadeTo( "slow", 1 ).find('#loading').remove();
+					alert("작성 성공"); // 성공하면 alert 출력
+					$("#content").empty();
+					$.get("./list/getManToManList", function(result) { // qna list 함수를 그대로 가져옴
+						$("#content").append(result);
+						$("#NAcheck").val($("#qnaNACheck").val());
+						var checkNA = $("#NAcheck").val();
+						if (checkNA == 'true') {
+							// 미답변 문의가 있으면
+							$(".new").children(".fas").removeClass(
+									"fa-envelope");
+							$(".new").children(".fas").addClass(
+									"fa-envelope-open-text");
+						} else {
+							// 미답변 문의가 없을시
+							$(".new").children("#new").remove();
+							$(".new").children(".fas").removeClass(
+									"fa-envelope-open-text")
+							$(".new").children(".fas").addClass("fa-envelope");
+							$(".new").children(".fas").css("color", "black");
+						}
 					})
-				  }
+				}
 			})
+
 		}
 		function getQnaList() {
 			$("#content").empty();
@@ -276,77 +348,131 @@
 
 		// member
 		function getBlockList() {
-			$("#content").empty();
-			$.get("./list/getMemberList?mem_access=1&handling=0", function(
-					result) {
+			$.ajax({
+				type:"GET",
+				url : "./list/getMemberList?mem_access=1&handling=0",
+				beforeSend : function() {
+				    var loadingHtml = '<div id="loading" style="z-index: 1005;position: absolute; top:50%;left:50%; text-align:center;"> ';
+				    loadingHtml += '<div class="loading_box"><img src="${pageContext.request.contextPath}/resources/images/loading.gif">"</div></div>';
+				    $('#content').fadeTo( "fast", 0.4 ).append(loadingHtml);
+				}, success : function (result) {
+				$('#content').fadeTo( "slow", 1 ).find('#loading').remove();
+				$("#content").empty();
 				$("#content").append(result);
+				}
 			})
 		}
 
 		function getMemberList() {
-			$("#content").empty();
-			$.get("./list/getMemberList?mem_access=0&handling=0", function(
-					result) {
+			$.ajax({
+				type:"GET",
+				url : "./list/getMemberList?mem_access=0&handling=0",
+				beforeSend : function() {
+				    var loadingHtml = '<div id="loading" style="z-index: 1005;position: absolute; top:50%;left:50%; text-align:center;"> ';
+				    loadingHtml += '<div class="loading_box"><img src="${pageContext.request.contextPath}/resources/images/loading.gif">"</div></div>';
+				    $('#content').fadeTo( "fast", 0.4 ).append(loadingHtml);
+				}, success : function (result) {
+				$('#content').fadeTo( "slow", 1 ).find('#loading').remove();
+				$("#content").empty();
 				$("#content").append(result);
+				}
 			})
 		}
 
 		function getMemberSearchList(kind, search, mem_access) {
-			$("#content").empty();
 			$.post("./list/getMemberList", {
 				mem_access : mem_access,
 				kind : kind,
 				search : search
 			}, function(result) {
+				$("#content").empty();
 				$("#content").append(result);
 			})
 		}
-		
+
 		// product
 		function getProductList() {
-			$("#content").empty();
-			$.get("./list/getProductList", function(result) {
+			$.ajax({
+				type:"GET",
+				url : "./list/getProductList?curPage=1",
+				beforeSend : function() {
+				    var loadingHtml = '<div id="loading" style="z-index: 1005;position: absolute; top:50%;left:50%; text-align:center;"> ';
+				    loadingHtml += '<div class="loading_box"><img src="${pageContext.request.contextPath}/resources/images/loading.gif">"</div></div>';
+				    $('#content').fadeTo( "fast", 0.4 ).append(loadingHtml);
+				}, success : function (result) {
+				$('#content').fadeTo( "slow", 1 ).find('#loading').remove();
+				$("#content").empty();
 				$("#content").append(result);
+				}
+			})
+		}
+		function getTradingProductList() {
+			$.ajax({
+				type:"GET",
+				url : "./list/getTradingProductList",
+				beforeSend : function() {
+				    var loadingHtml = '<div id="loading" style="z-index: 1005;position: absolute; top:50%;left:50%; text-align:center;"> ';
+				    loadingHtml += '<div class="loading_box"><img src="${pageContext.request.contextPath}/resources/images/loading.gif">"</div></div>';
+				    $('#content').fadeTo( "fast", 0.4 ).append(loadingHtml);
+				}, success : function (result) {
+				$('#content').fadeTo( "slow", 1 ).find('#loading').remove();
+				$("#content").empty();
+				$("#content").append(result);
+				}
 			})
 		}
 
 		// notice
 		function getNoticeList() {
-			$("#content").empty();
-			$.get("./list/getNoticeList", function(result) {
-				$("#content").append(result)
+			$.ajax({
+				type:"GET",
+				url : "./list/getNoticeList",
+				beforeSend : function() {
+				    var loadingHtml = '<div id="loading" style="z-index: 1005;position: absolute; top:50%;left:50%; text-align:center;"> ';
+				    loadingHtml += '<div class="loading_box"><img src="${pageContext.request.contextPath}/resources/images/loading.gif">"</div></div>';
+				    $('#content').fadeTo( "fast", 0.4 ).append(loadingHtml);
+				}, success : function (result) {
+				$('#content').fadeTo( "slow", 1 ).find('#loading').remove();
+				$("#content").empty();
+				$("#content").append(result);
+				}
 			})
-			
 		}
-		function getNoticeWrite(){
+		function getNoticeWrite() {
 			$("#content").empty();
 			$.get("../notice/noticeWrite", function(result) {
 				$("#content").append(result);
 			})
 		}
 
-		function getNoticeWriteOK(){
-			var form = {										// 변수 한번에 넘겨주기위해 변수하나에 필요한 내용 다 담기			
-					notitle : $("#notitle").val(),
-					no_contents : $("#summernote").val()
+		function getNoticeWriteOK() {
+			var form = { // 변수 한번에 넘겨주기위해 변수하나에 필요한 내용 다 담기			
+				notitle : $("#notitle").val(),
+				no_contents : $("#summernote").val()
 			};
 			$("#content").empty();
 			$.ajax({
-				type: 'POST',  
-				  url: '/notice/noticeWrite',  					// post로 보냄
-				  data: form,									// 담은 변수명 보냄
-				  success: function(result){
-					  alert("공지 작성 완료");						// 성공하면 alert 출력
-					  $("#content").empty();
-						$.get("/admin/list/getNoticeList", function(result) {
-							$("#content").append(result)
-						})
-				  }
+				type : 'POST',
+				url : '/notice/noticeWrite', // post로 보냄
+				data : form, // 담은 변수명 보냄
+				beforeSend : function() {
+				    var loadingHtml = '<div id="loading" style="z-index: 1005;position: absolute; top:50%;left:50%; text-align:center;"> ';
+				    loadingHtml += '<div class="loading_box"><img src="${pageContext.request.contextPath}/resources/images/loading.gif">"</div></div>';
+				    $('#content').fadeTo( "fast", 0.4 ).append(loadingHtml);
+				},
+				success : function(result) {
+				$('#content').fadeTo( "slow", 1 ).find('#loading').remove();
+					alert("공지 작성 완료"); // 성공하면 alert 출력
+					$("#content").empty();
+					$.get("/admin/list/getNoticeList", function(result) {
+						$("#content").append(result)
+					})
+				}
 			})
 		}
-		function getNoticeDelete(nonum){
+		function getNoticeDelete(nonum) {
 			$("#content").empty();
-			$.get("../notice/noticeDelete?nonum="+nonum, function(result) {
+			$.get("../notice/noticeDelete?nonum=" + nonum, function(result) {
 				alert("삭제 완료");
 				$("#content").empty();
 				$.get("./list/getNoticeList", function(result) {
@@ -354,46 +480,53 @@
 				})
 			})
 		}
-		function getNoticeUpdate(nonum){
+		function getNoticeUpdate(nonum) {
 			$("#content").empty();
-			$.get("../notice/noticeUpdate?nonum="+nonum, function(result) {
+			$.get("../notice/noticeUpdate?nonum=" + nonum, function(result) {
 				$("#content").append(result);
 			})
 		}
-		function getNoticeUpdateOK(){
-			var form = {			
-					nonum : $("#nonum").val(),							// 변수 한번에 넘겨주기위해 변수하나에 필요한 내용 다 담기			
-					notitle : $("#notitle").val(),
-					no_contents : $("#summernote").val()
+		function getNoticeUpdateOK() {
+			var form = {
+				nonum : $("#nonum").val(), // 변수 한번에 넘겨주기위해 변수하나에 필요한 내용 다 담기			
+				notitle : $("#notitle").val(),
+				no_contents : $("#summernote").val()
 			};
 			$("#content").empty();
 			$.ajax({
-				type: 'POST',  
-				  url: '/notice/noticeUpdate',  					// post로 보냄
-				  data: form,									// 담은 변수명 보냄
-				  success: function(result){
-					  alert("공지 수정 완료");						// 성공하면 alert 출력
-					  $("#content").empty();
-						$.get("/admin/list/getNoticeList", function(result) {
-							$("#content").append(result)
-						})
-				  }
+				type : 'POST',
+				url : '/notice/noticeUpdate', // post로 보냄
+				data : form, // 담은 변수명 보냄
+				beforeSend : function() {
+				    var loadingHtml = '<div id="loading" style="z-index: 1005;position: absolute; top:50%;left:50%; text-align:center;"> ';
+				    loadingHtml += '<div class="loading_box"><img src="${pageContext.request.contextPath}/resources/images/loading.gif">"</div></div>';
+				    $('#content').fadeTo( "fast", 0.4 ).append(loadingHtml);
+				},
+				success : function(result) {
+				$('#content').fadeTo( "slow", 1 ).find('#loading').remove();
+					alert("공지 수정 완료"); // 성공하면 alert 출력
+					$("#content").empty();
+					$.get("/admin/list/getNoticeList", function(result) {
+						$("#content").append(result)
+					})
+				}
 			})
 		}
-		function getNoticeSelect(nonum){
+		function getNoticeSelect(nonum) {
 			$("#content").empty();
-			$.get("../notice/noticeSelect?nonum="+nonum, function(result) {
+			$.get("../notice/noticeSelect?nonum=" + nonum, function(result) {
 				$("#content").append(result);
 			})
 		}
-		function getNoticeSearch(search) {						// qna에서 글작성자 검색 함수
+		function getNoticeSearch(search) { // qna에서 글작성자 검색 함수
 			$("#content").empty();
-			$.post("./list/getNoticeList",{						// post로 보냄 (controller에는 같은 이름의 메서드가 get방식으로 있어서 post로 보냄)
-					search : search
-				}, function(result) {
-				$("#content").append(result);					// callback
+			$.post("./list/getNoticeList", { // post로 보냄 (controller에는 같은 이름의 메서드가 get방식으로 있어서 post로 보냄)
+				search : search
+			}, function(result) {
+				$("#content").append(result); // callback
 			})
 		}
+
 	</script>
 </body>
 </html>

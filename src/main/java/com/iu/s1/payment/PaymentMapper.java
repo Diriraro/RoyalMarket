@@ -69,5 +69,7 @@ public interface PaymentMapper {
 	
 	public int paystatsInsert(PayStatsVO payStatsVO) throws Exception;
 	
+	public List<TradingVO> tradingList() throws Exception;
+	
 	
 }

@@ -36,7 +36,7 @@
  	
  	<!--거래중 테이블 -->
  	<insert id="tradingInsert" parameterType="com.iu.s1.trading.TradingVO">
- 		insert into trading values(#{sell_num},#{sell_price},#{buyer_id},#{seller_id},0,0,0)
+ 		insert into trading values(#{sell_num},#{sell_price},#{buyer_id},#{seller_id},0,0,0,0,0)
  	</insert>
  	
  	<!-- 판매자 아이디 조회 -->
@@ -99,6 +99,11 @@
  	<delete id="tradingDelete" parameterType="java.lang.Long">
  		delete from trading where sell_num=#{sell_num} 
  	</delete>
+ 	
+ 	<!--  trading List -->
+ 	<select id="tradingList" resultType="com.iu.s1.trading.TradingVO">
+ 		select * from trading
+ 	</select>
  	
  	<!-- 판매자가 로그인 했을 때 판매가 들어온 상품이 있는지 없는지 확인 -->
  	<select id="seller_check" parameterType="java.lang.String" resultType="com.iu.s1.paymentHistory.Sell_HistoryVO">
