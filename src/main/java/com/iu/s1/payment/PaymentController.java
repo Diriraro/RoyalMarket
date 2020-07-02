@@ -240,19 +240,23 @@ public class PaymentController {
 		
 		}else {
 			
-			MemberVO memberVO = (MemberVO)request.getSession().getAttribute("member");
-			tradingVO.setSell_price(sell_price);
-			tradingVO.setSell_num(sell_num);
-			tradingVO.setBuyer_id(memberVO.getMem_id());
-			String seller_id=paymentService.seller_id_select(sell_num);
+			/*
+			 * MemberVO memberVO = (MemberVO)request.getSession().getAttribute("member");
+			 * tradingVO.setSell_price(sell_price); tradingVO.setSell_num(sell_num);
+			 * tradingVO.setBuyer_id(memberVO.getMem_id()); String
+			 * seller_id=paymentService.seller_id_select(sell_num);
+			 * 
+			 * tradingVO.setSeller_id(seller_id);
+			 * 
+			 * ProductVO productVO = paymentService.productSelect(sell_num);
+			 * 
+			 * mv.addObject("tradingVO", tradingVO); mv.addObject("productVO", productVO);
+			 * mv.setViewName("/payment/productTrading");
+			 */
+			mv.addObject("result", "이미 구매중인 상품입니다.");
+			mv.addObject("path", "../");
+			mv.setViewName("./common/result");
 			
-			tradingVO.setSeller_id(seller_id);
-			
-			ProductVO productVO = paymentService.productSelect(sell_num);
-			
-			mv.addObject("tradingVO", tradingVO);
-			mv.addObject("productVO", productVO);
-			mv.setViewName("/payment/productTrading");
 		}
 		return mv;
 	}
@@ -499,33 +503,65 @@ public class PaymentController {
 		ModelAndView mv = new ModelAndView();
 		long sell_num = Long.parseLong(request.getParameter("sell_num"));
 		String check= request.getParameter("check");
+		long status = paymentService.buy_status(sell_num);
+		long status2 = paymentService.sell_status(sell_num);
 		
-		Buy_HistoryVO buy_HistoryVO = new Buy_HistoryVO();
-		buy_HistoryVO.setSell_num(sell_num);
-		buy_HistoryVO.setStatus(3);
-		paymentService.buy_statusUp(buy_HistoryVO);
-		Sell_HistoryVO sell_HistoryVO = new Sell_HistoryVO();
-		sell_HistoryVO.setSell_num(sell_num);
-		sell_HistoryVO.setStatus(3);
-		paymentService.sell_statusUp(sell_HistoryVO);
-		
-		// 트레이딩 테이블에서 가격과 판매자 아이디를 조회해서 다시 판매자에게 돈을 돌려줌
-		TradingVO tradingVO =paymentService.tradingSelect(sell_num);
-		String mem_id = tradingVO.getSeller_id();
-		long price = tradingVO.getSell_price();
-		
-		//맴버에서 원래 아이디의 가격을 조회 후 취소된 거래의 가격만큼 더해줌
-		long point = paymentService.pointSelect(mem_id);
-		MemberVO memberVO = new MemberVO();
-		memberVO.setMem_id(mem_id);
-		memberVO.setMem_point(price+point);
-		paymentService.pointUpdate(memberVO);
 		
 		if(check.equals("buy")) {
 			mv.setViewName("redirect:./buy_History");
+			Sell_HistoryVO sell_HistoryVO = new Sell_HistoryVO();
+			sell_HistoryVO.setSell_num(sell_num);
+			sell_HistoryVO.setStatus(4);
+			
+			if(status!=3) {
+				Buy_HistoryVO buy_HistoryVO = new Buy_HistoryVO();
+				buy_HistoryVO.setSell_num(sell_num);
+				buy_HistoryVO.setStatus(3);
+			}
+			paymentService.sell_statusUp(sell_HistoryVO);
+			paymentService.buy_cancelUp(1);
 		}else {
 			mv.setViewName("redirect:./sell_History");
+			Buy_HistoryVO buy_HistoryVO = new Buy_HistoryVO();
+			buy_HistoryVO.setSell_num(sell_num);
+			buy_HistoryVO.setStatus(4);
+			
+			if(status2!=3) {
+				Sell_HistoryVO sell_HistoryVO = new Sell_HistoryVO();
+				sell_HistoryVO.setSell_num(sell_num);
+				sell_HistoryVO.setStatus(3);
+			}
+			paymentService.buy_statusUp(buy_HistoryVO);
+			paymentService.sell_cancelUp(1);
 		}
+		
+
+		// 트레이딩 테이블에서 가격과 판매자 아이디를 조회해서 다시 판매자에게 돈을 돌려줌
+		TradingVO tradingVO =paymentService.tradingSelect(sell_num);
+		if(tradingVO.getBuy_cancel()==1 && tradingVO.getSell_cancel()==1) {
+			Buy_HistoryVO buy_HistoryVO = new Buy_HistoryVO();
+			buy_HistoryVO.setSell_num(sell_num);
+			buy_HistoryVO.setStatus(3);
+			paymentService.buy_statusUp(buy_HistoryVO);
+			Sell_HistoryVO sell_HistoryVO = new Sell_HistoryVO();
+			sell_HistoryVO.setSell_num(sell_num);
+			sell_HistoryVO.setStatus(3);
+			paymentService.sell_statusUp(sell_HistoryVO);
+			
+			String mem_id = tradingVO.getSeller_id();
+			long price = tradingVO.getSell_price();
+			
+			//맴버에서 원래 아이디의 가격을 조회 후 취소된 거래의 가격만큼 더해줌
+			long point = paymentService.pointSelect(mem_id);
+			MemberVO memberVO = new MemberVO();
+			memberVO.setMem_id(mem_id);
+			memberVO.setMem_point(price+point);
+			paymentService.pointUpdate(memberVO);
+			
+			paymentService.tradingDelete(sell_num);
+		}
+		
+	
 		return mv;
 	}
 	

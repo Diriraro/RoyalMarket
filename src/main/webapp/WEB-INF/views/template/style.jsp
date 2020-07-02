@@ -1,6 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <style type="text/css">
+/* footer 하단에 고정하려면 자기가  가장 큰 div를 .cotainer와 동일하게 css를  주세요 */
+body {
+    margin: 0; /* 리셋을 하지 않은 경우 추가 */
+}
+.container {
+    min-height: calc(100vh - 20px);
+}
+footer {
+    height: 20px;
+}
+
  .footer {
   background: white;
   font-size: 12px;  
@@ -11,7 +22,7 @@
    color:#4D4D4D;
 }
 .footer-menu {
-  background: #FBFBFB;
+  background: white;
   border-top: 1px solid #d9d9d9;
   border-bottom: 1px solid #d9d9d9;
 }
@@ -150,7 +161,7 @@ a.blog span {
 .guide {
   max-width: 1000px;
   color: #989898;
-  line-height: 1.5;
+  line-height: 1;
   margin: 0 auto;
   padding: 0 15px;
 }
@@ -158,6 +169,33 @@ a.blog span {
   padding: 0;
 }
  
+ 
+ .img{
+        position: relative;
+        background-image: url('${pageContext.request.contextPath}/resources/qna_images/${file[i.index]}');                                                               
+        height: 100px;
+        width: 100px;
+        background-size: cover;
+    }
+
+.img-cover{
+
+       height: 100%;
+       width: 100%;
+       background-color: rgba(0, 0, 0, 0.7);                                                                 
+       z-index:1;
+    }
+
+.img .content{
+         position: absolute;
+         top:50%;
+         left:50%;
+         transform: translate(-50%, -50%);                                                                   
+         font-size:1rem;
+         color: white;
+         z-index: 2;
+         text-align: center;
+ }
 	
 </style>
     

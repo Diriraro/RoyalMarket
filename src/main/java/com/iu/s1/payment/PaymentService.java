@@ -132,4 +132,12 @@ public class PaymentService {
 	public Buy_HistoryVO buy_Sel(long sell_num)throws Exception{
 		return paymentMapper.buy_Sel(sell_num);
 	}
+	
+	public int buy_cancelUp(long buy_cancel)throws Exception{
+		return paymentMapper.buy_cancelUp(buy_cancel);
+	}
+	
+	public int sell_cancelUp(long cell_cancel)throws Exception{
+		return paymentMapper.sell_cancelUp(cell_cancel);
+	}
 }

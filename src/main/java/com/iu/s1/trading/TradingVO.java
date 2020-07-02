@@ -8,6 +8,21 @@ public class TradingVO {
 	private String seller_id;
 	private long receive;
 	private long give;
+	private long buy_cancel;
+	private long sell_cancel;
+	
+	public long getBuy_cancel() {
+		return buy_cancel;
+	}
+	public void setBuy_cancel(long buy_cancel) {
+		this.buy_cancel = buy_cancel;
+	}
+	public long getSell_cancel() {
+		return sell_cancel;
+	}
+	public void setSell_cancel(long sell_cancel) {
+		this.sell_cancel = sell_cancel;
+	}
 	public long getSell_num() {
 		return sell_num;
 	}

@@ -75,4 +75,8 @@ public interface PaymentMapper {
 	public long sell_status(long sell_num)throws Exception;
 	
 	public Buy_HistoryVO buy_Sel(long sell_num)throws Exception;
+	
+	public int buy_cancelUp(long buy_cancel)throws Exception;
+	
+	public int sell_cancelUp(long cell_cancel)throws Exception;
 }

@@ -36,7 +36,7 @@
  	
  	<!--거래중 테이블 -->
  	<insert id="tradingInsert" parameterType="com.iu.s1.trading.TradingVO">
- 		insert into trading values(#{sell_num},#{sell_price},#{buyer_id},#{seller_id},0,0,0)
+ 		insert into trading values(#{sell_num},#{sell_price},#{buyer_id},#{seller_id},0,0,0,0,0)
  	</insert>
  	
  	<!-- 판매자 아이디 조회 -->
@@ -158,5 +158,16 @@
   	<select id="buy_Sel" parameterType="java.lang.Long" resultType="com.iu.s1.paymentHistory.Buy_HistoryVO">
   		select * from buy_history where sell_num=#{sell_num}
   	</select>
+  	
+  	<!-- trading buy_cancel Up -->
+  	<update id="buy_cancelUp" parameterType="java.lang.Long">
+  		update trading set buy_cancel=#{buy_cancel}
+  	</update>
+  	
+  	<!-- trading sell_cancel Up -->
+  	<update id="sell_cancelUp" parameterType="java.lang.Long">
+  		update trading set sell_cancel=#{sell_cancel}
+  	</update>
+  		
   		
  </mapper>
