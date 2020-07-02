@@ -71,9 +71,11 @@
 				<span id="new">new</span> <i class="fas fa-envelope"></i>
 			</div>
 		</div>
-	</section>
+	</section>	
 	<section id="sc3">
-		<div id="content"></div>
+		<div class="w3-container">
+			<div id="content"></div>
+		</div>
 	</section>
 	<script type="text/javascript">
 		var check = $("#NAcheck").val();
@@ -250,38 +252,44 @@
 		})
 
 		function getDashBoard() {
-			$.ajax({
-				type : "GET",
-				url : "./list/getDashBoard",
-				beforeSend : function() {
-				    var loadingHtml = '<div id="loading" style="z-index: 1005;position: absolute; top:50%;left:50%; text-align:center;"> ';
-				    loadingHtml += '<div class="loading_box"><img src="${pageContext.request.contextPath}/resources/images/loading.gif">"</div></div>';
-				    $('#content').fadeTo( "fast", 0.4 ).append(loadingHtml);
-				},
-				success : function(result) {
-					$('#content').fadeTo( "slow", 1 ).find('#loading').remove();
-					$("#content").empty();
-					$("#content").append(result);
-				}
-			})
+			$
+					.ajax({
+						type : "GET",
+						url : "./list/getDashBoard",
+						beforeSend : function() {
+							var loadingHtml = '<div id="loading" style="z-index: 1005;position: absolute; top:50%;left:50%; text-align:center;"> ';
+							loadingHtml += '<div class="loading_box"><img src="${pageContext.request.contextPath}/resources/images/loading.gif">"</div></div>';
+							$('#content').fadeTo("fast", 0.4).append(
+									loadingHtml);
+						},
+						success : function(result) {
+							$('#content').fadeTo("slow", 1).find('#loading')
+									.remove();
+							$("#content").empty();
+							$("#content").append(result);
+						}
+					})
 		}
 
 		// qna
 		function getManToManList() {
-			$.ajax({
-				type:"GET",
-				url: "./list/getManToManList",
-				beforeSend : function() {
-				    var loadingHtml = '<div id="loading" style="z-index: 1005;position: absolute; top:50%;left:50%; text-align:center;"> ';
-				    loadingHtml += '<div class="loading_box"><img src="${pageContext.request.contextPath}/resources/images/loading.gif">"</div></div>';
-				    $('#content').fadeTo( "fast", 0.4 ).append(loadingHtml);
-				},
-				success : function(result) {
-					$('#content').fadeTo( "slow", 1 ).find('#loading').remove();
-					$("#content").empty();
-					$("#content").append(result);
-				}
-				})
+			$
+					.ajax({
+						type : "GET",
+						url : "./list/getManToManList",
+						beforeSend : function() {
+							var loadingHtml = '<div id="loading" style="z-index: 1005;position: absolute; top:50%;left:50%; text-align:center;"> ';
+							loadingHtml += '<div class="loading_box"><img src="${pageContext.request.contextPath}/resources/images/loading.gif">"</div></div>';
+							$('#content').fadeTo("fast", 0.4).append(
+									loadingHtml);
+						},
+						success : function(result) {
+							$('#content').fadeTo("slow", 1).find('#loading')
+									.remove();
+							$("#content").empty();
+							$("#content").append(result);
+						}
+					})
 		}
 		function getQnaMemSearch(search) { // qna에서 글작성자 검색 함수
 			$("#content").empty();
@@ -303,40 +311,45 @@
 				qna_contents : $("#qna_contents").val()
 			};
 			$("#content").empty();
-			$.ajax({
-				type : 'POST',
-				url : './list/qnaAnswer', // post로 보냄
-				data : form, // 담은 변수명 보냄
-				beforeSend : function() {
-				    var loadingHtml = '<div id="loading" style="z-index: 1005;position: absolute; top:50%;left:50%; text-align:center;"> ';
-				    loadingHtml += '<div class="loading_box"><img src="${pageContext.request.contextPath}/resources/images/loading.gif">"</div></div>';
-				    $('#content').fadeTo( "fast", 0.4 ).append(loadingHtml);
-				},
-				success : function(data) {
-					$('#content').fadeTo( "slow", 1 ).find('#loading').remove();
-					alert("작성 성공"); // 성공하면 alert 출력
-					$("#content").empty();
-					$.get("./list/getManToManList", function(result) { // qna list 함수를 그대로 가져옴
-						$("#content").append(result);
-						$("#NAcheck").val($("#qnaNACheck").val());
-						var checkNA = $("#NAcheck").val();
-						if (checkNA == 'true') {
-							// 미답변 문의가 있으면
-							$(".new").children(".fas").removeClass(
-									"fa-envelope");
-							$(".new").children(".fas").addClass(
-									"fa-envelope-open-text");
-						} else {
-							// 미답변 문의가 없을시
-							$(".new").children("#new").remove();
-							$(".new").children(".fas").removeClass(
-									"fa-envelope-open-text")
-							$(".new").children(".fas").addClass("fa-envelope");
-							$(".new").children(".fas").css("color", "black");
+			$
+					.ajax({
+						type : 'POST',
+						url : './list/qnaAnswer', // post로 보냄
+						data : form, // 담은 변수명 보냄
+						beforeSend : function() {
+							var loadingHtml = '<div id="loading" style="z-index: 1005;position: absolute; top:50%;left:50%; text-align:center;"> ';
+							loadingHtml += '<div class="loading_box"><img src="${pageContext.request.contextPath}/resources/images/loading.gif">"</div></div>';
+							$('#content').fadeTo("fast", 0.4).append(
+									loadingHtml);
+						},
+						success : function(data) {
+							$('#content').fadeTo("slow", 1).find('#loading')
+									.remove();
+							alert("작성 성공"); // 성공하면 alert 출력
+							$("#content").empty();
+							$.get("./list/getManToManList", function(result) { // qna list 함수를 그대로 가져옴
+								$("#content").append(result);
+								$("#NAcheck").val($("#qnaNACheck").val());
+								var checkNA = $("#NAcheck").val();
+								if (checkNA == 'true') {
+									// 미답변 문의가 있으면
+									$(".new").children(".fas").removeClass(
+											"fa-envelope");
+									$(".new").children(".fas").addClass(
+											"fa-envelope-open-text");
+								} else {
+									// 미답변 문의가 없을시
+									$(".new").children("#new").remove();
+									$(".new").children(".fas").removeClass(
+											"fa-envelope-open-text")
+									$(".new").children(".fas").addClass(
+											"fa-envelope");
+									$(".new").children(".fas").css("color",
+											"black");
+								}
+							})
 						}
 					})
-				}
-			})
 
 		}
 		function getQnaList() {
@@ -348,35 +361,43 @@
 
 		// member
 		function getBlockList() {
-			$.ajax({
-				type:"GET",
-				url : "./list/getMemberList?mem_access=1&handling=0",
-				beforeSend : function() {
-				    var loadingHtml = '<div id="loading" style="z-index: 1005;position: absolute; top:50%;left:50%; text-align:center;"> ';
-				    loadingHtml += '<div class="loading_box"><img src="${pageContext.request.contextPath}/resources/images/loading.gif">"</div></div>';
-				    $('#content').fadeTo( "fast", 0.4 ).append(loadingHtml);
-				}, success : function (result) {
-				$('#content').fadeTo( "slow", 1 ).find('#loading').remove();
-				$("#content").empty();
-				$("#content").append(result);
-				}
-			})
+			$
+					.ajax({
+						type : "GET",
+						url : "./list/getMemberList?mem_access=1&handling=0",
+						beforeSend : function() {
+							var loadingHtml = '<div id="loading" style="z-index: 1005;position: absolute; top:50%;left:50%; text-align:center;"> ';
+							loadingHtml += '<div class="loading_box"><img src="${pageContext.request.contextPath}/resources/images/loading.gif">"</div></div>';
+							$('#content').fadeTo("fast", 0.4).append(
+									loadingHtml);
+						},
+						success : function(result) {
+							$('#content').fadeTo("slow", 1).find('#loading')
+									.remove();
+							$("#content").empty();
+							$("#content").append(result);
+						}
+					})
 		}
 
 		function getMemberList() {
-			$.ajax({
-				type:"GET",
-				url : "./list/getMemberList?mem_access=0&handling=0",
-				beforeSend : function() {
-				    var loadingHtml = '<div id="loading" style="z-index: 1005;position: absolute; top:50%;left:50%; text-align:center;"> ';
-				    loadingHtml += '<div class="loading_box"><img src="${pageContext.request.contextPath}/resources/images/loading.gif">"</div></div>';
-				    $('#content').fadeTo( "fast", 0.4 ).append(loadingHtml);
-				}, success : function (result) {
-				$('#content').fadeTo( "slow", 1 ).find('#loading').remove();
-				$("#content").empty();
-				$("#content").append(result);
-				}
-			})
+			$
+					.ajax({
+						type : "GET",
+						url : "./list/getMemberList?mem_access=0&handling=0",
+						beforeSend : function() {
+							var loadingHtml = '<div id="loading" style="z-index: 1005;position: absolute; top:50%;left:50%; text-align:center;"> ';
+							loadingHtml += '<div class="loading_box"><img src="${pageContext.request.contextPath}/resources/images/loading.gif">"</div></div>';
+							$('#content').fadeTo("fast", 0.4).append(
+									loadingHtml);
+						},
+						success : function(result) {
+							$('#content').fadeTo("slow", 1).find('#loading')
+									.remove();
+							$("#content").empty();
+							$("#content").append(result);
+						}
+					})
 		}
 
 		function getMemberSearchList(kind, search, mem_access) {
@@ -392,51 +413,63 @@
 
 		// product
 		function getProductList() {
-			$.ajax({
-				type:"GET",
-				url : "./list/getProductList?curPage=1",
-				beforeSend : function() {
-				    var loadingHtml = '<div id="loading" style="z-index: 1005;position: absolute; top:50%;left:50%; text-align:center;"> ';
-				    loadingHtml += '<div class="loading_box"><img src="${pageContext.request.contextPath}/resources/images/loading.gif">"</div></div>';
-				    $('#content').fadeTo( "fast", 0.4 ).append(loadingHtml);
-				}, success : function (result) {
-				$('#content').fadeTo( "slow", 1 ).find('#loading').remove();
-				$("#content").empty();
-				$("#content").append(result);
-				}
-			})
+			$
+					.ajax({
+						type : "GET",
+						url : "./list/getProductList?curPage=1",
+						beforeSend : function() {
+							var loadingHtml = '<div id="loading" style="z-index: 1005;position: absolute; top:50%;left:50%; text-align:center;"> ';
+							loadingHtml += '<div class="loading_box"><img src="${pageContext.request.contextPath}/resources/images/loading.gif">"</div></div>';
+							$('#content').fadeTo("fast", 0.4).append(
+									loadingHtml);
+						},
+						success : function(result) {
+							$('#content').fadeTo("slow", 1).find('#loading')
+									.remove();
+							$("#content").empty();
+							$("#content").append(result);
+						}
+					})
 		}
 		function getTradingProductList() {
-			$.ajax({
-				type:"GET",
-				url : "./list/getTradingProductList",
-				beforeSend : function() {
-				    var loadingHtml = '<div id="loading" style="z-index: 1005;position: absolute; top:50%;left:50%; text-align:center;"> ';
-				    loadingHtml += '<div class="loading_box"><img src="${pageContext.request.contextPath}/resources/images/loading.gif">"</div></div>';
-				    $('#content').fadeTo( "fast", 0.4 ).append(loadingHtml);
-				}, success : function (result) {
-				$('#content').fadeTo( "slow", 1 ).find('#loading').remove();
-				$("#content").empty();
-				$("#content").append(result);
-				}
-			})
+			$
+					.ajax({
+						type : "GET",
+						url : "./list/getTradingProductList",
+						beforeSend : function() {
+							var loadingHtml = '<div id="loading" style="z-index: 1005;position: absolute; top:50%;left:50%; text-align:center;"> ';
+							loadingHtml += '<div class="loading_box"><img src="${pageContext.request.contextPath}/resources/images/loading.gif">"</div></div>';
+							$('#content').fadeTo("fast", 0.4).append(
+									loadingHtml);
+						},
+						success : function(result) {
+							$('#content').fadeTo("slow", 1).find('#loading')
+									.remove();
+							$("#content").empty();
+							$("#content").append(result);
+						}
+					})
 		}
 
 		// notice
 		function getNoticeList() {
-			$.ajax({
-				type:"GET",
-				url : "./list/getNoticeList",
-				beforeSend : function() {
-				    var loadingHtml = '<div id="loading" style="z-index: 1005;position: absolute; top:50%;left:50%; text-align:center;"> ';
-				    loadingHtml += '<div class="loading_box"><img src="${pageContext.request.contextPath}/resources/images/loading.gif">"</div></div>';
-				    $('#content').fadeTo( "fast", 0.4 ).append(loadingHtml);
-				}, success : function (result) {
-				$('#content').fadeTo( "slow", 1 ).find('#loading').remove();
-				$("#content").empty();
-				$("#content").append(result);
-				}
-			})
+			$
+					.ajax({
+						type : "GET",
+						url : "./list/getNoticeList",
+						beforeSend : function() {
+							var loadingHtml = '<div id="loading" style="z-index: 1005;position: absolute; top:50%;left:50%; text-align:center;"> ';
+							loadingHtml += '<div class="loading_box"><img src="${pageContext.request.contextPath}/resources/images/loading.gif">"</div></div>';
+							$('#content').fadeTo("fast", 0.4).append(
+									loadingHtml);
+						},
+						success : function(result) {
+							$('#content').fadeTo("slow", 1).find('#loading')
+									.remove();
+							$("#content").empty();
+							$("#content").append(result);
+						}
+					})
 		}
 		function getNoticeWrite() {
 			$("#content").empty();
@@ -451,24 +484,28 @@
 				no_contents : $("#summernote").val()
 			};
 			$("#content").empty();
-			$.ajax({
-				type : 'POST',
-				url : '/notice/noticeWrite', // post로 보냄
-				data : form, // 담은 변수명 보냄
-				beforeSend : function() {
-				    var loadingHtml = '<div id="loading" style="z-index: 1005;position: absolute; top:50%;left:50%; text-align:center;"> ';
-				    loadingHtml += '<div class="loading_box"><img src="${pageContext.request.contextPath}/resources/images/loading.gif">"</div></div>';
-				    $('#content').fadeTo( "fast", 0.4 ).append(loadingHtml);
-				},
-				success : function(result) {
-				$('#content').fadeTo( "slow", 1 ).find('#loading').remove();
-					alert("공지 작성 완료"); // 성공하면 alert 출력
-					$("#content").empty();
-					$.get("/admin/list/getNoticeList", function(result) {
-						$("#content").append(result)
+			$
+					.ajax({
+						type : 'POST',
+						url : '/notice/noticeWrite', // post로 보냄
+						data : form, // 담은 변수명 보냄
+						beforeSend : function() {
+							var loadingHtml = '<div id="loading" style="z-index: 1005;position: absolute; top:50%;left:50%; text-align:center;"> ';
+							loadingHtml += '<div class="loading_box"><img src="${pageContext.request.contextPath}/resources/images/loading.gif">"</div></div>';
+							$('#content').fadeTo("fast", 0.4).append(
+									loadingHtml);
+						},
+						success : function(result) {
+							$('#content').fadeTo("slow", 1).find('#loading')
+									.remove();
+							alert("공지 작성 완료"); // 성공하면 alert 출력
+							$("#content").empty();
+							$.get("/admin/list/getNoticeList",
+									function(result) {
+										$("#content").append(result)
+									})
+						}
 					})
-				}
-			})
 		}
 		function getNoticeDelete(nonum) {
 			$("#content").empty();
@@ -493,24 +530,28 @@
 				no_contents : $("#summernote").val()
 			};
 			$("#content").empty();
-			$.ajax({
-				type : 'POST',
-				url : '/notice/noticeUpdate', // post로 보냄
-				data : form, // 담은 변수명 보냄
-				beforeSend : function() {
-				    var loadingHtml = '<div id="loading" style="z-index: 1005;position: absolute; top:50%;left:50%; text-align:center;"> ';
-				    loadingHtml += '<div class="loading_box"><img src="${pageContext.request.contextPath}/resources/images/loading.gif">"</div></div>';
-				    $('#content').fadeTo( "fast", 0.4 ).append(loadingHtml);
-				},
-				success : function(result) {
-				$('#content').fadeTo( "slow", 1 ).find('#loading').remove();
-					alert("공지 수정 완료"); // 성공하면 alert 출력
-					$("#content").empty();
-					$.get("/admin/list/getNoticeList", function(result) {
-						$("#content").append(result)
+			$
+					.ajax({
+						type : 'POST',
+						url : '/notice/noticeUpdate', // post로 보냄
+						data : form, // 담은 변수명 보냄
+						beforeSend : function() {
+							var loadingHtml = '<div id="loading" style="z-index: 1005;position: absolute; top:50%;left:50%; text-align:center;"> ';
+							loadingHtml += '<div class="loading_box"><img src="${pageContext.request.contextPath}/resources/images/loading.gif">"</div></div>';
+							$('#content').fadeTo("fast", 0.4).append(
+									loadingHtml);
+						},
+						success : function(result) {
+							$('#content').fadeTo("slow", 1).find('#loading')
+									.remove();
+							alert("공지 수정 완료"); // 성공하면 alert 출력
+							$("#content").empty();
+							$.get("/admin/list/getNoticeList",
+									function(result) {
+										$("#content").append(result)
+									})
+						}
 					})
-				}
-			})
 		}
 		function getNoticeSelect(nonum) {
 			$("#content").empty();
@@ -526,7 +567,6 @@
 				$("#content").append(result); // callback
 			})
 		}
-
 	</script>
 </body>
 </html>

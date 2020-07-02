@@ -177,12 +177,20 @@ section {
 /* Section 3 */
 #sc3 {
 	border-top: 1px solid white;
-	padding: 20px 30px;
+	padding: 5px 5px;
 	width: 87%;
 	background-color: #f2f2f2;
 	height: 874px;
 	overflow: auto;
 	width: 87%;
+}
+.w3-container {
+	background-color: white;
+	border-radius: 5px;
+	padding : 10px 10px;
+}
+.table {
+	margin-top : 5px;
 }
 /* Section 3 ==================== getList Search Form ==================== */
 .listSection {
@@ -193,6 +201,7 @@ section {
 	width: 100%;
 	overflow: hidden;
 	background-color: #e9e9e9;
+	border-radius : 3px;
 	text-align: center;
 }
 
@@ -282,6 +291,7 @@ section {
 .pointCursor {
 	cursor: pointer;
 }
+
 
 /* all Section */
 </style>
