@@ -32,7 +32,7 @@
 			style="border: 0px solid black; width: 680px; height: 330px; float: left;">
 
 			<div style="border: 1px solid black; height: 80px;margin-bottom: 1px; margin-top: 2px;">
-				<span>상점명</span><button>상점명 수정</button>
+				<span>${mem_storeName}</span><button>상점명 수정</button>
 				<a> </a>
 			</div>
 
@@ -52,7 +52,7 @@
 		</c:if>
 		
 		<c:if test="${msnum ne mem_storeNum }">
-						<a class="btn btn-info">남상점</a>
+						
 	<div style="border: 1px solid black; width: 1024px; height: 340px;">
 
 		<!-- div 1번 -->
@@ -85,7 +85,7 @@
 			style="border: 1px solid black; width: 680px; height: 330px; float: left;">
 
 			<div style="border: 1px solid black; height: 80px;">
-				<span>상점명</span><button>남의상점</button>
+				<span>${mem_storeName }</span>
 				<a> </a>
 			</div>
 

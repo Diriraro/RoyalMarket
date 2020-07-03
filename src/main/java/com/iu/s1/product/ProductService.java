@@ -75,6 +75,10 @@ public class ProductService {
 	public List<ProductFileVO> productFileSelect(long sell_num)throws Exception{
 		return productFileMapper.productFileSelect(sell_num);
 	}
+	
+	public List<ProductFileVO> productFileSelect2(long sell_num)throws Exception{
+		return productFileMapper.productFileSelect2(sell_num);
+	}
 
 	public List<ProductVO> productList(Pager pager) throws Exception {
 		pager.makeRow();

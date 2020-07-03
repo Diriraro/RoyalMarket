@@ -77,7 +77,7 @@ public class ShopController {
 		for(ProductVO productVO2 : ar) {
 			long sell_num = productVO2.getSell_num();
 			
-			productFileVOs.addAll(productService.productFileSelect(sell_num));
+			productFileVOs.addAll(productService.productFileSelect2(sell_num));
 		}
 		
 		mv.addObject("pfile", productFileVOs); // 상품들의  사진 출력

@@ -41,25 +41,65 @@
 </head>
 <body>
 	
-	<div style="width: 1024px; margin-left: 440px; margin-top:50px; height: 1315px;">
+	<div style="width: 1024px; margin-left: 440px; margin-top:50px; height: 800px; ">
 		
 		<form action="rei" method="post" enctype="multipart/form-data">
 		
+		<h2> 리뷰작성 </h2>	
 		<hr style="border: solid 1.2px black;">
-		<br>
-		
 		<div>
+		<div class="form-group">
 		<input type="hidden" value="${mem_storeNum }" name="mem_storeNum" id="mem_storeNum"><br>
+		</div>
+		<div class="form-group">
 		<input type="hidden" value="${sell_product}" name="sell_product" id="sell_product"><br>
-		<input type="text" value="상품컨텐츠 입력 일단 test" name="re_context" id="re_context"><br>
-		<input type="text" value="5" name="re_rate" id="re_rate"><br>
-		<!-- 별점을 일단 5점  -->
+		</div>
+		
+	<!-- 	<div class="form-group">
+				<input type="text" style="width: 500px; height: 200px;"  value="상품컨텐츠 입력 일단 test" name="re_context" id="re_context"><br>
+		</div>	 -->
+		
+		<div class="form-group">
+				<label for="re_context">Contents:</label>
+				<textarea rows="" cols="" class="form-control" id="re_context" name="re_context" placeholder="리뷰사항은 100자 이내에 작성해 주세요." style="width:900px; height: 150px;pla "></textarea>
+				<span style="color:#aaa;" id="counter">(0 / 최대 100자)</span>
+			</div>
+		
+		
+			
+		
+			<div class="form-group" style=" background-color: white">
+				<label for="re_rate" style="font-size: 40px;"> 별점선택</label>
+				<p></p>
+				<hr style=" border-top: 3px #80d6ff solid;"> 
+				<input type="radio" class="5p" name="re_rate" value="5" checked="checked"><!-- #e6f5ff -->
+				<img alt="" src="${pageContext.request.contextPath}/resources/images/star22.png" class=""> <span class="5p">5점</span>&nbsp;&nbsp;&nbsp;
+				
+				<input type="radio" class="4p" name="re_rate" value="4"><!-- #e6f5ff -->
+				<img alt="" src="${pageContext.request.contextPath}/resources/images/star22.png" class=""> <span class="4p">4점</span>&nbsp;&nbsp;&nbsp;
+				
+				<input type="radio" class="3p" name="re_rate" value="3">
+				<img alt="" src="${pageContext.request.contextPath}/resources/images/star22.png" class=""> <span class="3p">3점</span>&nbsp;&nbsp;&nbsp;
+				
+				<input type="radio" class="2p" name="re_rate" value="2"><!-- #e6f5ff -->
+				<img alt="" src="${pageContext.request.contextPath}/resources/images/star22.png" class=""> <span class="2p">2점</span>&nbsp;&nbsp;&nbsp;
+				
+				<input type="radio" class="1p" name="re_rate" value="1">
+				<img alt="" src="${pageContext.request.contextPath}/resources/images/star22.png" class=""> <span class="1p">1점</span>&nbsp;&nbsp;&nbsp;
+				<hr>
+			</div>	
+		
+
+		<!-- 별점을 선택해서 주기   -->
+		
+		
 		
 		<!-- 리뷰남기는 상점이름 : 리뷰남기는 상점 번호  -->
+		<div class="form-group">
 		<input type="hidden" value="${member.mem_storeName}" name="re_storeName" id="re_storeName">
 		<input type="hidden" value="${member.mem_storeNum}" name="re_storeNum" id="re_storeNum"><br>
 		</div>
-		
+		</div>
 		
 		<div style="width: 168px;height:380px; float: left;">
 		<font style="font-size: 18px;font-weight: 900;">리뷰이미지</font> <font style="color: #ff5d4a;font-size: 18px;">*</font>
@@ -77,24 +117,18 @@
  		<input id="files2" type="file" name="files" accept="image/jpg, image/jpeg, image/png" class="img" />
  		</div>
  		
- 		<div>
+ 		<div style="float: left;">
 		<div class="imagePreview3" style="background-image: url('${pageContext.request.contextPath}/resources/images/showimage_logo.png');"></div>
  		<input id="files3" type="file" name="files" accept="image/jpg, image/jpeg, image/png" class="img" />
  		</div>
- 		<br>
+		<button style="margin-top: 36px; width: 160px;height: 56px;border: 0px;background-image: url('${pageContext.request.contextPath}/resources/images/regi_logo.png');" type="submit" class="btn btn-default btn pull-right" id="rei"></button>
 		</div>
 		<hr>
 		
-		<button style="margin-top: 16px; width: 160px;height: 56px;border: 0px;background-image: url('${pageContext.request.contextPath}/resources/images/regi_logo.png');" type="submit" class="btn btn-default" id="rei"></button>
 		
 		<a id="tests"> ccc</a>
 	</form>
-
 		</div>
-		<div style="height: 88px; background-color: #fafafd;">
-		
-		</div>
-	
 		
 
 	<script type="text/javascript">
@@ -154,14 +188,20 @@
 		$("#rei").click(function() {
 			var files = $("#files").val();
 			var files2 = $("#files2").val();
-	
+
+			//
 			
+			var content = $('#re_context').val();
+			console.log(content);
+			console.log(content.length);
+			 
 			
+			//
 			if (files==""&&files2=="") {
 				alert("사진을 1개 이상 올려주세요");
 				return false;				
-			}else if (sell_price=="") {
-				alert("상품정보에 대해 입력해주세요")
+			}else if (content=="") {
+				alert("리뷰사항을 적어주세요")
 				return false;
 			
 			}
@@ -177,17 +217,36 @@
 			var t5 = $("#re_storeName").val();
 			var t6 = $("#re_storeNum").val();
 
-			
-			console.log(t1);
-			console.log(t2);
-			console.log(t3);
-			console.log(t4);
-			console.log(t5);
-			console.log(t6);
+			var ss= document.querySelector('input[name="re_rate"]:checked').value;
+			console.log(t1+"memsotrenum");
+			console.log(t2+"sell-pro");
+			console.log(t3+"recont");
+			console.log(t4+"retate");
+			console.log(t5+"restorename");
+			console.log(t6+"resotrenum");
+			console.log(ss+"선택한별점");
+
 			
 			
 		});
 
+
+
+
+		$('#re_context').keyup(function (e){
+		    var content = $(this).val();
+		    $('#counter').html("("+content.length+" / 최대 100자)");    //글자수 실시간 카운팅
+
+		    if (content.length > 100){
+		        alert("최대 100자까지 입력 가능합니다.");
+		        $(this).val(content.substring(0, 100));
+		        $('#counter').html("(100 / 최대 100자)");
+		    }
+		});
+
+
+
+		
 
 	
 	</script>

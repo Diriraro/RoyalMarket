@@ -31,7 +31,7 @@ border-top: 2px solid black;
 <c:import url="../template/boot.jsp"></c:import>
 </head>
 <body>
-	<c:import url="../template/nav.jsp"></c:import>
+	<c:import url="../template/woozoo_nav.jsp"></c:import>
 	<!-- 내상점 버튼 누르면 처음으로 들어오는 곳  -->
 
 	<c:import url="../template/shopmain.jsp"></c:import>
@@ -76,19 +76,14 @@ border-top: 2px solid black;
 					
 					
 				<c:forEach items="${pfile}" var="pfile" varStatus="status" >
-				
+				<div style="width: 198px;">
 				<c:if test="${vo.sell_num eq pfile.sell_num}">
-				<div>
-					<img src="../upload/product/${pfile.file_name}"	alt="${pfile.ori_name}"	style="overflow: hidden; display: flex; align-items: center; justify-content: center; width: 70px; height: 70px; float: left;">
-				</div>
-				
+					<img src="../upload/product/${pfile.file_name}"	alt="${pfile.ori_name}"	style="overflow: hidden; display: flex; align-items: center; justify-content: center; width: 197px; height: 190px; ">
 				</c:if>
+				</div>
 				</c:forEach>
-					
-					
+					<br>
 					<div>
-					<br>
-					<br>
 					${vo.sell_product }
 					</div>
 					<div>
@@ -96,6 +91,9 @@ border-top: 2px solid black;
 					<span style="float: right;">
 					${vo.sell_date }
 					</span>
+					</div>
+					<div>
+					${vo.sell_kind}
 					</div>
 					
 					

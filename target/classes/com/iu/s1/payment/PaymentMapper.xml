@@ -36,7 +36,7 @@
  	
  	<!--거래중 테이블 -->
  	<insert id="tradingInsert" parameterType="com.iu.s1.trading.TradingVO">
- 		insert into trading values(#{sell_num},#{sell_price},#{buyer_id},#{seller_id},0,0,0)
+ 		insert into trading values(#{sell_num},#{sell_price},#{buyer_id},#{seller_id},0,0,0,0,0)
  	</insert>
  	
  	<!-- 판매자 아이디 조회 -->

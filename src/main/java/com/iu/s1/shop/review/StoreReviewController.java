@@ -65,7 +65,7 @@ public class StoreReviewController {
 		StoreReviewVO storeReviewVO = new StoreReviewVO();
 		storeReviewVO.setRe_num(re_num);
 		int result = storeReviewService.setDeleteReview(storeReviewVO);
-		mv.setViewName("redirect:./review?mem_storeNum="+mem_storeNum);
+		mv.setViewName("redirect:./reviews?mem_storeNum="+mem_storeNum);
 	
 		return mv;
 	}

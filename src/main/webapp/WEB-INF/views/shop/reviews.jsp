@@ -106,7 +106,13 @@ border-top: 2px solid black;
 				
 				</c:if>
 				</c:forEach>
-			
+				
+				
+				<c:if test="${msnum eq vo.re_storeNum}">
+							<a href="./setDeleteReview?re_num=${vo.re_num}&mem_storeNum=${vo.mem_storeNum}"	class="btn btn-danger pull-right"><span	class="	glyphicon glyphicon-remove-sign"></span>Delete</a>
+				</c:if>
+				
+				
 				
 				
 				
