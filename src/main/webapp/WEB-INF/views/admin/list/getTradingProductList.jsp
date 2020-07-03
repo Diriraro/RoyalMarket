@@ -2,9 +2,10 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<div>
+<div class="w3-container">
 	<div class="topnav">
-		<a class="active" href="#home">거래중 상품 관리</a>
+		<a class="check" title="ProductList">상품 정보 관리</a>
+		<a class="check active" title="TradingList">상품 거래 관리</a>
 		<div class="search-container">
 			<select id="sel1" name="kind">
 				<option value="pn">상품번호</option>
@@ -21,11 +22,11 @@
 	<table class="table">
 		<thead>
 			<tr>
-				<td>거래번호</td>
-				<td>상품번호</td>
-				<td>구매자</td>
-				<td>판매자</td>
-				<td>상품가격</td>
+				<th>거래번호</th>
+				<th>상품번호</th>
+				<th>구매자</th>
+				<th>판매자</th>
+				<th>상품가격</th>
 			</tr>
 		</thead>
 		<tbody>

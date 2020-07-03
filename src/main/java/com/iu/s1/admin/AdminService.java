@@ -82,7 +82,6 @@ public class AdminService {
 		MemberVO memberVO = new MemberVO();
 		memberVO.setMem_regDate(date1);
 		List<MemberVO> ar = memberRepository.getDailyNewMember(memberVO);
-		System.out.println(ar.size());
 		return ar.size();
 	}
 	public List<NoticeVO> getNoticeList() throws Exception {
@@ -105,7 +104,6 @@ public class AdminService {
 			Optional<VisitorVO> opt = adminRepository.findById(daily);
 			visitorVO = opt.get();
 		} else {
-			System.out.println("New DAY");
 			visitorVO.setDay(daily);
 			visitorVO.setCount(1);
 			adminRepository.save(visitorVO);
@@ -228,7 +226,18 @@ public class AdminService {
 	}
 
 	public Long getProfit() throws Exception {
-		return paymentHistoryRepository.getProfit();
+		Calendar cal = Calendar.getInstance();
+		int year1 = cal.getTime().getYear() + 1900;
+		int month1 = cal.getTime().getMonth() + 1;
+		int day1 = cal.getActualMaximum(cal.DAY_OF_MONTH);
+		//요번달 마지막일
+		String sell_date1 = year1 + "/" + month1 + "/" + day1;
+		int year2 = cal.getTime().getYear() + 1900;
+		int month2 = cal.getTime().getMonth() + 1;
+		int day2 = 1;
+		// 요번달 1일
+		String sell_date2 = year2 + "/" + month2 + "/" + day2;
+		return paymentHistoryRepository.getProfit( sell_date1, sell_date2);
 	}
 	
 	public List<ProductVO> productRecentList() throws Exception {

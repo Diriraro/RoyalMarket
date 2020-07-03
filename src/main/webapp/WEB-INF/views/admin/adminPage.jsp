@@ -59,6 +59,17 @@
 			<div style="float: left; line-height: 75px;">
 				<a style="color: black;" href="../"><i class="fas fa-home"></i>Home</a>
 			</div>
+			<div class="adminMenu">
+				<div id="adminMenubar" onclick="myFunction(this)">
+					<div class="bar1"></div>
+					<div class="bar2"></div>
+					<div class="bar3"></div>
+				</div>
+				<div id="mySidenav" class="sidenav2">
+					<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+					<a id="memberLogout">관리자 로그아웃</a>
+				</div>
+			</div>
 			<div id="admin_set">
 				관리자 님
 				<!-- ${member.mem_id} == admin 추후 설정 -->
@@ -71,13 +82,12 @@
 				<span id="new">new</span> <i class="fas fa-envelope"></i>
 			</div>
 		</div>
-	</section>	
+	</section>
 	<section id="sc3">
-		<div class="w3-container">
-			<div id="content"></div>
-		</div>
+		<div id="content"></div>
 	</section>
 	<script type="text/javascript">
+	
 		var check = $("#NAcheck").val();
 		if (check == 'true') {
 			// 미답변 문의가 있으면
@@ -88,21 +98,46 @@
 			$(".new").children("#new").remove();
 			$(".new").children(".fas").removeClass("fa-envelope-open-text")
 			$(".new").children(".fas").addClass("fa-envelope");
-			$(".new").children(".fas").css("color", "black");
+			$(".new").children(".fas").css("color", "#26004d");
 		}
+
 		$(function() {
-			// id : content 내용
-			getDashBoard();
-			$(".info").on("mouseover", function() {
-				$(this).find(".contents").css("display", "block");
-				$(this).find(".focus").addClass("focus_sub");
+			// section 2
+			$(".adminMenu").click(function() {
+				if ($("#mySidenav").css("width") == "0px") {
+					openNav();
+				} else if ($("#mySidenav").css("width") == "250px") {
+					closeNav();
+				}
 			})
-			$(".info").on("mouseout", function() {
-				$(this).find(".contents").css("display", "none");
-				$(this).find(".focus").removeClass("focus_sub");
+			$("#memberLogout").click(function() {
+				if (confirm("로그아웃하시겠습니까?")) {
+					location.href = "../member/memberLogout";
+				}
+			})
+			// section 3
+			getDashBoard();
+			// section 1 
+			$(".info").on("click", function() {
+				if ($(this).find(".contents").css("display") == "none") {
+					$(this).find(".contents").show(200);
+					$(this).find(".focus").addClass("focus_sub");
+				}
+			})
+			$(".focus").on("click", function() {
+				if ($(this).parent().find(".contents").css("display") != "none") {
+					$(this).parent().find(".contents").hide(200);
+					$(this).removeClass("focus_sub");
+				}
 			})
 			$(".check").click(function() {
+				$(".check").css("text-decoration","none");
+				$(".check").css("font-weight","");
+				$(".check").css("color", "#b366ff");
 				var path = $(this).prop("title");
+				$(this).css("text-decoration","underline");
+				$(this).css("font-weight", "bold");
+				$(this).css("color", "#26004d");
 				if (path == 'MemberList') {
 					getMemberList();
 				} else if (path == 'ProductList') {
@@ -164,8 +199,19 @@
 				getManToManList();
 			} else if (path == 'NoticeSelect') {
 				var nonum = $(this).attr("id");
-				console.log(nonum);
 				getNoticeSelect(nonum);
+			} else if (path == 'MemberList') {
+				getMemberList();
+			} else if (path == 'MemberBlockList') {
+				getBlockList();
+			} else if (path == 'ProductList') {
+				getProductList();
+			} else if (path == 'TradingList') {
+				getTradingProductList();
+			} else if (path == 'NoticeList') {
+				getNoticeList();
+			} else if (path == 'NoticeWrite') {
+				getNoticeWrite();
 			}
 		})
 		$("#content").on(
@@ -255,6 +301,7 @@
 			$
 					.ajax({
 						type : "GET",
+						sync : false,
 						url : "./list/getDashBoard",
 						beforeSend : function() {
 							var loadingHtml = '<div id="loading" style="z-index: 1005;position: absolute; top:50%;left:50%; text-align:center;"> ';
@@ -392,8 +439,7 @@
 									loadingHtml);
 						},
 						success : function(result) {
-							$('#content').fadeTo("slow", 1).find('#loading')
-									.remove();
+							$('#content').fadeTo("slow", 1).find('#loading').remove();
 							$("#content").empty();
 							$("#content").append(result);
 						}
@@ -566,6 +612,17 @@
 			}, function(result) {
 				$("#content").append(result); // callback
 			})
+		}
+		// 관리자 메뉴
+		function myFunction(x) {
+			x.classList.toggle("change");
+		}
+		function openNav() {
+			document.getElementById("mySidenav").style.width = "250px";
+		}
+
+		function closeNav() {
+			document.getElementById("mySidenav").style.width = "0";
 		}
 	</script>
 </body>

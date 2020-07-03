@@ -2,9 +2,10 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<div>
+<div class="w3-container">
 	<div class="topnav">
-		<a class="active" href="#home">상품 관리</a>
+		<a class="check active" title="ProductList">상품 정보 관리</a>
+		<a class="check " title="TradingList">상품 거래 관리</a>
 		<div class="search-container">
 			<select id="sel1" name="kind">
 				<option value="sp">상품명</option>
@@ -20,13 +21,13 @@
 	<table class="table">
 		<thead>
 			<tr>
-				<td>상품번호</td>
-				<td>판매자번호</td>
-				<td>상품명</td>
-				<td>상품 가격</td>
-				<td>종류</td>
-				<td>게시일</td>
-				<td>상품삭제</td>
+				<th>상품번호</th>
+				<th>판매자번호</th>
+				<th>상품명</th>
+				<th>상품 가격</th>
+				<th>종류</th>
+				<th>게시일</th>
+				<th>상품삭제</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -44,19 +45,29 @@
 				</tr>
 			</c:forEach>
 		</tbody>
+		<tfoot>
+			<tr>
+				<td colspan="7">
+					<div style="width: 1024px; height: 40px; float: left;">
+						<ul class="pagination">
+							<c:if test="${pager.curBlock gt 1}">
+								<li><a
+									title="./list/getProductList?curPage=${pager.startNum-1}&kind=${pager.kind}&search=${pager.search}">이전</a></li>
+							</c:if>
+							<c:forEach begin="${pager.startNum}" end="${pager.lastNum}"
+								var="i">
+								<li><a
+									title="./list/getProductList?curPage=${i}&kind=${pager.kind}&search=${pager.search}">${i}</a></li>
+							</c:forEach>
+							<c:if test="${pager.curBlock lt pager.totalBlock}">
+								<li><a
+									title="./list/getProductList?curPage=${pager.lastNum+1}&kind=${pager.kind}&search=${pager.search}">다음</a></li>
+							</c:if>
+						</ul>
+					</div>
+
+				</td>
+			</tr>
+		</tfoot>
 	</table>
-	<div style="width: 1024px; height: 40px; float: left;">
-		<ul class="pagination">
-			<c:if test="${pager.curBlock gt 1}">
-				<li><a
-					title="./list/getProductList?curPage=${pager.startNum-1}&kind=${pager.kind}&search=${pager.search}">이전</a></li>
-			</c:if>
-			<c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
-				<li><a title="./list/getProductList?curPage=${i}&kind=${pager.kind}&search=${pager.search}">${i}</a></li>
-			</c:forEach>
-			<c:if test="${pager.curBlock lt pager.totalBlock}">
-				<li><a title="./list/getProductList?curPage=${pager.lastNum+1}&kind=${pager.kind}&search=${pager.search}">다음</a></li>
-			</c:if>
-		</ul>
-	</div>
 </div>

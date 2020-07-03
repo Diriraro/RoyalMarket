@@ -96,8 +96,10 @@ public class AdminController {
 		}
 		List<Map.Entry<String, Long>> tradeAr = adminService.getLocateTradeCount();
 		long profit = 0;
+		long profitRate = 0;
 		if (adminService.getProfit() != null) {
 			profit = adminService.getProfit();
+			profitRate = (long)(profit/1000000)*100;
 		}
 		long tradeCountYD = 0;
 		if(adminService.getRateForTradeCountYD() != null) {
@@ -115,6 +117,7 @@ public class AdminController {
 		model.addAttribute("tradeCount", tradeCount);
 		model.addAttribute("tradeAr", tradeAr);
 		model.addAttribute("profit", profit);
+		model.addAttribute("profitRate",profitRate);
 
 		// 상품
 		List<ProductVO> proList = adminService.productRecentList();
@@ -147,13 +150,13 @@ public class AdminController {
 			model.addAttribute("list", ar);
 		} else if (handling == 1) { // handling == 1 일시, 회원로그인 차단/허용 관리
 			long mem_access = memberVO.getMem_access();
-			ar = adminService.getMemberList(mem_access);
 			if (memberVO.getMem_access() == 1) {
 				memberVO.setMem_access(0);
 			} else if (memberVO.getMem_access() == 0) {
 				memberVO.setMem_access(1);
 			}
 			adminService.accessManage(memberVO);
+			ar = adminService.getMemberList(mem_access);
 			String check = "";
 			if (mem_access == 0) {
 				check = "accept";
@@ -181,7 +184,6 @@ public class AdminController {
 	@GetMapping("getProductList")
 	public void productList(Model model,@DefaultValue(value = "1") long curPage, Pager pager) throws Exception {
 		pager.setCurPage(curPage);
-		System.out.println("컨트롤러 입장");
 		List<ProductVO> ar = new ArrayList<ProductVO>();
 		ar = adminService.productList(pager);
 		model.addAttribute("list", ar);

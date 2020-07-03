@@ -6,8 +6,6 @@
 
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css?family=Raleway">
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
@@ -33,10 +31,6 @@
 	rel="stylesheet">
 <script
 	src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
-
-
-
-
 <style>
 thead {
 	font-weight: bold;
@@ -88,7 +82,12 @@ section {
 .info {
 	margin: 10px 0px;
 }
-
+.focus {
+	cursor: pointer;
+}
+.focus:hover{
+	text-decoration: underline;
+}
 .focus_sub {
 	border-bottom: 1px solid gray;
 }
@@ -104,7 +103,6 @@ section {
 
 .contents {
 	display: none;
-	height: 200px;
 	width: 100%;
 	padding: 10px;
 	border-radius: 10px;
@@ -112,7 +110,7 @@ section {
 }
 
 .contents>a {
-	color: #000066;
+	color: #b366ff;
 	display: block;
 	line-height: 30px;
 }
@@ -164,13 +162,82 @@ section {
 	font-size: 13px;
 	float: right;
 }
-
-#QnaAndManToMan>a {
-	color: black;
+#QnaAndManToMan>a{
+color : #b366ff; 
 }
 
 .check {
 	cursor: pointer;
+}
+
+.adminMenu{
+	padding : 18px 0px;
+	box-sizing:border-box;
+	margin-right : 10px;
+	margin-left : 5px;
+	display: inline-block;
+	float : right;
+	cursor: pointer;
+}
+.bar1, .bar2, .bar3 {
+  width: 30px;
+  height: 5px;
+  background-color: #333;
+  margin: 5px 0;
+  transition: 0.4s;
+}
+
+.change .bar1 {
+  -webkit-transform: rotate(-45deg) translate(-9px, 5px);
+  transform: rotate(-45deg) translate(-9px, 5px);
+}
+
+.change .bar2 {opacity: 0;}
+
+.change .bar3 {
+  -webkit-transform: rotate(45deg) translate(-8px, -6px);
+  transform: rotate(45deg) translate(-8px, -6px);
+}
+#adminMenubar{
+	float : right;
+	}
+.sidenav2 {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  right: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.sidenav2 a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidenav2 a:hover {
+  color: #f1f1f1;
+}
+
+.sidenav2 .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav2 {padding-top: 15px;}
+  .sidenav2 a {font-size: 18px;}
 }
 /* Section 2 */
 
@@ -184,13 +251,15 @@ section {
 	overflow: auto;
 	width: 87%;
 }
+
 .w3-container {
 	background-color: white;
 	border-radius: 5px;
-	padding : 10px 10px;
+	padding: 10px 10px;
 }
+
 .table {
-	margin-top : 5px;
+	margin-top: 5px;
 }
 /* Section 3 ==================== getList Search Form ==================== */
 .listSection {
@@ -201,7 +270,7 @@ section {
 	width: 100%;
 	overflow: hidden;
 	background-color: #e9e9e9;
-	border-radius : 3px;
+	border-radius: 3px;
 	text-align: center;
 }
 
@@ -291,7 +360,6 @@ section {
 .pointCursor {
 	cursor: pointer;
 }
-
 
 /* all Section */
 </style>
