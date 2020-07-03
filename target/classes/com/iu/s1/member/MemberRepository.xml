@@ -8,21 +8,33 @@
 		like concat('%',#{search},'%')
 	</sql>
 	
+	<update id="memberPwUpdate" parameterType="MemberVO">
+		update member set mem_pw=#{mem_pw} where mem_id=#{mem_id}
+	</update>
+	
 	
 	<select id="memberLogin" parameterType="MemberVO" resultType="MemberVO">
-		select * from member where mem_id=#{mem_id} and mem_pw=#{mem_pw}
+		select * from member where mem_id=#{mem_id} and mem_pw=#{mem_pw} and mem_access=0
 	</select>
 	
-	<select id="memberIdCheck" parameterType="MemberVO" resultType="MemberVO">
+	<select id="selectMember" parameterType="MemberVO" resultType="MemberVO">
 		select * from member where mem_id=#{mem_id}
 	</select>
 	
+	<select id="selectMemberByEmail" parameterType="MemberVO" resultType="MemberVO">
+		select * from member where mem_email=#{mem_email}
+	</select>
+	
+	<select id="selectMemberByPhone" parameterType="MemberVO" resultType="MemberVO">
+		select * from member where mem_phone=#{mem_phone}
+	</select>
+	
 	<insert id="memberJoin" parameterType="MemberVO">
-		insert into member values(#{mem_id},#{mem_pw},#{mem_name},#{mem_email},#{mem_phone},#{mem_storeNum},#{mem_id},#{mem_address},0,0)
+		insert into member values(#{mem_id},#{mem_pw},#{mem_name},#{mem_email},#{mem_phone},#{mem_storeNum},#{mem_id},#{mem_address},0,0,now(),#{mem_kakao},#{kind},#{search})
 	</insert>
 	
 	<select id="getMemberList" resultType="MemberVO" parameterType="Long">
-		SELECT * FROM member where mem_access = #{mem_access}
+		SELECT * FROM member where mem_access = #{mem_access} order by mem_storeNum desc
 	</select>
 	
 	<select id="getMemberSearchList" resultType="MemberVO" parameterType="MemberVO">
@@ -37,7 +49,26 @@
 						mem_name
 					</otherwise>
 				</choose>
-				<include refid="search"></include>
+				<include refid="search"></include>and mem_access = #{mem_access} order by mem_storeNum desc
 	</select>
+	<select id="memberCount" resultType="Long">
+		SELECT count(mem_storeNum) from member;
+	</select>
+	
+	<select id="getDailyNewMember" resultType="MemberVO" parameterType="MemberVO">
+		SELECT * FROM member where mem_regDate > #{mem_regDate}
+	</select>
+	
+	<update id="accessManage" parameterType="MemberVO">
+		update member set mem_access=#{mem_access} where mem_storeNum=#{mem_storeNum}
+	</update>
+	
+	<select id="kakaoLogin" parameterType="memberVO"
+		resultType="memberVO">
+		<!-- SELECT * FROM KAKAOMEMBER WHERE ID = #{id} -->
+		select * from member where mem_email = #{mem_email}
+	</select>
+	
+	
 	
 </mapper>

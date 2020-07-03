@@ -1,5 +1,7 @@
 package com.iu.s1.member;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
@@ -23,17 +26,22 @@ public class MemberVO {
 	
 	@Size(min = 6, max = 16)
 	@Column
+	@NotEmpty
 	private String mem_pw;
 	
 	@Transient
 	private String pwCheck;
 	
 	@Column
+	@NotEmpty
 	private String mem_name;
 	
 	@Column
+	@NotEmpty
+	@Email
 	private String mem_email;
 	
+	@Size(min = 10, max = 11)
 	@Column
 	private String mem_phone;
 	
@@ -50,6 +58,7 @@ public class MemberVO {
 	private String mem_address;
 	
 	@Transient
+	@NotEmpty
 	private String road_address;
 	
 	@Transient
@@ -58,14 +67,20 @@ public class MemberVO {
 	@Column
 	private long mem_point;
 	
-	//멤버 추가사항
 	private String kind;
 		
-	//멤버 추가사항
 	private String search;
 		
 	@Column
 	private long mem_access;
+	
+	@Column
+	private Date mem_regDate;
+	
+	@Column
+	private long mem_kakao;
+	
+	
 
 
 }
