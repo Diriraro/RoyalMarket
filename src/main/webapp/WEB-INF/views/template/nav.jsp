@@ -2,6 +2,9 @@
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <script type="text/javascript" src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+
+
+
 <nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -29,13 +32,13 @@
       <li><a href="${pageContext.request.contextPath}/payment/buy_History"><span class="glyphicon glyphicon-user"></span> 구매내역</a></li>
       <li><a href="${pageContext.request.contextPath}/shop/myshop?mem_storeNum=${member.mem_storeNum}"><span class="glyphicon glyphicon-user"></span> 내상점</a></li>
       <li><a href="${pageContext.request.contextPath}/member/memberLogout"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
-
      
     </c:if>
     
     </ul>
   </div>
 </nav>
+
 
 <script type="text/javascript">
 	function popup(){
@@ -44,4 +47,9 @@
 	    var option = "width = 500, height = 500, top = 100, left = 200, location = no"
 	    window.open(url, name, option);
 	}
+
+
+	
+
+	
 </script>

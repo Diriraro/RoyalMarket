@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+
 <style type="text/css">
 #header_top {
 	width: 1900px;
@@ -54,7 +55,7 @@ body {
 		
 	<c:if test="${empty sessionScope.member}">
 	<div style="margin-right: 250px;margin-top: 9px;">
-	  <a href="${pageContext.request.contextPath}/member/memberLogin"><font style="font-weight: 800; font-size: 13px;color: #666666;">로그인</font></a>
+	 <a href="${pageContext.request.contextPath}/member/memberLogin"> <font style="font-weight: 800; font-size: 13px;color: #666666;">로그인</font></a>
       <font>&nbsp;ㅣ&nbsp;</font>
       <a href="${pageContext.request.contextPath}/member/memberJoin"><font style="font-weight: 800; font-size: 13px;color: #666666;">회원가입</font></a>
     </div>
@@ -136,6 +137,9 @@ body {
 	</header>
 </div>
 
+
+
+
 <script type="text/javascript">
 	$(window).scroll(function(e) {
 		if ($(this).scrollTop() > 5) {
@@ -147,5 +151,7 @@ body {
 		}
 	});
 </script>
+
+
 
 

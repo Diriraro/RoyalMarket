@@ -43,11 +43,10 @@
 		</form>
 			<div id="kakao-login-btn"></div>
 			
-			
-			
-
 
 	</div>
+	
+	
 	<script type="text/javascript">
 	
 	var openWin;
