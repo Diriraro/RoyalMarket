@@ -156,8 +156,7 @@
 			</c:if>
 
 			<c:if test="${vo.mem_storeNum eq member.mem_storeNum}">
-				<a class="zzimbtn"  href="myProductList?kind=sp&mem_storeNum=${member.mem_storeNum}&search=
-				"><img
+				<a class="zzimbtn"  href="myProductList?kind=sp&mem_storeNum=${member.mem_storeNum}"><img
 					style="margin-top: 65px; cursor: pointer;" alt=""
 					src="${pageContext.request.contextPath}/resources/images/myshopgo_logo.png"></a>
 			</c:if>
@@ -216,8 +215,9 @@
 		
 		
 	<!--  상품문의  -->
+	<br>
 	<hr style="width: 1024px;">
-	<div style="width: 663px; margin-left:440px; background-color: yellow;float: left;">
+	<div style="width: 663px; margin-left:440px;float: left;border-right: solid 1px #e4e4e4;">
 	<font style="font-size: 18px;font-weight: 900;">상품문의</font>
 	<hr style="width: 630px;">
 
@@ -244,17 +244,39 @@
 	
 	
 	<!-- 상점정보 -->
-	<div style="background-color: pink;float: left;width: 360px;">
-	<font style="font-size: 18px;font-weight: 900;">상점정보</font>
+	<div style="float: left;width: 360px;">
+	<font style="font-size: 18px;font-weight: 900;">&nbsp;&nbsp;상점정보</font>
 	<hr style="width: 330px;">
+	<img style="width: 50px;height: 50px;margin-left: 29px;" alt="" src="${pageContext.request.contextPath}/resources/images/logo.png">
 	  <a href="${pageContext.request.contextPath}/shop/myshop?mem_storeNum=${vo.mem_storeNum}"> 
-	  <font style="font-weight: 800; font-size: 13px;color: #666666;">${mvo2.mem_storeName}</font></a>
+	  <font style="font-weight: 800; font-size: 16px;color: black;">&nbsp;${mvo2.mem_storeName}</font></a>
+
+	  <c:if test="${fonum.follow_Num eq null}">
+					<a href="../shop/setinsertFollow?give_storeNum=${member.mem_storeNum}&take_storeNum=${vo.mem_storeNum}&mem_storeNum=${vo.mem_storeNum}"
+					class="btn" id="pi"style="margin-top:9px; margin-left: 15px;">
+					<img style="border: solid 1px #808080;" alt="" src="${pageContext.request.contextPath}/resources/images/follow_logo.png"></a>
+				</c:if>
+				
+				<!-- 팔로우 상태라면 언팔버튼 출력  -->
+				<c:if test="${fonum.follow_Num ne null}">
+				<a href="../shop/setDeleteFollow?follow_Num=${fonum.follow_Num}&mem_storeNum=${vo.mem_storeNum}" 
+				class="btn" id="mi"style="margin-top:9px; margin-left: 15px;">
+				<img style="border: solid 1px #f0595b;" alt="" src="${pageContext.request.contextPath}/resources/images/following_logo.png"></a>
+				</c:if>
+
+				<br>
+				<div style="height: 10px;"></div>
+				<a href="${pageContext.request.contextPath}/shop/myshop?mem_storeNum=${vo.mem_storeNum}">
+				<font style="margin-left:125px; color: gray;">상점 상품 더보기></font></a>
+				<hr>
+				
+				
+	  
 	</div>
 	<!-- 상점정보끝 -->
 	
 	<script type="text/javascript">
 		$(document).on('click', '.reply', function() {
-			alert("asdasd");
 			$("#pq_contents").val("@" + $(this).val() + " : ");
 		});
 

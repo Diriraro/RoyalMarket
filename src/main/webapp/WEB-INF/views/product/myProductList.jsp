@@ -69,9 +69,9 @@
 					<td style="line-height: 152px;">${vo.sell_date}</td>
 					<td >
 					<a href="./productUpdate?sell_num=${vo.sell_num}">
-					<img style="border: solid 1px #e4e4e4;" src="${pageContext.request.contextPath}/resources/images/modi_logo.png"></a>
+					<img class="up" style="border: solid 1px #e4e4e4;" src="${pageContext.request.contextPath}/resources/images/modi_logo.png"></a>
 					<a href="./productDelete?sell_num=${vo.sell_num}">
-					<img style="border: solid 1px #e4e4e4;margin-top: 10px;" src="${pageContext.request.contextPath}/resources/images/del_logo.png"></a>
+					<img class="del" style="border: solid 1px #e4e4e4;margin-top: 10px;" src="${pageContext.request.contextPath}/resources/images/del_logo.png"></a>
 					</td>
 				</tr>
 			</c:forEach>
@@ -93,6 +93,22 @@
 					</c:if>
 				</ul>
 			</div>
+			
+			<% 
+			String strReferer = request.getHeader("referer");
+			request.getMethod().equals("GET");
+			if(strReferer == null){ 
+			%>
+			<script type="text/javascript">
+			document.location.href="http://localhost:8080/";
+ 			/* alert("정상적인 경로를 통해 다시 접근해 주세요");
+ */
+			</script>
+			<%
+			return;
+			}
+			%>
+			
 
 
 
@@ -100,6 +116,18 @@
 <!-- <script type="text/javascript">
  history.replaceState({}, null, location.pathname); 
 </script> -->
+<script type="text/javascript">
+$(".del").click(function(){
+    if(confirm("정말 삭제하시겠습니까 ?") == true){
+        alert("삭제되었습니다");
+    }
+    else{
+        return false;
+    }
+});
+
+
+</script>
 
 
 

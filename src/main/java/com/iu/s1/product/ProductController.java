@@ -21,6 +21,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.iu.s1.member.MemberVO;
 import com.iu.s1.product.productFile.ProductFileVO;
 import com.iu.s1.product.zzim.ZzimVO;
+import com.iu.s1.shop.follow.StoreFollowService;
+import com.iu.s1.shop.follow.StoreFollowVO;
+import com.iu.s1.shop.qna.StoreQnaService;
+import com.iu.s1.shop.qna.StoreQnaVO;
 import com.iu.s1.util.Pager;
 
 @Controller
@@ -29,6 +33,12 @@ public class ProductController {
 
 	@Autowired
 	private ProductService productService;
+	
+	@Autowired
+	private StoreQnaService storeQnaService;
+	
+	@Autowired
+	private StoreFollowService storeFollowService;
 
 	@GetMapping("productNew")
 	public ModelAndView productInsert(ModelAndView mv) throws Exception {
@@ -121,7 +131,21 @@ public class ProductController {
 		mv.addObject("mvo2", memberVOs);
 		mv.setViewName("product/productSelect");
 		
+		
 
+		long msnum = ((MemberVO)session.getAttribute("member")).getMem_storeNum();
+
+		/// 팔로우영역
+		long give_storeNum=msnum;
+		long take_storeNum=productVO.getMem_storeNum();
+		
+		StoreFollowVO storeFollowVO = new StoreFollowVO();
+		storeFollowVO = storeFollowService.selectnum(give_storeNum,take_storeNum);
+		//System.out.println(storeFollowVO+"::::::: 팔로우 번호 확인  없으면 널 있으면 번호생성");
+		
+		mv.addObject("fonum",storeFollowVO); // 팔로우번호 있으면 전송 없으면 null
+	
+		
 		List<ProductFileVO> productFileVOs = productService.productFileSelect(sell_num);
 		mv.addObject("pfile", productFileVOs); // store 사진 출력
 		

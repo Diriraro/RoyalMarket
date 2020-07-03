@@ -8,6 +8,38 @@
 <title>Insert title here</title>
 <c:import url="../template/boot.jsp"></c:import>
 <link href="./css/test.css" rel="stylesheet" type="text/css">
+
+<style type="text/css">
+
+.img{
+        position: relative;
+        background-image: url('${pageContext.request.contextPath}/upload/product/${file[i.index]}');                                                               
+        height: 194px;
+        width: 194px;
+        background-size: cover;
+    }
+
+    .img-cover{
+       position: absolute;
+       height: 100%;
+       width: 100%;
+       background-color: rgba(0, 0, 0, 0.7);                                                                 
+       z-index:1;
+    }
+
+    .img .content{
+         position: absolute;
+         top:50%;
+         left:50%;
+         transform: translate(-50%, -50%);                                                                   
+         font-size:1rem;
+         color: white;
+         z-index: 2;
+         text-align: center;
+    }
+	
+</style>
+
 </head>
 <body style="background-color: #fafafd;">
 	<c:import url="../template/woozoo_nav.jsp"></c:import>
@@ -69,8 +101,23 @@
 						onclick="location.href='./productSelect?sell_num=${vo.sell_num}'">
 
 
-						<img style="height: 194px; width: 194px; cursor: pointer;" alt=""
+<%-- 						<img style="height: 194px; width: 194px; cursor: pointer;" alt=""
+							src="${pageContext.request.contextPath}/upload/product/${file[i.index]}"> --%>
+							
+ 				<c:if test="${vo.sell_status ne 0}">
+ 				<div class="img">
+					<div class="content">
+						<h5 style="margin-bottom: 30px;">예약완료</h5>
+					</div>
+					<div class="img-cover"></div></div>
+
+				</c:if>
+				<c:if test="${vo.sell_status eq 0 }">
+				<img class="img" style="height: 194px; width: 194px; cursor: pointer;" alt=""
 							src="${pageContext.request.contextPath}/upload/product/${file[i.index]}">
+				</c:if>
+
+							
 						<div style="width: 194px; background-color: white;">
 							<div style="height: 80px;">
 								<div ><br>
