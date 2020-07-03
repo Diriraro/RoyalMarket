@@ -20,6 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.iu.s1.member.MemberVO;
 import com.iu.s1.product.productFile.ProductFileVO;
+import com.iu.s1.product.qna.ProductQnaVO;
 import com.iu.s1.product.zzim.ZzimVO;
 import com.iu.s1.shop.follow.StoreFollowService;
 import com.iu.s1.shop.follow.StoreFollowVO;
@@ -131,6 +132,8 @@ public class ProductController {
 		mv.addObject("mvo2", memberVOs);
 		mv.setViewName("product/productSelect");
 		
+		List<ProductQnaVO> ar = productService.qnaList2(sell_num);
+		mv.addObject("qnalist", ar);
 		
 
 		long msnum = ((MemberVO)session.getAttribute("member")).getMem_storeNum();

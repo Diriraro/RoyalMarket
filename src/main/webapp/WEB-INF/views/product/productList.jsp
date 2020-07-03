@@ -97,7 +97,7 @@
 
 			<c:forEach items="${list}" var="vo" varStatus="i">
 				<div style="float: left; margin-left: 9px; margin-bottom: 129px;">
-					<div style="height: 194px; width: 194px; cursor: pointer;"
+					<div id="qqq" style="height: 194px; width: 194px; cursor: pointer;"
 						onclick="location.href='./productSelect?sell_num=${vo.sell_num}'">
 
 
@@ -167,7 +167,9 @@
 
 
 	<script type="text/javascript">
-		
+
+
+
 	</script>
 
 

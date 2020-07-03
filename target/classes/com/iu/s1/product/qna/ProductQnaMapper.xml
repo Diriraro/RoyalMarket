@@ -17,5 +17,9 @@
         SELECT * FROM product_qna where sell_num=#{sell_num} ORDER BY pq_num desc limit 5
     </select>
     
+	<select id="qnaList2" parameterType="Long" resultType="ProductQnaVO">
+        SELECT * FROM product_qna where sell_num=#{sell_num}
+    </select>
+    
 
 </mapper>

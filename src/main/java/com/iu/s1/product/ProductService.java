@@ -12,6 +12,8 @@ import org.springframework.web.multipart.MultipartFile;
 import com.iu.s1.member.MemberVO;
 import com.iu.s1.product.productFile.ProductFileMapper;
 import com.iu.s1.product.productFile.ProductFileVO;
+import com.iu.s1.product.qna.ProductQnaMapper;
+import com.iu.s1.product.qna.ProductQnaVO;
 import com.iu.s1.product.zzim.ZzimMapper;
 import com.iu.s1.product.zzim.ZzimVO;
 import com.iu.s1.util.FileManager;
@@ -29,6 +31,9 @@ public class ProductService {
 	
 	@Autowired
 	private ZzimMapper zzimMapper;
+	
+	@Autowired
+	private ProductQnaMapper productQnaMapper;
 
 	@Autowired
 	private FilePathGenerator filePathGenerator;
@@ -89,6 +94,10 @@ public class ProductService {
 		pager.makePage(totalCount);
 		return productMapper.myProductList(pager);
 	}
+	
+	public List<ProductQnaVO> qnaList2(long sell_num) throws Exception{
+		return productQnaMapper.qnaList2(sell_num);
+	}
 
 	public MemberVO productAddress(long sell_num) throws Exception{
 		return productMapper.productAddress(sell_num);
@@ -121,4 +130,5 @@ public class ProductService {
 	public int productDelete(ProductVO productVO)throws Exception{
 		return productMapper.productDelete(productVO);
 	}
+
 }

@@ -236,7 +236,10 @@
 	</div>
 
 	<div class="container">
-		<div class="qnaList"></div>
+		<div class="qnaList">
+
+		
+		</div>
 	</div>
 	
 	</div>
@@ -251,17 +254,23 @@
 	  <a href="${pageContext.request.contextPath}/shop/myshop?mem_storeNum=${vo.mem_storeNum}"> 
 	  <font style="font-weight: 800; font-size: 16px;color: black;">&nbsp;${mvo2.mem_storeName}</font></a>
 
-	  <c:if test="${fonum.follow_Num eq null}">
+	  <c:if test="${fonum.follow_Num eq null and (vo.mem_storeNum ne member.mem_storeNum)}">
 					<a href="../shop/setinsertFollow?give_storeNum=${member.mem_storeNum}&take_storeNum=${vo.mem_storeNum}&mem_storeNum=${vo.mem_storeNum}"
 					class="btn" id="pi"style="margin-top:9px; margin-left: 15px;">
 					<img style="border: solid 1px #808080;" alt="" src="${pageContext.request.contextPath}/resources/images/follow_logo.png"></a>
 				</c:if>
 				
 				<!-- 팔로우 상태라면 언팔버튼 출력  -->
-				<c:if test="${fonum.follow_Num ne null}">
+				<c:if test="${fonum.follow_Num ne null and (vo.mem_storeNum ne member.mem_storeNum)}">
 				<a href="../shop/setDeleteFollow?follow_Num=${fonum.follow_Num}&mem_storeNum=${vo.mem_storeNum}" 
 				class="btn" id="mi"style="margin-top:9px; margin-left: 15px;">
 				<img style="border: solid 1px #f0595b;" alt="" src="${pageContext.request.contextPath}/resources/images/following_logo.png"></a>
+				</c:if>
+				
+				<c:if test="${vo.mem_storeNum eq member.mem_storeNum}">
+				<a href="${pageContext.request.contextPath}/shop/myshop?mem_storeNum=${vo.mem_storeNum}" 
+				class="btn" id="mi"style="margin-top:9px; margin-left: 15px;">
+				<img style="border: solid 1px #5c2392;" alt="" src="${pageContext.request.contextPath}/resources/images/myshop_logo.png"></a>
 				</c:if>
 
 				<br>
@@ -288,7 +297,18 @@
 			$('#myModal2').modal('hide');
 			});
 
+/* 			$(document).on('click', '.qlist', function() {
+				var a =5 ; 
+				var b = 10;	
+				if(a > b){ 
+					alert("a 가 b 보다 큽니다."); 
+					}else if(b > a){ 
+					alert('b 가 c 보다 큽니다.'); 
+					}else { c
+					 alert('모든 조건을 만족하지 않습니다.'); }
+				});
 
+ */
 
 		
 					
