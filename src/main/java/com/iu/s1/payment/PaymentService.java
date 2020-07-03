@@ -10,6 +10,8 @@ import com.iu.s1.paycheck.PayCheckVO;
 import com.iu.s1.paymentHistory.Buy_HistoryVO;
 import com.iu.s1.paymentHistory.Sell_HistoryVO;
 import com.iu.s1.product.ProductVO;
+import com.iu.s1.saveCash.SaveCashRepository;
+import com.iu.s1.saveCash.SaveCashVO;
 import com.iu.s1.trading.TradingVO;
 
 @Service
@@ -17,6 +19,9 @@ public class PaymentService {
 
 	@Autowired
 	private PaymentMapper paymentMapper;
+	
+	@Autowired
+	private SaveCashRepository saveCashRepository;		//적립금
 	
 	public int pointUpdate(MemberVO memberVO)throws Exception{
 		return paymentMapper.pointUpdate(memberVO);
@@ -131,5 +136,17 @@ public class PaymentService {
 	
 	public Buy_HistoryVO buy_Sel(long sell_num)throws Exception{
 		return paymentMapper.buy_Sel(sell_num);
+	}
+	
+	public SaveCashVO selectSC(String mem_id)throws Exception{
+		return saveCashRepository.selectSC(mem_id);
+	}
+	
+	public int createSC(String mem_id)throws Exception{
+		return saveCashRepository.createSC(mem_id);
+	}
+	
+	public int updateSC(SaveCashVO saveCashVO)throws Exception{
+		return saveCashRepository.updateSC(saveCashVO);
 	}
 }

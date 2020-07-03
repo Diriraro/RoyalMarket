@@ -22,6 +22,7 @@ import com.iu.s1.paymentHistory.Buy_HistoryVO;
 import com.iu.s1.paymentHistory.Sell_HistoryVO;
 import com.iu.s1.product.ProductService;
 import com.iu.s1.product.ProductVO;
+import com.iu.s1.saveCash.SaveCashVO;
 import com.iu.s1.trading.TradingVO;
 
 @Controller
@@ -142,6 +143,16 @@ public class PaymentController {
 		long sell_price = Long.parseLong(request.getParameter("sell_price"));
 		long sell_num = Long.parseLong(request.getParameter("sell_num"));
 		
+		//페이지 진입시 savecash에 아이디가 있는지 확인 / 없으면 생성후 cash 불러오기 / 있으면 cash 불러오기
+		SaveCashVO saveCashVO = new SaveCashVO();
+		saveCashVO = paymentService.selectSC(memberVO.getMem_id());
+		if(saveCashVO==null) {
+			paymentService.createSC(memberVO.getMem_id());
+			saveCashVO = paymentService.selectSC(memberVO.getMem_id());
+		}
+		mv.addObject("cash", saveCashVO);
+		
+		
 		//맴버테이블에서 포인트 조회
 		String mem_id = memberVO.getMem_id();
 		long point = paymentService.pointSelect(mem_id);
@@ -160,14 +171,14 @@ public class PaymentController {
 	}
 	
 	// 상풀결제 중간 페이지
-	@GetMapping("productTrading")
-	public ModelAndView productTrading(HttpServletRequest request)throws Exception{
+	@PostMapping("productTrading")
+	public ModelAndView productTrading(HttpServletRequest request, long sell_num, long sell_price, long cash)throws Exception{
 		// 상품의 가격만큼 포인트 차감
 		ModelAndView mv = new ModelAndView();
 		
 		//productSelect에서 넘길때 파라미터 값으로 sell넘을 넘겨 받아서 상품에 대한 정보 조회
-		long sell_num = Long.parseLong(request.getParameter("sell_num"));
-		long sell_price = Long.parseLong(request.getParameter("sell_price"));
+//		long sell_num = Long.parseLong(request.getParameter("sell_num"));
+//		long sell_price = Long.parseLong(request.getParameter("sell_price"));
 		
 		// 결제 진행 테이블 입력
 		TradingVO tradingVO = paymentService.tradingSelect(sell_num);
@@ -177,7 +188,7 @@ public class PaymentController {
 			tradingVO = new TradingVO();
 			paymentService.product_sell_statusUp(sell_num);
 			MemberVO memberVO = (MemberVO)request.getSession().getAttribute("member");
-			tradingVO.setSell_price(sell_price);
+			tradingVO.setSell_price(sell_price+cash);		// 이미 sell_price가 jsp에서 cash만큼 빠져서 넘어오기 때문에 더해줌 / 
 			tradingVO.setSell_num(sell_num);
 			tradingVO.setBuyer_id(memberVO.getMem_id());
 			String seller_id=paymentService.seller_id_select(sell_num);
@@ -185,8 +196,15 @@ public class PaymentController {
 			tradingVO.setSeller_id(seller_id);
 			
 			paymentService.tradingInsert(tradingVO);
-		
-		
+			
+			// 사용한 적립금 빼기
+			if(cash!=0) {
+				SaveCashVO saveCashVO = new SaveCashVO();
+				saveCashVO = paymentService.selectSC(memberVO.getMem_id());
+				long nowCash = saveCashVO.getMem_cash()-cash;
+				saveCashVO.setMem_cash(nowCash);
+				paymentService.updateSC(saveCashVO);
+			}
 		
 			// payment 업데이트
 			PayVO payVO = new PayVO();
@@ -194,11 +212,11 @@ public class PaymentController {
 			System.out.println(nowPoint);
 			payVO.setMem_id(memberVO.getMem_id());
 			payVO.setPay_price(sell_price);
-			payVO.setPoint_rest(nowPoint-sell_price); 
+			payVO.setPoint_rest(nowPoint-sell_price); 			// parameter로 넘어올때 sell_price = (sell_price+택배비)-cash 하고 넘어옴
 			paymentService.paymentOut(payVO);
 			
 			// member point 업데이트
-			memberVO.setMem_point(nowPoint-sell_price);
+			memberVO.setMem_point(nowPoint-sell_price);			// parameter로 넘어올때 sell_price = (sell_price+택배비)-cash 하고 넘어옴
 			paymentService.pointUpdate(memberVO);
 			
 			// 구매내역 입력 
@@ -355,6 +373,15 @@ public class PaymentController {
 			sell_HistoryVO.setStatus(2);
 			paymentService.sell_statusUp(sell_HistoryVO);
 			
+			// 1% 적립금 추가
+			SaveCashVO saveCashVO = new SaveCashVO();
+			ProductVO productVO =paymentService.productSelect(sell_num);
+			int sc = productVO.getSell_price();
+			sc= (int) (sc*0.01);
+			saveCashVO.setMem_cash(sc);
+			saveCashVO.setMem_id(tradingVO.getBuyer_id());
+			paymentService.updateSC(saveCashVO);
+			
 			// 포인트 업데이트 및 trading에서 삭제
 			paymentService.pointUpdate(memberVO);
 			paymentService.tradingDelete(sell_num);
@@ -424,6 +451,18 @@ public class PaymentController {
 			sell_HistoryVO.setStatus(2);
 			paymentService.sell_statusUp(sell_HistoryVO);
 			
+			// 1% 적립금 추가
+			SaveCashVO saveCashVO = new SaveCashVO();
+			saveCashVO = paymentService.selectSC(tradingVO.getBuyer_id());
+			
+			ProductVO productVO =paymentService.productSelect(sell_num);
+			long sc = productVO.getSell_price();
+			sc = (long) (sc*0.01);				//1%
+			sc = Math.round(sc*0.1) *10;		//1원단위 반올림
+			sc = sc+saveCashVO.getMem_cash();
+			saveCashVO.setMem_cash(sc);
+			paymentService.updateSC(saveCashVO);
+
 			// 포인트 업데이트 및 trading에서 삭제
 			paymentService.pointUpdate(memberVO);
 			paymentService.tradingDelete(sell_num);
