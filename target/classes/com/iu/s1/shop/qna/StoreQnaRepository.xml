@@ -26,5 +26,11 @@
 	<select id="getSelectStoreName" parameterType="com.iu.s1.shop.qna.StoreQnaVO" resultType="String">
 		SELECT mem_storeName FROM member WHERE mem_storeNum=#{sq_storeNum}
 	</select>
+	
+	
+	<select id="coco" parameterType="com.iu.s1.shop.qna.StoreQnaVO" resultType="Long">
+	select count(*) from store_qna where mem_storeNum= #{mem_storeNum}
+	
+	</select>
 
 </mapper>

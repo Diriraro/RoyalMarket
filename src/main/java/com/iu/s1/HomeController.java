@@ -30,21 +30,17 @@ public class HomeController {
 			throws Exception {
 		boolean check = false;
 		// 쿠키들을 가져옴
-		System.out.println(request.getCookies());
 		if (request.getCookies() != null) {
 			Cookie[] cookies = request.getCookies();
 			if (cookies.length > 0) {
-				System.out.println(cookies.length);
 				String str[] = new String[cookies.length];
 				for (int i = 0; i < cookies.length; i++) {
 					str[i] = cookies[i].getName();
-					System.out.println(str[i]);
 				}
-				// 쿠키들중에 해당 쿠키 키네임이 visitor의 존재여부
+				// 쿠키들중에 키네임이 visitor의 존재여부
 				check = Arrays.stream(str).anyMatch("visitor"::equals);
 			}
 		}
-		System.out.println("존재 여부 :" + check);
 		if (!check) {
 			if (session.getAttribute("member") != null) {
 				MemberVO memberVO = (MemberVO) session.getAttribute("member");
@@ -62,7 +58,6 @@ public class HomeController {
 				String daily = year + "/" + month + "/" + day;
 
 				if (adminRepository.existsById(daily)) {
-					System.out.println("daily count ++");
 					// 방문일에 대한 데이터가 있으면 count 증가
 					Optional<VisitorVO> opt = adminRepository.findById(daily);
 					visitorVO = opt.get();
@@ -70,7 +65,6 @@ public class HomeController {
 					adminRepository.save(visitorVO);
 				} else {
 					// 방문일에 대한 데이터가 없으면 추가
-					System.out.println("New DAY");
 					visitorVO.setDay(daily);
 					visitorVO.setCount(1);
 					adminRepository.save(visitorVO);

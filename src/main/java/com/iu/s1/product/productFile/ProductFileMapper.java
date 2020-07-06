@@ -16,5 +16,7 @@ public interface ProductFileMapper {
 	public List<ProductFileVO> productFileSelect(long sell_num)throws Exception;
 	
 	public String selectFileName(long sell_num) throws Exception;
+	
+	public List<ProductFileVO> productFileSelect2(long sell_num)throws Exception;
 
 }

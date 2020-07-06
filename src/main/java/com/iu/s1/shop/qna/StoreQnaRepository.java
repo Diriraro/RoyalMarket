@@ -21,5 +21,5 @@ public interface StoreQnaRepository {
 	//getSelectStoreName
 	public String getSelectStoreName(StoreQnaVO storeQnaVO) throws Exception;
 	
-	
+	public long coco(long mem_storeNum) throws Exception;
 }

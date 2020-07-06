@@ -8,6 +8,7 @@
 <script type="text/javascript">
 	alert('${result}');
 	location.href="${path}";
+
 </script>
 </head>
 <body>

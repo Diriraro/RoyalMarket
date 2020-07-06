@@ -15,8 +15,6 @@
 	<c:import url="./template/woozoo_nav.jsp"></c:import>
 
 
-
-
 	<div class="container">
 		<h1>Index PAGe</h1>
 		
@@ -34,7 +32,7 @@
 			<li><input type="button" class="kind" value="뷰티/미용"></li>
 		</ul>
 
-
+		<a href="${pageContext.request.contextPath}/shop/rei"><span class="glyphicon glyphicon-user"></span> 지울것</a>
 
 	</div>
 
