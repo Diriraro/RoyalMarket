@@ -1,6 +1,11 @@
 package com.iu.s1.util;
 
-public class Pager {
+
+import com.iu.s1.product.ProductVO;
+
+public class Pager extends ProductVO {
+
+
 	private Long curPage;
 	private Integer perPage;
 
