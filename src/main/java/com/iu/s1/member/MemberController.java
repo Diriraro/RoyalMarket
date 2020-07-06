@@ -180,22 +180,22 @@ public class MemberController {
 
 		if (memberVO2 == null) {
 			mv.addObject("result", "존재하지 않는 회원입니다.");
-			mv.addObject("path", "./memberLogin");
+			mv.addObject("path", "../");
 			mv.setViewName("common/result");
 			return mv;
 		} else if (!memberVO2.getMem_pw().equals(memberVO.getMem_pw())) {
 			mv.addObject("result", "잘못된 비밀번호입니다");
-			mv.addObject("path", "./memberLogin");
+			mv.addObject("path", "../");
 			mv.setViewName("common/result");
 			return mv;
 		} else if (memberVO2.getMem_access() == 1L) {
 			mv.addObject("result", "차단 회원입니다");
-			mv.addObject("path", "./memberLogin");
+			mv.addObject("path", "../");
 			mv.setViewName("common/result");
 			return mv;
 		} else if (memberVO2.getMem_kakao() == 1L) {
 			mv.addObject("result", "카카오 회원은 카카오 로그인을 이용해주세요");
-			mv.addObject("path", "./memberLogin");
+			mv.addObject("path", "../");
 			mv.setViewName("common/result");
 			return mv;
 		}
@@ -209,7 +209,7 @@ public class MemberController {
 				mv.addObject("path", "../admin/adminPage");
 				mv.setViewName("common/result");
 			} else {
-				mv.addObject("result", "로그인 성공");
+				mv.addObject("result", "환영합니다!");
 				mv.addObject("path", "../");
 				mv.setViewName("common/result");
 

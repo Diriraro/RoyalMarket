@@ -667,7 +667,7 @@ iframe {
 			}, function(result) {
 				alert(result.trim());
 				SetTime = 300;
-				if(result.trim()=="인증 메세지 전송 실패했습니다") {
+				if(result.trim()=="인증 메세지를 전송했습니다") {
 					clearInterval(tid);
 					TimerStart();
 				} else {
