@@ -94,6 +94,7 @@ body {
 								<option value="sp">제품명</option>
 								<option value="sk">종류</option>
 								<option value="st">태그</option>
+								<option style="display: none;" value="smn"></option>
 							</select>
 						</div>
 						<div class="input-group input-group-sm col-xs-2 "
