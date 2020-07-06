@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.maven.model.Model;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -56,20 +57,20 @@ public class PaymentController {
 	
 	//결제 성공페이지
 	@GetMapping("paySuccess")
-	public String paySuccess(HttpServletRequest httpServletRequest,MemberVO memberVO)throws Exception{
+	public ModelAndView paySuccess(HttpServletRequest httpServletRequest)throws Exception{
 		PayVO payVO = new PayVO();
-		
+		ModelAndView mv = new ModelAndView();
 		
 		long amount = Long.parseLong(httpServletRequest.getParameter("amount"));
-		long mem_point = Long.parseLong(httpServletRequest.getParameter("mem_point"));
 		String key = httpServletRequest.getParameter("key");
 		String checkKey=paymentService.paycheckSelect(httpServletRequest.getParameter("mem_id"));
 		
 		if(key.equals(checkKey)) {
 
 			//완료페이지를 갈때 맴버 포인트 업데이트
-			mem_point = mem_point + amount;
-			memberVO.setMem_point(mem_point);
+			MemberVO memberVO = (MemberVO)httpServletRequest.getSession().getAttribute("member");
+			memberVO.setMem_point(memberVO.getMem_point()+amount);
+			
 			memberVO.setMem_id(httpServletRequest.getParameter("mem_id"));
 		
 			//현재 포인트 조회
@@ -87,19 +88,31 @@ public class PaymentController {
 			//paycheckId 삭제
 			paymentService.paycheckDel(httpServletRequest.getParameter("mem_id"));
 			
-			return("payment/paySuccess");
+			httpServletRequest.setAttribute("member", memberVO);
+			
+			mv.addObject("result", "포인트 충전이 완료 되었습니다.");
+			mv.addObject("path", "/");
+			mv.setViewName("common/result");
+			return mv;
 		}else {
 			//paycheckId 삭제
 			paymentService.paycheckDel(httpServletRequest.getParameter("mem_id"));
-			return "payment/payFail";
+			mv.addObject("result", "포인트 충전을 실패 하였습니다.");
+			mv.addObject("path", "/");
+			mv.setViewName("common/result");
+			return mv;
 	
 		}
 	}
 	
 	@GetMapping("payFail")
-	public String payFail()throws Exception{
-		System.out.println("test");
-		return "payment/payFail"; 
+	public ModelAndView payFail()throws Exception{
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("result", "포인트 충전을 실패 하였습니다.");
+		mv.addObject("path", "/");
+		mv.setViewName("common/result");
+		
+		return mv;
 	}
 	
 	// 포인트 충전 
@@ -650,6 +663,16 @@ public class PaymentController {
 		
 		return mv;
 		
+	}
+	
+	//예외 처리 메서드
+	@ExceptionHandler(NullPointerException.class)
+	public ModelAndView error() {
+		ModelAndView mv = new ModelAndView();
+			
+		mv.setViewName("error/serverError");
+			
+		return mv;
 	}
 	
 }

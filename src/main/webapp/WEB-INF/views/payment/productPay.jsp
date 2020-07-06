@@ -81,7 +81,7 @@
 						<font style="color: red; font-size: large; margin-left: 10px; float: left;"><b>포인트가 부족합니다!!</b></font> 	
 					</div>
 					<div style="margin-top: 10px;">	
-						<button class="btn btn-danger" id="pointCharge" style="float: right; margin-right: 10px; margin-top: 5px;">포인트 충전하기</button>
+						<button type="button" class="btn btn-danger" id="pointCharge" style="float: right; margin-right: 10px; margin-top: 5px;">포인트 충전하기</button>
 					</div>
 				</c:if>
 					<c:if test="${point ge sell_price-test+2500-cash.mem_cash}">	<!-- 포인트+적립금이 구매금액보다 많거나 같을경우 -->
