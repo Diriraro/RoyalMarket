@@ -18,6 +18,7 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
 import org.apache.http.HttpRequest;
+import org.apache.http.HttpResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -43,9 +44,8 @@ public class MemberController {
 
 	@Autowired
 	private JavaMailSender mailSender;
-	
-	private String checkNum = "";
 
+	private String checkNum = "";
 
 	@GetMapping("findPwByEmail")
 	public ModelAndView findPwByEmail(HttpSession session, MemberVO memberVO) throws Exception {
@@ -56,30 +56,31 @@ public class MemberController {
 	}
 
 	@PostMapping("findPwByEmail")
-	public ModelAndView findPwByEmail(@Valid MemberVO memberVO, BindingResult bindingResult,HttpSession session) throws Exception {
 
+	public ModelAndView findPwByEmail(@Valid MemberVO memberVO, BindingResult bindingResult, HttpSession session)
+			throws Exception {
 		ModelAndView mv = new ModelAndView();
 
 		Calendar cal = Calendar.getInstance();
 		long now = cal.getTimeInMillis();
 		long now_now = now - (long) session.getAttribute("now");
-		
+
 		boolean result = memberService.findPwByEmail(memberVO, bindingResult, checkNum);
 
 		if (result) {
 			mv.setViewName("member/findPwByEmail");
-		}else if(now_now > 300000) {
+		} else if (now_now > 300000) {
 			System.out.println("ddd");
 			mv.addObject("result", "인증번호 유효기간이 지났습니다.");
 			mv.addObject("path", "./findPwByEmail");
-			
-			mv.setViewName("common/result");	
+
+			mv.setViewName("common/result");
 		} else {
 			int result2 = memberService.memberPwUpdate(memberVO);
 			if (result2 > 0) {
 				mv.addObject("result", "비밀번호가 변경되었습니다. 다시 로그인 해주세요");
 				mv.addObject("path", "../");
-				mv.addObject("close",1);
+				mv.addObject("close", 1);
 				mv.setViewName("common/result2");
 			}
 		}
@@ -87,32 +88,32 @@ public class MemberController {
 	}
 
 	@PostMapping("findPwByPhone")
-	public ModelAndView findPwByPhone(@Valid MemberVO memberVO, BindingResult bindingResult, Model model,HttpSession session)
-			throws Exception {
+	public ModelAndView findPwByPhone(@Valid MemberVO memberVO, BindingResult bindingResult, Model model,
+			HttpSession session) throws Exception {
 		ModelAndView mv = new ModelAndView();
 
 		Calendar cal = Calendar.getInstance();
 		long now = cal.getTimeInMillis();
 		long now_now = now - (long) session.getAttribute("now");
-		
+
 		boolean result = memberService.findPwByPhone(memberVO, bindingResult, checkNum);
 		System.out.println(result);
 		System.out.println(now_now);
-		if (result){
+		if (result) {
 			// model.addAttribute("result","인증번호를 다시 확인해주세요");
 			mv.setViewName("member/findPwByPhone");
-		}else if(now_now > 300000){
+		} else if (now_now > 300000) {
 			mv.addObject("result", "인증번호 유효기간이 지났습니다.");
 			mv.addObject("path", "./findPwByPhone");
-			
-			mv.setViewName("common/result");	
-		}else {
+
+			mv.setViewName("common/result");
+		} else {
 			int result2 = memberService.memberPwUpdate(memberVO);
 			if (result2 > 0) {
 				// model.addAttribute("result","비밀번호가 성공적으로 변경되었습니다.");
 				mv.addObject("result", "비밀번호가 변경되었습니다. 다시 로그인 해주세요");
 				mv.addObject("path", "../");
-				mv.addObject("close",1);
+				mv.addObject("close", 1);
 				mv.setViewName("common/result2");
 			}
 			session.invalidate();
@@ -142,7 +143,7 @@ public class MemberController {
 			// 정상작동
 			int result2 = memberService.memberJoin(memberVO);
 			if (result2 > 0) {
-				mv.addObject("result", "회원가입 성공");
+				mv.addObject("result", "환영합니다! 로그인해주세요");
 				mv.addObject("path", "../");
 				mv.setViewName("common/result");
 			}
@@ -177,37 +178,43 @@ public class MemberController {
 		response.addCookie(cookie);
 		MemberVO memberVO2 = new MemberVO();
 		memberVO2 = memberService.selectMember(memberVO);
-		
-		if(memberVO2==null){
+
+		if (memberVO2 == null) {
 			mv.addObject("result", "존재하지 않는 회원입니다.");
-			mv.addObject("path", "./memberLogin");
+			mv.addObject("path", "../");
 			mv.setViewName("common/result");
 			return mv;
-		}else if(!memberVO2.getMem_pw().equals(memberVO.getMem_pw())){
+		} else if (!memberVO2.getMem_pw().equals(memberVO.getMem_pw())) {
 			mv.addObject("result", "잘못된 비밀번호입니다");
-			mv.addObject("path", "./memberLogin");
+			mv.addObject("path", "../");
 			mv.setViewName("common/result");
 			return mv;
-		}
-		else if(memberVO2.getMem_access()==1L ) {
+		} else if (memberVO2.getMem_access() == 1L) {
 			mv.addObject("result", "차단 회원입니다");
-			mv.addObject("path", "./memberLogin");
+			mv.addObject("path", "../");
 			mv.setViewName("common/result");
 			return mv;
-		}else if(memberVO2.getMem_kakao()==1L) {
+		} else if (memberVO2.getMem_kakao() == 1L) {
 			mv.addObject("result", "카카오 회원은 카카오 로그인을 이용해주세요");
-			mv.addObject("path", "./memberLogin");
+			mv.addObject("path", "../");
 			mv.setViewName("common/result");
 			return mv;
 		}
-		
+
 		memberVO = memberService.memberLogin(memberVO);
 
 		if (memberVO != null) {
 			session.setAttribute("member", memberVO);
-			mv.addObject("result", "로그인 성공");
-			mv.addObject("path", "../");
-			mv.setViewName("common/result");
+			if (memberVO.getMem_id().equals("admin")) {
+				mv.addObject("result", "관리자 로그인 승인되었습니다.");
+				mv.addObject("path", "../admin/adminPage");
+				mv.setViewName("common/result");
+			} else {
+				mv.addObject("result", "환영합니다!");
+				mv.addObject("path", "../");
+				mv.setViewName("common/result");
+
+			}
 		}
 		return mv;
 	}
@@ -238,7 +245,7 @@ public class MemberController {
 					String ran = Integer.toString(rand.nextInt(10));
 					numStr += ran;
 				}
-				
+
 				Calendar nowCal = Calendar.getInstance();
 				long now = nowCal.getTimeInMillis();
 				System.out.println("sendSMS" + now);
@@ -246,7 +253,6 @@ public class MemberController {
 
 				session.setAttribute("numStr", numStr);
 				session.setAttribute("now", now);
-				
 
 				System.out.println("수신자 번호 : " + phoneNumber);
 				System.out.println("인증번호 : " + numStr);
@@ -278,12 +284,12 @@ public class MemberController {
 			String ran = Integer.toString(rand.nextInt(10));
 			numStr += ran;
 		}
-		
+
 		MemberVO memberVO2 = new MemberVO();
 		memberVO2.setMem_phone(phoneNumber);
 		memberVO2 = memberService.selectMemberByPhone(memberVO2);
-		if(memberVO2 != null) {
-			msg= "이미 가입한 전화번호입니다";
+		if (memberVO2 != null) {
+			msg = "이미 가입한 전화번호입니다";
 			model.addAttribute("result", msg);
 			return;
 		}
@@ -292,10 +298,10 @@ public class MemberController {
 		long now = nowCal.getTimeInMillis();
 		System.out.println("sendSMS" + now);
 		checkNum = numStr;
-		
+
 		session.setAttribute("numStr", numStr);
 		session.setAttribute("now", now);
-		
+
 		System.out.println(session.getAttribute("now"));
 
 		System.out.println("수신자 번호 : " + phoneNumber);
@@ -341,7 +347,7 @@ public class MemberController {
 
 	@PostMapping("sendEmail")
 	public void sendEmailAction(@RequestParam Map<String, Object> paramMap, String id, String email, ModelMap model,
-		ModelAndView mv, Model model2,HttpSession session) throws Exception {
+			ModelAndView mv, Model model2, HttpSession session) throws Exception {
 
 		paramMap.put("username", id);
 		paramMap.put("email", email);
@@ -368,7 +374,7 @@ public class MemberController {
 				}
 				System.out.println(PASSWORD);
 				checkNum = PASSWORD;
-				
+
 				Calendar nowCal = Calendar.getInstance();
 				long now = nowCal.getTimeInMillis();
 
@@ -468,10 +474,10 @@ public class MemberController {
 		System.out.println(phoneNumber);
 		if (memberService.selectMemberByPhone(mem) == null) {
 			msg = "존재하지 않는 전화번호입니다.";
-		}else {
+		} else {
 			mem = memberService.selectMemberByPhone(mem);
 
-			if(mem.getMem_name().equals(name)) {
+			if (mem.getMem_name().equals(name)) {
 
 				String id = mem.getMem_id();
 
@@ -486,19 +492,27 @@ public class MemberController {
 					msg = "인증 메세지 전송 실패했습니다";
 				}
 
-			}else {
+			} else {
 				msg = "등록된 번호와 다릅니다.";
 			}
 		}
 
 		model.addAttribute("result", msg);
 	}
-	
+
 	@PostMapping("kakaoLogin")
-	public ModelAndView kakaoLogin(MemberVO memberVO, HttpSession session, ModelAndView mv,String profile)throws Exception{
-		
+	public ModelAndView kakaoLogin(MemberVO memberVO, HttpSession session, ModelAndView mv, String profile,
+			HttpServletResponse response) throws Exception {
+
 		/* memberVO.setKind(profile); */
-		session.setAttribute("memberVO", memberVO);		
+		
+		Cookie kakao_email = new Cookie("kakao_email", memberVO.getMem_email());
+		Cookie kakao_name = new Cookie("kakao_name", memberVO.getMem_name());
+		kakao_email.setMaxAge(600);
+		kakao_name.setMaxAge(600);
+		response.addCookie(kakao_email);
+		response.addCookie(kakao_name);
+
 		memberVO = memberService.kakaoLogin(memberVO);
 		mv.addObject("result", "newMember");
 		// Cookie작업
@@ -509,9 +523,9 @@ public class MemberController {
 		mv.setViewName("common/ajaxResult");
 		return mv;
 	}
-	
+
 	@GetMapping("kakaoMemberJoin")
-	public ModelAndView memberNewKakao(HttpSession session) throws Exception {		
+	public ModelAndView memberNewKakao(HttpSession session) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		/*
 		 * MemberVO memberVO2 = (MemberVO) session.getAttribute("memberVO");
@@ -519,43 +533,57 @@ public class MemberController {
 		 */
 		mv.addObject("memberVO", new MemberVO());
 		mv.setViewName("member/kakaoMemberJoin");
+
 		return mv;
 	}
-	
+
 	@PostMapping("kakaoMemberJoin")
-	public ModelAndView kakaoMemberJoin(@Valid MemberVO memberVO, BindingResult bindingResult,HttpSession session)throws Exception{
-		MemberVO memberVO2 = (MemberVO) session.getAttribute("memberVO");
-		String email = memberVO2.getMem_email();
-		String name = memberVO2.getMem_name();
-		String kind = memberVO2.getKind();
+	public ModelAndView kakaoMemberJoin(@Valid MemberVO memberVO, BindingResult bindingResult, HttpSession session,
+			HttpServletRequest request) throws Exception {
+		String email = "";
+		String name = "";
+		Cookie[] cookies = request.getCookies();
+		for(int i=0;i<cookies.length;i++) {
+			
+			if(cookies[i].getName().equals("kakao_name")) {
+				name = cookies[i].getValue();
+			}else if(cookies[i].getName().equals("kakao_email")){
+				email = cookies[i].getValue();
+			}
+		}
+		
+		
 		memberVO.setMem_name(name);
 		memberVO.setMem_id(email);
 		memberVO.setMem_email(email);
 		memberVO.setMem_pw("kakaoPw");
 		memberVO.setMem_kakao(1);
-		memberVO.setKind(kind);
 		
+
 		ModelAndView mv = new ModelAndView();
 		boolean result = memberService.kakaoMemberCheck(memberVO, bindingResult, checkNum);
 		System.out.println(result);
 		if (result) {
 			mv.setViewName("member/kakaoMemberJoin");
-		}else {
+		} else {
 			// 정상작동
 			int result2 = memberService.memberJoin(memberVO);
 			if (result2 > 0) {
 				mv.addObject("result", "회원가입 성공");
 				mv.addObject("path", "../");
 				mv.setViewName("common/result");
+				cookies[1] = new Cookie("kakao_email", null);
+				cookies[1].setMaxAge(0); // 쿠키의 expiration 타임을 0으로 하여 없앤다.
+				cookies[1].setPath("/");
+				cookies[2] = new Cookie("kakao_name", null);
+				cookies[2].setMaxAge(0); // 쿠키의 expiration 타임을 0으로 하여 없앤다.
+				cookies[2].setPath("/");
+				
 			}
 			session.invalidate();
 		}
 
 		return mv;
 	}
-	
-	
-
-	
 
 }

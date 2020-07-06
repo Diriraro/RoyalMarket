@@ -15,8 +15,6 @@
 	<c:import url="./template/woozoo_nav.jsp"></c:import>
 
 
-
-
 	<div class="container">
 		<h1>Index PAGe</h1>
 		

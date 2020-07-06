@@ -43,11 +43,10 @@
 		</form>
 			<div id="kakao-login-btn"></div>
 			
-			
-			
-
 
 	</div>
+	
+	
 	<script type="text/javascript">
 	
 	var openWin;
@@ -56,7 +55,7 @@
 			window.name = "parentForm";
 			// window.open("open할 window", "자식창 이름", "팝업창 옵션");
 			openWin = window.open("./findMember", "childForm",
-					"width=600, height=800, resizable = no, scrollbars = no");
+					"width=300, height=300, resizable = no, scrollbars = no");
 		}
 
 	
