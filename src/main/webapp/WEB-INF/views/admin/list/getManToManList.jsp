@@ -6,7 +6,7 @@
 	<input type="hidden" value="${check}" id="qnaNACheck">
 	<div class="topnav">
 		<a class="check active" title="manToman" style="cursor: pointer;">1:1
-			문의</a> <a class="check" title="qna" style="cursor: pointer;">질문과 답변</a>
+			문의</a>
 		<div class="search-container">
 			<input type="text" placeholder="MemberName..." name="search"
 				id="qnaSearch">

@@ -28,7 +28,9 @@
 			<!-- 목록을 제외한 다른 호출은 각 Controller로 보내서 처리 -->
 			<div style="font-size: 13px;">MENU</div>
 			<div class="info">
-				<label class="focus"><i class="far fa-folder"></i> 회원 관리 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-caret-down"></i></label>
+				<label class="focus"><i class="far fa-folder"></i> 회원 관리
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i
+					class="fa fa-caret-down"></i></label>
 				<div class="contents">
 					<a href="#" class="check" title="MemberList"><i
 						class="far fa-file-alt"></i> 일반 회원 관리</a> <a href="#" class="check"
@@ -37,7 +39,9 @@
 				</div>
 			</div>
 			<div class="info">
-				<label class="focus"><i class="far fa-folder"></i> 상품 관리  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-caret-down"></i></label>
+				<label class="focus"><i class="far fa-folder"></i> 상품 관리
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i
+					class="fa fa-caret-down"></i></label>
 				<div class="contents">
 					<a href="#" class="check" title="ProductList"><i
 						class="far fa-file-alt"></i> 상품 정보 관리</a> <a href="#" class="check"
@@ -45,7 +49,8 @@
 				</div>
 			</div>
 			<div class="info">
-				<label class="focus"><i class="far fa-folder"></i> 공지사항 관리 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-caret-down"></i></label>
+				<label class="focus"><i class="far fa-folder"></i> 공지사항 관리
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-caret-down"></i></label>
 				<div class="contents">
 					<a href="#" class="check" title="NoticeList"><i
 						class="far fa-file-alt"></i> 공지 사항 목록</a> <a href="#" class="check"
@@ -72,12 +77,11 @@
 				</div>
 			</div>
 			<div id="admin_set">
-				관리자 님
-				<!-- ${member.mem_id} == admin 추후 설정 -->
+				${member.mem_id}님
 				<i class="fas fa-user-cog"></i>
 			</div>
 			<div id="QnaAndManToMan">
-				<a title="manToman" class="check"> 질문과 답변 및 1:1문의 </a>
+				<a title="manToman" class="check"> 1:1문의 </a>
 			</div>
 			<div class="new">
 				<span id="new">new</span> <i class="fas fa-envelope"></i>
@@ -89,6 +93,7 @@
 	</section>
 	<script type="text/javascript">
 		var check = $("#NAcheck").val();
+		var s
 		if (check == 'true') {
 			// 미답변 문의가 있으면
 			$(".new").children(".fas").removeClass("fa-envelope");
@@ -223,6 +228,10 @@
 				getNoticeWrite();
 			}
 		})
+		$("#content").on("click",".w3-circle", function() {
+			var num = $(this).attr("title").trim();
+			location.href="../product/productSelect?sell_num="+num
+			})
 		$("#content").on(
 				"click",
 				"#productSearchbtn",

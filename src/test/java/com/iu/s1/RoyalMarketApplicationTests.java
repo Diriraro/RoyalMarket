@@ -32,8 +32,8 @@ class RoyalMarketApplicationTests {
 //	}
 	@Test
 	void test() throws Exception {
-		Calendar cal = Calendar.getInstance();
-		cal.set(cal.get(Calendar.YEAR),cal.get(Calendar.MONTH));
-		System.out.println(cal.getActualMaximum(cal.DATE));
+		long count = 4;
+		long countyd = 14;
+		System.out.println(((double)count/(double)countyd)*100);
 	}
 }

@@ -129,7 +129,7 @@
 					<div class="w3-col m2 text-center">
 						<img class="w3-circle" alt="상품이미지${i.index +1}"
 							src="${pageContext.request.contextPath}/upload/product/${productFileMain[i.index]}"
-							style="width: 96px; height: 96px">
+							style="width: 96px; height: 96px" title="${list.sell_num}">
 					</div>
 					<div class="w3-col m10 w3-container">
 						<h4>

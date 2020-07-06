@@ -90,10 +90,6 @@ public class AdminController {
 		model.addAttribute("qnaNACount", qnaNACount);
 
 		// 당일 거래량 및 지역별 거래량, 총 회사 수익
-		long tradeCount = 0;
-		if (adminService.getDailyTradeCount() != null) {
-			tradeCount = adminService.getDailyTradeCount();
-		}
 		List<Map.Entry<String, Long>> tradeAr = adminService.getLocateTradeCount();
 		long profit = 0;
 		long profitRate = 0;
@@ -101,20 +97,23 @@ public class AdminController {
 			profit = adminService.getProfit();
 			profitRate = (long)(profit/1000000)*100;
 		}
+		long tradeCount = 0;
+		if (adminService.getDailyTradeCount() != null) {
+			tradeCount = adminService.getDailyTradeCount();
+		}
 		long tradeCountYD = 0;
 		if(adminService.getRateForTradeCountYD() != null) {
 			tradeCountYD = adminService.getRateForTradeCountYD();
 		}
 		long tradeRate = 0;
 		if(tradeCountYD != 0 && tradeCount != 0) {
-			tradeRate= (tradeCount / tradeCountYD) * 100;
+			tradeRate = (long)(((double)tradeCount / (double)tradeCountYD) * 100);
 		} else if (tradeCountYD == 0 && tradeCount > 0) {
 			tradeRate = 100;
 		}
 		if (tradeRate > 100) {
 			tradeRate = 100;
 		}
-
 		model.addAttribute("tradeRate", tradeRate);
 		model.addAttribute("tradeCount", tradeCount);
 		model.addAttribute("tradeAr", tradeAr);
