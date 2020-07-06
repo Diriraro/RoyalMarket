@@ -34,6 +34,41 @@
 	-webkit-box-shadow: 0 0 1px 1px rgba(0, 0, 0, .3);
 	display: inline-block;
 }
+.kind {
+	background-color: white;
+}
+.kind:hover {
+	background-color: #e6dffe;
+}
+/*  */
+
+
+    ul li {
+        display: inline-block;
+        font-size: 20px;
+        letter-spacing: -.5px;
+        margin-top: 10px;
+    }
+
+    ul li.tag-item {
+        background-color: #e4e4e4;
+        color: #000;
+        margin-left: 5px;
+    }
+
+    .tag-item:hover {
+        background-color: #262626;
+        color: #fff;
+    }
+
+    .del-btn {
+        font-size: 12px;
+        font-weight: bold;
+        cursor: pointer;
+        margin-left: 8px;
+    }
+
+/*  */
 </style>
 
 <c:import url="../template/boot.jsp"></c:import>
@@ -44,7 +79,7 @@
 	
 	<div style="width: 1024px; margin-left: 440px; margin-top:50px; height: 1315px;">
 		
-		<form action="productNew" method="post" enctype="multipart/form-data">
+		<form id="allform" action="productNew" method="post" enctype="multipart/form-data">
 		
 		<font style="font-size: 25px;font-weight: bold;">기본정보</font>
 		<font style="font-size: 15px;font-weight: lighter;color: #ff5d4a">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*필수항목</font>
@@ -95,31 +130,33 @@
 		<font style="font-size: 18px;font-weight: 900;">카테고리</font> <font style="color: #ff5d4a;font-size: 18px;">*</font>
 		</div>
 		
-		<div style="width: 856px;height:250px; float: left;border-top:solid 1px #dcdbe4;">
-		<div style="overflow-y: scroll; width: 300px; height: 200px;">
-			<ul class="allKind" ">
-				<li><input type="button" class="kind" value="패션잡화"></li>
-				<li><input type="button" class="kind" value="여성의류"></li>
-				<li><input type="button" class="kind" value="남성의류"></li>
-				<li><input type="button" class="kind" value="디지털/가전"></li>
-				<li><input type="button" class="kind" value="도서/티켓/취미/애완"></li>
-				<li><input type="button" class="kind" value="생활/문구/가구/식품"></li>
-				<li><input type="button" class="kind" value="유아동/출산"></li>
-				<li><input type="button" class="kind" value="스타굿즈"></li>
-				<li><input type="button" class="kind" value="스포츠/레저"></li>
-				<li><input type="button" class="kind" value="뷰티/미용"></li>
-				<li><input type="button" class="kind" value="기타"></li>
-				<li><input type="button" class="kind" value="차량/오토바이"></li>
-				<li><input type="button" class="kind" value="구인구직"></li>
-				<li><input type="button" class="kind" value="재능"></li>
-				<li><input type="button" class="kind" value="번개나눔"></li>
-				<li><input type="button" class="kind" value="지역 서비스"></li>
-				<li><input type="button" class="kind" value="커뮤니티"></li>
-				<li><input type="button" class="kind" value="원룸/함께살아요"></li>
+		<div style="width: 856px; float: left;border-top:solid 1px #dcdbe4;">
+		<br>
+		<div style="overflow-y: scroll; width: 300px; height: 200px;font-size: 15px;font-weight: 400;border: solid 1px #e4e4e4;">
 
-			</ul>
+				<button type="button" class="kind" value="패션잡화" style="width: 280px;height: 40px;outline: 0;border: 0px;">
+				<font style="margin-right: 170px;">패션잡화</font></button>
+				<button type="button" class="kind" value="여성의류" style="width: 280px;height: 40px;outline: 0;border: 0px;">
+				<font style="margin-right: 170px;">여성의류</font></button>
+				<button type="button" class="kind" value="남성의류" style="width: 280px;height: 40px;outline: 0;border: 0px;">
+				<font style="margin-right: 170px;">남성의류</font></button>
+				<button type="button" class="kind" value="디지털/가전" style="width: 280px;height: 40px;outline: 0;border: 0px;">
+				<font style="margin-right: 152px;">디지털/가전</font></button>
+				<button type="button" class="kind" value="생활/문구/가구/식품" style="width: 280px;height: 40px;outline: 0;border: 0px;">
+				<font style="margin-right: 98px;">생활/문구/가구/식품</font></button>
+				<button type="button" class="kind" value="유아동/출산" style="width: 280px;height: 40px;outline: 0;border: 0px;">
+				<font style="margin-right: 152px;">유아동/출산</font></button>
+				<button type="button" class="kind" value="스타굿즈" style="width: 280px;height: 40px;outline: 0;border: 0px;">
+				<font style="margin-right: 170px;">스타굿즈</font></button>
+				<button type="button" class="kind" value="스포츠/레저" style="width: 280px;height: 40px;outline: 0;border: 0px;">
+				<font style="margin-right: 152px;">스포츠/레저</font></button>
+				<button type="button" class="kind" value="뷰티/미용" style="width: 280px;height: 40px;outline: 0;border: 0px;">
+				<font style="margin-right: 166px;">뷰티/미용</font></button>
+
 		</div>
-		선택한 카테고리 : <input type="text" id="sell_kind" name="sell_kind" value="" readonly="readonly">
+		<font style="font-size: 15px;color: #5c2392;font-weight: 400;">선택한 카테고리 : </font>
+		<input type="text" id="sell_kind" name="sell_kind" value="" readonly="readonly" 
+		style="height: 70px;font-size: 15px;font-weight: 900;color: #5c2392;outline: 0;border: 0px;">
 		</div>
 		<div style="width: 168px;height:113px; float: left;text-align: left;line-height: 113px;border-top:solid 1px #dcdbe4;">
 		<font style="font-size: 18px;font-weight: 900;">가격</font> <font style="color: #ff5d4a;font-size: 18px;">*</font>
@@ -143,7 +180,12 @@
 		</div>
 		
 		<div style="width: 856px;height:113px; float: left;border-top:solid 1px #dcdbe4;border-bottom:solid 1px #dcdbe4;"> 
-		<input style="margin-top: 32px;width: 856px;height: 48px;" class="form-control" type="text" name="sell_tag" id="sell_tag"> 
+		<input type="hidden" value="" name="sell_tag" id="rdTag" />
+		<div  style="height: 50px;display: inline-block;">
+		 <ul id="tag-list">
+        </ul>
+        </div>
+		<input style="width: 856px;height: 48px;" class="form-control" type="text" id="sell_tag"placeholder="태그작성 후 스페이스키를 눌러주세요"> 
 		</div>
 
 		<button style="margin-left: 860px;margin-top: 16px; width: 160px;height: 56px;border: 0px;background-image: url('${pageContext.request.contextPath}/resources/images/regi_logo.png');" type="submit" class="btn btn-default" id="productNew"></button>            
@@ -197,9 +239,6 @@
 		
 
 	<script type="text/javascript">
-/* 	$("#black").mouseover(function() {
-		$("#files").attr("type","file");
-	}); */
 	
 		$(".kind").click(function() {
 			$("#sell_kind").val($(this).val());
@@ -264,6 +303,11 @@
 						}
 					});
 		});
+
+
+		$("#sell_price").on("keyup", function() {
+		    $(this).val($(this).val().replace(/[^0-9]/g,""));
+		});
 		
 		
 
@@ -299,6 +343,8 @@
 		});
 
 
+
+
 		function doOpenCheck(chk) {
 			var obj = document.getElementsByName("condition");
 			for (var i = 0; i < obj.length; i++) {
@@ -316,6 +362,74 @@
 				}
 			}
 		}
+
+		/*  */
+		
+		$(document).ready(function () {
+
+        var tag = {};
+        var counter = 0;
+
+        // 태그를 추가한다.
+        function addTag (value) {
+            tag[counter] = value; // 태그를 Object 안에 추가
+            counter++; // counter 증가 삭제를 위한 del-btn 의 고유 id 가 된다.
+        }
+
+        // 최종적으로 서버에 넘길때 tag 안에 있는 값을 array type 으로 만들어서 넘긴다.
+        function marginTag () {
+            return Object.values(tag).filter(function (word) {
+                return word !== "";
+            });
+        }
+    
+        // 서버에 넘기기
+        $("#allform").on("submit", function (e) {
+            var value = marginTag(); // return array
+            $("#rdTag").val(value); 
+
+            $(this).submit();
+        });
+
+        $("#sell_tag").on("keypress", function (e) {
+            var self = $(this);
+
+            // input 에 focus 되있을 때 엔터 및 스페이스바 입력시 구동
+            if (e.key === "Enter" || e.keyCode == 32) {
+
+                var tagValue = self.val(); // 값 가져오기
+
+                // 값이 없으면 동작 ㄴㄴ
+                if (tagValue !== "") {
+
+                    // 같은 태그가 있는지 검사한다. 있다면 해당값이 array 로 return 된다.
+                    var result = Object.values(tag).filter(function (word) {
+                        return word === tagValue;
+                    })
+                
+                    // 태그 중복 검사
+                    if (result.length == 0) { 
+                        $("#tag-list").append("<li class='tag-item'>"+tagValue+"<span class='del-btn' idx='"+counter+"'>x</span></li>");
+                        addTag(tagValue);
+                        self.val("");
+                    } else {
+                        alert("태그값이 중복됩니다.");
+                    }
+                }
+                e.preventDefault(); // SpaceBar 시 빈공간이 생기지 않도록 방지
+            }
+        });
+
+        // 삭제 버튼 
+        // 삭제 버튼은 비동기적 생성이므로 document 최초 생성시가 아닌 검색을 통해 이벤트를 구현시킨다.
+        $(document).on("click", ".del-btn", function (e) {
+            var index = $(this).attr("idx");
+            tag[index] = "";
+            $(this).parent().remove();
+        });
+})
+		
+		/*  */
 	</script>
 
 

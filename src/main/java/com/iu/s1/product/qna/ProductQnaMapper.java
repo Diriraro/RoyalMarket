@@ -17,5 +17,7 @@ public interface ProductQnaMapper {
 	//댓글삭제
 	public long qnaDelete(long pq_num) throws Exception;
 	
+	 public List<ProductQnaVO> qnaList2(long sell_num) throws Exception;
+	
 
 }

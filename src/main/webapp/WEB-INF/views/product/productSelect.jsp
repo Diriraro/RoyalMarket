@@ -134,7 +134,9 @@
 					type="hidden" name="mem_storeNum" value="${member.mem_storeNum}" />
 				<input type="hidden" name="sell_num" value="${vo.sell_num}" />
 
-				<c:if test="${empty zc.zzim_num}">
+				
+				<c:if test="${empty zc.zzim_num and (vo.mem_storeNum ne member.mem_storeNum)}">
+
 					<button type="submit"
 						style="margin-top: 65px; border-radius:0px 0px 0px 0px;width: 176px; height: 56px;background-image: url('${pageContext.request.contextPath}/resources/images/zzim_button.png');"
 						class="btn btn-default"></button>
@@ -145,15 +147,27 @@
 				</c:if> 
 			</form>
 
-			<c:if test="${not empty zc.zzim_num}">
-				<a href="zzimDelete?zzim_num=${zc.zzim_num}"><img
+
+			<c:if test="${not empty zc.zzim_num and (vo.mem_storeNum ne member.mem_storeNum)}">
+				<a class="zzimbtn"  href="zzimDelete?zzim_num=${zc.zzim_num}"><img
+
 					style="margin-top: 65px; cursor: pointer;" alt=""
 					src="${pageContext.request.contextPath}/resources/images/zzimaft_button.png"></a>
 				<a><img style="margin-top: 65px; cursor: pointer;" alt=""
 					src="${pageContext.request.contextPath}/resources/images/phone_button.png"></a>
 				<a href="../payment/productPay?sell_product=${vo.sell_product}&sell_price=${vo.sell_price}&sell_num=${vo.sell_num}"><img style="margin-top: 65px; cursor: pointer;" alt=""
 					src="${pageContext.request.contextPath}/resources/images/buy_button.png"></a>
-			</c:if>  
+			</c:if>
+
+			<c:if test="${vo.mem_storeNum eq member.mem_storeNum}">
+				<a class="zzimbtn"  href="myProductList?kind=sp&mem_storeNum=${member.mem_storeNum}"><img
+					style="margin-top: 65px; cursor: pointer;" alt=""
+					src="${pageContext.request.contextPath}/resources/images/myshopgo_logo.png"></a>
+			</c:if>
+  <div id="myModal2" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+
+</div>	
+
 			<!-- 찜 끝 -->
 
 
@@ -202,23 +216,14 @@
 
 	
 	<!-- 상품정보 끝 -->
-	
 
-	<div class="panel panel-info"
-		style="height: 100px; width: 80px; cursor: pointer; background-color: black;"
-		onclick="location.href='./productUpdate?sell_num=${vo.sell_num}'"></div>
-		
-		
-			<div class="panel panel-info"
-		style="height: 100px; width: 80px; cursor: pointer; background-color: red;"
-		onclick="location.href='./productDelete?sell_num=${vo.sell_num}'"></div>
-		
 		
 		
 		
 	<!--  상품문의  -->
+	<br>
 	<hr style="width: 1024px;">
-	<div style="width: 663px; margin-left:440px; background-color: yellow;float: left;">
+	<div style="width: 663px; margin-left:440px;float: left;border-right: solid 1px #e4e4e4;">
 	<font style="font-size: 18px;font-weight: 900;">상품문의</font>
 	<hr style="width: 630px;">
 
@@ -237,23 +242,78 @@
 	</div>
 
 	<div class="container">
-		<div class="qnaList"></div>
+		<div class="qnaList">
+
+		
+		</div>
 	</div>
 	
 	</div>
+
+	<!-- 상품문의끝 -->
 	
-	<div style="background-color: blue;float: left;width: 360px;">
-	<font style="font-size: 18px;font-weight: 900;">상점정보</font>
+	
+	<!-- 상점정보 -->
+	<div style="float: left;width: 360px;">
+	<font style="font-size: 18px;font-weight: 900;">&nbsp;&nbsp;상점정보</font>
+
 	<hr style="width: 330px;">
+	<img style="width: 50px;height: 50px;margin-left: 29px;" alt="" src="${pageContext.request.contextPath}/resources/images/logo.png">
+	  <a href="${pageContext.request.contextPath}/shop/myshop?mem_storeNum=${vo.mem_storeNum}"> 
+	  <font style="font-weight: 800; font-size: 16px;color: black;">&nbsp;${mvo2.mem_storeName}</font></a>
+
+	  <c:if test="${fonum.follow_Num eq null and (vo.mem_storeNum ne member.mem_storeNum)}">
+					<a href="../shop/setinsertFollow?give_storeNum=${member.mem_storeNum}&take_storeNum=${vo.mem_storeNum}&mem_storeNum=${vo.mem_storeNum}"
+					class="btn" id="pi"style="margin-top:9px; margin-left: 15px;">
+					<img style="border: solid 1px #808080;" alt="" src="${pageContext.request.contextPath}/resources/images/follow_logo.png"></a>
+				</c:if>
+				
+				<!-- 팔로우 상태라면 언팔버튼 출력  -->
+				<c:if test="${fonum.follow_Num ne null and (vo.mem_storeNum ne member.mem_storeNum)}">
+				<a href="../shop/setDeleteFollow?follow_Num=${fonum.follow_Num}&mem_storeNum=${vo.mem_storeNum}" 
+				class="btn" id="mi"style="margin-top:9px; margin-left: 15px;">
+				<img style="border: solid 1px #f0595b;" alt="" src="${pageContext.request.contextPath}/resources/images/following_logo.png"></a>
+				</c:if>
+				
+				<c:if test="${vo.mem_storeNum eq member.mem_storeNum}">
+				<a href="${pageContext.request.contextPath}/shop/myshop?mem_storeNum=${vo.mem_storeNum}" 
+				class="btn" id="mi"style="margin-top:9px; margin-left: 15px;">
+				<img style="border: solid 1px #5c2392;" alt="" src="${pageContext.request.contextPath}/resources/images/myshop_logo.png"></a>
+				</c:if>
+
+				<br>
+				<div style="height: 10px;"></div>
+				<a href="${pageContext.request.contextPath}/shop/myshop?mem_storeNum=${vo.mem_storeNum}">
+				<font style="margin-left:125px; color: gray;">상점 상품 더보기></font></a>
+				<hr>
+				
+				
+	  
 	</div>
-	
+	<!-- 상점정보끝 -->
 	
 	<script type="text/javascript">
 		$(document).on('click', '.reply', function() {
-			alert("asdasd");
 			$("#pq_contents").val("@" + $(this).val() + " : ");
 		});
 		
+
+			$('#closebtn').on('click', function(){
+			$('#myModal2').modal('hide');
+			});
+
+/* 			$(document).on('click', '.qlist', function() {
+				var a =5 ; 
+				var b = 10;	
+				if(a > b){ 
+					alert("a 가 b 보다 큽니다."); 
+					}else if(b > a){ 
+					alert('b 가 c 보다 큽니다.'); 
+					}else { c
+					 alert('모든 조건을 만족하지 않습니다.'); }
+				});
+
+ */
 		
 	</script>
 
