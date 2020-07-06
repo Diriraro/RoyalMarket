@@ -7,9 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-
-
-
 	<script>
 		var sell_num = '${vo.sell_num}'; //게시글 번호
 
@@ -37,7 +34,7 @@
 												a += '<div class="qnaInfo'+value.pq_num+'">';
 												//상점연결하기
 												a += '<a href='
-														+ "./productSelect?sell_num=${vo.sell_num}"
+														+ "../shop/myshop?mem_storeNum=${member.mem_storeNum}"
 														+ ' style="color: #ababab; font-size: 14px; font-weight: 600;">'
 														+ value.pq_storeName
 														+ '  </a>'
@@ -61,22 +58,22 @@
 		//댓글 등록
 		function qnaInsert(insertData) {
 			var qnacontents = $("#pq_contents").val().trim();
-			if(qnacontents==""){
+			if (qnacontents == "") {
 				alert("문의사항을 입력해주세요");
 				stopPropagation();
-				}else{
-			$.ajax({
-				url : '/productQna/qnaInsert',
-				type : 'post',
-				data : insertData,
-				success : function(data) {
-					if (data == 1) {
-						qnaList(); //댓글 작성 후 댓글 목록 reload
-						$('[name=pq_contents]').val('');
+			} else {
+				$.ajax({
+					url : '/productQna/qnaInsert',
+					type : 'post',
+					data : insertData,
+					success : function(data) {
+						if (data == 1) {
+							qnaList(); //댓글 작성 후 댓글 목록 reload
+							$('[name=pq_contents]').val('');
+						}
 					}
-				}
-			});
-		}
+				});
+			}
 		}
 
 		//댓글 삭제 
@@ -95,14 +92,7 @@
 		$(document).ready(function() {
 			qnaList(); //페이지 로딩시 댓글 목록 출력 
 		});
-
-		
-		
 	</script>
-
-
-
-
 
 </body>
 </html>

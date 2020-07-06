@@ -253,10 +253,7 @@
 			alert("asdasd");
 			$("#pq_contents").val("@" + $(this).val() + " : ");
 		});
-
 		
-
-
 		
 	</script>
 

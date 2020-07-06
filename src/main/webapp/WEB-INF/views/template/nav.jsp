@@ -10,6 +10,7 @@
       <li class="active"><a href="${pageContext.request.contextPath}/">Home</a></li>
       <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Page 1 <span class="caret"></span></a>
         <ul class="dropdown-menu">
+          <li><a href="${pageContext.request.contextPath}/notice/noticeList">Notice</a></li>
           <li><a href="${pageContext.request.contextPath}/qna/qnaList">QNA</a></li>
 
           <li><a href="javascript:popup()">포인트 충전</a></li>
@@ -26,7 +27,6 @@
       <li><a href="${pageContext.request.contextPath}/member/memberPage"><span class="glyphicon glyphicon-user"></span> MyPage</a></li>
       <li><a href="${pageContext.request.contextPath}/member/memberLogout"><span class="glyphicon glyphicon-log-in"></span> Logout</a></li>
     </c:if>
-    
     </ul>
   </div>
 </nav>

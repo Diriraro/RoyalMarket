@@ -6,12 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.iu.s1.member.MemberVO;
+import com.iu.s1.product.qna.ProductQnaMapper;
 
 @Service
 public class ProductQnaService {
 	
 	@Autowired
-	ProductQnaMapper qnaMapper;
+	private ProductQnaMapper qnaMapper;
 	
 	//작성
 	

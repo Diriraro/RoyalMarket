@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <div class="footer" style="height: 300px;">
@@ -35,8 +36,8 @@
 		<br><br>
 			<p>
 				<font style="font-size: 15px; ">Copyright ⓒ Bungaejangter Inc. All rights reserved</font>
-				<font style="float: right;">제휴문의 &nbsp&nbsppartner@bunjang.co.kr</font>
-				<font style="float: right; margin-right: 40px;">고객센터 &nbsp&nbsp 02-598-8240</font>
+				<font style="float: right;">제휴문의 &nbsp;&nbsp;partner@bunjang.co.kr</font>
+				<font style="float: right; margin-right: 40px;">고객센터 &nbsp;&nbsp; 02-598-8240</font>
 			</p>
 	</div>
 	

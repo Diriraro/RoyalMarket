@@ -2,6 +2,8 @@ package com.iu.s1.product;
 
 import java.sql.Date;
 
+import lombok.Data;
+
 public class ProductVO {
 	
 	private Long sell_num;
