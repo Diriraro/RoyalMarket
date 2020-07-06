@@ -9,6 +9,9 @@ import com.iu.s1.member.MemberVO;
 import com.iu.s1.paycheck.PayCheckVO;
 import com.iu.s1.paymentHistory.Buy_HistoryVO;
 import com.iu.s1.paymentHistory.Sell_HistoryVO;
+import com.iu.s1.product.ProductVO;
+import com.iu.s1.saveCash.SaveCashRepository;
+import com.iu.s1.saveCash.SaveCashVO;
 import com.iu.s1.trading.TradingVO;
 
 @Service
@@ -16,6 +19,9 @@ public class PaymentService {
 
 	@Autowired
 	private PaymentMapper paymentMapper;
+	
+	@Autowired
+	private SaveCashRepository saveCashRepository;		//적립금
 	
 	public int pointUpdate(MemberVO memberVO)throws Exception{
 		return paymentMapper.pointUpdate(memberVO);
@@ -25,8 +31,8 @@ public class PaymentService {
 		return paymentMapper.pointSelect(mem_id);
 	}
 	
-	public String productName(long sell_num)throws Exception{
-		return paymentMapper.productName(sell_num);
+	public ProductVO productSelect(long sell_num)throws Exception{
+		return paymentMapper.productSelect(sell_num);
 	}
 	
 	public int paymentCharge(PayVO payVO)throws Exception{
@@ -112,4 +118,48 @@ public class PaymentService {
 		return paymentMapper.paycheckDel(mem_id);
 	}
 	
+	public MemberVO memberVOSel(String mem_id)throws Exception{
+		return paymentMapper.memberVOSel(mem_id);
+	}
+	
+	public int paystatsInsert(PayStatsVO payStatsVO) throws Exception{
+		return paymentMapper.paystatsInsert(payStatsVO);
+	}
+	
+	public long buy_status(long sell_num)throws Exception{
+		return paymentMapper.buy_status(sell_num);
+	}
+	
+	public long sell_status(long sell_num)throws Exception{
+		return paymentMapper.sell_status(sell_num);
+	}
+	
+	public Buy_HistoryVO buy_Sel(long sell_num)throws Exception{
+		return paymentMapper.buy_Sel(sell_num);
+	}
+	
+	public Sell_HistoryVO sell_Sel(long sell_num)throws Exception{
+		return paymentMapper.sell_Sel(sell_num);
+	}
+	
+	
+	public int buy_cancelUp(long buy_cancel)throws Exception{
+		return paymentMapper.buy_cancelUp(buy_cancel);
+	}
+	
+	public int sell_cancelUp(long cell_cancel)throws Exception{
+		return paymentMapper.sell_cancelUp(cell_cancel);
+	}
+
+	public SaveCashVO selectSC(String mem_id)throws Exception{
+		return saveCashRepository.selectSC(mem_id);
+	}
+	
+	public int createSC(String mem_id)throws Exception{
+		return saveCashRepository.createSC(mem_id);
+	}
+	
+	public int updateSC(SaveCashVO saveCashVO)throws Exception{
+		return saveCashRepository.updateSC(saveCashVO);
+	}
 }

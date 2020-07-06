@@ -64,14 +64,7 @@
 	<select id="myProductCount" parameterType="Pager"
 		resultType="java.lang.Long">
 		select count(sell_num) from store_product where
-		<choose>
-			<when test="kind=='sp'">
-				sell_product
-			</when>
-			<otherwise>
-				mem_storeNum
-			</otherwise>
-		</choose>
+		mem_storeNum=#{mem_storeNum}
 		like concat('%',#{search},'%')
 	</select>
 
@@ -100,6 +93,12 @@
 	<select id="productAddress" parameterType="Long"
 		resultType="MemberVO">
 		select mem_address from member where mem_storeNum=(select
+		mem_storeNum from store_product where sell_num=#{sell_num})
+	</select>
+	
+		<select id="productStoreName" parameterType="Long"
+		resultType="MemberVO">
+		select mem_storeName from member where mem_storeNum=(select
 		mem_storeNum from store_product where sell_num=#{sell_num})
 	</select>
 

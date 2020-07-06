@@ -12,7 +12,7 @@
 <body>
 </head>
 <body>
-	<c:import url="./template/nav.jsp"></c:import>
+	<c:import url="./template/woozoo_nav.jsp"></c:import>
 
 
 

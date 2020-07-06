@@ -2,10 +2,11 @@ package com.iu.s1.product.qna;
 
 import java.util.List;
 
-import org.apache.maven.model.Model;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.querydsl.QPageRequest;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,13 +17,14 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.iu.s1.product.qna.ProductQnaService;
 import com.iu.s1.member.MemberVO;
+import com.iu.s1.product.qna.ProductQnaService;
 
 @Controller
 @RequestMapping("/productQna/**/")
 public class ProductQnaController {
 	
 	@Autowired
-	ProductQnaService qnaService;
+	private ProductQnaService qnaService;
 	
 //	@GetMapping("qnaInsert")
 //	public ModelAndView qnaInsert(ModelAndView mv)throws Exception{
@@ -62,11 +64,15 @@ public class ProductQnaController {
     @RequestMapping("/qnaList") //댓글 리스트
     @ResponseBody
     private List<ProductQnaVO> qnaList(Model model,@RequestParam long sell_num) throws Exception{
-
         return qnaService.qnaList(sell_num);
     }
-
-
-
+    
+	/*
+	 * @RequestMapping("/qnaList") //댓글 리스트
+	 * 
+	 * @ResponseBody private void qnaList2(Model model,long sell_num) throws
+	 * Exception{ List<ProductQnaVO> ar = qnaService.qnaList(sell_num);
+	 * model.addAttribute("qlist", ar); }
+	 */
 
 }
