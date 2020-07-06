@@ -328,6 +328,7 @@ public class PaymentController {
 		
 		
 		long sell_num=Long.parseLong(request.getParameter("sell_num"));
+		long buy_history_num = Long.parseLong(request.getParameter("buy_history_num"));
 		String seller_id=paymentService.seller_id_select(sell_num);
 		long curPoint = paymentService.pointSelect(seller_id);
 		
@@ -402,6 +403,7 @@ public class PaymentController {
 		ModelAndView mv = new ModelAndView();
 		
 		long sell_num=Long.parseLong(request.getParameter("sell_num"));
+		
 		System.out.println(sell_num);
 		String seller_id=paymentService.seller_id_select(sell_num);
 		long curPoint = paymentService.pointSelect(seller_id);
@@ -449,10 +451,13 @@ public class PaymentController {
 			Buy_HistoryVO buy_HistoryVO = new Buy_HistoryVO();
 			buy_HistoryVO.setSell_num(sell_num);
 			buy_HistoryVO.setStatus(2);			
+			buy_HistoryVO.setBuy_check(0);
 			paymentService.buy_statusUp(buy_HistoryVO);
+			
 			sell_HistoryVO = new Sell_HistoryVO();
 			sell_HistoryVO.setSell_num(sell_num);
 			sell_HistoryVO.setStatus(2);
+			sell_HistoryVO.setSell_check(0);	
 			paymentService.sell_statusUp(sell_HistoryVO);
 			
 			// 1% 적립금 추가
@@ -482,21 +487,23 @@ public class PaymentController {
 		ModelAndView mv = new ModelAndView();
 		MemberVO memberVO = (MemberVO)request.getSession().getAttribute("member");
 		long sell_num = Long.parseLong(request.getParameter("sell_num"));
+		long buy_history_num = Long.parseLong(request.getParameter("buy_history_num"));
 		
 		// productVo 가져오기
 		ProductVO productVO =paymentService.productSelect(sell_num);
 		// 이미지 불러오기
 		String image =productService.selectFileName(sell_num);
 		// status(주문상태 가져오기 )
-		long status = paymentService.buy_status(sell_num);
+		long status = paymentService.buy_status(buy_history_num);
 		// 주문자추가
 		String mem_id=memberVO.getMem_id();
 		//날짜 가져오기
-		Buy_HistoryVO buy_HistoryVO= paymentService.buy_Sel(sell_num);
+		Buy_HistoryVO buy_HistoryVO= paymentService.buy_Sel(buy_history_num);
 		
 		mv.addObject("buy_date", buy_HistoryVO.getBuy_date());
 		mv.addObject("mem_id", mem_id);
 		mv.addObject("status", status);
+		mv.addObject("buy_history_num", buy_history_num);
 		mv.addObject("image", image);
 		mv.addObject("productVO", productVO);
 		mv.addObject("sell_num", sell_num);
@@ -509,26 +516,29 @@ public class PaymentController {
 		ModelAndView mv = new ModelAndView();
 		long sell_num = Long.parseLong(request.getParameter("sell_num"));
 		MemberVO memberVO = (MemberVO)request.getSession().getAttribute("member");
+		long sell_history_num= Long.parseLong(request.getParameter("sell_history_num"));
+		
 		// productVo 가져오기
 		ProductVO productVO =paymentService.productSelect(sell_num);
 		// 이미지 불러오기
 		String image =productService.selectFileName(sell_num);
 		// status(주문상태 가져오기 )
-		long status = paymentService.sell_status(sell_num);
+		long status = paymentService.sell_status(sell_history_num);
 		// 주문자추가
 		String mem_id=memberVO.getMem_id();
 		//날짜 가져오기
-		Buy_HistoryVO buy_HistoryVO= paymentService.buy_Sel(sell_num);
+		Sell_HistoryVO sell_HistoryVO = paymentService.sell_Sel(sell_history_num);
 		// 구매자 전화번호와 주소 검색
-		String buyer_id = buy_HistoryVO.getMem_id();
+		String buyer_id = sell_HistoryVO.getMem_id();
 		MemberVO memberVO2=paymentService.memberVOSel(buyer_id);
 		
 		mv.addObject("memberVO", memberVO2);
-		mv.addObject("buy_date", buy_HistoryVO.getBuy_date());
+		mv.addObject("buy_date", sell_HistoryVO.getSell_date());
 		mv.addObject("mem_id", mem_id);
 		mv.addObject("status", status);
 		mv.addObject("image", image);
 		mv.addObject("productVO", productVO);
+		mv.addObject("sell_history_num", sell_history_num);
 		mv.addObject("sell_num", sell_num);
 		mv.setViewName("/payment/buyer_page");
 		mv.addObject("sell_num", sell_num);
@@ -542,11 +552,11 @@ public class PaymentController {
 		ModelAndView mv = new ModelAndView();
 		long sell_num = Long.parseLong(request.getParameter("sell_num"));
 		String check= request.getParameter("check");
-		long status = paymentService.buy_status(sell_num);
-		long status2 = paymentService.sell_status(sell_num);
-		
-		
+	
 		if(check.equals("buy")) {
+			long buy_history_num = Long.parseLong(request.getParameter("buy_history_num"));
+			long status = paymentService.buy_status(buy_history_num);
+			
 			mv.setViewName("redirect:./buy_History");
 			Sell_HistoryVO sell_HistoryVO = new Sell_HistoryVO();
 			sell_HistoryVO.setSell_num(sell_num);
@@ -563,6 +573,10 @@ public class PaymentController {
 			paymentService.sell_statusUp(sell_HistoryVO);
 			paymentService.buy_cancelUp(1);
 		}else {
+			long sell_history_num = Long.parseLong(request.getParameter("sell_history_num"));
+			long status2 = paymentService.sell_status(sell_history_num);
+			
+			
 			mv.setViewName("redirect:./sell_History");
 			Buy_HistoryVO buy_HistoryVO = new Buy_HistoryVO();
 			buy_HistoryVO.setSell_num(sell_num);
@@ -588,10 +602,13 @@ public class PaymentController {
 			Buy_HistoryVO buy_HistoryVO = new Buy_HistoryVO();
 			buy_HistoryVO.setSell_num(sell_num);
 			buy_HistoryVO.setStatus(3);
+			buy_HistoryVO.setBuy_check(1);
 			paymentService.buy_statusUp(buy_HistoryVO);
 			Sell_HistoryVO sell_HistoryVO = new Sell_HistoryVO();
 			sell_HistoryVO.setSell_num(sell_num);
 			sell_HistoryVO.setStatus(3);
+			sell_HistoryVO.setSell_check(1);
+			
 			paymentService.sell_statusUp(sell_HistoryVO);
 			
 			String mem_id = tradingVO.getSeller_id();

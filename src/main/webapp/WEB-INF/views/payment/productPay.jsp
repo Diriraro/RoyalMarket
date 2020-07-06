@@ -97,9 +97,9 @@
 					</div>
 				</c:if>
 				<!-- post parameter -->
-				<input type="text" id="cash" name="cash" value="0">							
-				<input type="text" id="sel_price" name="sell_price" value="${sell_price+2500}">
-				<input type="text" id="sel_num" name="sell_num" value="${sell_num}">
+				<input type="hidden" id="cash" name="cash" value="0">							
+				<input type="hidden" id="sel_price" name="sell_price" value="${sell_price+2500}">
+				<input type="hidden" id="sel_num" name="sell_num" value="${sell_num}">
 				<!-- cash 		: 차감되는 적립금
 					 sel_price 	: 차감되는 포인트 -->
 			</form>	

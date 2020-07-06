@@ -71,7 +71,8 @@
 		var check = confirm("상품 주문을 취소하시겠습니까?");
 		var num = $("#productCancel").attr("title");
 		if(check){
-			location.href="./productCancel?sell_num="+num+"&check=sell";
+			var sell_history_num= ${sell_history_num};
+			location.href="./productCancel?sell_num="+num+"&check=sell&sell_history_num="+sell_history_num;
 		}
 	});	
 	

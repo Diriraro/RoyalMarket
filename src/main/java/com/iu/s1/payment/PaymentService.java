@@ -138,6 +138,11 @@ public class PaymentService {
 		return paymentMapper.buy_Sel(sell_num);
 	}
 	
+	public Sell_HistoryVO sell_Sel(long sell_num)throws Exception{
+		return paymentMapper.sell_Sel(sell_num);
+	}
+	
+	
 	public int buy_cancelUp(long buy_cancel)throws Exception{
 		return paymentMapper.buy_cancelUp(buy_cancel);
 	}

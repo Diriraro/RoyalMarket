@@ -67,14 +67,16 @@
 		var check = confirm("상품 주문을 취소하시겠습니까?");
 		var num = $("#productCancel").attr("title");
 		if(check){
-			location.href="./productCancel?sell_num="+num+"&check=buy";
+			var buy_history_num = ${buy_history_num};
+			location.href="./productCancel?sell_num="+num+"&check=buy&buy_history_num="+buy_history_num;
 		}
 	})	
 	$("#productTake").click(function() {
 		var check = confirm("상품 인수완료를 하시겠습니까?");
 		var num = $("#productTake").attr("title");
 		if(check){
-			location.href="./productTake?sell_num="+num;
+			var buy_history_num = ${buy_history_num};
+			location.href="./productTake?sell_num="+num+"&buy_history_num="+buy_history_num;
 		}
 	}); 
 		
