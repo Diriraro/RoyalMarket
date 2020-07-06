@@ -51,7 +51,7 @@ public class MemberController {
 	public ModelAndView findPwByEmail(HttpSession session, MemberVO memberVO) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("memberVO", new MemberVO());
-		mv.setViewName("member/findPwByEmail");
+		mv.setViewName("member/findMember");
 		return mv;
 	}
 
@@ -68,11 +68,12 @@ public class MemberController {
 		boolean result = memberService.findPwByEmail(memberVO, bindingResult, checkNum);
 
 		if (result) {
-			mv.setViewName("member/findPwByEmail");
+			mv.addObject("show4", result);
+			mv.setViewName("member/findMember");
 		} else if (now_now > 300000) {
 			System.out.println("ddd");
 			mv.addObject("result", "인증번호 유효기간이 지났습니다.");
-			mv.addObject("path", "./findPwByEmail");
+			mv.addObject("path", "./findMember");
 
 			mv.setViewName("common/result");
 		} else {
@@ -101,10 +102,11 @@ public class MemberController {
 		System.out.println(now_now);
 		if (result) {
 			// model.addAttribute("result","인증번호를 다시 확인해주세요");
-			mv.setViewName("member/findPwByPhone");
+			mv.setViewName("member/findMember");
+			mv.addObject("show3", result);
 		} else if (now_now > 300000) {
 			mv.addObject("result", "인증번호 유효기간이 지났습니다.");
-			mv.addObject("path", "./findPwByPhone");
+			mv.addObject("path", "./findMember");
 
 			mv.setViewName("common/result");
 		} else {
@@ -332,12 +334,12 @@ public class MemberController {
 	}
 
 	@GetMapping("findMember")
-	public ModelAndView findMember() throws Exception{
+	public ModelAndView findMember() throws Exception {
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("memberVO", new MemberVO());
 		mv.setViewName("member/findMember");
 		return mv;
-	
+
 	}
 
 	@GetMapping("findPwByPhone")
@@ -509,7 +511,7 @@ public class MemberController {
 			HttpServletResponse response) throws Exception {
 
 		/* memberVO.setKind(profile); */
-		
+
 		Cookie kakao_email = new Cookie("kakao_email", memberVO.getMem_email());
 		Cookie kakao_name = new Cookie("kakao_name", memberVO.getMem_name());
 		kakao_email.setMaxAge(600);
@@ -547,22 +549,20 @@ public class MemberController {
 		String email = "";
 		String name = "";
 		Cookie[] cookies = request.getCookies();
-		for(int i=0;i<cookies.length;i++) {
-			
-			if(cookies[i].getName().equals("kakao_name")) {
+		for (int i = 0; i < cookies.length; i++) {
+
+			if (cookies[i].getName().equals("kakao_name")) {
 				name = cookies[i].getValue();
-			}else if(cookies[i].getName().equals("kakao_email")){
+			} else if (cookies[i].getName().equals("kakao_email")) {
 				email = cookies[i].getValue();
 			}
 		}
-		
-		
+
 		memberVO.setMem_name(name);
 		memberVO.setMem_id(email);
 		memberVO.setMem_email(email);
 		memberVO.setMem_pw("kakaoPw");
 		memberVO.setMem_kakao(1);
-		
 
 		ModelAndView mv = new ModelAndView();
 		boolean result = memberService.kakaoMemberCheck(memberVO, bindingResult, checkNum);
@@ -582,7 +582,7 @@ public class MemberController {
 				cookies[2] = new Cookie("kakao_name", null);
 				cookies[2].setMaxAge(0); // 쿠키의 expiration 타임을 0으로 하여 없앤다.
 				cookies[2].setPath("/");
-				
+
 			}
 			session.invalidate();
 		}
