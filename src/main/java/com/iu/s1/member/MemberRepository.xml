@@ -59,7 +59,7 @@
 		SELECT * FROM member where mem_regDate > #{mem_regDate}
 	</select>
 	
-	<update id="accessManage" parameterType="MemberVO">
+	<update id="accessManager" parameterType="MemberVO">
 		update member set mem_access=#{mem_access} where mem_storeNum=#{mem_storeNum}
 	</update>
 	
