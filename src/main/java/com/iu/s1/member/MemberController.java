@@ -332,8 +332,12 @@ public class MemberController {
 	}
 
 	@GetMapping("findMember")
-	public void findMember() throws Exception {
-
+	public ModelAndView findMember() throws Exception{
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("memberVO", new MemberVO());
+		mv.setViewName("member/findMember");
+		return mv;
+	
 	}
 
 	@GetMapping("findPwByPhone")
