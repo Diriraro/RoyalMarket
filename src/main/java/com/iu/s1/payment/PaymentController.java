@@ -512,12 +512,15 @@ public class PaymentController {
 			Sell_HistoryVO sell_HistoryVO = new Sell_HistoryVO();
 			sell_HistoryVO.setSell_num(sell_num);
 			sell_HistoryVO.setStatus(4);
+			Buy_HistoryVO buy_HistoryVO = new Buy_HistoryVO();
 			
-			if(status!=3) {
-				Buy_HistoryVO buy_HistoryVO = new Buy_HistoryVO();
+			if(status!=4) {
 				buy_HistoryVO.setSell_num(sell_num);
 				buy_HistoryVO.setStatus(3);
 			}
+			buy_HistoryVO.setStatus(5);
+			
+			paymentService.buy_statusUp(buy_HistoryVO);
 			paymentService.sell_statusUp(sell_HistoryVO);
 			paymentService.buy_cancelUp(1);
 		}else {
@@ -525,12 +528,15 @@ public class PaymentController {
 			Buy_HistoryVO buy_HistoryVO = new Buy_HistoryVO();
 			buy_HistoryVO.setSell_num(sell_num);
 			buy_HistoryVO.setStatus(4);
+			Sell_HistoryVO sell_HistoryVO = new Sell_HistoryVO();
 			
 			if(status2!=3) {
-				Sell_HistoryVO sell_HistoryVO = new Sell_HistoryVO();
+				
 				sell_HistoryVO.setSell_num(sell_num);
 				sell_HistoryVO.setStatus(3);
 			}
+			sell_HistoryVO.setStatus(5);
+			paymentService.sell_statusUp(sell_HistoryVO);
 			paymentService.buy_statusUp(buy_HistoryVO);
 			paymentService.sell_cancelUp(1);
 		}
@@ -538,6 +544,7 @@ public class PaymentController {
 
 		// 트레이딩 테이블에서 가격과 판매자 아이디를 조회해서 다시 판매자에게 돈을 돌려줌
 		TradingVO tradingVO =paymentService.tradingSelect(sell_num);
+		
 		if(tradingVO.getBuy_cancel()==1 && tradingVO.getSell_cancel()==1) {
 			Buy_HistoryVO buy_HistoryVO = new Buy_HistoryVO();
 			buy_HistoryVO.setSell_num(sell_num);

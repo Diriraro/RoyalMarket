@@ -42,6 +42,7 @@
 					<c:if test="${status eq 2}"> 판매 완료</c:if>
 					<c:if test="${status eq 3}"> 취소 완료</c:if>
 					<c:if test="${status eq 4}"> 구매자가 취소 요청을 하였습니다. </c:if>
+					<c:if test="${status eq 5}"> 취소 요청중</c:if>
 					
 				</td>
 					<c:if test="${status eq 0}">
