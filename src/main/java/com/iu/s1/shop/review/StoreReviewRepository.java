@@ -27,6 +27,9 @@ public interface StoreReviewRepository {
 	// 2번 sell_num 으로 store_product 검색해서 sell_product 가져오기
 	public String getSelectSell_num_sell_product(long sell_num) throws Exception;
 	
+	// 갯수
+	public long reco(long mem_storeNum)throws Exception;
+	
 	
 	
 	

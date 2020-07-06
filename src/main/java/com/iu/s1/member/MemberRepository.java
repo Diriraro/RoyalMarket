@@ -1,5 +1,6 @@
 package com.iu.s1.member;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -30,5 +31,8 @@ public interface MemberRepository {
 	public List<MemberVO> getDailyNewMember(MemberVO memberVO) throws Exception;
 	public long memberCount() throws Exception;
 	public int accessManager(MemberVO memberVO)throws Exception;
+	
+	// shop
+	public String getregDate(long mem_storeNum) throws Exception;
 	
 }

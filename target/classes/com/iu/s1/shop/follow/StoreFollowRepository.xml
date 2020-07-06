@@ -45,8 +45,16 @@
 		SELECT mem_storeName FROM member WHERE mem_storeNum=#{give_storeNum}
 	</select>
 	
+<!-- giveco  -->
+	<select id="giveco" parameterType="com.iu.s1.shop.follow.StoreFollowVO" resultType="Long">
+		select count(*) from follow where give_storeNum = #{mem_storeNum}
+	</select>
+
 	
-	
+<!-- takeco  -->	
+	<select id="takeco" parameterType="com.iu.s1.shop.follow.StoreFollowVO" resultType="Long">
+	select count(*) from follow where take_storeNum =  #{mem_storeNum}
+	</select>
 	
 	  
   </mapper>

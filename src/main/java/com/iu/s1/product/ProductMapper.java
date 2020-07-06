@@ -34,7 +34,10 @@ public interface ProductMapper {
 	
 	// shop에서 쓸거
 	public List<ProductVO> myList(long mem_storeNum) throws Exception;
+	public long prodco(long mem_storeNum) throws Exception;
+	
 	public int productDelete(ProductVO productVO) throws Exception;
+	
 	
 	
 }

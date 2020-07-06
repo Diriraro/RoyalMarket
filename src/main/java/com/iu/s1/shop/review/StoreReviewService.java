@@ -95,6 +95,11 @@ public class StoreReviewService {
 		
 	}
 	
+	// reco
+	public long reco(long mem_storeNum)throws Exception{
+		return storeReviewRepository.reco(mem_storeNum);
+		
+	}
 	
 	
 	

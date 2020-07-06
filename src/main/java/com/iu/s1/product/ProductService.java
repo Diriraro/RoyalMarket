@@ -122,13 +122,22 @@ public class ProductService {
 	public List<ProductVO> myList(long mem_storeNum) throws Exception {
 		return productMapper.myList(mem_storeNum);
 	}
+	//shop 에서 쓸 상품co
+	public long prodco(long mem_storeNum) throws Exception {
+		
+		return productMapper.prodco(mem_storeNum);
+	}
 	
 	// shop에서 쓸 찜
 	public List<ZzimVO> myzzim(long mem_storeNum) throws Exception{
 		return zzimMapper.myzzim(mem_storeNum);
-		
 	}
 	
+	// shop에서 쓸 찜co
+	
+	public long zico(long mem_storeNum) throws Exception{
+		return zzimMapper.zico(mem_storeNum);
+	}
 	
 	
 	public int productDelete(ProductVO productVO)throws Exception{

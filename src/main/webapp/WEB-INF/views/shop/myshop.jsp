@@ -3,6 +3,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,6 +32,7 @@ border-top: 2px solid black;
 <c:import url="../template/boot.jsp"></c:import>
 </head>
 <body>
+<h2></h2>
 	<c:import url="../template/woozoo_nav.jsp"></c:import>
 	<!-- 내상점 버튼 누르면 처음으로 들어오는 곳  -->
 
@@ -46,16 +48,16 @@ border-top: 2px solid black;
 			<hr>
 			<table border="1" style="height: 80px;">
 				<tr>
-				<td class="td1"><a href="./myshop?mem_storeNum=${mem_storeNum}">상품</a></td>
-				<td bgcolor="#f2f2f2"><a href="./comments?mem_storeNum=${mem_storeNum}">상점문의</a></td>
+				<td class="td1"><a href="./myshop?mem_storeNum=${mem_storeNum}">상품&nbsp;&nbsp;   ${prodco}</a></td>
+				<td bgcolor="#f2f2f2"><a href="./comments?mem_storeNum=${mem_storeNum}">상점문의 &nbsp;&nbsp;${coco}</a></td>
 				<c:if test="${msnum eq mem_storeNum }">
 				<td bgcolor="#f2f2f2">
-					<a href="./favorites?mem_storeNum=${mem_storeNum}"> 찜</a>
+					<a href="./favorites?mem_storeNum=${mem_storeNum}"> 찜&nbsp;&nbsp; ${zico}</a>
 				</td>
 				</c:if>
-				<td bgcolor="#f2f2f2"><a href="./reviews?mem_storeNum=${mem_storeNum}">상점후기</a></td>
-				<td bgcolor="#f2f2f2"><a href="./followings?mem_storeNum=${mem_storeNum}">팔로잉</a></td>
-				<td bgcolor="#f2f2f2"><a href="./followers?mem_storeNum=${mem_storeNum}">팔로워</a></td>
+				<td bgcolor="#f2f2f2"><a href="./reviews?mem_storeNum=${mem_storeNum}">상점후기&nbsp;&nbsp;  ${reco }</a></td>
+				<td bgcolor="#f2f2f2"><a href="./followings?mem_storeNum=${mem_storeNum}">팔로잉&nbsp;&nbsp;  ${giveco}</a></td>
+				<td bgcolor="#f2f2f2"><a href="./followers?mem_storeNum=${mem_storeNum}">팔로워 &nbsp;&nbsp;  ${takeco} </a></td>
 				</tr>
 			
 			</table>

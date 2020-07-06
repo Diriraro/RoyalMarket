@@ -225,4 +225,10 @@ public class MemberService {
 		return memberRepository.kakaoLogin(memberVO);
 	}
 
+	
+	//shop
+	public String getregDate(long mem_storeNum) throws Exception{
+		
+		return memberRepository.getregDate(mem_storeNum);
+	}
 }

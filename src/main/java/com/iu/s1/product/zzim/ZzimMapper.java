@@ -22,5 +22,7 @@ public interface ZzimMapper {
 	// shop에서 보여줄 목록
 	public List<ZzimVO> myzzim(long mem_storeNum)throws Exception;
 	
+	// shop에서 보여줄 co
+	public long zico(long mem_storeNum) throws Exception;
 
 }

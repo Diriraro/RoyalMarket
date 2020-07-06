@@ -43,6 +43,10 @@ public class StoreQnaService {
 		return storeQnaRepository.getSelectStoreName(storeQnaVO);
 	}
 	
-	
+	//coco
+	public long coco(long mem_storeNum) throws Exception {
+		
+		return storeQnaRepository.coco(mem_storeNum);
+	}
 
 }

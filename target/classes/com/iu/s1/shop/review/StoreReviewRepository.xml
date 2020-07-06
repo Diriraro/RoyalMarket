@@ -42,6 +42,12 @@
   		select sell_product from store_product where sell_num=#{sell_num}
   	</select>
   
+  <!-- reco  -->
+  
+  <select id="reco" parameterType="com.iu.s1.shop.review.StoreReviewVO" resultType="Long">
+  		select COUNT(*) FROM store_review where mem_storeNum=#{mem_storeNum}
+  </select>
+  
   
   
   </mapper>

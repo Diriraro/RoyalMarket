@@ -38,4 +38,11 @@ public interface StoreFollowRepository {
 	public String getSelectgiveStoreName(StoreFollowVO storeFollowVO)throws Exception;
 	
 	
+	// count1 giveco
+	public long giveco(long mem_storeNum)throws Exception;
+	
+	// count2 takeco
+	public long takeco(long mem_storeNum) throws Exception;
+	
+	
 }

@@ -70,5 +70,9 @@
 	</select>
 	
 	
+	<select id="getregDate" parameterType="Long" resultType="String">
+	select mem_regDate from member where mem_storeNum = #{mem_storeNum}
+	</select>
+	
 	
 </mapper>
