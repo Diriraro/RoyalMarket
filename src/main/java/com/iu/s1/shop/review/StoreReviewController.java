@@ -32,6 +32,7 @@ public class StoreReviewController {
 		mv.addObject("mem_storeNum",mem_storeNum);
 		mv.addObject("sell_product",sell_product);
 		mv.addObject("buy_history");
+		mv.addObject("sell_num",sell_num);
 		mv.addObject("StoreReviewVO", new StoreReviewVO());
 		return mv;
 		
