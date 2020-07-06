@@ -3,60 +3,126 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+
     
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<style type="text/css">
+td{
+width: 220px;
+font-size: large;
+text-align: center;
+font-weight: bold;
+}
+
+.td1{
+border-bottom: 2px solid white;
+border-left: 2px solid black;
+border-right: 2px solid black;
+border-top: 2px solid black;
+}
+
+</style>
+<meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <c:import url="../template/boot.jsp"></c:import>
 
 <body>
-<c:import url="../template/nav.jsp"></c:import>
-
-<h1>리뷰페이지</h1>
+<c:import url="../template/woozoo_nav.jsp"></c:import>
 <c:import url="../template/shopmain.jsp"></c:import>
 
 	<div class="container">
-		<div style="border: 1px solid black; width: 1024px; height: 340px;">
+		<div style="border: 1px solid black; width: 1024px;  min-height: 340px;">
 			<!-- 각자 페이지에 하나씩 생성  -->
 			<!--버튼 감싸는 div  -->
 			<div>
-				<button class="btn btn-info">
-					<a href="./myshop?mem_storeNum=${mem_storeNum}">상품</a>
-				</button>
-
-				<button class="btn btn-info">
-					<a href="./comments?mem_storeNum=${mem_storeNum}">상점문의</a>
-				</button>
-
-			<!-- 찜페이지 버튼은 나의 상점에서만 가능  -->
-			<c:if test="${msnum eq mem_storeNum }">
-				<button class="btn btn-info">
-					<a href="./favorites?mem_storeNum=${mem_storeNum}"> 찜</a>
-				</button>
-			</c:if>
-
-				<button class="btn btn-danger">
-					<a href="./reviews?mem_storeNum=${mem_storeNum}">상점후기</a>
-				</button>
-
-				<button class="btn btn-info">
-					<a href="./followings?mem_storeNum=${mem_storeNum}">팔로잉</a>
-				</button>
-
-				<button class="btn btn-info">
-					<a href="./followers?mem_storeNum=${mem_storeNum}">팔로워</a>
-				</button>
-
+			<!-- 이동버튼  -->
+			<hr>
+			<table border="1" style="height: 80px;">
+				<tr>
+				<td bgcolor="#f2f2f2"><a href="./myshop?mem_storeNum=${mem_storeNum}">상품&nbsp;&nbsp;   ${prodco}</a></td>
+				<td bgcolor="#f2f2f2"><a href="./comments?mem_storeNum=${mem_storeNum}">상점문의 &nbsp;&nbsp;${coco}</a></td>
+				<c:if test="${msnum eq mem_storeNum }">
+				<td bgcolor="#f2f2f2">
+					<a href="./favorites?mem_storeNum=${mem_storeNum}"> 찜&nbsp;&nbsp; ${zico}</a>
+				</td>
+				</c:if>
+				<td class="td1"><a href="./reviews?mem_storeNum=${mem_storeNum}">상점후기&nbsp;&nbsp;  ${reco }</a></td>
+				<td bgcolor="#f2f2f2"><a href="./followings?mem_storeNum=${mem_storeNum}">팔로잉&nbsp;&nbsp;  ${giveco}</a></td>
+				<td bgcolor="#f2f2f2"><a href="./followers?mem_storeNum=${mem_storeNum}">팔로워 &nbsp;&nbsp;  ${takeco} </a></td>
+				</tr>
+			
+			</table>
+			<!--  -->
 			</div>
 
 
 			<div>
-				<h2>내용</h2>
+				<h2>${mem_storeName } 의 리뷰목록</h2>
+			<c:forEach items="${relist}" var="vo" varStatus="i">
+				 <!-- 리스트 감쌀디아이브이  -->
+				<div style="border: 1px solid ; min-height: 150px; overflow: auto;">
+				
+				<div style="float: left; width: 80px; height: 250px;">
+					<img alt="" src="${pageContext.request.contextPath}/resources/images/user11.png" width="80px;">			
+				</div><!-- 왼쪽 옆에 이미지 박스  -->
+				
+				<div style="font-size: large;">
+				<a href="./myshop?mem_storeNum=${vo.re_storeNum}">	${vo.re_storeName}</a>  <button class="btn btn-sm btn-info">인증</button>
+				<span style="float: right;">${vo.re_wDate}</span>
+				<%-- ${vo.re_storeNum}  리뷰남김사람 번호 --%>
+				</div>
+				<%-- 리뷰번호 :${vo.re_num} 지울떄 사용--%>
+				<div>
+				<%-- 점수 : ${vo.re_rate} --%>
+				<c:forEach var="i" begin="1" end="${vo.re_rate}">
+					<a><img style="cursor: pointer; width: 14px; height: 15px;" alt=""
+					src="${pageContext.request.contextPath}/resources/images/star22.png"></a>
+				</c:forEach>
+				
+				</div>
+				<br>
+				
+				<div>
+				<button class="btn-default">${vo.sell_product}</button>
+				</div>
+				<br>
+				
+				<div>
+					<p style="font-size: large;">
+					${vo.re_context}
+					</p>
+				</div>
+				
+				
+				<c:forEach items="${pfile}" var="pfile" varStatus="status" >
+				
+				<c:if test="${vo.re_num eq pfile.re_num}">
+				<div>
+					<img src="../upload/review/${pfile.file_name}"	alt="${pfile.ori_name}"	style="overflow: hidden; display: flex; align-items: center; justify-content: center; width: 70px; height: 70px; float: left;">
+				</div>
+				
+				</c:if>
+				</c:forEach>
+				
+				
+				<c:if test="${msnum eq vo.re_storeNum}">
+							<a href="./setDeleteReview?re_num=${vo.re_num}&mem_storeNum=${vo.mem_storeNum}"	class="btn btn-danger pull-right"><span	class="	glyphicon glyphicon-remove-sign"></span>Delete</a>
+				</c:if>
+				
+				
+				
+				
+				
+				
+				</div>  <!-- 리스트 감쌀디아이브이  -->
+			</c:forEach>
+				</div>
 
-			</div>
+			
 
 		</div><!-- 버튼, 내용 끝  -->
 

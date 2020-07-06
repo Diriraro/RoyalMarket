@@ -100,6 +100,31 @@
  		delete from trading where sell_num=#{sell_num} 
  	</delete>
  	
+ 	<!-- trading List -->
+	<sql id="search">
+		like concat('%',#{search},'%')
+	</sql>
+	<select id="tradingList"
+		resultType="com.iu.s1.trading.TradingVO" parameterType="Pager">
+		select * from trading where
+		<choose>
+			<when test="kind == 'pn'">
+				sell_num
+			</when>
+			<when test="kind== 'tn'">
+				trading_num
+			</when>
+			<when test="kind== 'bn'">
+				buyer_id
+			</when>
+			<otherwise>
+				seller_id
+			</otherwise>
+		</choose>
+		<include refid="search"></include>
+		order by trading_num desc
+	</select>
+ 	
  	<!-- 판매자가 로그인 했을 때 판매가 들어온 상품이 있는지 없는지 확인 -->
  	<select id="seller_check" parameterType="java.lang.String" resultType="com.iu.s1.paymentHistory.Sell_HistoryVO">
  		select * from sell_history where mem_id=#{seller_id} and status=0
@@ -137,7 +162,6 @@
   	<select id="memberVOSel" parameterType="java.lang.String" resultType="com.iu.s1.member.MemberVO">
   		select * from member where mem_id=#{mem_id}
   	</select>
-  	
   	
   	<!-- paystats insert -->
   	<insert id="paystatsInsert" parameterType="com.iu.s1.payment.PayStatsVO">

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.iu.s1.shop.review.reviewFile.StoreReviewFileRepository">
+
+	<insert id="reviewFileInsert" parameterType="com.iu.s1.shop.review.reviewFile.StoreReviewFileVO">
+		insert into review_file values(0,#{re_num}, #{file_name}, #{ori_name})
+	</insert>
+
+	<select id="reviewFileSelect" parameterType="Long"
+		resultType="com.iu.s1.shop.review.reviewFile.StoreReviewFileVO">
+		SELECT * FROM review_file WHERE re_num=#{re_num}
+	</select>
+</mapper>

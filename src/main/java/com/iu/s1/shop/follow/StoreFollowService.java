@@ -72,8 +72,19 @@ public class StoreFollowService {
 			return storeFollowRepository.getSelectgiveStoreName(storeFollowVO);
 		}
 	
+	//giveco
+	public long giveco(long mem_storeNum)throws Exception {
+		return storeFollowRepository.giveco(mem_storeNum);
+		
+	}
 	
 	
+	//taleco
+	public long takeco(long mem_storeNum)throws Exception {
+		
+		return storeFollowRepository.takeco(mem_storeNum);
+		
+	}
 	
 
 }

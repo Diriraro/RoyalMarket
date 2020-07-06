@@ -1,1 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.iu.s1.shop.review.StoreReviewRepository">
+  
+  <!--setInsertReview  리뷰 남기기 -->
+  <insert id="setInsertReview" parameterType="com.iu.s1.shop.review.StoreReviewVO" useGeneratedKeys="true" keyProperty="re_num">
+  insert into store_review values (0,#{mem_storeNum},#{sell_product},#{re_context},#{re_rate},now(),#{re_storeName},#{re_storeNum})
+  </insert>
+  
+  
+  <!-- setDeleteReview 리뷰지우기 -->
+  <delete id="setDeleteReview" parameterType="com.iu.s1.shop.review.StoreReviewVO">
+  delete from store_review where re_num= #{re_num}
+  </delete>
+  
+  
+  <!-- getSelectListReview 리뷰 리스트 확인 -->
+  <select id="getSelectListReview" parameterType="com.iu.s1.shop.review.StoreReviewVO" resultType="com.iu.s1.shop.review.StoreReviewVO">
+  
+  select * from store_review where mem_storeNum = #{mem_storeNum} order by re_num desc
+  
+  </select>
+  
+  <!--파일 이름   -->
+  	<select id="selectFileName" parameterType="Long"
+		resultType="String">
+		select file_name from review_file where re_num=#{re_num} LIMIT 1
+	</select>
+  
+  <!-- getSelectsell_num_mem_storeNum store_product에서 mem_storeNum 검색  -->
+  
+  	<select id="getSelectsell_num_mem_storeNum" parameterType="Long" resultType="Long">
+  		SELECT mem_storeNum FROM store_product WHERE sell_num=#{sell_num}
+  	</select>
+  
+  <!-- getSelectSell_num_sell_product  store_procute에서 sell_product 검색.  -->
+  
+  	<select id="getSelectSell_num_sell_product" parameterType="Long" resultType="String">
+  		select sell_product from store_product where sell_num=#{sell_num}
+  	</select>
+  
+  <!-- reco  -->
+  
+  <select id="reco" parameterType="com.iu.s1.shop.review.StoreReviewVO" resultType="Long">
+  		select COUNT(*) FROM store_review where mem_storeNum=#{mem_storeNum}
+  </select>
+  
+  
+  
+  </mapper>

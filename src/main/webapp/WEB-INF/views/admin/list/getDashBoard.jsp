@@ -4,62 +4,64 @@
 <div class="w3-main">
 
 	<!-- Header -->
-	<header class="w3-container" style="padding-top: 22px">
-		<h2>
-			<b><i class="fa fa-dashboard"></i> My Dashboard</b>
-		</h2>
-	</header>
-	<br>
-	<div class="w3-row-padding w3-margin-bottom">
-		<div class="w3-quarter">
-			<div class="w3-container w3-red w3-padding-16">
-				<div class="w3-left">
-					<i class="fa fa-comment w3-xxxlarge"></i>
+	<div class="w3-container">
+		<header style="padding-top: 22px">
+			<h2>
+				<b><i class="fa fa-dashboard"></i> My Dashboard</b>
+			</h2>
+		</header>
+		<br>
+		<div class="w3-row-padding w3-margin-bottom">
+			<div class="w3-quarter">
+				<div class="w3-container w3-red w3-padding-16">
+					<div class="w3-left">
+						<i class="fa fa-comment w3-xxxlarge"></i>
+					</div>
+					<div class="w3-right">
+						<h3>${qnaCount}<span style="font-size: 12px;">(${qnaNACount})</span>
+						</h3>
+					</div>
+					<div class="w3-clear"></div>
+					<h4>
+						문의 수<span style="font-size: 12px;">(미답변)</span>
+					</h4>
 				</div>
-				<div class="w3-right">
-					<h3>${qnaCount}<span style="font-size: 12px;">(${qnaNACount})</span>
-					</h3>
-				</div>
-				<div class="w3-clear"></div>
-				<h4>
-					문의 수<span style="font-size: 12px;">(미답변)</span>
-				</h4>
 			</div>
-		</div>
-		<div class="w3-quarter">
-			<div class="w3-container w3-blue w3-padding-16">
-				<div class="w3-left">
-					<i class="fa fa-eye w3-xxxlarge"></i>
+			<div class="w3-quarter">
+				<div class="w3-container w3-blue w3-padding-16">
+					<div class="w3-left">
+						<i class="fa fa-eye w3-xxxlarge"></i>
+					</div>
+					<div class="w3-right">
+						<h3>${visitors}</h3>
+					</div>
+					<div class="w3-clear"></div>
+					<h4>방문자 수</h4>
 				</div>
-				<div class="w3-right">
-					<h3>${visitors}</h3>
-				</div>
-				<div class="w3-clear"></div>
-				<h4>방문자 수</h4>
 			</div>
-		</div>
-		<div class="w3-quarter">
-			<div class="w3-container w3-teal w3-padding-16">
-				<div class="w3-left">
-					<i class="fa fa-share-alt w3-xxxlarge"></i>
+			<div class="w3-quarter">
+				<div class="w3-container w3-teal w3-padding-16">
+					<div class="w3-left">
+						<i class="fa fa-share-alt w3-xxxlarge"></i>
+					</div>
+					<div class="w3-right">
+						<h3>${tradeCount}</h3>
+					</div>
+					<div class="w3-clear"></div>
+					<h4>일일 거래량</h4>
 				</div>
-				<div class="w3-right">
-					<h3>${tradeCount}</h3>
-				</div>
-				<div class="w3-clear"></div>
-				<h4>일일 거래량</h4>
 			</div>
-		</div>
-		<div class="w3-quarter">
-			<div class="w3-container w3-orange w3-text-white w3-padding-16">
-				<div class="w3-left">
-					<i class="fa fa-users w3-xxxlarge"></i>
+			<div class="w3-quarter">
+				<div class="w3-container w3-orange w3-text-white w3-padding-16">
+					<div class="w3-left">
+						<i class="fa fa-users w3-xxxlarge"></i>
+					</div>
+					<div class="w3-right">
+						<h3>${memberCount}</h3>
+					</div>
+					<div class="w3-clear"></div>
+					<h4>총 회원수</h4>
 				</div>
-				<div class="w3-right">
-					<h3>${memberCount}</h3>
-				</div>
-				<div class="w3-clear"></div>
-				<h4>총 회원수</h4>
 			</div>
 		</div>
 	</div>
@@ -100,8 +102,8 @@
 			class="w3-table w3-striped w3-bordered w3-border w3-hoverable w3-white">
 			<thead>
 				<tr>
-					<td>지역</td>
-					<td>누적거래량</td>
+					<th>지역</th>
+					<th>누적거래량</th>
 				</tr>
 			</thead>
 			<!-- 비율이 가장 높은 순으로 6개 지역만  -->
@@ -121,35 +123,24 @@
 			<b>최신 상품게시글</b>
 		</h3>
 		<br>
-		<div class="w3-row">
-			<div class="w3-col m2 text-center">
-				<img class="w3-circle" alt="사진" style="width: 96px; height: 96px">
-			</div>
-			<div class="w3-col m10 w3-container">
-				<h4>
-					John <span class="w3-opacity w3-medium">Sep 29, 2014, 9:12
-						PM</span>
-				</h4>
-				<p>Keep up the GREAT work! I am cheering for you!! Lorem ipsum
-					dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-					incididunt ut labore et dolore magna aliqua.</p>
-				<br>
-			</div>
-		</div>
-
-		<div class="w3-row">
-			<div class="w3-col m2 text-center">
-				<img class="w3-circle" alt="사진" style="width: 96px; height: 96px">
-			</div>
-			<div class="w3-col m10 w3-container">
-				<h4>
-					Bo <span class="w3-opacity w3-medium">Sep 28, 2014, 10:15 PM</span>
-				</h4>
-				<p>Sed do eiusmod tempor incididunt ut labore et dolore magna
-					aliqua.</p>
-				<br>
-			</div>
-		</div>
+		<c:catch>
+			<c:forEach items="${productList}" var="list" end="3" varStatus="i">
+				<div class="w3-row">
+					<div class="w3-col m2 text-center">
+						<img class="w3-circle" alt="상품이미지${i.index +1}"
+							src="${pageContext.request.contextPath}/upload/product/${productFileMain[i.index]}"
+							style="width: 96px; height: 96px">
+					</div>
+					<div class="w3-col m10 w3-container">
+						<h4>
+							${list.sell_product} <span class="w3-opacity w3-medium">${list.sell_date}</span>
+						</h4>
+						<p>${list.sell_info}</p>
+						<br>
+					</div>
+				</div>
+			</c:forEach>
+		</c:catch>
 	</div>
 	<br>
 	<div class="w3-container">
@@ -162,10 +153,10 @@
 			<table class="table">
 				<thead>
 					<tr>
-						<td>공지 글 번호</td>
-						<td>공지 글 제목</td>
-						<td>공지 글 내용</td>
-						<td>공지 게시 일</td>
+						<th>공지 글 번호</th>
+						<th>공지 글 제목</th>
+						<th>공지 글 내용</th>
+						<th>공지 게시 일</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -174,7 +165,8 @@
 							end="${list.size()}">
 							<tr>
 								<td>${li.nonum}</td>
-								<td><a href="../notice/noticeSelect?no_num=${li.nonum}">${li.notitle}</a></td>
+								<td><a href="#" title="NoticeSelect"
+									class="check pointCursor" id="${li.nonum}">${li.notitle}</a></td>
 								<td>${li.no_contents}</td>
 								<td>${li.no_regDate}</td>
 							</tr>
@@ -184,4 +176,23 @@
 			</table>
 		</div>
 	</div>
-</div>
+	<div class="w3-container">
+		<h3>
+			<b>장터 운영 수익 <i class="fas fa-won-sign"></i>
+			</b>
+		</h3>
+		<br>
+		<p class="ct">
+			달성 / 목표 <i class="fas fa-won-sign"></i>
+		</p>
+		<div class="w3-grey" style="position: relative;">
+			<div class="w3-container w3-center w3-padding w3-green"
+				style="width:${profitRate}%; height: 30px;">
+				<div
+					style="overflow: visible; width: 100%; text-align: center; position: absolute; height: 100%;">${profit}
+					/ 1,000,000 <i class="fas fa-won-sign"></i>
+					<div></div>
+				</div>
+			</div>
+		</div>
+	</div>

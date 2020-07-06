@@ -115,6 +115,20 @@
 		sell_kind=#{sell_kind}, sell_tag=#{sell_tag}
 		where sell_num=#{sell_num}
 	</update>
+	
+	<!--shop에서 쓸꺼  -->
+	<select id="myList" parameterType="Long" resultType="ProductVO">
+	select * from store_product where mem_storeNum = #{mem_storeNum}
+	
+	</select>
+	
+	
+	<!-- shop 에서 쓸꺼  -->
+	<select id="prodco" parameterType="Long" resultType="Long">
+		select count(*) from store_product where mem_storeNum= #{mem_storeNum}
+	</select>
+	
+
 
 	<delete id="productDelete" parameterType="ProductVO">
 		delete from

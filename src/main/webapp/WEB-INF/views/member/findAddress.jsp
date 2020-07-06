@@ -1,24 +1,30 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jstl/core"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<c:import url="../template/boot.jsp"></c:import>
+<script type="text/javascript" src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
 </head>
 <body>
 	<form name="f">
-	<input type="text" id="sample4_postcode" placeholder="우편번호">
-	<input type="button" onclick="sample4_execDaumPostcode()"
+	<input type="text" id="sample4_postcode" placeholder="우편번호" class="w3-input">
+	<input type="button" onclick="sample4_execDaumPostcode()" class="w3-input"
 		value="우편번호 찾기">
-	<br>
-	<input type="text" id="sample4_roadAddress" name="road_address" placeholder="도로명주소">
-	<input type="text" id="sample4_jibunAddress" placeholder="지번주소">
+	<input type="text" id="sample4_roadAddress" name="road_address" placeholder="도로명주소" class="w3-input">
+	<input type="text" id="sample4_jibunAddress" placeholder="지번주소" class="w3-input">
 	<span id="guide" style="color: #999; display: none"></span>
-	<input type="text" id="sample4_detailAddress" placeholder="상세주소">
-	<input type="text" id="sample4_extraAddress" placeholder="참고항목">
-	
-	<input type="button" value="확인" onclick="setParentText()">
+	<input type="text" id="sample4_detailAddress" placeholder="상세주소" class="w3-input">
+	<input type="text" id="sample4_extraAddress" placeholder="참고항목" class="w3-input">
+	<br><br>
+	<input type="button" value="확인" onclick="setParentText()" class="w3-input">
 
 
 	</form>
@@ -101,6 +107,7 @@
 
 		 function setParentText(){
              opener.document.getElementById("road_address").value = document.getElementById("sample4_roadAddress").value
+             opener.document.getElementById("detail_address").value = document.getElementById("sample4_detailAddress").value
              window.close();
         }
 	        

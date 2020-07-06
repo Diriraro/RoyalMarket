@@ -12,4 +12,9 @@
 		resultType="ProductFileVO">
 		SELECT * FROM sell_file WHERE sell_num=#{sell_num}
 	</select>
+	
+	<select id="productFileSelect2" parameterType="Long"
+		resultType="ProductFileVO">
+		SELECT * FROM sell_file WHERE sell_num=#{sell_num} limit 1
+	</select>
 </mapper>

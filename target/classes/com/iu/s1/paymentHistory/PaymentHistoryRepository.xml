@@ -15,7 +15,9 @@
 		<include refid="address"></include>
 	</select>
 	<select id="getProfit" resultType="Long">
-		SELECT sum(sell_commition) from paystats
+  	<![CDATA[
+		SELECT sum(sell_commition) from paystats where sell_date >= #{sell_date2} and sell_date < #{sell_date1}
+  		]]>
 	</select>
 	<select id="getRateForTradeCountYD" resultType="Long">
   	<![CDATA[

@@ -80,6 +80,10 @@ public class ProductService {
 	public List<ProductFileVO> productFileSelect(long sell_num)throws Exception{
 		return productFileMapper.productFileSelect(sell_num);
 	}
+	
+	public List<ProductFileVO> productFileSelect2(long sell_num)throws Exception{
+		return productFileMapper.productFileSelect2(sell_num);
+	}
 
 	public List<ProductVO> productList(Pager pager) throws Exception {
 		pager.makeRow();
@@ -126,6 +130,28 @@ public class ProductService {
 	public long zzimCount(long sell_num)throws Exception{
 		return zzimMapper.zzimCount(sell_num);
 	}
+	
+	// shop에서 쓸꺼
+	public List<ProductVO> myList(long mem_storeNum) throws Exception {
+		return productMapper.myList(mem_storeNum);
+	}
+	//shop 에서 쓸 상품co
+	public long prodco(long mem_storeNum) throws Exception {
+		
+		return productMapper.prodco(mem_storeNum);
+	}
+	
+	// shop에서 쓸 찜
+	public List<ZzimVO> myzzim(long mem_storeNum) throws Exception{
+		return zzimMapper.myzzim(mem_storeNum);
+	}
+	
+	// shop에서 쓸 찜co
+	
+	public long zico(long mem_storeNum) throws Exception{
+		return zzimMapper.zico(mem_storeNum);
+	}
+	
 	
 	public int productDelete(ProductVO productVO)throws Exception{
 		return productMapper.productDelete(productVO);
