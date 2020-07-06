@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.iu.s1.paymentHistory.PaymentHistoryRepository">
+	<sql id="address">
+		like concat('%',#{seller_address},'%')
+	</sql>
+	<select id="getDailyTradeCount" resultType="Long">
+		SELECT count(*) from paystats where sell_date > #{sell_date}
+	</select>
+	<select id="getLocateTradeCount" resultType="Long">
+		SELECT count(*) #{seller_address} from paystats where seller_address
+		<include refid="address"></include>
+	</select>
+	<select id="getProfit" resultType="Long">
+  	<![CDATA[
+		SELECT sum(sell_commition) from paystats where sell_date >= #{sell_date2} and sell_date < #{sell_date1}
+  		]]>
+	</select>
+	<select id="getRateForTradeCountYD" resultType="Long">
+  	<![CDATA[
+  		SELECT count(*) from paystats where sell_date >= #{sell_date2} and sell_date < #{sell_date1}
+  		]]>
+	</select>
+</mapper>

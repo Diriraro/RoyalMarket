@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.iu.s1.saveCash.SaveCashRepository">
+	
+	<select id="selectSC" parameterType="String" resultType="com.iu.s1.saveCash.SaveCashVO">
+		SELECT * FROM savecash WHERE mem_id=#{mem_id}
+	</select>
+	
+	<insert id="createSC" parameterType="String">
+		INSERT INTO savecash VALUES(#{mem_id}, 0)
+	</insert>
+
+	<update id="updateSC" parameterType="com.iu.s1.saveCash.SaveCashVO">
+		UPDATE savecash SET mem_cash=#{mem_cash} WHERE mem_id=#{mem_id}
+	</update>
+</mapper>

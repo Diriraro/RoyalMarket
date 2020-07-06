@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.iu.s1.product.ProductMapper">
+
+	<insert id="productInsert" parameterType="ProductVO"
+		keyProperty="sell_num" useGeneratedKeys="true">
+		insert into store_product
+		values
+		(0,#{mem_storeNum},#{sell_product},
+		#{sell_price},#{sell_info},
+		#{sell_kind},
+		#{sell_tag},now(),0,0)
+	</insert>
+
+	<select id="productSelect" parameterType="java.lang.Long"
+		resultType="ProductVO">
+		SELECT * FROM store_product WHERE sell_num=#{sell_num}
+	</select>
+
+	<select id="productCount" parameterType="Pager"
+		resultType="java.lang.Long">
+		select count(sell_num) from store_product where
+		<choose>
+			<when test="kind=='sp'">
+				sell_product
+			</when>
+			<when test="kind=='sk'">
+				sell_kind
+			</when>
+			<when test="kind=='smn'">
+				mem_storeNum
+			</when>
+			<otherwise>
+				sell_tag
+			</otherwise>
+		</choose>
+		like concat('%',#{search},'%')
+	</select>
+
+	<select id="productList" parameterType="Pager"
+		resultType="ProductVO">
+		select * from store_product where
+		<choose>
+			<when test="kind=='sp'">
+				sell_product
+			</when>
+			<when test="kind=='sk'">
+				sell_kind
+			</when>
+			<when test="kind=='smn'">
+				mem_storeNum
+			</when>
+			<otherwise>
+				sell_tag
+			</otherwise>
+		</choose>
+		like concat('%',#{search},'%')
+		order by sell_num desc limit
+		#{startRow},10
+	</select>
+
+	<select id="myProductCount" parameterType="Pager"
+		resultType="java.lang.Long">
+		select count(sell_num) from store_product where
+		mem_storeNum=#{mem_storeNum}
+		like concat('%',#{search},'%')
+	</select>
+
+	<select id="myProductList" parameterType="Pager" resultType="ProductVO">
+		select * from store_product where
+		<choose>
+			<when test="kind=='sp'">
+				sell_product
+			</when>
+			<otherwise>
+				mem_storeNum
+			</otherwise>
+		</choose>
+		like concat('%',#{search},'%') and mem_storeNum=#{mem_storeNum}
+		order by sell_num desc limit
+		#{startRow},10
+	</select>
+
+
+	<select id="selectFileName" parameterType="Long"
+		resultType="String">
+		select file_name from sell_file where sell_num=#{sell_num}
+		LIMIT 1
+	</select>
+
+	<select id="productAddress" parameterType="Long"
+		resultType="MemberVO">
+		select mem_address from member where mem_storeNum=(select
+		mem_storeNum from store_product where sell_num=#{sell_num})
+	</select>
+	
+		<select id="productStoreName" parameterType="Long"
+		resultType="MemberVO">
+		select mem_storeName from member where mem_storeNum=(select
+		mem_storeNum from store_product where sell_num=#{sell_num})
+	</select>
+
+	<update id="hitUpdate" parameterType="Long">
+		update store_product set
+		sell_hit = sell_hit+1
+		where sell_num=#{sell_num}
+	</update>
+
+	<update id="productUpdate" parameterType="ProductVO">
+		update store_product
+		set sell_product=#{sell_product},
+		sell_price=#{sell_price}, sell_info=#{sell_info},
+		sell_kind=#{sell_kind}, sell_tag=#{sell_tag}
+		where sell_num=#{sell_num}
+	</update>
+	
+	<!--shop에서 쓸꺼  -->
+	<select id="myList" parameterType="Long" resultType="ProductVO">
+	select * from store_product where mem_storeNum = #{mem_storeNum}
+	
+	</select>
+	
+	
+	<!-- shop 에서 쓸꺼  -->
+	<select id="prodco" parameterType="Long" resultType="Long">
+		select count(*) from store_product where mem_storeNum= #{mem_storeNum}
+	</select>
+	
+
+
+	<delete id="productDelete" parameterType="ProductVO">
+		delete from
+		store_product where sell_num=#{sell_num}
+	</delete>
+
+</mapper>
