@@ -143,7 +143,7 @@ public class AdminService {
 	}
 
 	public int accessManage(MemberVO memberVO) throws Exception {
-		return memberRepository.accessManage(memberVO);
+		return memberRepository.accessManager(memberVO);
 	}
 
 	public long qnaCount() throws Exception {
