@@ -13,8 +13,8 @@
 				<option value="bn">구매자명</option>
 				<option value="sn">판매자명</option>
 			</select> <input type="text" placeholder="Trading Search.." name="search"
-				id="selSearch">
-			<button type="submit" id="productSearchbtn">
+				id="tradingSearch">
+			<button type="submit" id="tradingSearchbtn">
 				<i class="fa fa-search"></i>
 			</button>
 		</div>

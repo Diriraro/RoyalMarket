@@ -10,6 +10,7 @@ import com.iu.s1.paycheck.PayCheckVO;
 import com.iu.s1.paymentHistory.Buy_HistoryVO;
 import com.iu.s1.paymentHistory.Sell_HistoryVO;
 import com.iu.s1.trading.TradingVO;
+import com.iu.s1.util.Pager;
 
 @Repository
 @Mapper
@@ -69,7 +70,7 @@ public interface PaymentMapper {
 	
 	public int paystatsInsert(PayStatsVO payStatsVO) throws Exception;
 	
-	public List<TradingVO> tradingList() throws Exception;
+	public List<TradingVO> tradingList(Pager pager) throws Exception;
 	
 	
 }

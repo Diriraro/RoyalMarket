@@ -108,6 +108,8 @@ public class AdminController {
 		long tradeRate = 0;
 		if(tradeCountYD != 0 && tradeCount != 0) {
 			tradeRate= (tradeCount / tradeCountYD) * 100;
+		} else if (tradeCountYD == 0 && tradeCount > 0) {
+			tradeRate = 100;
 		}
 		if (tradeRate > 100) {
 			tradeRate = 100;
@@ -195,8 +197,8 @@ public class AdminController {
 	}
 	
 	@GetMapping("getTradingProductList")
-	public void tradingList(Model model) throws Exception {
-		List<TradingVO> tradeVO = adminService.tradingList();
+	public void tradingList(Model model, Pager pager) throws Exception {
+		List<TradingVO> tradeVO = adminService.tradingList(pager);
 		model.addAttribute("list", tradeVO);
 	}
 	

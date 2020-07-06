@@ -259,8 +259,8 @@ public class AdminService {
 		return productMapper.productDelete(productVO);
 	}
 	
-	public List<TradingVO> tradingList() throws Exception {
-		return paymentMapper.tradingList();
+	public List<TradingVO> tradingList(Pager pager) throws Exception {
+		return paymentMapper.tradingList(pager);
 	}
 	
 }
