@@ -11,6 +11,7 @@
 </head>
 <body>
 	<header></header>
+	<input type="hidden" value="${check}" id="NAcheck">
 	<section id="sc1">
 		<div id="logo">
 			<img alt="로고" src="../resources/images/nav_logo_nonback2.png"
@@ -27,7 +28,7 @@
 			<!-- 목록을 제외한 다른 호출은 각 Controller로 보내서 처리 -->
 			<div style="font-size: 13px;">MENU</div>
 			<div class="info">
-				<label class="focus"><i class="far fa-folder"></i> 회원 관리</label>
+				<label class="focus"><i class="far fa-folder"></i> 회원 관리 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-caret-down"></i></label>
 				<div class="contents">
 					<a href="#" class="check" title="MemberList"><i
 						class="far fa-file-alt"></i> 일반 회원 관리</a> <a href="#" class="check"
@@ -36,28 +37,39 @@
 				</div>
 			</div>
 			<div class="info">
-				<label class="focus"><i class="far fa-folder"></i> 상품 관리</label>
+				<label class="focus"><i class="far fa-folder"></i> 상품 관리  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-caret-down"></i></label>
 				<div class="contents">
 					<a href="#" class="check" title="ProductList"><i
-						class="far fa-file-alt"></i> 상품 정보 관리</a> <a href="#" class="check"><i
-						class="far fa-file-alt"></i> 상품 거래 관리</a>
+						class="far fa-file-alt"></i> 상품 정보 관리</a> <a href="#" class="check"
+						title="TradingList"><i class="far fa-file-alt"></i> 상품 거래 관리</a>
 				</div>
 			</div>
 			<div class="info">
-				<label class="focus"><i class="far fa-folder"></i> 공지 사항 관리</label>
+				<label class="focus"><i class="far fa-folder"></i> 공지사항 관리 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-caret-down"></i></label>
 				<div class="contents">
 					<a href="#" class="check" title="NoticeList"><i
-						class="far fa-file-alt"></i> 공지 사항 목록</a> <a
-						href="#" class="check" title="NoticeWrite"><i
-						class="far fa-file-alt"></i> 공지 사항 등록</a>
+						class="far fa-file-alt"></i> 공지 사항 목록</a> <a href="#" class="check"
+						title="NoticeWrite"><i class="far fa-file-alt"></i> 공지 사항 등록</a>
 				</div>
 			</div>
 		</div>
+		<div id="kCalendar"></div>
 	</section>
 	<section id="sc2">
 		<div id="section_head">
 			<div style="float: left; line-height: 75px;">
 				<a style="color: black;" href="../"><i class="fas fa-home"></i>Home</a>
+			</div>
+			<div class="adminMenu">
+				<div id="adminMenubar" onclick="myFunction(this)">
+					<div class="bar1"></div>
+					<div class="bar2"></div>
+					<div class="bar3"></div>
+				</div>
+				<div id="mySidenav" class="sidenav2">
+					<a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+					<a id="memberLogout">관리자 로그아웃</a>
+				</div>
 			</div>
 			<div id="admin_set">
 				관리자 님
@@ -76,32 +88,65 @@
 		<div id="content"></div>
 	</section>
 	<script type="text/javascript">
-		$(function() {
-			var check = ${check};
-			if (check) {
-				// 미답변 문의가 있으면
-				$(".new").children(".fas").removeClass("fa-envelope");
-				$(".new").children(".fas").addClass("fa-envelope-open-text");
-			} else {
-				// 미답변 문의가 없을시
-				$(".new").children("#new").remove();
-				$(".new").children(".fas").removeClass("fa-envelope-open-text")
-				$(".new").children(".fas").addClass("fa-envelope");
-				$(".new").children(".fas").css("color", "black");
-			}
+		var check = $("#NAcheck").val();
+		if (check == 'true') {
+			// 미답변 문의가 있으면
+			$(".new").children(".fas").removeClass("fa-envelope");
+			$(".new").children(".fas").addClass("fa-envelope-open-text");
+		} else {
+			// 미답변 문의가 없을시
+			$(".new").children("#new").remove();
+			$(".new").children(".fas").removeClass("fa-envelope-open-text")
+			$(".new").children(".fas").addClass("fa-envelope");
+			$(".new").children(".fas").css("color", "#26004d");
+		}
 
-			// id : content 내용
+		$(function() {
+			// section 2
+			$(".adminMenu").click(function() {
+				if ($("#mySidenav").css("width") == "0px") {
+					openNav();
+				} else if ($("#mySidenav").css("width") == "250px") {
+					closeNav();
+				}
+			})
+			$("#memberLogout").click(function() {
+				if (confirm("로그아웃하시겠습니까?")) {
+					location.href = "../member/memberLogout";
+				}
+			})
+			// section 3
 			getDashBoard();
-			$(".info").on("mouseover", function() {
-				$(this).find(".contents").css("display", "block");
-				$(this).find(".focus").addClass("focus_sub");
+			// section 1 
+			$(".info").on("click", function() {
+				if ($(this).find(".contents").css("display") == "none") {
+					$(this).find(".fa").removeClass("fa-caret-down");
+					$(this).find(".fa").addClass("fa-caret-up");
+					$(this).find(".contents").show(200);
+					$(this).find(".focus").addClass("focus_sub");
+				}
 			})
-			$(".info").on("mouseout", function() {
-				$(this).find(".contents").css("display", "none");
-				$(this).find(".focus").removeClass("focus_sub");
-			})
+			$(".focus")
+					.on(
+							"click",
+							function() {
+								if ($(this).parent().find(".contents").css(
+										"display") != "none") {
+									$(this).parent().find(".contents")
+											.hide(200);
+									$(this).find(".fa").removeClass("fa-caret-up");
+									$(this).find(".fa").addClass("fa-caret-down");
+									$(this).removeClass("focus_sub");
+								}
+							})
 			$(".check").click(function() {
+				$(".check").css("text-decoration", "none");
+				$(".check").css("font-weight", "");
+				$(".check").css("color", "#b366ff");
 				var path = $(this).prop("title");
+				$(this).css("text-decoration", "underline");
+				$(this).css("font-weight", "bold");
+				$(this).css("color", "#26004d");
 				if (path == 'MemberList') {
 					getMemberList();
 				} else if (path == 'ProductList') {
@@ -114,9 +159,11 @@
 					getManToManList();
 				} else if (path == 'dashBoard') {
 					getDashBoard();
-				} else if (path == 'NoticeWrite'){
+				} else if (path == 'NoticeWrite') {
 					getNoticeWrite();
-				} 
+				} else if (path == 'TradingList') {
+					getTradingProductList();
+				}
 				/* 컨텐츠를 추가시 함수 + else if 추가 */
 			})
 			$("#content").on(
@@ -151,61 +198,113 @@
 					})
 		})
 		$("#logo").click(function() {
-			location.href="./adminPage";
-			})
+			location.href = "./adminPage";
+		})
 		$("#content").on("click", ".check", function() {
 			var path = $(this).prop("title");
 			if (path == 'qna') {
 				getQnaList();
 			} else if (path == 'manToman') {
 				getManToManList();
-			} else if (path == 'NoticeSelect'){
+			} else if (path == 'NoticeSelect') {
 				var nonum = $(this).attr("id");
-				console.log(nonum);
 				getNoticeSelect(nonum);
+			} else if (path == 'MemberList') {
+				getMemberList();
+			} else if (path == 'MemberBlockList') {
+				getBlockList();
+			} else if (path == 'ProductList') {
+				getProductList();
+			} else if (path == 'TradingList') {
+				getTradingProductList();
+			} else if (path == 'NoticeList') {
+				getNoticeList();
+			} else if (path == 'NoticeWrite') {
+				getNoticeWrite();
 			}
 		})
-		$("#content").on("click", ".qna_num", function(){		// 답변 페이지 진입
-			var qna_num = $(this).attr("id");					// 글 번호 받아오기
-			getQnaAnswer(qna_num);								// 함수로 보냄
+		$("#content").on(
+				"click",
+				"#productSearchbtn",
+				function() {
+					var kind = $("#sel1").val().trim();
+					var search = $("#selSearch").val().trim();
+					$.get("./list/getProductList?curPage=1&kind=" + kind
+							+ "&search=" + search, function(result) {
+						$("#content").empty();
+						$("#content").append(result);
+					})
+				})
+		$("#content").on(
+				"click",
+				"#tradingSearchbtn",
+				function() {
+					var kind = $("#sel1").val().trim();
+					var search = $("#tradingSearch").val().trim();
+					$.get("./list/getTradingProductList?curPage=1&kind=" + kind
+							+ "&search=" + search, function(result) {
+						$("#content").empty();
+						$("#content").append(result);
+					})
+				})
+		$("#content").on("click", ".deletebtn", function() {
+			if (confirm("정말 삭제하시겠습니까?")) {
+				var html = $(this).attr("title");
+				$.get(html, function(result) {
+					if (result > 0) {
+						getProductList();
+					}
+				})
+			}
 		})
-		
-		$("#content").on("click", "#answerO", function(){		// 답변완료 누를시 진입
-			getQnaAnswerOK();									// 함수로 바로 보냄 > 함수에서 변수받아옴
+		$("#content").on("click", "a", function() {
+			$("#content").empty();
+			var pager = $(this).attr("title");
+			$.get(pager, function(result) {
+				$("#content").append(result);
+			})
 		})
-		
-		$("#content").on("click", "#qnaMemSearch", function(){	// 글 목록에서 작성자 아이디 검색
-			var search = $("#qnaSearch").val();					// 아이디 변수로 받아옴
-			getQnaMemSearch(search);							// 함수로 보냄
+		$("#content").on("click", ".qna_num", function() { // 답변 페이지 진입
+			var qna_num = $(this).attr("id"); // 글 번호 받아오기
+			getQnaAnswer(qna_num); // 함수로 보냄
 		})
-		
-		$("#content").on("click","#noticeSubmit", function(){
+
+		$("#content").on("click", "#answerO", function() { // 답변완료 누를시 진입
+			getQnaAnswerOK(); // 함수로 바로 보냄 > 함수에서 변수받아옴
+		})
+
+		$("#content").on("click", "#qnaMemSearch", function() { // 글 목록에서 작성자 아이디 검색
+			var search = $("#qnaSearch").val(); // 아이디 변수로 받아옴
+			getQnaMemSearch(search); // 함수로 보냄
+		})
+
+		$("#content").on("click", "#noticeSubmit", function() {
 			getNoticeWriteOK();
 		})
-		
-		$("#content").on("click","#noticeDel", function(){
+
+		$("#content").on("click", "#noticeDel", function() {
 			var check = confirm("삭제하면 복구할수 없습니다. 정말로 삭제할까요?");
-			if(check){
+			if (check) {
 				var nonum = $(this).attr("title");
 				getNoticeDelete(nonum);
-			}else{
+			} else {
 				event.stopPropagation();
 			}
 		})
-		$("#content").on("click","#noticeUpd", function(){
+		$("#content").on("click", "#noticeUpd", function() {
 			var nonum = $(this).attr("title");
 			getNoticeUpdate(nonum);
 		})
-		
-		$("#content").on("click","#noticeUpdate", function(){
+
+		$("#content").on("click", "#noticeUpdate", function() {
 			getNoticeUpdateOK();
 		})
-		
-		$("#content").on("click", "#noticeTitleSearch", function(){	
-			var search = $("#noticeSearch").val();					
-			getNoticeSearch(search);							
+
+		$("#content").on("click", "#noticeTitleSearch", function() {
+			var search = $("#noticeSearch").val();
+			getNoticeSearch(search);
 		})
-		
+
 		$("#content").on("click", "#frm", function() {
 			var kind = $("#kind").val();
 			var search = $("#search").val();
@@ -218,54 +317,108 @@
 			var mem_access = 1;
 			getMemberSearchList(kind, search, mem_access);
 		})
-		
-		// dashboard
+
 		function getDashBoard() {
-			$("#content").empty();
-			$.get("./list/getDashBoard", function(result) {
-				$("#content").append(result);
-			})
+			$
+					.ajax({
+						type : "GET",
+						sync : false,
+						url : "./list/getDashBoard",
+						beforeSend : function() {
+							var loadingHtml = '<div id="loading" style="z-index: 1005;position: absolute; top:50%;left:50%; text-align:center;"> ';
+							loadingHtml += '<div class="loading_box"><img src="${pageContext.request.contextPath}/resources/images/loading.gif">"</div></div>';
+							$('#content').fadeTo("fast", 0.4).append(
+									loadingHtml);
+						},
+						success : function(result) {
+							$('#content').fadeTo("slow", 1).find('#loading')
+									.remove();
+							$("#content").empty();
+							$("#content").append(result);
+						}
+					})
 		}
 
 		// qna
 		function getManToManList() {
-			$("#content").empty();
-			$.get("./list/getManToManList", function(result) {
-				$("#content").append(result);
-			})
+			$
+					.ajax({
+						type : "GET",
+						url : "./list/getManToManList",
+						beforeSend : function() {
+							var loadingHtml = '<div id="loading" style="z-index: 1005;position: absolute; top:50%;left:50%; text-align:center;"> ';
+							loadingHtml += '<div class="loading_box"><img src="${pageContext.request.contextPath}/resources/images/loading.gif">"</div></div>';
+							$('#content').fadeTo("fast", 0.4).append(
+									loadingHtml);
+						},
+						success : function(result) {
+							$('#content').fadeTo("slow", 1).find('#loading')
+									.remove();
+							$("#content").empty();
+							$("#content").append(result);
+						}
+					})
 		}
-		function getQnaMemSearch(search) {						// qna에서 글작성자 검색 함수
+		function getQnaMemSearch(search) { // qna에서 글작성자 검색 함수
 			$("#content").empty();
-			$.post("./list/getManToManList",{					// post로 보냄 (controller에는 같은 이름의 메서드가 get방식으로 있어서 post로 보냄)
-					search : search
-				}, function(result) {
-				$("#content").append(result);					// callback
+			$.post("./list/getManToManList", { // post로 보냄 (controller에는 같은 이름의 메서드가 get방식으로 있어서 post로 보냄)
+				search : search
+			}, function(result) {
+				$("#content").append(result); // callback
 			})
 		}
 		function getQnaAnswer(qna_num) {
 			$("#content").empty();
-			$.get("./list/qnaAnswer?qna_num="+qna_num, function(result) {
+			$.get("./list/qnaAnswer?qna_num=" + qna_num, function(result) {
 				$("#content").append(result);
 			})
-		}	
+		}
 		function getQnaAnswerOK() {
-			var form = {										// 변수 한번에 넘겨주기위해 변수하나에 필요한 내용 다 담기			
-					qna_num : $("#qna_numAnswer").val(),
-					qna_contents : $("#qna_contents").val()
+			var form = { // 변수 한번에 넘겨주기위해 변수하나에 필요한 내용 다 담기			
+				qna_num : $("#qna_numAnswer").val(),
+				qna_contents : $("#qna_contents").val()
 			};
 			$("#content").empty();
-			$.ajax({
-				type: 'POST',  
-				  url: './list/qnaAnswer',  					// post로 보냄
-				  data: form,									// 담은 변수명 보냄
-				  success: function(data){
-					  alert("작성 성공");							// 성공하면 alert 출력
-					  $("#content").empty();
-						$.get("./list/getManToManList", function(result) {	// qna list 함수를 그대로 가져옴
-							$("#content").append(result);
+			$
+					.ajax({
+						type : 'POST',
+						url : './list/qnaAnswer', // post로 보냄
+						data : form, // 담은 변수명 보냄
+						beforeSend : function() {
+							var loadingHtml = '<div id="loading" style="z-index: 1005;position: absolute; top:50%;left:50%; text-align:center;"> ';
+							loadingHtml += '<div class="loading_box"><img src="${pageContext.request.contextPath}/resources/images/loading.gif">"</div></div>';
+							$('#content').fadeTo("fast", 0.4).append(
+									loadingHtml);
+						},
+						success : function(data) {
+							$('#content').fadeTo("slow", 1).find('#loading')
+									.remove();
+							alert("작성 성공"); // 성공하면 alert 출력
+							$("#content").empty();
+							$.get("./list/getManToManList", function(result) { // qna list 함수를 그대로 가져옴
+								$("#content").append(result);
+								$("#NAcheck").val($("#qnaNACheck").val());
+								var checkNA = $("#NAcheck").val();
+								if (checkNA == 'true') {
+									// 미답변 문의가 있으면
+									$(".new").children(".fas").removeClass(
+											"fa-envelope");
+									$(".new").children(".fas").addClass(
+											"fa-envelope-open-text");
+								} else {
+									// 미답변 문의가 없을시
+									$(".new").children("#new").remove();
+									$(".new").children(".fas").removeClass(
+											"fa-envelope-open-text")
+									$(".new").children(".fas").addClass(
+											"fa-envelope");
+									$(".new").children(".fas").css("color",
+											"black");
+								}
+							})
+						}
 					})
-				  }
-			})
+
 		}
 		function getQnaList() {
 			$("#content").empty();
@@ -276,77 +429,155 @@
 
 		// member
 		function getBlockList() {
-			$("#content").empty();
-			$.get("./list/getMemberList?mem_access=1&handling=0", function(
-					result) {
-				$("#content").append(result);
-			})
+			$
+					.ajax({
+						type : "GET",
+						url : "./list/getMemberList?mem_access=1&handling=0",
+						beforeSend : function() {
+							var loadingHtml = '<div id="loading" style="z-index: 1005;position: absolute; top:50%;left:50%; text-align:center;"> ';
+							loadingHtml += '<div class="loading_box"><img src="${pageContext.request.contextPath}/resources/images/loading.gif">"</div></div>';
+							$('#content').fadeTo("fast", 0.4).append(
+									loadingHtml);
+						},
+						success : function(result) {
+							$('#content').fadeTo("slow", 1).find('#loading')
+									.remove();
+							$("#content").empty();
+							$("#content").append(result);
+						}
+					})
 		}
 
 		function getMemberList() {
-			$("#content").empty();
-			$.get("./list/getMemberList?mem_access=0&handling=0", function(
-					result) {
-				$("#content").append(result);
-			})
+			$
+					.ajax({
+						type : "GET",
+						url : "./list/getMemberList?mem_access=0&handling=0",
+						beforeSend : function() {
+							var loadingHtml = '<div id="loading" style="z-index: 1005;position: absolute; top:50%;left:50%; text-align:center;"> ';
+							loadingHtml += '<div class="loading_box"><img src="${pageContext.request.contextPath}/resources/images/loading.gif">"</div></div>';
+							$('#content').fadeTo("fast", 0.4).append(
+									loadingHtml);
+						},
+						success : function(result) {
+							$('#content').fadeTo("slow", 1).find('#loading')
+									.remove();
+							$("#content").empty();
+							$("#content").append(result);
+						}
+					})
 		}
 
 		function getMemberSearchList(kind, search, mem_access) {
-			$("#content").empty();
 			$.post("./list/getMemberList", {
 				mem_access : mem_access,
 				kind : kind,
 				search : search
 			}, function(result) {
-				$("#content").append(result);
-			})
-		}
-		
-		// product
-		function getProductList() {
-			$("#content").empty();
-			$.get("./list/getProductList", function(result) {
+				$("#content").empty();
 				$("#content").append(result);
 			})
 		}
 
+		// product
+		function getProductList() {
+			$
+					.ajax({
+						type : "GET",
+						url : "./list/getProductList?curPage=1",
+						beforeSend : function() {
+							var loadingHtml = '<div id="loading" style="z-index: 1005;position: absolute; top:50%;left:50%; text-align:center;"> ';
+							loadingHtml += '<div class="loading_box"><img src="${pageContext.request.contextPath}/resources/images/loading.gif">"</div></div>';
+							$('#content').fadeTo("fast", 0.4).append(
+									loadingHtml);
+						},
+						success : function(result) {
+							$('#content').fadeTo("slow", 1).find('#loading')
+									.remove();
+							$("#content").empty();
+							$("#content").append(result);
+						}
+					})
+		}
+		function getTradingProductList() {
+			$
+					.ajax({
+						type : "GET",
+						url : "./list/getTradingProductList",
+						beforeSend : function() {
+							var loadingHtml = '<div id="loading" style="z-index: 1005;position: absolute; top:50%;left:50%; text-align:center;"> ';
+							loadingHtml += '<div class="loading_box"><img src="${pageContext.request.contextPath}/resources/images/loading.gif">"</div></div>';
+							$('#content').fadeTo("fast", 0.4).append(
+									loadingHtml);
+						},
+						success : function(result) {
+							$('#content').fadeTo("slow", 1).find('#loading')
+									.remove();
+							$("#content").empty();
+							$("#content").append(result);
+						}
+					})
+		}
+
 		// notice
 		function getNoticeList() {
-			$("#content").empty();
-			$.get("./list/getNoticeList", function(result) {
-				$("#content").append(result)
-			})
-			
+			$
+					.ajax({
+						type : "GET",
+						url : "./list/getNoticeList",
+						beforeSend : function() {
+							var loadingHtml = '<div id="loading" style="z-index: 1005;position: absolute; top:50%;left:50%; text-align:center;"> ';
+							loadingHtml += '<div class="loading_box"><img src="${pageContext.request.contextPath}/resources/images/loading.gif">"</div></div>';
+							$('#content').fadeTo("fast", 0.4).append(
+									loadingHtml);
+						},
+						success : function(result) {
+							$('#content').fadeTo("slow", 1).find('#loading')
+									.remove();
+							$("#content").empty();
+							$("#content").append(result);
+						}
+					})
 		}
-		function getNoticeWrite(){
+		function getNoticeWrite() {
 			$("#content").empty();
 			$.get("../notice/noticeWrite", function(result) {
 				$("#content").append(result);
 			})
 		}
 
-		function getNoticeWriteOK(){
-			var form = {										// 변수 한번에 넘겨주기위해 변수하나에 필요한 내용 다 담기			
-					notitle : $("#notitle").val(),
-					no_contents : $("#summernote").val()
+		function getNoticeWriteOK() {
+			var form = { // 변수 한번에 넘겨주기위해 변수하나에 필요한 내용 다 담기			
+				notitle : $("#notitle").val(),
+				no_contents : $("#summernote").val()
 			};
 			$("#content").empty();
-			$.ajax({
-				type: 'POST',  
-				  url: '/notice/noticeWrite',  					// post로 보냄
-				  data: form,									// 담은 변수명 보냄
-				  success: function(result){
-					  alert("공지 작성 완료");						// 성공하면 alert 출력
-					  $("#content").empty();
-						$.get("/admin/list/getNoticeList", function(result) {
-							$("#content").append(result)
-						})
-				  }
-			})
+			$
+					.ajax({
+						type : 'POST',
+						url : '/notice/noticeWrite', // post로 보냄
+						data : form, // 담은 변수명 보냄
+						beforeSend : function() {
+							var loadingHtml = '<div id="loading" style="z-index: 1005;position: absolute; top:50%;left:50%; text-align:center;"> ';
+							loadingHtml += '<div class="loading_box"><img src="${pageContext.request.contextPath}/resources/images/loading.gif">"</div></div>';
+							$('#content').fadeTo("fast", 0.4).append(
+									loadingHtml);
+						},
+						success : function(result) {
+							$('#content').fadeTo("slow", 1).find('#loading')
+									.remove();
+							alert("공지 작성 완료"); // 성공하면 alert 출력
+							$("#content").empty();
+							$.get("/admin/list/getNoticeList",
+									function(result) {
+										$("#content").append(result)
+									})
+						}
+					})
 		}
-		function getNoticeDelete(nonum){
+		function getNoticeDelete(nonum) {
 			$("#content").empty();
-			$.get("../notice/noticeDelete?nonum="+nonum, function(result) {
+			$.get("../notice/noticeDelete?nonum=" + nonum, function(result) {
 				alert("삭제 완료");
 				$("#content").empty();
 				$.get("./list/getNoticeList", function(result) {
@@ -354,46 +585,165 @@
 				})
 			})
 		}
-		function getNoticeUpdate(nonum){
+		function getNoticeUpdate(nonum) {
 			$("#content").empty();
-			$.get("../notice/noticeUpdate?nonum="+nonum, function(result) {
+			$.get("../notice/noticeUpdate?nonum=" + nonum, function(result) {
 				$("#content").append(result);
 			})
 		}
-		function getNoticeUpdateOK(){
-			var form = {			
-					nonum : $("#nonum").val(),							// 변수 한번에 넘겨주기위해 변수하나에 필요한 내용 다 담기			
-					notitle : $("#notitle").val(),
-					no_contents : $("#summernote").val()
+		function getNoticeUpdateOK() {
+			var form = {
+				nonum : $("#nonum").val(), // 변수 한번에 넘겨주기위해 변수하나에 필요한 내용 다 담기			
+				notitle : $("#notitle").val(),
+				no_contents : $("#summernote").val()
 			};
 			$("#content").empty();
-			$.ajax({
-				type: 'POST',  
-				  url: '/notice/noticeUpdate',  					// post로 보냄
-				  data: form,									// 담은 변수명 보냄
-				  success: function(result){
-					  alert("공지 수정 완료");						// 성공하면 alert 출력
-					  $("#content").empty();
-						$.get("/admin/list/getNoticeList", function(result) {
-							$("#content").append(result)
-						})
-				  }
-			})
+			$
+					.ajax({
+						type : 'POST',
+						url : '/notice/noticeUpdate', // post로 보냄
+						data : form, // 담은 변수명 보냄
+						beforeSend : function() {
+							var loadingHtml = '<div id="loading" style="z-index: 1005;position: absolute; top:50%;left:50%; text-align:center;"> ';
+							loadingHtml += '<div class="loading_box"><img src="${pageContext.request.contextPath}/resources/images/loading.gif">"</div></div>';
+							$('#content').fadeTo("fast", 0.4).append(
+									loadingHtml);
+						},
+						success : function(result) {
+							$('#content').fadeTo("slow", 1).find('#loading')
+									.remove();
+							alert("공지 수정 완료"); // 성공하면 alert 출력
+							$("#content").empty();
+							$.get("/admin/list/getNoticeList",
+									function(result) {
+										$("#content").append(result)
+									})
+						}
+					})
 		}
-		function getNoticeSelect(nonum){
+		function getNoticeSelect(nonum) {
 			$("#content").empty();
-			$.get("../notice/noticeSelect?nonum="+nonum, function(result) {
+			$.get("../notice/noticeSelect?nonum=" + nonum, function(result) {
 				$("#content").append(result);
 			})
 		}
-		function getNoticeSearch(search) {						// qna에서 글작성자 검색 함수
+		function getNoticeSearch(search) { // qna에서 글작성자 검색 함수
 			$("#content").empty();
-			$.post("./list/getNoticeList",{						// post로 보냄 (controller에는 같은 이름의 메서드가 get방식으로 있어서 post로 보냄)
-					search : search
-				}, function(result) {
-				$("#content").append(result);					// callback
+			$.post("./list/getNoticeList", { // post로 보냄 (controller에는 같은 이름의 메서드가 get방식으로 있어서 post로 보냄)
+				search : search
+			}, function(result) {
+				$("#content").append(result); // callback
 			})
 		}
+		// 관리자 메뉴
+		function myFunction(x) {
+			x.classList.toggle("change");
+		}
+		function openNav() {
+			document.getElementById("mySidenav").style.width = "250px";
+		}
+
+		function closeNav() {
+			document.getElementById("mySidenav").style.width = "0";
+			$("#adminMenubar").removeClass("change");
+		}
+
+
+		// Calendar
+		function kCalendar(id, date) {
+	var kCalendar = document.getElementById(id);
+
+	var realdate = new Date();
+	if( typeof( date ) !== 'undefined' ) {
+		date = date.split('-');
+		date[1] = date[1] - 1;
+		date = new Date(date[0], date[1], date[2]);
+	} else {
+		var date = new Date();
+	}
+	var currentYear = date.getFullYear();
+	//년도를 구함
+	
+	var currentMonth = date.getMonth() + 1;
+	//연을 구함. 월은 0부터 시작하므로 +1, 12월은 11을 출력
+	
+	var currentDate = date.getDate();
+	//오늘 일자.
+	
+	date.setDate(1);
+	var currentDay = date.getDay();
+	//이번달 1일의 요일은 출력. 0은 일요일 6은 토요일
+	
+	var dateString = new Array('sun', 'mon', 'tue', 'wed', 'thu', 'fri', 'sat');
+	var lastDate = new Array(31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31);
+	if( (currentYear % 4 === 0 && currentYear % 100 !== 0) || currentYear % 400 === 0 )
+		lastDate[1] = 29;
+	//각 달의 마지막 일을 계산, 윤년의 경우 년도가 4의 배수이고 100의 배수가 아닐 때 혹은 400의 배수일 때 2월달이 29일 임.
+	
+	var currentLastDate = lastDate[currentMonth-1];
+	var week = Math.ceil( ( currentDay + currentLastDate ) / 7 );
+	//총 몇 주인지 구함.
+	
+	if(currentMonth != 1)
+		var prevDate = currentYear + '-' + ( currentMonth - 1 ) + '-' + currentDate;
+	else
+		var prevDate = ( currentYear - 1 ) + '-' + 12 + '-' + currentDate;
+	//만약 이번달이 1월이라면 1년 전 12월로 출력.
+	
+	if(currentMonth != 12) 
+		var nextDate = currentYear + '-' + ( currentMonth + 1 ) + '-' + currentDate;
+	else
+		var nextDate = ( currentYear + 1 ) + '-' + 1 + '-' + currentDate;
+	//만약 이번달이 12월이라면 1년 후 1월로 출력.
+
+	
+	if( currentMonth < 10 )
+		var currentMonth = '0' + currentMonth;
+	//10월 이하라면 앞에 0을 붙여준다.
+	
+	var calendar = '';
+	
+	calendar += '<div id="header">';
+	calendar += '			<span><a href="#" class="button left" onclick="kCalendar(\'' +  id + '\', \'' + prevDate + '\')"><</a></span>';
+	calendar += '			<span id="date">' + currentYear + '년 ' + currentMonth + '월</span>';
+	calendar += '			<span><a href="#" class="button right" onclick="kCalendar(\'' + id + '\', \'' + nextDate + '\')">></a></span>';
+	calendar += '		</div>';
+	calendar += '			<b style="text-align : center;">Dday : ' + (realdate.getYear()+1900) + '년 ' + (realdate.getMonth()+1) + '월 '+ currentDate+'일</b>'
+	calendar += '		<table border="0" cellspacing="0" cellpadding="0">';
+	calendar += '			<caption>' + currentYear + '년 ' + currentMonth + '월 달력</caption>';
+	calendar += '				<tr>';
+	calendar += '				  <th class="sun" scope="row">일</th>';
+	calendar += '				  <th class="mon" scope="row">월</th>';
+	calendar += '				  <th class="tue" scope="row">화</th>';
+	calendar += '				  <th class="wed" scope="row">수</th>';
+	calendar += '				  <th class="thu" scope="row">목</th>';
+	calendar += '				  <th class="fri" scope="row">금</th>';
+	calendar += '				  <th class="sat" scope="row">토</th>';
+	calendar += '				</tr>';
+	calendar += '			<tbody>';
+	
+	var dateNum = 1 - currentDay;
+	
+	for(var i = 0; i < week; i++) {
+		calendar += '			<tr>';
+		for(var j = 0; j < 7; j++, dateNum++) {
+			if( dateNum < 1 || dateNum > currentLastDate ) {
+				calendar += '				<td class="' + dateString[j] + ' "> </td>';
+				continue;
+			}
+			calendar += '				<td class="' + dateString[j] + ' ">' + dateNum + '</td>';
+		}
+		calendar += '			</tr>';
+	}
+	
+	calendar += '			</tbody>';
+	calendar += '		</table>';
+	
+	kCalendar.innerHTML = calendar;
+}
+		window.onload = function () {
+			kCalendar('kCalendar');
+		};
 	</script>
 </body>
 </html>

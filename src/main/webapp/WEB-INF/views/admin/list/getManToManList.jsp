@@ -2,15 +2,17 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-<div>
+<div class="w3-container">
+	<input type="hidden" value="${check}" id="qnaNACheck">
 	<div class="topnav">
 		<a class="check active" title="manToman" style="cursor: pointer;">1:1
 			문의</a> <a class="check" title="qna" style="cursor: pointer;">질문과 답변</a>
 		<div class="search-container">
-				<input type="text" placeholder="MemberName..." name="search" id="qnaSearch">
-				<button type="submit" id="qnaMemSearch">
-					<i class="fa fa-search"></i>
-				</button>
+			<input type="text" placeholder="MemberName..." name="search"
+				id="qnaSearch">
+			<button type="submit" id="qnaMemSearch">
+				<i class="fa fa-search"></i>
+			</button>
 			<!-- <form action="./qnaMemberSearch">
 			</form> -->
 		</div>
@@ -18,14 +20,14 @@
 	<table class="table">
 		<thead>
 			<tr>
-				<td>상담 카테고리</td>
-				<td>문의 제목</td>
-				<td>문의자 ID</td>
-				<td>첨부파일 여부</td>
-				<td>문의 날짜</td>
-				<td>문의 상황</td>
-				<td>문의 답변날짜</td>
-				<td>문의 답변버튼</td>
+				<th>상담 카테고리</th>
+				<th>문의 제목</th>
+				<th>문의자 ID</th>
+				<th>첨부파일 여부</th>
+				<th>문의 날짜</th>
+				<th>문의 상황</th>
+				<th>문의 답변날짜</th>
+				<th>문의 답변버튼</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -41,10 +43,10 @@
 							test="${list.qna_check ne 0}">답변완료</c:if></td>
 					<td><c:if test="${list.qna_checkDate eq null}">답변대기중</c:if> <c:if
 							test="${list.qna_checkDate ne null}">${list.qna_checkDate}</c:if></td>
-					<td>
-					<c:if test="${list.qna_check eq 0}">
-						<a title="qnaAnswer" class="check"><button class="qna_num" id="${list.qna_num}">답변하기</button></a>
-					</c:if></td>
+					<td><c:if test="${list.qna_check eq 0}">
+							<a title="qnaAnswer" class="check"><button class="qna_num"
+									id="${list.qna_num}">답변하기</button></a>
+						</c:if></td>
 
 				</tr>
 

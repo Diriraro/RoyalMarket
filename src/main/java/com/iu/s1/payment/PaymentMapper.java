@@ -11,6 +11,7 @@ import com.iu.s1.paymentHistory.Buy_HistoryVO;
 import com.iu.s1.paymentHistory.Sell_HistoryVO;
 import com.iu.s1.product.ProductVO;
 import com.iu.s1.trading.TradingVO;
+import com.iu.s1.util.Pager;
 
 @Repository
 @Mapper
@@ -71,6 +72,8 @@ public interface PaymentMapper {
 	public int paystatsInsert(PayStatsVO payStatsVO) throws Exception;
 	
 	public long buy_status(long sell_num)throws Exception;
+	
+	public List<TradingVO> tradingList(Pager pager) throws Exception;
 	
 	public long sell_status(long sell_num)throws Exception;
 	

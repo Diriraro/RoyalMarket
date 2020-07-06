@@ -19,15 +19,21 @@ import com.iu.s1.member.MemberRepository;
 import com.iu.s1.member.MemberVO;
 import com.iu.s1.notice.NoticeRepository;
 import com.iu.s1.notice.NoticeVO;
+import com.iu.s1.payment.PaymentMapper;
 import com.iu.s1.paymentHistory.PaymentHistoryRepository;
+import com.iu.s1.product.ProductMapper;
+import com.iu.s1.product.ProductVO;
 import com.iu.s1.qna.QnaRepository;
+import com.iu.s1.trading.TradingVO;
+import com.iu.s1.util.Pager;
 import com.iu.s1.visitor.VisitorVO;
 
 @Service
 public class AdminService {
 
 	// 상품 Repository ( 상품 분류 및 삭제 )
-
+	@Autowired
+	private ProductMapper productMapper;
 	// 문의 Repository ( 1:1 문의 답변 )
 	@Autowired
 	private QnaRepository qnaRepository;
@@ -43,6 +49,9 @@ public class AdminService {
 	// 거래량
 	@Autowired
 	private PaymentHistoryRepository paymentHistoryRepository;
+	// 거래중
+	@Autowired
+	private PaymentMapper paymentMapper;
 
 	public List<MemberVO> getMemberList(long mem_access) throws Exception {
 		if (mem_access == 1) {
@@ -73,7 +82,6 @@ public class AdminService {
 		MemberVO memberVO = new MemberVO();
 		memberVO.setMem_regDate(date1);
 		List<MemberVO> ar = memberRepository.getDailyNewMember(memberVO);
-		System.out.println(ar.size());
 		return ar.size();
 	}
 	public List<NoticeVO> getNoticeList() throws Exception {
@@ -96,7 +104,6 @@ public class AdminService {
 			Optional<VisitorVO> opt = adminRepository.findById(daily);
 			visitorVO = opt.get();
 		} else {
-			System.out.println("New DAY");
 			visitorVO.setDay(daily);
 			visitorVO.setCount(1);
 			adminRepository.save(visitorVO);
@@ -153,7 +160,7 @@ public class AdminService {
 	public long qnaNACount() throws Exception {
 		return qnaRepository.qnaNACount();
 	}
-	public long getRateForTradeCountYD() throws Exception {
+	public Long getRateForTradeCountYD() throws Exception {
 		Calendar cal = Calendar.getInstance();
 		// 오늘
 		int year = cal.getTime().getYear() + 1900;
@@ -183,7 +190,7 @@ public class AdminService {
 		return daily;
 	}
 
-	public long getDailyTradeCount() throws Exception {
+	public Long getDailyTradeCount() throws Exception {
 		Date date = new Date();
 		int year = date.getYear();
 		int month = date.getMonth();
@@ -219,7 +226,41 @@ public class AdminService {
 	}
 
 	public Long getProfit() throws Exception {
-		return paymentHistoryRepository.getProfit();
+		Calendar cal = Calendar.getInstance();
+		int year1 = cal.getTime().getYear() + 1900;
+		int month1 = cal.getTime().getMonth() + 1;
+		int day1 = cal.getActualMaximum(cal.DAY_OF_MONTH);
+		//요번달 마지막일
+		String sell_date1 = year1 + "/" + month1 + "/" + day1;
+		int year2 = cal.getTime().getYear() + 1900;
+		int month2 = cal.getTime().getMonth() + 1;
+		int day2 = 1;
+		// 요번달 1일
+		String sell_date2 = year2 + "/" + month2 + "/" + day2;
+		return paymentHistoryRepository.getProfit( sell_date1, sell_date2);
+	}
+	
+	public List<ProductVO> productRecentList() throws Exception {
+		Pager pager = new Pager();
+		pager.setCurPage(1L);
+		pager.makeRow();
+		long totalCount = productMapper.productCount(pager);
+		pager.makePage(totalCount);
+		return productMapper.productList(pager);
+	}
+	
+	public List<ProductVO> productList(Pager pager) throws Exception {
+		pager.makeRow();
+		long totalCount = productMapper.productCount(pager);
+		pager.makePage(totalCount);
+		return  productMapper.productList(pager);
+	}
+	public int productDelete(ProductVO productVO) throws Exception {
+		return productMapper.productDelete(productVO);
+	}
+	
+	public List<TradingVO> tradingList(Pager pager) throws Exception {
+		return paymentMapper.tradingList(pager);
 	}
 	
 }
