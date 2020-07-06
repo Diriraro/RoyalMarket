@@ -138,6 +138,19 @@ public class PaymentService {
 		return paymentMapper.buy_Sel(sell_num);
 	}
 	
+	public Sell_HistoryVO sell_Sel(long sell_num)throws Exception{
+		return paymentMapper.sell_Sel(sell_num);
+	}
+	
+	
+	public int buy_cancelUp(long buy_cancel)throws Exception{
+		return paymentMapper.buy_cancelUp(buy_cancel);
+	}
+	
+	public int sell_cancelUp(long cell_cancel)throws Exception{
+		return paymentMapper.sell_cancelUp(cell_cancel);
+	}
+
 	public SaveCashVO selectSC(String mem_id)throws Exception{
 		return saveCashRepository.selectSC(mem_id);
 	}

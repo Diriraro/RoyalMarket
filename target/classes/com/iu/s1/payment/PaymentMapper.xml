@@ -47,12 +47,12 @@
  	
  	<!-- 구매내역 추가 -->
  	<insert id="buy_his" parameterType="com.iu.s1.paymentHistory.Buy_HistoryVO">
- 		insert into buy_history values(#{mem_id},#{sell_num},#{sell_price},0,0,#{sell_product},#{file_name},#{seller_id},#{buy_date})
+ 		insert into buy_history values(#{mem_id},#{sell_num},#{sell_price},0,0,#{sell_product},#{file_name},#{seller_id},#{buy_date},0)
  	</insert>
  	
  	<!-- 판매내역 추가 -->
  	<insert id="sell_his" parameterType="com.iu.s1.paymentHistory.Sell_HistoryVO">
- 		insert into sell_history values(#{mem_id},#{sell_num},#{sell_price},0,0,#{sell_product},#{file_name},#{buyer_id},#{sell_date})
+ 		insert into sell_history values(#{mem_id},#{sell_num},#{sell_price},0,0,#{sell_product},#{file_name},#{buyer_id},#{sell_date},0)
  	</insert>
  	
  	<!-- 구매 내역 출력 -->
@@ -77,7 +77,7 @@
  	
  	<!-- 인수 업데이트2 -->
  	<update id="buy_statusUp" parameterType="com.iu.s1.paymentHistory.Buy_HistoryVO">
- 		update buy_history set status=#{status} where sell_num=#{sell_num}
+ 		update buy_history set status=#{status}, buy_check=#{buy_check} where sell_num=#{sell_num} and buy_check=0
  	</update>
  	
  	<!-- 인계 업데이트 -->
@@ -87,7 +87,7 @@
  	
  	<!-- 인수 업데이트2 -->
  	<update id="sell_statusUp" parameterType="com.iu.s1.paymentHistory.Sell_HistoryVO">
- 		update sell_history set status=#{status} where sell_num=#{sell_num}
+ 		update sell_history set status=#{status}, sell_check=#{sell_check} where sell_num=#{sell_num} and sell_check=0
  	</update>
  	
  	<!-- trading Select -->
@@ -146,17 +146,33 @@
   	
   	<!-- sellnum으로 buy_history에서 status 가져오기 -->
   	<select id="buy_status" parameterType="java.lang.Long" resultType="java.lang.Long">
-  		select status from buy_history where sell_num=#{sell_num}
+  		select status from buy_history where buy_history_num=#{buy_history_num}
   	</select>
   	  
   	<!-- sellnum으로 sell_history에서 status 가져오기 -->
   	<select id="sell_status" parameterType="java.lang.Long" resultType="java.lang.Long">
-  		select status from sell_history where sell_num=#{sell_num}
+  		select status from sell_history where sell_history_num=#{sell_history_num}
   	</select>
   	
   	<!-- buy_his 검색 -->
   	<select id="buy_Sel" parameterType="java.lang.Long" resultType="com.iu.s1.paymentHistory.Buy_HistoryVO">
-  		select * from buy_history where sell_num=#{sell_num}
+  		select * from buy_history where buy_history_num=#{buy_history_num}
   	</select>
+  	
+  	<!-- sell_his 검색 -->
+  	<select id="sell_Sel" parameterType="java.lang.Long" resultType="com.iu.s1.paymentHistory.Sell_HistoryVO">
+  		select * from sell_history where sell_history_num=#{sell_history_num}
+  	</select>
+  	
+  	<!-- trading buy_cancel Up -->
+  	<update id="buy_cancelUp" parameterType="java.lang.Long">
+  		update trading set buy_cancel=#{buy_cancel}
+  	</update>
+  	
+  	<!-- trading sell_cancel Up -->
+  	<update id="sell_cancelUp" parameterType="java.lang.Long">
+  		update trading set sell_cancel=#{sell_cancel}
+  	</update>
+  		
   		
  </mapper>

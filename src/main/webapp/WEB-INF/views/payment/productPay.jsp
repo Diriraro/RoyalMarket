@@ -11,17 +11,21 @@
 </head>
 <body>
 	<c:import url="../template/woozoo_nav.jsp"></c:import>
+	<c:import url="../template/style.jsp"></c:import>
 
 	<div class="container">
+		<br><br><br>
 		<font style="font-size: x-large;"><b>주문</b></font>
-		<hr style="border: solid 1px #e4e4e4;">
+		<hr style="border: solid 1px #5c2392;">
 		<br><br><br><br>
 		
 		<div style="border: 1px solid white">
 			<font style="font-size: x-large;"><b>상품 정보</b></font>
-			<hr style="border: solid 1px #e4e4e4;">
-			<div style="width: 400px; height: 500px; border: solid 1px black; display: inline-block; float: right;">
+			
+			<hr style="border: solid 1px #5c2392;">
+			<div style="width: 385px; height: 500px; border: 2px solid #5c2392; background-color display: inline-block; float: right;">
 			<form action="./productTrading" method="post">
+
 				<div style="margin-top: 10px;">
 					<font style="color: red; font-size: large; margin-left: 10px; float: left"><b>총 상품 금액</b></font>
 					<font style="color: red; font-size: large; margin-right: 10px; float: right;"><b>${sell_price}  원</b></font>
@@ -93,34 +97,35 @@
 					</div>
 				</c:if>
 				<!-- post parameter -->
-				<input type="text" id="cash" name="cash" value="0">							
-				<input type="text" id="sel_price" name="sell_price" value="${sell_price+2500}">
-				<input type="text" id="sel_num" name="sell_num" value="${sell_num}">
+				<input type="hidden" id="cash" name="cash" value="0">							
+				<input type="hidden" id="sel_price" name="sell_price" value="${sell_price+2500}">
+				<input type="hidden" id="sel_num" name="sell_num" value="${sell_num}">
 				<!-- cash 		: 차감되는 적립금
 					 sel_price 	: 차감되는 포인트 -->
 			</form>	
 	
 			</div>
-			<div style="width: 730px; height: 500px; border: solid 1px black; display: inline-block; float: left;">
-				<table class="table table-bordered" style="margin-top: 10px;">
-					<tr>
+			<div style="width: 715px; height: 500px; margin-right:15px; display: inline-block; float: left;">
+				<table class="table" style="margin-top: 10px;">
+					<tr style="border-top: 2px solid black; border-bottom:2px solid black; text-align: center; background-color:#c2d6d6; ">
 						<td>상풍 정보</td>
 						<td>상품 금액</td>
-						<td>적립 예정</td>
-						<td>배송비</td>
+						<td style="width: 15%">적립 예정</td>
+						<td style="width: 10%;">배송비</td>
 					</tr>
-					<tr>
-						<td>
-							${sell_product}
-							<div><img alt="images" src="${pageContext.request.contextPath}/upload/product/${image}" style="width: 200px; height: 200px;"></div>					
+					<tr style="height: 250px; text-align: center; font-size: 25px; border-bottom: 1px solid #e4e4e4;">
+						<td style="text-align: left; border-right: 1px solid #e4e4e4;">
+							<div style="display: inline-block;"><img alt="images" src="${pageContext.request.contextPath}/upload/product/${image}" style="width: 200px; height: 200px;"></div>					
+							<div style="display: inline-block;">&nbsp;&nbsp;&nbsp;${sell_product}</div>
 							</td>
-						<td>${sell_price}</td>
-						<td> test</td>
-						<td>2500</td>
+						<td style="vertical-align: middle; border-right: 1px solid #e4e4e4;">${sell_price}</td>
+						<td style="vertical-align: middle; border-right: 1px solid #e4e4e4; color: red"><b>test</b></td>
+						<td style="vertical-align: middle ;">2500</td>
 					</tr>
 				</table>
 			</div>
 		</div>
+
 </div>	
 		
 
@@ -152,7 +157,7 @@
 	    var option = "width = 500, height = 500, top = 100, left = 200, location = no"
 	    window.open(url, name, option);
 	}
-
+			
 
 	$("#cashAmount").click(function(){		// input 클릭시에 기본값 0 없애기
 		if($(this).val()==0){
@@ -243,6 +248,7 @@
 		}
 	})
 
-	</script>
+</script>
+		<c:import url="../template/footer.jsp"></c:import>
 </body>
 </html>
