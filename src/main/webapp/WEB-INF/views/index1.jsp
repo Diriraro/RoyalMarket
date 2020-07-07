@@ -26,7 +26,7 @@ display: none;
 display: none;
 }
 .cbtn{
-width: 114.444444px;
+width: 128.5555555px;
 height:50px;
 float: left;
 }
@@ -67,7 +67,7 @@ float: left;
     </div>
 
     <div class="item">
-      <img src="${pageContext.request.contextPath}/resources/images/adv_3.png" alt="">
+      <img src="${pageContext.request.contextPath}/resources/images/adv_6.png" alt="">
     </div>
     
         <div class="item">
@@ -93,19 +93,19 @@ float: left;
 
 	
 </div>
-
+	<div style="background-color: #fafafd;">
 	<div style="width: 1030px; height:20px; margin-left: 440px; margin-top:50px;">
 	<button id="c0_btn" class="cbtn">패션잡화</button>
 	<button id="c1_btn" class="cbtn">여성의류</button>
 	<button id="c2_btn" class="cbtn">남성의류</button>
 	<button id="c3_btn" class="cbtn">디지털/가전</button>
-	<button id="c4_btn" class="cbtn">생활/문구/가구/식품</button>
-	<button id="c5_btn" class="cbtn">유아동/출산</button>
 	<button id="c6_btn" class="cbtn">스타굿즈</button>
 	<button id="c7_btn" class="cbtn">스포츠/레저</button>
 	<button id="c8_btn" class="cbtn">뷰티/미용</button>
+	<button id="c4_btn" class="cbtn">기타</button>
 	</div>
-	<div style="background-color: red;">
+	
+	
 	<div id="c0_title" style="width: 1030px; height:20px; margin-left: 440px; margin-top:50px; background-color: yellow;border-top: 1px solid black;">
 	패션잡화
 	<a href="/product/productList?kind=sk&search=패션잡화"><font>전체보기</font></a>
@@ -114,47 +114,48 @@ float: left;
 	
 	<div id="c1_title" style="width: 1030px; height:20px; margin-left: 440px; margin-top:50px; background-color: yellow;border-top: 1px solid black;">
 	여성의류
-	<a href="/product/productList?kind=sk&search=패션잡화"><font>전체보기</font></a>
+	<a href="/product/productList?kind=sk&search=여성의류"><font>전체보기</font></a>
 	</div>
 	<div id="c1" style="height: 650px;"></div>
 	
 	<div id="c2_title" style="width: 1030px; margin-left: 440px; margin-top:50px; background-color: yellow;border-top: 1px solid black;">
 	남성의류
-	<a href="/product/productList?kind=sk&search=패션잡화"><font>전체보기</font></a>
+	<a href="/product/productList?kind=sk&search=남성의류"><font>전체보기</font></a>
 	</div>
-	<div id="c2"></div>
+	<div id="c2" style="height: 650px;"></div>
 	
 	<div id="c3_title" style="width: 1030px; margin-left: 440px; margin-top:50px; background-color: yellow;border-top: 1px solid black;">
 	디지털/가전
-	<a href="/product/productList?kind=sk&search=패션잡화"><font>전체보기</font></a>
+	<a href="/product/productList?kind=sk&search=디지털/가전"><font>전체보기</font></a>
 	</div>
-	<div id="c3"></div>
-	
-	<div id="c4_title" style="width: 1030px; margin-left: 440px; margin-top:50px; background-color: yellow;border-top: 1px solid black;">
-	생활/문구/가구/식품
-	<a href="/product/productList?kind=sk&search=패션잡화"><font>전체보기</font></a>
-	</div>
-	<div id="c4"></div>
-	
-	<div id="c5_title" style="width: 1030px; margin-left: 440px; margin-top:50px; background-color: yellow;border-top: 1px solid black;">
-	유아동/출산
-	<a href="/product/productList?kind=sk&search=패션잡화"><font>전체보기</font></a>
-	</div>
-	<div id="c5"></div>
+	<div id="c3" style="height: 650px;"></div>
 	
 	<div id="c6_title" style="width: 1030px; margin-left: 440px; margin-top:50px; background-color: yellow;border-top: 1px solid black;">
 	스타굿즈
-	<a href="/product/productList?kind=sk&search=패션잡화"><font>전체보기</font></a>
+	<a href="/product/productList?kind=sk&search=스타굿즈"><font>전체보기</font></a>
 	</div>
-	<div id="c6"></div>
+	<div id="c6" style="height: 650px;"></div>
 	
-	<div id="c7_title" style="width: 1030px; margin-left: 440px; margin-top:50px; background-color: yellow;border-top: 1px solid black;">스포츠/레저</div>
-	<div id="c7"></div>
-	
-	<div id="c8_title" style="width: 1030px; margin-left: 440px; margin-top:50px; background-color: yellow;border-top: 1px solid black;">뷰티/미용</div>
-	<div id="c8"></div>
+	<div id="c7_title" style="width: 1030px; margin-left: 440px; margin-top:50px; background-color: yellow;border-top: 1px solid black;">
+	스포츠/레저
+	<a href="/product/productList?kind=sk&search=스포츠/레저"><font>전체보기</font></a>
 	</div>
-	<c:import url="../template/footer_index.jsp"></c:import>
+	<div id="c7" style="height: 650px;"></div>
+	
+	<div id="c8_title" style="width: 1030px; margin-left: 440px; margin-top:50px; background-color: yellow;border-top: 1px solid black;">
+	뷰티/미용
+	<a href="/product/productList?kind=sk&search=뷰티/미용"><font>전체보기</font></a>
+	</div>
+	<div id="c8" style="height: 650px;"></div>
+	
+	<div id="c4_title" style="width: 1030px; margin-left: 440px; margin-top:50px; background-color: yellow;border-top: 1px solid black;">
+	기타
+	<a href="/product/productList?kind=sk&search=기타"><font>전체보기</font></a>
+	</div>
+	<div id="c4" style="height: 650px;"></div>
+	
+	</div>
+	<c:import url="./template/footer_index.jsp"></c:import>
 
 
 
@@ -166,7 +167,7 @@ float: left;
 		    	
 		        $.ajax({
 		            type : "GET", //전송방식을 지정한다 (POST,GET)
-		            url : "product/productList?kind=sk&search=패션잡화",//호출 URL을 설정한다. GET방식일경우 뒤에 파라티터를 붙여서 사용해도된다.
+		            url : "product/productList?curPage=1&kind=sk&search=패션잡화",//호출 URL을 설정한다. GET방식일경우 뒤에 파라티터를 붙여서 사용해도된다.
 		            dataType : "text",//호출한 페이지의 형식이다. xml,json,html,text등의 여러 방식을 사용할 수 있다.
 		            error : function(){
 		                alert("통신실패!!!!");
@@ -232,7 +233,7 @@ float: left;
 		    	
 		        $.ajax({
 		            type : "GET", //전송방식을 지정한다 (POST,GET)
-		            url : "product/productList?kind=sk&search=생활/문구/가구/식품",//호출 URL을 설정한다. GET방식일경우 뒤에 파라티터를 붙여서 사용해도된다.
+		            url : "product/productList?kind=sk&search=기타",//호출 URL을 설정한다. GET방식일경우 뒤에 파라티터를 붙여서 사용해도된다.
 		            dataType : "text",//호출한 페이지의 형식이다. xml,json,html,text등의 여러 방식을 사용할 수 있다.
 		            error : function(){
 		                alert("통신실패!!!!");
@@ -244,21 +245,6 @@ float: left;
 		        });
 		    });
 
-		  $(document).ready(function(){
-		    	
-		        $.ajax({
-		            type : "GET", //전송방식을 지정한다 (POST,GET)
-		            url : "product/productList?kind=sk&search=유아동/출산",//호출 URL을 설정한다. GET방식일경우 뒤에 파라티터를 붙여서 사용해도된다.
-		            dataType : "text",//호출한 페이지의 형식이다. xml,json,html,text등의 여러 방식을 사용할 수 있다.
-		            error : function(){
-		                alert("통신실패!!!!");
-		            },
-		            success : function(Parse_data){
-		                $("#c5").html(Parse_data); //div에 받아온 값을 넣는다.
-		            }
-		             
-		        });
-		    });
 
 		  $(document).ready(function(){
 		    	
