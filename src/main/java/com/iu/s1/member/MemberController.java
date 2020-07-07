@@ -51,7 +51,7 @@ public class MemberController {
 	public ModelAndView findPwByEmail(HttpSession session, MemberVO memberVO) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("memberVO", new MemberVO());
-		mv.setViewName("member/findMember");
+		mv.setViewName("member/findPwByEmail");
 		return mv;
 	}
 
@@ -493,9 +493,9 @@ public class MemberController {
 				System.out.println("에러카운트" + error_count);
 
 				if (error_count.equals("0")) {
-					msg = "인증 메세지를 전송했습니다";
+					msg = "아이디를 전송했습니다";
 				} else {
-					msg = "인증 메세지 전송 실패했습니다";
+					msg = "아이디 전송 실패했습니다";
 				}
 
 			} else {
