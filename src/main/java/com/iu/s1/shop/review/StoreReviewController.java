@@ -51,7 +51,7 @@ public class StoreReviewController {
 			System.out.println(storeReviewVO);
 			int result = storeReviewService.setInsertReview(storeReviewVO, files);
 			rd.addFlashAttribute("result",result);
-			mv.setViewName("redirect:../");
+			mv.setViewName("redirect:../payment/buy_History");
 		}
 		
 	return mv;	

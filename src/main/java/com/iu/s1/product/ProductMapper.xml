@@ -128,6 +128,11 @@
 		select count(*) from store_product where mem_storeNum= #{mem_storeNum}
 	</select>
 	
+	<!-- 상품이름 -->
+	<select id="getsell_product" parameterType="com.iu.s1.product.zzim.ZzimVO" resultType="String">
+		select sell_product from store_product where sell_num=#{sell_num}
+	</select>
+	
 
 
 	<delete id="productDelete" parameterType="ProductVO">

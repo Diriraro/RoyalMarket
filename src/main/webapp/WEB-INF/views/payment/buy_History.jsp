@@ -83,7 +83,7 @@
 					</c:if>
 					<c:if test="${vo.status eq 2}">
 						<div style="display: inline-block;">구매 완료</div>
-						<td><a href="../shop/rei?sell_num=${vo.sell_num}"> 리뷰남기기</a>　</td>
+						
 					</c:if>
 					<c:if test="${vo.status eq 3}">
 						<div style="display: inline-block;">취소된 거래입니다.</div>

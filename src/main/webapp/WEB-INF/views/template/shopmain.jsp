@@ -23,7 +23,8 @@
 					<img alt="" src="${pageContext.request.contextPath}/resources/images/user11.png" style="width: 100%; height: 100%;">
 				</div>
 				<div style=" height: 100px; margin-top: 60px; text-align: center;">
-					<button>상품 관리</button>
+					<button><a class="zzimbtn"  href="../product/myProductList?kind=sp&mem_storeNum=${member.mem_storeNum}">
+				 상품관리</a></button>
 				
 				
 				</div>

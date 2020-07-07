@@ -30,6 +30,8 @@ public interface StoreReviewRepository {
 	// 갯수
 	public long reco(long mem_storeNum)throws Exception;
 	
+	// 작성했는지 안했는지 검사 상품번호와 리뷰는 1대1
+	public StoreReviewVO recheck(long sell_num) throws Exception;
 	
 	
 	

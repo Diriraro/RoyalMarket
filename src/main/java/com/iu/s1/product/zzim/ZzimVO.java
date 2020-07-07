@@ -5,7 +5,14 @@ public class ZzimVO {
 	private long mem_storeNum;
 	private long sell_num;
 	private long zzim_num;
+	private String sell_product;
 	
+	public String getSell_product() {
+		return sell_product;
+	}
+	public void setSell_product(String sell_product) {
+		this.sell_product = sell_product;
+	}
 	public long getZzim_num() {
 		return zzim_num;
 	}

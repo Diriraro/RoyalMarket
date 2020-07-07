@@ -64,7 +64,7 @@ border-top: 2px solid black;
 				<div style="border: 1px solid red; min-height: 340px; overflow: auto;">
 					<c:forEach items="${zilist }" var="vo">
 						<div style="border: 1px solid red; width: 480px; height: 140px; float: left; margin-left: 2%; margin-top: 2%; margin-bottom: 2%;" >
-						<button>
+						<%-- <button>
 							${vo.mem_storeNum } <a>mem_storeNum</a>
 						</button>
 						<button>
@@ -72,7 +72,17 @@ border-top: 2px solid black;
 						</button>
 						<button>
 							  ${vo.zzim_num }<a>zzim_num</a>
-						</button>
+						</button> --%>
+						<div style="border: 1px solid; width: 34%; height:100%; float: left;">
+						   
+						</div>
+						<div style="border: 1px solid; width: 33%;height:100%; float: left;">
+						    상품이름  ::  ${vo.sell_product }
+						</div>	
+						<div style="border: 1px solid; width: 33%;height:100%; float: left;">
+						   <button> <a href="">go</a></button>
+						</div>
+						
 						</div>
 					</c:forEach>
 

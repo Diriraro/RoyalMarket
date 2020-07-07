@@ -200,6 +200,11 @@ public class ShopController {
 		
 		// 찜 리스트
 		List<ZzimVO> zar = productService.myzzim(mem_storeNum);
+		for (ZzimVO zzimVO :zar) {
+			zzimVO.setSell_product(productService.getsell_product(zzimVO));
+		}
+		
+		
 		// 찜 리스트 끝
 		
 		// 공유
