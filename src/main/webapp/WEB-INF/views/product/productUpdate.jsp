@@ -34,11 +34,12 @@
 </style>
 
 <c:import url="../template/boot.jsp"></c:import>
+<c:import url="../template/style.jsp"></c:import>
 
 </head>
 <body>
 	<c:import url="../template/nav.jsp"></c:import>
-	<div style="width: 1024px; margin-left: 440px; margin-top:50px; height: 1315px;">
+	<div style="width: 1024px; margin-left: 440px; margin-top:50px;">
 	<form action="productUpdate" method="post" enctype="multipart/form-data">
 
 		<!-- <a id="sellimg"><img src="${pageContext.request.contextPath}/resources/images/showimage.png"></a>
@@ -125,12 +126,24 @@
 		value="${vvo.sell_tag}"> 
 		</div>
 
-		<button style="margin-left: 860px;margin-top: 16px; width: 160px;height: 56px;border: 0px;background-image: url('${pageContext.request.contextPath}/resources/images/regi_logo.png');" type="submit" class="btn btn-default" id="productNew"></button>            
+			<div  style="height: 50px;display: inline-block;">
+			<button style="margin-left: 400px;margin-top: 16px; width: 160px;height: 56px;border: 0px;
+			background-image: url('${pageContext.request.contextPath}/resources/images/regi_logo.png');" type="submit" class="btn btn-default" id="productNew">
+			</button>
 
+
+		</div>
+		
 
 	</form>
 
 		</div>
+		<div style="background-color: white;"></div>
+
+
+
+		
+<c:import url="../template/footer.jsp"></c:import>
 
 
 

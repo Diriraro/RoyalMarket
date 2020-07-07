@@ -3,7 +3,7 @@
 
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<div class="footer f" style="height: 300px;">
+<div class="footer" style="height: 300px;">
 	<div class="footer-menu">  
 		<ul>
 		<li style="margin-right: 30px;"><a href="#"><b>공지사항</a></li>    

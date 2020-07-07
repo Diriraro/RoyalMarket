@@ -124,7 +124,7 @@ button {
 
 
 </style>
-<div class="n">
+<div>
 	<header>
 		<nav id="header_top">
 		<div style="float: left;width: 450px;">
@@ -352,8 +352,15 @@ button {
 					"width=600, height=800, resizable = no, scrollbars = no");
 		}
 
-
-
+/* 	$("#search_btn").click(function(){
+		if($("#search").val!=null){
+			alert("asd")
+			}else{
+				alert("공백입니다. 다시 입력해 주세요")
+				return false;
+				}
+		})
+ */
 	
 
 		

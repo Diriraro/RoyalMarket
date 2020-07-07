@@ -8,6 +8,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <c:import url="../template/boot.jsp"></c:import>
+<c:import url="../template/style.jsp"></c:import>
 
 </head>
 <body>
@@ -235,7 +236,8 @@
 				<input type="hidden" id="pq_storeName" name="pq_storeName" value="${member.mem_storeName}" /> 
 					<textarea style="width: 630px;height: 80px;" class="form-control" id="pq_contents" name="pq_contents"placeholder="내용을 입력하세요."></textarea>
 					<div>
-					<button id="qnaInsert" class="btn btn-default" type="button" name="qnaInsertBtn">등록</button>
+					<button style="background-image: url('${pageContext.request.contextPath}/resources/images/regis_logo.png'); width:81px;height:31px;margin-left:549px;margin-top:3px;" id="qnaInsert" class="btn btn-default" type="button" name="qnaInsertBtn">
+					</button>
 					</div>
 			</div>
 		</form>
@@ -287,10 +289,14 @@
 				<font style="margin-left:125px; color: gray;">상점 상품 더보기></font></a>
 				<hr>
 				
-				
+					
 	  
 	</div>
 	<!-- 상점정보끝 -->
+	<div style="height: 10px;width:1024px; background-color: white;display: inline-block;"></div>
+	<c:import url="../template/footer.jsp"></c:import>
+
+	
 	
 	<script type="text/javascript">
 		$(document).on('click', '.reply', function() {
@@ -302,18 +308,6 @@
 			$('#myModal2').modal('hide');
 			});
 
-/* 			$(document).on('click', '.qlist', function() {
-				var a =5 ; 
-				var b = 10;	
-				if(a > b){ 
-					alert("a 가 b 보다 큽니다."); 
-					}else if(b > a){ 
-					alert('b 가 c 보다 큽니다.'); 
-					}else { c
-					 alert('모든 조건을 만족하지 않습니다.'); }
-				});
-
- */
 		
 	</script>
 
