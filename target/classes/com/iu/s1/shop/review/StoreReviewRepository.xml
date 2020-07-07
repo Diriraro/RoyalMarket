@@ -7,7 +7,7 @@
   
   <!--setInsertReview  리뷰 남기기 -->
   <insert id="setInsertReview" parameterType="com.iu.s1.shop.review.StoreReviewVO" useGeneratedKeys="true" keyProperty="re_num">
-  insert into store_review values (0,#{mem_storeNum},#{sell_product},#{re_context},#{re_rate},now(),#{re_storeName},#{re_storeNum})
+  insert into store_review values (0,#{mem_storeNum},#{sell_product},#{re_context},#{re_rate},now(),#{re_storeName},#{re_storeNum},#{sell_num})
   </insert>
   
   
@@ -48,6 +48,10 @@
   		select COUNT(*) FROM store_review where mem_storeNum=#{mem_storeNum}
   </select>
   
+  <!-- recheck -->
+  <select id="recheck" parameterType="Long" resultType="com.iu.s1.shop.review.StoreReviewVO">
+  		select sell_num from store_review where sell_num = #{sell_num}
+  </select>
   
   
   </mapper>

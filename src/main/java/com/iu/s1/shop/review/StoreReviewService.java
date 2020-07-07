@@ -101,6 +101,11 @@ public class StoreReviewService {
 		
 	}
 	
+	// recheck
+	public StoreReviewVO recheck(long sell_num) throws Exception{
+		return storeReviewRepository.recheck(sell_num);
+		
+	}
 	
 	
 }

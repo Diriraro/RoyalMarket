@@ -23,6 +23,8 @@ import com.iu.s1.paymentHistory.Sell_HistoryVO;
 import com.iu.s1.product.ProductService;
 import com.iu.s1.product.ProductVO;
 import com.iu.s1.saveCash.SaveCashVO;
+import com.iu.s1.shop.review.StoreReviewService;
+import com.iu.s1.shop.review.StoreReviewVO;
 import com.iu.s1.trading.TradingVO;
 
 @Controller
@@ -33,6 +35,8 @@ public class PaymentController {
 	private PaymentService paymentService;
 	@Autowired
 	private ProductService productService;
+	@Autowired
+	private StoreReviewService storeReviewService;
 	
 	//결제로 들어가는 페이지
 	@GetMapping("pay")
@@ -499,6 +503,14 @@ public class PaymentController {
 		String mem_id=memberVO.getMem_id();
 		//날짜 가져오기
 		Buy_HistoryVO buy_HistoryVO= paymentService.buy_Sel(buy_history_num);
+		
+		///
+		StoreReviewVO reviewVO = new StoreReviewVO();
+		reviewVO = storeReviewService.recheck(sell_num);
+		System.out.println(reviewVO+"확인 ㄱㄷㄱㄷㄱㄷㄱㄷ");
+		
+		mv.addObject("recheck",reviewVO);
+		////
 		
 		mv.addObject("buy_date", buy_HistoryVO.getBuy_date());
 		mv.addObject("mem_id", mem_id);

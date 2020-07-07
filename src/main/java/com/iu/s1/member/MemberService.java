@@ -231,4 +231,12 @@ public class MemberService {
 		
 		return memberRepository.getregDate(mem_storeNum);
 	}
+	
+	//mdata 
+	public MemberVO mdata(long mem_storeNum) throws Exception{
+		
+		return memberRepository.mdata(mem_storeNum);
+	}
+	
+	
 }

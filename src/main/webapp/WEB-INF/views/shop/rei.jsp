@@ -368,6 +368,9 @@ iframe {
 		<div class="form-group">
 		<input type="hidden" value="${sell_product}" name="sell_product" id="sell_product"><br>
 		</div>
+		<div class="form-group">
+		<input type="text" value="${sell_num}" name="sell_num" id="sell_num"><br>
+		</div>
 	
 		<div id="root">
 			<div class="app">

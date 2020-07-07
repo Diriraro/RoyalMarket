@@ -11,6 +11,14 @@
 <c:import url="../template/style.jsp"></c:import>
 </head>
 <body>
+	<c:if test="${recheck ne null }">
+		<button> 이미 작성함.</button>
+	</c:if>
+	
+	<c:if test="${recheck eq null }">
+		<button> 작성가능</button>
+	</c:if>
+
 	<c:import url="../template/woozoo_nav.jsp"></c:import>
 	<div class="container"> 
 		<h2><b>주문 상세정보</b></h2>
@@ -37,7 +45,19 @@
 				<td style="width: 100px; border-right: 1px solid #cccccc; background: #F7F7F7;">
 					<c:if test="${status eq 0}"> 구매 대기중</c:if>
 					<c:if test="${status eq 1}"> 인수 완료</c:if>
-					<c:if test="${status eq 2}"> 구매 완료</c:if>
+					<c:if test="${status eq 2}"> 구매 완료 <br>
+					
+					<c:if test="${recheck eq null }">
+					 <a href="../shop/rei?sell_num=${productVO.sell_num}">리뷰남기기</a>　
+					</c:if>
+					
+					<c:if test="${recheck ne null }">
+						<a href="../shop/reviews?mem_storeNum=${productVO.mem_storeNum}">리뷰보기</a>　
+					</c:if>
+					
+					 
+					 
+					  </c:if>
 					<c:if test="${status eq 3}"> 취소 완료</c:if>
 					<c:if test="${status eq 4}"> 판매자가 취소 요청을 하였습니다. </c:if>
 					<c:if test="${status eq 5}"> 취소 요청중</c:if>

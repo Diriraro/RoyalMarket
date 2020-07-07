@@ -73,20 +73,21 @@ border-top: 2px solid black;
 					<c:forEach items="${mylist }" var="vo">
 					
 					
-					<div style="width: 200px; height: 300px; border: 1px solid; float: left; margin-left: 4px; margin-bottom: 4px;">
+					<div style="width: 200px; height: 300px; border: 1px solid; float: left; margin-left: 4px; margin-bottom: 4px;  background-color: #f0f0f5"  onclick="location.href='../product/productSelect?sell_num=${vo.sell_num}'">
 					
 					
 					
 				<c:forEach items="${pfile}" var="pfile" varStatus="status" >
 				<div style="width: 198px;">
 				<c:if test="${vo.sell_num eq pfile.sell_num}">
-					<img src="../upload/product/${pfile.file_name}"	alt="${pfile.ori_name}"	style="overflow: hidden; display: flex; align-items: center; justify-content: center; width: 197px; height: 190px; ">
+					<img  src="../upload/product/${pfile.file_name}"	alt="${pfile.ori_name}"	style="overflow: hidden; display: flex; align-items: center; justify-content: center; width: 197px; height: 190px;">
 				</c:if>
 				</div>
 				</c:forEach>
 					<br>
-					<div>
+					<div >
 					${vo.sell_product }
+					
 					</div>
 					<div>
 					${vo.sell_price }
