@@ -74,5 +74,9 @@
 	select mem_regDate from member where mem_storeNum = #{mem_storeNum}
 	</select>
 	
+	<select id="mdata" parameterType="Long" resultType="memberVO">
+		select * from member where mem_storeNum=#{mem_storeNum}
+	</select>
+	
 	
 </mapper>

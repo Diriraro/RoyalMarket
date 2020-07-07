@@ -6,7 +6,14 @@ public class ZzimVO {
 	private long sell_num;
 	private long zzim_num;
 	private String sell_product;
+	private String file_name;
 	
+	public String getFile_name() {
+		return file_name;
+	}
+	public void setFile_name(String file_name) {
+		this.file_name = file_name;
+	}
 	public String getSell_product() {
 		return sell_product;
 	}

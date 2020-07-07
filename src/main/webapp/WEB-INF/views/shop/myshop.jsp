@@ -73,7 +73,7 @@ border-top: 2px solid black;
 					<c:forEach items="${mylist }" var="vo">
 					
 					
-					<div style="width: 200px; height: 300px; border: 1px solid; float: left; margin-left: 4px; margin-bottom: 4px;"  onclick="location.href='../product/productSelect?sell_num=${vo.sell_num}'">
+					<div style="width: 200px; height: 300px; border: 1px solid; float: left; margin-left: 4px; margin-bottom: 4px;  background-color: #f0f0f5"  onclick="location.href='../product/productSelect?sell_num=${vo.sell_num}'">
 					
 					
 					

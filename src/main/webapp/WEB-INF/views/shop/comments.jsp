@@ -103,7 +103,7 @@ border-top: 2px solid black;
 					</c:if> --%>
 				
 					
-					<div style=" border: 1px solid; height: 100px;">
+					<div style=" border: 1px solid; height: 100px;  background-color: #f0f0f5">
 						<tr>
 							<%-- <td>${vo.sq_num}</td>
 							<td>${vo.mem_storeNum }	</td> --%>

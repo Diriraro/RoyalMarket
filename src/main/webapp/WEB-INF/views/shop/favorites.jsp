@@ -73,14 +73,16 @@ border-top: 2px solid black;
 						<button>
 							  ${vo.zzim_num }<a>zzim_num</a>
 						</button> --%>
-						<div style="border: 1px solid; width: 34%; height:100%; float: left;">
-						   
+						<div style="border: 1px solid; width: 34%; height:100%; float: left;  background-color: #f0f0f5">
+						    <img src="../upload/product/${vo.file_name}"
+						    style="overflow: hidden; display: flex; align-items: center; justify-content: center; width: 100%; height: 100%;">
 						</div>
-						<div style="border: 1px solid; width: 33%;height:100%; float: left;">
+						<div style="border: 1px solid; width: 33%;height:100%; float: left;  background-color: #f0f0f5">
 						    상품이름  ::  ${vo.sell_product }
+						   
 						</div>	
-						<div style="border: 1px solid; width: 33%;height:100%; float: left;">
-						   <button> <a href="">go</a></button>
+						<div style="border: 1px solid; width: 33%;height:100%; float: left;  background-color: #f0f0f5">
+						   <button> <a href="#">go</a></button>
 						</div>
 						
 						</div>

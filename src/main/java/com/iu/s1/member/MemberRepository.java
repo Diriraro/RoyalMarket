@@ -34,5 +34,6 @@ public interface MemberRepository {
 	
 	// shop
 	public String getregDate(long mem_storeNum) throws Exception;
+	public MemberVO mdata(long mem_storeNum) throws Exception;
 	
 }

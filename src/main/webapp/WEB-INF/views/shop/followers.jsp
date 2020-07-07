@@ -69,7 +69,7 @@ border-top: 2px solid black;
 							<%-- <td>${vo.take_storeNum}</td> --%>
 						
 					
-					<div style="width: 200px; height: 320px; border: 1px solid; float: left; margin-left: 4px; margin-bottom: 4px; overflow: auto;" onclick="location.href='./shop/myshop?mem_storeNum=${vo.give_storeNum }'">
+					<div style="width: 200px; height: 320px; border: 1px solid; float: left; margin-left: 4px; margin-bottom: 4px; overflow: auto; background-color: #f0f0f5" onclick="location.href='./shop/myshop?mem_storeNum=${vo.give_storeNum }'">
 					
 				<%-- 	<div style="width: 198px;">
 					<img src="${pageContext.request.contextPath}/resources/images/showimage.png" alt="main" style="width: 197px; height: 190px;">
@@ -77,7 +77,7 @@ border-top: 2px solid black;
 					
 					<div style="width: 198px; width: 130px; margin-top: 40px;  margin-left: 17%;border-radius: 70%;overflow: hidden;">
 					<!-- 카카오 이미지 확인  -->
-					<img alt="" src="${pageContext.request.contextPath}/resources/images/logo.png" style="width: 100%; height: 100%;">
+					<img alt="" src="${pageContext.request.contextPath}/resources/images/user11.png" style="width: 100%; height: 100%; background-color: gray;" >
 					</div>					
 					
 					
