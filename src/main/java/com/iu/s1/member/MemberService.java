@@ -238,5 +238,13 @@ public class MemberService {
 		return memberRepository.mdata(mem_storeNum);
 	}
 	
+	public MemberVO selectMemberByStoreName(MemberVO memberVO) throws Exception{
+		return memberRepository.selectMemberByStoreName(memberVO);
+	}
+	
+	public int updateStoreName(MemberVO memberVO3)throws Exception{
+		return memberRepository.updateStoreName(memberVO3);
+	}
+	
 	
 }

@@ -4,6 +4,11 @@
 
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 
+<style>
+.update_form{
+	display: none;
+}
+</style>
 
 <!-- shop 페이지가 공통으로 가져갈곳  -->
 
@@ -51,7 +56,12 @@
 			<div style="border: 1px solid black; height: 80px;margin-bottom: 1px; margin-top: 2px;">
 			
 				<!--  상점명 수정   승범이형  plz  -->
-				<span>${mem_storeName}</span><button>상점명 수정</button>
+				<form action="../member/updateStoreName" method="post">
+					<input name="mem_id" value="${member.mem_id}" type="hidden">
+					<input name="mem_storeName" class="update_form">
+					<button type="submit" class="update_form">확인</button> 
+				</form>
+				<span class="update">${mem_storeName}</span><button type="button" class="update" onclick="update_storeName();">상점명 수정</button>
 				<a> </a>
 			</div>
 
@@ -136,7 +146,7 @@
 
 			<div style="border: 1px solid black; height: 80px;">
 			<!--  상점명 수정   승범이형  plz  -->
-				<span>${mem_storeName }</span>
+				<span>${mem_storeName}</span>
 				<a> </a>
 			</div>
 
@@ -167,6 +177,14 @@
 </div>
 
 <script type="text/javascript">
+
+function update_storeName(){
+	$(".update").css("display","none");
+	$(".update_form").css("display","block");
+	
+}
+
+
 
 
 

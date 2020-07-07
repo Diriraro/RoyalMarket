@@ -78,5 +78,15 @@
 		select * from member where mem_storeNum=#{mem_storeNum}
 	</select>
 	
+	<update id="updateStoreName" parameterType="memberVO">
+		update member set mem_storeName=#{mem_storeName} where mem_id=#{mem_id}
+	</update>
+	
+	<select id="selectMemberByStoreName" resultType="MemberVO" parameterType="MemberVO">
+		select * from member where mem_storeName=#{mem_storeName}
+	</select>
+	
+	
+	
 	
 </mapper>

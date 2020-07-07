@@ -589,5 +589,54 @@ public class MemberController {
 
 		return mv;
 	}
+	
+	@PostMapping("updateStoreName")
+	public ModelAndView updateStoreName(MemberVO memberVO, HttpServletRequest request)throws Exception{
+		ModelAndView mv = new ModelAndView();
+		
+		System.out.println(memberVO.getMem_id());
+		MemberVO memberVO3 = new MemberVO();
+		memberVO3.setMem_id(memberVO.getMem_id());
+		memberVO3.setMem_storeName(memberVO.getMem_storeName());
+		
+		MemberVO member = memberService.selectMemberByStoreName(memberVO);
+		memberVO = memberService.selectMember(memberVO);
+		String msg="";
+		
+		String referer = request.getHeader("referer");
+		
+		if(memberVO3.getMem_storeName()=="" || memberVO3.getMem_storeName()==null) {
+			msg = "상점명을 입력해주세요";
+			mv.addObject("path", "../shop/myshop?mem_storeNum="+memberVO.getMem_storeNum());
+			mv.addObject("result", msg);
+			mv.setViewName("common/result");
+			return mv;
+		}
+		
+		if(member != null) {
+			msg = "이미 등록된 상점명입니다";
+			mv.addObject("path", "../shop/myshop?mem_storeNum="+memberVO.getMem_storeNum());
+			mv.addObject("result", msg);
+			mv.setViewName("common/result");
+		}else {
+			int i = memberService.updateStoreName(memberVO3);
+			
+			if(i>0) {
+				//msg = "수정 완료!";			
+				System.out.println("referer!!!!!"+referer);
+				mv.addObject("path", "../shop/myshop?mem_storeNum="+memberVO.getMem_storeNum());
+				mv.addObject("result", msg);
+				mv.setViewName("common/result");	
+			}else {
+				msg = "수정 실패!";			
+				mv.addObject("path", "../shop/myshop?mem_storeNum="+memberVO.getMem_storeNum());
+				mv.addObject("result", msg);
+				mv.setViewName("common/result");
+			}
+			
+		}
+		
+		return mv;
+	}
 
 }
