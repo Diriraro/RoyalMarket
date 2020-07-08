@@ -8,6 +8,9 @@
 .update_form{
 	display: none;
 }
+
+
+
 </style>
 
 <!-- shop 페이지가 공통으로 가져갈곳  -->
@@ -29,20 +32,20 @@
 				</div>
 				
 				<!--별점  -->
-					<div style=" text-align: center; margin-top: 30px;">
+					<div style=" text-align: center; margin-top: 22px;">
 				<c:forEach var="i" begin="1" end="${flo}">
-					<a><img style="cursor: pointer; width: 14px; height: 15px;" alt=""
+					<a><img style="cursor: pointer; width: 22px; height: 20px;" alt=""
 					src="${pageContext.request.contextPath}/resources/images/star22.png"></a>
 				</c:forEach>
 				<c:if test="${substar eq 1}">
-					<a><img style="cursor: pointer; width: 14px; height: 15px;" alt=""
+					<a><img style="cursor: pointer; width: 22px; height: 20px;" alt=""
 					src="${pageContext.request.contextPath}/resources/images/star23.png"></a>
 				</c:if>
 					</div>
 				
 				<div style=" height: 100px; margin-top: 60px; text-align: center;">
 					
-					<a class="zzimbtn btn" style=" font-size: 25px;"  href="../product/myProductList?kind=sp&mem_storeNum=${member.mem_storeNum}">
+					<a class="zzimbtn btn btn-default" style=" font-size: 25px;"  href="../product/myProductList?kind=sp&mem_storeNum=${member.mem_storeNum}">
 				 상품관리</a>
 				
 				
@@ -55,32 +58,44 @@
 
 			<div style="border: 1px solid black; height: 80px;margin-bottom: 1px; margin-top: 2px;">
 			
-				<!--  상점명 수정   승범이형  plz  -->
 				<form action="../member/updateStoreName" method="post">
 					<input name="mem_id" value="${member.mem_id}" type="hidden">
 					<input name="mem_storeName" class="update_form">
 					<button type="submit" class="update_form">확인</button> 
 				</form>
-				<span class="update">${mem_storeName}</span><button type="button" class="update" onclick="update_storeName();">상점명 수정</button>
-				<a> </a>
+				<div style=" margin-top: 2%;">
+				<span class="update" style="font-size: 30px;">${mem_storeName}</span><button type="button" class="update" onclick="update_storeName();">상점명 수정</button>
+				</div>
 			</div>
 
 			<div style="border: 1px solid black; height: 80px; margin-bottom: 1px; margin-top: 2px;">
-				<span>상점오픈일 :: ${getregDate} </span>
+
+			<div style="margin-top: 2%;">
+				<span style="font-size: 30px;">상점오픈일 :: ${getregDate} </span>
+			</div>			
+			
 			</div>
 
-			<div style="border: 1px solid black; height: 80px;">
+			<div style="border: 1px solid black; height: 80px;margin-bottom: 1px; margin-top: 2px;">
 			<c:if test="${avg eq 0.0}">
-			<a> 거래내역이 없습니다. </a>			
+			<div style="margin-top: 2%;">
+			<span style="font-size: 30px;"> 거래내역이 없습니다. </span>			
+			</div>	
 			</c:if>
 			
-			<c:if test="${avg ne 0.0}">
-			<a>평점 : ${avg }</a>
+			<c:if test="${avg ne 0.0} ">
+			<div style="margin-top: 2%;">
+			<span style="font-size: 30px;">평점 : ${avg }</span>
+			</div>	
 			</c:if>
 			</div>
 			
-			<div style="border: 1px solid black; height: 80px;">
+			<div style="border: 1px solid black; height: 80px; margin-bottom: 1px; margin-top: 2px;">
+			<div style="margin-top: 2%;">
+			<span style="font-size: 30px;">
 				${mdata.mem_address}
+			</span>
+			</div>	
 			<%-- 	${mdata.mem_email}
 				${mdata.mem_phone} --%>
 			</div>
@@ -94,7 +109,7 @@
 
 		<!-- div 1번 -->
 		<div style="width: 340px; float: left;">
-			<div style="border: 1px solid black; width: 330px; height: 330px; background-size : cover;  background-image: url('${pageContext.request.contextPath}/resources/images/shopback.jpg');">
+			<div style="border: 1px solid white; width: 330px; height: 330px; background-size : cover;  background-image: url('${pageContext.request.contextPath}/resources/images/shopback.jpg');">
 				<!-- 사진  -->
 				<div style="width: 130px; width: 130px; margin-top: 40px;  margin-left: 30%;border-radius: 70%;overflow: hidden;">
 					<c:if test="${mdata.mem_access eq 0}">
@@ -109,11 +124,11 @@
 				<!--별점  -->
 					<div style=" text-align: center; margin-top: 30px;">
 				<c:forEach var="i" begin="1" end="${flo}">
-					<a><img style="cursor: pointer; width: 14px; height: 15px;" alt=""
+					<a><img style="cursor: pointer; width: 22px; height: 20px;" alt=""
 					src="${pageContext.request.contextPath}/resources/images/star22.png"></a>
 				</c:forEach>
 				<c:if test="${substar eq 1}">
-					<a><img style="cursor: pointer; width: 14px; height: 15px;" alt=""
+					<a><img style="cursor: pointer; width: 22px; height: 20px;" alt=""
 					src="${pageContext.request.contextPath}/resources/images/star23.png"></a>
 				</c:if>
 					</div>
@@ -151,38 +166,62 @@
 		
 		<div style="border: 0px solid black; width: 680px; height: 330px; float: left; font-size: large;">
 
-			<div style="border: 1px solid black; height: 80px;">
+			<div style="border: 1px solid black; height: 80px; margin-bottom: 1px; margin-top: 2px;">
 
 				<c:if test="${mdata.mem_access eq 0}">
-				<span>${mem_storeName }</span>
+				<div style="margin-top: 2%;">
+				<span style="font-size: 30px;">${mem_storeName }</span>
+				</div>	
 				</c:if>
 				<c:if test="${mdata.mem_access eq 1}">
-				
+				<div style="margin-top: 2%;">
 				<h1>차단 회원 입니다.</h1>
+				</div>	
 				</c:if>
 		
 			</div>
 
-			<div style="border: 1px solid black; height: 80px;">
-				<span>상점오픈일  :: ${getregDate }</span>
+			<div style="border: 1px solid black; height: 80px; margin-bottom: 1px; margin-top: 2px;">
+			<div style="margin-top: 2%;">
+				<span style="font-size: 30px;">상점오픈일  :: ${getregDate }</span>
+			</div>	
 			</div>
 
-			<div style="border: 1px solid black; height: 80px;">
+			<div style="border: 1px solid black; height: 80px; margin-bottom: 1px; margin-top: 2px;">
 			<c:if test="${avg eq 0.0}">
-			<a> 거래내역이 없습니다. </a>			
+			<div style="margin-top: 2%;">
+			<span style="font-size: 30px;"> 거래내역이 없습니다. </span>			
+			</div>	
 			</c:if>
 			
 			<c:if test="${avg ne 0.0}">
-			<a>평점 : ${avg }</a>
+			<div style="margin-top: 2%;">
+			<span style="font-size: 30px;">평점 : ${avg }</span>
+			</div>	
 			</c:if>
 			</div>
-			<div style="border: 1px solid black; height: 80px;">
+			<div style="border: 1px solid black; height: 80px; margin-bottom: 1px; margin-top: 2px; overflow: auto;">
 			<c:if test="${mdata.mem_access eq 0}">
+			<div style="margin-top: 2%;">
+			<span style="font-size: 30px;">
 			 거래장소 :${mdata.mem_address}
+			</span>
+			</div>	
 			</c:if>
 			<c:if test="${mdata.mem_access eq 1}">
-			<a class="btn btn-danger">전화번호 : ${mdata.mem_phone} </a>
-			<a class="btn btn-danger">이메일 : ${mdata.mem_email} </a>
+			
+			<span class="btn btn-danger"data-toggle="collapse" data-target="#phone"style="font-size: 40px;">전화번호
+			 <span id="phone" class="collapse" style="float: right; font-size: 40px;">
+    			: ${mdata.mem_phone}
+			 </span>
+			 </span>
+			<br>
+			<span class="btn btn-danger"data-toggle="collapse" data-target="#email" style="font-size: 40px;">이메일
+			 <span id="email" class="collapse" style="float: right; font-size: 40px;">
+    			 : ${mdata.mem_email} 
+			 </sapn>
+			</span>
+			
 			</c:if>
 				
 			<%-- 	${mdata.mem_email}
