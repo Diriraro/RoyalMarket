@@ -351,7 +351,7 @@ public class PaymentController {
 		
 		//인수 인계가 모두 1이면 판매자 포인트 업데이트
 		if(receive==1 && give==1) {		
-			long total=curPoint+tradingVO.getSell_price();
+			long total=curPoint+(tradingVO.getSell_price()-2500);
 			MemberVO memberVO = new MemberVO();
 			memberVO.setMem_id(seller_id);
 			PayStatsVO payStatsVO = new PayStatsVO();
@@ -361,8 +361,8 @@ public class PaymentController {
 			payStatsVO.setSeller_address(memberVO2.getMem_address());
 			
 			//수익 계산
-			long profit = (total/10);
-			long commition= tradingVO.getSell_price()/10;
+			long profit = (tradingVO.getSell_price()-2500)/10;
+			long commition= (tradingVO.getSell_price()-2500)/10;
 			memberVO.setMem_point(total-profit+2500);
 			buy_HistoryVO.setSell_num(sell_num);
 			buy_HistoryVO.setStatus(2);
@@ -429,7 +429,7 @@ public class PaymentController {
 		//인수 인계가 모두 1이면 판매자 포인트 업데이트
 		if(receive==1 && give==1) {		
 			
-			long total=curPoint+tradingVO.getSell_price();
+			long total=curPoint+(tradingVO.getSell_price()-2500);
 			MemberVO memberVO = new MemberVO();
 			memberVO.setMem_id(seller_id);
 			PayStatsVO payStatsVO = new PayStatsVO();
@@ -439,8 +439,8 @@ public class PaymentController {
 			payStatsVO.setSeller_address(memberVO2.getMem_address());
 			
 			// 수익 계산
-			long profit = (total/10);
-			long commition = tradingVO.getSell_price()/10;
+			long profit = (tradingVO.getSell_price()-2500)/10;
+			long commition = (tradingVO.getSell_price()-2500)/10;
 			payStatsVO.setSell_commition(commition);
 			memberVO.setMem_point(total-profit+2500);
 			System.out.println(total-profit+2500);
