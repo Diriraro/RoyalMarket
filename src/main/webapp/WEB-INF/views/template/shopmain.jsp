@@ -71,8 +71,8 @@
 			
 			<div style="border: 1px solid black; height: 80px;">
 				${mdata.mem_address}
-				${mdata.mem_email}
-				${mdata.mem_phone}
+			<%-- 	${mdata.mem_email}
+				${mdata.mem_phone} --%>
 			</div>
 		</div>
 	</div>
@@ -87,8 +87,13 @@
 			<div style="border: 1px solid black; width: 330px; height: 330px; background-size : cover;  background-image: url('${pageContext.request.contextPath}/resources/images/shopback.jpg');">
 				<!-- 사진  -->
 				<div style="width: 130px; width: 130px; margin-top: 40px;  margin-left: 30%;border-radius: 70%;overflow: hidden;">
-				<!-- 카카오 이미지 확인  -->
+					<c:if test="${mdata.mem_access eq 0}">
 					<img alt="" src="${pageContext.request.contextPath}/resources/images/user11.png" style="width: 100%; height: 100%;">
+					</c:if>
+					<c:if test="${mdata.mem_access eq 1}">
+					<img alt="" src="${pageContext.request.contextPath}/resources/images/bb1.png" style="width: 100%; height: 100%;">
+					</c:if>
+					
 				</div>
 				
 				<!--별점  -->
@@ -106,6 +111,8 @@
 				
 				
 				<!-- 팔로우가 아니면 팔로우버튼 출력 -->
+				<c:if test="${mdata.mem_access eq 0}">
+				
 				<div style=" height: 100px; margin-top: 60px; text-align: center;">
 				
 				<c:if test="${fonum.follow_Num eq null}">
@@ -127,7 +134,7 @@
 						
 				<%-- <a>${fonum.follow_Num}</a> --%><!-- 팔로우 번호   ******  -->
 				</div>
-				
+				</c:if>
 			</div>
 		</div>
 		<!-- div 2번  -->
@@ -135,8 +142,14 @@
 		<div style="border: 0px solid black; width: 680px; height: 330px; float: left; font-size: large;">
 
 			<div style="border: 1px solid black; height: 80px;">
-			<!--  상점명 수정   승범이형  plz  -->
+				<c:if test="${mdata.mem_access eq 0}">
 				<span>${mem_storeName }</span>
+				</c:if>
+				<c:if test="${mdata.mem_access eq 1}">
+				
+				<h1>차단 회원 입니다.</h1>
+				</c:if>
+				
 				<a> </a>
 			</div>
 
@@ -154,8 +167,13 @@
 			</c:if>
 			</div>
 			<div style="border: 1px solid black; height: 80px;">
+			<c:if test="${mdata.mem_access eq 0}">
 			 거래장소 :${mdata.mem_address}
-				
+			</c:if>
+			<c:if test="${mdata.mem_access eq 1}">
+			<a class="btn btn-danger">전화번호 : ${mdata.mem_phone} </a>
+			<a class="btn btn-danger">이메일 : ${mdata.mem_email} </a>
+			</c:if>
 				
 			<%-- 	${mdata.mem_email}
 				${mdata.mem_phone} --%>

@@ -39,6 +39,8 @@ public interface ProductMapper {
 	public List<ProductVO> myList(long mem_storeNum) throws Exception;
 	public long prodco(long mem_storeNum) throws Exception;
 	public String getsell_product(ZzimVO zzimVO)throws Exception; 
+	public long getsell_price(ZzimVO zzimVO) throws Exception;
+	public long getmem_storeNum(ZzimVO zzimVO) throws Exception;
 	
 	
 	public int productDelete(ProductVO productVO) throws Exception;

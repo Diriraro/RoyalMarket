@@ -25,6 +25,12 @@ border-right: 2px solid black;
 border-top: 2px solid black;
 }
 
+.s1{
+font-size: 20px;
+border:1px solid gray; 
+
+}
+
 </style>
 
 <meta charset="UTF-8">
@@ -66,14 +72,15 @@ border-top: 2px solid black;
 		
 			<div>  <!-- 내용보여줄 div -->
 				<h2>${mem_storeName } 의 상품목록</h2>
+				<hr>
 				
-				<div style="border: 1px solid red; min-height: 340px; overflow: auto;"  >
+				<div style="border: 1px solid white; min-height: 340px; overflow: auto;"  >
 					<!-- 상품판매중인 리스트를 밑에다 뿌릴것.  -->
 					
 					<c:forEach items="${mylist }" var="vo">
 					
 					
-					<div style="width: 200px; height: 300px; border: 1px solid; float: left; margin-left: 4px; margin-bottom: 4px;  background-color: #f0f0f5"  onclick="location.href='../product/productSelect?sell_num=${vo.sell_num}'">
+					<div style="width: 200px; height: 300px; border: 1px solid gray ; float: left; margin-left: 4px; margin-bottom: 4px;  background-color: #f0f0f5"  onclick="location.href='../product/productSelect?sell_num=${vo.sell_num}'">
 					
 					
 					
@@ -85,17 +92,16 @@ border-top: 2px solid black;
 				</div>
 				</c:forEach>
 					<br>
-					<div >
+					<div class="s1">
 					${vo.sell_product }
-					
 					</div>
-					<div>
+					<div class="s1">
 					${vo.sell_price }
 					<span style="float: right;">
 					${vo.sell_date }
 					</span>
 					</div>
-					<div>
+					<div class="s1">
 					${vo.sell_kind}
 					</div>
 					

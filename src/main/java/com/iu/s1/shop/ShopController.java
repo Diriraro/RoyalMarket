@@ -207,6 +207,11 @@ public class ShopController {
 		for (ZzimVO zzimVO :zar) {
 			zzimVO.setSell_product(productService.getsell_product(zzimVO));
 			zzimVO.setFile_name(productService.selectFileName(zzimVO.getSell_num()));
+			zzimVO.setSell_price(productService.getsell_price(zzimVO));
+			String ss=	 memberService.mdata(productService.getmem_storeNum(zzimVO)).getMem_address();
+			zzimVO.setMem_address(ss);
+			// 주소를 가져와라
+			
 		}
 		
 		
@@ -389,6 +394,7 @@ public class ShopController {
 	public ModelAndView setInsertFollow(long give_storeNum,long take_storeNum,long mem_storeNum, ModelAndView mv,HttpServletRequest request)throws Exception{
 		// 이전페이지 주소찾기
 		String referer = request.getHeader("referer");
+		System.out.println(referer+" ㄴㅇㄹㄴㅇㄹㄴㅇㄹ");
 		//이전페이지 주소찾기 끝
 		
 		
@@ -411,7 +417,7 @@ public class ShopController {
 		
 		// 이전페이지 주소찾기
 		String referer = request.getHeader("referer");
-		System.out.println(referer);
+		System.out.println(referer+" ㄴㅇㄹㄴㅇㄹㄴㅇㄹ");
 		//이전페이지 주소찾기 끝
 
 		

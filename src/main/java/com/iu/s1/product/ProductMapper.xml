@@ -132,6 +132,15 @@
 	<select id="getsell_product" parameterType="com.iu.s1.product.zzim.ZzimVO" resultType="String">
 		select sell_product from store_product where sell_num=#{sell_num}
 	</select>
+	<!-- 상품가격  -->
+	<select id="getsell_price" parameterType="com.iu.s1.product.zzim.ZzimVO" resultType="Long">
+		select sell_price from store_product where sell_num= #{sell_num}
+	</select>
+	
+	<!-- 상품 판매하는 사람의 번호  -->
+	<select id="getmem_storeNum" parameterType="com.iu.s1.product.zzim.ZzimVO" resultType="Long">
+		select mem_storeNum from store_product where sell_num = #{sell_num}  
+	</select>
 	
 
 

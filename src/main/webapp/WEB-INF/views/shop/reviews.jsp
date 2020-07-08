@@ -62,6 +62,7 @@ border-top: 2px solid black;
 
 			<div>
 				<h2>${mem_storeName } 의 리뷰목록</h2>
+				<hr>
 			<c:forEach items="${relist}" var="vo" varStatus="i">
 				 <!-- 리스트 감쌀디아이브이  -->
 				<div style="border: 1px solid ; min-height: 150px; overflow: auto;">
@@ -71,8 +72,8 @@ border-top: 2px solid black;
 				</div><!-- 왼쪽 옆에 이미지 박스  -->
 				
 				<div style="font-size: large;">
-				<a href="./myshop?mem_storeNum=${vo.re_storeNum}">	${vo.re_storeName}</a>  <button class="btn btn-sm btn-info">인증</button>
-				<span style="float: right;">${vo.re_wDate}</span>
+				<a href="./myshop?mem_storeNum=${vo.re_storeNum}">	${vo.re_storeName}</a>
+				<span style="float: right;" class="badge pull-right">${vo.re_wDate}</span>
 				<%-- ${vo.re_storeNum}  리뷰남김사람 번호 --%>
 				</div>
 				<%-- 리뷰번호 :${vo.re_num} 지울떄 사용--%>
@@ -87,7 +88,7 @@ border-top: 2px solid black;
 				<br>
 				
 				<div>
-				<button class="btn-default">${vo.sell_product}</button>
+				<button class="btn-default go" title="${vo.sell_num }">${vo.sell_product}</button>
 				</div>
 				<br>
 				
@@ -113,11 +114,6 @@ border-top: 2px solid black;
 							<a href="./setDeleteReview?re_num=${vo.re_num}&mem_storeNum=${vo.mem_storeNum}"	class="btn btn-danger pull-right"><span	class="	glyphicon glyphicon-remove-sign"></span>Delete</a>
 				</c:if>
 				
-				
-				
-				
-				
-				
 				</div>  <!-- 리스트 감쌀디아이브이  -->
 			</c:forEach>
 				</div>
@@ -127,5 +123,19 @@ border-top: 2px solid black;
 		</div><!-- 버튼, 내용 끝  -->
 
 	</div><!-- 컨테이너 끝  -->
+	
+	<script type="text/javascript">
+		$(".go").click(function(){
+		var tt=	$(this).attr("title");
+			console.log(tt);
+			location.href = "../product/productSelect?sell_num="+tt;
+
+
+			
+			});
+
+	</script>
+	
+	
 </body>
 </html>
