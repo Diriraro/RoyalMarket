@@ -137,7 +137,7 @@ public class MemberService {
 
 		// 1. 기본어노테이션 제공 검증 실행
 		result = bindingResult.hasErrors();
-
+		
 		// 2.pw가 일치하는 지 검증
 		if (!memberVO.getMem_pw().equals(memberVO.getPwCheck())) {
 			bindingResult.rejectValue("pwCheck", "memberVO.mem_pw.notEqual");
@@ -176,9 +176,61 @@ public class MemberService {
 			bindingResult.rejectValue("phoneCheck", "memberVO.phoneCheck.notEqual");
 			result = true;
 		}
+		
 
 		return result;
 	}
+	
+	public boolean memberUpdateCheck(MemberVO memberVO, BindingResult bindingResult, String checkNum) throws Exception {
+		boolean result = false;	
+		
+		result = bindingResult.hasErrors();
+		
+		System.out.println(bindingResult.getAllErrors());
+		
+			
+			
+			
+			// 2.pw가 일치하는 지 검증
+			if (!memberVO.getMem_pw().equals(memberVO.getPwCheck())) {
+				bindingResult.rejectValue("pwCheck", "memberVO.mem_pw.notEqual");
+				result = true;
+			}
+			
+			List<MemberVO> ar = memberRepository.selectMemberUpdate(memberVO);
+			
+			for(int i =0;i<ar.size();i++) {
+				if(memberVO.getMem_phone().equals(ar.get(i).getMem_phone())) {
+					bindingResult.rejectValue("mem_phone", "memberVO.mem_phone.unique");
+					result = true;
+					break;
+				}
+			}
+			
+			
+			for(int i =0;i<ar.size();i++) {
+				if(memberVO.getMem_email().equals(ar.get(i).getMem_email())) {
+					bindingResult.rejectValue("mem_email", "memberVO.mem_email.unique");
+					result = true;
+					break;
+				}
+			}
+			
+			if (!memberVO.getPhoneCheck().equals(checkNum)) {
+				bindingResult.rejectValue("phoneCheck", "memberVO.phoneCheck.notEqual");
+				result = true;
+			}
+		
+		
+				
+		return result;
+	};
+	
+	public List<MemberVO> selectMemberUpdate(MemberVO memberVO)throws Exception{
+		return memberRepository.selectMemberUpdate(memberVO);
+	}
+	
+	
 
 	public boolean kakaoMemberCheck(MemberVO memberVO, BindingResult bindingResult, String checkNum) throws Exception {
 		boolean result = false; // false 에러X, true 에러O
@@ -248,6 +300,10 @@ public class MemberService {
 	
 	public int memberDelete(MemberVO memberVO)throws Exception{
 		return memberRepository.memberDelete(memberVO);
+	}
+	
+	public int memberUpdate(MemberVO memberVO)throws Exception{
+		return memberRepository.memberUpdate(memberVO);
 	}
 	
 	

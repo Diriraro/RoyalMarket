@@ -206,7 +206,7 @@ body {
 
 		<div class="sc-jtEaiv hnoHdo">
 			<a href="./memberLogout" style="text-decoration: none; height: 70px" class="aa">&nbsp;&nbsp;로그아웃</a> 
-			<a href="/withdraw" style="text-decoration: none; height: 70px;">&nbsp;&nbsp;회원정보수정</a> 
+			<a href="./memberUpdatePage" style="text-decoration: none; height: 70px;">&nbsp;&nbsp;회원정보수정</a> 
 			<a href="#" data-toggle="modal" data-target="#memberDelete" style="text-decoration: none; height: 70px;">&nbsp;&nbsp;탈퇴</a>
 		</div>
 	</div>

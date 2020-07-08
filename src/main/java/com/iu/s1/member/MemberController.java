@@ -46,10 +46,10 @@ public class MemberController {
 	private JavaMailSender mailSender;
 
 	private String checkNum = "";
-	
+
 	@GetMapping("memberUpdate")
-	public void memberUpdate()throws Exception{
-		
+	public void memberPage() throws Exception {
+
 	}
 
 	@GetMapping("findPwByEmail")
@@ -281,9 +281,14 @@ public class MemberController {
 		model.addAttribute("result", msg);
 	}
 
-	@PostMapping("sendSMS2")
-	public void sendSMS2(String phoneNumber, Model model, HttpSession session, String id) throws Exception {
+	//@PostMapping("sendSMS2")
+	@RequestMapping(value="sendSMS2", method = {RequestMethod.GET, RequestMethod.POST})
+	public void sendSMS2(String phoneNumber, Model model, HttpSession session, String id, String update) throws Exception {
 		String msg = "";
+		System.out.println("upupup"+update);
+		if(update==null) {
+			update="0";
+		}
 
 		Random rand = new Random();
 		String numStr = "";
@@ -291,15 +296,32 @@ public class MemberController {
 			String ran = Integer.toString(rand.nextInt(10));
 			numStr += ran;
 		}
-
-		MemberVO memberVO2 = new MemberVO();
-		memberVO2.setMem_phone(phoneNumber);
-		memberVO2 = memberService.selectMemberByPhone(memberVO2);
-		if (memberVO2 != null) {
-			msg = "이미 가입한 전화번호입니다";
-			model.addAttribute("result", msg);
-			return;
+		System.out.println(update.equals("1"));
+		
+		if(update.equals("1")) {
+			MemberVO memberVO2 = new MemberVO();
+			memberVO2.setMem_id(id);
+			List<MemberVO> ar = memberService.selectMemberUpdate(memberVO2);
+			for (int i = 0; i < ar.size(); i++) {
+				if (ar.get(i).getMem_phone().equals(phoneNumber)) {
+					msg = "이미 가입한 전화번호입니다";
+					model.addAttribute("result", msg);
+					return;
+				}
+			}
+		}else {
+			MemberVO memberVO2 = new MemberVO();
+			memberVO2.setMem_phone(phoneNumber);
+			memberVO2 = memberService.selectMemberByPhone(memberVO2);
+			if (memberVO2 != null) {
+				msg = "이미 가입한 전화번호입니다";
+				model.addAttribute("result", msg);
+				return;
+			}
+			
 		}
+
+		
 
 		Calendar nowCal = Calendar.getInstance();
 		long now = nowCal.getTimeInMillis();
@@ -324,6 +346,8 @@ public class MemberController {
 
 		model.addAttribute("result", msg);
 	}
+
+	
 
 	@GetMapping("findAddress")
 	public void findAddress() throws Exception {
@@ -594,80 +618,121 @@ public class MemberController {
 
 		return mv;
 	}
-	
+
 	@PostMapping("updateStoreName")
-	public ModelAndView updateStoreName(MemberVO memberVO, HttpServletRequest request)throws Exception{
+	public ModelAndView updateStoreName(MemberVO memberVO, HttpServletRequest request) throws Exception {
 		ModelAndView mv = new ModelAndView();
-		
+
 		System.out.println(memberVO.getMem_id());
 		MemberVO memberVO3 = new MemberVO();
 		memberVO3.setMem_id(memberVO.getMem_id());
 		memberVO3.setMem_storeName(memberVO.getMem_storeName());
-		
+
 		MemberVO member = memberService.selectMemberByStoreName(memberVO);
 		memberVO = memberService.selectMember(memberVO);
-		String msg="";
-		
+		String msg = "";
+
 		String referer = request.getHeader("referer");
-		
-		if(memberVO3.getMem_storeName()=="" || memberVO3.getMem_storeName()==null) {
+
+		if (memberVO3.getMem_storeName() == "" || memberVO3.getMem_storeName() == null) {
 			msg = "상점명을 입력해주세요";
 			mv.addObject("path", referer);
 			mv.addObject("result", msg);
 			mv.setViewName("common/result");
 			return mv;
 		}
-		
-		if(member != null) {
+
+		if (member != null) {
 			msg = "이미 등록된 상점명입니다";
 			mv.addObject("path", referer);
 			mv.addObject("result", msg);
 			mv.setViewName("common/result");
-		}else {
+		} else {
 			int i = memberService.updateStoreName(memberVO3);
-			
-			if(i>0) {
-				//msg = "수정 완료!";			
+
+			if (i > 0) {
+				// msg = "수정 완료!";
 				mv.addObject("path", referer);
-				mv.setViewName("common/result3");	
-			}else {
-				msg = "수정 실패!";			
+				mv.setViewName("common/result3");
+			} else {
+				msg = "수정 실패!";
 				mv.addObject("path", referer);
 				mv.addObject("result", msg);
 				mv.setViewName("common/result");
 			}
-			
+
 		}
-		
+
 		return mv;
 	}
-	
+
 	@PostMapping("memberDelete")
-	public ModelAndView memberDelete(HttpSession session, MemberVO memberVO, HttpServletRequest request)throws Exception{
+	public ModelAndView memberDelete(HttpSession session, MemberVO memberVO, HttpServletRequest request)
+			throws Exception {
 		System.out.println(memberVO.getMem_id());
 		System.out.println(memberVO.getMem_pw());
 		ModelAndView mv = new ModelAndView();
 		String referer = request.getHeader("referer");
-		String msg="";
-		
+		String msg = "";
+
 		MemberVO member = memberService.selectMember(memberVO);
-		
+
 		System.out.println(member.getMem_storeNum());
 		System.out.println(memberVO.getMem_pw());
-		if(member.getMem_pw().equals(memberVO.getMem_pw())) {
+		if (member.getMem_pw().equals(memberVO.getMem_pw())) {
 			int result = memberService.memberDelete(member);
 			session.invalidate();
 			mv.setViewName("redirect:../");
 			return mv;
-				
-		}else {
+
+		} else {
 			msg = "비밀번호가 다릅니다.";
 			mv.addObject("path", referer);
 			mv.addObject("result", msg);
 			mv.setViewName("common/result");
 			return mv;
-		
+
 		}
+	}
+
+	@GetMapping("memberUpdatePage")
+	public ModelAndView memberUpdate() throws Exception {
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("memberVO", new MemberVO());
+		mv.setViewName("member/memberUpdatePage");
+		return mv;
+	}
+
+	@PostMapping("memberUpdate")
+	public ModelAndView memberUpdate(@Valid MemberVO memberVO, BindingResult bindingResult, HttpSession session)
+			throws Exception {
+		ModelAndView mv = new ModelAndView();
+
+		Calendar cal = Calendar.getInstance();
+		long now = cal.getTimeInMillis();
+		long now_now = now - (long) session.getAttribute("now");
+
+		memberVO.setMem_address(memberVO.getRoad_address() + " " + memberVO.getDetail_address());
+
+		boolean result = memberService.memberUpdateCheck(memberVO, bindingResult, checkNum);
+		System.out.println(result);
+
+		if (result) {
+			mv.setViewName("member/memberUpdatePage");
+		} else if (now_now > 300) {
+			mv.addObject("result", "인증번호 유효기간이 지났습니다.");
+			mv.addObject("path", "./memberUpdatePage");
+			mv.setViewName("common/result");
+		} else {
+			// 정상작동
+			int result2 = memberService.memberUpdate(memberVO);
+			if (result2 > 0) {
+				mv.addObject("result", "회원정보가 수정되었습니다");
+				mv.addObject("path", "../");
+				mv.setViewName("common/result");
+			}
+		}
+		return mv;
 	}
 
 }
