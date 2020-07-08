@@ -309,6 +309,8 @@ public class ShopController {
 		List<StoreFollowVO> owiar = storeFollowService.getSelectListFollowers(storeFollowVO2);
 		for (StoreFollowVO storeFollowVO3 :owiar) {
 			storeFollowVO3.setTake_storeName(storeFollowService.getSelecttakeStoreName(storeFollowVO3));// 작성자의 번호로 이름을 출력 한것을 ar안에 담고.
+			storeFollowVO3.setPco(productService.prodco(storeFollowVO3.getTake_storeNum())); // 내가 팔로우 한 사람의 상품수 출력
+			storeFollowVO3.setFco(storeFollowService.takeco(storeFollowVO3.getTake_storeNum())); // 내가 팔로우 한 사람의 팔로워 수 출력
 		}	
 		// 팔로우 리스트 영역 끝
 		
@@ -363,6 +365,8 @@ public class ShopController {
 		List<StoreFollowVO> owear = storeFollowService.getSelectListFollowings(storeFollowVO2);
 		for (StoreFollowVO storeFollowVO3 :owear) {
 			storeFollowVO3.setGive_storeName(storeFollowService.getSelectgiveStoreName(storeFollowVO3));// 작성자의 번호로 이름을 출력 한것을 ar안에 담고.
+			storeFollowVO3.setPco(productService.prodco(storeFollowVO3.getGive_storeNum()));
+			storeFollowVO3.setFco(storeFollowService.takeco(storeFollowVO3.getGive_storeNum()));
 		}	
 		// 팔로워 리스트 영역 끝
 		

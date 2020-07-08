@@ -23,6 +23,11 @@ border-right: 2px solid black;
 border-top: 2px solid black;
 }
 
+#redd{
+color: red;
+}
+
+
 </style>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -64,7 +69,7 @@ border-top: 2px solid black;
 
 
 			<div>
-				<h2>상점문의</h2>
+				<h2>상점문의&nbsp;<a id="redd">${coco}</a></h2>
 				<hr>
 
 				<%--  <c:import url="../template/comentsForm.jsp"></c:import>  --%>

@@ -63,36 +63,36 @@
 					<input name="mem_storeName" class="update_form">
 					<button type="submit" class="update_form">확인</button> 
 				</form>
-				<div style=" margin-top: 2%;">
-				<span class="update" style="font-size: 30px;">${mem_storeName}</span><button type="button" class="update" onclick="update_storeName();">상점명 수정</button>
+				<div style=" margin-top: 3%;">
+				<span class="update" style="font-size: 22px;">${mem_storeName}</span><button type="button" class="update" onclick="update_storeName();">상점명 수정</button>
 				</div>
 			</div>
 
 			<div style="border: 1px solid black; height: 80px; margin-bottom: 1px; margin-top: 2px;">
 
-			<div style="margin-top: 2%;">
-				<span style="font-size: 30px;">상점오픈일 :: ${getregDate} </span>
+			<div style="margin-top: 3%;">
+				<span style="font-size: 22px;">상점오픈일 :: ${getregDate} </span>
 			</div>			
 			
 			</div>
 
 			<div style="border: 1px solid black; height: 80px;margin-bottom: 1px; margin-top: 2px;">
 			<c:if test="${avg eq 0.0}">
-			<div style="margin-top: 2%;">
-			<span style="font-size: 30px;"> 거래내역이 없습니다. </span>			
+			<div style="margin-top: 3%;">
+			<span style="font-size: 22px;"> 거래내역이 없습니다. </span>			
 			</div>	
 			</c:if>
 			
 			<c:if test="${avg ne 0.0} ">
-			<div style="margin-top: 2%;">
-			<span style="font-size: 30px;">평점 : ${avg }</span>
+			<div style="margin-top: 3%;">
+			<span style="font-size: 22px;">평점 : ${avg }</span>
 			</div>	
 			</c:if>
 			</div>
 			
 			<div style="border: 1px solid black; height: 80px; margin-bottom: 1px; margin-top: 2px;">
-			<div style="margin-top: 2%;">
-			<span style="font-size: 30px;">
+			<div style="margin-top: 3%;">
+			<span style="font-size: 22px;">
 				${mdata.mem_address}
 			</span>
 			</div>	
@@ -169,12 +169,12 @@
 			<div style="border: 1px solid black; height: 80px; margin-bottom: 1px; margin-top: 2px;">
 
 				<c:if test="${mdata.mem_access eq 0}">
-				<div style="margin-top: 2%;">
-				<span style="font-size: 30px;">${mem_storeName }</span>
+				<div style="margin-top: 3%;">
+				<span style="font-size: 22px;">${mem_storeName }</span>
 				</div>	
 				</c:if>
 				<c:if test="${mdata.mem_access eq 1}">
-				<div style="margin-top: 2%;">
+				<div style="margin-top: 3%;">
 				<h1>차단 회원 입니다.</h1>
 				</div>	
 				</c:if>
@@ -182,28 +182,28 @@
 			</div>
 
 			<div style="border: 1px solid black; height: 80px; margin-bottom: 1px; margin-top: 2px;">
-			<div style="margin-top: 2%;">
-				<span style="font-size: 30px;">상점오픈일  :: ${getregDate }</span>
+			<div style="margin-top: 3%;">
+				<span style="font-size: 22px;">상점오픈일  :: ${getregDate }</span>
 			</div>	
 			</div>
 
 			<div style="border: 1px solid black; height: 80px; margin-bottom: 1px; margin-top: 2px;">
 			<c:if test="${avg eq 0.0}">
-			<div style="margin-top: 2%;">
-			<span style="font-size: 30px;"> 거래내역이 없습니다. </span>			
+			<div style="margin-top: 3%;">
+			<span style="font-size: 22px;"> 거래내역이 없습니다. </span>			
 			</div>	
 			</c:if>
 			
 			<c:if test="${avg ne 0.0}">
-			<div style="margin-top: 2%;">
-			<span style="font-size: 30px;">평점 : ${avg }</span>
+			<div style="margin-top: 3%;">
+			<span style="font-size: 22px;">평점 : ${avg }</span>
 			</div>	
 			</c:if>
 			</div>
 			<div style="border: 1px solid black; height: 80px; margin-bottom: 1px; margin-top: 2px; overflow: auto;">
 			<c:if test="${mdata.mem_access eq 0}">
-			<div style="margin-top: 2%;">
-			<span style="font-size: 30px;">
+			<div style="margin-top: 3%;">
+			<span style="font-size: 22px;">
 			 거래장소 :${mdata.mem_address}
 			</span>
 			</div>	

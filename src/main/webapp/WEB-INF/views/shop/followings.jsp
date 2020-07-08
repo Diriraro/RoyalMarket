@@ -24,6 +24,10 @@ border-top: 2px solid black;
 
 }
 
+#redd{
+color: red;
+}
+
 </style>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -63,7 +67,7 @@ border-top: 2px solid black;
 
 
 			<div>  <!-- 내용보여줄 div -->
-				<h2>${mem_storeName } 의 팔로잉 목록</h2>
+				<h2>팔로잉&nbsp;<a id="redd">${giveco}</a></h2>
 				<hr>
 				
 				<div style="border: 1px solid white; min-height: 340px; overflow: auto;" >
@@ -88,10 +92,12 @@ border-top: 2px solid black;
 					
 					<br>
 							<div style=" text-align: center; margin-top: 40px;" >
+							<span>상품   ${vo.pco} | 팔로워  ${vo.fco}</span><br>
 							<a href="./myshop?mem_storeNum=${vo.take_storeNum }" class="btn btn-info">${vo.take_storeName }</a>
+							
 							</div>
 							
-						</div>  <!-- 옆에 팔로우목록의 대표상품  -->
+						</div>  
 												
 					
 					</c:forEach>

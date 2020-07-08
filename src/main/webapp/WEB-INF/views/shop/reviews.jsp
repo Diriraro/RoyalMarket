@@ -24,6 +24,10 @@ border-right: 2px solid black;
 border-top: 2px solid black;
 }
 
+#redd{
+color: red;
+}
+
 </style>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -62,7 +66,7 @@ border-top: 2px solid black;
 
 
 			<div>
-				<h2>${mem_storeName } 의 리뷰목록</h2>
+				<h2>인증후기&nbsp;<a id="redd">${reco}</a></h2>
 				<hr>
 			<c:forEach items="${relist}" var="vo" varStatus="i">
 				 <!-- 리스트 감쌀디아이브이  -->

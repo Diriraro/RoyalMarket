@@ -23,6 +23,10 @@ border-top: 2px solid black;
 
 }
 
+#redd{
+color: red;
+}
+
 </style>
 <head>
 <meta charset="UTF-8">
@@ -61,7 +65,7 @@ border-top: 2px solid black;
 			</div>
 
 				<div>  <!-- 내용보여줄 div -->
-				<h2>${mem_storeName } 의 팔로워 목록</h2>
+				<h2>팔로워&nbsp;<a id="redd">${takeco}</a></h2>
 				
 				<div style="border: 0px solid red; min-height: 340px; overflow: auto;" >
 					<c:forEach items="${owelist}" var="vo">
@@ -85,6 +89,7 @@ border-top: 2px solid black;
 							
 					<br>
 					<div style=" text-align: center; margin-top: 40px;" >
+						<span>상품   ${vo.pco} | 팔로워  ${vo.fco}</span><br>
 				    <a href="./myshop?mem_storeNum=${vo.give_storeNum }" class="btn btn-info" >${vo.give_storeName}</a>
 					</div>
 					

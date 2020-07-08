@@ -31,6 +31,39 @@ border-top:1px solid gray;
 
 }
 
+#redd{
+color: red;
+}
+
+.img{
+        position: relative;                                   
+        height: 190px;
+        width: 197px;
+        background-size: cover;
+    }
+
+.img-cover{
+
+       height: 100%;
+       width: 100%;
+       background-color: rgba(0, 0, 0, 0.7);                                                                 
+       z-index:1;
+    }
+
+.img .content{
+         position: absolute;
+         top:50%;
+         left:50%;
+         transform: translate(-50%, -50%);                                                                   
+         font-size:1rem;
+         color: white;
+         z-index: 2;
+         text-align: center;
+  }
+
+
+
+
 </style>
 
 <meta charset="UTF-8">
@@ -70,7 +103,7 @@ border-top:1px solid gray;
 			</div>
 		
 			<div>  <!-- 내용보여줄 div -->
-				<h2>${mem_storeName } 의 상품목록</h2>
+				<h2>상품&nbsp;<a id="redd">${prodco}</a></h2>
 				<hr>
 				
 				<div style="border: 1px solid white; min-height: 340px; overflow: auto;"  >
@@ -81,16 +114,48 @@ border-top:1px solid gray;
 					
 					<div style="width: 200px; height: 300px; border: 1px solid gray ; float: left; margin-left: 4px; margin-bottom: 4px;  background-color: #f0f0f5"  onclick="location.href='../product/productSelect?sell_num=${vo.sell_num}'">
 					
+				<!--status 2이면   판매완료 -->	
+				<c:if test="${vo.sell_status eq 2}">
 					
-					
-				<c:forEach items="${pfile}" var="pfile" varStatus="status" >
 				<div style="width: 198px;">
+				<c:forEach items="${pfile}" var="pfile" varStatus="status" >
+				
+				<c:if test="${vo.sell_num eq pfile.sell_num}">
+				
+				<!--  -->
+					<%-- <img  src="../upload/product/${pfile.file_name}"	alt="${pfile.ori_name}"	style="overflow: hidden; display: flex; align-items: center; justify-content: center; width: 197px; height: 190px;"> --%>
+				<!--  -->
+				
+					<div class=img style="height: 190px; width:197px;float: left;  background-size: 197px 190px; background-image: url('${pageContext.request.contextPath}/upload/product/${pfile.file_name}');">
+						<div class="content">
+							<h5 style="margin-bottom: 30px;">판매 <br> 완료</h5>
+						</div>
+						<div class="img-cover">
+						</div>
+					</div>
+					
+				</c:if>
+				
+				
+				</c:forEach>
+				</div>
+				</c:if>	
+				
+				<!--0,1 일떄 판매중  -->
+					<c:if test="${vo.sell_status ne 2}">
+					
+				<div style="width: 198px;">
+				<c:forEach items="${pfile}" var="pfile" varStatus="status" >
+				
 				<c:if test="${vo.sell_num eq pfile.sell_num}">
 					<img  src="../upload/product/${pfile.file_name}"	alt="${pfile.ori_name}"	style="overflow: hidden; display: flex; align-items: center; justify-content: center; width: 197px; height: 190px;">
 				</c:if>
-				</div>
+				
+				
 				</c:forEach>
-					<br>
+				</div>
+				</c:if>	
+				
 					<div class="s1">
 					${vo.sell_product }
 					</div>

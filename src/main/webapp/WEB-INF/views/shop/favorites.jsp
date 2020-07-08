@@ -30,6 +30,10 @@ color: black;
 
 }
 
+#redd{
+color: red;
+}
+
 
 </style>
 <meta charset="EUC-KR">
@@ -67,7 +71,7 @@ color: black;
 
 
 			<div> <!-- 내용보여줄 div  -->
-				<h2>${mem_storeName} 님의 찜목록</h2>
+				<h2>찜&nbsp;<a id="redd">${zico}</a></h2>
 				<hr>
 
 				<div style="border: 1px solid white; min-height: 340px; overflow: auto;">
