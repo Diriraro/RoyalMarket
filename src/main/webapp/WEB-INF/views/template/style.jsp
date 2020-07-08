@@ -196,6 +196,8 @@ a.blog span {
          z-index: 2;
          text-align: center;
  }
+ 
+
 	
 </style>
     

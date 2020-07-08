@@ -2,6 +2,7 @@ package com.iu.s1.payment;
 
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -24,6 +25,9 @@ import com.iu.s1.paymentHistory.Sell_HistoryVO;
 import com.iu.s1.product.ProductService;
 import com.iu.s1.product.ProductVO;
 import com.iu.s1.saveCash.SaveCashVO;
+import com.iu.s1.shop.review.StoreReviewService;
+import com.iu.s1.shop.review.StoreReviewVO;
+import com.iu.s1.shop.review.reviewFile.StoreReviewFileVO;
 import com.iu.s1.trading.TradingVO;
 
 @Controller
@@ -34,7 +38,9 @@ public class PaymentController {
 	private PaymentService paymentService;
 	@Autowired
 	private ProductService productService;
-	
+	@Autowired
+	private StoreReviewService storeReviewService;
+ 	
 	//결제로 들어가는 페이지
 	@GetMapping("pay")
 	public ModelAndView pay(long amount,HttpServletRequest request) throws Exception{
@@ -664,6 +670,51 @@ public class PaymentController {
 		
 		return mv;
 		
+	}
+	@GetMapping("prepare")
+	public ModelAndView prepare()throws Exception{
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("result", "준비중 입니다!!");
+		mv.addObject("path", "../");
+		mv.setViewName("common/result");
+		
+		
+		return mv;
+		
+	}
+	@GetMapping("phone")
+	public ModelAndView phone(HttpServletRequest request)throws Exception{
+		ModelAndView mv = new ModelAndView();
+		long sell_num= Long.parseLong(request.getParameter("sell_num"));
+		long mem_storeNum= Long.parseLong(request.getParameter("mem_storeNum"));
+		String seller_id =paymentService.seller_id_select(sell_num);
+		MemberVO memberVO =paymentService.memberVOSel(seller_id);	
+		StoreReviewVO storeReviewVO = new StoreReviewVO();
+		
+		storeReviewVO.setMem_storeNum(mem_storeNum);
+		
+		List<StoreReviewVO> ar =storeReviewService.getSelectListReview(storeReviewVO);
+		double sum=0.0;
+		double avg=0.0;
+		
+		for(int i=0; i<ar.size(); i++) {
+			sum= sum+ar.get(i).getRe_rate();
+			System.out.println(ar.get(i).getRe_rate()+"tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt");
+		}
+		System.out.println("sum:   "+ sum);
+
+		avg=sum/ar.size();		
+		System.out.println(avg);
+		double rest=Math.floor(avg);
+		
+		rest= avg-rest;
+		
+		mv.addObject("rest", rest);
+		mv.addObject("avg", avg);
+		mv.addObject("sum", sum);
+		mv.addObject("memberVO", memberVO);
+		mv.setViewName("/payment/phone");
+		return mv;
 	}
 	
 	//예외 처리 메서드
