@@ -86,6 +86,10 @@
 		select * from member where mem_storeName=#{mem_storeName}
 	</select>
 	
+	<delete id="memberDelete" parameterType="MemberVO">
+		delete from member where mem_storeNum=#{mem_storeNum}
+	</delete>
+	
 	
 	
 	

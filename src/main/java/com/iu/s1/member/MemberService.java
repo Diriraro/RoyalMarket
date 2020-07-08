@@ -246,5 +246,9 @@ public class MemberService {
 		return memberRepository.updateStoreName(memberVO3);
 	}
 	
+	public int memberDelete(MemberVO memberVO)throws Exception{
+		return memberRepository.memberDelete(memberVO);
+	}
+	
 	
 }

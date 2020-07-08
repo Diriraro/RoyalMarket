@@ -29,6 +29,8 @@ public interface MemberRepository {
 	
 	public int updateStoreName(MemberVO memberVO3)throws Exception;
 	
+	public int memberDelete(MemberVO memberVO)throws Exception;
+	
 	// 관리자 페이지 필요한 매퍼
 	public List<MemberVO> getMemberList(long mem_access)throws Exception;
 	public List<MemberVO> getMemberSearchList(MemberVO memberVO) throws Exception;

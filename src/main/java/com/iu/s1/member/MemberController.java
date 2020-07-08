@@ -46,6 +46,11 @@ public class MemberController {
 	private JavaMailSender mailSender;
 
 	private String checkNum = "";
+	
+	@GetMapping("memberUpdate")
+	public void memberUpdate()throws Exception{
+		
+	}
 
 	@GetMapping("findPwByEmail")
 	public ModelAndView findPwByEmail(HttpSession session, MemberVO memberVO) throws Exception {
@@ -607,7 +612,7 @@ public class MemberController {
 		
 		if(memberVO3.getMem_storeName()=="" || memberVO3.getMem_storeName()==null) {
 			msg = "상점명을 입력해주세요";
-			mv.addObject("path", "../shop/myshop?mem_storeNum="+memberVO.getMem_storeNum());
+			mv.addObject("path", referer);
 			mv.addObject("result", msg);
 			mv.setViewName("common/result");
 			return mv;
@@ -615,7 +620,7 @@ public class MemberController {
 		
 		if(member != null) {
 			msg = "이미 등록된 상점명입니다";
-			mv.addObject("path", "../shop/myshop?mem_storeNum="+memberVO.getMem_storeNum());
+			mv.addObject("path", referer);
 			mv.addObject("result", msg);
 			mv.setViewName("common/result");
 		}else {
@@ -623,13 +628,11 @@ public class MemberController {
 			
 			if(i>0) {
 				//msg = "수정 완료!";			
-				System.out.println("referer!!!!!"+referer);
-				mv.addObject("path", "../shop/myshop?mem_storeNum="+memberVO.getMem_storeNum());
-				mv.addObject("result", msg);
-				mv.setViewName("common/result");	
+				mv.addObject("path", referer);
+				mv.setViewName("common/result3");	
 			}else {
 				msg = "수정 실패!";			
-				mv.addObject("path", "../shop/myshop?mem_storeNum="+memberVO.getMem_storeNum());
+				mv.addObject("path", referer);
 				mv.addObject("result", msg);
 				mv.setViewName("common/result");
 			}
@@ -637,6 +640,34 @@ public class MemberController {
 		}
 		
 		return mv;
+	}
+	
+	@PostMapping("memberDelete")
+	public ModelAndView memberDelete(HttpSession session, MemberVO memberVO, HttpServletRequest request)throws Exception{
+		System.out.println(memberVO.getMem_id());
+		System.out.println(memberVO.getMem_pw());
+		ModelAndView mv = new ModelAndView();
+		String referer = request.getHeader("referer");
+		String msg="";
+		
+		MemberVO member = memberService.selectMember(memberVO);
+		
+		System.out.println(member.getMem_storeNum());
+		System.out.println(memberVO.getMem_pw());
+		if(member.getMem_pw().equals(memberVO.getMem_pw())) {
+			int result = memberService.memberDelete(member);
+			session.invalidate();
+			mv.setViewName("redirect:../");
+			return mv;
+				
+		}else {
+			msg = "비밀번호가 다릅니다.";
+			mv.addObject("path", referer);
+			mv.addObject("result", msg);
+			mv.setViewName("common/result");
+			return mv;
+		
+		}
 	}
 
 }
