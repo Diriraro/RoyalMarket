@@ -60,25 +60,26 @@ public class PaymentController {
 	public ModelAndView paySuccess(HttpServletRequest httpServletRequest)throws Exception{
 		PayVO payVO = new PayVO();
 		ModelAndView mv = new ModelAndView();
+		MemberVO memberVO = (MemberVO)httpServletRequest.getSession().getAttribute("member");
 		
 		long amount = Long.parseLong(httpServletRequest.getParameter("amount"));
 		String key = httpServletRequest.getParameter("key");
-		String checkKey=paymentService.paycheckSelect(httpServletRequest.getParameter("mem_id"));
+		String checkKey=paymentService.paycheckSelect(memberVO.getMem_id());
 		
 		if(key.equals(checkKey)) {
 
 			//완료페이지를 갈때 맴버 포인트 업데이트
-			MemberVO memberVO = (MemberVO)httpServletRequest.getSession().getAttribute("member");
+		
 			memberVO.setMem_point(memberVO.getMem_point()+amount);
 			
-			memberVO.setMem_id(httpServletRequest.getParameter("mem_id"));
+			memberVO.setMem_id(memberVO.getMem_id());
 		
 			//현재 포인트 조회
-			long nowPoint = paymentService.pointSelect(httpServletRequest.getParameter("mem_id"));
+			long nowPoint = paymentService.pointSelect(memberVO.getMem_id());
 
 			
 			//충전 내역 업데이트
-			payVO.setMem_id(httpServletRequest.getParameter("mem_id"));
+			payVO.setMem_id(memberVO.getMem_id());
 			payVO.setPay_price(amount);
 			payVO.setPoint_rest(nowPoint+amount);
 			paymentService.paymentCharge(payVO);
@@ -86,7 +87,7 @@ public class PaymentController {
 			paymentService.pointUpdate(memberVO);
 	
 			//paycheckId 삭제
-			paymentService.paycheckDel(httpServletRequest.getParameter("mem_id"));
+			paymentService.paycheckDel(memberVO.getMem_id());
 			
 			httpServletRequest.setAttribute("member", memberVO);
 			
@@ -96,7 +97,7 @@ public class PaymentController {
 			return mv;
 		}else {
 			//paycheckId 삭제
-			paymentService.paycheckDel(httpServletRequest.getParameter("mem_id"));
+			paymentService.paycheckDel(memberVO.getMem_id());
 			mv.addObject("result", "포인트 충전을 실패 하였습니다.");
 			mv.addObject("path", "/");
 			mv.setViewName("common/result");

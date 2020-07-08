@@ -173,7 +173,7 @@ button {
 					alt="로고"></a>
 					<!-- 검색창 -->
 				<div style="margin-left: 90px; display: inline-block;">
-					<form action="./productList" class="form-inline">
+					<form action="../product/productList" class="form-inline">
 						<div class="input-group input-group-sm col-xs-2"
 							style="display: inline-block;border-radius:3px 3px 3px 3px; width:90px;
 							border-bottom: solid 2px #5c2392; 
@@ -211,7 +211,7 @@ button {
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<a style="margin-right:;" href="./productNew"><img
+			<a style="margin-right:;" href="../product/productNew"><img
 				src="${pageContext.request.contextPath}/resources/images/pn_logo.png"
 				width="23" height="26" alt="판매하기 이미지"> &nbsp;<font
 				style="color: #2a2a2a; font-size: 13px; font-weight: 600;">판매하기</font></a>

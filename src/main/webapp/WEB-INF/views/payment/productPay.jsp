@@ -23,7 +23,7 @@
 			<font style="font-size: x-large;"><b>상품 정보</b></font>
 			
 			<hr style="border: solid 1px #5c2392;">
-			<div style="width: 385px; height: 500px; border: 2px solid #5c2392; background-color display: inline-block; float: right;">
+			<div style="width: 385px; height: 570px; border: 2px solid #5c2392; background-color display: inline-block; float: right;">
 			<form action="./productTrading" method="post">
 
 				<div style="margin-top: 10px;">
@@ -46,9 +46,10 @@
 					<b>
 					<input type="text" numberOnly value="0" id="cashAmount" style="float: left; margin-left: 15px; width: 100px;" placeholder="사용할 적립금">
 					<fmt:parseNumber var="test" value="0" integerOnly="true"/>
-					<input type="button" class="btn btn-success" id="useCash" value="사용하기">
+					<input type="button" class="btn btn-success" id="useCash" value="사용하기" style="margin-left: 10px;">
 					<input type="button" class="btn btn-primary" id="useAll" value="전부 사용">
 					</b>
+					<h6 style="color: red;">&nbsp;&nbsp;&nbsp;&nbsp;※ 적립금은 100원이상부터 사용 하실 수 있습니다.</h6>
 				</div>
 				<hr style="border: solid 1px #e4e4e4;">
 				
@@ -81,7 +82,8 @@
 						<font style="color: red; font-size: large; margin-left: 10px; float: left;"><b>포인트가 부족합니다!!</b></font> 	
 					</div>
 					<div style="margin-top: 10px;">	
-						<button type="button" class="btn btn-danger" id="pointCharge" style="float: right; margin-right: 10px; margin-top: 5px;">포인트 충전하기</button>
+						<a href="javascript:popup()"><img alt="" src="${pageContext.request.contextPath}/resources/images/pointCharge.jpg" style="width: 100px; height: 50x; float: right;"></a>
+
 					</div>
 				</c:if>
 					<c:if test="${point ge sell_price-test+2500-cash.mem_cash}">	<!-- 포인트+적립금이 구매금액보다 많거나 같을경우 -->
@@ -164,24 +166,24 @@
 			$(this).val('');
 		}
 	})
-	$("#cashAmount").blur(function(){		// 100원 미만 절사 & 입력 안했을시 기본값
+/* 	$("#cashAmount").blur(function(){		// 100원 미만 절사 & 입력 안했을시 기본값
 		if($(this).val()==''){
 			$(this).val('0');
 		}else{
 			$(this).val(Math.floor($(this).val()/100) * 100);
 		}
 	})
-
+ */
 	$("#useAll").click(function(){
 		var check = confirm("적립금을 전부 사용하시겠습니까?")
+		var cash = ${cash.mem_cash};						// 보유 적립금
 		
-		if(check){
+		if(check && cash>=100){
 			
-			var cash = ${cash.mem_cash};						// 보유 적립금
 			var sell_price= ${sell_price+2500};					// 현재 가격+배송비
 			var point = ${point};								// 보유 포인트
 			
-			if(cash>=${sell_price+2500}){						// 사용하는 적립금이 결제금액보다 많을경우
+			if(cash>=${sell_price+2500}){			// 사용하는 적립금이 결제금액보다 많을경우
 				
 				$("#cashAmount").val(sell_price);				// 적립금 적는 input
 				$("#cash").val(sell_price);						// 파라미터로 넘겨주는 적립금
@@ -200,14 +202,15 @@
 				$("#spoint").val(point-sell_price+cash);		// 결제 후 잔여 포인트 표시
 				alert("적용되었습니다.");
 			}
+		}else{
+			alert("적립금은 100원 이상부터 사용 가능합니다.");
 		}
 	})
 	
 	$("#useCash").click(function(){
 		var cashAmount = $("#cashAmount").val()*1;				// input에 적힌 숫자
 		var cash = ${cash.mem_cash};							// 보유 적립금
-		if(cashAmount<=cash){
-			
+		if(cashAmount<=cash){		
 			var check = confirm("적립금을 "+cashAmount+" 만큼 사용하시겠습니까?")
 			if(check){
 				var sell_price= ${sell_price+2500};
@@ -223,7 +226,10 @@
 					$("#sel_price").val('0');
 					$("#spoint").val(point);						// 결제 후 잔여 포인트 표시
 					
-				}else{
+				}else if(cashAmount<100){
+					alert("적립금은 100원 이상부터 사용 가능합니다.")
+				}
+				else{
 					
 					$("#cash").val(cashAmount);
 					$("#scash").val(cashAmount);
