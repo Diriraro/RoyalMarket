@@ -31,6 +31,7 @@ border-top: 2px solid black;
 </head>
 <body>
 <c:import url="../template/woozoo_nav.jsp"></c:import>
+<h2></h2>
 		
 		<c:import url="../template/shopmain.jsp"></c:import>
 
@@ -62,14 +63,14 @@ border-top: 2px solid black;
 				<div>  <!-- 내용보여줄 div -->
 				<h2>${mem_storeName } 의 팔로워 목록</h2>
 				
-				<div style="border: 1px solid red; min-height: 340px; overflow: auto;" >
+				<div style="border: 0px solid red; min-height: 340px; overflow: auto;" >
 					<c:forEach items="${owelist}" var="vo">
 							<%--<td>${vo.follow_Num}</td> --%>
 							<%-- <td>${vo.give_storeNum}</td> --%>
 							<%-- <td>${vo.take_storeNum}</td> --%>
 						
 					
-					<div style="width: 200px; height: 320px; border: 1px solid; float: left; margin-left: 4px; margin-bottom: 4px; overflow: auto; background-color: #f0f0f5" onclick="location.href='./shop/myshop?mem_storeNum=${vo.give_storeNum }'">
+					<div style="width: 200px; height: 320px; border: 1px solid gray; float: left; margin-left: 4px; margin-bottom: 4px; overflow: auto; background-color: #f0f0f5" onclick="location.href='./shop/myshop?mem_storeNum=${vo.give_storeNum }'">
 					
 				<%-- 	<div style="width: 198px;">
 					<img src="${pageContext.request.contextPath}/resources/images/showimage.png" alt="main" style="width: 197px; height: 190px;">

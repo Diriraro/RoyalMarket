@@ -32,6 +32,7 @@ border-top: 2px solid black;
 
 <body>
 <c:import url="../template/woozoo_nav.jsp"></c:import>
+<h2></h2>
 <c:import url="../template/shopmain.jsp"></c:import>
 
 	<div class="container">
@@ -65,7 +66,7 @@ border-top: 2px solid black;
 				<hr>
 			<c:forEach items="${relist}" var="vo" varStatus="i">
 				 <!-- 리스트 감쌀디아이브이  -->
-				<div style="border: 1px solid ; min-height: 150px; overflow: auto;">
+				<div style="border-top: 1px solid gray ; min-height: 150px; overflow: auto; background-color: #f0f0f5">
 				
 				<div style="float: left; width: 80px; height: 250px;">
 					<img alt="" src="${pageContext.request.contextPath}/resources/images/user11.png" width="80px;">			
@@ -90,6 +91,7 @@ border-top: 2px solid black;
 				<div>
 				<button class="btn-default go" title="${vo.sell_num }">${vo.sell_product}</button>
 				</div>
+				<hr>
 				<br>
 				
 				<div>
@@ -115,6 +117,7 @@ border-top: 2px solid black;
 				</c:if>
 				
 				</div>  <!-- 리스트 감쌀디아이브이  -->
+				<hr>
 			</c:forEach>
 				</div>
 

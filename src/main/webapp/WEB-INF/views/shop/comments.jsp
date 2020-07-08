@@ -30,7 +30,8 @@ border-top: 2px solid black;
 <c:import url="../template/summer.jsp"></c:import>
 </head>
 <body>
-<c:import url="../template/woozoo_nav.jsp"></c:import>
+	<c:import url="../template/woozoo_nav.jsp"></c:import>
+	<h2></h2>
 	<c:import url="../template/shopmain.jsp"></c:import>
 
 	<div class="container">

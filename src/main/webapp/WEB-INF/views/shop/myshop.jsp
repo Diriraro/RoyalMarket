@@ -27,7 +27,7 @@ border-top: 2px solid black;
 
 .s1{
 font-size: 20px;
-border:1px solid gray; 
+border-top:1px solid gray; 
 
 }
 
@@ -38,10 +38,9 @@ border:1px solid gray;
 <c:import url="../template/boot.jsp"></c:import>
 </head>
 <body>
-<h2></h2>
 	<c:import url="../template/woozoo_nav.jsp"></c:import>
 	<!-- 내상점 버튼 누르면 처음으로 들어오는 곳  -->
-
+	<h2></h2>
 	<c:import url="../template/shopmain.jsp"></c:import>
 							
 

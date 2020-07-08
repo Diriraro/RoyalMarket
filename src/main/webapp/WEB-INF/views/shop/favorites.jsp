@@ -38,6 +38,7 @@ color: black;
 </head>
 <body>
 <c:import url="../template/woozoo_nav.jsp"></c:import>
+<h2></h2>
 		<c:import url="../template/shopmain.jsp"></c:import>
 <div class="container">
 		<div style="border: 1px solid black; width: 1024px;  min-height: 340px;">
