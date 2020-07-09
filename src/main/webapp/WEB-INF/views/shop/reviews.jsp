@@ -10,34 +10,22 @@
 <html>
 <head>
 <style type="text/css">
-td{
-width: 220px;
-font-size: large;
-text-align: center;
-font-weight: bold;
-}
-
-.td1{
-border-bottom: 2px solid white;
-border-left: 2px solid black;
-border-right: 2px solid black;
-border-top: 2px solid black;
-}
-
-#redd{
-color: red;
-}
 
 </style>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <c:import url="../template/boot.jsp"></c:import>
+<c:import url="../template/style.jsp"></c:import>
+<c:import url="../template/shopstyle.jsp"></c:import>
+
+
 
 <body>
 <c:import url="../template/woozoo_nav.jsp"></c:import>
 <h2></h2>
 <c:import url="../template/shopmain.jsp"></c:import>
+<c:if test="${mdata.mem_access ne 1}">
 
 	<div class="container">
 		<div style="border: 1px solid black; width: 1024px;  min-height: 340px; border-color: rgba(0,0,0,0.25);">
@@ -48,16 +36,16 @@ color: red;
 			<hr>
 			<table border="1" style="height: 80px; border-color: rgba(0,0,0,0.25);">
 				<tr>
-				<td bgcolor="#f2f2f2"><a href="./myshop?mem_storeNum=${mem_storeNum}">상품&nbsp;&nbsp;   ${prodco}</a></td>
-				<td bgcolor="#f2f2f2"><a href="./comments?mem_storeNum=${mem_storeNum}">상점문의 &nbsp;&nbsp;${coco}</a></td>
+				<td bgcolor="#f2f2f2"><a class="tds" href="./myshop?mem_storeNum=${mem_storeNum}">상품&nbsp;&nbsp;   ${prodco}</a></td>
+				<td bgcolor="#f2f2f2"><a class="tds" href="./comments?mem_storeNum=${mem_storeNum}">상점문의 &nbsp;&nbsp;${coco}</a></td>
 				<c:if test="${msnum eq mem_storeNum }">
 				<td bgcolor="#f2f2f2">
-					<a href="./favorites?mem_storeNum=${mem_storeNum}"> 찜&nbsp;&nbsp; ${zico}</a>
+					<a class="tds" href="./favorites?mem_storeNum=${mem_storeNum}"> 찜&nbsp;&nbsp; ${zico}</a>
 				</td>
 				</c:if>
-				<td class="td1"><a href="./reviews?mem_storeNum=${mem_storeNum}">상점후기&nbsp;&nbsp;  ${reco }</a></td>
-				<td bgcolor="#f2f2f2"><a href="./followings?mem_storeNum=${mem_storeNum}">팔로잉&nbsp;&nbsp;  ${giveco}</a></td>
-				<td bgcolor="#f2f2f2"><a href="./followers?mem_storeNum=${mem_storeNum}">팔로워 &nbsp;&nbsp;  ${takeco} </a></td>
+				<td class="td1"><a class="tds" href="./reviews?mem_storeNum=${mem_storeNum}">상점후기&nbsp;&nbsp;  ${reco }</a></td>
+				<td bgcolor="#f2f2f2"><a class="tds" href="./followings?mem_storeNum=${mem_storeNum}">팔로잉&nbsp;&nbsp;  ${giveco}</a></td>
+				<td bgcolor="#f2f2f2"><a class="tds" href="./followers?mem_storeNum=${mem_storeNum}">팔로워 &nbsp;&nbsp;  ${takeco} </a></td>
 				</tr>
 			
 			</table>
@@ -130,7 +118,7 @@ color: red;
 		</div><!-- 버튼, 내용 끝  -->
 
 	</div><!-- 컨테이너 끝  -->
-	
+	</c:if>
 	<script type="text/javascript">
 		$(".go").click(function(){
 		var tt=	$(this).attr("title");
@@ -143,6 +131,7 @@ color: red;
 
 	</script>
 	
+		<c:import url="../template/footer.jsp"></c:import>
 	
 </body>
 </html>
