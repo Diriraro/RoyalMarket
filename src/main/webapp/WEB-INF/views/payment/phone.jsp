@@ -35,7 +35,7 @@
        				<img alt="" src="${pageContext.request.contextPath}/resources/images/star22.png" style="width: 20px; height: 20px">
        			</c:forEach>
        			<c:if test="${rest>0}">
-       				<img alt="" src="${pageContext.request.contextPath}/resources/images/star23.png " style="width: 20px; height: 20px>
+       				<img alt="" src="${pageContext.request.contextPath}/resources/images/star23.png " style="width: 20px; height: 20px">
        			</c:if>
        		
        		</div>
