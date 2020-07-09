@@ -46,22 +46,15 @@ public class MemberController {
 	private JavaMailSender mailSender;
 
 	private String checkNum = "";
+	
 
 	@GetMapping("memberUpdate")
 	public void memberPage() throws Exception {
 
 	}
 
-	@GetMapping("findPwByEmail")
-	public ModelAndView findPwByEmail(HttpSession session, MemberVO memberVO) throws Exception {
-		ModelAndView mv = new ModelAndView();
-		mv.addObject("memberVO", new MemberVO());
-		mv.setViewName("member/findPwByEmail");
-		return mv;
-	}
 
 	@PostMapping("findPwByEmail")
-
 	public ModelAndView findPwByEmail(@Valid MemberVO memberVO, BindingResult bindingResult, HttpSession session)
 			throws Exception {
 		ModelAndView mv = new ModelAndView();
@@ -74,6 +67,7 @@ public class MemberController {
 
 		if (result) {
 			mv.addObject("show4", result);
+			mv.addObject("time", "time");
 			mv.setViewName("member/findMember");
 		} else if (now_now > 300000) {
 			System.out.println("ddd");
@@ -105,11 +99,13 @@ public class MemberController {
 		boolean result = memberService.findPwByPhone(memberVO, bindingResult, checkNum);
 		System.out.println(result);
 		System.out.println(now_now);
+		
 		if (result) {
 			// model.addAttribute("result","인증번호를 다시 확인해주세요");
+			mv.addObject("time", "time");
 			mv.setViewName("member/findMember");
 			mv.addObject("show3", result);
-		} else if (now_now > 300000) {
+		}else if (now_now > 300000) {
 			mv.addObject("result", "인증번호 유효기간이 지났습니다.");
 			mv.addObject("path", "./findMember");
 
@@ -238,9 +234,12 @@ public class MemberController {
 
 		MemberVO mem = new MemberVO();
 		mem.setMem_id(id);
+		mem = memberService.selectMember(mem);
 		if (memberService.selectMember(mem) == null) {
 			msg = "존재하지 않는 아이디입니다.";
-		} else {
+		}else if(mem.getMem_kakao()==1){
+			msg="본 회원은 카카오 회원입니다. 카카오계정으로 로그인해주세요";
+		}else {
 
 			mem = memberService.selectMember(mem);
 
@@ -366,24 +365,16 @@ public class MemberController {
 	public ModelAndView findMember() throws Exception {
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("memberVO", new MemberVO());
+		mv.addObject("time", -1);
 		mv.setViewName("member/findMember");
 		return mv;
 
 	}
 
-	@GetMapping("findPwByPhone")
-	public ModelAndView findPwByPhone() throws Exception {
-		ModelAndView mv = new ModelAndView();
-		mv.addObject("memberVO", new MemberVO());
-		mv.setViewName("member/findPwByPhone");
-
-		return mv;
-	}
-
 	@PostMapping("sendEmail")
 	public void sendEmailAction(@RequestParam Map<String, Object> paramMap, String id, String email, ModelMap model,
 			ModelAndView mv, Model model2, HttpSession session) throws Exception {
-
+		
 		paramMap.put("username", id);
 		paramMap.put("email", email);
 
@@ -392,13 +383,15 @@ public class MemberController {
 		String msg2 = "";
 		if (memberService.selectMember(mem) == null) {
 			msg2 = "존재하지 않는 아이디입니다.";
-		} else {
+		}else {
 
 			mem = memberService.selectMember(mem);
 
 			if (!mem.getMem_email().equals(email)) {
 				msg2 = "등록된 이메일과 다릅니다.";
-			} else {
+			}else if(mem.getMem_kakao()==1){
+				msg2="본 회원은 카카오 회원입니다. 카카오계정으로 로그인해주세요";
+			}else {
 				String USERNAME = (String) paramMap.get("username");
 				String EMAIL = (String) paramMap.get("email");
 				String PASSWORD = "";
@@ -456,6 +449,10 @@ public class MemberController {
 				msg2 = "등록된 이메일과 다릅니다.";
 				model2.addAttribute("result", msg2);
 				return;
+			}else if (memberService.selectMemberByPhone(mem).getMem_kakao()==1) {
+				msg2 = "본 회원은 카카오 회원입니다. 카카오계정으로 로그인해주세요";
+				model2.addAttribute("result", msg2);
+				return;
 			}
 
 			String USERNAME = (String) paramMap.get("username");
@@ -483,22 +480,7 @@ public class MemberController {
 		model2.addAttribute("result", msg2);
 	}
 
-	@GetMapping("findIdByEmail")
-	public ModelAndView findIdByEmail() throws Exception {
-		ModelAndView mv = new ModelAndView();
-		mv.addObject("memberVO", new MemberVO());
-		mv.setViewName("member/findIdByEmail");
 
-		return mv;
-	}
-
-	@GetMapping("findIdByPhone")
-	public ModelAndView findIdByPhone() throws Exception {
-		ModelAndView mv = new ModelAndView();
-		mv.addObject("memberVO", new MemberVO());
-		mv.setViewName("member/findIdByPhone");
-		return mv;
-	}
 
 	@PostMapping("findIdByPhone")
 	public void findIdByPhone(String phoneNumber, Model model, HttpSession session, String name) throws Exception {
@@ -509,7 +491,9 @@ public class MemberController {
 		System.out.println(phoneNumber);
 		if (memberService.selectMemberByPhone(mem) == null) {
 			msg = "존재하지 않는 전화번호입니다.";
-		} else {
+		}else if (memberService.selectMemberByPhone(mem).getMem_kakao()==1) {
+			msg = "본 회원은 카카오 회원입니다. 카카오계정으로 로그인해주세요";
+		}else {
 			mem = memberService.selectMemberByPhone(mem);
 
 			if (mem.getMem_name().equals(name)) {
@@ -774,6 +758,8 @@ public class MemberController {
 		}
 		return mv;
 	}
+	
+	
 	
 	
 

@@ -79,6 +79,7 @@ body {
 	background: rgb(102, 0, 102);
 	border-radius: 4px;
 	border: none;
+	font-family: "Noto Sans KR", sans-serif;
 }
 
 button {

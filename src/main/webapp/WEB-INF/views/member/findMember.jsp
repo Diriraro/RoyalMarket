@@ -200,6 +200,15 @@ body {
 	background: rgb(102, 0, 102);
 }
 
+.mail:hover{
+	background-color: rgb(102, 0, 102);
+	color: white; 
+}
+
+
+
+
+
 #address {
 	width: 100px;
 	height: 32px;
@@ -485,8 +494,9 @@ input {
 							<form:input path="mem_phone" type="text" id="mem_phone"
 								placeholder="휴대폰 번호" />
 
-							<input type="button" value="아이디 찾기" class="btn btn-default"
+							<input type="button" value="아이디 찾기" class="btn btn-default phone"
 								id="rq_num" onclick="checkPhone()">
+								
 						</div>
 					</div>
 					<form:errors path="mem_phone" class="error_msg"></form:errors>
@@ -580,7 +590,7 @@ input {
 							<form:input path="mem_phone" type="text" id="mem_phone3"
 								placeholder="휴대폰 번호" />
 
-							<input type="button" value="인증번호 요청" class="btn btn-default"
+							<input type="button" value="인증번호 요청" class="btn btn-default phone"
 								id="rq_num" onclick="checkPhone3()">
 						</div>
 					</div>
@@ -638,9 +648,6 @@ input {
 
 				</form:form>
 				
-
-			
-
 
 			</div>
 
@@ -713,6 +720,14 @@ input {
 						</div>
 					</div>
 					<form:errors path="mem_pw" class="error_msg"></form:errors>
+					
+					
+					
+					
+					<input id="time" name="time">
+					
+					
+					
 
 					<div class="sc-lhLRcH csuEuq">
 						<div class="sc-jMtzgO liBHhX">
@@ -729,7 +744,7 @@ input {
 
 					<div class="form-group">
 						<div class="col-sm-offset-2 col-sm-10">
-							<button type="submit" class="btn btn-default"  value="확인"   style="width: 100%; background:rgb(102, 0, 102); color: white; margin-top: 10px;">확인</button>
+							<button type="submit" class="btn btn-default"  value="확인"   style="width: 100%; background:rgb(102, 0, 102); color: white; margin-top: 10px;" onclick="timeSend();">확인</button>
 						</div>
 					</div>
 				</form:form>
@@ -744,6 +759,12 @@ input {
 
 
 	<script type="text/javascript">
+	/* var time = "${time}";
+
+	if(time=="time"){
+		TimerStart4();
+	} */
+	
 	var name="";
 		$("#show1").click(function() {
 			if ($(this).prop("title") == "hide") {
@@ -804,6 +825,7 @@ input {
 			}
 		});
 
+		
 		function checkEmail() {
 			var email = $('#mem_email').val();
 			var name = $('#mem_name1').val();
@@ -831,8 +853,12 @@ input {
 			window.close();
 		}
 
-
-		var SetTime = 300;	
+		var SetTime=300;
+		/* var SetTime=${time};
+	
+		if(SetTime == -1){
+				SetTime=300;
+			} */
 		var tid=0;
 
 		function msg_time3() {	// 1초씩 카운트
@@ -844,13 +870,14 @@ input {
 			document.all.ViewTimer3.innerHTML = msg;		// div 영역에 보여줌 
 					
 			SetTime--;					// 1초씩 감소
+
+			$("#time").val(SetTime);
 			
 			if (SetTime < 0) {			// 시간이 종료 되었으면..
 				clearInterval(tid);		// 타이머 해제
 				alert("인증번호가 만료되었습니다.");
 			}
 		}
-		
 		
 		
 		function msg_time4() {	// 1초씩 카운트
@@ -862,6 +889,8 @@ input {
 			document.all.ViewTimer4.innerHTML = msg;		// div 영역에 보여줌 
 					
 			SetTime--;					// 1초씩 감소
+
+			$("#time").val(SetTime);
 			
 			if (SetTime < 0) {			// 시간이 종료 되었으면..
 				clearInterval(tid);		// 타이머 해제
@@ -890,9 +919,9 @@ input {
 		
 			function checkEmail4(result2) {
 				
-				SetTime=300;
 				var email = $('#mem_email4').val();
 				var id = $('#mem_id4').val();
+				var time = "1";
 				$(".pw").css("display", "block")
 
 				$.post("./check/sendEmail", {
@@ -935,6 +964,8 @@ input {
 					}
 				})
 			}
+
+	
 
 		
 	

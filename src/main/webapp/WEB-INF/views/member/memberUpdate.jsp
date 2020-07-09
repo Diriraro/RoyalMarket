@@ -212,7 +212,9 @@ body {
 			<c:if test="${member.mem_kakao eq 1}">
 			<a href="./kakaoMemberUpdate" style="text-decoration: none; height: 70px;">&nbsp;&nbsp;회원정보수정</a> 
 			</c:if>
+			<c:if test="${member.mem_kakao eq 0}">
 			<a href="#" data-toggle="modal" data-target="#memberDelete" style="text-decoration: none; height: 70px;">&nbsp;&nbsp;탈퇴</a>
+			</c:if>
 		</div>
 	</div>
 
