@@ -8,6 +8,19 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <c:import url="../template/boot.jsp"></c:import>
+
+<style type="text/css">
+ #my2Modal {
+	left: 50%;
+	top: 70%;
+	transform: translate(-50%, -50%);
+	width: 800px;
+	overflow: hidden;
+	height: 800px;
+}
+
+</style>
+
 <c:import url="../template/style.jsp"></c:import>
 
 </head>
@@ -141,8 +154,10 @@
 					<button type="submit"
 						style="margin-top: 65px; border-radius:0px 0px 0px 0px;width: 176px; height: 56px;background-image: url('${pageContext.request.contextPath}/resources/images/zzim_button.png');"
 						class="btn btn-default"></button>
-					<a><img style="margin-top: 65px; cursor: pointer;" alt=""
-						src="${pageContext.request.contextPath}/resources/images/phone_button.png"></a>
+					<%-- <a href="../payment/phone?sell_num=${vo.sell_num}&mem_storeNum=${member.mem_storeNum}" data-toggle="modal" data-target="#my2Modal"><img style="margin-top: 65px; cursor: pointer;" alt=""
+						src="${pageContext.request.contextPath}/resources/images/phone_button.png"></a> --%>
+						<img style="margin-top: 65px; cursor: pointer;" alt="" id="phone" data-toggle="modal" data-target="#my2Modal" 
+							src="${pageContext.request.contextPath}/resources/images/phone_button.png">
 					<a href="../payment/productPay?sell_product=${vo.sell_product}&sell_price=${vo.sell_price}&sell_num=${vo.sell_num}"><img style="margin-top: 65px; cursor: pointer;" alt=""
 						src="${pageContext.request.contextPath}/resources/images/buy_button.png"></a>
 				</c:if> 
@@ -154,8 +169,8 @@
 
 					style="margin-top: 65px; cursor: pointer;" alt=""
 					src="${pageContext.request.contextPath}/resources/images/zzimaft_button.png"></a>
-				<a><img style="margin-top: 65px; cursor: pointer;" alt=""
-					src="${pageContext.request.contextPath}/resources/images/phone_button.png"></a>
+				<img style="margin-top: 65px; cursor: pointer;" alt="" id="phone" data-toggle="modal" data-target="#my2Modal" 
+							src="${pageContext.request.contextPath}/resources/images/phone_button.png">
 				<a href="../payment/productPay?sell_product=${vo.sell_product}&sell_price=${vo.sell_price}&sell_num=${vo.sell_num}"><img style="margin-top: 65px; cursor: pointer;" alt=""
 					src="${pageContext.request.contextPath}/resources/images/buy_button.png"></a>
 			</c:if>
@@ -298,7 +313,34 @@
 
 	
 	
+	<!-- 연락하기 모달 -->
+	<div class="modal fade" id="my2Modal" role="dialog">
+				<div class="modal-dialog modal-sm">
+					<div class="modal-content" id="modalPhone">
+						
+					</div>
+				</div>
+			</div>
+
+
+
+
+	
 	<script type="text/javascript">
+		$("#phone").click(function(){
+			$("#modalPhone").empty();
+			var mem_storeNum=${vo.mem_storeNum};
+			var sell_num=${vo.sell_num};
+			
+			$.get("../payment/phone?mem_storeNum="+mem_storeNum+"&sell_num="+sell_num , function(result) {
+				$("#modalPhone").append(result);
+			});
+
+			
+		});
+			
+	
+	
 		$(document).on('click', '.reply', function() {
 			$("#pq_contents").val("@" + $(this).val() + " : ");
 		});

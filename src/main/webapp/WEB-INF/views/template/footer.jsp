@@ -6,11 +6,11 @@
 <div class="footer f" style="height: 300px;">
 	<div class="footer-menu">  
 		<ul>
-		<li style="margin-right: 30px;"><a href="#"><b>공지사항</a></li>    
-		<li style="margin-right: 30px;"><a href="#"><b>자주묻는질문</b></a></li>
-		<li style="margin-right: 30px;"><a href="#"><b>운영 정책</b></a></li>
-		<li style="margin-right: 30px;"><a href="#"><b>1:1문의</b></a></li>
-		<li style="margin-right: 30px;"><a href="#"><b>이용약관</b></a></li>
+		<li style="margin-right: 30px;"><a href="/notice/noticeList"><b>공지사항</b></a></li>    
+		<li style="margin-right: 30px;"><a href="/notice/policy"><b>운영 정책</b></a></li>
+		<li style="margin-right: 30px;"><a href="/notice/ban"><b>거래 금지 품목</b></a></li>
+		<li style="margin-right: 30px;"><a href="/qna/qnaWrite"><b>1:1문의</b></a></li>
+		<li style="margin-right: 30px;"><a href="/notice/terms/service"><b>이용약관</b></a></li>
 		<li><a href="#"><b>개인정보처리방침</b></a></li>
 
 		</ul>
@@ -35,8 +35,8 @@
 	<div class="guide">
 		<br><br>
 			<p>
-				<font style="font-size: 15px; ">Copyright ⓒ Bungaejangter Inc. All rights reserved</font>
-				<font style="float: right;">제휴문의 &nbsp;&nbsp;partner@bunjang.co.kr</font>
+				<font style="font-size: 15px; ">Copyright ⓒ Woozoojangter Inc. All rights reserved</font>
+				<font style="float: right;">제휴문의 &nbsp;&nbsp;partner@woojang.co.kr</font>
 				<font style="float: right; margin-right: 40px;">고객센터 &nbsp;&nbsp; 02-598-8240</font>
 			</p>
 	</div>

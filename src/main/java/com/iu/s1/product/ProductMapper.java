@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
 import com.iu.s1.member.MemberVO;
+import com.iu.s1.product.zzim.ZzimVO;
 import com.iu.s1.util.Pager;
 
 @Mapper
@@ -39,6 +40,10 @@ public interface ProductMapper {
 	// shop에서 쓸거
 	public List<ProductVO> myList(long mem_storeNum) throws Exception;
 	public long prodco(long mem_storeNum) throws Exception;
+	public String getsell_product(ZzimVO zzimVO)throws Exception; 
+	public long getsell_price(ZzimVO zzimVO) throws Exception;
+	public long getmem_storeNum(ZzimVO zzimVO) throws Exception;
+	
 	
 	public int productDelete(ProductVO productVO) throws Exception;
 	

@@ -9,7 +9,10 @@
 	alert('${result}');
 	location.href="${path}";
 
+	window.opener.location.reload();    //부모창 reload
+	window.close();    //현재 팝업창 Close
 </script>
+
 </head>
 <body>
 </body>

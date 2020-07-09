@@ -164,6 +164,17 @@ a.blog span {
   padding: 0;
 }
 
+.img .content{
+         position: absolute;
+         top:50%;
+         left:50%;
+         transform: translate(-50%, -50%);                                                                   
+         font-size:1rem;
+         color: white;
+         z-index: 2;
+         text-align: center;
+ }
+
 	
 </style>
     

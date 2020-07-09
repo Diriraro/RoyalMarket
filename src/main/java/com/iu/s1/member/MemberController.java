@@ -35,6 +35,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.iu.s1.payment.PaymentService;
+import com.iu.s1.paymentHistory.Sell_HistoryVO;
+
 @Controller
 @RequestMapping("/member/**")
 public class MemberController {
@@ -46,6 +49,16 @@ public class MemberController {
 	private JavaMailSender mailSender;
 
 	private String checkNum = "";
+	
+
+	@Autowired
+	private PaymentService paymentService;
+
+	@GetMapping("memberUpdate")
+	public void memberUpdate()throws Exception{
+		
+	}
+
 
 	@GetMapping("findPwByEmail")
 	public ModelAndView findPwByEmail(HttpSession session, MemberVO memberVO) throws Exception {
@@ -68,11 +81,12 @@ public class MemberController {
 		boolean result = memberService.findPwByEmail(memberVO, bindingResult, checkNum);
 
 		if (result) {
-			mv.setViewName("member/findPwByEmail");
+			mv.addObject("show4", result);
+			mv.setViewName("member/findMember");
 		} else if (now_now > 300000) {
 			System.out.println("ddd");
 			mv.addObject("result", "인증번호 유효기간이 지났습니다.");
-			mv.addObject("path", "./findPwByEmail");
+			mv.addObject("path", "./findMember");
 
 			mv.setViewName("common/result");
 		} else {
@@ -101,10 +115,11 @@ public class MemberController {
 		System.out.println(now_now);
 		if (result) {
 			// model.addAttribute("result","인증번호를 다시 확인해주세요");
-			mv.setViewName("member/findPwByPhone");
+			mv.setViewName("member/findMember");
+			mv.addObject("show3", result);
 		} else if (now_now > 300000) {
 			mv.addObject("result", "인증번호 유효기간이 지났습니다.");
-			mv.addObject("path", "./findPwByPhone");
+			mv.addObject("path", "./findMember");
 
 			mv.setViewName("common/result");
 		} else {
@@ -179,6 +194,11 @@ public class MemberController {
 		MemberVO memberVO2 = new MemberVO();
 		memberVO2 = memberService.selectMember(memberVO);
 
+		List<Sell_HistoryVO> sell = paymentService.seller_check(memberVO.getMem_id());
+		int sellProduct = sell.size();
+		
+		
+		
 		if (memberVO2 == null) {
 			mv.addObject("result", "존재하지 않는 회원입니다.");
 			mv.addObject("path", "../");
@@ -199,6 +219,10 @@ public class MemberController {
 			mv.addObject("path", "../");
 			mv.setViewName("common/result");
 			return mv;
+		}else if(!sell.isEmpty()) {
+			mv.addObject("result", sellProduct+"개의 판매중인 상품이 있습니다.");
+			mv.addObject("path", "../payment/sell_History");
+			mv.setViewName("common/result");
 		}
 
 		memberVO = memberService.memberLogin(memberVO);
@@ -209,11 +233,18 @@ public class MemberController {
 				mv.addObject("result", "관리자 로그인 승인되었습니다.");
 				mv.addObject("path", "../admin/adminPage");
 				mv.setViewName("common/result");
-			} else {
-				mv.addObject("result", "환영합니다!");
-				mv.addObject("path", "../");
-				mv.setViewName("common/result");
-
+			}else {
+				
+				// 로그인 할 때 판매 상품이 있는지 없는지 판별하는 조건문
+				if(sell.isEmpty()) {					
+					mv.addObject("result", "환영합니다!");
+					mv.addObject("path", "../");
+					mv.setViewName("common/result");
+				}else {
+					mv.addObject("result", sellProduct+"개의 판매중인 상품이 있습니다.");
+					mv.addObject("path", "../payment/sell_History");
+					mv.setViewName("common/result");
+				}
 			}
 		}
 		return mv;
@@ -332,7 +363,11 @@ public class MemberController {
 	}
 
 	@GetMapping("findMember")
-	public void findMember() throws Exception {
+	public ModelAndView findMember() throws Exception {
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("memberVO", new MemberVO());
+		mv.setViewName("member/findMember");
+		return mv;
 
 	}
 
@@ -487,9 +522,9 @@ public class MemberController {
 				System.out.println("에러카운트" + error_count);
 
 				if (error_count.equals("0")) {
-					msg = "인증 메세지를 전송했습니다";
+					msg = "아이디를 전송했습니다";
 				} else {
-					msg = "인증 메세지 전송 실패했습니다";
+					msg = "아이디 전송 실패했습니다";
 				}
 
 			} else {
@@ -505,7 +540,7 @@ public class MemberController {
 			HttpServletResponse response) throws Exception {
 
 		/* memberVO.setKind(profile); */
-		
+
 		Cookie kakao_email = new Cookie("kakao_email", memberVO.getMem_email());
 		Cookie kakao_name = new Cookie("kakao_name", memberVO.getMem_name());
 		kakao_email.setMaxAge(600);
@@ -543,22 +578,20 @@ public class MemberController {
 		String email = "";
 		String name = "";
 		Cookie[] cookies = request.getCookies();
-		for(int i=0;i<cookies.length;i++) {
-			
-			if(cookies[i].getName().equals("kakao_name")) {
+		for (int i = 0; i < cookies.length; i++) {
+
+			if (cookies[i].getName().equals("kakao_name")) {
 				name = cookies[i].getValue();
-			}else if(cookies[i].getName().equals("kakao_email")){
+			} else if (cookies[i].getName().equals("kakao_email")) {
 				email = cookies[i].getValue();
 			}
 		}
-		
-		
+
 		memberVO.setMem_name(name);
 		memberVO.setMem_id(email);
 		memberVO.setMem_email(email);
 		memberVO.setMem_pw("kakaoPw");
 		memberVO.setMem_kakao(1);
-		
 
 		ModelAndView mv = new ModelAndView();
 		boolean result = memberService.kakaoMemberCheck(memberVO, bindingResult, checkNum);
@@ -578,12 +611,87 @@ public class MemberController {
 				cookies[2] = new Cookie("kakao_name", null);
 				cookies[2].setMaxAge(0); // 쿠키의 expiration 타임을 0으로 하여 없앤다.
 				cookies[2].setPath("/");
-				
+
 			}
 			session.invalidate();
 		}
 
 		return mv;
+	}
+	
+	@PostMapping("updateStoreName")
+	public ModelAndView updateStoreName(MemberVO memberVO, HttpServletRequest request)throws Exception{
+		ModelAndView mv = new ModelAndView();
+		
+		System.out.println(memberVO.getMem_id());
+		MemberVO memberVO3 = new MemberVO();
+		memberVO3.setMem_id(memberVO.getMem_id());
+		memberVO3.setMem_storeName(memberVO.getMem_storeName());
+		
+		MemberVO member = memberService.selectMemberByStoreName(memberVO);
+		memberVO = memberService.selectMember(memberVO);
+		String msg="";
+		
+		String referer = request.getHeader("referer");
+		
+		if(memberVO3.getMem_storeName()=="" || memberVO3.getMem_storeName()==null) {
+			msg = "상점명을 입력해주세요";
+			mv.addObject("path", referer);
+			mv.addObject("result", msg);
+			mv.setViewName("common/result");
+			return mv;
+		}
+		
+		if(member != null) {
+			msg = "이미 등록된 상점명입니다";
+			mv.addObject("path", referer);
+			mv.addObject("result", msg);
+			mv.setViewName("common/result");
+		}else {
+			int i = memberService.updateStoreName(memberVO3);
+			
+			if(i>0) {
+				//msg = "수정 완료!";			
+				mv.addObject("path", referer);
+				mv.setViewName("common/result3");	
+			}else {
+				msg = "수정 실패!";			
+				mv.addObject("path", referer);
+				mv.addObject("result", msg);
+				mv.setViewName("common/result");
+			}
+			
+		}
+		
+		return mv;
+	}
+	
+	@PostMapping("memberDelete")
+	public ModelAndView memberDelete(HttpSession session, MemberVO memberVO, HttpServletRequest request)throws Exception{
+		System.out.println(memberVO.getMem_id());
+		System.out.println(memberVO.getMem_pw());
+		ModelAndView mv = new ModelAndView();
+		String referer = request.getHeader("referer");
+		String msg="";
+		
+		MemberVO member = memberService.selectMember(memberVO);
+		
+		System.out.println(member.getMem_storeNum());
+		System.out.println(memberVO.getMem_pw());
+		if(member.getMem_pw().equals(memberVO.getMem_pw())) {
+			int result = memberService.memberDelete(member);
+			session.invalidate();
+			mv.setViewName("redirect:../");
+			return mv;
+				
+		}else {
+			msg = "비밀번호가 다릅니다.";
+			mv.addObject("path", referer);
+			mv.addObject("result", msg);
+			mv.setViewName("common/result");
+			return mv;
+		
+		}
 	}
 
 }
