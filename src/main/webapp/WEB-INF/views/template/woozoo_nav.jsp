@@ -122,6 +122,26 @@ button {
 	font-weight: bold;
 }
 
+.dropdown:hover .dropdown-menu {
+    display: block;
+    margin-top: 0; 
+    // remove the gap so it doesn't close
+    
+ }
+ 
+ .glyphicon:hover{
+ 	color: #5c2392;
+ }
+ .kind{
+ color: #212121;
+ }
+ 
+  .kind:hover{
+ 	background-color: #5c2392;
+ 	color: white;
+ }
+
+
 
 </style>
 <div class="n">
@@ -224,7 +244,7 @@ button {
 				  <button class="btn dropdown-toggle" type="button" data-toggle="dropdown" style="width: 50px; height: 50px;margin-right: 10px;">
 					<font style="color: #2a2a2a; font-size: 13px; font-weight: 600;">내 상점</font>
 				  <span class="caret"></span></button>
-				  <ul class="dropdown-menu">
+				  <ul style="width: 51px;" class="dropdown-menu"> 
 				    <li><a href="../shop/myshop?mem_storeNum=${member.mem_storeNum}">내상점</a></li>
 				    <li><a href="../payment/buy_History">구매내역</a></li>
 				    <li><a href="../payment/sell_History">판매내역</a></li>
@@ -242,6 +262,45 @@ button {
 
 
 			</div>
+			<!-- 카테고리 드롭다운  -->
+			<div class="dropdown"style="display: inline-block;margin-left: 410px;margin-top: 18px;">
+				  <button  class="btn btn-lg dropdown-toggle" type="button" data-toggle="dropdown" >
+				    <span  class="	glyphicon glyphicon-menu-hamburger"></span>
+				  </button>
+				  <ul class="dropdown-menu">
+				    <div style="border-bottom: solid 1px #e5e5e5;height: 40px;text-align: left;line-height: 40px;">
+				    <font style="margin-left:25px;;font-weight: 800;">전체 카테고리</font></div>
+				    
+				<a href="../payment/buy_History">
+				<button type="button" class="kind" value="패션잡화" style="width: 280px;height: 40px;outline: 0;border: 0px;">
+				<font style="margin-right: 170px;">패션잡화</font></button></a>
+				
+				<button type="button" class="kind" value="여성의류" style="width: 280px;height: 40px;outline: 0;border: 0px;">
+				<font style="margin-right: 170px;">여성의류</font></button>
+				
+				<button type="button" class="kind" value="남성의류" style="width: 280px;height: 40px;outline: 0;border: 0px;">
+				<font style="margin-right: 170px;">남성의류</font></button>
+				
+				<button type="button" class="kind" value="디지털/가전" style="width: 280px;height: 40px;outline: 0;border: 0px;">
+				<font style="margin-right: 152px;">디지털/가전</font></button>
+				
+				<button type="button" class="kind" value="생활/문구/가구/식품" style="width: 280px;height: 40px;outline: 0;border: 0px;">
+				<font style="margin-right: 98px;">생활/문구/가구/식품</font></button>
+				
+				<button type="button" class="kind" value="유아동/출산" style="width: 280px;height: 40px;outline: 0;border: 0px;">
+				<font style="margin-right: 152px;">유아동/출산</font></button>
+				
+				<button type="button" class="kind" value="스타굿즈" style="width: 280px;height: 40px;outline: 0;border: 0px;">
+				<font style="margin-right: 170px;">스타굿즈</font></button>
+				
+				<button type="button" class="kind" value="스포츠/레저" style="width: 280px;height: 40px;outline: 0;border: 0px;">
+				<font style="margin-right: 152px;">스포츠/레저</font></button>
+				
+				<button type="button" class="kind" value="뷰티/미용" style="width: 280px;height: 40px;outline: 0;border: 0px;">
+				<font style="margin-right: 166px;">뷰티/미용</font></button>
+				    
+				  </ul>
+				</div>
 		</nav>
 	</header>
 </div>
@@ -293,6 +352,7 @@ button {
 
 		</div>
 	</div>
+
 </div>
 
 
@@ -309,6 +369,7 @@ button {
 			$('#header_wrap').css("top", "39px").css("position", "absolute");
 		}
 	});
+
 </script>
 
 

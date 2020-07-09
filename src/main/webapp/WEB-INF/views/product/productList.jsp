@@ -12,33 +12,7 @@
 
 <style type="text/css">
 
-.img{
-        position: relative;
-        background-image: url('${pageContext.request.contextPath}/upload/product/${file[i.index]}');                                                               
-        height: 194px;
-        width: 194px;
-        background-size: cover;
-    }
 
-    .img-cover{
-       position: absolute;
-       height: 100%;
-       width: 100%;
-       background-color: rgba(0, 0, 0, 0.7);                                                                 
-       z-index:1;
-    }
-
-    .img .content{
-         position: absolute;
-         top:50%;
-         left:50%;
-         transform: translate(-50%, -50%);                                                                   
-         font-size:1rem;
-         color: white;
-         z-index: 2;
-         text-align: center;
-    }
-	
 </style>
 
 </head>
@@ -106,7 +80,7 @@
 			<font style="font-size: 15px;font-weight: 600">의 검색결과</font>
 			</c:if>
 
-			<c:if test="${empty list and param.kind eq 'sp'}">
+			<c:if test="${empty list and ( param.kind eq 'sp'or param.kind eq 'sk'or param.kind eq 'st')}">
 			<br><br><br><br><br>
 			<font style="color: #ff5d4a; font-size: 40px;font-weight: 600;">${param.search}</font>
 			<font style="font-size: 20px;font-weight: 600">에 대한 검색결과가 없습니다</font>
@@ -165,7 +139,7 @@
 
 			</c:forEach>
 			
-			<c:if test="${vo.sell_product ne null or param.kind eq 'sk'}">
+			<c:if test="${not empty list and (param.kind eq 'sp'or param.kind eq 'sk'or param.kind eq 'st')}">
 			
 			
 		

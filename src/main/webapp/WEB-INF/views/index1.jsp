@@ -8,23 +8,10 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <c:import url="./template/boot.jsp"></c:import>
+<c:import url="./template/style.jsp"></c:import>
 
 <style type="text/css">
-.f{
-display: none;
-}
-.c{
-display: none;
-}
-.n{
-display: none;
-}
-.cc{
-display: none;
-}
-.p{
-display: none;
-}
+
 .cbtn{
 width: 128.5555555px;
 height:50px;
@@ -48,7 +35,7 @@ a:hover { text-decoration:none !important }
 
 </head>
 <body>
-	<c:import url="./template/woozoo_nav_index.jsp"></c:import>
+	<c:import url="./template/woozoo_nav.jsp"></c:import>
 
 
 	<!-- 메인페이지시작 -->
@@ -190,7 +177,7 @@ a:hover { text-decoration:none !important }
 	<div id="c4" style="height: 650px;"></div>
 	
 	</div>
-	<c:import url="./template/footer_index.jsp"></c:import>
+	<c:import url="./template/footer.jsp"></c:import>
 
 
 
@@ -198,31 +185,30 @@ a:hover { text-decoration:none !important }
 
 		$(".carousel").carousel({interval:3000});
 
-		  $(document).ready(function(){
+  		  $(document).ready(function(){
 		    	
 		        $.ajax({
 		            type : "GET", //전송방식을 지정한다 (POST,GET)
-		            url : "product/productList?curPage=1&kind=sk&search=패션잡화",//호출 URL을 설정한다. GET방식일경우 뒤에 파라티터를 붙여서 사용해도된다.
+		            url : "product/homeProductList?curPage=1&kind=sk&search=패션잡화",//호출 URL을 설정한다. GET방식일경우 뒤에 파라티터를 붙여서 사용해도된다.
 		            dataType : "text",//호출한 페이지의 형식이다. xml,json,html,text등의 여러 방식을 사용할 수 있다.
 		            error : function(){
-		                alert("통신실패!!!!");
+		                alert("통신실패1");
 		            },
 		            success : function(Parse_data){
 		                $("#c0").html(Parse_data); //div에 받아온 값을 넣는다.
-/* 		                alert("통신 데이터 값 : " + Parse_data); */
 		            }
 		             
 		        });
-		    });
+		    }); 
 
 		  $(document).ready(function(){
 		    	
 		        $.ajax({
 		            type : "GET", //전송방식을 지정한다 (POST,GET)
-		            url : "product/productList?kind=sk&search=여성의류",//호출 URL을 설정한다. GET방식일경우 뒤에 파라티터를 붙여서 사용해도된다.
+		            url : "product/homeProductList?kind=sk&search=여성의류",//호출 URL을 설정한다. GET방식일경우 뒤에 파라티터를 붙여서 사용해도된다.
 		            dataType : "text",//호출한 페이지의 형식이다. xml,json,html,text등의 여러 방식을 사용할 수 있다.
 		            error : function(){
-		                alert("통신실패!!!!");
+		                alert("통신실패2");
 		            },
 		            success : function(Parse_data){
 		                $("#c1").html(Parse_data); //div에 받아온 값을 넣는다.
@@ -235,10 +221,10 @@ a:hover { text-decoration:none !important }
 		    	
 		        $.ajax({
 		            type : "GET", //전송방식을 지정한다 (POST,GET)
-		            url : "product/productList?kind=sk&search=남성의류",//호출 URL을 설정한다. GET방식일경우 뒤에 파라티터를 붙여서 사용해도된다.
+		            url : "product/homeProductList?kind=sk&search=남성의류",//호출 URL을 설정한다. GET방식일경우 뒤에 파라티터를 붙여서 사용해도된다.
 		            dataType : "text",//호출한 페이지의 형식이다. xml,json,html,text등의 여러 방식을 사용할 수 있다.
 		            error : function(){
-		                alert("통신실패!!!!");
+		                alert("통신실패3");
 		            },
 		            success : function(Parse_data){
 		                $("#c2").html(Parse_data); //div에 받아온 값을 넣는다.
@@ -252,10 +238,10 @@ a:hover { text-decoration:none !important }
 		    	
 		        $.ajax({
 		            type : "GET", //전송방식을 지정한다 (POST,GET)
-		            url : "product/productList?kind=sk&search=디지털/가전",//호출 URL을 설정한다. GET방식일경우 뒤에 파라티터를 붙여서 사용해도된다.
+		            url : "product/homeProductList?kind=sk&search=디지털/가전",//호출 URL을 설정한다. GET방식일경우 뒤에 파라티터를 붙여서 사용해도된다.
 		            dataType : "text",//호출한 페이지의 형식이다. xml,json,html,text등의 여러 방식을 사용할 수 있다.
 		            error : function(){
-		                alert("통신실패!!!!");
+		                alert("통신실패4");
 		            },
 		            success : function(Parse_data){
 		                $("#c3").html(Parse_data); //div에 받아온 값을 넣는다.
@@ -268,10 +254,10 @@ a:hover { text-decoration:none !important }
 		    	
 		        $.ajax({
 		            type : "GET", //전송방식을 지정한다 (POST,GET)
-		            url : "product/productList?kind=sk&search=기타",//호출 URL을 설정한다. GET방식일경우 뒤에 파라티터를 붙여서 사용해도된다.
+		            url : "product/homeProductList?kind=sk&search=기타",//호출 URL을 설정한다. GET방식일경우 뒤에 파라티터를 붙여서 사용해도된다.
 		            dataType : "text",//호출한 페이지의 형식이다. xml,json,html,text등의 여러 방식을 사용할 수 있다.
 		            error : function(){
-		                alert("통신실패!!!!");
+		                alert("통신실패5");
 		            },
 		            success : function(Parse_data){
 		                $("#c4").html(Parse_data); //div에 받아온 값을 넣는다.
@@ -285,10 +271,10 @@ a:hover { text-decoration:none !important }
 		    	
 		        $.ajax({
 		            type : "GET", //전송방식을 지정한다 (POST,GET)
-		            url : "product/productList?kind=sk&search=스타굿즈",//호출 URL을 설정한다. GET방식일경우 뒤에 파라티터를 붙여서 사용해도된다.
+		            url : "product/homeProductList?kind=sk&search=스타굿즈",//호출 URL을 설정한다. GET방식일경우 뒤에 파라티터를 붙여서 사용해도된다.
 		            dataType : "text",//호출한 페이지의 형식이다. xml,json,html,text등의 여러 방식을 사용할 수 있다.
 		            error : function(){
-		                alert("통신실패!!!!");
+		                alert("통신실패6");
 		            },
 		            success : function(Parse_data){
 		                $("#c6").html(Parse_data); //div에 받아온 값을 넣는다.
@@ -301,10 +287,10 @@ a:hover { text-decoration:none !important }
 		    	
 		        $.ajax({
 		            type : "GET", //전송방식을 지정한다 (POST,GET)
-		            url : "product/productList?kind=sk&search=스포츠/레저",//호출 URL을 설정한다. GET방식일경우 뒤에 파라티터를 붙여서 사용해도된다.
+		            url : "product/homeProductList?kind=sk&search=스포츠/레저",//호출 URL을 설정한다. GET방식일경우 뒤에 파라티터를 붙여서 사용해도된다.
 		            dataType : "text",//호출한 페이지의 형식이다. xml,json,html,text등의 여러 방식을 사용할 수 있다.
 		            error : function(){
-		                alert("통신실패!!!!");
+		                alert("통신실패7");
 		            },
 		            success : function(Parse_data){
 		                $("#c7").html(Parse_data); //div에 받아온 값을 넣는다.
@@ -317,17 +303,17 @@ a:hover { text-decoration:none !important }
 		    	
 		        $.ajax({
 		            type : "GET", //전송방식을 지정한다 (POST,GET)
-		            url : "product/productList?kind=sk&search=뷰티/미용",//호출 URL을 설정한다. GET방식일경우 뒤에 파라티터를 붙여서 사용해도된다.
+		            url : "product/homeProductList?kind=sk&search=뷰티/미용",//호출 URL을 설정한다. GET방식일경우 뒤에 파라티터를 붙여서 사용해도된다.
 		            dataType : "text",//호출한 페이지의 형식이다. xml,json,html,text등의 여러 방식을 사용할 수 있다.
 		            error : function(){
-		                alert("통신실패!!!!");
+		                alert("통신실패8");
 		            },
 		            success : function(Parse_data){
 		                $("#c8").html(Parse_data); //div에 받아온 값을 넣는다.
 		            }
 		             
 		        });
-		    });
+		    }); 
 
 		  $(document).ready(function(){
 		    	
@@ -336,7 +322,7 @@ a:hover { text-decoration:none !important }
 		            url : "product/recProductList",//호출 URL을 설정한다. GET방식일경우 뒤에 파라티터를 붙여서 사용해도된다.
 		            dataType : "text",//호출한 페이지의 형식이다. xml,json,html,text등의 여러 방식을 사용할 수 있다.
 		            error : function(){
-		                alert("통신실패!!!!");
+		                alert("통신실패9");
 		            },
 		            success : function(Parse_data){
 		                $("#rec").html(Parse_data); //div에 받아온 값을 넣는다.

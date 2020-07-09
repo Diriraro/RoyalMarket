@@ -1,23 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-</head>
-<body>
-<br><br>
-<font style="font-size: 25px;color: black;">우주장터 상품</font>
-<br><br>
-<div style="width: 1045px;height: 400px;">
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<div style="width: 1045px;height: 400px;margin-left: 440px;">
 
 
-			<c:forEach items="${list}" var="vo" varStatus="i">
-				<div style="display:inline-block;margin-right: 64px;">
+		<c:forEach items="${list}" var="vo" varStatus="i">
+				<div style="float: left; margin-left: 9px; margin-bottom: 129px;">
 					<div class="qqq" style="height: 194px; width: 194px; cursor: pointer;"
 						onclick="location.href='../product/productSelect?sell_num=${vo.sell_num}'">
 
@@ -34,14 +23,12 @@
 
 				</c:if>
 				<c:if test="${vo.sell_status eq 0 }">
-				<div style="background-color: #f9f9f9;width: 244px;">
-				<img class="img-circle" style="height: 194px; width: 194px; margin-left:25px;margin-top:20px; cursor: pointer;" alt=""
+				<img class="img" style="height: 194px; width: 194px; cursor: pointer;" alt=""
 							src="${pageContext.request.contextPath}/upload/product/${file[i.index]}">
-							</div>
 				</c:if>
 
 							
-						<div style="width: 244px; background-color: #f9f9f9;">
+						<div style="width: 194px; background-color: white;border: 1px solid #e5e5e5">
 							<div style="height: 80px;">
 								<div ><br>
 									<font style="font-size: 14px;font-weight: 700;margin-left: 8px;">${vo.sell_product}</font>
@@ -64,6 +51,3 @@
 
 			</c:forEach>
 			</div>
-
-</body>
-</html>
