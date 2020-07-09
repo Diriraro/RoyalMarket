@@ -2,14 +2,14 @@ package com.iu.s1.payment;
 
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
+
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.maven.model.Model;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -27,7 +27,8 @@ import com.iu.s1.product.ProductVO;
 import com.iu.s1.saveCash.SaveCashVO;
 import com.iu.s1.shop.review.StoreReviewService;
 import com.iu.s1.shop.review.StoreReviewVO;
-import com.iu.s1.shop.review.reviewFile.StoreReviewFileVO;
+
+
 import com.iu.s1.trading.TradingVO;
 
 @Controller
@@ -40,7 +41,7 @@ public class PaymentController {
 	private ProductService productService;
 	@Autowired
 	private StoreReviewService storeReviewService;
- 	
+
 	//결제로 들어가는 페이지
 	@GetMapping("pay")
 	public ModelAndView pay(long amount,HttpServletRequest request) throws Exception{
@@ -519,6 +520,14 @@ public class PaymentController {
 		String mem_id=memberVO.getMem_id();
 		//날짜 가져오기
 		Buy_HistoryVO buy_HistoryVO= paymentService.buy_Sel(buy_history_num);
+		
+		///
+		StoreReviewVO reviewVO = new StoreReviewVO();
+		reviewVO = storeReviewService.recheck(sell_num);
+		System.out.println(reviewVO+"확인 ㄱㄷㄱㄷㄱㄷㄱㄷ");
+		
+		mv.addObject("recheck",reviewVO);
+		////
 		
 		mv.addObject("buy_date", buy_HistoryVO.getBuy_date());
 		mv.addObject("mem_id", mem_id);

@@ -235,4 +235,24 @@ public class MemberService {
 		
 		return memberRepository.getregDate(mem_storeNum);
 	}
+	
+	//mdata 
+	public MemberVO mdata(long mem_storeNum) throws Exception{
+		
+		return memberRepository.mdata(mem_storeNum);
+	}
+	
+	public MemberVO selectMemberByStoreName(MemberVO memberVO) throws Exception{
+		return memberRepository.selectMemberByStoreName(memberVO);
+	}
+	
+	public int updateStoreName(MemberVO memberVO3)throws Exception{
+		return memberRepository.updateStoreName(memberVO3);
+	}
+	
+	public int memberDelete(MemberVO memberVO)throws Exception{
+		return memberRepository.memberDelete(memberVO);
+	}
+	
+	
 }

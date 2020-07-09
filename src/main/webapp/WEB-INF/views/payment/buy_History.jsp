@@ -85,10 +85,7 @@
 					</c:if>
 					<c:if test="${vo.status eq 2}">
 						<div style="display: inline-block;">구매 완료</div>
-						<div>
-							<img alt="" src="${pageContext.request.contextPath}/resources/images/reviewWrite.png" width="30px;" height="30px;">
-							<a href="../shop/rei?sell_num=${vo.sell_num}" style="color: black;"> 리뷰 작성하기</a>
-						</div>
+
 					</c:if>
 					<c:if test="${vo.status eq 3}">
 						<div style="display: inline-block;">취소된 거래입니다.</div>

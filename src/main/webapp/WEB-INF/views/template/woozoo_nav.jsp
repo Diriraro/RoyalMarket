@@ -156,6 +156,8 @@ button {
       <a href="${pageContext.request.contextPath}/member/memberLogout"> <font style="font-weight: 800; font-size: 13px;color: #666666;">로그아웃</font></a>
       <font>&nbsp;ㅣ&nbsp;</font>
       <a href="${pageContext.request.contextPath}/shop/myshop?mem_storeNum=${member.mem_storeNum}"> <font style="font-weight: 800; font-size: 13px;color: #666666;">내 상점</font></a>
+      <font>&nbsp;ㅣ&nbsp;</font>
+      <a href="${pageContext.request.contextPath}/member/memberUpdate"> <font style="font-weight: 800; font-size: 13px;color: #666666;">계정설정</font></a>
       </div>
     </c:if>
 		</div>
@@ -344,6 +346,7 @@ button {
 		fail : function(err) {
 		}
 	});
+
 
 
 	var openWin;

@@ -12,4 +12,8 @@ public class StoreFollowVO {
 	private String take_storeName; //멤버에서 조회해서  내가 팔로우한 사람의 이름
 	
 	private String give_storeName;  // 멤버에서 조회해서 나에게 건사람 이름 출력
+	
+	private long pco; // 상품갯수
+	private long fco; // 팔로워 수
+	
 }

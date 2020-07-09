@@ -74,5 +74,23 @@
 	select mem_regDate from member where mem_storeNum = #{mem_storeNum}
 	</select>
 	
+	<select id="mdata" parameterType="Long" resultType="memberVO">
+		select * from member where mem_storeNum=#{mem_storeNum}
+	</select>
+	
+	<update id="updateStoreName" parameterType="memberVO">
+		update member set mem_storeName=#{mem_storeName} where mem_id=#{mem_id}
+	</update>
+	
+	<select id="selectMemberByStoreName" resultType="MemberVO" parameterType="MemberVO">
+		select * from member where mem_storeName=#{mem_storeName}
+	</select>
+	
+	<delete id="memberDelete" parameterType="MemberVO">
+		delete from member where mem_storeNum=#{mem_storeNum}
+	</delete>
+	
+	
+	
 	
 </mapper>

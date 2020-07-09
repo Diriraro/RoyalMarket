@@ -152,6 +152,21 @@ public class ProductService {
 		return zzimMapper.zico(mem_storeNum);
 	}
 	
+	// shop 에서 쓸 이름
+	public String getsell_product(ZzimVO zzimVO)throws Exception{
+		return productMapper.getsell_product(zzimVO);
+	}
+	
+	// shop favorit
+	public long getsell_price(ZzimVO zzimVO) throws Exception{
+		return productMapper.getsell_price(zzimVO);
+	}
+	// wnth
+	public long getmem_storeNum(ZzimVO zzimVO) throws Exception{
+		return productMapper.getmem_storeNum(zzimVO);
+	}
+	
+	
 	
 	public int productDelete(ProductVO productVO)throws Exception{
 		return productMapper.productDelete(productVO);
