@@ -103,7 +103,7 @@ a:hover { text-decoration:none !important }
 
 	
 </div>
-	<div style="background-color: #fafafd;">
+	<div style="background-color: #f9f9f9;">
 	<br><br>
 	<font style="margin-left: 440px;font-size: 25px;font-weight: 500;color: black;">카테고리별 상품</font>
 	<div style="width: 1030px; height:20px; margin-left: 440px;margin-top: 20px;">
