@@ -1,7 +1,9 @@
 package com.iu.s1;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.List;
 import java.util.Optional;
 
 import javax.servlet.http.Cookie;
@@ -13,9 +15,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.iu.s1.admin.AdminRepository;
 import com.iu.s1.member.MemberVO;
+import com.iu.s1.product.ProductService;
+import com.iu.s1.product.ProductVO;
+import com.iu.s1.util.Pager;
 import com.iu.s1.visitor.VisitorVO;
 
 @Controller
@@ -24,6 +30,9 @@ public class HomeController {
 
 	@Autowired
 	private AdminRepository adminRepository;
+	
+	@Autowired
+	private ProductService productService;
 
 	@GetMapping("/")
 	public String getHome(HttpSession session, HttpServletResponse response, HttpServletRequest request)
@@ -75,5 +84,8 @@ public class HomeController {
 
 		return "index1";
 	}
+	
+
+
 
 }

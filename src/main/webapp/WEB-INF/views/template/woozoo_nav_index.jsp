@@ -124,19 +124,19 @@ button {
 
 
 </style>
-<div class="n">
+<div>
 	<header>
 		<nav id="header_top">
 		<div style="float: left;width: 450px;">
 		&nbsp;
 		</div>
 		<div style="margin-right: 600px;float: left;">
-			<a style="margin-right:;" href="../payment/prepare"><img
+			<a style="margin-right:;" href="/splash"><img
 				src="${pageContext.request.contextPath}/resources/images/nav_logo.png"
 				width="26" height="39" alt="앱다운로드버튼 이미지"> &nbsp;<font
 				style="color: #2a2a2a; font-size: 12px; font-weight: 600;">앱다운로드</font></a>
 				&nbsp;&nbsp;&nbsp;
-			<a style="margin-right: ;" href="../payment/prepare"><img
+			<a style="margin-right: ;" href="/splash"><img
 				src="${pageContext.request.contextPath}/resources/images/favorite.png"
 				width="26" height="39" alt="즐겨찾기 이미지"> &nbsp;<font
 				style="color: #2a2a2a; font-size: 12px; font-weight: 600;">즐겨찾기</font></a>
@@ -220,11 +220,6 @@ button {
 				src="${pageContext.request.contextPath}/resources/images/ms_logo.png"
 				width="23" height="24" alt="나의상점 이미지"> &nbsp;<font
 				style="color: #2a2a2a; font-size: 13px; font-weight: 600;">내상점</font></a>
-				<font>&nbsp;ㅣ&nbsp;</font>
-			<a style="margin-right: ;" href="javascript:popup()"><img
-				src="${pageContext.request.contextPath}/resources/images/pointCharge22.jpg"
-				width="45" height="30" alt=포인트 충전 이미지"> &nbsp;<font
-				style="color: #2a2a2a; font-size: 13px; font-weight: 600;">포인트 충전</font></a>
 
 
 			</div>
@@ -280,6 +275,8 @@ button {
 		</div>
 	</div>
 </div>
+
+
 
 
 
@@ -355,13 +352,16 @@ button {
 					"width=600, height=800, resizable = no, scrollbars = no");
 		}
 
-
-	function popup(){
-	    var url = "../payment/pointCharge";
-	    var name = "포인트 충전";
-	    var option = "width = 500, height = 500, top = 100, left = 200, location = no"
-	    window.open(url, name, option);
-	}
+/* 	$("#search_btn").click(function(){
+		if($("#search").val!=null){
+			alert("asd")
+			}else{
+				alert("공백입니다. 다시 입력해 주세요")
+				return false;
+				}
+		})
+ */
+	
 
 		
 </script>
