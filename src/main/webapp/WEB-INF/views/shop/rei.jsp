@@ -349,7 +349,20 @@ iframe {
 	transition: border 0.2s ease 0s, background-color 0.2s ease 0s;
 }
 
+.starR{
+  background: url('${pageContext.request.contextPath}/resources/images/emptyStar.png') no-repeat right 0;
+  background-size: auto 100%;
+  width: 30px;
+  height: 30px;
+  display: inline-block;
+  text-indent: -9999px;
+  cursor: pointer;
+}
+.starR.on{
+	 background: url('${pageContext.request.contextPath}/resources/images/star22.png') no-repeat right 0;
+	 background-size: auto 100%;
 
+}
 
 /* 스타일 추가한거 끝  */
 </style>
@@ -418,7 +431,18 @@ iframe {
 				<label for="re_rate" style="font-size: 20px;"> 별점선택</label>
 				<p></p>
 				<hr style=" border-top: 3px #80d6ff solid;"> 
-				<input type="radio" class="5p" name="re_rate" value="5" checked="checked"><!-- #e6f5ff -->
+				
+				<div class="starRev">
+				  <span class="starR on">별1</span>
+				  <span class="starR">별2</span>
+				  <span class="starR">별3</span>
+				  <span class="starR">별4</span>
+				  <span class="starR">별5</span>
+				</div>
+				
+				<input type="text" name="re_rate" id="re_rate">
+				
+		<%-- 		<input type="radio" class="5p" name="re_rate" value="5" checked="checked"><!-- #e6f5ff -->
 				<img alt="" src="${pageContext.request.contextPath}/resources/images/star22.png" class=""> <span class="5p">5점</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				
 				<input type="radio" class="4p" name="re_rate" value="4"><!-- #e6f5ff -->
@@ -433,7 +457,7 @@ iframe {
 				<input type="radio" class="1p" name="re_rate" value="1">
 				<img alt="" src="${pageContext.request.contextPath}/resources/images/star22.png" class=""> <span class="1p">1점</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<hr>
-			</div>	
+			</div>	 --%>
 		<div class="form-group">
 		<input type="hidden" value="${member.mem_storeName}" name="re_storeName" id="re_storeName">
 		<input type="hidden" value="${member.mem_storeNum}" name="re_storeNum" id="re_storeNum"><br>
@@ -601,8 +625,16 @@ iframe {
 
 
 
-		
+		$('.starRev span').click(function(){
+			  $(this).parent().children('span').removeClass('on');
+			  $(this).addClass('on').prevAll('span').addClass('on');
+				var star =$('.on').length;
+				
+				$('#re_rate').val(star);
+				
+			  return false;
 
+			});
 	
 	</script>
 

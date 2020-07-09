@@ -218,11 +218,23 @@ button {
 				width="23" height="26" alt="판매하기 이미지"> &nbsp;<font
 				style="color: #2a2a2a; font-size: 13px; font-weight: 600;">판매하기</font></a>
 				<font>&nbsp;ㅣ&nbsp;</font>
-			<a style="margin-right: ;" href="../shop/myshop?mem_storeNum=${member.mem_storeNum}"><img
+				<img src="${pageContext.request.contextPath}/resources/images/ms_logo.png" width="23" height="24" alt="나의상점 이미지"> 
+				
+				<div class="dropdown"style="display: inline-block;">
+				  <button class="btn dropdown-toggle" type="button" data-toggle="dropdown" style="width: 50px; height: 50px;margin-right: 10px;">
+					<font style="color: #2a2a2a; font-size: 13px; font-weight: 600;">내 상점</font>
+				  <span class="caret"></span></button>
+				  <ul class="dropdown-menu">
+				    <li><a href="../shop/myshop?mem_storeNum=${member.mem_storeNum}">내상점</a></li>
+				    <li><a href="../payment/buy_History">구매내역</a></li>
+				    <li><a href="../payment/sell_History">판매내역</a></li>
+				  </ul>
+				</div>
+		<%-- 	<a style="margin-right: ;" href="../shop/myshop?mem_storeNum=${member.mem_storeNum}"><img
 				src="${pageContext.request.contextPath}/resources/images/ms_logo.png"
 				width="23" height="24" alt="나의상점 이미지"> &nbsp;<font
-				style="color: #2a2a2a; font-size: 13px; font-weight: 600;">내상점</font></a>
-				<font>&nbsp;ㅣ&nbsp;</font>
+				style="color: #2a2a2a; font-size: 13px; font-weight: 600;">내상점</font></a> --%>
+				<font>&nbsp;&nbsp;&nbsp;ㅣ&nbsp;</font>
 			<a style="margin-right: ;" href="javascript:popup()"><img
 				src="${pageContext.request.contextPath}/resources/images/pointCharge22.jpg"
 				width="45" height="30" alt=포인트 충전 이미지"> &nbsp;<font
