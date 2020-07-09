@@ -58,16 +58,18 @@
 			<div style=" margin-top: 10px; margin-left: 257px;">
 				<c:if test="${vo.status eq 2}">
 					<div class=img style="height: 100px; width:100px;float: left;  background-size: 100px 100px; background-image: url('${pageContext.request.contextPath}/upload/product/${vo.file_name}');">
-						<div class="content">
+						<a href="./buyer_page?sell_num=${vo.sell_num}&buy_history_num=${vo.buy_history_num}"><div class="content">
 							<h5 style="margin-bottom: 30px;">구매 <br> 완료</h5>
-						</div>
-						<div class="img-cover">
-						</div>
+						</div></a>
+						
+						<a href="./buyer_page?sell_num=${vo.sell_num}&buy_history_num=${vo.buy_history_num}">
+							<div class="img-cover"></div>
+						</a>
 					</div>
 				</c:if>
 					
 				<c:if test="${vo.status ne 2}">
-					<div style="height: 100px; width:100px;float: left;  background-size: 100px 100px; background-image: url('${pageContext.request.contextPath}/upload/product/${vo.file_name}');"></div>
+					<a href="./buyer_page?sell_num=${vo.sell_num}&buy_history_num=${vo.buy_history_num}"><div style="height: 100px; width:100px;float: left;  background-size: 100px 100px; background-image: url('${pageContext.request.contextPath}/upload/product/${vo.file_name}');"></div></a>
 				</c:if>
 				
 				<div style="height: 100px; display: inline-block; margin-left: 10px;">
@@ -83,7 +85,7 @@
 					</c:if>
 					<c:if test="${vo.status eq 2}">
 						<div style="display: inline-block;">구매 완료</div>
-						
+
 					</c:if>
 					<c:if test="${vo.status eq 3}">
 						<div style="display: inline-block;">취소된 거래입니다.</div>

@@ -124,19 +124,19 @@ button {
 
 
 </style>
-<div>
+<div class="n">
 	<header>
 		<nav id="header_top">
 		<div style="float: left;width: 450px;">
 		&nbsp;
 		</div>
 		<div style="margin-right: 600px;float: left;">
-			<a style="margin-right:;" href="/splash"><img
+			<a style="margin-right:;" href="../payment/prepare"><img
 				src="${pageContext.request.contextPath}/resources/images/nav_logo.png"
 				width="26" height="39" alt="앱다운로드버튼 이미지"> &nbsp;<font
 				style="color: #2a2a2a; font-size: 12px; font-weight: 600;">앱다운로드</font></a>
 				&nbsp;&nbsp;&nbsp;
-			<a style="margin-right: ;" href="/splash"><img
+			<a style="margin-right: ;" href="../payment/prepare"><img
 				src="${pageContext.request.contextPath}/resources/images/favorite.png"
 				width="26" height="39" alt="즐겨찾기 이미지"> &nbsp;<font
 				style="color: #2a2a2a; font-size: 12px; font-weight: 600;">즐겨찾기</font></a>
@@ -175,7 +175,7 @@ button {
 					alt="로고"></a>
 					<!-- 검색창 -->
 				<div style="margin-left: 90px; display: inline-block;">
-					<form action="./productList" class="form-inline">
+					<form action="../product/productList" class="form-inline">
 						<div class="input-group input-group-sm col-xs-2"
 							style="display: inline-block;border-radius:3px 3px 3px 3px; width:90px;
 							border-bottom: solid 2px #5c2392; 
@@ -193,14 +193,14 @@ button {
 						<div class="input-group input-group-sm col-xs-2 "
 							style="width: 400px;">
 
-							<input type="text" class="form-control" placeholder="Search"
-								name="search"
+							<input type="text"  class="form-control" placeholder="Search"
+								name="search" id="search"
 								style="height: 40px; margin-top: 1px; border-bottom: solid 2px #5c2392; 
 								border-left: solid 2px #5c2392; 
 								border-right: solid 2px #5c2392; 
 								border-top: solid 2px #5c2392;">
 							<div class="input-group-btn">
-								<button class="btn btn-default" type="submit" style="height:40px;margin-top:1px;
+								<button class="btn btn-default" id="search_btn" type="submit" style="height:40px;margin-top:1px;
 							border-bottom: solid 2px #5c2392; border-left: solid 1px #5c2392; 
 							border-right: solid 2px #5c2392; border-top: solid 2px #5c2392;">
 									<i style="color:#5c2392;" class="glyphicon glyphicon-search"></i>
@@ -213,7 +213,7 @@ button {
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<a style="margin-right:;" href="./productNew"><img
+			<a style="margin-right:;" href="../product/productNew"><img
 				src="${pageContext.request.contextPath}/resources/images/pn_logo.png"
 				width="23" height="26" alt="판매하기 이미지"> &nbsp;<font
 				style="color: #2a2a2a; font-size: 13px; font-weight: 600;">판매하기</font></a>
@@ -222,6 +222,11 @@ button {
 				src="${pageContext.request.contextPath}/resources/images/ms_logo.png"
 				width="23" height="24" alt="나의상점 이미지"> &nbsp;<font
 				style="color: #2a2a2a; font-size: 13px; font-weight: 600;">내상점</font></a>
+				<font>&nbsp;ㅣ&nbsp;</font>
+			<a style="margin-right: ;" href="javascript:popup()"><img
+				src="${pageContext.request.contextPath}/resources/images/pointCharge22.jpg"
+				width="45" height="30" alt=포인트 충전 이미지"> &nbsp;<font
+				style="color: #2a2a2a; font-size: 13px; font-weight: 600;">포인트 충전</font></a>
 
 
 			</div>
@@ -277,8 +282,6 @@ button {
 		</div>
 	</div>
 </div>
-
-
 
 
 
@@ -344,8 +347,22 @@ button {
 		}
 	});
 
+	var openWin;
+	function openChild() {
+			// window.name = "부모창 이름"; 
+			window.name = "parentForm";
+			// window.open("open할 window", "자식창 이름", "팝업창 옵션");
+			openWin = window.open("${pageContext.request.contextPath}/member/findMember", "childForm",
+					"width=600, height=800, resizable = no, scrollbars = no");
+		}
 
-	
+
+	function popup(){
+	    var url = "../payment/pointCharge";
+	    var name = "포인트 충전";
+	    var option = "width = 500, height = 500, top = 100, left = 200, location = no"
+	    window.open(url, name, option);
+	}
 
 		
 </script>
