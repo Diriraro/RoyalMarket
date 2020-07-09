@@ -512,7 +512,7 @@ iframe {
 											<div class="sc-hPeUyl lerNRt">
 												<div class="sc-kasBVs dDiVis" id="check1"></div>
 												<div class="sc-imAxmJ kZHPTS">
-													<span class="sc-iWadT bOqqay">(필수)</span>번개장터 이용약관 동의
+													<span class="sc-iWadT bOqqay">(필수)</span>우주장터 이용약관 동의
 												</div>
 												<div id="show1" title="hide">
 													<img
@@ -524,7 +524,7 @@ iframe {
 											</div>
 											<div class="sc-esoVGF geWVNF show1" style="display: none;">
 												<div class="sc-cAJUJo fFrJW">
-													<iframe title="번개장터 위치기반서비스 이용약관"
+													<iframe title="우주장터 위치기반서비스 이용약관"
 														src="https://terms.bunjang.co.kr/terms/service.html"></iframe>
 												</div>
 											</div>
@@ -547,7 +547,7 @@ iframe {
 											</div>
 											<div class="sc-esoVGF geWVNF show2" style="display: none;">
 												<div class="sc-cAJUJo fFrJW">
-													<iframe title="번개장터 위치기반서비스 이용약관"
+													<iframe title="우주장터 위치기반서비스 이용약관"
 														src="https://terms.bunjang.co.kr/terms/privacy.html"></iframe>
 												</div>
 											</div>
