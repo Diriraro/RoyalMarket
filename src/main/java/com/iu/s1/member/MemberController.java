@@ -719,7 +719,7 @@ public class MemberController {
 
 		if (result) {
 			mv.setViewName("member/memberUpdatePage");
-		} else if (now_now > 300) {
+		} else if (now_now > 300000) {
 			mv.addObject("result", "인증번호 유효기간이 지났습니다.");
 			mv.addObject("path", "./memberUpdatePage");
 			mv.setViewName("common/result");
@@ -734,5 +734,47 @@ public class MemberController {
 		}
 		return mv;
 	}
+	
+	@GetMapping("kakaoMemberUpdate")
+	public ModelAndView kakaoMemberUpdatePage()throws Exception{
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("memberVO", new MemberVO());
+		mv.setViewName("member/kakaoMemberUpdate");
+		return mv;
+	}
+	
+	@PostMapping("kakaoMemberUpdate")
+	public ModelAndView kakaoMemberUpdate(@Valid MemberVO memberVO, BindingResult bindingResult, HttpSession session)
+			throws Exception {
+		ModelAndView mv = new ModelAndView();
+
+		Calendar cal = Calendar.getInstance();
+		long now = cal.getTimeInMillis();
+		long now_now = now - (long) session.getAttribute("now");
+
+		memberVO.setMem_address(memberVO.getRoad_address() + " " + memberVO.getDetail_address());
+
+		boolean result = memberService.kakaoMemberUpdateCheck(memberVO, bindingResult, checkNum);
+		System.out.println(result);
+
+		if (result) {
+			mv.setViewName("member/kakaoMemberUpdate");
+		} else if (now_now > 300000) {
+			mv.addObject("result", "인증번호 유효기간이 지났습니다.");
+			mv.addObject("path", "./kakaoMemberUpdate");
+			mv.setViewName("common/result");
+		} else {
+			// 정상작동
+			int result2 = memberService.memberUpdate(memberVO);
+			if (result2 > 0) {
+				mv.addObject("result", "회원정보가 수정되었습니다");
+				mv.addObject("path", "../");
+				mv.setViewName("common/result");
+			}
+		}
+		return mv;
+	}
+	
+	
 
 }

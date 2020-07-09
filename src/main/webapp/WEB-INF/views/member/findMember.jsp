@@ -449,7 +449,7 @@ input {
 									width="17" height="20">
 							</div>
 							<form:input path="mem_phone" type="text" id="mem_phone"
-								placeholder="휴대폰 번호(숫자만 허용)" />
+								placeholder="휴대폰 번호" />
 
 							<input type="button" value="아이디 찾기" class="btn btn-default"
 								id="rq_num" onclick="checkPhone()">
@@ -542,7 +542,7 @@ input {
 									width="17" height="20">
 							</div>
 							<form:input path="mem_phone" type="text" id="mem_phone3"
-								placeholder="휴대폰 번호(숫자만 허용)" />
+								placeholder="휴대폰 번호" />
 
 							<input type="button" value="인증번호 요청" class="btn btn-default"
 								id="rq_num" onclick="checkPhone3()">
