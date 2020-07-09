@@ -316,9 +316,15 @@ public class ShopController {
 			storeFollowVO3.setTake_storeName(storeFollowService.getSelecttakeStoreName(storeFollowVO3));// 작성자의 번호로 이름을 출력 한것을 ar안에 담고.
 			storeFollowVO3.setPco(productService.prodco(storeFollowVO3.getTake_storeNum())); // 내가 팔로우 한 사람의 상품수 출력
 			storeFollowVO3.setFco(storeFollowService.takeco(storeFollowVO3.getTake_storeNum())); // 내가 팔로우 한 사람의 팔로워 수 출력
-		}	
+			// 점수 : 
+			
+			//storeFollowVO3.setRe_rate( (storeReviewService.take_rate(storeFollowVO3.getTake_storeNum())).getRe_rate());
+			
+			
+			
+			//
+		}
 		// 팔로우 리스트 영역 끝
-		
 		
 		// 공유
 					countall(mv,mem_storeNum);

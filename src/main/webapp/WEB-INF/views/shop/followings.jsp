@@ -74,12 +74,12 @@
 					<div style="width: 198px; width: 130px; margin-top: 40px;  margin-left: 17%;border-radius: 70%;overflow: hidden; background-color: gray;" onclick="location.href='./myshop?mem_storeNum=${vo.take_storeNum }'">
 					<img alt="" src="${pageContext.request.contextPath}/resources/images/user11.png" style="width: 100%; height: 100%;">
 					</div>	
-					
-					
-					<br>
+					<h2></h2>
+					<div style="text-align: center;">
+							<a href="./myshop?mem_storeNum=${vo.take_storeNum }" class="btn btn-success">${vo.take_storeName }</a><br>
+					</div>					
 							<div style=" text-align: center; margin-top: 40px;" >
 							<span onclick="location.href='./myshop?mem_storeNum=${vo.take_storeNum }'">상품   ${vo.pco}</span>  |  <span onclick="location.href='./followers?mem_storeNum=${vo.take_storeNum }'">팔로워  ${vo.fco}</span><br>
-							<a href="./myshop?mem_storeNum=${vo.take_storeNum }" class="btn btn-success">${vo.take_storeName }</a>
 							
 							</div>
 							

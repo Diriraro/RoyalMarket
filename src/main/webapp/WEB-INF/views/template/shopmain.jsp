@@ -8,9 +8,6 @@
 .update_form{
 	display: none;
 }
-
-
-
 </style>
 
 <!-- shop 페이지가 공통으로 가져갈곳  -->
@@ -73,7 +70,7 @@
 			<div style="border: 1px solid white; height: 80px; margin-bottom: 1px; margin-top: 2px;">
 
 			<div style="margin-top: 3%;">
-				<span style="font-size: 17px;"><img alt="" src="${pageContext.request.contextPath}/resources/images/date_logo.png"> ${getregDate} </span>
+				<span style="font-size: 17px;"><img alt="" src="${pageContext.request.contextPath}/resources/images/date_logo.png" width="19px;" height="19px;"> ${getregDate} </span>
 			</div>			
 			<hr>
 			</div>
@@ -95,7 +92,7 @@
 			<div style="border: 1px solid white; height: 80px; margin-bottom: 1px; margin-top: 2px;">
 			<div style="margin-top: 3%;">
 			<span style="font-size: 22px;">
-			<img alt="" src="${pageContext.request.contextPath}/resources/images/ad_logo.png">	${mdata.mem_address}
+			<img alt="" src="${pageContext.request.contextPath}/resources/images/ad_logo.png" width="25px;" height="25px;">	${mdata.mem_address}
 			</span>
 			<hr>
 			</div>	
@@ -186,7 +183,7 @@
 
 			<div style="border: 1px solid white; height: 80px; margin-bottom: 1px; margin-top: 2px;">
 			<div style="margin-top: 3%;">
-				<span style="font-size: 17px;">상점오픈일  :: ${getregDate }</span>
+				<span style="font-size: 17px;"><img alt="" src="${pageContext.request.contextPath}/resources/images/date_logo.png" width="19px;" height="19px;"> ${getregDate} </span>
 			</div>	
 			<hr>
 			</div>
@@ -209,7 +206,7 @@
 			<c:if test="${mdata.mem_access eq 0}">
 			<div style="margin-top: 3%;">
 			<span style="font-size: 22px;">
-			 거래장소 :${mdata.mem_address}
+			<img alt="" src="${pageContext.request.contextPath}/resources/images/ad_logo.png" width="25px;" height="25px;">	${mdata.mem_address}
 			</span>
 			</div>	
 			</c:if>

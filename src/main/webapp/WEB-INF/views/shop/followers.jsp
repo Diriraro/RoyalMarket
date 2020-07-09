@@ -69,14 +69,15 @@
 					<div style="width: 198px; width: 130px; margin-top: 40px;  margin-left: 17%;border-radius: 70%;overflow: hidden;" onclick="location.href='./myshop?mem_storeNum=${vo.give_storeNum }'">
 					<!-- 카카오 이미지 확인  -->
 					<img alt="" src="${pageContext.request.contextPath}/resources/images/user11.png" style="width: 100%; height: 100%; background-color: gray;" >
-					</div>					
-					
-					
+					</div>
+					<h2></h2>					
+					<div style="text-align: center;">
+				    <a href="./myshop?mem_storeNum=${vo.give_storeNum }" class="btn btn-success" >${vo.give_storeName}</a><br>
+				    <span>별점 : </span>
+					</div>
 							
-					<br>
 					<div style=" text-align: center; margin-top: 40px;" >
 						<span>상품   ${vo.pco}</span> | <span>팔로워  ${vo.fco}</span><br>
-				    <a href="./myshop?mem_storeNum=${vo.give_storeNum }" class="btn btn-success" >${vo.give_storeName}</a>
 					</div>
 					
 					

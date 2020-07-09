@@ -107,5 +107,17 @@ public class StoreReviewService {
 		
 	}
 	
+	//take_rate
+	public StoreReviewVO take_rate(long take_storeNum)throws Exception {
+		return storeReviewRepository.take_rate(take_storeNum);
+	}
+	
+	//give_rate
+	
+	public StoreReviewVO give_rate(long give_storeNum)throws Exception{
+		return storeReviewRepository.give_rate(give_storeNum);
+		
+	}
+	
 	
 }
