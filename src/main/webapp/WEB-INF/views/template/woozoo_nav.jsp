@@ -10,10 +10,13 @@
 #recentBox {
 	position: fixed;
 	right: calc(50% - 830px);
-	top: 200px;
+	top:200px;
 	width: 200px;
 	text-align: center;
-	border: 1px solid rgb(204, 204, 204);
+	border-top: 1px solid rgb(204, 204, 204);
+	border-left: 1px solid rgb(204, 204, 204);
+	border-right: 1px solid rgb(204, 204, 204);
+	border-bottom: 1px solid rgb(204, 204, 204);
 	padding: 10px;
 	overflow: hidden;
 	padding: 10px;
@@ -199,18 +202,20 @@ button {
 					src="${pageContext.request.contextPath}/resources/images/nav_logo2.png"
 					alt="로고"></a>
 				<!-- 검색창 -->
-				<div style="margin-left: 90px; display: inline-block;">
-					<form action="../product/productList" class="form-inline">
+			<div style="margin-left: 90px; display: inline-block;">
+					<form action="./productList" class="form-inline">
 						<div class="input-group input-group-sm col-xs-2"
-							style="display: inline-block; border-radius: 3px 3px 3px 3px; width: 90px; border-bottom: solid 2px #5c2392; border-left: solid 2px #5c2392; border-right: solid 2px #5c2392; border-top: solid 2px #5c2392;"
-							../shop/myshop?mem_storeNum=${member.mem_storeNum}ame=
-							"kind"
-								style="height: 36../payment/buy_History value="sp">
-							제품명
-							</option>
-							<opt.. /payment/sell_Historyon>
-							<option value="st">태그</option>
-							<option style="display: none;" value="smn"></option>
+							style="display: inline-block;border-radius:3px 3px 3px 3px; width:90px;
+							border-bottom: solid 2px #5c2392; 
+							border-left: solid 2px #5c2392; 
+							border-right: solid 2px #5c2392; 
+							border-top: solid 2px #5c2392;">
+							<select class="form-control" id="sel1" name="kind"
+								style="height: 36px;">
+								<option value="sp">제품명</option>
+								<option value="sk">종류</option>
+								<option value="st">태그</option>
+								<option style="display: none;" value="smn"></option>
 							</select>
 						</div>
 						<div class="input-group input-group-sm col-xs-2 "
@@ -249,7 +254,7 @@ button {
 						<font style="color: #2a2a2a; font-size: 13px; font-weight: 600;">내
 							상점</font> <span class="caret"></span>
 					</button>
-					<ul class="dropdown-menu">
+					<ul class="dropdown-menu" style="width: 1	0px;">
 						<li><a
 							href="../shop/myshop?mem_storeNum=${member.mem_storeNum}">내상점</a></li>
 						<li><a href="../payment/buy_History">구매내역</a></li>
@@ -417,6 +422,7 @@ button {
 			$.get(
 					"${pageContext.request.contextPath}/product/recentSearchProduct?sell_num="
 							+ cookie, function(result) {
+						$("#recent").empty();
 						$("#recent").append(result);
 					})
 		} else {
