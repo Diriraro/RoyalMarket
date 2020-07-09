@@ -17,21 +17,35 @@
 	text-align: center;
 	margin-top: 50px;
 	margin-bottom: 50px;
+
 }
 
 #find_id {
-	margin-bottom: 100px;
+	text-align:center;
+	background-color: white;
+	padding-bottom: 10px;
+	
+
+}
+
+#find_pw{
+	text-align:center;
+	background-color: white;
+	padding-bottom: 10px;
 }
 
 h3 {
+	text-align: center;
 	color: rgb(102, 0, 102);
-	font-weight: bold;
+	font-family: "Noto Sans KR", sans-serif;
+    font-weight: 1000;
 }
 
 h4 {
-	
-	font-weight: bold;
+
 	cursor: pointer;
+	font-family: "Noto Sans KR", sans-serif;
+    font-weight: 1000;
 }
 
 body {
@@ -406,11 +420,31 @@ iframe {
 input {
 	width: 100%;
 }
+
+.jRNgFE {
+    background: rgb(249, 249, 249);
+}
+
+.isYAvJ {
+	text-align: center;
+	margin-top: 100px;
+	margin-left : 
+	height:500px;
+    padding: 60px;
+    background: rgb(255, 255, 255);
+}
+
+.box{
+	padding:3px;
+	background: rgb(244, 244, 250);
+	margin: 10px 10px 10px 10px;
+}
 </style>
 </head>
 
 <body>
 
+<div class="jRNgFE">
 
 	<div class="logo">
 		<img src="../../resources/images/logo4.JPG" class="sc-fYiAbW knQFFQ">
@@ -418,9 +452,9 @@ input {
 
 	<div style="padding: 0 20% 0% 20%">
 		<div id="find_id">
-			<h3>아이디 찾기</h3>
+			<h3>ID</h3>
 
-			<h4 id="show1" class="sh" title="hide">등록된 전화번호로 아이디 찾기</h4>
+			<h4 id="show1" class="sh box" title="hide">SMS로 아이디 찾기</h4>
 			<div class="show1" style="display: none;">
 				<form:form modelAttribute="memberVO" action="./findIdByEmail"
 					method="post">
@@ -460,7 +494,7 @@ input {
 				</form:form>
 			</div>
 
-			<h4 id="show2" class="sh">등록된 이메일로 아이디 찾기</h4>
+			<h4 id="show2" class="sh box">E-MAIL로 아이디 찾기</h4>
 			<div class="show2" style="display: none;">
 				<form:form modelAttribute="memberVO" action="./findIdByEmail"
 					method="post">
@@ -502,17 +536,19 @@ input {
 			</div>
 
 		</div>
-
+		
+		<div style="height: 50px;"></div>
+		
 		<div id="find_pw">
 
 
-			<h3>비밀번호 찾기</h3>
+			<div><h3>PASSWORD</h3></div>
 
 
 
 
 
-			<h4 id="show3" class="sh">등록된 전화번호로 비밀번호 찾기</h4>
+			<h4 id="show3" class="sh box">SMS인증으로 비밀번호 찾기</h4>
 			<div class="show3" style="display: none;">
 				<form:form modelAttribute="memberVO" action="./findPwByPhone"
 					method="post">
@@ -608,7 +644,7 @@ input {
 
 			</div>
 
-			<h4 id="show4" class="sh">등록된 이메일로 비밀번호 찾기</h4>
+			<h4 id="show4" class="sh box">E-MAIL인증으로 비밀번호 찾기</h4>
 			<div class="show4" style="display: none;">
 				<form:form modelAttribute="memberVO" action="./findPwByEmail"
 					method="post">
@@ -701,7 +737,7 @@ input {
 
 		</div>
 	</div>
-					<img alt="dd" src="../../resources/images/find2.png">
+					
 	
 
 
@@ -906,6 +942,7 @@ input {
 		
 		
 	</script>
+	</div>
 
 </body>
 
