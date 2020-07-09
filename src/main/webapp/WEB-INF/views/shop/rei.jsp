@@ -440,7 +440,7 @@ iframe {
 				  <span class="starR">별5</span>
 				</div>
 				
-				<input type="text" name="re_rate" id="re_rate">
+				<input type="hidden" name="re_rate" id="re_rate">
 				
 		<%-- 		<input type="radio" class="5p" name="re_rate" value="5" checked="checked"><!-- #e6f5ff -->
 				<img alt="" src="${pageContext.request.contextPath}/resources/images/star22.png" class=""> <span class="5p">5점</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
