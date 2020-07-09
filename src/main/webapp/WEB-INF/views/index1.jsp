@@ -29,11 +29,19 @@ display: none;
 width: 128.5555555px;
 height:50px;
 float: left;
+border: 0px;
+border-right:solid 1px #f9f9f9;
+border-left:solid 1px #f9f9f9;
+background-color: white;
+color: #888888;
+font-weight: 600;
 }
 
 .cbtn:hover {
-	background-color: yellow;
+	background-color: #5c2392;
+	color: white;
 }
+a:hover { text-decoration:none !important }
 
 </style>
 
@@ -44,7 +52,7 @@ float: left;
 
 
 	<!-- 메인페이지시작 -->
-<div style="width: 1030px; margin-left: 440px; margin-top:50px; background-color: yellow;">
+<div style="width: 1030px; margin-left: 440px; ">
 	
 	<div id="myCarousel" class="carousel slide" data-ride="carousel">
   <!-- Indicators -->
@@ -90,11 +98,15 @@ float: left;
   </a>
 	</div>
 	
+	<div id="rec" style=""></div>
+	
 
 	
 </div>
 	<div style="background-color: #fafafd;">
-	<div style="width: 1030px; height:20px; margin-left: 440px; margin-top:50px;">
+	<br><br>
+	<font style="margin-left: 440px;font-size: 25px;font-weight: 500;color: black;">카테고리별 상품</font>
+	<div style="width: 1030px; height:20px; margin-left: 440px;margin-top: 20px;">
 	<button id="c0_btn" class="cbtn">패션잡화</button>
 	<button id="c1_btn" class="cbtn">여성의류</button>
 	<button id="c2_btn" class="cbtn">남성의류</button>
@@ -104,54 +116,77 @@ float: left;
 	<button id="c8_btn" class="cbtn">뷰티/미용</button>
 	<button id="c4_btn" class="cbtn">기타</button>
 	</div>
+	<br>
 	
-	
-	<div id="c0_title" style="width: 1030px; height:20px; margin-left: 440px; margin-top:50px; background-color: yellow;border-top: 1px solid black;">
-	패션잡화
-	<a href="/product/productList?kind=sk&search=패션잡화"><font>전체보기</font></a>
+	<div id="c0_title" style="width: 1030px; height:20px; margin-left: 440px; margin-top:50px;">
+	<font style="font-size: 20px;font-weight:bold; ;color: #212121;">패션잡화</font>
+	<a href="/product/productList?kind=sk&search=패션잡화">
+	<font style="font-size: 20px;font-weight:bold; ;color: #cccccc;">&nbsp;전체보기</font></a>
 	</div>
+	<br>
 	<div id="c0" style="height: 650px;"></div>
 	
-	<div id="c1_title" style="width: 1030px; height:20px; margin-left: 440px; margin-top:50px; background-color: yellow;border-top: 1px solid black;">
-	여성의류
-	<a href="/product/productList?kind=sk&search=여성의류"><font>전체보기</font></a>
+	<div id="c1_title" style="width: 1030px; height:20px; margin-left: 440px; margin-top:50px;border-top: 1px solid #e5e5e5;">
+	<br><br>
+	<font style="font-size: 20px;font-weight:bold; ;color: #212121;">여성의류</font>
+	<a href="/product/productList?kind=sk&search=여성의류">
+	<font style="font-size: 20px;font-weight:bold; ;color: #cccccc;">&nbsp;전체보기</font></a>
 	</div>
+	<br><br><br>
 	<div id="c1" style="height: 650px;"></div>
 	
-	<div id="c2_title" style="width: 1030px; margin-left: 440px; margin-top:50px; background-color: yellow;border-top: 1px solid black;">
-	남성의류
-	<a href="/product/productList?kind=sk&search=남성의류"><font>전체보기</font></a>
+	<div id="c2_title" style="width: 1030px; margin-left: 440px; margin-top:50px;border-top: 1px solid #e5e5e5;">
+	<br><br>
+	<font style="font-size: 20px;font-weight:bold; ;color: #212121;">남성의류</font>
+	<a href="/product/productList?kind=sk&search=남성의류">
+	<font style="font-size: 20px;font-weight:bold; ;color: #cccccc;">&nbsp;전체보기</font></a>
 	</div>
+	<br><br><br>
 	<div id="c2" style="height: 650px;"></div>
 	
-	<div id="c3_title" style="width: 1030px; margin-left: 440px; margin-top:50px; background-color: yellow;border-top: 1px solid black;">
-	디지털/가전
-	<a href="/product/productList?kind=sk&search=디지털/가전"><font>전체보기</font></a>
+	<div id="c3_title" style="width: 1030px; margin-left: 440px; margin-top:50px;border-top: 1px solid #e5e5e5;">
+	<br><br>
+	<font style="font-size: 20px;font-weight:bold; ;color: #212121;">디지털/가전</font>
+	<a href="/product/productList?kind=sk&search=디지털/가전">
+	<font style="font-size: 20px;font-weight:bold; ;color: #cccccc;">&nbsp;전체보기</font></a>
 	</div>
+	<br><br><br>
 	<div id="c3" style="height: 650px;"></div>
 	
-	<div id="c6_title" style="width: 1030px; margin-left: 440px; margin-top:50px; background-color: yellow;border-top: 1px solid black;">
-	스타굿즈
-	<a href="/product/productList?kind=sk&search=스타굿즈"><font>전체보기</font></a>
+	<div id="c6_title" style="width: 1030px; margin-left: 440px; margin-top:50px;border-top: 1px solid #e5e5e5;">
+	<br><br>
+	<font style="font-size: 20px;font-weight:bold; ;color: #212121;">스타굿즈</font>
+	<a href="/product/productList?kind=sk&search=스타굿즈">
+	<font style="font-size: 20px;font-weight:bold; ;color: #cccccc;">&nbsp;전체보기</font></a>
 	</div>
+	<br><br><br>
 	<div id="c6" style="height: 650px;"></div>
 	
-	<div id="c7_title" style="width: 1030px; margin-left: 440px; margin-top:50px; background-color: yellow;border-top: 1px solid black;">
-	스포츠/레저
-	<a href="/product/productList?kind=sk&search=스포츠/레저"><font>전체보기</font></a>
+	<div id="c7_title" style="width: 1030px; margin-left: 440px; margin-top:50px;border-top: 1px solid #e5e5e5;">
+	<br><br>
+	<font style="font-size: 20px;font-weight:bold; ;color: #212121;">스포츠/레저</font>
+	<a href="/product/productList?kind=sk&search=스포츠/레저">
+	<font style="font-size: 20px;font-weight:bold; ;color: #cccccc;">&nbsp;전체보기</font></a>
 	</div>
+	<br><br><br>
 	<div id="c7" style="height: 650px;"></div>
 	
-	<div id="c8_title" style="width: 1030px; margin-left: 440px; margin-top:50px; background-color: yellow;border-top: 1px solid black;">
-	뷰티/미용
-	<a href="/product/productList?kind=sk&search=뷰티/미용"><font>전체보기</font></a>
+	<div id="c8_title" style="width: 1030px; margin-left: 440px; margin-top:50px;border-top: 1px solid #e5e5e5;">
+	<br><br>
+	<font style="font-size: 20px;font-weight:bold; ;color: #212121;">뷰티/미용</font>
+	<a href="/product/productList?kind=sk&search=뷰티/미용">
+	<font style="font-size: 20px;font-weight:bold; ;color: #cccccc;">&nbsp;전체보기</font></a>
 	</div>
+	<br><br><br>
 	<div id="c8" style="height: 650px;"></div>
 	
-	<div id="c4_title" style="width: 1030px; margin-left: 440px; margin-top:50px; background-color: yellow;border-top: 1px solid black;">
-	기타
-	<a href="/product/productList?kind=sk&search=기타"><font>전체보기</font></a>
+	<div id="c4_title" style="width: 1030px; margin-left: 440px; margin-top:50px;border-top: 1px solid #e5e5e5;">
+	<br><br>
+	<font style="font-size: 20px;font-weight:bold; ;color: #212121;">기타</font>
+	<a href="/product/productList?kind=sk&search=기타">
+	<font style="font-size: 20px;font-weight:bold; ;color: #cccccc;">&nbsp;전체보기</font></a>
 	</div>
+	<br><br><br>
 	<div id="c4" style="height: 650px;"></div>
 	
 	</div>
@@ -289,6 +324,22 @@ float: left;
 		            },
 		            success : function(Parse_data){
 		                $("#c8").html(Parse_data); //div에 받아온 값을 넣는다.
+		            }
+		             
+		        });
+		    });
+
+		  $(document).ready(function(){
+		    	
+		        $.ajax({
+		            type : "GET", //전송방식을 지정한다 (POST,GET)
+		            url : "product/recProductList",//호출 URL을 설정한다. GET방식일경우 뒤에 파라티터를 붙여서 사용해도된다.
+		            dataType : "text",//호출한 페이지의 형식이다. xml,json,html,text등의 여러 방식을 사용할 수 있다.
+		            error : function(){
+		                alert("통신실패!!!!");
+		            },
+		            success : function(Parse_data){
+		                $("#rec").html(Parse_data); //div에 받아온 값을 넣는다.
 		            }
 		             
 		        });

@@ -92,6 +92,13 @@ public class ProductService {
 		return productMapper.productList(pager);
 	}
 	
+	public List<ProductVO> recProductList(Pager pager) throws Exception {
+		pager.makeRow();
+		long totalCount = productMapper.productCount(pager);
+		pager.makePage(totalCount);
+		return productMapper.recProductList(pager);
+	}
+	
 	public List<ProductVO> myProductList(Pager pager) throws Exception {
 		pager.makeRow();
 		long totalCount = productMapper.myProductCount(pager);

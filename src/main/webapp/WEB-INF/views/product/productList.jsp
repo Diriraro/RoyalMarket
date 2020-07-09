@@ -42,13 +42,12 @@
 </style>
 
 </head>
-<body style="background-color: #fafafd;">
+<body style="background-color: #f9f9f9;">
 	<c:import url="../template/woozoo_nav.jsp"></c:import>
 	<!-- 전체시작 -->
 	<div style="height: 88px;">
 
-		<div
-			style="width: 1024px; margin-left: 440px; ">
+		<div style="width: 1024px; margin-left: 440px; ">
 			
 			<c:if test="${param.kind eq 'sk'}">
 			<div class="c" style="width: 1024px; height: 90px;">
@@ -143,7 +142,7 @@
 				</c:if>
 
 							
-						<div style="width: 194px; background-color: white;">
+						<div style="width: 194px; background-color: white;border: 1px solid #e5e5e5">
 							<div style="height: 80px;">
 								<div ><br>
 									<font style="font-size: 14px;font-weight: 700;margin-left: 8px;">${vo.sell_product}</font>

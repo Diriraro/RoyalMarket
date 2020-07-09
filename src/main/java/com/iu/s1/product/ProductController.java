@@ -92,6 +92,31 @@ public class ProductController {
 		return mv;
 	}
 	
+	@GetMapping("recProductList")
+	public ModelAndView recProductList(ProductVO productVO, Pager pager) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		List<ProductVO> ar = productService.recProductList(pager);
+		mv.addObject("list", ar);
+
+		List<String> ar2 = new ArrayList<String>();
+		int index = 0;
+		for (ProductVO productVOs : ar) {
+			long sell_num = productVOs.getSell_num();
+			ar2.add(productService.selectFileName(sell_num));
+			productVOs.setMem_address(productService.productAddress(sell_num).getMem_address());
+			index++;
+
+		}
+		
+		mv.addObject("file", ar2);
+
+		mv.addObject("pager", pager);
+		mv.setViewName("product/recProductList");
+
+		return mv;
+	}
+	
+	
 	@GetMapping("myProductList")
 	public ModelAndView myProductList(ProductVO productVO, Pager pager) throws Exception {
 		ModelAndView mv = new ModelAndView();
