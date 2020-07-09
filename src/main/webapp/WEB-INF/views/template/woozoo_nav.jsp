@@ -16,8 +16,8 @@
 	border: 1px solid rgb(204, 204, 204);
 	padding: 10px;
 	overflow: hidden;
-	z-index: 20;
 	padding: 10px;
+	box-sizing: border-box;
 }
 
 .recentSearchContainer {
@@ -146,40 +146,45 @@ button {
 	<header>
 		<nav id="header_top">
 
-		<div style="float: left;width: 450px;">
-		&nbsp;
-		</div>
-		<div style="margin-right: 600px;float: left;">
-			<a style="margin-right:;" href="../payment/prepare"><img
-				src="${pageContext.request.contextPath}/resources/images/nav_logo.png"
-				width="26" height="39" alt="앱다운로드버튼 이미지"> &nbsp;<font
-				style="color: #2a2a2a; font-size: 12px; font-weight: 600;">앱다운로드</font></a>
-				&nbsp;&nbsp;&nbsp;
-			<a style="margin-right: ;" href="../payment/prepare"><img
-				src="${pageContext.request.contextPath}/resources/images/favorite.png"
-				width="26" height="39" alt="즐겨찾기 이미지"> &nbsp;<font
-				style="color: #2a2a2a; font-size: 12px; font-weight: 600;">즐겨찾기</font></a>
-		</div>
-		<div style="display: inline-block; margin-right: 100px;">
-		
-	<c:if test="${empty sessionScope.member}">
-	<div style="margin-right: 250px;margin-top: 9px;">
-	 <a href="#" data-toggle="modal" data-target="#myModal"> <font style="font-weight: 800; font-size: 13px;color: #666666;">로그인</font></a>
-      <font>&nbsp;ㅣ&nbsp;</font>
-      <a href="${pageContext.request.contextPath}/member/memberJoin"><font style="font-weight: 800; font-size: 13px;color: #666666;">회원가입</font></a>
-    </div>
-    </c:if>
-    
-     <c:if test="${not empty sessionScope.member}">
-     <div style="margin-right: 250px;margin-top: 9px;">
-      <a href="${pageContext.request.contextPath}/member/memberLogout"> <font style="font-weight: 800; font-size: 13px;color: #666666;">로그아웃</font></a>
-      <font>&nbsp;ㅣ&nbsp;</font>
-      <a href="${pageContext.request.contextPath}/shop/myshop?mem_storeNum=${member.mem_storeNum}"> <font style="font-weight: 800; font-size: 13px;color: #666666;">내 상점</font></a>
-      <font>&nbsp;ㅣ&nbsp;</font>
-      <a href="${pageContext.request.contextPath}/member/memberUpdate"> <font style="font-weight: 800; font-size: 13px;color: #666666;">계정설정</font></a>
-      </div>
-    </c:if>
-		</div>
+			<div style="float: left; width: 450px;">&nbsp;</div>
+			<div style="margin-right: 600px; float: left;">
+				<a style="margin-right:;" href="../payment/prepare"><img
+					src="${pageContext.request.contextPath}/resources/images/nav_logo.png"
+					width="26" height="39" alt="앱다운로드버튼 이미지"> &nbsp;<font
+					style="color: #2a2a2a; font-size: 12px; font-weight: 600;">앱다운로드</font></a>
+				&nbsp;&nbsp;&nbsp; <a style="margin-right:;"
+					href="../payment/prepare"><img
+					src="${pageContext.request.contextPath}/resources/images/favorite.png"
+					width="26" height="39" alt="즐겨찾기 이미지"> &nbsp;<font
+					style="color: #2a2a2a; font-size: 12px; font-weight: 600;">즐겨찾기</font></a>
+			</div>
+			<div style="display: inline-block; margin-right: 100px;">
+
+				<c:if test="${empty sessionScope.member}">
+					<div style="margin-right: 250px; margin-top: 9px;">
+						<a href="#" data-toggle="modal" data-target="#myModal"> <font
+							style="font-weight: 800; font-size: 13px; color: #666666;">로그인</font></a>
+						<font>&nbsp;ㅣ&nbsp;</font> <a
+							href="${pageContext.request.contextPath}/member/memberJoin"><font
+							style="font-weight: 800; font-size: 13px; color: #666666;">회원가입</font></a>
+					</div>
+				</c:if>
+
+				<c:if test="${not empty sessionScope.member}">
+					<div style="margin-right: 250px; margin-top: 9px;">
+						<a href="${pageContext.request.contextPath}/member/memberLogout">
+							<font style="font-weight: 800; font-size: 13px; color: #666666;">로그아웃</font>
+						</a> <font>&nbsp;ㅣ&nbsp;</font> <a
+							href="${pageContext.request.contextPath}/shop/myshop?mem_storeNum=${member.mem_storeNum}">
+							<font style="font-weight: 800; font-size: 13px; color: #666666;">내
+								상점</font>
+						</a> <font>&nbsp;ㅣ&nbsp;</font> <a
+							href="${pageContext.request.contextPath}/member/memberUpdate">
+							<font style="font-weight: 800; font-size: 13px; color: #666666;">계정설정</font>
+						</a>
+					</div>
+				</c:if>
+			</div>
 
 
 		</nav>
@@ -197,27 +202,27 @@ button {
 				<div style="margin-left: 90px; display: inline-block;">
 					<form action="../product/productList" class="form-inline">
 						<div class="input-group input-group-sm col-xs-2"
-							style="display: inline-block; border-radius: 3px 3px 3px 3px; width: 90px; border-bottom: solid 2px #5c2392; border-left: solid 2px #5c2392; border-right: solid 2px #5c2392; border-top: solid 2px #5c2392;"../shop/myshop?mem_storeNum=${member.mem_storeNum}ame="kind"
-								style="height: 36../payment/buy_History value="sp">제품명</option>
-								<opt../payment/sell_Historyon>
-								<option value="st">태그</option>
-								<option style="display: none;" value="smn"></option>
+							style="display: inline-block; border-radius: 3px 3px 3px 3px; width: 90px; border-bottom: solid 2px #5c2392; border-left: solid 2px #5c2392; border-right: solid 2px #5c2392; border-top: solid 2px #5c2392;"
+							../shop/myshop?mem_storeNum=${member.mem_storeNum}ame=
+							"kind"
+								style="height: 36../payment/buy_History value="sp">
+							제품명
+							</option>
+							<opt.. /payment/sell_Historyon>
+							<option value="st">태그</option>
+							<option style="display: none;" value="smn"></option>
 							</select>
 						</div>
 						<div class="input-group input-group-sm col-xs-2 "
 							style="width: 400px;">
 
-				<input type="text"  class="form-control" placeholder="Search"
+							<input type="text" class="form-control" placeholder="Search"
 								name="search" id="search"
-								style="height: 40px; margin-top: 1px; border-bottom: solid 2px #5c2392; 
-								border-left: solid 2px #5c2392; 
-								border-right: solid 2px #5c2392; 
-								border-top: solid 2px #5c2392;">
+								style="height: 40px; margin-top: 1px; border-bottom: solid 2px #5c2392; border-left: solid 2px #5c2392; border-right: solid 2px #5c2392; border-top: solid 2px #5c2392;">
 							<div class="input-group-btn">
-								<button class="btn btn-default" id="search_btn" type="submit" style="height:40px;margin-top:1px;
-							border-bottom: solid 2px #5c2392; border-left: solid 1px #5c2392; 
-							border-right: solid 2px #5c2392; border-top: solid 2px #5c2392;">
-									<i style="color:#5c2392;" class="glyphicon glyphicon-search"></i>
+								<button class="btn btn-default" id="search_btn" type="submit"
+									style="height: 40px; margin-top: 1px; border-bottom: solid 2px #5c2392; border-left: solid 1px #5c2392; border-right: solid 2px #5c2392; border-top: solid 2px #5c2392;">
+									<i style="color: #5c2392;" class="glyphicon glyphicon-search"></i>
 
 								</button>
 							</div>
@@ -226,35 +231,41 @@ button {
 				</div>
 				<!-- 검색창 끝 -->
 
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			<a style="margin-right:;" href="../product/productNew"><img
-				src="${pageContext.request.contextPath}/resources/images/pn_logo.png"
-				width="23" height="26" alt="판매하기 이미지"> &nbsp;<font
-				style="color: #2a2a2a; font-size: 13px; font-weight: 600;">판매하기</font></a>
-				<font>&nbsp;ㅣ&nbsp;</font>
-				<img src="${pageContext.request.contextPath}/resources/images/ms_logo.png" width="23" height="24" alt="나의상점 이미지"> 
-				
-				<div class="dropdown"style="display: inline-block;">
-				  <button class="btn dropdown-toggle" type="button" data-toggle="dropdown" style="width: 50px; height: 50px;margin-right: 10px;">
-					<font style="color: #2a2a2a; font-size: 13px; font-weight: 600;">내 상점</font>
-				  <span class="caret"></span></button>
-				  <ul class="dropdown-menu">
-				    <li><a href="../shop/myshop?mem_storeNum=${member.mem_storeNum}">내상점</a></li>
-				    <li><a href="../payment/buy_History">구매내역</a></li>
-				    <li><a href="../payment/sell_History">판매내역</a></li>
-				  </ul>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a style="margin-right:;"
+					href="../product/productNew"><img
+					src="${pageContext.request.contextPath}/resources/images/pn_logo.png"
+					width="23" height="26" alt="판매하기 이미지"> &nbsp;<font
+					style="color: #2a2a2a; font-size: 13px; font-weight: 600;">판매하기</font></a>
+				<font>&nbsp;ㅣ&nbsp;</font> <img
+					src="${pageContext.request.contextPath}/resources/images/ms_logo.png"
+					width="23" height="24" alt="나의상점 이미지">
+
+				<div class="dropdown" style="display: inline-block;">
+					<button class="btn dropdown-toggle" type="button"
+						data-toggle="dropdown"
+						style="width: 50px; height: 50px; margin-right: 10px;">
+						<font style="color: #2a2a2a; font-size: 13px; font-weight: 600;">내
+							상점</font> <span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu">
+						<li><a
+							href="../shop/myshop?mem_storeNum=${member.mem_storeNum}">내상점</a></li>
+						<li><a href="../payment/buy_History">구매내역</a></li>
+						<li><a href="../payment/sell_History">판매내역</a></li>
+					</ul>
 				</div>
-		<%-- 	<a style="margin-right: ;" href="../shop/myshop?mem_storeNum=${member.mem_storeNum}"><img
+				<%-- 	<a style="margin-right: ;" href="../shop/myshop?mem_storeNum=${member.mem_storeNum}"><img
 				src="${pageContext.request.contextPath}/resources/images/ms_logo.png"
 				width="23" height="24" alt="나의상점 이미지"> &nbsp;<font
 				style="color: #2a2a2a; font-size: 13px; font-weight: 600;">내상점</font></a> --%>
-				<font>&nbsp;&nbsp;&nbsp;ㅣ&nbsp;</font>
-			<a style="margin-right: ;" href="javascript:popup()"><img
-				src="${pageContext.request.contextPath}/resources/images/pointCharge22.jpg"
-				width="45" height="30" alt=포인트 충전 이미지"> &nbsp;<font
-				style="color: #2a2a2a; font-size: 13px; font-weight: 600;">포인트 충전</font></a>
+				<font>&nbsp;&nbsp;&nbsp;ㅣ&nbsp;</font> <a style="margin-right:;"
+					href="javascript:popup()"><img
+					src="${pageContext.request.contextPath}/resources/images/pointCharge22.jpg"
+					width="45" height="30" alt=포인트 충전이미지"> &nbsp;<font
+					style="color: #2a2a2a; font-size: 13px; font-weight: 600;">포인트
+						충전</font></a>
 
 
 			</div>
@@ -264,10 +275,7 @@ button {
 
 <div id="recentBox">
 	<div id="recent"></div>
-
 </div>
-
-
 
 <div class="modal fade" id="myModal" role="dialog">
 	<div class="modal-dialog">
@@ -319,6 +327,8 @@ button {
 		</div>
 	</div>
 </div>
+
+
 
 
 
@@ -391,7 +401,6 @@ button {
 				}
 			});
 
-
 	var openWin;
 	function openChild() {
 		// window.name = "부모창 이름"; 
@@ -408,13 +417,13 @@ button {
 			$.get(
 					"${pageContext.request.contextPath}/product/recentSearchProduct?sell_num="
 							+ cookie, function(result) {
-								console.log(result);
-						$("#recent").empty();
 						$("#recent").append(result);
 					})
 		} else {
-			$("#recent").append('<label>최근본 상품</label> <div style="padding-top : 5px;margin-top : 5px; border-top : 0.5px dotted black;"> 최근 본 상품이 없습니다.</div>');
-			}
+			$("#recent")
+					.append(
+							'<label>최근본 상품</label> <div style="padding-top : 5px;margin-top : 5px; border-top : 0.5px dotted black;"> 최근 본 상품이 없습니다.</div>');
+		}
 
 	})
 
@@ -434,16 +443,10 @@ button {
 		return null;
 	}
 
-
-	function popup(){
-	    var url = "../payment/pointCharge";
-	    var name = "포인트 충전";
-	    var option = "width = 500, height = 500, top = 100, left = 200, location = no"
-	    window.open(url, name, option);
+	function popup() {
+		var url = "../payment/pointCharge";
+		var name = "포인트 충전";
+		var option = "width = 500, height = 500, top = 100, left = 200, location = no"
+		window.open(url, name, option);
 	}
-
-
 </script>
-
-
-

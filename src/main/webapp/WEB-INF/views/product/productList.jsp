@@ -127,7 +127,7 @@
 
 					<div class="qqq" title="${vo.sell_num}"
 						style="height: 194px; width: 194px; cursor: pointer;"
-						onclick="location.href='./productSelect?sell_num=${vo.sell_num}'">
+						onclick="location.href='./product/productSelect?sell_num=${vo.sell_num}'">
 
 
 						<%-- 						<img style="height: 194px; width: 194px; cursor: pointer;" alt=""
@@ -218,7 +218,7 @@
 		$(".qqq").click(function() {
 			var sell_num = $(this).prop("title");
 			var myCookie = getCookie("recentSearch");
-			alert(myCookie);
+			
 			if (myCookie == null) {
 				setCookie("recentSearch", sell_num, 1)
 			} else {

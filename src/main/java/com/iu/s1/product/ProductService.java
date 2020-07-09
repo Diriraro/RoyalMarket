@@ -156,7 +156,7 @@ public class ProductService {
 	public long zico(long mem_storeNum) throws Exception {
 		return zzimMapper.zico(mem_storeNum);
 	}
-
+	
 	
 	// shop 에서 쓸 이름
 	public String getsell_product(ZzimVO zzimVO)throws Exception{
