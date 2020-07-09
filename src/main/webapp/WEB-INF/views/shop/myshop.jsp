@@ -27,7 +27,8 @@ border-top: 2px solid black;
 
 .s1{
 font-size: 20px;
-border-top:1px solid gray; 
+border-top:1px solid gray ; 
+border-color: rgba(0,0,0,0.25);
 
 }
 
@@ -78,13 +79,13 @@ color: red;
 							
 
 	<div class="container">
-		<div style="border: 1px solid black; width: 1024px; min-height: 340px;">
+		<div style="border: 1px solid black; width: 1024px; min-height: 340px; border-color: rgba(0,0,0,0.25);">
 			<!-- 각자 페이지에 하나씩 생성  -->
 			<!--버튼 감싸는 div  -->
 			<div>
 			<!-- 이동버튼  -->
 			<hr>
-			<table border="1" style="height: 80px;">
+			<table border="1" style="height: 80px; border-color: rgba(0,0,0,0.25);">
 				<tr>
 				<td class="td1"><a href="./myshop?mem_storeNum=${mem_storeNum}">상품&nbsp;&nbsp;   ${prodco}</a></td>
 				<td bgcolor="#f2f2f2"><a href="./comments?mem_storeNum=${mem_storeNum}">상점문의 &nbsp;&nbsp;${coco}</a></td>
@@ -112,7 +113,7 @@ color: red;
 					<c:forEach items="${mylist }" var="vo">
 					
 					
-					<div style="width: 200px; height: 300px; border: 1px solid gray ; float: left; margin-left: 4px; margin-bottom: 4px;  background-color: #f0f0f5"  onclick="location.href='../product/productSelect?sell_num=${vo.sell_num}'">
+					<div style="width: 200px; height: 300px; border: 1px solid gray ; float: left; margin-left: 4px; margin-bottom: 4px;  background-color: #f0f0f5; border-color: rgba(0,0,0,0.25);"  onclick="location.href='../product/productSelect?sell_num=${vo.sell_num}'">
 					
 				<!--status 2이면   판매완료 -->	
 				<c:if test="${vo.sell_status eq 2}">

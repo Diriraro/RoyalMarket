@@ -5,12 +5,23 @@ public class ZzimVO {
 	private long mem_storeNum;
 	private long sell_num;
 	private long zzim_num;
+	
+	
 	private String sell_product;
 	private String file_name;
 	private long sell_price;
 	private String mem_address;
+	private long sell_status;
 	
 	
+	
+	
+	public long getSell_status() {
+		return sell_status;
+	}
+	public void setSell_status(long sell_status) {
+		this.sell_status = sell_status;
+	}
 	public String getMem_address() {
 		return mem_address;
 	}

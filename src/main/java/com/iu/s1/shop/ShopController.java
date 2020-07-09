@@ -208,8 +208,13 @@ public class ShopController {
 			zzimVO.setSell_product(productService.getsell_product(zzimVO));
 			zzimVO.setFile_name(productService.selectFileName(zzimVO.getSell_num()));
 			zzimVO.setSell_price(productService.getsell_price(zzimVO));
-			String ss=	 memberService.mdata(productService.getmem_storeNum(zzimVO)).getMem_address();
-			zzimVO.setMem_address(ss);
+			String m_ad=	 memberService.mdata(productService.getmem_storeNum(zzimVO)).getMem_address();
+			zzimVO.setMem_address(m_ad);
+			
+			ProductVO productVOss = productService.productSelect(zzimVO.getSell_num());
+			long jstaus = productVOss.getSell_status();
+			zzimVO.setSell_status(jstaus); // 찜상태확인 
+			
 			// 주소를 가져와라
 			
 		}
@@ -500,7 +505,7 @@ public class ShopController {
 				
 				mv.addObject("flo",flo); // 내림
 				mv.addObject("ban",ban); // 반올림
-				mv.addObject("avg", avg); // 평균
+				mv.addObject("avg",avg); // 평균
 				mv.addObject("substar",flo3);// 반별
 				
 				mv.addObject("pfile", storeReviewFileVOs); // store 사진 출력
