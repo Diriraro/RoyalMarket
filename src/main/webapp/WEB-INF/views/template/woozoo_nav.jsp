@@ -6,8 +6,29 @@
 <script type="text/javascript"
 	src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
 
-
 <style type="text/css">
+#recentBox {
+	position: fixed;
+	right: calc(50% - 830px);
+	top: 200px;
+	width: 200px;
+	text-align: center;
+	border: 1px solid rgb(204, 204, 204);
+	padding: 10px;
+	overflow: hidden;
+	z-index: 20;
+	padding: 10px;
+}
+
+.recentSearchContainer {
+	text-align: center;
+}
+
+.recentSearchContainer>img {
+	border-radius: 50%;
+	width: 100px;
+}
+
 #header_top {
 	width: 1900px;
 	height: 39px;
@@ -106,27 +127,25 @@ button {
 	margin-bottom: 30px;
 }
 
-#join_btn{
-	color:rgb(102, 0, 102);
+#join_btn {
+	color: rgb(102, 0, 102);
 	text-decoration: none;
 }
 
-#find_id{
+#find_id {
 	text-decoration: none;
 	color: black;
-	cursor:pointer;
-	
+	cursor: pointer;
 }
 
-#foot{
+#foot {
 	font-weight: bold;
 }
-
-
 </style>
 <div class="n">
 	<header>
 		<nav id="header_top">
+
 		<div style="float: left;width: 450px;">
 		&nbsp;
 		</div>
@@ -162,6 +181,7 @@ button {
     </c:if>
 		</div>
 
+
 		</nav>
 	</header>
 
@@ -173,19 +193,13 @@ button {
 				<a href="../"><img
 					src="${pageContext.request.contextPath}/resources/images/nav_logo2.png"
 					alt="로고"></a>
-					<!-- 검색창 -->
+				<!-- 검색창 -->
 				<div style="margin-left: 90px; display: inline-block;">
 					<form action="../product/productList" class="form-inline">
 						<div class="input-group input-group-sm col-xs-2"
-							style="display: inline-block;border-radius:3px 3px 3px 3px; width:90px;
-							border-bottom: solid 2px #5c2392; 
-							border-left: solid 2px #5c2392; 
-							border-right: solid 2px #5c2392; 
-							border-top: solid 2px #5c2392;">
-							<select class="form-control" id="sel1" name="kind"
-								style="height: 36px;">
-								<option value="sp">제품명</option>
-								<option value="sk">종류</option>
+							style="display: inline-block; border-radius: 3px 3px 3px 3px; width: 90px; border-bottom: solid 2px #5c2392; border-left: solid 2px #5c2392; border-right: solid 2px #5c2392; border-top: solid 2px #5c2392;"../shop/myshop?mem_storeNum=${member.mem_storeNum}ame="kind"
+								style="height: 36../payment/buy_History value="sp">제품명</option>
+								<opt../payment/sell_Historyon>
 								<option value="st">태그</option>
 								<option style="display: none;" value="smn"></option>
 							</select>
@@ -193,7 +207,7 @@ button {
 						<div class="input-group input-group-sm col-xs-2 "
 							style="width: 400px;">
 
-							<input type="text"  class="form-control" placeholder="Search"
+				<input type="text"  class="form-control" placeholder="Search"
 								name="search" id="search"
 								style="height: 40px; margin-top: 1px; border-bottom: solid 2px #5c2392; 
 								border-left: solid 2px #5c2392; 
@@ -204,12 +218,14 @@ button {
 							border-bottom: solid 2px #5c2392; border-left: solid 1px #5c2392; 
 							border-right: solid 2px #5c2392; border-top: solid 2px #5c2392;">
 									<i style="color:#5c2392;" class="glyphicon glyphicon-search"></i>
+
 								</button>
 							</div>
 						</div>
 					</form>
 				</div>
 				<!-- 검색창 끝 -->
+
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -246,6 +262,11 @@ button {
 	</header>
 </div>
 
+<div id="recentBox">
+	<div id="recent"></div>
+
+</div>
+
 
 
 <div class="modal fade" id="myModal" role="dialog">
@@ -265,7 +286,9 @@ button {
 				</div>
 
 				<div class="sc-dymIpo hkyRQC">
-					<form action="${pageContext.request.contextPath}/member/memberLogin" method="post">
+					<form
+						action="${pageContext.request.contextPath}/member/memberLogin"
+						method="post">
 						<div class="sc-bnXvFD bvbxpR">
 							<input id="mem_id" type="text" class="form-control" name="mem_id"
 								placeholder="ID" value="${cookie.cId.value}">
@@ -274,7 +297,7 @@ button {
 							<input id="mem_pw" type="password" class="form-control"
 								name="mem_pw" placeholder="비밀번호">
 						</div>
-						<br><br>
+						<br> <br>
 						<div style="text-align: center;">
 							<button type="submit" class="sc-fhYwyz cjHLSv">우주장터 이용하기
 							</button>
@@ -286,8 +309,10 @@ button {
 
 
 				<div class="modal-footer" id="foot">
-					아직 계정이없으세요? <a href="${pageContext.request.contextPath}/member/memberJoin" id="join_btn">회원가입하기</a><br>
-					<a onclick="openChild()" id="find_id">아이디 또는 비밀번호를 잊어버리셨나요?</a><br> 
+					아직 계정이없으세요? <a
+						href="${pageContext.request.contextPath}/member/memberJoin"
+						id="join_btn">회원가입하기</a><br> <a onclick="openChild()"
+						id="find_id">아이디 또는 비밀번호를 잊어버리셨나요?</a><br>
 				</div>
 			</div>
 
@@ -319,56 +344,95 @@ button {
 		// window.name = "부모창 이름"; 
 		window.name = "parentForm";
 		// window.open("open할 window", "자식창 이름", "팝업창 옵션");
-		openWin = window.open("${pageContext.request.contextPath}/member/findMember", "childForm",
-				"width=500, height=600, resizable = no, scrollbars = no, toolbar = no");
+		openWin = window
+				.open("${pageContext.request.contextPath}/member/findMember",
+						"childForm",
+						"width=500, height=600, resizable = no, scrollbars = no, toolbar = no");
 	}
 
 	Kakao.init('59e57c59aff3a79eda4531bb82ae7989');
 
 	var Referer = '${Referer}';
 
-	Kakao.Auth.createLoginButton({
-		container : '#kakao-login-btn',
-		success : function(authObj) {
-			Kakao.API.request({
-				url : '/v2/user/me',
-				success : function(res) {
-					$.ajax({
-						type : "post",
-						url : "${pageContext.request.contextPath}/member/kakaoLogin",
-						data : {
-							mem_id : res.id,
-							mem_email : res.kakao_account['email'],
-							mem_name : res.kakao_account.profile['nickname'],
-							profile : res.properties.profile_image,
-						},
-						success : function(result) {
-							result = result.trim();
-							if (result != null && result != 'newMember') {
-								location.href = "../" + Referer;
-							} else if (result == 'newMember') {
-								location.href = "${pageContext.request.contextPath}/member/kakaoMemberJoin";
-							}
-						}
-					});
+	Kakao.Auth
+			.createLoginButton({
+				container : '#kakao-login-btn',
+				success : function(authObj) {
+					Kakao.API
+							.request({
+								url : '/v2/user/me',
+								success : function(res) {
+									$
+											.ajax({
+												type : "post",
+												url : "${pageContext.request.contextPath}/member/kakaoLogin",
+												data : {
+													mem_id : res.id,
+													mem_email : res.kakao_account['email'],
+													mem_name : res.kakao_account.profile['nickname'],
+													profile : res.properties.profile_image,
+												},
+												success : function(result) {
+													result = result.trim();
+													if (result != null
+															&& result != 'newMember') {
+														location.href = "../"
+																+ Referer;
+													} else if (result == 'newMember') {
+														location.href = "${pageContext.request.contextPath}/member/kakaoMemberJoin";
+													}
+												}
+											});
+								}
+
+							});
+				},
+				fail : function(err) {
 				}
-
 			});
-		},
-		fail : function(err) {
-		}
-	});
-
 
 
 	var openWin;
 	function openChild() {
-			// window.name = "부모창 이름"; 
-			window.name = "parentForm";
-			// window.open("open할 window", "자식창 이름", "팝업창 옵션");
-			openWin = window.open("${pageContext.request.contextPath}/member/findMember", "childForm",
-					"width=600, height=800, resizable = no, scrollbars = no");
+		// window.name = "부모창 이름"; 
+		window.name = "parentForm";
+		// window.open("open할 window", "자식창 이름", "팝업창 옵션");
+		openWin = window.open(
+				"${pageContext.request.contextPath}/member/findMember",
+				"childForm",
+				"width=600, height=800, resizable = no, scrollbars = no");
+	}
+	$(function() {
+		var cookie = getCookie("recentSearch");
+		if (cookie != null) {
+			$.get(
+					"${pageContext.request.contextPath}/product/recentSearchProduct?sell_num="
+							+ cookie, function(result) {
+								console.log(result);
+						$("#recent").empty();
+						$("#recent").append(result);
+					})
+		} else {
+			$("#recent").append('<label>최근본 상품</label> <div style="padding-top : 5px;margin-top : 5px; border-top : 0.5px dotted black;"> 최근 본 상품이 없습니다.</div>');
+			}
+
+	})
+
+	function getCookie(cname) {
+		var name = cname + "=";
+		var decodedCookie = decodeURIComponent(document.cookie);
+		var ca = decodedCookie.split(';');
+		for (var i = 0; i < ca.length; i++) {
+			var c = ca[i];
+			while (c.charAt(0) == ' ') {
+				c = c.substring(1);
+			}
+			if (c.indexOf(name) == 0) {
+				return c.substring(name.length, c.length);
+			}
 		}
+		return null;
+	}
 
 
 	function popup(){
@@ -378,7 +442,7 @@ button {
 	    window.open(url, name, option);
 	}
 
-		
+
 </script>
 
 

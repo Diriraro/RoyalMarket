@@ -49,6 +49,7 @@ public class InterceptorConfig implements WebMvcConfigurer {
 		
 		registry.addInterceptor(adminInterceptor)
 		.addPathPatterns("/admin/*");
+	
 
 		//적용할 Interceptor 등록
 		//registry.addInterceptor(productQnaInterceptor)
@@ -57,10 +58,6 @@ public class InterceptorConfig implements WebMvcConfigurer {
 		//Interceptro에서 제외할 URL 등록
 		//.excludePathPatterns("");
 
-		
-		
-		// TODO Auto-generated method stub
-		// WebMvcConfigurer.super.addInterceptors(registry);
 	}
 
 }
