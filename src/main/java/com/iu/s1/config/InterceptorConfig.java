@@ -1,5 +1,4 @@
 package com.iu.s1.config;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -46,6 +45,7 @@ public class InterceptorConfig implements WebMvcConfigurer {
 		.addPathPatterns("/payment/*")
 		.excludePathPatterns("/payment/prepare")
 		.excludePathPatterns("/product/productList")
+		.excludePathPatterns("/product/homeProductList")
 		.excludePathPatterns("/product/recProductList");
 		
 		registry.addInterceptor(adminInterceptor)
@@ -62,3 +62,4 @@ public class InterceptorConfig implements WebMvcConfigurer {
 	}
 
 }
+

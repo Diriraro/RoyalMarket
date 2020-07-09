@@ -37,17 +37,18 @@
 	z-index: 2;
 	text-align: center;
 }
+
 </style>
 
 </head>
-<body style="background-color: #fafafd;">
+<body style="background-color: #f9f9f9;">
 	<c:import url="../template/woozoo_nav.jsp"></c:import>
 	<!-- 전체시작 -->
 	<div style="height: 88px;">
 
 
-		<div
-			style="width: 1024px; margin-left: 440px; ">
+		<div style="width: 1024px; margin-left: 440px; ">
+
 			
 			<c:if test="${param.kind eq 'sk'}">
 			<div class="c" style="width: 1024px; height: 90px;">
@@ -108,7 +109,7 @@
 			<font style="font-size: 15px;font-weight: 600">의 검색결과</font>
 			</c:if>
 
-			<c:if test="${empty list and param.kind eq 'sp'}">
+			<c:if test="${empty list and ( param.kind eq 'sp'or param.kind eq 'sk'or param.kind eq 'st')}">
 			<br><br><br><br><br>
 			<font style="color: #ff5d4a; font-size: 40px;font-weight: 600;">${param.search}</font>
 			<font style="font-size: 20px;font-weight: 600">에 대한 검색결과가 없습니다</font>
@@ -149,7 +150,10 @@
 						</c:if>
 
 
-						<div style="width: 194px; background-color: white;">
+
+							
+						<div style="width: 194px; background-color: white;border: 1px solid #e5e5e5">
+
 							<div style="height: 80px;">
 								<div>
 									<br> <font
@@ -177,10 +181,8 @@
 
 			</c:forEach>
 
-			<c:if test="${vo.sell_product ne null or param.kind eq 'sk'}">
-			
-			
-		
+			<c:if test="${not empty list and (param.kind eq 'sp'or param.kind eq 'sk'or param.kind eq 'st')}">
+
 			<div class="p" style="width: 1024px;height: 40px;float: left;">
 				<ul class="pagination" >
 

@@ -17,6 +17,10 @@ public interface ProductMapper {
 	
 	public List<ProductVO> productList(Pager pager) throws Exception;
 	
+	public List<ProductVO> recProductList(Pager pager) throws Exception;
+	
+	public List<ProductVO> homeProductList(Pager pager) throws Exception;
+	
 	public List<ProductVO> myProductList(Pager pager) throws Exception;
 	
 	public long myProductCount(Pager pager) throws Exception;
