@@ -696,18 +696,26 @@ public class PaymentController {
 		List<StoreReviewVO> ar =storeReviewService.getSelectListReview(storeReviewVO);
 		double sum=0.0;
 		double avg=0.0;
+		double rest=0.0;
 		
-		for(int i=0; i<ar.size(); i++) {
-			sum= sum+ar.get(i).getRe_rate();
-			System.out.println(ar.get(i).getRe_rate()+"tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt");
+		if(!ar.isEmpty()) {
+			for(int i=0; i<ar.size(); i++) {
+				sum= sum+ar.get(i).getRe_rate();
+				System.out.println(ar.get(i).getRe_rate()+"tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt");
+			}
+			System.out.println("sum:   "+ sum);
+	
+			avg=sum/ar.size();		
+			System.out.println(avg);
+			rest=Math.floor(avg);
+			
+			
+			rest= avg-rest;
+		}else {
+			avg=0.0;
+			rest= 0.0;
 		}
-		System.out.println("sum:   "+ sum);
-
-		avg=sum/ar.size();		
-		System.out.println(avg);
-		double rest=Math.floor(avg);
 		
-		rest= avg-rest;
 		
 		mv.addObject("rest", rest);
 		mv.addObject("avg", avg);

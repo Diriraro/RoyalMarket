@@ -31,16 +31,28 @@
        		</div>
        		<div style="display: inline-block; margin-left: 24px;">
        			
-       			<c:forEach begin="1" end="${avg}">
-       				<img alt="" src="${pageContext.request.contextPath}/resources/images/star22.png" style="width: 20px; height: 20px">
-       			</c:forEach>
-       			<c:if test="${rest>0}">
-       				<img alt="" src="${pageContext.request.contextPath}/resources/images/star23.png " style="width: 20px; height: 20px">
+       			<c:if test="${avg ne 0.0}">
+	       			<c:forEach begin="1" end="${avg}">
+	       				<img alt="" src="${pageContext.request.contextPath}/resources/images/star22.png" style="width: 20px; height: 20px">
+	       			</c:forEach>
+	       			<c:if test="${rest>0}">
+	       				<img alt="" src="${pageContext.request.contextPath}/resources/images/star23.png " style="width: 20px; height: 20px">
+	       			</c:if>
+	       			<c:forEach begin="1" end="${5-avg}">
+	       				<img alt="" src="${pageContext.request.contextPath}/resources/images/emptyStar.png" style="width: 20px; height: 20px">
+	       			</c:forEach>
        			</c:if>
-       		
+       			
+       			<c:if test="${avg eq 0.0}">
+       				<c:forEach begin="1" end="5">
+	       				<img alt="" src="${pageContext.request.contextPath}/resources/images/emptyStar.png" style="width: 20px; height: 20px">
+	       			</c:forEach>
+       			</c:if>
+       			
        		</div>
        	</div>
-       	
+      
+       
        	</div>
       
       </div>
