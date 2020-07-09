@@ -178,14 +178,28 @@
 	</div>
 	<div class="w3-container">
 		<h3>
-			<b>장터 운영 수익 <i class="fas fa-won-sign"></i>
+			<b>연간 장터 운영 월 수익 <i class="fas fa-won-sign"></i>
 			</b>
 		</h3>
 		<br>
 		<p class="ct">
 			달성 / 목표 <i class="fas fa-won-sign"></i>
 		</p>
-		<div class="w3-grey" style="position: relative;">
+		<c:forEach items="${profitAr}" var="profit" varStatus="i">
+			<div>${i.index+1}월매출</div>
+			<div class="w3-grey" style="position: relative;">
+				<div class="w3-container w3-center w3-padding w3-green"
+					style="width:${profit.profitRate}%; height: 30px;">
+					<div
+						style="overflow: visible; width: 100%; text-align: center; position: absolute; height: 100%;">${profit.profit}
+						/ 1,000,000 <i class="fas fa-won-sign"></i>
+						<div></div>
+					</div>
+				</div>
+			</div>
+			<br>
+		</c:forEach>
+		<%-- <div class="w3-grey" style="position: relative;">
 			<div class="w3-container w3-center w3-padding w3-green"
 				style="width:${profitRate}%; height: 30px;">
 				<div
@@ -194,5 +208,6 @@
 					<div></div>
 				</div>
 			</div>
-		</div>
+		</div> --%>
 	</div>
+</div>
