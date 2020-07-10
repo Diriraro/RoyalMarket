@@ -146,6 +146,7 @@
 			<div class="p" style="width: 1024px;height: 40px;float: left;">
 				<ul class="pagination" >
 					<c:if test="${pager.curBlock gt 1}">
+					
 						<li><a
 							href="./productList?curPage=${pager.startNum-1}&kind=${pager.kind}&search=${pager.search}">이전</a></li>
 					</c:if>
