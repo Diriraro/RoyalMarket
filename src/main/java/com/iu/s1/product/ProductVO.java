@@ -20,7 +20,7 @@ public class ProductVO {
 	
 	private String sell_tag;
 	
-	private Date sell_date;
+	private String sell_date;
 	
 	private Long sell_status;
 	
@@ -120,11 +120,11 @@ public class ProductVO {
 		this.sell_tag = sell_tag;
 	}
 
-	public Date getSell_date() {
+	public String getSell_date() {
 		return sell_date;
 	}
 
-	public void setSell_date(Date sell_date) {
+	public void setSell_date(String sell_date) {
 		this.sell_date = sell_date;
 	}
 	

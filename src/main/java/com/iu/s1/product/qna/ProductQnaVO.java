@@ -15,7 +15,7 @@ public class ProductQnaVO {
 	
 	private String pq_contents;
 	
-	private Date pq_regDate;
+	private String pq_regDate;
 	
 	private String pq_storeName;
 
@@ -59,11 +59,11 @@ public class ProductQnaVO {
 		this.pq_contents = pq_contents;
 	}
 
-	public Date getPq_regDate() {
+	public String getPq_regDate() {
 		return pq_regDate;
 	}
 
-	public void setPq_regDate(Date pq_regDate) {
+	public void setPq_regDate(String pq_regDate) {
 		this.pq_regDate = pq_regDate;
 	}
 
