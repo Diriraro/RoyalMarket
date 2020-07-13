@@ -45,7 +45,7 @@ public class MemberController {
 	@Autowired
 	private JavaMailSender mailSender;
 
-	private String checkNum = "";
+	private String checkNum = "checkNum";
 
 	@GetMapping("memberUpdate")
 	public void memberPage() throws Exception {
@@ -709,12 +709,8 @@ public class MemberController {
 
 		Calendar cal = Calendar.getInstance();
 		long now = cal.getTimeInMillis();
-		long now_now;
-		if(session.getAttribute("now")==null) {
-			now_now = 0L;
-		}else {
-			now_now = now - (long) session.getAttribute("now");
-		}
+		long now_now= now - (long) session.getAttribute("now");
+	
 		memberVO.setMem_address(memberVO.getRoad_address() + " " + memberVO.getDetail_address());
 
 		boolean result = memberService.memberUpdateCheck(memberVO, bindingResult, checkNum);
