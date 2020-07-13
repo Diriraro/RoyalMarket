@@ -25,6 +25,16 @@ public interface MemberRepository {
 	
 	public MemberVO kakaoLogin(MemberVO memberVO) throws Exception;
 	
+	public MemberVO selectMemberByStoreName(MemberVO memberVO) throws Exception;
+	
+	public int updateStoreName(MemberVO memberVO3)throws Exception;
+	
+	public int memberDelete(MemberVO memberVO)throws Exception;
+	
+	public int memberUpdate(MemberVO memberVO)throws Exception;
+	
+	public List<MemberVO> selectMemberUpdate(MemberVO memberVO)throws Exception;
+	
 	// 관리자 페이지 필요한 매퍼
 	public List<MemberVO> getMemberList(long mem_access)throws Exception;
 	public List<MemberVO> getMemberSearchList(MemberVO memberVO) throws Exception;
@@ -34,5 +44,6 @@ public interface MemberRepository {
 	
 	// shop
 	public String getregDate(long mem_storeNum) throws Exception;
+	public MemberVO mdata(long mem_storeNum) throws Exception;
 	
 }

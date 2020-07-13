@@ -30,12 +30,13 @@ border-top: 2px solid black;
 <c:import url="../template/summer.jsp"></c:import>
 </head>
 <body>
-<c:import url="../template/woozoo_nav.jsp"></c:import>
+	<c:import url="../template/woozoo_nav.jsp"></c:import>
+	<h2></h2>
 	<c:import url="../template/shopmain.jsp"></c:import>
 
 	<div class="container">
 		<div
-			style="border: 1px solid blue; width: 1024px; min-height: 340px;">
+			style="border: 1px solid black; width: 1024px; min-height: 340px;">
 			<!-- 각자 페이지에 하나씩 생성  -->
 			<!--버튼 감싸는 div  -->
 			<div>
@@ -64,6 +65,7 @@ border-top: 2px solid black;
 
 			<div>
 				<h2>상점문의</h2>
+				<hr>
 
 				<%--  <c:import url="../template/comentsForm.jsp"></c:import>  --%>
 				<div class="container"> <!-- 폼태그  -->
@@ -92,10 +94,10 @@ border-top: 2px solid black;
 			<!--  추가한거. -->
 			<input type="button" id="btn" class="btn btn-default" value="Write">
 			</form>
-
+<hr>
 				</div>
 
-				<div style="border: 1px solid red; margin-top: 30px;">
+				<div style="border: 1px solid white; margin-top: 30px; border-bottom: ">
 					<c:forEach items="${colist}" var="vo">
 					
 					<%-- <c:if test="${msnum eq vo.sq_storeNum }">
@@ -103,7 +105,7 @@ border-top: 2px solid black;
 					</c:if> --%>
 				
 					
-					<div style=" border: 1px solid; height: 100px;">
+					<div style=" border-top: 1px solid gray; border-bottom:1px solid gray; height: 100px;  background-color: #f0f0f5">
 						<tr>
 							<%-- <td>${vo.sq_num}</td>
 							<td>${vo.mem_storeNum }	</td> --%>

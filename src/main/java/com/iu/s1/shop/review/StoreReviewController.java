@@ -32,6 +32,7 @@ public class StoreReviewController {
 		mv.addObject("mem_storeNum",mem_storeNum);
 		mv.addObject("sell_product",sell_product);
 		mv.addObject("buy_history");
+		mv.addObject("sell_num",sell_num);
 		mv.addObject("StoreReviewVO", new StoreReviewVO());
 		return mv;
 		
@@ -50,7 +51,7 @@ public class StoreReviewController {
 			System.out.println(storeReviewVO);
 			int result = storeReviewService.setInsertReview(storeReviewVO, files);
 			rd.addFlashAttribute("result",result);
-			mv.setViewName("redirect:../");
+			mv.setViewName("redirect:../payment/buy_History");
 		}
 		
 	return mv;	

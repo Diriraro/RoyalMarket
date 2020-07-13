@@ -5,7 +5,36 @@ public class ZzimVO {
 	private long mem_storeNum;
 	private long sell_num;
 	private long zzim_num;
+	private String sell_product;
+	private String file_name;
+	private long sell_price;
+	private String mem_address;
 	
+	
+	public String getMem_address() {
+		return mem_address;
+	}
+	public void setMem_address(String mem_address) {
+		this.mem_address = mem_address;
+	}
+	public long getSell_price() {
+		return sell_price;
+	}
+	public void setSell_price(long sell_price) {
+		this.sell_price = sell_price;
+	}
+	public String getFile_name() {
+		return file_name;
+	}
+	public void setFile_name(String file_name) {
+		this.file_name = file_name;
+	}
+	public String getSell_product() {
+		return sell_product;
+	}
+	public void setSell_product(String sell_product) {
+		this.sell_product = sell_product;
+	}
 	public long getZzim_num() {
 		return zzim_num;
 	}

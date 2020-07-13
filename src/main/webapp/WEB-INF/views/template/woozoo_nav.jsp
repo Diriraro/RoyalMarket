@@ -79,6 +79,7 @@ body {
 	background: rgb(102, 0, 102);
 	border-radius: 4px;
 	border: none;
+	font-family: "Noto Sans KR", sans-serif;
 }
 
 button {
@@ -156,6 +157,8 @@ button {
       <a href="${pageContext.request.contextPath}/member/memberLogout"> <font style="font-weight: 800; font-size: 13px;color: #666666;">로그아웃</font></a>
       <font>&nbsp;ㅣ&nbsp;</font>
       <a href="${pageContext.request.contextPath}/shop/myshop?mem_storeNum=${member.mem_storeNum}"> <font style="font-weight: 800; font-size: 13px;color: #666666;">내 상점</font></a>
+      <font>&nbsp;ㅣ&nbsp;</font>
+      <a href="${pageContext.request.contextPath}/member/memberUpdate"> <font style="font-weight: 800; font-size: 13px;color: #666666;">계정설정</font></a>
       </div>
     </c:if>
 		</div>
@@ -342,15 +345,6 @@ button {
 		}
 	});
 
-
-	var openWin;
-	function openChild() {
-			// window.name = "부모창 이름"; 
-			window.name = "parentForm";
-			// window.open("open할 window", "자식창 이름", "팝업창 옵션");
-			openWin = window.open("${pageContext.request.contextPath}/member/findMember", "childForm",
-					"width=600, height=800, resizable = no, scrollbars = no");
-		}
 
 	
 

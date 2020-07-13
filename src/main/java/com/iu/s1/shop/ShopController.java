@@ -81,6 +81,8 @@ public class ShopController {
 			countall(mv,mem_storeNum);
 			grade(mv, mem_storeNum);
 			getregDate(mv, mem_storeNum);
+			mdata(mv, mem_storeNum);
+			
 		// 
 		
 		mv.addObject("pfile", productFileVOs); // 상품들의  사진 출력
@@ -131,6 +133,7 @@ public class ShopController {
 					countall(mv,mem_storeNum);
 					grade(mv, mem_storeNum);
 					getregDate(mv, mem_storeNum);
+					mdata(mv, mem_storeNum);
 		// 
 		
 		
@@ -200,12 +203,25 @@ public class ShopController {
 		
 		// 찜 리스트
 		List<ZzimVO> zar = productService.myzzim(mem_storeNum);
+		List<ProductFileVO> f = new ArrayList<>();
+		for (ZzimVO zzimVO :zar) {
+			zzimVO.setSell_product(productService.getsell_product(zzimVO));
+			zzimVO.setFile_name(productService.selectFileName(zzimVO.getSell_num()));
+			zzimVO.setSell_price(productService.getsell_price(zzimVO));
+			String ss=	 memberService.mdata(productService.getmem_storeNum(zzimVO)).getMem_address();
+			zzimVO.setMem_address(ss);
+			// 주소를 가져와라
+			
+		}
+		
+		
 		// 찜 리스트 끝
 		
 		// 공유
 					countall(mv,mem_storeNum);
 					grade(mv, mem_storeNum);
 					getregDate(mv, mem_storeNum);
+					mdata(mv, mem_storeNum);
 				// 
 		
 		
@@ -248,6 +264,7 @@ public class ShopController {
 					grade(mv, mem_storeNum);
 					countall(mv,mem_storeNum);
 					getregDate(mv, mem_storeNum);
+					mdata(mv, mem_storeNum);
 				// 
 		
 		
@@ -300,6 +317,7 @@ public class ShopController {
 					countall(mv,mem_storeNum);
 					grade(mv, mem_storeNum);
 					getregDate(mv, mem_storeNum);
+					mdata(mv, mem_storeNum);
 				// 
 
 		mv.addObject("mem_storeName",para); // 파라미터의 상점이름
@@ -353,6 +371,7 @@ public class ShopController {
 					countall(mv,mem_storeNum);
 					grade(mv, mem_storeNum);
 					getregDate(mv, mem_storeNum);
+					mdata(mv, mem_storeNum);
 				// 
 		
 		
@@ -375,6 +394,7 @@ public class ShopController {
 	public ModelAndView setInsertFollow(long give_storeNum,long take_storeNum,long mem_storeNum, ModelAndView mv,HttpServletRequest request)throws Exception{
 		// 이전페이지 주소찾기
 		String referer = request.getHeader("referer");
+		System.out.println(referer+" ㄴㅇㄹㄴㅇㄹㄴㅇㄹ");
 		//이전페이지 주소찾기 끝
 		
 		
@@ -397,7 +417,7 @@ public class ShopController {
 		
 		// 이전페이지 주소찾기
 		String referer = request.getHeader("referer");
-		System.out.println(referer);
+		System.out.println(referer+" ㄴㅇㄹㄴㅇㄹㄴㅇㄹ");
 		//이전페이지 주소찾기 끝
 
 		
@@ -491,12 +511,19 @@ public class ShopController {
 	
 	// 날짜
 	public ModelAndView getregDate(ModelAndView mv, long mem_storeNum)throws Exception{
-		
 			
 		mv.addObject("getregDate" ,memberService.getregDate(mem_storeNum));
 		//// getregDate   getregDate   getregDate
 		return mv;
 	}
+	
+	// 멤버데이터
+	public ModelAndView mdata(ModelAndView mv, long mem_sotreNum) throws Exception{
+		mv.addObject("mdata", memberService.mdata(mem_sotreNum));
+		return mv;
+	}
+	
+	
 	
 	
 	

@@ -127,7 +127,7 @@ body {
 	height: 56px;
 	text-align: center;
 	font-size: 18px;
-	background: rgb(102, 0, 102);
+	background: rgb(247, 47, 51);
 	margin-top: 30px;
 }
 
@@ -138,7 +138,7 @@ body {
 }
 
 #ViewTimer {
-	margin: 0px 7px 0px 140px;
+	margin: 0px 7px 0px 210px;
 }
 
 .ubhSQ {
@@ -329,8 +329,9 @@ iframe {
 </head>
 
 <body style="overflow: auto;">
-	<form:form modelAttribute="memberVO" action="./memberJoin"
+	<form:form modelAttribute="memberVO" action="./memberUpdate"
 		method="post">
+		
 
 		<div id="root">
 			<div class="app">
@@ -338,44 +339,15 @@ iframe {
 					<div class="sc-kvkilB fSETiC">
 						<div class="sc-cANqwJ wmnsE">
 							<div class="sc-clWJBl biGiRA">
-								<h2>회원가입</h2>
+								<h2>회원정보수정</h2>
 							</div>
+							
+							<form:input path="mem_id"  id="mem_id" type="hidden" value="${member.mem_id}"/>
+							<form:input path="mem_name"  id="mem_name" type="hidden" value="${member.mem_name}"/>
 							<div class="sc-jGkVzM HDroZ">
 
-								<div class="sc-fYAFcb kThGwo">
-
-
-									<div class="sc-lhLRcH csuEuq">
-										<div class="sc-jMtzgO liBHhX">
-											<div class="sc-kAKrxA kVlvmu">
-												<i class="glyphicon glyphicon-user"
-													style="width: 20; height: 20; color: gray"></i>
-											</div>
-											<form:input path="mem_name" type="text" id="mem_name"
-												placeholder="이름" />
-
-										</div>
-									</div>
-									<form:errors path="mem_name" class="error_msg"></form:errors>
-								</div>
-
 
 								<div class="sc-fYAFcb kThGwo">
-
-									<div class="sc-lhLRcH csuEuq">
-										<div class="sc-jMtzgO liBHhX">
-											<div class="sc-kAKrxA kVlvmu">
-												<i class="far fa-id-card"
-													style="width: 25; height: 25; color: gray"></i>
-											</div>
-											<form:input path="mem_id" type="text" id="mem_id"
-												placeholder="아이디" />
-
-										</div>
-									</div>
-									<form:errors path="mem_id" class="error_msg"></form:errors>
-
-
 
 									<div class="sc-lhLRcH csuEuq">
 										<div class="sc-jMtzgO liBHhX">
@@ -385,7 +357,7 @@ iframe {
 													width="16" height="20">
 											</div>
 											<form:input path="mem_pw" type="password" id="mem_pw"
-												placeholder="비밀번호 6-16자" />
+												placeholder="비밀번호 6-16자" value="${member.mem_pw}"/>
 
 										</div>
 									</div>
@@ -422,7 +394,7 @@ iframe {
 													width="17" height="20">
 											</div>
 											<form:input path="mem_phone" type="text" id="mem_phone"
-												placeholder="휴대폰 번호(숫자만 허용)" />
+												placeholder="휴대폰 번호(숫자만 허용)"  value="${member.mem_phone}"/>
 
 											<input type="button" value="인증 번호" class="btn btn-default"
 												id="rq_num" onclick="checkPhone()">
@@ -457,7 +429,7 @@ iframe {
 													style="width: 25; height: 25; color: gray"></i>
 											</div>
 											<form:input path="road_address" type="text" id="road_address"
-												placeholder="주소 입력" />
+												placeholder="주소 입력" value="${member.mem_address}"/>
 
 											<input id="address" type="button" value="주소 검색"
 												class="btn btn-default" onclick="openChild()">
@@ -473,7 +445,7 @@ iframe {
 													style="width: 25; height: 25; color: gray"></i>
 											</div>
 											<form:input path="detail_address" type="text"
-												id="detail_address" placeholder="상세 주소 입력" />
+												id="detail_address" placeholder="상세 주소 입력"  />
 
 										</div>
 									</div>
@@ -488,9 +460,7 @@ iframe {
 													width="18" height="15">
 											</div>
 											<form:input path="mem_email" type="text" id="mem_email"
-												placeholder="이메일 입력" />
-
-
+												placeholder="이메일 입력" value="${member.mem_email}" />
 
 										</div>
 									</div>
@@ -498,96 +468,9 @@ iframe {
 								</div>
 
 
-								<div class="sc-exdmVY ubhSQ">
-									<div class="sc-evWYkj llQLqu">
-										<div class="sc-hqGPoI ettlGe">
-											<div class="sc-hPeUyl lerNRt">
-												<div class="sc-kasBVs dDiVis" id="checkAll"></div>
-												<div class="sc-imAxmJ kZHPTS">전체동의하기</div>
-											</div>
-										</div>
-									</div>
-									<div class="sc-idjmjb fZmenS">
-										<div class="sc-hqGPoI ettlGe">
-											<div class="sc-hPeUyl lerNRt">
-												<div class="sc-kasBVs dDiVis" id="check1"></div>
-												<div class="sc-imAxmJ kZHPTS">
-													<span class="sc-iWadT bOqqay">(필수)</span>우주장터 이용약관 동의
-												</div>
-												<div id="show1" title="hide">
-													<img
-														src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAALRJREFUOBFjYBgFgzMEqqtb5Cl1GcwMxoaGdoVfv3+d+s/EGNreXHeQHINrapod/v3/t4qRgdmU+cCBvR9sHJxOMf77vxpEHzm0/yEphlbWNtkz/P+/GuSgtpbai8wgzSBDyDEUZBjIIci+AxtIjqHYDAOZAzeQFENxGYZhIDGG4jMMq4H4DCVkGEgvI4jABZANAKlBjwBs+vAaCNIAS2MgNnJsgvhkA5ChINeSbcCoRpJCAADCUaKHyL/YQQAAAABJRU5ErkJggg=="
-														width="20" height="20" alt="회원가입 아이콘"
-														style="background-color: white">
-												</div>
+								
 
-											</div>
-											<div class="sc-esoVGF geWVNF show1" style="display: none;">
-												<div class="sc-cAJUJo fFrJW">
-													<iframe title="우주장터 위치기반서비스 이용약관"
-														src="https://terms.bunjang.co.kr/terms/service.html"></iframe>
-												</div>
-											</div>
-										</div>
-										<div class="sc-hqGPoI ettlGe">
-											<div class="sc-hPeUyl lerNRt">
-												<div class="sc-kasBVs dDiVis" id="check2"></div>
-												<div class="sc-imAxmJ kZHPTS">
-													<span class="sc-iWadT bOqqay">(필수)</span>개인정보 처리 방침 동의
-												</div>
-
-												<div id="show2" title="hide">
-													<img
-														src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAALRJREFUOBFjYBgFgzMEqqtb5Cl1GcwMxoaGdoVfv3+d+s/EGNreXHeQHINrapod/v3/t4qRgdmU+cCBvR9sHJxOMf77vxpEHzm0/yEphlbWNtkz/P+/GuSgtpbai8wgzSBDyDEUZBjIIci+AxtIjqHYDAOZAzeQFENxGYZhIDGG4jMMq4H4DCVkGEgvI4jABZANAKlBjwBs+vAaCNIAS2MgNnJsgvhkA5ChINeSbcCoRpJCAADCUaKHyL/YQQAAAABJRU5ErkJggg=="
-														width="20" height="20" alt="회원가입 아이콘"
-														style="background-color: white">
-												</div>
-
-
-											</div>
-											<div class="sc-esoVGF geWVNF show2" style="display: none;">
-												<div class="sc-cAJUJo fFrJW">
-													<iframe title="우주장터 위치기반서비스 이용약관"
-														src="https://terms.bunjang.co.kr/terms/privacy.html"></iframe>
-												</div>
-											</div>
-										</div>
-										<div class="sc-hqGPoI ettlGe">
-											<div class="sc-hPeUyl lerNRt">
-												<div class="sc-kasBVs dDiVis" id="check3"></div>
-												<div class="sc-imAxmJ kZHPTS">
-													<span class="sc-ZUflv euslgD">(선택)</span>위치기반서비스 동의
-												</div>
-
-												<div id="show3" title="hide">
-													<img
-														src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAYAAACNiR0NAAAAAXNSR0IArs4c6QAAALRJREFUOBFjYBgFgzMEqqtb5Cl1GcwMxoaGdoVfv3+d+s/EGNreXHeQHINrapod/v3/t4qRgdmU+cCBvR9sHJxOMf77vxpEHzm0/yEphlbWNtkz/P+/GuSgtpbai8wgzSBDyDEUZBjIIci+AxtIjqHYDAOZAzeQFENxGYZhIDGG4jMMq4H4DCVkGEgvI4jABZANAKlBjwBs+vAaCNIAS2MgNnJsgvhkA5ChINeSbcCoRpJCAADCUaKHyL/YQQAAAABJRU5ErkJggg=="
-														width="20" height="20" alt="회원가입 아이콘"
-														style="background-color: white">
-												</div>
-
-											</div>
-											<div class="sc-esoVGF geWVNF show3" style="display: none;">
-												<div class="sc-cAJUJo fFrJW">
-													<iframe title="번개장터 위치기반서비스 이용약관"
-														src="https://terms.bunjang.co.kr/terms/location.html"></iframe>
-												</div>
-											</div>
-										</div>
-										<div class="sc-hqGPoI ettlGe">
-											<div class="sc-hPeUyl lerNRt">
-												<div class="sc-kasBVs dDiVis" id="check4"></div>
-												<div class="sc-imAxmJ kZHPTS">
-													<span class="sc-ZUflv euslgD">(선택)</span>이메일,SMS 광고 수신 동의
-												</div>
-											</div>
-										</div>
-										<div class="sc-fHlXLc jvQNgl">*선택항목은 동의하지 않아도 회원가입이
-											가능합니다</div>
-									</div>
-								</div>
-
-								<button type="submit" class="gqqaLP" id="btn_submit">가입하기</button>
+								<button type="submit" class="gqqaLP" id="btn_submit">수정하기</button>
 
 							</div>
 
@@ -603,20 +486,16 @@ iframe {
 		var check = false;
 		var SetTime = 300;		// 최초 설정 시간(기본 : 초)
 		var tid = 0;
-
-		var again = "${again}";
-
-		if(again=="again"){
-				alert("인증번호를 재발급해주세요!")
-			}
 		
-		
-		
+			
 		function checkPhone(result2) {
 			var phoneNumber = $('#mem_phone').val();
-
+			var id = $('#mem_id').val();
+			var update = "1";
 			$.post("./check/sendSMS2", {
-				phoneNumber : phoneNumber
+				id : id,
+				phoneNumber : phoneNumber,
+				update : update
 			}, function(result) {
 				alert(result.trim());
 				SetTime = 300;
@@ -667,111 +546,6 @@ iframe {
 			}
 			
 		}
-
-		$("#checkAll").click(function(){
-			
-			
-			if($(this).attr("class")=="sc-kasBVs dDiVis"){
-				$(this).attr("class","ivGQtp");
-				$("#check1").attr("class","ivGQtp");	
-				$("#check2").attr("class","ivGQtp");
-				$("#check3").attr("class","ivGQtp");
-				$("#check4").attr("class","ivGQtp");
-			}else if($(this).attr("class")=="ivGQtp"){
-				$(this).attr("class","sc-kasBVs dDiVis");
-				$("#check1").attr("class","sc-kasBVs dDiVis");
-				$("#check2").attr("class","sc-kasBVs dDiVis");
-				$("#check3").attr("class","sc-kasBVs dDiVis");
-				$("#check4").attr("class","sc-kasBVs dDiVis");
-			}
-		}); 
-		
-		
-		$("#check1").click(function(){
-			
-			if($(this).attr("class")=="sc-kasBVs dDiVis"){
-				$(this).attr("class","ivGQtp");
-				}else if($(this).attr("class")=="ivGQtp"){
-					$("#checkAll").attr("class","sc-kasBVs dDiVis");
-					$(this).attr("class","sc-kasBVs dDiVis");
-				}
-			
-			})
-			
-		$("#check2").click(function(){
-			if($(this).attr("class")=="sc-kasBVs dDiVis"){
-				$(this).attr("class","ivGQtp");
-				}else if($(this).attr("class")=="ivGQtp"){
-					$("#checkAll").attr("class","sc-kasBVs dDiVis");
-					$(this).attr("class","sc-kasBVs dDiVis");
-				}
-			
-			})
-			
-		$("#check3").click(function(){
-			if($(this).attr("class")=="sc-kasBVs dDiVis"){
-				$(this).attr("class","ivGQtp");
-				}else if($(this).attr("class")=="ivGQtp"){
-					$("#checkAll").attr("class","sc-kasBVs dDiVis");
-					$(this).attr("class","sc-kasBVs dDiVis");
-				}
-			
-			})
-			
-			
-		$("#check4").click(function(){
-			if($(this).attr("class")=="sc-kasBVs dDiVis"){
-				$(this).attr("class","ivGQtp");
-				}else if($(this).attr("class")=="ivGQtp"){
-					$("#checkAll").attr("class","sc-kasBVs dDiVis");
-					$(this).attr("class","sc-kasBVs dDiVis");
-				}
-			
-			})
-			
-		$("#btn_submit").click(function(){
-			if($(check1).attr("class")!="ivGQtp" || $(check2).attr("class")!="ivGQtp"){
-					alert("필수 항목에 동의해주세요")
-					$("#btn_submit").prop("type","button");
-			}else{
-				$("#btn_submit").prop("type","submit");
-				}
-		});
-
-		$("#show1").click(function(){
-			if($(this).prop("title")=="hide"){
-				$(".show1").show(500);
-				$(this).prop("title","show");
-			}else{
-				$(".show1").hide(500);
-				$(this).prop("title","hide");
-				}
-				
-			});
-
-		$("#show2").click(function(){
-			if($(this).prop("title")=="hide"){
-				$(".show2").show(500);
-				$(this).prop("title","show");
-			}else{
-				$(".show2").hide(500);
-				$(this).prop("title","hide");
-				}
-				
-			});
-
-		$("#show3").click(function(){
-			if($(this).prop("title")=="hide"){
-				$(".show3").show(500);
-				$(this).prop("title","show");
-			}else{
-				$(".show3").hide(500);
-				$(this).prop("title","hide");
-				}
-				
-			});
-
-		
 
 
 

@@ -24,6 +24,13 @@ border-top: 2px solid black;
 
 }
 
+.fo1{
+font-size: 17px;
+color: black;
+
+}
+
+
 </style>
 <meta charset="EUC-KR">
 <title>Insert title here</title>
@@ -31,6 +38,7 @@ border-top: 2px solid black;
 </head>
 <body>
 <c:import url="../template/woozoo_nav.jsp"></c:import>
+<h2></h2>
 		<c:import url="../template/shopmain.jsp"></c:import>
 <div class="container">
 		<div style="border: 1px solid black; width: 1024px;  min-height: 340px;">
@@ -60,11 +68,12 @@ border-top: 2px solid black;
 
 			<div> <!-- 내용보여줄 div  -->
 				<h2>${mem_storeName} 님의 찜목록</h2>
+				<hr>
 
-				<div style="border: 1px solid red; min-height: 340px; overflow: auto;">
+				<div style="border: 1px solid white; min-height: 340px; overflow: auto;">
 					<c:forEach items="${zilist }" var="vo">
-						<div style="border: 1px solid red; width: 480px; height: 140px; float: left; margin-left: 2%; margin-top: 2%; margin-bottom: 2%;" >
-						<button>
+						<div style="border: 1px solid gray; width: 480px; height: 140px; float: left; margin-left: 2%; margin-top: 2%; margin-bottom: 2%;" >
+						<%-- <button>
 							${vo.mem_storeNum } <a>mem_storeNum</a>
 						</button>
 						<button>
@@ -72,7 +81,38 @@ border-top: 2px solid black;
 						</button>
 						<button>
 							  ${vo.zzim_num }<a>zzim_num</a>
-						</button>
+						</button> --%>
+						<div style="border: 0px solid ; width: 34%; height:100%; float: left;  background-color: #f0f0f5" class="pp2" title="${vo.sell_num }">
+						    <img src="../upload/product/${vo.file_name}"
+						    style="overflow: hidden; display: flex; align-items: center; justify-content: center; width: 100%; height: 100%;">
+						</div>
+						<div style="border: 0px solid; width: 66%;height:100%; float: left;  background-color: #f0f0f5; font-size: 20px;">
+						   <button class="btn btn-danger del" style="float: right;"title="${vo.zzim_num}"> <a style="color: white;">찜 해제</a></button>
+						   
+						   
+						<div style="border-top: 0px solid white; height: 40px;" class="pp2" title="${vo.sell_num }">
+						<font style="color: #b1b1b1; font-size: 15px; font-weight: 600;">·&nbsp;상품명 :&nbsp;&nbsp;</font> <a class="fo1">${vo.sell_product}</a>						
+					
+						</div>
+						
+						<div style="border: 0px solid; height: 40px;" class="pp2" title="${vo.sell_num }">
+																	
+						<font style="color: #b1b1b1; font-size: 15px; font-weight: 600;">·&nbsp;가격 :&nbsp;&nbsp;</font> <a class="fo1">${vo.sell_price}  원</a>
+						</div> 
+						
+						<div style="border: 0px solid; min-height: 40px; overflow: auto;" class="pp2" title="${vo.sell_num }">
+					
+						<font style="color: #b1b1b1; font-size: 15px; font-weight: 600;">·&nbsp;지역&nbsp;&nbsp;</font>
+						 <img	style="width: 16px; height: 20px; margin-bottom: 3px;" alt=""	src="${pageContext.request.contextPath}/resources/images/ad_logo.png">
+						<font style="font-weight: 600; font-size: 15px;">&nbsp;${vo.mem_address}</font>
+						
+						
+						
+						</div>  
+						</div>	
+						
+						
+						
 						</div>
 					</c:forEach>
 
@@ -84,4 +124,36 @@ border-top: 2px solid black;
 
 	</div><!-- 컨테이너 끝  -->
 </body>
+
+<script type="text/javascript">
+
+$(".del").click(function(){
+	var ss = $(this).attr("title");
+	console.log(ss);
+	 if (confirm("정말 삭제하시겠습니까??") == true){    //확인
+
+	 location.href="../product/zzimDelete?zzim_num="+ss;
+			console.log("지우기");
+	 }else{   //취소
+			console.log('살리기');
+	     return false;
+
+	 }
+});
+
+$(".pp2").click(function(){
+	var title= $(this).attr("title");
+	console.log(title);
+
+	location.href = "../product/productSelect?sell_num="+title;
+		
+	});
+
+
+
+</script>
+
+
+
+
 </html>

@@ -14,6 +14,8 @@ public class StoreReviewVO {
 	private String re_wDate;
 	private String re_storeName;
 	private long re_storeNum;
+	private long sell_num;
+
 	
 	
 }
