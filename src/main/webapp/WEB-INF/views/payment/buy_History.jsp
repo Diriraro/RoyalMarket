@@ -96,6 +96,8 @@
 		</c:forEach>
 	
 	</div>
+	
+	
 	<script type="text/javascript">
 
  	$(".productTake").click(function() {	

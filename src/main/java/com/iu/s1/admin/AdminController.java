@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.iu.s1.member.MemberVO;
 import com.iu.s1.notice.NoticeVO;
+import com.iu.s1.paymentHistory.ProfitVO;
 import com.iu.s1.product.ProductService;
 import com.iu.s1.product.ProductVO;
 import com.iu.s1.qna.QnaService;
@@ -76,7 +77,7 @@ public class AdminController {
 		} else {
 			rate2 = (long) ((visitorVO.getCount() * 100) / visitorVO2.getCount());
 		}
-		if ( rate2 > 100) {
+		if (rate2 > 100) {
 			rate2 = 100;
 		}
 		model.addAttribute("visitors", visitorVO.getCount());
@@ -90,36 +91,31 @@ public class AdminController {
 		model.addAttribute("qnaNACount", qnaNACount);
 
 		// 당일 거래량 및 지역별 거래량, 총 회사 수익
+		List<Map.Entry<String, Long>> tradeAr = adminService.getLocateTradeCount();
+		List<ProfitVO> profitAr = new ArrayList<ProfitVO>();
+		profitAr = adminService.getProfit();
+		
 		long tradeCount = 0;
 		if (adminService.getDailyTradeCount() != null) {
 			tradeCount = adminService.getDailyTradeCount();
 		}
-		List<Map.Entry<String, Long>> tradeAr = adminService.getLocateTradeCount();
-		long profit = 0;
-		long profitRate = 0;
-		if (adminService.getProfit() != null) {
-			profit = adminService.getProfit();
-			profitRate = (long)(profit/1000000)*100;
-		}
 		long tradeCountYD = 0;
-		if(adminService.getRateForTradeCountYD() != null) {
+		if (adminService.getRateForTradeCountYD() != null) {
 			tradeCountYD = adminService.getRateForTradeCountYD();
 		}
 		long tradeRate = 0;
-		if(tradeCountYD != 0 && tradeCount != 0) {
-			tradeRate= (tradeCount / tradeCountYD) * 100;
+		if (tradeCountYD != 0 && tradeCount != 0) {
+			tradeRate = (long) (((double) tradeCount / (double) tradeCountYD) * 100);
 		} else if (tradeCountYD == 0 && tradeCount > 0) {
 			tradeRate = 100;
 		}
 		if (tradeRate > 100) {
 			tradeRate = 100;
 		}
-
 		model.addAttribute("tradeRate", tradeRate);
 		model.addAttribute("tradeCount", tradeCount);
 		model.addAttribute("tradeAr", tradeAr);
-		model.addAttribute("profit", profit);
-		model.addAttribute("profitRate",profitRate);
+		model.addAttribute("profitAr", profitAr);
 
 		// 상품
 		List<ProductVO> proList = adminService.productRecentList();
@@ -184,24 +180,24 @@ public class AdminController {
 
 	// Product
 	@GetMapping("getProductList")
-	public void productList(Model model,@DefaultValue(value = "1") long curPage, Pager pager) throws Exception {
+	public void productList(Model model, @DefaultValue(value = "1") long curPage, Pager pager) throws Exception {
 		pager.setCurPage(curPage);
 		List<ProductVO> ar = new ArrayList<ProductVO>();
 		ar = adminService.productList(pager);
 		model.addAttribute("list", ar);
 	}
+
 	@GetMapping("productDelete")
 	public void productDelete(ProductVO productVO, Model model) throws Exception {
-		int result = adminService.productDelete(productVO); 
+		int result = adminService.productDelete(productVO);
 		model.addAttribute("result", result);
 	}
-	
+
 	@GetMapping("getTradingProductList")
 	public void tradingList(Model model, Pager pager) throws Exception {
 		List<TradingVO> tradeVO = adminService.tradingList(pager);
 		model.addAttribute("list", tradeVO);
 	}
-	
 
 	// Qna
 	@GetMapping("getQnaList")
@@ -242,7 +238,7 @@ public class AdminController {
 			check = true;
 		}
 
-		model.addAttribute("check",check);
+		model.addAttribute("check", check);
 		model.addAttribute("qna_adlist", ar2);
 		model.addAttribute("list", ar);
 	}

@@ -142,7 +142,6 @@ button {
     </c:if>
     </ul>
   </div>
-
 </nav>
 
 
@@ -210,6 +209,7 @@ button {
 
 
 <script type="text/javascript">
+
 	var openWin;
 	function openChild() {
 		// window.name = "부모창 이름"; 
@@ -264,8 +264,4 @@ button {
 			openWin = window.open("${pageContext.request.contextPath}/member/findMember", "childForm",
 					"width=600, height=800, resizable = no, scrollbars = no");
 		}
-
-	
-
-		
 </script>

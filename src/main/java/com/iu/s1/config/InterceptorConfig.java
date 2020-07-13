@@ -1,5 +1,4 @@
 package com.iu.s1.config;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -41,13 +40,15 @@ public class InterceptorConfig implements WebMvcConfigurer {
 		
 		// Product랑 Shop에 대해 로그인 해야 들어 갈수 있는 Interceptor //qna, notice추가
 		registry.addInterceptor(productInterceptor)
-		.addPathPatterns("/product/*")
+		/* .addPathPatterns("/product/*") */
 		.addPathPatterns("/shop/*")
 		.addPathPatterns("/payment/*")
 		.addPathPatterns("/qna/qnaWrite")
 		.addPathPatterns("/qna/qnaMyList")
 		.excludePathPatterns("/payment/prepare")
-		.excludePathPatterns("/product/productList");
+		.excludePathPatterns("/product/productList")
+		.excludePathPatterns("/product/homeProductList")
+		.excludePathPatterns("/product/recProductList");
 		
 		registry.addInterceptor(adminInterceptor)
 		.addPathPatterns("/admin/*")
@@ -58,6 +59,7 @@ public class InterceptorConfig implements WebMvcConfigurer {
 		.excludePathPatterns("/notice/policy")
 		.excludePathPatterns("/notice/ban");
 
+
 		//적용할 Interceptor 등록
 		//registry.addInterceptor(productQnaInterceptor)
 		//Interceptor를 사용할 URL 등록
@@ -65,10 +67,7 @@ public class InterceptorConfig implements WebMvcConfigurer {
 		//Interceptro에서 제외할 URL 등록
 		//.excludePathPatterns("");
 
-		
-		
-		// TODO Auto-generated method stub
-		// WebMvcConfigurer.super.addInterceptors(registry);
 	}
 
 }
+

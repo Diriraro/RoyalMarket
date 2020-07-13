@@ -101,8 +101,8 @@
 			%>
 			<script type="text/javascript">
 			document.location.href="http://localhost:8080/";
- 			/* alert("정상적인 경로를 통해 다시 접근해 주세요");
- */
+ 			alert("정상적인 경로를 통해 다시 접근해 주세요");
+
 			</script>
 			<%
 			return;

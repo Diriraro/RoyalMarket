@@ -5,6 +5,7 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -19,8 +20,10 @@ import com.iu.s1.member.MemberRepository;
 import com.iu.s1.member.MemberVO;
 import com.iu.s1.notice.NoticeRepository;
 import com.iu.s1.notice.NoticeVO;
+import com.iu.s1.payment.PayStatsVO;
 import com.iu.s1.payment.PaymentMapper;
 import com.iu.s1.paymentHistory.PaymentHistoryRepository;
+import com.iu.s1.paymentHistory.ProfitVO;
 import com.iu.s1.product.ProductMapper;
 import com.iu.s1.product.ProductVO;
 import com.iu.s1.qna.QnaRepository;
@@ -228,19 +231,27 @@ public class AdminService {
 		return list;
 	}
 
-	public Long getProfit() throws Exception {
-		Calendar cal = Calendar.getInstance();
-		int year1 = cal.getTime().getYear() + 1900;
-		int month1 = cal.getTime().getMonth() + 1;
-		int day1 = cal.getActualMaximum(cal.DAY_OF_MONTH);
-		//요번달 마지막일
-		String sell_date1 = year1 + "/" + month1 + "/" + day1;
-		int year2 = cal.getTime().getYear() + 1900;
-		int month2 = cal.getTime().getMonth() + 1;
-		int day2 = 1;
-		// 요번달 1일
-		String sell_date2 = year2 + "/" + month2 + "/" + day2;
-		return paymentHistoryRepository.getProfit( sell_date1, sell_date2);
+	public List<ProfitVO> getProfit() throws Exception {
+		List<ProfitVO> ar = new ArrayList<ProfitVO>();
+		Date date = new Date();		
+		for(int i = 0 ; i < date.getMonth()+1; i++) {
+			Calendar cal1 = new GregorianCalendar(date.getYear()+1900, i , 1);
+			int year = cal1.getTime().getYear()+1900;
+			int month = cal1.getTime().getMonth()+1;
+			int day = cal1.getActualMaximum(Calendar.DAY_OF_MONTH);
+			String sell_date = year + "/" + month + "/" + day;
+			String sell_date1 = year + "/" + month + "/" + 1;
+			Long result = paymentHistoryRepository.getProfit( sell_date, sell_date1);
+			if ( result == null) {
+				result = 0L;
+			}
+			ProfitVO profitVO = new ProfitVO();
+			profitVO.setProfit(result);
+			profitVO.setProfitRate((long)(((double)result / 1000000) * 100));
+			ar.add(profitVO);
+		}
+		
+		return ar;
 	}
 	
 	public List<ProductVO> productRecentList() throws Exception {
