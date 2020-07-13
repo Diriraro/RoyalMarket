@@ -100,14 +100,14 @@ public class PaymentController {
 			
 			mv.addObject("result", "포인트 충전이 완료 되었습니다.");
 			mv.addObject("path", "/");
-			mv.setViewName("common/result");
+			mv.setViewName("common/chargeResult");
 			return mv;
 		}else {
 			//paycheckId 삭제
 			paymentService.paycheckDel(memberVO.getMem_id());
 			mv.addObject("result", "포인트 충전을 실패 하였습니다.");
 			mv.addObject("path", "/");
-			mv.setViewName("common/result");
+			mv.setViewName("common/chargeResult");
 			return mv;
 	
 		}
