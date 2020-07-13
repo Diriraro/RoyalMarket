@@ -85,6 +85,9 @@ public class AdminService {
 		return ar.size();
 	}
 	public List<NoticeVO> getNoticeList() throws Exception {
+		return noticeRepository.findAllByOrderByNonumAsc();
+	}
+	public List<NoticeVO> getNoticeList2() throws Exception {
 		return noticeRepository.findAllByOrderByNonumDesc();
 	}
 	

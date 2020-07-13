@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -132,6 +133,22 @@ public class NoticeController {
 	public void service()throws Exception{
 		
 	}
-
+	
+	@ExceptionHandler(Exception.class)
+	public ModelAndView error3() {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("error/serverError");
+		
+		return mv;
+	}
+	//예외 처리 메서드
+	@ExceptionHandler(NullPointerException.class)
+	public ModelAndView error() {
+		ModelAndView mv = new ModelAndView();
+			
+		mv.setViewName("error/serverError");
+			
+		return mv;
+	}
 
 }

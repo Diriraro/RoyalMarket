@@ -267,7 +267,7 @@ public class AdminController {
 	@GetMapping("getNoticeList")
 	public void getNoticeList(Model model) throws Exception {
 		List<NoticeVO> ar = new ArrayList<NoticeVO>();
-		ar = adminService.getNoticeList();
+		ar = adminService.getNoticeList2();
 		model.addAttribute("list", ar);
 	}
 

@@ -49,7 +49,8 @@
 				<td><button class="more" id="${i.count}">문의내용 확인</button> </td>	<!-- 리스트중 어디를 눌러도 문의내역이 뜰수있게 세팅 -->
 																					<!-- 스크립트에서 this를 쓸수 있게 id에 count세팅 -->
 				<td>																<!-- 같은 숫자를 문의내역 뒤에 붙여서 각각 다른 id로 설정 -->
-				<textarea id="hiddenCont${i.count}" readonly="readonly" style="margin: 0px; width: 740px; height: 240px; display: none;">${list.qna_contents}</textarea>
+				<textarea id="hiddenCont${i.count}" disabled="disabled" class="form-control" style="resize:none; 
+				margin: 0px; width: 740px; height: 240px; display: none;" >${list.qna_contents}</textarea>
 				</td>
 				<td></td>
 				<td></td>

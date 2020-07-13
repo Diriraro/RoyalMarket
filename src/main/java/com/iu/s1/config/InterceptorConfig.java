@@ -39,16 +39,24 @@ public class InterceptorConfig implements WebMvcConfigurer {
 		.addPathPatterns("/payment/productCancel")
 		.addPathPatterns("/payment/productGive");
 		
-		// Product랑 Shop에 대해 로그인 해야 들어 갈수 있는 Interceptor
+		// Product랑 Shop에 대해 로그인 해야 들어 갈수 있는 Interceptor //qna, notice추가
 		registry.addInterceptor(productInterceptor)
 		.addPathPatterns("/product/*")
 		.addPathPatterns("/shop/*")
 		.addPathPatterns("/payment/*")
+		.addPathPatterns("/qna/qnaWrite")
+		.addPathPatterns("/qna/qnaMyList")
 		.excludePathPatterns("/payment/prepare")
 		.excludePathPatterns("/product/productList");
 		
 		registry.addInterceptor(adminInterceptor)
-		.addPathPatterns("/admin/*");
+		.addPathPatterns("/admin/*")
+		.addPathPatterns("/notice/*")
+		.addPathPatterns("/qna/qnaAdminList")
+		.addPathPatterns("/qna/qnaAnswer")
+		.excludePathPatterns("/notice/noticeList")
+		.excludePathPatterns("/notice/policy")
+		.excludePathPatterns("/notice/ban");
 
 		//적용할 Interceptor 등록
 		//registry.addInterceptor(productQnaInterceptor)

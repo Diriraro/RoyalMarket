@@ -156,7 +156,7 @@
 							<div style="height: 40px; border-top: solid 1px #e4e4e4;text-align: left;line-height: 40px;">
 								<img style="margin-left: 8px;width: 16px; height: 20px; margin-bottom: 3px;" alt="" 
 									src="${pageContext.request.contextPath}/resources/images/ad_logo.png">
-								<font style="font-weight: 600; font-size: 12px;color: gray;">${vo.mem_address}</font>
+								<font style="font-weight: 600; font-size: 12px;color: gray; overflow: hidden;">${vo.mem_address}</font>
 							</div>
 
 						</div>
@@ -166,7 +166,7 @@
 
 			</c:forEach>
 			
-			<c:if test="${vo.sell_product ne null or param.kind eq 'sk'}">
+			<c:if test="${not empty list and (param.kind eq 'sk' or param.kind eq 'sp' or param.kind eq 'sp')}">
 			
 			
 		
