@@ -721,12 +721,7 @@ input {
 					</div>
 					<form:errors path="mem_pw" class="error_msg"></form:errors>
 					
-					
-					
-					
-					<input id="time" name="time">
-					
-					
+
 					
 
 					<div class="sc-lhLRcH csuEuq">
@@ -759,11 +754,12 @@ input {
 
 
 	<script type="text/javascript">
-	/* var time = "${time}";
+	/*  var time = "${time}";
 
-	if(time=="time"){
+	 if(time=="time"){
 		TimerStart4();
-	} */
+	}   */
+	
 	
 	var name="";
 		$("#show1").click(function() {
@@ -853,12 +849,8 @@ input {
 			window.close();
 		}
 
-		var SetTime=300;
-		/* var SetTime=${time};
-	
-		if(SetTime == -1){
-				SetTime=300;
-			} */
+		var SetTime = 300;
+		
 		var tid=0;
 
 		function msg_time3() {	// 1초씩 카운트
@@ -907,6 +899,11 @@ input {
 		
 		var show3 = "${show3}";
 		var show4 = "${show4}";
+		var again = "${again}";
+
+		if(again=="again"){
+				alert("인증번호를 재발급해주세요!")
+			}
 	
 
 		if(show4){
@@ -921,8 +918,8 @@ input {
 				
 				var email = $('#mem_email4').val();
 				var id = $('#mem_id4').val();
-				var time = "1";
-				$(".pw").css("display", "block")
+				$(".pw").css("display", "block");
+				SetTime= 300;
 
 				$.post("./check/sendEmail", {
 					id : id,
@@ -946,10 +943,10 @@ input {
 
 			function checkPhone3(result2) {
 				var phoneNumber = $('#mem_phone3').val();
-				SetTime=300;
 				var id = $('#mem_id3').val();
 				$(".pw").css("display", "block")
-
+				SetTime= 300;
+	
 				$.post("./check/sendSMS", {
 					id : id,
 					phoneNumber : phoneNumber

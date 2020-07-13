@@ -603,6 +603,12 @@ iframe {
 		var check = false;
 		var SetTime = 300;		// 최초 설정 시간(기본 : 초)
 		var tid = 0;
+
+		var again = "${again}";
+
+		if(again=="again"){
+				alert("인증번호를 재발급해주세요!")
+			}
 		
 		
 		
