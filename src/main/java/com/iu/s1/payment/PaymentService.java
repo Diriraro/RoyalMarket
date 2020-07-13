@@ -162,4 +162,8 @@ public class PaymentService {
 	public int updateSC(SaveCashVO saveCashVO)throws Exception{
 		return saveCashRepository.updateSC(saveCashVO);
 	}
+	
+	public int product_cancel_status(long sell_num)throws Exception{
+		return paymentMapper.product_cancel_status(sell_num);
+	}
 }

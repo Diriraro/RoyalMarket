@@ -208,8 +208,13 @@ public class ShopController {
 			zzimVO.setSell_product(productService.getsell_product(zzimVO));
 			zzimVO.setFile_name(productService.selectFileName(zzimVO.getSell_num()));
 			zzimVO.setSell_price(productService.getsell_price(zzimVO));
-			String ss=	 memberService.mdata(productService.getmem_storeNum(zzimVO)).getMem_address();
-			zzimVO.setMem_address(ss);
+			String m_ad=	 memberService.mdata(productService.getmem_storeNum(zzimVO)).getMem_address();
+			zzimVO.setMem_address(m_ad);
+			
+			ProductVO productVOss = productService.productSelect(zzimVO.getSell_num());
+			long jstaus = productVOss.getSell_status();
+			zzimVO.setSell_status(jstaus); // 찜상태확인 
+			
 			// 주소를 가져와라
 			
 		}
@@ -309,6 +314,8 @@ public class ShopController {
 		List<StoreFollowVO> owiar = storeFollowService.getSelectListFollowers(storeFollowVO2);
 		for (StoreFollowVO storeFollowVO3 :owiar) {
 			storeFollowVO3.setTake_storeName(storeFollowService.getSelecttakeStoreName(storeFollowVO3));// 작성자의 번호로 이름을 출력 한것을 ar안에 담고.
+			storeFollowVO3.setPco(productService.prodco(storeFollowVO3.getTake_storeNum())); // 내가 팔로우 한 사람의 상품수 출력
+			storeFollowVO3.setFco(storeFollowService.takeco(storeFollowVO3.getTake_storeNum())); // 내가 팔로우 한 사람의 팔로워 수 출력
 		}	
 		// 팔로우 리스트 영역 끝
 		
@@ -363,6 +370,8 @@ public class ShopController {
 		List<StoreFollowVO> owear = storeFollowService.getSelectListFollowings(storeFollowVO2);
 		for (StoreFollowVO storeFollowVO3 :owear) {
 			storeFollowVO3.setGive_storeName(storeFollowService.getSelectgiveStoreName(storeFollowVO3));// 작성자의 번호로 이름을 출력 한것을 ar안에 담고.
+			storeFollowVO3.setPco(productService.prodco(storeFollowVO3.getGive_storeNum()));
+			storeFollowVO3.setFco(storeFollowService.takeco(storeFollowVO3.getGive_storeNum()));
 		}	
 		// 팔로워 리스트 영역 끝
 		
@@ -496,7 +505,7 @@ public class ShopController {
 				
 				mv.addObject("flo",flo); // 내림
 				mv.addObject("ban",ban); // 반올림
-				mv.addObject("avg", avg); // 평균
+				mv.addObject("avg",avg); // 평균
 				mv.addObject("substar",flo3);// 반별
 				
 				mv.addObject("pfile", storeReviewFileVOs); // store 사진 출력

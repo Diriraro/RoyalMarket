@@ -16,7 +16,7 @@ public class NoticeService {
 	private NoticeRepository noticeRepository;
 	
 	public List<NoticeVO> noticeList()throws Exception{
-		return noticeRepository.findAll();
+		return noticeRepository.findAllByOrderByNonumDesc();
 	}
 	
 	public int noticeWrite(NoticeVO noticeVO)throws Exception{

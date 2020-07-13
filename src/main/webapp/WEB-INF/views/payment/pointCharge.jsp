@@ -43,7 +43,11 @@
 			<div style="margin-top: 15px;"><input class="check" type="checkbox" id="check1">&nbsp; 충전 내용을 확인하였고 유료 서비스약관에 동의 합니다.</div>
 			<div><input class="check" type="checkbox" id="check2">&nbsp; 우주마켓 포인트 이용 약관에 동의합니다.</div>
 
-			<div><button type="submit" style="background-color: #5c2392; height: 30px; color: white; margin-top:15px; float: left"; id="goCharge">충전하기</button></div>
+			<div style="text-align: center;">
+				<button type="submit" style="background-color: #5c2392; width:100px; height: 30px; color: white; margin-top:15px; display: inline-block; border:1px solid white; border-radius: 10px;"  id="goCharge">충전하기</button>
+				<button type="submit" style="background-color: #5c2392; width:100px; height: 30px; color: white; margin-top:15px; display: inline-block; border:1px solid white; border-radius: 10px;"  id="Cancel">취소하기</button>
+			</div>
+			
 		</form>
 
 	</div>
@@ -71,7 +75,10 @@
 		}
 	
 	});
-	
+
+	$("#Cancel").click(function(){
+			close();
+		})
 
 
 	$("#goCharge").click(function(){

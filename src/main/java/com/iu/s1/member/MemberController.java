@@ -35,6 +35,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.iu.s1.payment.PaymentService;
+import com.iu.s1.paymentHistory.Sell_HistoryVO;
+
 @Controller
 @RequestMapping("/member/**")
 public class MemberController {
@@ -47,9 +50,22 @@ public class MemberController {
 
 	private String checkNum = "";
 
+
+	@Autowired
+	private PaymentService paymentService;
+
+
 	@GetMapping("memberUpdate")
 	public void memberPage() throws Exception {
 
+	}
+
+	@GetMapping("findPwByEmail")
+	public ModelAndView findPwByEmail(HttpSession session, MemberVO memberVO) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("memberVO", new MemberVO());
+		mv.setViewName("member/findPwByEmail");
+		return mv;
 	}
 
 	@PostMapping("findPwByEmail")
@@ -203,6 +219,11 @@ public class MemberController {
 		MemberVO memberVO2 = new MemberVO();
 		memberVO2 = memberService.selectMember(memberVO);
 
+		List<Sell_HistoryVO> sell = paymentService.seller_check(memberVO.getMem_id());
+		int sellProduct = sell.size();
+		
+		
+		
 		if (memberVO2 == null) {
 			mv.addObject("result", "존재하지 않는 회원입니다.");
 			mv.addObject("path", "../");
@@ -223,6 +244,10 @@ public class MemberController {
 			mv.addObject("path", "../");
 			mv.setViewName("common/result");
 			return mv;
+		}else if(!sell.isEmpty()) {
+			mv.addObject("result", sellProduct+"개의 판매중인 상품이 있습니다.");
+			mv.addObject("path", "../payment/sell_History");
+			mv.setViewName("common/result");
 		}
 
 		memberVO = memberService.memberLogin(memberVO);
@@ -233,11 +258,18 @@ public class MemberController {
 				mv.addObject("result", "관리자 로그인 승인되었습니다.");
 				mv.addObject("path", "../admin/adminPage");
 				mv.setViewName("common/result");
-			} else {
-				mv.addObject("result", "환영합니다!");
-				mv.addObject("path", "../");
-				mv.setViewName("common/result");
-
+			}else {
+				
+				// 로그인 할 때 판매 상품이 있는지 없는지 판별하는 조건문
+				if(sell.isEmpty()) {					
+					mv.addObject("result", "환영합니다!");
+					mv.addObject("path", "../");
+					mv.setViewName("common/result");
+				}else {
+					mv.addObject("result", sellProduct+"개의 판매중인 상품이 있습니다.");
+					mv.addObject("path", "../payment/sell_History");
+					mv.setViewName("common/result");
+				}
 			}
 		}
 		return mv;

@@ -17,11 +17,17 @@ font-weight: bold;
 }
 
 .td1{
+
 border-bottom: 2px solid white;
 border-left: 2px solid black;
 border-right: 2px solid black;
 border-top: 2px solid black;
 }
+
+#redd{
+color: red;
+}
+
 
 </style>
 <meta charset="UTF-8">
@@ -36,13 +42,13 @@ border-top: 2px solid black;
 
 	<div class="container">
 		<div
-			style="border: 1px solid black; width: 1024px; min-height: 340px;">
+			style="border: 1px solid black; width: 1024px; min-height: 340px; border-color: rgba(0,0,0,0.25);">
 			<!-- 각자 페이지에 하나씩 생성  -->
 			<!--버튼 감싸는 div  -->
 			<div>
 			<!-- 이동버튼  -->
 			<hr>
-			<table border="1" style="height: 80px;">
+			<table border="1" style="height: 80px; border-color: rgba(0,0,0,0.25);">
 				<tr>
 				<td bgcolor="#f2f2f2"><a href="./myshop?mem_storeNum=${mem_storeNum}">상품&nbsp;&nbsp;   ${prodco}</a></td>
 				<td class="td1"><a href="./comments?mem_storeNum=${mem_storeNum}">상점문의 &nbsp;&nbsp;${coco}</a></td>
@@ -64,7 +70,7 @@ border-top: 2px solid black;
 
 
 			<div>
-				<h2>상점문의</h2>
+				<h2>상점문의&nbsp;<a id="redd">${coco}</a></h2>
 				<hr>
 
 				<%--  <c:import url="../template/comentsForm.jsp"></c:import>  --%>
@@ -105,7 +111,7 @@ border-top: 2px solid black;
 					</c:if> --%>
 				
 					
-					<div style=" border-top: 1px solid gray; border-bottom:1px solid gray; height: 100px;  background-color: #f0f0f5">
+					<div style=" border-top: 1px solid gray; border-bottom:1px solid gray; height: 100px;  background-color: #f0f0f5; border-color: rgba(0,0,0,0.25);">
 						<tr>
 							<%-- <td>${vo.sq_num}</td>
 							<td>${vo.mem_storeNum }	</td> --%>

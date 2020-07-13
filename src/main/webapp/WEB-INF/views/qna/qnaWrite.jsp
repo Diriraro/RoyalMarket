@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+    pageEncoding="UTF-8"%>
+    <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,21 +9,26 @@
 <title>Insert title here</title>
 <c:import url="../template/boot.jsp"></c:import>
 </head>
-<body>
-	<c:import url="../template/nav.jsp"></c:import>
+<body style="background-color: #f5f0f5;">
+<c:import url="../template/woozoo_nav.jsp"></c:import>
+<c:import url="../template/style.jsp"></c:import>
 
 	<div class="container">
-		<h1 style="display: inline-block;">1:1 상담하기</h1>
-
-		<h1 style="display: inline-block;">
-			<a href="./qnaMyList">상담내역</a>
-		</h1>
-		<%
-			String seop = ""; // 스크립틀릿으로 변수명줘보기 테스트
-		%>
+	
+	<!-- qna nav -->
+	<div class="list-group" align="center" style="margin-top: 20px; margin-bottom: 20px;">
+		<button class="list-group-item" type="button" style="width: 512px; height: 44px; display: inline-block; 
+		text-align: center;line-height: 20px; border-left-color: #f5f0f5; border-right-color: #f5f0f5; border-top-color: #f5f0f5; border-bottom-color: #5c2392;
+		border-bottom-width: 2px;">
+		1:1 상담하기</button>
+		<a href="./qnaMyList"><button class="list-group-item" type="button" style="width: 512px; height: 44px; display: inline-block; 
+		text-align: center;line-height: 20px; border-color: #f5f0f5;">
+		상담내역</button></a>
+	</div>
+		
 		<form action="./qnaWrite" method="post" enctype="multipart/form-data">
 			<div align="center" id="qna_kind">
-				<select id="qna_kind_1" style="width: 1174px; height: 35px">
+				<select class="form-control" id="qna_kind_1" style="width: 1024px; height: 35px">
 					<option value="">문의할 내용을 선택해주세요</option>
 					<option value="계정문의">계정문의</option>
 					<option value="차단">차단(제제)</option>
@@ -34,25 +39,33 @@
 					<option value="제안">제안</option>
 					<option value="기타">기타 신고</option>
 				</select>
-				<select id="qna_kind_2" style="width: 1174px; height: 35px">
+				<br>
+				<select class="form-control" id="qna_kind_2" style="width: 1024px; height: 35px">
 					<option value="">상위 항목을 선택해주세요</option>
 				</select>
+				
 				<br><br>
-				<input type="text" id="qna_title" name="qna_title" style="width: 1174px;" placeholder="제목을 입력해 주세요">
+				
+				<input class="form-control" type="text" id="qna_title" name="qna_title" style="width: 1024px;" placeholder="문의 제목을 입력해 주세요">
+				
 				<br><br>
-				<textarea style="margin: 0px; width: 1174px; height: 448px;" name="qna_contents" id="qna_contents">템플릿 양식에 맞춰 작성해주세요.</textarea>
+				
+				<textarea class="form-control" style="margin: 0px; width: 1024px; height: 448px; 
+				resize: none;" name="qna_contents" id="qna_contents">템플릿 양식에 맞춰 작성해주세요.</textarea>
+				
 				<br>
 				<input type="hidden" id="qnak" name="qna_kind" >
-				<input type="hidden" id="mem_id" name="mem_id" value="${member.mem_id }">			<!-- 아이디 세션에서 받아서 value 바꾸기 -->
+				<input type="hidden" id="qmem_id" name="mem_id" value="${member.mem_id}">			<!-- 아이디 세션에서 받아서 value 바꾸기 -->
 			</div>
-			<div align="center" id="fd">
-				<input type="button" class="btn btn-success" id="qnaFileAdd" value="사진추가" style="width:200px;">
-				<div id="f"></div>
+			
+			<div align="left" id="fd" style="width: 1024px; margin-left: 60px;">
+				<input type="button" class="btn" id="qnaFileAdd" value="사진추가" style="width:200px; background-color: white; color: red; font-weight: bold;">
+				<div align="right" style="float: right;">
+					<button type="submit" class="btn" style="width:200px; background-color: #5c2392; color: white; font-weight: bold;" >작성완료</button>
+				</div>
+				<div id="f" align="left"></div>
 			</div>
-			<br><br>
-			<div align="center">
-				<button type="submit" class="btn btn-primary" style="width:200px;">작성완료</button>
-			</div>
+			
 		</form>
 	</div>
 	
@@ -69,7 +82,7 @@
 
 	$("#qnaFileAdd").click(function() {   
 		if (countm < 5) { 
-			$("#f").append('<div id="ff"><input type="file" name="files" style="display: inline-block;"><i class="glyphicon glyphicon-remove remove"></i></div>');
+			$("#f").append('<div id="ff"><input type="file" accept="image/jpg, image/jpeg, image/png" name="files" style="display: inline-block;"><i class="glyphicon glyphicon-remove remove"></i></div>');
 			countm++;
 			} else { 
 			alert("사진등록은 최대 5개 까지입니다.")
@@ -258,13 +271,14 @@
 			});
 			
 		}else{
-			
+			$("#qnak").remove();
+			$("#qna_kind").append('<input type="hidden" id="qnak" name="qna_kind" value="">')
 			$("#qna_kind_2 option").remove();
 			$("#qna_kind_2").append('<option value="">상위 항목을 선택해주세요</option>');
 		}
 		
 	});
 	</script>
-
+<c:import url="../template/footer.jsp"></c:import>
 </body>
 </html>

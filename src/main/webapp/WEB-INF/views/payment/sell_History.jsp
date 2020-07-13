@@ -80,7 +80,7 @@
 					<div style="display: inline-block;">${vo.buyer_id}</div><br>
 					<div style="display: inline-block;">${vo.sell_date}</div><br>
 					<c:if test="${vo.status eq 0}">
-						<button class="btn btn-primary productGive" id="productTake"  title="${vo.sell_num}">판매 대기중</button>
+						<div style="display: inline-block;">판매 대기중</div>
 					</c:if>
 					<c:if test="${vo.status eq 1}">
 						<div style="display: inline-block;">인계 완료</div>
@@ -90,7 +90,7 @@
 					</c:if>
 					<c:if test="${vo.status eq 3}">
 						<div style="display: inline-block;">취소된 거래입니다.</div>
-						<button class="btn btn-primary sellDelete" id="buyDelete"  title="${vo.sell_num}" style="background-color: white; border: white;"><font style="color: red;">삭제하기</font></button>
+						<button class="btn btn-primary sellDelete" id="buyDelete"  title="${vo.sell_history_num}" style="background-color: white; border: white;"><font style="color: red;">삭제하기</font></button>
 					</c:if>		
 				</div>
 			</div>
@@ -105,8 +105,8 @@
 		
 	}); 
  	$(".sellDelete").click(function() {	
-		var num = $(this).attr("title");
-		location.href="./sellDelete?sell_num="+num;
+		var sell_history_num = $(this).attr("title");
+		location.href="./sellDelete?sell_history_num="+sell_history_num;
 		
 	}); 
 	

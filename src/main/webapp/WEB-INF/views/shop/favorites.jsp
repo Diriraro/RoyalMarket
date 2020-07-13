@@ -30,6 +30,39 @@ color: black;
 
 }
 
+#redd{
+color: red;
+}
+
+.img{
+        position: relative;                                   
+        /* height: 190px;
+        width: 197px; */
+        background-size: cover;
+    }
+
+.img-cover{
+
+       height: 100%;
+       width: 100%;
+       background-color: rgba(0, 0, 0, 0.7);                                                                 
+       z-index:1;
+    }
+
+.img .content{
+         position: absolute;
+         top:50%;
+         left:50%;
+         transform: translate(-50%, -50%);                                                                   
+         font-size:1rem;
+         color: white;
+         z-index: 2;
+         text-align: center;
+  }
+
+
+
+
 
 </style>
 <meta charset="EUC-KR">
@@ -41,13 +74,13 @@ color: black;
 <h2></h2>
 		<c:import url="../template/shopmain.jsp"></c:import>
 <div class="container">
-		<div style="border: 1px solid black; width: 1024px;  min-height: 340px;">
+		<div style="border: 1px solid black; width: 1024px;  min-height: 340px; border-color: rgba(0,0,0,0.25);">
 			<!-- 각자 페이지에 하나씩 생성  -->
 			<!--버튼 감싸는 div  -->
 			<div>
 			<!-- 이동버튼  -->
 			<hr>
-			<table border="1" style="height: 80px;">
+			<table border="1" style="height: 80px; border-color: rgba(0,0,0,0.25);">
 				<tr>
 				<td bgcolor="#f2f2f2"><a href="./myshop?mem_storeNum=${mem_storeNum}">상품&nbsp;&nbsp;   ${prodco}</a></td>
 				<td bgcolor="#f2f2f2"><a href="./comments?mem_storeNum=${mem_storeNum}">상점문의 &nbsp;&nbsp;${coco}</a></td>
@@ -67,12 +100,12 @@ color: black;
 
 
 			<div> <!-- 내용보여줄 div  -->
-				<h2>${mem_storeName} 님의 찜목록</h2>
+				<h2>찜&nbsp;<a id="redd">${zico}</a></h2>
 				<hr>
 
-				<div style="border: 1px solid white; min-height: 340px; overflow: auto;">
+				<div style="border: 1px solid white; min-height: 340px; overflow: auto; ">
 					<c:forEach items="${zilist }" var="vo">
-						<div style="border: 1px solid gray; width: 480px; height: 140px; float: left; margin-left: 2%; margin-top: 2%; margin-bottom: 2%;" >
+						<div style="border: 1px solid gray; width: 480px; height: 140px; float: left; margin-left: 2%; margin-top: 2%; margin-bottom: 2%; border-color: rgba(0,0,0,0.25);" >
 						<%-- <button>
 							${vo.mem_storeNum } <a>mem_storeNum</a>
 						</button>
@@ -82,10 +115,42 @@ color: black;
 						<button>
 							  ${vo.zzim_num }<a>zzim_num</a>
 						</button> --%>
+						
+						<!-- ㅜ 이미지 div 2 판매완료  -->
+						<c:if test="${vo.sell_status eq 2 }">
+						
 						<div style="border: 0px solid ; width: 34%; height:100%; float: left;  background-color: #f0f0f5" class="pp2" title="${vo.sell_num }">
-						    <img src="../upload/product/${vo.file_name}"
-						    style="overflow: hidden; display: flex; align-items: center; justify-content: center; width: 100%; height: 100%;">
+						    <%-- <img src="../upload/product/${vo.file_name}" style="overflow: hidden; display: flex; align-items: center; justify-content: center; width: 100%; height: 100%;"> --%>
+						<div class="img" style="background-image: url('${pageContext.request.contextPath}/upload/product/${vo.file_name}'); width:100% ; height : 100%;">
+							<div class="content">
+								<h5 style="margin-bottom: 30px;">판매 <br> 완료</h5>
+							</div>
+							<div class="img-cover">
+							</div>
 						</div>
+						
+						</div>
+						
+						</c:if>
+						<!--  status 2아닐시 판매중 , 예약중 -->
+						<c:if test="${vo.sell_status ne 2 }">
+						
+						<div style="border: 0px solid ; width: 34%; height:100%; float: left;  background-color: #f0f0f5" class="pp2" title="${vo.sell_num }">
+						    <%-- <img src="../upload/product/${vo.file_name}" style="overflow: hidden; display: flex; align-items: center; justify-content: center; width: 100%; height: 100%;"> --%>
+						<div class="img" style="background-image: url('${pageContext.request.contextPath}/upload/product/${vo.file_name}'); width:100% ; height : 100%; border:1px solid; border-color: rgba(0,0,0,0.25);">
+							
+						</div>
+						
+						</div>
+						
+						</c:if>
+						
+						
+						
+						
+						
+						
+						
 						<div style="border: 0px solid; width: 66%;height:100%; float: left;  background-color: #f0f0f5; font-size: 20px;">
 						   <button class="btn btn-danger del" style="float: right;"title="${vo.zzim_num}"> <a style="color: white;">찜 해제</a></button>
 						   
@@ -106,7 +171,7 @@ color: black;
 						 <img	style="width: 16px; height: 20px; margin-bottom: 3px;" alt=""	src="${pageContext.request.contextPath}/resources/images/ad_logo.png">
 						<font style="font-weight: 600; font-size: 15px;">&nbsp;${vo.mem_address}</font>
 						
-						
+					
 						
 						</div>  
 						</div>	

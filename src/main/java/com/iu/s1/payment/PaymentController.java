@@ -2,15 +2,17 @@ package com.iu.s1.payment;
 
 
 import java.text.SimpleDateFormat;
+
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.maven.model.Model;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +27,8 @@ import com.iu.s1.product.ProductVO;
 import com.iu.s1.saveCash.SaveCashVO;
 import com.iu.s1.shop.review.StoreReviewService;
 import com.iu.s1.shop.review.StoreReviewVO;
+
+
 import com.iu.s1.trading.TradingVO;
 
 @Controller
@@ -37,7 +41,7 @@ public class PaymentController {
 	private ProductService productService;
 	@Autowired
 	private StoreReviewService storeReviewService;
-	
+
 	//결제로 들어가는 페이지
 	@GetMapping("pay")
 	public ModelAndView pay(long amount,HttpServletRequest request) throws Exception{
@@ -60,28 +64,29 @@ public class PaymentController {
 	
 	//결제 성공페이지
 	@GetMapping("paySuccess")
-	public String paySuccess(HttpServletRequest httpServletRequest,MemberVO memberVO)throws Exception{
+	public ModelAndView paySuccess(HttpServletRequest httpServletRequest)throws Exception{
 		PayVO payVO = new PayVO();
-		
+		ModelAndView mv = new ModelAndView();
+		MemberVO memberVO = (MemberVO)httpServletRequest.getSession().getAttribute("member");
 		
 		long amount = Long.parseLong(httpServletRequest.getParameter("amount"));
-		long mem_point = Long.parseLong(httpServletRequest.getParameter("mem_point"));
 		String key = httpServletRequest.getParameter("key");
-		String checkKey=paymentService.paycheckSelect(httpServletRequest.getParameter("mem_id"));
+		String checkKey=paymentService.paycheckSelect(memberVO.getMem_id());
 		
 		if(key.equals(checkKey)) {
 
 			//완료페이지를 갈때 맴버 포인트 업데이트
-			mem_point = mem_point + amount;
-			memberVO.setMem_point(mem_point);
-			memberVO.setMem_id(httpServletRequest.getParameter("mem_id"));
+		
+			memberVO.setMem_point(memberVO.getMem_point()+amount);
+			
+			memberVO.setMem_id(memberVO.getMem_id());
 		
 			//현재 포인트 조회
-			long nowPoint = paymentService.pointSelect(httpServletRequest.getParameter("mem_id"));
+			long nowPoint = paymentService.pointSelect(memberVO.getMem_id());
 
 			
 			//충전 내역 업데이트
-			payVO.setMem_id(httpServletRequest.getParameter("mem_id"));
+			payVO.setMem_id(memberVO.getMem_id());
 			payVO.setPay_price(amount);
 			payVO.setPoint_rest(nowPoint+amount);
 			paymentService.paymentCharge(payVO);
@@ -89,21 +94,33 @@ public class PaymentController {
 			paymentService.pointUpdate(memberVO);
 	
 			//paycheckId 삭제
-			paymentService.paycheckDel(httpServletRequest.getParameter("mem_id"));
+			paymentService.paycheckDel(memberVO.getMem_id());
 			
-			return("payment/paySuccess");
+			httpServletRequest.setAttribute("member", memberVO);
+			
+			mv.addObject("result", "포인트 충전이 완료 되었습니다.");
+			mv.addObject("path", "/");
+			mv.setViewName("common/result");
+			return mv;
 		}else {
 			//paycheckId 삭제
-			paymentService.paycheckDel(httpServletRequest.getParameter("mem_id"));
-			return "payment/payFail";
+			paymentService.paycheckDel(memberVO.getMem_id());
+			mv.addObject("result", "포인트 충전을 실패 하였습니다.");
+			mv.addObject("path", "/");
+			mv.setViewName("common/result");
+			return mv;
 	
 		}
 	}
 	
 	@GetMapping("payFail")
-	public String payFail()throws Exception{
-		System.out.println("test");
-		return "payment/payFail"; 
+	public ModelAndView payFail()throws Exception{
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("result", "포인트 충전을 실패 하였습니다.");
+		mv.addObject("path", "/");
+		mv.setViewName("common/result");
+		
+		return mv;
 	}
 	
 	// 포인트 충전 
@@ -355,7 +372,7 @@ public class PaymentController {
 		
 		//인수 인계가 모두 1이면 판매자 포인트 업데이트
 		if(receive==1 && give==1) {		
-			long total=curPoint+tradingVO.getSell_price();
+			long total=curPoint+(tradingVO.getSell_price()-2500);
 			MemberVO memberVO = new MemberVO();
 			memberVO.setMem_id(seller_id);
 			PayStatsVO payStatsVO = new PayStatsVO();
@@ -365,8 +382,8 @@ public class PaymentController {
 			payStatsVO.setSeller_address(memberVO2.getMem_address());
 			
 			//수익 계산
-			long profit = (total/10);
-			long commition= tradingVO.getSell_price()/10;
+			long profit = (tradingVO.getSell_price()-2500)/10;
+			long commition= (tradingVO.getSell_price()-2500)/10;
 			memberVO.setMem_point(total-profit+2500);
 			buy_HistoryVO.setSell_num(sell_num);
 			buy_HistoryVO.setStatus(2);
@@ -433,7 +450,7 @@ public class PaymentController {
 		//인수 인계가 모두 1이면 판매자 포인트 업데이트
 		if(receive==1 && give==1) {		
 			
-			long total=curPoint+tradingVO.getSell_price();
+			long total=curPoint+(tradingVO.getSell_price()-2500);
 			MemberVO memberVO = new MemberVO();
 			memberVO.setMem_id(seller_id);
 			PayStatsVO payStatsVO = new PayStatsVO();
@@ -443,8 +460,8 @@ public class PaymentController {
 			payStatsVO.setSeller_address(memberVO2.getMem_address());
 			
 			// 수익 계산
-			long profit = (total/10);
-			long commition = tradingVO.getSell_price()/10;
+			long profit = (tradingVO.getSell_price()-2500)/10;
+			long commition = (tradingVO.getSell_price()-2500)/10;
 			payStatsVO.setSell_commition(commition);
 			memberVO.setMem_point(total-profit+2500);
 			System.out.println(total-profit+2500);
@@ -623,7 +640,7 @@ public class PaymentController {
 			
 			paymentService.sell_statusUp(sell_HistoryVO);
 			
-			String mem_id = tradingVO.getSeller_id();
+			String mem_id = tradingVO.getBuyer_id();
 			long price = tradingVO.getSell_price();
 			
 			//맴버에서 원래 아이디의 가격을 조회 후 취소된 거래의 가격만큼 더해줌
@@ -634,6 +651,7 @@ public class PaymentController {
 			paymentService.pointUpdate(memberVO);
 			
 			paymentService.tradingDelete(sell_num);
+			paymentService.product_cancel_status(sell_num);
 		}
 		
 	
@@ -643,8 +661,8 @@ public class PaymentController {
 	@GetMapping("sellDelete")
 	public ModelAndView sellDelete(HttpServletRequest request)throws Exception{
 		ModelAndView mv = new ModelAndView();
-		long sell_num= Long.parseLong(request.getParameter("sell_num"));
-		paymentService.del_sellHistory(sell_num);
+		long sell_history_num= Long.parseLong(request.getParameter("sell_history_num"));
+		paymentService.del_sellHistory(sell_history_num);
 		
 		mv.setViewName("redirect:./sell_History");
 		
@@ -655,13 +673,76 @@ public class PaymentController {
 	@GetMapping("buyDelete")
 	public ModelAndView buyDelete(HttpServletRequest request)throws Exception{
 		ModelAndView mv = new ModelAndView();
-		long sell_num= Long.parseLong(request.getParameter("sell_num"));
-		paymentService.del_buyHistory(sell_num);
+		long buy_history_num= Long.parseLong(request.getParameter("buy_history_num"));
+		paymentService.del_buyHistory(buy_history_num);
 		
 		mv.setViewName("redirect:./buy_History");
 		
 		return mv;
 		
+	}
+	@GetMapping("prepare")
+	public ModelAndView prepare()throws Exception{
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("result", "준비중 입니다!!");
+		mv.addObject("path", "../");
+		mv.setViewName("common/result");
+		
+		
+		return mv;
+		
+	}
+	@GetMapping("phone")
+	public ModelAndView phone(HttpServletRequest request)throws Exception{
+		ModelAndView mv = new ModelAndView();
+		long sell_num= Long.parseLong(request.getParameter("sell_num"));
+		long mem_storeNum= Long.parseLong(request.getParameter("mem_storeNum"));
+		String seller_id =paymentService.seller_id_select(sell_num);
+		MemberVO memberVO =paymentService.memberVOSel(seller_id);	
+		StoreReviewVO storeReviewVO = new StoreReviewVO();
+		
+		storeReviewVO.setMem_storeNum(mem_storeNum);
+		
+		List<StoreReviewVO> ar =storeReviewService.getSelectListReview(storeReviewVO);
+		double sum=0.0;
+		double avg=0.0;
+		double rest=0.0;
+		
+		if(!ar.isEmpty()) {
+			for(int i=0; i<ar.size(); i++) {
+				sum= sum+ar.get(i).getRe_rate();
+				System.out.println(ar.get(i).getRe_rate()+"tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt");
+			}
+			System.out.println("sum:   "+ sum);
+	
+			avg=sum/ar.size();		
+			System.out.println(avg);
+			rest=Math.floor(avg);
+			
+			
+			rest= avg-rest;
+		}else {
+			avg=0.0;
+			rest= 0.0;
+		}
+		
+		
+		mv.addObject("rest", rest);
+		mv.addObject("avg", avg);
+		mv.addObject("sum", sum);
+		mv.addObject("memberVO", memberVO);
+		mv.setViewName("/payment/phone");
+		return mv;
+	}
+	
+	//예외 처리 메서드
+	@ExceptionHandler(NullPointerException.class)
+	public ModelAndView error() {
+		ModelAndView mv = new ModelAndView();
+			
+		mv.setViewName("error/serverError");
+			
+		return mv;
 	}
 	
 }

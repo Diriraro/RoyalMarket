@@ -30,7 +30,7 @@ public class QnaController {
 		String id = ((MemberVO)session.getAttribute("member")).getMem_id();
 		qnaVO.setMem_id(id);			//테스트용 아이디=iu ** 나중에 세션에서 로그인한사람 아이디 집어넣어야함
 		List<QnaVO> ar = qnaService.qnaMyList(qnaVO);
-		System.out.println("================================================================="+ar);
+		
 		if(!ar.isEmpty()) {					//로그인한 사용자의 아이디로 상담내역이 있는지 확인
 			mv.addObject("qna_list", ar);
 			mv.setViewName("qna/qnaMyList");
@@ -52,15 +52,25 @@ public class QnaController {
 	@PostMapping("qnaWrite")
 	public ModelAndView qnaWrite(QnaVO qnaVO, MultipartFile [] files)throws Exception{
 		ModelAndView mv = new ModelAndView();
-		int result = qnaService.qnaWrite(qnaVO, files);
-		if(result!=0) {
-			mv.addObject("result", "1:1 상담문의 완료");
-			mv.addObject("path", "../");
+		String title=qnaVO.getQna_title();
+		String contents=qnaVO.getQna_contents();
+		String kind=qnaVO.getQna_kind();
+
+		if(title.equals("")||contents.equals("")||kind.equals("")) {
+			mv.addObject("result", "입력되지 않은 부분이 있습니다. 다시 작성해주세요.");
+			mv.addObject("path", "qnaWrite");
 			mv.setViewName("common/result");
-		}else {
-			mv.addObject("result", "에러발생");
-			mv.addObject("path", "notice/noticeWrite");
-			mv.setViewName("common/result");
+		}else {			
+			int result = qnaService.qnaWrite(qnaVO, files);
+			if(result!=0) {
+				mv.addObject("result", "1:1 상담문의 완료");
+				mv.addObject("path", "qna/qnaMyList");
+				mv.setViewName("common/result");
+			}else {
+				mv.addObject("result", "에러발생");
+				mv.addObject("path", "qna/qnaWrite");
+				mv.setViewName("common/result");
+			}
 		}
 		return mv;
 	}

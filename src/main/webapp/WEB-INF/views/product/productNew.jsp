@@ -72,6 +72,7 @@
 </style>
 
 <c:import url="../template/boot.jsp"></c:import>
+<c:import url="../template/style.jsp"></c:import>
 
 </head>
 <body>
@@ -185,23 +186,29 @@
 		 <ul id="tag-list">
         </ul>
         </div>
-		<input style="width: 856px;height: 48px;" class="form-control" type="text" id="sell_tag"placeholder="태그작성 후 스페이스키를 눌러주세요"> 
+		<input style="width: 856px;height: 48px;" class="form-control" type="text" id="sell_tag"placeholder="태그작성 후 스페이스 혹은 엔터키를 눌러 등록해주세요">
+ 
 		</div>
 		
-		<button style="margin-left: 1302px;margin-top: 16px; width: 160px;height: 56px;border: 0px;background-image: url('${pageContext.request.contextPath}/resources/images/regi_logo.png');" type="submit" class="btn btn-default" id="productNew"></button>
 
-		<button style="margin-left: 860px;margin-top: 16px; width: 160px;height: 56px;border: 0px;background-image: url('${pageContext.request.contextPath}/resources/images/regi_logo.png');" type="submit" class="btn btn-default" id="productNew"></button>            
+		<div  style="height: 50px;display: inline-block;">
+			<button style="margin-left: 400px;margin-top: 16px; width: 160px;height: 56px;border: 0px;
+			background-image: url('${pageContext.request.contextPath}/resources/images/regi_logo.png');" type="submit" class="btn btn-default" id="productNew">
+			</button>
 
+
+		</div>
+		
 
 	</form>
 
 		</div>
-		<div style="height: 88px; background-color: #fafafd;">
-		
-		</div>
+		<div style="height: 90px;width:1024px; background-color: white;"></div>
+
+
 
 		
-
+<c:import url="../template/footer.jsp"></c:import>
 
 		<!-- <a id="sellimg"><img src="${pageContext.request.contextPath}/resources/images/showimage.png"></a>
 		<div class="form-group" id="f"></div> -->
