@@ -382,7 +382,7 @@ iframe {
 		<input type="hidden" value="${sell_product}" name="sell_product" id="sell_product"><br>
 		</div>
 		<div class="form-group">
-		<input type="text" value="${sell_num}" name="sell_num" id="sell_num"><br>
+		<input type="hidden" value="${sell_num}" name="sell_num" id="sell_num"><br>
 		</div>
 	
 		<div id="root">
@@ -394,33 +394,8 @@ iframe {
 								<h2>리뷰 작성</h2>
 								<br>
 							</div>
-							<div class="sc-jGkVzM HDroZ">
-
-								<div class="sc-fYAFcb kThGwo">
-
-									<div class="sc-lhLRcH csuEuq">
-										<div class="sc-jMtzgO liBHhX" style=" height: 230px;">
-										
-												<div class="form-group">
-												<label for="re_context"></label>
-												<textarea rows="" cols="" class="form-control" id="re_context" name="re_context" placeholder="리뷰사항은 100자 이내에 작성해 주세요." style="width: 800px; height: 200px; resize: none; font-size: large;"></textarea>
-												<span style="color:#aaa;" id="counter">(0 / 최대 100자)</span>
-												
-												</div>
-										
-											<div class="sc-kAKrxA kVlvmu">
-												
-											</div>
-
-										</div>
-									</div>
-								</div>
-
-
-								<div class="sc-fYAFcb kThGwo">
-
-									<div class="sc-lhLRcH csuEuq">
-										<div class="sc-jMtzgO liBHhX"style="height: 300px;">
+							
+														<div class="sc-jMtzgO liBHhX"style="height: 300px;">
 											<div class="sc-kAKrxA kVlvmu">
 												
 											</div>
@@ -458,6 +433,7 @@ iframe {
 				<img alt="" src="${pageContext.request.contextPath}/resources/images/star22.png" class=""> <span class="1p">1점</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<hr>
 			</div>	 --%>
+
 		<div class="form-group">
 		<input type="hidden" value="${member.mem_storeName}" name="re_storeName" id="re_storeName">
 		<input type="hidden" value="${member.mem_storeNum}" name="re_storeNum" id="re_storeNum"><br>
@@ -467,6 +443,33 @@ iframe {
 												<!--  -->													
 										</div>
 									</div>
+							<div class="sc-jGkVzM HDroZ">
+
+								<div class="sc-fYAFcb kThGwo">
+
+									<div class="sc-lhLRcH csuEuq">
+										<div class="sc-jMtzgO liBHhX" style=" height: 230px;">
+										
+												<div class="form-group">
+												<label for="re_context"></label>
+												<textarea rows="" cols="" class="form-control" id="re_context" name="re_context" placeholder="리뷰사항은 100자 이내에 작성해 주세요." style="width: 800px; height: 200px; resize: none; font-size: large;"></textarea>
+												<span style="color:#aaa;" id="counter">(0 / 최대 100자)</span>
+												
+												</div>
+										
+											<div class="sc-kAKrxA kVlvmu">
+												
+											</div>
+
+										</div>
+									</div>
+								</div>
+
+
+								<div class="sc-fYAFcb kThGwo">
+
+									<div class="sc-lhLRcH csuEuq">
+			
 								</div>
 								
 								

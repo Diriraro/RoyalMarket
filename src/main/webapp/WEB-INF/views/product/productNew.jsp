@@ -186,7 +186,7 @@
 		 <ul id="tag-list">
         </ul>
         </div>
-		<input style="width: 856px;height: 48px;" class="form-control" type="text" id="sell_tag"placeholder="태그작성 후 스페이스키를 눌러주세요">
+		<input style="width: 856px;height: 48px;" class="form-control" type="text" id="sell_tag"placeholder="태그작성 후 스페이스 혹은 엔터키를 눌러 등록해주세요">
  
 		</div>
 		

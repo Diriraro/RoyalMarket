@@ -7,12 +7,13 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <c:import url="../template/boot.jsp"></c:import>
+
+<c:import url="../template/style.jsp"></c:import>
 </head>
 <body>
-	<c:import url="../template/nav.jsp"></c:import>
+	<c:import url="../template/woozoo_nav.jsp"></c:import>
 	<div class="container">
-		<h1>${member.mem_id}님의 Point 내역</h1>
-		<table class="table table-hover">
+		<table class="table table-hover" style="margin-top: 30px;">
 			<tr>
 				<td>구분</td>
 				<td>포인트량</td>
@@ -38,6 +39,6 @@
 			</c:forEach>
 		</table>
 	</div>
-
+<c:import url="../template/footer.jsp"></c:import>
 </body>
 </html>

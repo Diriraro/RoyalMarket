@@ -100,14 +100,14 @@ public class PaymentController {
 			
 			mv.addObject("result", "포인트 충전이 완료 되었습니다.");
 			mv.addObject("path", "/");
-			mv.setViewName("common/result");
+			mv.setViewName("common/chargeResult");
 			return mv;
 		}else {
 			//paycheckId 삭제
 			paymentService.paycheckDel(memberVO.getMem_id());
 			mv.addObject("result", "포인트 충전을 실패 하였습니다.");
 			mv.addObject("path", "/");
-			mv.setViewName("common/result");
+			mv.setViewName("common/chargeResult");
 			return mv;
 	
 		}
@@ -377,6 +377,7 @@ public class PaymentController {
 			memberVO.setMem_id(seller_id);
 			PayStatsVO payStatsVO = new PayStatsVO();
 			
+			
 			//판매자 아이디 조회 후 paystatus에 인서트
 			MemberVO memberVO2 = paymentService.memberVOSel(seller_id);			
 			payStatsVO.setSeller_address(memberVO2.getMem_address());
@@ -589,6 +590,7 @@ public class PaymentController {
 			mv.setViewName("redirect:./buy_History");
 			Sell_HistoryVO sell_HistoryVO = new Sell_HistoryVO();
 			sell_HistoryVO.setSell_num(sell_num);
+			// 판매자한테 취소 요청
 			sell_HistoryVO.setStatus(4);
 			Buy_HistoryVO buy_HistoryVO = new Buy_HistoryVO();
 			
@@ -596,11 +598,14 @@ public class PaymentController {
 				buy_HistoryVO.setSell_num(sell_num);
 				buy_HistoryVO.setStatus(3);
 			}
+			//buy_history에서 취소됨
 			buy_HistoryVO.setStatus(5);
 			
+			TradingVO tradingVO=paymentService.tradingSelect(sell_num);
+			tradingVO.setBuy_cancel(1);
 			paymentService.buy_statusUp(buy_HistoryVO);
 			paymentService.sell_statusUp(sell_HistoryVO);
-			paymentService.buy_cancelUp(1);
+			paymentService.buy_cancelUp(tradingVO);
 		}else {
 			long sell_history_num = Long.parseLong(request.getParameter("sell_history_num"));
 			long status2 = paymentService.sell_status(sell_history_num);
@@ -609,6 +614,7 @@ public class PaymentController {
 			mv.setViewName("redirect:./sell_History");
 			Buy_HistoryVO buy_HistoryVO = new Buy_HistoryVO();
 			buy_HistoryVO.setSell_num(sell_num);
+			// 구매자한테 취소요청
 			buy_HistoryVO.setStatus(4);
 			Sell_HistoryVO sell_HistoryVO = new Sell_HistoryVO();
 			
@@ -617,10 +623,14 @@ public class PaymentController {
 				sell_HistoryVO.setSell_num(sell_num);
 				sell_HistoryVO.setStatus(3);
 			}
+			//sell_history에서 취소됨
 			sell_HistoryVO.setStatus(5);
+			TradingVO tradingVO = paymentService.tradingSelect(sell_num);
+			tradingVO.setSell_cancel(1);
+			
 			paymentService.sell_statusUp(sell_HistoryVO);
 			paymentService.buy_statusUp(buy_HistoryVO);
-			paymentService.sell_cancelUp(1);
+			paymentService.sell_cancelUp(tradingVO);
 		}
 		
 
@@ -640,7 +650,7 @@ public class PaymentController {
 			
 			paymentService.sell_statusUp(sell_HistoryVO);
 			
-			String mem_id = tradingVO.getSeller_id();
+			String mem_id = tradingVO.getBuyer_id();
 			long price = tradingVO.getSell_price();
 			
 			//맴버에서 원래 아이디의 가격을 조회 후 취소된 거래의 가격만큼 더해줌
@@ -651,6 +661,7 @@ public class PaymentController {
 			paymentService.pointUpdate(memberVO);
 			
 			paymentService.tradingDelete(sell_num);
+			paymentService.product_cancel_status(sell_num);
 		}
 		
 	
@@ -660,8 +671,8 @@ public class PaymentController {
 	@GetMapping("sellDelete")
 	public ModelAndView sellDelete(HttpServletRequest request)throws Exception{
 		ModelAndView mv = new ModelAndView();
-		long sell_num= Long.parseLong(request.getParameter("sell_num"));
-		paymentService.del_sellHistory(sell_num);
+		long sell_history_num= Long.parseLong(request.getParameter("sell_history_num"));
+		paymentService.del_sellHistory(sell_history_num);
 		
 		mv.setViewName("redirect:./sell_History");
 		
@@ -672,8 +683,8 @@ public class PaymentController {
 	@GetMapping("buyDelete")
 	public ModelAndView buyDelete(HttpServletRequest request)throws Exception{
 		ModelAndView mv = new ModelAndView();
-		long sell_num= Long.parseLong(request.getParameter("sell_num"));
-		paymentService.del_buyHistory(sell_num);
+		long buy_history_num= Long.parseLong(request.getParameter("buy_history_num"));
+		paymentService.del_buyHistory(buy_history_num);
 		
 		mv.setViewName("redirect:./buy_History");
 		
