@@ -49,7 +49,7 @@ public interface PaymentMapper {
 	
 	public int sell_statusUp(Sell_HistoryVO sell_HistoryVO)throws Exception;
 	
-	public TradingVO tradingSelect(long sell_num)throws Exception;
+	public TradingVO tradingSelect(long trading_num)throws Exception;
 	
 	public int tradingDelete(long sell_num)throws Exception;
 	

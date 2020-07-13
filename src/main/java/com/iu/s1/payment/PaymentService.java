@@ -86,8 +86,8 @@ public class PaymentService {
 		return paymentMapper.sell_statusUp(sell_HistoryVO);
 	}
 	
-	public TradingVO tradingSelect(long sell_num)throws Exception{
-		return paymentMapper.tradingSelect(sell_num);
+	public TradingVO tradingSelect(long trading_num)throws Exception{
+		return paymentMapper.tradingSelect(trading_num);
 	}
 	public int tradingDelete(long sell_num)throws Exception{
 		return paymentMapper.tradingDelete(sell_num);

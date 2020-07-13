@@ -92,7 +92,7 @@
  	
  	<!-- trading Select -->
  	<select id="tradingSelect" parameterType="java.lang.Long" resultType="com.iu.s1.trading.TradingVO">
- 		select * from trading where sell_num=#{sell_num}
+ 		select * from trading where trading_num=#{trading_num}
  	</select>
  	
  	<!--  trading Delete -->

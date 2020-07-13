@@ -599,7 +599,7 @@ public class PaymentController {
 			//buy_history에서 취소됨
 			buy_HistoryVO.setStatus(5);
 			
-			TradingVO tradingVO=paymentService.tradingSelect(sell_num);
+			TradingVO tradingVO=paymentService.tradingSelect(buy_history_num);
 			tradingVO.setBuy_cancel(1);
 			paymentService.buy_statusUp(buy_HistoryVO);
 			paymentService.sell_statusUp(sell_HistoryVO);
@@ -623,7 +623,7 @@ public class PaymentController {
 			}
 			//sell_history에서 취소됨
 			sell_HistoryVO.setStatus(5);
-			TradingVO tradingVO = paymentService.tradingSelect(sell_num);
+			TradingVO tradingVO = paymentService.tradingSelect(sell_history_num);
 			tradingVO.setSell_cancel(1);
 			
 			paymentService.sell_statusUp(sell_HistoryVO);
@@ -633,7 +633,8 @@ public class PaymentController {
 		
 
 		// 트레이딩 테이블에서 가격과 판매자 아이디를 조회해서 다시 판매자에게 돈을 돌려줌
-		TradingVO tradingVO =paymentService.tradingSelect(sell_num);
+		long history_num = Long.parseLong(request.getParameter("sell_history_num"));
+		TradingVO tradingVO =paymentService.tradingSelect(history_num);
 		
 		if(tradingVO.getBuy_cancel()==1 && tradingVO.getSell_cancel()==1) {
 			Buy_HistoryVO buy_HistoryVO = new Buy_HistoryVO();
@@ -742,14 +743,14 @@ public class PaymentController {
 		return mv;
 	}
 	
-	//예외 처리 메서드
-	@ExceptionHandler(NullPointerException.class)
-	public ModelAndView error() {
-		ModelAndView mv = new ModelAndView();
-			
-		mv.setViewName("error/serverError");
-			
-		return mv;
-	}
+//	//예외 처리 메서드
+//	@ExceptionHandler(NullPointerException.class)
+//	public ModelAndView error() {
+//		ModelAndView mv = new ModelAndView();
+//			
+//		mv.setViewName("error/serverError");
+//			
+//		return mv;
+//	}
 	
 }
