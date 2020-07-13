@@ -902,7 +902,7 @@ input {
 		var again = "${again}";
 
 		if(again=="again"){
-				alert("인증번호를 재발급해주세요!")
+				alert("입력정보가 틀립니다. 인증번호를 재발급하고 다시 시도해주세요!")
 			}
 	
 
