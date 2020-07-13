@@ -90,7 +90,7 @@
 					</c:if>
 					<c:if test="${vo.status eq 3}">
 						<div style="display: inline-block;">취소된 거래입니다.</div>
-						<button class="btn btn-primary sellDelete" id="buyDelete"  title="${vo.sell_num}" style="background-color: white; border: white;"><font style="color: red;">삭제하기</font></button>
+						<button class="btn btn-primary sellDelete" id="buyDelete"  title="${vo.sell_history_num}" style="background-color: white; border: white;"><font style="color: red;">삭제하기</font></button>
 					</c:if>		
 				</div>
 			</div>
@@ -105,8 +105,8 @@
 		
 	}); 
  	$(".sellDelete").click(function() {	
-		var num = $(this).attr("title");
-		location.href="./sellDelete?sell_num="+num;
+		var sell_history_num = $(this).attr("title");
+		location.href="./sellDelete?sell_history_num="+sell_history_num;
 		
 	}); 
 	
