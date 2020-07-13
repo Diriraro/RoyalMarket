@@ -127,7 +127,7 @@ body {
 	height: 56px;
 	text-align: center;
 	font-size: 18px;
-	background: rgb(247, 47, 51);
+	background: rgb(102, 0, 102);
 	margin-top: 30px;
 }
 
