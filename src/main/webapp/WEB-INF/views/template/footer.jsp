@@ -11,7 +11,7 @@
 		<li style="margin-right: 30px;"><a href="/notice/ban"><b>거래 금지 품목</b></a></li>
 		<li style="margin-right: 30px;"><a href="/qna/qnaWrite"><b>1:1문의</b></a></li>
 		<li style="margin-right: 30px;"><a href="/notice/terms/service"><b>이용약관</b></a></li>
-		<li><a href="#"><b>개인정보처리방침</b></a></li>
+		<li><a href="/notice/terms/privacy"><b>개인정보처리방침</b></a></li>
 
 		</ul>
 	</div>    

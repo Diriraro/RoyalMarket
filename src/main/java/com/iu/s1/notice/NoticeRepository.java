@@ -11,4 +11,5 @@ public interface NoticeRepository extends JpaRepository<NoticeVO, Long> {
 	public List<NoticeVO> findByNotitleContainingOrderByNonumDesc(String search);
 	
 	public List<NoticeVO> findAllByOrderByNonumDesc();
+	public List<NoticeVO> findAllByOrderByNonumAsc();
 }
