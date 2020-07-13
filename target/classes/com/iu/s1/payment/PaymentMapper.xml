@@ -189,13 +189,14 @@
   	</select>
   	
   	<!-- trading buy_cancel Up -->
-  	<update id="buy_cancelUp" parameterType="java.lang.Long">
-  		update trading set buy_cancel=#{buy_cancel}
+  	<update id="buy_cancelUp" parameterType="com.iu.s1.trading.TradingVO">
+  		update trading set buy_cancel=#{buy_cancel} where trading_num = #{trading_num}
+  		
   	</update>
   	
   	<!-- trading sell_cancel Up -->
-  	<update id="sell_cancelUp" parameterType="java.lang.Long">
-  		update trading set sell_cancel=#{sell_cancel}
+  	<update id="sell_cancelUp" parameterType="com.iu.s1.trading.TradingVO">
+  		update trading set sell_cancel=#{sell_cancel} where trading_num = #{trading_num}
   	</update>
   	
   	<update id="product_cancel_status" parameterType="java.lang.Long">

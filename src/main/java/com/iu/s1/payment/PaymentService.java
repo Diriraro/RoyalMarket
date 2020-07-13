@@ -143,12 +143,12 @@ public class PaymentService {
 	}
 	
 	
-	public int buy_cancelUp(long buy_cancel)throws Exception{
-		return paymentMapper.buy_cancelUp(buy_cancel);
+	public int buy_cancelUp(TradingVO tradingVO)throws Exception{
+		return paymentMapper.buy_cancelUp(tradingVO);
 	}
 	
-	public int sell_cancelUp(long cell_cancel)throws Exception{
-		return paymentMapper.sell_cancelUp(cell_cancel);
+	public int sell_cancelUp(TradingVO tradingVO)throws Exception{
+		return paymentMapper.sell_cancelUp(tradingVO);
 	}
 
 	public SaveCashVO selectSC(String mem_id)throws Exception{

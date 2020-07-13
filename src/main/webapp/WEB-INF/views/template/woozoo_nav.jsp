@@ -274,6 +274,7 @@ button {
 				    <li><a href="../shop/myshop?mem_storeNum=${member.mem_storeNum}">내상점</a></li>
 				    <li><a href="../payment/buy_History">구매내역</a></li>
 				    <li><a href="../payment/sell_History">판매내역</a></li>
+				    <li><a href="../payment/pointManage">나의 포인트</a></li>
 				  </ul>
 
 				</div>
