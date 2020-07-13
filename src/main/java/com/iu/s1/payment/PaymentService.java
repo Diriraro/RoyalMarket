@@ -166,4 +166,7 @@ public class PaymentService {
 	public int product_cancel_status(long sell_num)throws Exception{
 		return paymentMapper.product_cancel_status(sell_num);
 	}
+	public long auto_incrementNum() throws Exception{
+		return paymentMapper.auto_incrementNum();
+	}
 }

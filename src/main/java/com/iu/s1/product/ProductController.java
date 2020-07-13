@@ -52,7 +52,7 @@ public class ProductController {
 		mv.addObject("productVO", new ProductVO());
 		return mv;
 	}
-
+	 
 	@PostMapping("productNew")
 	public ModelAndView productInsert(@Valid ProductVO productVO, BindingResult bindingResult, MultipartFile[] files,
 			RedirectAttributes rd) throws Exception {

@@ -1,7 +1,10 @@
 package com.iu.s1.Error;
 
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.logging.SimpleFormatter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
@@ -26,9 +29,22 @@ public class ErrorPageConfig implements ErrorController{
     public String handleError(HttpServletRequest request, Model model) {
         Object status = request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);
         HttpStatus httpStatus = HttpStatus.valueOf(Integer.valueOf(status.toString()));
-        model.addAttribute("code", status.toString());
-        model.addAttribute("msg", httpStatus.getReasonPhrase());
-        model.addAttribute("timestamp", new Date());
+        String msg = "";
+        if(status.toString().equals("404")) {
+        	msg = "잘못된 경로입니다.";
+        } else if (status.toString().equals("500")) {
+        	msg = "잘못된 요청입니다.";
+        } else if (status.toString().equals("403")) {
+        	msg = "권한이 없습니다.";
+        } else if (status.toString().equals("405")) {
+        	msg = "잘못된 전달방식 입니다.";
+        } else {
+        	msg = "잘못된 파라미터 입니다.";
+        }
+        model.addAttribute("code", msg);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일  HH시 mm분 ss초");
+        String date =sdf.format(new Date());
+        model.addAttribute("timestamp", date);
         return "error/error";
     }
 	

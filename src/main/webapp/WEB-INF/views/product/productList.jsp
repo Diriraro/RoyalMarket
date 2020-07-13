@@ -18,7 +18,6 @@
 	width: 194px;
 	background-size: cover;
 }
-
 .img-cover {
 	position: absolute;
 	height: 100%;
@@ -26,7 +25,6 @@
 	background-color: rgba(0, 0, 0, 0.7);
 	z-index: 1;
 }
-
 .img .content {
 	position: absolute;
 	top: 50%;
@@ -37,7 +35,6 @@
 	z-index: 2;
 	text-align: center;
 }
-
 </style>
 
 </head>
@@ -128,7 +125,7 @@
 
 					<div class="qqq" title="${vo.sell_num}"
 						style="height: 194px; width: 194px; cursor: pointer;"
-						onclick="location.href='./product/productSelect?sell_num=${vo.sell_num}'">
+						onclick="location.href='../product/productSelect?sell_num=${vo.sell_num}'">
 
 
 						<%-- 						<img style="height: 194px; width: 194px; cursor: pointer;" alt=""
@@ -216,7 +213,6 @@
 <c:import url="../template/footer.jsp"></c:import>
 
 	<script type="text/javascript">
-
 		$(".qqq").click(function() {
 			var sell_num = $(this).prop("title");
 			var myCookie = getCookie("recentSearch");
@@ -228,7 +224,6 @@
 				setCookie("recentSearch", sell_num, 1)
 			}
 		})
-
 		function setCookie(key, value, expiredays) {
 			var todayDate = new Date();
 			todayDate.setDate(todayDate.getDate() + expiredays);
@@ -250,7 +245,6 @@
 			}
 			return null;
 		}
-
 	</script>
 
 

@@ -11,19 +11,26 @@ import org.springframework.boot.context.properties.bind.DefaultValue;
 //import java.util.List;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.iu.s1.member.MemberService;
 import com.iu.s1.member.MemberVO;
 import com.iu.s1.notice.NoticeVO;
+import com.iu.s1.payment.PayStatsVO;
+import com.iu.s1.payment.PaymentService;
+import com.iu.s1.paymentHistory.Buy_HistoryVO;
 import com.iu.s1.paymentHistory.ProfitVO;
+import com.iu.s1.paymentHistory.Sell_HistoryVO;
 import com.iu.s1.product.ProductService;
 import com.iu.s1.product.ProductVO;
 import com.iu.s1.qna.QnaService;
 import com.iu.s1.qna.QnaVO;
 import com.iu.s1.qna.file.QnaFileVO;
+import com.iu.s1.saveCash.SaveCashVO;
 import com.iu.s1.trading.TradingVO;
 import com.iu.s1.util.Pager;
 import com.iu.s1.visitor.VisitorVO;
@@ -37,6 +44,10 @@ public class AdminController {
 	private AdminService adminService;
 	@Autowired
 	private QnaService qnaService;
+	@Autowired
+	private PaymentService paymentService;
+	@Autowired
+	private MemberService memberService;
 
 	@GetMapping("adminPage")
 	public String adminPage(Model model) throws Exception {
@@ -94,7 +105,7 @@ public class AdminController {
 		List<Map.Entry<String, Long>> tradeAr = adminService.getLocateTradeCount();
 		List<ProfitVO> profitAr = new ArrayList<ProfitVO>();
 		profitAr = adminService.getProfit();
-		
+
 		long tradeCount = 0;
 		if (adminService.getDailyTradeCount() != null) {
 			tradeCount = adminService.getDailyTradeCount();
@@ -302,5 +313,100 @@ public class AdminController {
 		}
 		List<NoticeVO> ar = adminService.noticeTitleSearch(search);
 		model.addAttribute("list", ar);
+	}
+
+	// Trading
+	@Transactional
+	@GetMapping("compulsionTrans")
+	public void compulsionTrans(TradingVO tradingVO, long behavior, Model model) throws Exception {
+		TradingVO traVO = new TradingVO();
+		traVO = paymentService.tradingSelect(tradingVO.getSell_num());
+		
+		
+		// 거래 인수
+		if (behavior == 1) {
+			// 상품 거래중인 정보
+			// 구매자의 구매내역에 해당 상품 추가
+
+			long curPoint = paymentService.pointSelect(traVO.getSeller_id());
+			long total = curPoint + (traVO.getSell_price() - 2500);
+			MemberVO memberVO = new MemberVO();
+			memberVO.setMem_id(traVO.getSeller_id());
+			PayStatsVO payStatsVO = new PayStatsVO();
+
+			// 판매자 아이디 조회후 paystatus에 인서트
+			MemberVO memberVO2 = paymentService.memberVOSel(traVO.getSeller_id());
+			payStatsVO.setSeller_address(memberVO2.getMem_address());
+
+			// 수익 계산
+			long profit = (traVO.getSell_price() - 2500) / 10;
+			long commition = (traVO.getSell_price() - 2500) / 10;
+			payStatsVO.setSell_commition(commition);
+			memberVO.setMem_point(total - profit + 2500);
+			System.out.println(total - profit + 2500);
+			// 판매 통계 업데이트
+			paymentService.paystatsInsert(payStatsVO);
+
+			// buy상태 sell상태 바꾸기
+			Buy_HistoryVO buy_HistoryVO = new Buy_HistoryVO();
+			buy_HistoryVO.setBuy_history_num(traVO.getTrading_num());
+			buy_HistoryVO.setStatus(2);
+			buy_HistoryVO.setBuy_check(0);
+			paymentService.buy_statusUp(buy_HistoryVO);
+
+			Sell_HistoryVO sell_HistoryVO = new Sell_HistoryVO();
+			sell_HistoryVO = new Sell_HistoryVO();
+			sell_HistoryVO.setSell_history_num(traVO.getTrading_num());
+			sell_HistoryVO.setStatus(2);
+			sell_HistoryVO.setSell_check(0);
+			paymentService.sell_statusUp(sell_HistoryVO);
+
+			// 1% 적립금 추가
+			SaveCashVO saveCashVO = new SaveCashVO();
+			saveCashVO = paymentService.selectSC(traVO.getBuyer_id());
+
+			ProductVO productVO = paymentService.productSelect(traVO.getSell_num());
+			long sc = productVO.getSell_price();
+			sc = (long) (sc * 0.01); // 1%
+			sc = Math.round(sc * 0.1) * 10; // 1원단위 반올림
+			sc = sc + saveCashVO.getMem_cash();
+			saveCashVO.setMem_cash(sc);
+			paymentService.updateSC(saveCashVO);
+
+			// 포인트 업데이트 및 trading에서 삭제
+			paymentService.pointUpdate(memberVO);
+			paymentService.tradingDelete(tradingVO.getSell_num());
+			
+			
+			// 거래 취소
+		} else if (behavior == 2) {
+			// 트레이딩 테이블에서 가격과 판매자 아이디를 조회해서 다시 판매자에게 돈을 돌려줌
+			Buy_HistoryVO buy_HistoryVO = new Buy_HistoryVO();
+			buy_HistoryVO.setBuy_history_num(traVO.getTrading_num());
+			buy_HistoryVO.setStatus(3);
+			buy_HistoryVO.setBuy_check(1);
+			paymentService.buy_statusUp(buy_HistoryVO);
+			
+			Sell_HistoryVO sell_HistoryVO = new Sell_HistoryVO();
+			sell_HistoryVO.setSell_history_num(traVO.getTrading_num());
+			sell_HistoryVO.setStatus(3);
+			sell_HistoryVO.setSell_check(1);
+			paymentService.sell_statusUp(sell_HistoryVO);
+
+			String mem_id = traVO.getBuyer_id();
+			long price = traVO.getSell_price();
+
+			// 맴버에서 원래 아이디의 가격을 조회 후 취소된 거래의 가격만큼 더해줌
+			
+			
+			/* 취소후 store_product 판매상태 status = 0 으로 update 하는 서비스 호출 추후 작성*/
+			long point = paymentService.pointSelect(mem_id);
+			MemberVO memberVO = new MemberVO();
+			memberVO.setMem_id(mem_id);
+			memberVO.setMem_point(price + point);
+			paymentService.pointUpdate(memberVO);
+			paymentService.tradingDelete(tradingVO.getSell_num());
+		}
+		System.out.println("behavior : " + behavior);
 	}
 }

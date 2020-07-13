@@ -46,7 +46,6 @@ public class InterceptorConfig implements WebMvcConfigurer {
 		// Product랑 Shop에 대해 로그인 해야 들어 갈수 있는 Interceptor
 
 		registry.addInterceptor(productInterceptor)
-		/* .addPathPatterns("/product/*") */
 		.addPathPatterns("/shop/*")
 		.addPathPatterns("/payment/*")
 		.addPathPatterns("/product/*")
@@ -56,7 +55,8 @@ public class InterceptorConfig implements WebMvcConfigurer {
 		.excludePathPatterns("/product/homeProductList")
 		.excludePathPatterns("/product/recProductList")
 		.excludePathPatterns("/qna/qnaAdminList")
-		.excludePathPatterns("/qna/qnaAnswer");
+		.excludePathPatterns("/qna/qnaAnswer")
+		.excludePathPatterns("/product/recentSearchProduct");
 		
 		registry.addInterceptor(adminInterceptor)
 		.addPathPatterns("/admin/*")

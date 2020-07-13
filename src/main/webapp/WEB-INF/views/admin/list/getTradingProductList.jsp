@@ -39,8 +39,8 @@
 					<td>${trading.buyer_id}</td>
 					<td>${trading.seller_id}</td>
 					<td>${trading.sell_price}</td>
-					<td width="50px"><button onclick="location.href='#'" class="btn btn-danger"> 강제인수 </button> <!-- ${trading.trading_num} 파라미터 넘기기-->
-					<td width="50px"><button onclick="location.href='#'" class="btn btn-normal"> 강제취소 </button> <!-- ${trading.trading_num} 파라미터 넘기기-->
+					<td width="50px"><button id="compulsionTrans" title="${trading.sell_num}" class="btn btn-danger"> 강제인수 </button> <!-- ${trading.trading_num} 파라미터 넘기기-->
+					<td width="50px"><button id="compulsionCancel" title="${trading.sell_num}" class="btn btn-normal"> 강제취소 </button> <!-- ${trading.trading_num} 파라미터 넘기기-->
 				</tr>
 			</c:forEach>
 		</tbody>
