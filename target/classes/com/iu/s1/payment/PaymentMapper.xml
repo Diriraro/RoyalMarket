@@ -132,12 +132,12 @@
  	
  	<!-- buy_history 삭제 -->
  	<delete id="del_buyHistory" parameterType="java.lang.Long">
- 		delete from buy_history where sell_num=#{sell_num}
+ 		delete from buy_history where buy_history_num=#{buy_history_num}
  	</delete>
  	
  	<!-- sell_history 삭제 -->
  	<delete id="del_sellHistory" parameterType="java.lang.Long">
- 		delete from sell_history where sell_num=#{sell_num}
+ 		delete from sell_history where sell_history_num=#{sell_history_num}
  	</delete>
  	
  	<!-- 거래를 시작 할때 예약중으로 바꾸기 -->
@@ -197,6 +197,9 @@
   	<update id="sell_cancelUp" parameterType="java.lang.Long">
   		update trading set sell_cancel=#{sell_cancel}
   	</update>
-  		
+  	
+  	<update id="product_cancel_status" parameterType="java.lang.Long">
+ 		update store_product set sell_status=0 where sell_num=#{sell_num};
+ 	</update>	
   		
  </mapper>
