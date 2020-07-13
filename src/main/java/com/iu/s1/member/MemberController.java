@@ -48,7 +48,7 @@ public class MemberController {
 	@Autowired
 	private JavaMailSender mailSender;
 
-	private String checkNum = "";
+	private String checkNum = "checkNum";
 
 
 	@Autowired
