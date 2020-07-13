@@ -39,6 +39,22 @@
 			</c:forEach>
 		</table>
 	</div>
+	
+	<div>
+		<a href="javascript:popup()">정산하기 </a>
+	</div>
+	
+	<script type="text/javascript">
+	
+		function popup() {
+		var url = "../payment/calculate";
+		var name = "정산";
+		var option = "width = 500, height = 500, top = 100, left = 200, location = no"
+		window.open(url, name, option);
+	}
+	</script>
+	
 <c:import url="../template/footer.jsp"></c:import>
+
 </body>
 </html>

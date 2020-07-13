@@ -743,6 +743,29 @@ public class PaymentController {
 		return mv;
 	}
 	
+	@GetMapping("calculate")
+	public ModelAndView calculate(HttpServletRequest request)throws Exception{
+		ModelAndView mv = new ModelAndView();
+		MemberVO memberVO = (MemberVO)request.getSession().getAttribute("member");
+	
+		String check= paymentService.paycheckSelect(memberVO.getMem_id());
+		
+		
+		if(check !=null) {
+	
+			paymentService.paycheckDel(memberVO.getMem_id());
+		}
+		
+		//맴버테이블에서 포인트 조회
+		String mem_id = memberVO.getMem_id();
+		long point = paymentService.pointSelect(mem_id);
+		
+		mv.addObject("point", point);
+		mv.setViewName("/payment/calculate");
+		
+		return mv;  
+	}
+	
 //	//예외 처리 메서드
 //	@ExceptionHandler(NullPointerException.class)
 //	public ModelAndView error() {
