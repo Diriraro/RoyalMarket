@@ -637,10 +637,9 @@ public class PaymentController {
 			sell_HistoryVO.setSell_num(sell_num);
 			sell_HistoryVO.setStatus(3);
 			sell_HistoryVO.setSell_check(1);
-			
 			paymentService.sell_statusUp(sell_HistoryVO);
 			
-			String mem_id = tradingVO.getSeller_id();
+			String mem_id = tradingVO.getBuyer_id();
 			long price = tradingVO.getSell_price();
 			
 			//맴버에서 원래 아이디의 가격을 조회 후 취소된 거래의 가격만큼 더해줌

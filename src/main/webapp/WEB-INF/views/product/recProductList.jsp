@@ -18,7 +18,7 @@
 
 			<c:forEach items="${list}" var="vo" varStatus="i">
 				<div style="display:inline-block;margin-right: 64px;">
-					<div class="qqq" style="height: 194px; width: 194px; cursor: pointer;"
+					<div class="qqq" style="height: 194px; width: 194px; cursor: pointer;" title="${vo.sell_num}"
 						onclick="location.href='../product/productSelect?sell_num=${vo.sell_num}'">
 
 

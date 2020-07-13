@@ -77,8 +77,7 @@
 				</div>
 			</div>
 			<div id="admin_set">
-				${member.mem_id}님
-				<i class="fas fa-user-cog"></i>
+				${member.mem_id}님 <i class="fas fa-user-cog"></i>
 			</div>
 			<div id="QnaAndManToMan">
 				<a title="manToman" class="check"> 1:1문의 </a>
@@ -106,7 +105,7 @@
 			$(".new").children(".fas").css("color", "#26004d");
 		}
 
-		$(function() {
+		$(function() { // 페이지 로딩이후 동작
 			// section 2
 			$(".adminMenu").click(function() {
 				if ($("#mySidenav").css("width") == "0px") {
@@ -228,6 +227,15 @@
 				getNoticeWrite();
 			}
 		})
+		
+		$("#content").on("click", "#compulsionTrans", function() {
+			var sell_num = $(this).prop("title");
+			compulsionTrans(sell_num);
+			})
+		$("#content").on("click", "#compulsionCancel", function() {
+			var sell_num = $(this).prop("title");
+			compulsionCancel(sell_num);
+			})
 		$("#content").on("click",".w3-circle", function() {
 			var num = $(this).attr("title").trim();
 			location.href="../product/productSelect?sell_num="+num
@@ -584,6 +592,51 @@
 						}
 					})
 		}
+		function compulsionTrans(sell_num) {
+			$("#content").empty();
+			$.get("./result/compulsionTrans?sell_num="+sell_num+"&behavior=1", function() {
+				$
+				.ajax({
+					type : "GET",
+					url : "./list/getTradingProductList",
+					beforeSend : function() {
+						var loadingHtml = '<div id="loading" style="z-index: 1005;position: absolute; top:50%;left:50%; text-align:center;"> ';
+						loadingHtml += '<div class="loading_box"><img src="${pageContext.request.contextPath}/resources/images/loading.gif">"</div></div>';
+						$('#content').fadeTo("fast", 0.4).append(
+								loadingHtml);
+					},
+					success : function(result) {
+						$('#content').fadeTo("slow", 1).find('#loading')
+								.remove();
+						alert("인수인계가 정상적으로 처리되었습니다.");
+						getTradingProductList();
+					}
+				})
+				})
+			}
+		function compulsionCancel(sell_num) {
+			$("#content").empty();
+			$.get("./result/compulsionTrans?sell_num="+sell_num+"&behavior=2", function() {
+				$
+				.ajax({
+					type : "GET",
+					url : "./list/getTradingProductList",
+					beforeSend : function() {
+						var loadingHtml = '<div id="loading" style="z-index: 1005;position: absolute; top:50%;left:50%; text-align:center;"> ';
+						loadingHtml += '<div class="loading_box"><img src="${pageContext.request.contextPath}/resources/images/loading.gif">"</div></div>';
+						$('#content').fadeTo("fast", 0.4).append(
+								loadingHtml);
+					},
+					success : function(result) {
+						$('#content').fadeTo("slow", 1).find('#loading')
+								.remove();
+						alert("상품거래가 정상적으로 취소되었습니다.");
+						getTradingProductList();
+					}
+				})
+				})
+			}
+		
 		function getNoticeDelete(nonum) {
 			$("#content").empty();
 			$.get("../notice/noticeDelete?nonum=" + nonum, function(result) {

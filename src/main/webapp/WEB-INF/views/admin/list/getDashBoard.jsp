@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <div class="w3-main">
 
 	<!-- Header -->
@@ -161,13 +162,12 @@
 				</thead>
 				<tbody>
 					<c:catch>
-						<c:forEach items="${list}" var="li" begin="${list.size()-2}"
-							end="${list.size()}">
+						<c:forEach items="${list}" var="li" begin="0" end="1">
 							<tr>
 								<td>${li.nonum}</td>
 								<td><a href="#" title="NoticeSelect"
 									class="check pointCursor" id="${li.nonum}">${li.notitle}</a></td>
-								<td>${li.no_contents}</td>
+								<td><p class="notice_Contents">${li.no_contents.substring(0, 40)}....</p></td>
 								<td>${li.no_regDate}</td>
 							</tr>
 						</c:forEach>
@@ -185,7 +185,7 @@
 		<p class="ct">
 			달성 / 목표 <i class="fas fa-won-sign"></i>
 		</p>
-		<c:forEach items="${profitAr}" var="profit" varStatus="i">
+		<%-- <c:forEach items="${profitAr}" var="profit" varStatus="i">
 			<div>${i.index+1}월매출</div>
 			<div class="w3-grey" style="position: relative;">
 				<div class="w3-container w3-center w3-padding w3-green"
@@ -198,16 +198,17 @@
 				</div>
 			</div>
 			<br>
-		</c:forEach>
-		<%-- <div class="w3-grey" style="position: relative;">
-			<div class="w3-container w3-center w3-padding w3-green"
-				style="width:${profitRate}%; height: 30px;">
-				<div
-					style="overflow: visible; width: 100%; text-align: center; position: absolute; height: 100%;">${profit}
-					/ 1,000,000 <i class="fas fa-won-sign"></i>
-					<div></div>
-				</div>
-			</div>
-		</div> --%>
+		</c:forEach> --%>
+		<div class="vGraph">
+			<ul>
+				<c:forEach items="${profitAr}" var="profit" varStatus="i">
+					<li><span class="gTerm">${i.index+1}월 매출</span><span><span
+							class="gBar"
+							style="height:${profit.profitRate}%; background-color : purple; color : white;"><span>${profit.profitRate}%</span>${profit.profit}
+								/ 1,000,000 원</span></span></li>
+				</c:forEach>
+			</ul>
+		</div>
 	</div>
 </div>
+
