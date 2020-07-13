@@ -10,17 +10,13 @@
 #recentBox {
 	position: fixed;
 	right: calc(50% - 830px);
-	top: 200px;
+	top: 185px;
 	width: 200px;
 	text-align: center;
-	border-top: 1px solid rgb(204, 204, 204);
-	border-left: 1px solid rgb(204, 204, 204);
-	border-right: 1px solid rgb(204, 204, 204);
-	border-bottom: 1px solid rgb(204, 204, 204);
-	padding: 10px;
-	overflow: hidden;
-	padding: 10px;
+	border: 1px solid rgb(204, 204, 204);
+	padding: 3px 10px;
 	box-sizing: border-box;
+	background-color: white;
 }
 
 .recentSearchContainer {
@@ -30,6 +26,7 @@
 .recentSearchContainer>img {
 	border-radius: 50%;
 	width: 100px;
+	height : 90px;
 }
 
 #header_top {
@@ -245,7 +242,7 @@ button {
 					alt="로고"></a>
 				<!-- 검색창 -->
 				<div style="margin-left: 90px; display: inline-block;">
-					<form action="./productList" class="form-inline">
+					<form action="/product/productList" class="form-inline">
 						<div class="input-group input-group-sm col-xs-2"
 							style="display: inline-block; border-radius: 3px 3px 3px 3px; width: 90px; border-bottom: solid 2px #5c2392; border-left: solid 2px #5c2392; border-right: solid 2px #5c2392; border-top: solid 2px #5c2392;">
 							<select class="form-control" id="sel1" name="kind"

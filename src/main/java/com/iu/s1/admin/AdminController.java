@@ -321,14 +321,14 @@ public class AdminController {
 
 			// buy상태 sell상태 바꾸기
 			Buy_HistoryVO buy_HistoryVO = new Buy_HistoryVO();
-			buy_HistoryVO.setSell_num(traVO.getSell_num());
+			buy_HistoryVO.setBuy_history_num(traVO.getTrading_num());
 			buy_HistoryVO.setStatus(2);
 			buy_HistoryVO.setBuy_check(0);
 			paymentService.buy_statusUp(buy_HistoryVO);
 
 			Sell_HistoryVO sell_HistoryVO = new Sell_HistoryVO();
 			sell_HistoryVO = new Sell_HistoryVO();
-			sell_HistoryVO.setSell_num(traVO.getSell_num());
+			sell_HistoryVO.setSell_history_num(traVO.getTrading_num());
 			sell_HistoryVO.setStatus(2);
 			sell_HistoryVO.setSell_check(0);
 			paymentService.sell_statusUp(sell_HistoryVO);
@@ -354,13 +354,13 @@ public class AdminController {
 		} else if (behavior == 2) {
 			// 트레이딩 테이블에서 가격과 판매자 아이디를 조회해서 다시 판매자에게 돈을 돌려줌
 			Buy_HistoryVO buy_HistoryVO = new Buy_HistoryVO();
-			buy_HistoryVO.setSell_num(traVO.getSell_num());
+			buy_HistoryVO.setBuy_history_num(traVO.getTrading_num());
 			buy_HistoryVO.setStatus(3);
 			buy_HistoryVO.setBuy_check(1);
 			paymentService.buy_statusUp(buy_HistoryVO);
 			
 			Sell_HistoryVO sell_HistoryVO = new Sell_HistoryVO();
-			sell_HistoryVO.setSell_num(traVO.getSell_num());
+			sell_HistoryVO.setSell_history_num(traVO.getTrading_num());
 			sell_HistoryVO.setStatus(3);
 			sell_HistoryVO.setSell_check(1);
 			paymentService.sell_statusUp(sell_HistoryVO);

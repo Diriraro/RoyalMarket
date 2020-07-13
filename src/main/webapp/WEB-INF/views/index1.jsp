@@ -88,7 +88,8 @@ a:hover { text-decoration:none !important }
 
 	
 </div>
-	<div style="background-color: #f9f9f9;">
+	<div id="searchbody"></div>
+	<div id="listbody" style="background-color: #f9f9f9;">
 	<br><br>
 	<font style="margin-left: 440px;font-size: 25px;font-weight: 500;color: black;">카테고리별 상품</font>
 	<div style="width: 1030px; height:20px; margin-left: 440px;margin-top: 20px;">
@@ -362,7 +363,6 @@ a:hover { text-decoration:none !important }
 			        var location = document.querySelector("#c8_title").offsetTop;
 			        window.scrollTo({top:location - menuHeight, behavior:'smooth'});
 			        });
-		        
 		        $(function() {
 			        var member = $("#memberID").val().trim();
 			        if(member != ""){
@@ -377,6 +377,7 @@ a:hover { text-decoration:none !important }
 						} 
 					})
 			        }
+
 				})
 
 				function setCookie(key, value, expiredays) {

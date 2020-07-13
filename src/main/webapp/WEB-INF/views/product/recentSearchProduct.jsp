@@ -17,9 +17,7 @@
 				src="${pageContext.request.contextPath}/upload/product/${file[i.index]}"
 				style="cursor: pointer;">
 			<p style="padding: 0px 20px">${vo.sell_product}</p>
-			<p style="padding: 0px 20px">${vo.sell_price}원</p>
 		</div>
-		<br>
 	</c:forEach>
 </c:catch>
 

@@ -35,8 +35,8 @@
  	</select>
  	
  	<!--거래중 테이블 -->
- 	<insert id="tradingInsert" parameterType="com.iu.s1.trading.TradingVO">
- 		insert into trading values(#{sell_num},#{sell_price},#{buyer_id},#{seller_id},0,0,0,0,0)
+ 	<insert id="tradingInsert" parameterType="com.iu.s1.trading.TradingVO" keyProperty="trading_num" useGeneratedKeys="true">
+ 		insert into trading values(#{sell_num},#{sell_price},#{buyer_id},#{seller_id},0,#{trading_num},0,0,0)
  	</insert>
  	
  	<!-- 판매자 아이디 조회 -->
@@ -47,12 +47,12 @@
  	
  	<!-- 구매내역 추가 -->
  	<insert id="buy_his" parameterType="com.iu.s1.paymentHistory.Buy_HistoryVO">
- 		insert into buy_history values(#{mem_id},#{sell_num},#{sell_price},0,0,#{sell_product},#{file_name},#{seller_id},#{buy_date},0)
+ 		insert into buy_history values(#{mem_id},#{sell_num},#{sell_price},0,#{buy_history_num},#{sell_product},#{file_name},#{seller_id},#{buy_date},0)
  	</insert>
  	
  	<!-- 판매내역 추가 -->
  	<insert id="sell_his" parameterType="com.iu.s1.paymentHistory.Sell_HistoryVO">
- 		insert into sell_history values(#{mem_id},#{sell_num},#{sell_price},0,0,#{sell_product},#{file_name},#{buyer_id},#{sell_date},0)
+ 		insert into sell_history values(#{mem_id},#{sell_num},#{sell_price},0,#{sell_history_num},#{sell_product},#{file_name},#{buyer_id},#{sell_date},0)
  	</insert>
  	
  	<!-- 구매 내역 출력 -->
@@ -77,7 +77,7 @@
  	
  	<!-- 인수 업데이트2 -->
  	<update id="buy_statusUp" parameterType="com.iu.s1.paymentHistory.Buy_HistoryVO">
- 		update buy_history set status=#{status}, buy_check=#{buy_check} where sell_num=#{sell_num} and buy_check=0
+ 		update buy_history set status=#{status}, buy_check=#{buy_check} where buy_history_num=#{buy_history_num} and buy_check=0
  	</update>
  	
  	<!-- 인계 업데이트 -->
@@ -87,7 +87,7 @@
  	
  	<!-- 인수 업데이트2 -->
  	<update id="sell_statusUp" parameterType="com.iu.s1.paymentHistory.Sell_HistoryVO">
- 		update sell_history set status=#{status}, sell_check=#{sell_check} where sell_num=#{sell_num} and sell_check=0
+ 		update sell_history set status=#{status}, sell_check=#{sell_check} where sell_history_num=#{sell_history_num} and sell_check=0
  	</update>
  	
  	<!-- trading Select -->
@@ -200,6 +200,12 @@
   	
   	<update id="product_cancel_status" parameterType="java.lang.Long">
  		update store_product set sell_status=0 where sell_num=#{sell_num};
- 	</update>	
-  		
+ 	</update>
+ 	<!-- AI 현재 증가값 -->
+  	<select id="auto_incrementNum" resultType="Long">
+  		SELECT AUTO_INCREMENT
+		FROM information_schema.tables
+		WHERE table_name = 'trading'
+		AND table_schema = DATABASE( ) ;
+  	</select>
  </mapper>

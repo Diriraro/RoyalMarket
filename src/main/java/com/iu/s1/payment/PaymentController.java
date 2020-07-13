@@ -205,7 +205,6 @@ public class PaymentController {
 		TradingVO tradingVO = paymentService.tradingSelect(sell_num);
 		
 		if(tradingVO==null) {
-			
 			tradingVO = new TradingVO();
 			paymentService.product_sell_statusUp(sell_num);
 			MemberVO memberVO = (MemberVO)request.getSession().getAttribute("member");
@@ -213,11 +212,8 @@ public class PaymentController {
 			tradingVO.setSell_num(sell_num);
 			tradingVO.setBuyer_id(memberVO.getMem_id());
 			String seller_id=paymentService.seller_id_select(sell_num);
-			
 			tradingVO.setSeller_id(seller_id);
-			
 			paymentService.tradingInsert(tradingVO);
-			
 			// 사용한 적립금 빼기
 			if(cash!=0) {
 				SaveCashVO saveCashVO = new SaveCashVO();
@@ -257,6 +253,7 @@ public class PaymentController {
 			buy_HistoryVO.setSell_num(sell_num);
 			buy_HistoryVO.setSell_price(sell_price);
 			buy_HistoryVO.setSell_product(productVO.getSell_product());
+			buy_HistoryVO.setBuy_history_num(tradingVO.getTrading_num());
 			buy_HistoryVO.setFile_name(file_name);
 			buy_HistoryVO.setSeller_id(seller_id);
 			buy_HistoryVO.setBuy_date(time1);
@@ -267,9 +264,10 @@ public class PaymentController {
 			sell_HistoryVO.setMem_id(seller_id);
 			sell_HistoryVO.setSell_num(sell_num);
 			sell_HistoryVO.setSell_price(sell_price);
+			sell_HistoryVO.setSell_product(productVO.getSell_product());
+			sell_HistoryVO.setSell_history_num(tradingVO.getTrading_num());
 			sell_HistoryVO.setFile_name(file_name);
 			sell_HistoryVO.setBuyer_id(memberVO.getMem_id());
-			sell_HistoryVO.setSell_product(productVO.getSell_product());
 			sell_HistoryVO.setSell_date(time1);
 			paymentService.sell_his(sell_HistoryVO);
 			
@@ -360,12 +358,12 @@ public class PaymentController {
 		// trading의 recieve 업데이트
 		paymentService.tradingReceiveUp(tradingVO);
 		// buy_history status 업데이트
+		tradingVO = paymentService.tradingSelect(sell_num);
 		Buy_HistoryVO buy_HistoryVO = new Buy_HistoryVO();
-		buy_HistoryVO.setSell_num(sell_num);
+		buy_HistoryVO.setBuy_history_num(tradingVO.getTrading_num());
 		buy_HistoryVO.setStatus(1);
 		paymentService.buy_statusUp(buy_HistoryVO);
 		
-		tradingVO = paymentService.tradingSelect(sell_num);
 		
 		long receive = tradingVO.getReceive();
 		long give = tradingVO.getGive();
@@ -385,7 +383,7 @@ public class PaymentController {
 			long profit = (tradingVO.getSell_price()-2500)/10;
 			long commition= (tradingVO.getSell_price()-2500)/10;
 			memberVO.setMem_point(total-profit+2500);
-			buy_HistoryVO.setSell_num(sell_num);
+			buy_HistoryVO.setBuy_history_num(tradingVO.getTrading_num());
 			buy_HistoryVO.setStatus(2);
 			payStatsVO.setSell_commition(commition);
 			System.out.println(total-profit+2500);
@@ -395,7 +393,7 @@ public class PaymentController {
 			// buy상태 sell 상태 바꾸기
 			paymentService.buy_statusUp(buy_HistoryVO);
 			Sell_HistoryVO sell_HistoryVO = new Sell_HistoryVO();
-			sell_HistoryVO.setSell_num(sell_num);
+			sell_HistoryVO.setSell_history_num(tradingVO.getTrading_num());
 			sell_HistoryVO.setStatus(2);
 			paymentService.sell_statusUp(sell_HistoryVO);
 			
@@ -436,13 +434,13 @@ public class PaymentController {
 		// trading의 recieve 업데이트
 		paymentService.tradingGiveUp(tradingVO);
 		// buy_history status 업데이트
+		tradingVO = paymentService.tradingSelect(sell_num);
 		Sell_HistoryVO sell_HistoryVO = new Sell_HistoryVO();
-		sell_HistoryVO.setSell_num(sell_num);
+		sell_HistoryVO.setSell_history_num(tradingVO.getTrading_num());
 		sell_HistoryVO.setStatus(1);
 		
 		paymentService.sell_statusUp(sell_HistoryVO);
 		
-		tradingVO = paymentService.tradingSelect(sell_num);
 		
 		long receive = tradingVO.getReceive();
 		long give = tradingVO.getGive();
@@ -470,13 +468,13 @@ public class PaymentController {
 			
 			//buy상태 sell상태 바꾸기
 			Buy_HistoryVO buy_HistoryVO = new Buy_HistoryVO();
-			buy_HistoryVO.setSell_num(sell_num);
+			buy_HistoryVO.setBuy_history_num(tradingVO.getTrading_num());
 			buy_HistoryVO.setStatus(2);			
 			buy_HistoryVO.setBuy_check(0);
 			paymentService.buy_statusUp(buy_HistoryVO);
 			
 			sell_HistoryVO = new Sell_HistoryVO();
-			sell_HistoryVO.setSell_num(sell_num);
+			sell_HistoryVO.setSell_history_num(tradingVO.getTrading_num());
 			sell_HistoryVO.setStatus(2);
 			sell_HistoryVO.setSell_check(0);	
 			paymentService.sell_statusUp(sell_HistoryVO);
