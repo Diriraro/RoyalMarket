@@ -84,4 +84,6 @@ public interface PaymentMapper {
 	public int buy_cancelUp(long buy_cancel)throws Exception;
 	
 	public int sell_cancelUp(long cell_cancel)throws Exception;
+	
+	public int product_cancel_status(long sell_num)throws Exception;
 }

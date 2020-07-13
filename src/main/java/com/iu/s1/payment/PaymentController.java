@@ -650,6 +650,7 @@ public class PaymentController {
 			paymentService.pointUpdate(memberVO);
 			
 			paymentService.tradingDelete(sell_num);
+			paymentService.product_cancel_status(sell_num);
 		}
 		
 	
@@ -659,8 +660,8 @@ public class PaymentController {
 	@GetMapping("sellDelete")
 	public ModelAndView sellDelete(HttpServletRequest request)throws Exception{
 		ModelAndView mv = new ModelAndView();
-		long sell_num= Long.parseLong(request.getParameter("sell_num"));
-		paymentService.del_sellHistory(sell_num);
+		long sell_history_num= Long.parseLong(request.getParameter("sell_history_num"));
+		paymentService.del_sellHistory(sell_history_num);
 		
 		mv.setViewName("redirect:./sell_History");
 		
@@ -671,8 +672,8 @@ public class PaymentController {
 	@GetMapping("buyDelete")
 	public ModelAndView buyDelete(HttpServletRequest request)throws Exception{
 		ModelAndView mv = new ModelAndView();
-		long sell_num= Long.parseLong(request.getParameter("sell_num"));
-		paymentService.del_buyHistory(sell_num);
+		long buy_history_num= Long.parseLong(request.getParameter("buy_history_num"));
+		paymentService.del_buyHistory(buy_history_num);
 		
 		mv.setViewName("redirect:./buy_History");
 		

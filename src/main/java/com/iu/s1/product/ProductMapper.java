@@ -50,5 +50,4 @@ public interface ProductMapper {
 	public int productDelete(ProductVO productVO) throws Exception;
 	
 	
-	
 }

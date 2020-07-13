@@ -11,7 +11,6 @@
 <c:import url="./template/style.jsp"></c:import>
 
 <style type="text/css">
-
 .cbtn{
 width: 128.5555555px;
 height:50px;
@@ -23,13 +22,11 @@ background-color: white;
 color: #888888;
 font-weight: 600;
 }
-
 .cbtn:hover {
 	background-color: #5c2392;
 	color: white;
 }
 a:hover { text-decoration:none !important }
-
 </style>
 
 
@@ -183,9 +180,7 @@ a:hover { text-decoration:none !important }
 
 
 	<script type="text/javascript">
-
 		$(".carousel").carousel({interval:3000});
-
   		  $(document).ready(function(){
 		    	
 		        $.ajax({
@@ -201,7 +196,6 @@ a:hover { text-decoration:none !important }
 		             
 		        });
 		    }); 
-
 		  $(document).ready(function(){
 		    	
 		        $.ajax({
@@ -217,7 +211,6 @@ a:hover { text-decoration:none !important }
 		             
 		        });
 		    });
-
 		  $(document).ready(function(){
 		    	
 		        $.ajax({
@@ -233,8 +226,6 @@ a:hover { text-decoration:none !important }
 		             
 		        });
 		    });
-
-
 		  $(document).ready(function(){
 		    	
 		        $.ajax({
@@ -250,7 +241,6 @@ a:hover { text-decoration:none !important }
 		             
 		        });
 		    });
-
 		  $(document).ready(function(){
 		    	
 		        $.ajax({
@@ -266,8 +256,6 @@ a:hover { text-decoration:none !important }
 		             
 		        });
 		    });
-
-
 		  $(document).ready(function(){
 		    	
 		        $.ajax({
@@ -283,7 +271,6 @@ a:hover { text-decoration:none !important }
 		             
 		        });
 		    });
-
 		  $(document).ready(function(){
 		    	
 		        $.ajax({
@@ -299,7 +286,6 @@ a:hover { text-decoration:none !important }
 		             
 		        });
 		    });
-
 		  $(document).ready(function(){
 		    	
 		        $.ajax({
@@ -315,7 +301,6 @@ a:hover { text-decoration:none !important }
 		             
 		        });
 		    }); 
-
 		  $(document).ready(function(){
 		    	
 		        $.ajax({
@@ -332,76 +317,49 @@ a:hover { text-decoration:none !important }
 		        });
 		    });
 		        
-
 		        $("#c0_btn").on("click",function(){
 		        var menuHeight = document.querySelector("#header_wrap").offsetHeight;
-
 		        var location = document.querySelector("#c0_title").offsetTop;
-
 		        window.scrollTo({top:location - menuHeight, behavior:'smooth'});
 		        });
-
 		        $("#c1_btn").on("click",function(){
 			        var menuHeight = document.querySelector("#header_wrap").offsetHeight;
-
 			        var location = document.querySelector("#c1_title").offsetTop;
-
 			        window.scrollTo({top:location - menuHeight, behavior:'smooth'});
 			        });
-
 		        $("#c2_btn").on("click",function(){
 			        var menuHeight = document.querySelector("#header_wrap").offsetHeight;
-
 			        var location = document.querySelector("#c2_title").offsetTop;
-
 			        window.scrollTo({top:location - menuHeight, behavior:'smooth'});
 			        });
-
 		        $("#c3_btn").on("click",function(){
 			        var menuHeight = document.querySelector("#header_wrap").offsetHeight;
-
 			        var location = document.querySelector("#c3_title").offsetTop;
-
 			        window.scrollTo({top:location - menuHeight, behavior:'smooth'});
 			        });
-
 		        $("#c4_btn").on("click",function(){
 			        var menuHeight = document.querySelector("#header_wrap").offsetHeight;
-
 			        var location = document.querySelector("#c4_title").offsetTop;
-
 			        window.scrollTo({top:location - menuHeight, behavior:'smooth'});
 			        });
-
 		        $("#c5_btn").on("click",function(){
 			        var menuHeight = document.querySelector("#header_wrap").offsetHeight;
-
 			        var location = document.querySelector("#c5_title").offsetTop;
-
 			        window.scrollTo({top:location - menuHeight, behavior:'smooth'});
 			        });
-
 		        $("#c6_btn").on("click",function(){
 			        var menuHeight = document.querySelector("#header_wrap").offsetHeight;
-
 			        var location = document.querySelector("#c6_title").offsetTop;
-
 			        window.scrollTo({top:location - menuHeight, behavior:'smooth'});
 			        });
-
 		        $("#c7_btn").on("click",function(){
 			        var menuHeight = document.querySelector("#header_wrap").offsetHeight;
-
 			        var location = document.querySelector("#c7_title").offsetTop;
-
 			        window.scrollTo({top:location - menuHeight, behavior:'smooth'});
 			        });
-
 		        $("#c8_btn").on("click",function(){
 			        var menuHeight = document.querySelector("#header_wrap").offsetHeight;
-
 			        var location = document.querySelector("#c8_title").offsetTop;
-
 			        window.scrollTo({top:location - menuHeight, behavior:'smooth'});
 			        });
 		        
@@ -442,11 +400,6 @@ a:hover { text-decoration:none !important }
 					}
 					return null;
 				}
-
 		    </script>
-
-
-
-
 </body>
 </html>

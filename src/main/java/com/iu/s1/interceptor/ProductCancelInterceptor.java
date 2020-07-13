@@ -13,10 +13,12 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import com.iu.s1.member.MemberVO;
 import com.iu.s1.payment.PaymentService;
 import com.iu.s1.paymentHistory.Buy_HistoryVO;
+import com.iu.s1.paymentHistory.Sell_HistoryVO;
 
 @Component
-public class BuyerPageInterceptor extends HandlerInterceptorAdapter {
+public class ProductCancelInterceptor extends HandlerInterceptorAdapter{
 
+	
 	@Autowired
 	private PaymentService paymentService;
 
@@ -25,12 +27,15 @@ public class BuyerPageInterceptor extends HandlerInterceptorAdapter {
 			throws Exception {
 		// TODO Auto-generated method stub
 		MemberVO memberVO = (MemberVO) request.getSession().getAttribute("member");
-		long sell_num = Long.parseLong(request.getParameter("sell_num"));
-		List<Buy_HistoryVO> buy_history = paymentService.buy_hisSelect(memberVO.getMem_id());
+		String check = request.getParameter("check");
 		boolean check1 = false;
 
 
-
+		if(check.equals("buy")) {
+			
+			long sell_num = Long.parseLong(request.getParameter("sell_num"));
+			List<Buy_HistoryVO> buy_history = paymentService.buy_hisSelect(memberVO.getMem_id());
+		
 			if (memberVO != null) {
 				for (int i = 0; i < buy_history.size(); i++) {
 
@@ -50,6 +55,30 @@ public class BuyerPageInterceptor extends HandlerInterceptorAdapter {
 				}
 			}
 	
+		}else {
+			long sell_num =Long.parseLong(request.getParameter("sell_num"));		
+			List<Sell_HistoryVO> sell_history = paymentService.sell_hisSelect(memberVO.getMem_id());
+			
+			if(memberVO!=null) {	
+				for(int i=0;i<sell_history.size();i++) {
+					
+					System.out.println(sell_history.get(i).getSell_num());
+					if(sell_history.get(i).getSell_num()==sell_num) {
+						check1 = true;
+			
+					}
+				}	
+			}
+			
+			if(check1==false) {
+				request.setAttribute("result", "잘못된 접근입니다.");
+				request.setAttribute("path", "../");
+				RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/common/result.jsp");
+				view.forward(request, response);
+				
+			}
+			
+		}
 		return check1;
 
 	}
