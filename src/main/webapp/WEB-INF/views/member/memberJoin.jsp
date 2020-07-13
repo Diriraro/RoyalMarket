@@ -138,7 +138,7 @@ body {
 }
 
 #ViewTimer {
-	margin: 0px 7px 0px 200px;
+	margin: 0px 7px 0px 210px;
 }
 
 .ubhSQ {
