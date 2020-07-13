@@ -27,8 +27,7 @@
 <body>
 	<c:import url="../template/woozoo_nav.jsp"></c:import>
 
-	<div
-		style="border-bottom: solid 1px black; width: 1024px; margin-left: 440px; height: 78px;">
+	<div style="border-bottom: solid 1px black; width: 1024px; margin-left: 440px; height: 78px;">
 		<div style="width: 300px; height: 300px;">
 			<img style="width: 20px;height: 20px;float: left;margin-top: 30px;" alt="홈이미지" src="${pageContext.request.contextPath}/resources/images/home_logo.png">
 			<font style="float: left;color: #4d555e;margin-top: 31px;">&nbsp;홈&nbsp;&nbsp;</font>
@@ -194,7 +193,7 @@
 	
 	<div style="width: 348px;margin-left: 440px;margin-top:100px;" > </div>
 	
-	<div style="width: 1024px; height: 360px; margin-left: 440px;">
+	<div style="width: 1024px;  margin-left: 440px;">
 	
 	<div style="float:left; height: 50px;width: 348px;
 	border-left:solid 1px black;border-right:solid 1px black;border-top:solid 1px black;
@@ -309,7 +308,7 @@
 	</div>
 	<!-- 상점정보끝 -->
 	<div style="height: 10px;width:1024px; background-color: white;display: inline-block;"></div>
-	<c:import url="../template/footer.jsp"></c:import>
+	
 
 	
 	
@@ -357,6 +356,6 @@
 	<%@ include file="productQna.jsp"%>
 
 
-
+<c:import url="../template/footer.jsp"></c:import>
 </body>
 </html>

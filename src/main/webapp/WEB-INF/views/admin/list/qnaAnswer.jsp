@@ -4,8 +4,18 @@
 
 <div class="w3-container">
 	<div class="topnav">
-		<a class="check active" title="manToman" style="cursor: pointer;">1:1
-			문의</a> <a class="check" title="qna" style="cursor: pointer;">질문과 답변</a>
+		<a class="check active" title="manToman" style="cursor: pointer;">1:1 문의</a> 
+			<select class="form-control" style="width: 180px; height: 52px; float: left;" id="qnaKind">
+				<option value="">문의 종류 별 검색</option>
+				<option value="계정문의">계정문의</option>
+				<option value="차단">차단(제제)</option>
+				<option value="거래신고">거래신고</option>
+				<option value="서비스기능">서비스 기능</option>
+				<option value="광고">광고/전문상점</option>
+				<option value="서비스장애">서비스 장애</option>
+				<option value="제안">제안</option>
+				<option value="기타">기타 신고</option>
+			</select>
 		<div class="search-container">
 			<input type="text" placeholder="MemberName..." name="search"
 				id="qnaSearch">
@@ -27,11 +37,7 @@
 		<c:if test="${not empty qfvo}">
 			<div align="center">
 				<h2>첨부파일</h2>
-				<c:forEach items="${qfvo}" var="vo">
-					<img src="../upload/qna/${vo.file_name}"
-						style="width: 700px; height: 448px;">
-						<br>
-				</c:forEach>
+				<button type="button" id="filePopup" class="form-control btn btn-success" style="width: 300px;">첨부파일 확인</button>
 			</div>
 		</c:if>
 		<br>
@@ -53,4 +59,17 @@
 			완료 하기</button>
 		</div>
 	</form>
+	
+	<script type="text/javascript">
+	$("#filePopup").click(function(){
+		location.href="javascript:popup()";
+	})	
+	
+	function popup(){
+	    var url = "list/showQnaFile?qna_num="+${qvo.qna_num};
+	    var name = "첨부파일 보기";
+	    var option = "width = 700, height = 500, top = 100, left = 200, location = no"
+	    window.open(url, name, option);
+	}
+	</script>
 </div>

@@ -5,19 +5,20 @@
 <div class="w3-container">
 	<input type="hidden" value="${check}" id="qnaNACheck">
 	<div class="topnav">
-		<a class="check active" title="manToman" style="cursor: pointer;">1:1 문의</a> 
-		<select>
-			<option value="">문의 종류 별 검색</option>
-			<option value="계정문의">계정문의</option>
-			<option value="차단">차단(제제)</option>
-			<option value="거래신고">거래신고</option>
-			<option value="서비스기능">서비스 기능</option>
-			<option value="광고">광고/전문상점</option>
-			<option value="서비스장애">서비스 장애</option>
-			<option value="제안">제안</option>
-			<option value="기타">기타 신고</option>
-		</select>
-		<div class="search-container">
+		<a class="check active" title="manToman" style="cursor: pointer;">1:1 문의</a>
+		<select class="form-control" style="width: 180px; height: 52px; float: left;" id="qnaKind">
+				<option value="">문의 종류 별 검색</option>
+				<option value="계정문의">계정문의</option>
+				<option value="차단">차단(제제)</option>
+				<option value="거래신고">거래신고</option>
+				<option value="서비스기능">서비스 기능</option>
+				<option value="광고">광고/전문상점</option>
+				<option value="서비스장애">서비스 장애</option>
+				<option value="제안">제안</option>
+				<option value="기타">기타 신고</option>
+			</select>
+		
+		<div class="search-container" style="float: right;" align="right">
 			<input type="text" placeholder="MemberName..." name="search"
 				id="qnaSearch">
 			<button type="submit" id="qnaMemSearch">
@@ -88,7 +89,6 @@
 				$("#hiddenCont" + i).slideDown();
 			}
 		});
-
 
 	</script>
 </div>

@@ -210,7 +210,8 @@
 			if (path == 'qna') {
 				getQnaList();
 			} else if (path == 'manToman') {
-				getManToManList();
+				var search="";
+				getManToManList(search);
 			} else if (path == 'NoticeSelect') {
 				var nonum = $(this).attr("id");
 				getNoticeSelect(nonum);
@@ -286,6 +287,12 @@
 			var search = $("#qnaSearch").val(); // 아이디 변수로 받아옴
 			getQnaMemSearch(search); // 함수로 보냄
 		})
+		$("#content").on("click", "#qnaKind", function(){
+			var search = $("#qnaKind option:selected").val();
+			if(search != ""){
+				getManToManList(search);
+			}
+		})
 
 		$("#content").on("click", "#noticeSubmit", function() {
 			getNoticeWriteOK();
@@ -349,10 +356,13 @@
 		}
 
 		// qna
-		function getManToManList() {
+		function getManToManList(search) {
 			$
 					.ajax({
 						type : "GET",
+						data : {
+							search : search
+						},
 						url : "./list/getManToManList",
 						beforeSend : function() {
 							var loadingHtml = '<div id="loading" style="z-index: 1005;position: absolute; top:50%;left:50%; text-align:center;"> ';

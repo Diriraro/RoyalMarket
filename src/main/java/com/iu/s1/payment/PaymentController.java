@@ -710,7 +710,7 @@ public class PaymentController {
 		if(!ar.isEmpty()) {
 			for(int i=0; i<ar.size(); i++) {
 				sum= sum+ar.get(i).getRe_rate();
-				System.out.println(ar.get(i).getRe_rate()+"tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt");
+				
 			}
 			System.out.println("sum:   "+ sum);
 	

@@ -221,26 +221,54 @@ public class AdminController {
 	public void qnaAnswer(QnaVO qnaVO, Model model) throws Exception {
 		int result = qnaService.qnaAnswer(qnaVO);
 	}
+	
+	@GetMapping("showQnaFile")
+	public void showQnaFile(long qna_num, Model model)throws Exception{
+		List<QnaFileVO> qnaFileVOs = qnaService.selectQnaFile(qna_num);
+		model.addAttribute("qfvo", qnaFileVOs);
+	}
 
 	@GetMapping("getManToManList")
-	public void getManToManList(Model model) throws Exception {
+	public void getManToManList(Model model, String search) throws Exception {
 		List<MemberVO> ar = new ArrayList<MemberVO>();
 //		ar = adminService.getManToManList();
-		List<QnaVO> ar2 = qnaService.qnaAdminList();
-		for (QnaVO qnaVO : ar2) {
-			int fileCheck = qnaService.fileCheck(qnaVO.getQna_num());
-			qnaVO.setFileCheck(fileCheck);
+		if(search==null) {
+			search="";
 		}
-		long qnaNACount = adminService.qnaNACount();
-
-		boolean check = false;
-		if (qnaNACount > 0) {
-			check = true;
+		if(search.equals("")) {			
+			List<QnaVO> ar2 = qnaService.qnaAdminList();
+			for (QnaVO qnaVO : ar2) {
+				int fileCheck = qnaService.fileCheck(qnaVO.getQna_num());
+				qnaVO.setFileCheck(fileCheck);
+			}
+			long qnaNACount = adminService.qnaNACount();
+			
+			boolean check = false;
+			if (qnaNACount > 0) {
+				check = true;
+			}
+			
+			model.addAttribute("check", check);
+			model.addAttribute("qna_adlist", ar2);
+			model.addAttribute("list", ar);
+		}else {
+			System.out.println("123821093821038129038219048129038120938120938");
+			List<QnaVO> ar2 = qnaService.qnaAdminList2(search);
+			for (QnaVO qnaVO : ar2) {
+				int fileCheck = qnaService.fileCheck(qnaVO.getQna_num());
+				qnaVO.setFileCheck(fileCheck);
+			}
+			long qnaNACount = adminService.qnaNACount();
+			
+			boolean check = false;
+			if (qnaNACount > 0) {
+				check = true;
+			}
+			
+			model.addAttribute("check", check);
+			model.addAttribute("qna_adlist", ar2);
+			model.addAttribute("list", ar);
 		}
-
-		model.addAttribute("check", check);
-		model.addAttribute("qna_adlist", ar2);
-		model.addAttribute("list", ar);
 	}
 
 	@PostMapping("getManToManList")

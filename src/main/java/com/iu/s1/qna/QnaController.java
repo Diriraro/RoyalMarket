@@ -64,11 +64,11 @@ public class QnaController {
 			int result = qnaService.qnaWrite(qnaVO, files);
 			if(result!=0) {
 				mv.addObject("result", "1:1 상담문의 완료");
-				mv.addObject("path", "qna/qnaMyList");
+				mv.addObject("path", "qnaMyList");
 				mv.setViewName("common/result");
 			}else {
 				mv.addObject("result", "에러발생");
-				mv.addObject("path", "qna/qnaWrite");
+				mv.addObject("path", "qnaWrite");
 				mv.setViewName("common/result");
 			}
 		}

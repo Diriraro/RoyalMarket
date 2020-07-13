@@ -134,6 +134,11 @@ public class NoticeController {
 		
 	}
 	
+	@GetMapping("privacy")
+	public void privacy()throws Exception{
+		
+	}
+	
 	@ExceptionHandler(Exception.class)
 	public ModelAndView error3() {
 		ModelAndView mv = new ModelAndView();

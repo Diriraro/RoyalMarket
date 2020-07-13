@@ -155,12 +155,12 @@
 						<div style="width: 194px; background-color: white;border: 1px solid #e5e5e5">
 
 							<div style="height: 80px;">
-								<div>
+								<div style="text-overflow: ellipsis; overflow: hidden; width: 192px; height: 40px; white-space: nowrap;">
 									<br> <font
 										style="font-size: 14px; font-weight: 700; margin-left: 8px;">${vo.sell_product}</font>
 								</div>
 								<div
-									style="text-align: left;; line-height: 40px; margin-left: 8px;">
+									style="text-align: left; line-height: 40px; margin-left: 8px;">
 									<font style="font-size: 18px; font-weight: bold;">${vo.sell_price}</font>
 									<font style="font-weight: bold;">원</font>
 								</div>
