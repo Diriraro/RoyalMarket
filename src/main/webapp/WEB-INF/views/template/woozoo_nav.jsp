@@ -224,7 +224,7 @@ button {
 					alt="로고"></a>
 				<!-- 검색창 -->
 			<div style="margin-left: 90px; display: inline-block;">
-					<form action="./productList" class="form-inline">
+					<form action="/product/productList" class="form-inline">
 						<div class="input-group input-group-sm col-xs-2"
 							style="display: inline-block;border-radius:3px 3px 3px 3px; width:90px;
 							border-bottom: solid 2px #5c2392; 
