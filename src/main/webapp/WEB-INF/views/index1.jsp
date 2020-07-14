@@ -191,7 +191,15 @@ a:hover { text-decoration:none !important }
 		            error : function(){
 		                alert("통신실패1");
 		            },
+		            beforeSend : function() {
+						var loadingHtml = '<div id="loading" style="z-index: 1005;position: fixed; top:50%;left:50%; text-align:center;"> ';
+						loadingHtml += '<div class="loading_box"><img src="${pageContext.request.contextPath}/resources/images/loading.gif">"</div></div>';
+						$('#c0').fadeTo("fast", 0.4).append(
+								loadingHtml);
+					},
 		            success : function(Parse_data){
+		            	$('#c0').fadeTo("slow", 1).find('#loading')
+						.remove();
 		                $("#c0").html(Parse_data); //div에 받아온 값을 넣는다.
 		            }
 		             
