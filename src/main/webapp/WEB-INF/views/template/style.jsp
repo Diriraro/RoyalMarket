@@ -2,12 +2,7 @@
     pageEncoding="UTF-8"%>
 <style type="text/css">
 /* footer 하단에 고정하려면 자기가  가장 큰 div를 .cotainer와 동일하게 css를  주세요 */
-body {
-    margin: 0; /* 리셋을 하지 않은 경우 추가 */
-}
-.container {
-    min-height: calc(100vh - 20px);
-}
+
 footer {
     height: 20px;
 }
@@ -168,25 +163,25 @@ a.blog span {
 .guide p {
   padding: 0;
 }
- 
+
  
  .img{
         position: relative;
-        background-image: url('${pageContext.request.contextPath}/resources/qna_images/${file[i.index]}');                                                               
-        height: 100px;
-        width: 100px;
+        background-image: url('${pageContext.request.contextPath}/upload/product/${file[i.index]}');                                                               
+        height: 194px;
+        width: 194px;
         background-size: cover;
     }
 
-.img-cover{
-
+    .img-cover{
+       position: absolute;
        height: 100%;
        width: 100%;
        background-color: rgba(0, 0, 0, 0.7);                                                                 
        z-index:1;
     }
 
-.img .content{
+    .img .content{
          position: absolute;
          top:50%;
          left:50%;
@@ -195,7 +190,9 @@ a.blog span {
          color: white;
          z-index: 2;
          text-align: center;
- }
+    }
+	
+
 	
 </style>
     

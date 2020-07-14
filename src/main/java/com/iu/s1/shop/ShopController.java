@@ -81,6 +81,8 @@ public class ShopController {
 			countall(mv,mem_storeNum);
 			grade(mv, mem_storeNum);
 			getregDate(mv, mem_storeNum);
+			mdata(mv, mem_storeNum);
+			
 		// 
 		
 		mv.addObject("pfile", productFileVOs); // 상품들의  사진 출력
@@ -131,6 +133,7 @@ public class ShopController {
 					countall(mv,mem_storeNum);
 					grade(mv, mem_storeNum);
 					getregDate(mv, mem_storeNum);
+					mdata(mv, mem_storeNum);
 		// 
 		
 		
@@ -200,12 +203,30 @@ public class ShopController {
 		
 		// 찜 리스트
 		List<ZzimVO> zar = productService.myzzim(mem_storeNum);
+		List<ProductFileVO> f = new ArrayList<>();
+		for (ZzimVO zzimVO :zar) {
+			zzimVO.setSell_product(productService.getsell_product(zzimVO));
+			zzimVO.setFile_name(productService.selectFileName(zzimVO.getSell_num()));
+			zzimVO.setSell_price(productService.getsell_price(zzimVO));
+			String m_ad=	 memberService.mdata(productService.getmem_storeNum(zzimVO)).getMem_address();
+			zzimVO.setMem_address(m_ad);
+			
+			ProductVO productVOss = productService.productSelect(zzimVO.getSell_num());
+			long jstaus = productVOss.getSell_status();
+			zzimVO.setSell_status(jstaus); // 찜상태확인 
+			
+			// 주소를 가져와라
+			
+		}
+		
+		
 		// 찜 리스트 끝
 		
 		// 공유
 					countall(mv,mem_storeNum);
 					grade(mv, mem_storeNum);
 					getregDate(mv, mem_storeNum);
+					mdata(mv, mem_storeNum);
 				// 
 		
 		
@@ -248,6 +269,7 @@ public class ShopController {
 					grade(mv, mem_storeNum);
 					countall(mv,mem_storeNum);
 					getregDate(mv, mem_storeNum);
+					mdata(mv, mem_storeNum);
 				// 
 		
 		
@@ -292,6 +314,8 @@ public class ShopController {
 		List<StoreFollowVO> owiar = storeFollowService.getSelectListFollowers(storeFollowVO2);
 		for (StoreFollowVO storeFollowVO3 :owiar) {
 			storeFollowVO3.setTake_storeName(storeFollowService.getSelecttakeStoreName(storeFollowVO3));// 작성자의 번호로 이름을 출력 한것을 ar안에 담고.
+			storeFollowVO3.setPco(productService.prodco(storeFollowVO3.getTake_storeNum())); // 내가 팔로우 한 사람의 상품수 출력
+			storeFollowVO3.setFco(storeFollowService.takeco(storeFollowVO3.getTake_storeNum())); // 내가 팔로우 한 사람의 팔로워 수 출력
 		}	
 		// 팔로우 리스트 영역 끝
 		
@@ -300,6 +324,7 @@ public class ShopController {
 					countall(mv,mem_storeNum);
 					grade(mv, mem_storeNum);
 					getregDate(mv, mem_storeNum);
+					mdata(mv, mem_storeNum);
 				// 
 
 		mv.addObject("mem_storeName",para); // 파라미터의 상점이름
@@ -345,6 +370,8 @@ public class ShopController {
 		List<StoreFollowVO> owear = storeFollowService.getSelectListFollowings(storeFollowVO2);
 		for (StoreFollowVO storeFollowVO3 :owear) {
 			storeFollowVO3.setGive_storeName(storeFollowService.getSelectgiveStoreName(storeFollowVO3));// 작성자의 번호로 이름을 출력 한것을 ar안에 담고.
+			storeFollowVO3.setPco(productService.prodco(storeFollowVO3.getGive_storeNum()));
+			storeFollowVO3.setFco(storeFollowService.takeco(storeFollowVO3.getGive_storeNum()));
 		}	
 		// 팔로워 리스트 영역 끝
 		
@@ -353,6 +380,7 @@ public class ShopController {
 					countall(mv,mem_storeNum);
 					grade(mv, mem_storeNum);
 					getregDate(mv, mem_storeNum);
+					mdata(mv, mem_storeNum);
 				// 
 		
 		
@@ -375,6 +403,7 @@ public class ShopController {
 	public ModelAndView setInsertFollow(long give_storeNum,long take_storeNum,long mem_storeNum, ModelAndView mv,HttpServletRequest request)throws Exception{
 		// 이전페이지 주소찾기
 		String referer = request.getHeader("referer");
+		System.out.println(referer+" ㄴㅇㄹㄴㅇㄹㄴㅇㄹ");
 		//이전페이지 주소찾기 끝
 		
 		
@@ -397,7 +426,7 @@ public class ShopController {
 		
 		// 이전페이지 주소찾기
 		String referer = request.getHeader("referer");
-		System.out.println(referer);
+		System.out.println(referer+" ㄴㅇㄹㄴㅇㄹㄴㅇㄹ");
 		//이전페이지 주소찾기 끝
 
 		
@@ -476,7 +505,7 @@ public class ShopController {
 				
 				mv.addObject("flo",flo); // 내림
 				mv.addObject("ban",ban); // 반올림
-				mv.addObject("avg", avg); // 평균
+				mv.addObject("avg",avg); // 평균
 				mv.addObject("substar",flo3);// 반별
 				
 				mv.addObject("pfile", storeReviewFileVOs); // store 사진 출력
@@ -491,12 +520,19 @@ public class ShopController {
 	
 	// 날짜
 	public ModelAndView getregDate(ModelAndView mv, long mem_storeNum)throws Exception{
-		
 			
 		mv.addObject("getregDate" ,memberService.getregDate(mem_storeNum));
 		//// getregDate   getregDate   getregDate
 		return mv;
 	}
+	
+	// 멤버데이터
+	public ModelAndView mdata(ModelAndView mv, long mem_sotreNum) throws Exception{
+		mv.addObject("mdata", memberService.mdata(mem_sotreNum));
+		return mv;
+	}
+	
+	
 	
 	
 	

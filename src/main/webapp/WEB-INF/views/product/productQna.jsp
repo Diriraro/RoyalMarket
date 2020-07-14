@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+
 <body>
 	<script>
 		var sell_num = '${vo.sell_num}'; //게시글 번호
@@ -32,24 +33,22 @@
 							$.each(data,function(key, value) {
 												var pqsnum = value.pq_storeNum;
 												var pqnum = value.pq_num;
-												a += '<div class="qnaArea" style="width:630px; border-bottom:1px solid darkgray; margin-bottom: 15px;">';
+												a += '<div class="qnaArea" style="width:630px; border-bottom:1px solid #e2e2e2; margin-bottom: 15px;">';
 												a += '<div class="qnaInfo'+value.pq_num+'">';
 												//상점연결하기
 												a += '<a href='
 														+ "../shop/myshop?mem_storeNum="+pqsnum
 														+ ' style="color: #ababab; font-size: 14px; font-weight: 600;">'
 														+ value.pq_storeName
-														+ '  </a>'
-														+ value.pq_regDate
-														+ ' ';
+														+ '  </a><font style="color: #ababab;margin-left:480px;">'+ value.pq_regDate+ '</font> ';
 												a += '<input type="hidden" id="pq_storeNum" value="'+pqsnum+'" />'
 												a += '<input type="hidden" id="mem_storeNum" value="${member.mem_storeNum}" />'
-												a += '<a id="qq" onclick="qnaDelete('+ value.pq_num+ ');"> '
-												+value.pq_storeNum+' 삭제 </a></div>';
+												
 												a += '<div class="qnaContents'+value.pq_num+'"> <p style="margin-top: 7px;"> 내용 : '
 														+ value.pq_contents
 														+ '</p>';
-												a += '<button class="reply" value="'+value.pq_storeName+'" >답글달기</button>';
+												a += '<button style="border: 0px;" class="reply" value="'+value.pq_storeName+'" ><img style="cursor: pointer;" alt="" src="${pageContext.request.contextPath}/resources/images/pqna_logo.png"></button>';
+												a += '<a id="qq" onclick="qnaDelete('+ value.pq_num+ ');"><img style="cursor: pointer;" alt="" src="${pageContext.request.contextPath}/resources/images/pqnad_logo.png"></a></div>';
 												a += '</div></div>';
 											/* 	
 												$(document).on('click', '#'+value.pq_num+'', function() {
@@ -99,7 +98,7 @@
 			var pq_storeNum = $("#pq_storeNum").val()
 			var mem_storeNum = $("#mem_storeNum").val()
 			if(pq_storeNum!=mem_storeNum){
-				alert("불일치");
+				alert("자신의 댓글만 삭제할 수 있습니다.");
 				stopPropagation();
 				}else{
 			$.ajax({
@@ -107,6 +106,8 @@
 				type : 'post',
 				success : function(data) {
 					if (data == 1)
+						if(confirm("정말 삭제하시겠습니까 ?") == true){
+					    }
 						qnaList(sell_num); //댓글 삭제후 목록 출력 
 				}
 			});
@@ -117,6 +118,7 @@
 		$(document).ready(function() {
 			qnaList(); //페이지 로딩시 댓글 목록 출력 
 		});
+
 	</script>
 
 </body>

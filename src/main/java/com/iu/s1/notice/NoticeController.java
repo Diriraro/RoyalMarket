@@ -119,5 +119,19 @@ public class NoticeController {
 		int result = noticeService.noticeUpdate(noticeVO);
 		
 	}
+	
+	@GetMapping("policy")
+	public void policy()throws Exception{
+		
+	}
+	@GetMapping("ban")
+	public void ban()throws Exception{
+		
+	}
+	@GetMapping("service")
+	public void service()throws Exception{
+		
+	}
+
 
 }

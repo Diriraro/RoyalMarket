@@ -59,7 +59,7 @@
 		SELECT * FROM member where mem_regDate > #{mem_regDate}
 	</select>
 	
-	<update id="accessManage" parameterType="MemberVO">
+	<update id="accessManager" parameterType="MemberVO">
 		update member set mem_access=#{mem_access} where mem_storeNum=#{mem_storeNum}
 	</update>
 	
@@ -73,6 +73,24 @@
 	<select id="getregDate" parameterType="Long" resultType="String">
 	select mem_regDate from member where mem_storeNum = #{mem_storeNum}
 	</select>
+	
+	<select id="mdata" parameterType="Long" resultType="memberVO">
+		select * from member where mem_storeNum=#{mem_storeNum}
+	</select>
+	
+	<update id="updateStoreName" parameterType="memberVO">
+		update member set mem_storeName=#{mem_storeName} where mem_id=#{mem_id}
+	</update>
+	
+	<select id="selectMemberByStoreName" resultType="MemberVO" parameterType="MemberVO">
+		select * from member where mem_storeName=#{mem_storeName}
+	</select>
+	
+	<delete id="memberDelete" parameterType="MemberVO">
+		delete from member where mem_storeNum=#{mem_storeNum}
+	</delete>
+	
+	
 	
 	
 </mapper>

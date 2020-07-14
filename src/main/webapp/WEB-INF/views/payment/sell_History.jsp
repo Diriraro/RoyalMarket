@@ -80,7 +80,7 @@
 					<div style="display: inline-block;">${vo.buyer_id}</div><br>
 					<div style="display: inline-block;">${vo.sell_date}</div><br>
 					<c:if test="${vo.status eq 0}">
-						<button class="btn btn-primary productGive" id="productTake"  title="${vo.sell_num}">판매 대기중</button>
+						<div style="display: inline-block;">판매 대기중</div>
 					</c:if>
 					<c:if test="${vo.status eq 1}">
 						<div style="display: inline-block;">인계 완료</div>

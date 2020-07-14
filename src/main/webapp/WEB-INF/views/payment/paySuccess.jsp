@@ -17,8 +17,8 @@ if (request.getProtocol().equals("HTTP/1.1"))
 	<h1>결제 성공</h1>
 	
 <script type="text/javascript">
-	window.opener.location.reload();    //부모창 reload
-	window.close();    //현재 팝업창 Close
+/* 	window.opener.location.reload();    //부모창 reload
+	window.close();    //현재 팝업창 Close */
 </script>
 </body>
 </html>

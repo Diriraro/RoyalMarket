@@ -56,7 +56,51 @@
 				sell_tag
 			</otherwise>
 		</choose>
-		like concat('%',#{search},'%')
+		like concat('%',#{search},'%') and sell_status=0
+		order by sell_num desc limit
+		#{startRow},10
+	</select>
+	
+	<select id="recProductList" parameterType="Pager"
+		resultType="ProductVO">
+		select * from store_product where
+		<choose>
+			<when test="kind=='sp'">
+				sell_product
+			</when>
+			<when test="kind=='sk'">
+				sell_kind
+			</when>
+			<when test="kind=='smn'">
+				mem_storeNum
+			</when>
+			<otherwise>
+				sell_tag
+			</otherwise>
+		</choose>
+		like concat('%',#{search},'%')and sell_status=0
+		order by sell_num desc limit 
+		#{startRow},4
+	</select>
+	
+		<select id="homeProductList" parameterType="Pager"
+		resultType="ProductVO">
+		select * from store_product where
+		<choose>
+			<when test="kind=='sp'">
+				sell_product
+			</when>
+			<when test="kind=='sk'">
+				sell_kind
+			</when>
+			<when test="kind=='smn'">
+				mem_storeNum
+			</when>
+			<otherwise>
+				sell_tag
+			</otherwise>
+		</choose>
+		like concat('%',#{search},'%') and sell_status=0
 		order by sell_num desc limit
 		#{startRow},10
 	</select>
@@ -126,6 +170,20 @@
 	<!-- shop 에서 쓸꺼  -->
 	<select id="prodco" parameterType="Long" resultType="Long">
 		select count(*) from store_product where mem_storeNum= #{mem_storeNum}
+	</select>
+	
+	<!-- 상품이름 -->
+	<select id="getsell_product" parameterType="com.iu.s1.product.zzim.ZzimVO" resultType="String">
+		select sell_product from store_product where sell_num=#{sell_num}
+	</select>
+	<!-- 상품가격  -->
+	<select id="getsell_price" parameterType="com.iu.s1.product.zzim.ZzimVO" resultType="Long">
+		select sell_price from store_product where sell_num= #{sell_num}
+	</select>
+	
+	<!-- 상품 판매하는 사람의 번호  -->
+	<select id="getmem_storeNum" parameterType="com.iu.s1.product.zzim.ZzimVO" resultType="Long">
+		select mem_storeNum from store_product where sell_num = #{sell_num}  
 	</select>
 	
 

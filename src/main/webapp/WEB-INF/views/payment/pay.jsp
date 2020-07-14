@@ -67,7 +67,7 @@ if (request.getProtocol().equals("HTTP/1.1"))
                     }
                 });
                 //성공시 이동할 페이지
-                location.href='<%=request.getContextPath()%>/payment/paySuccess?amount=${amount}&mem_point=${member.mem_point}&mem_id=${member.mem_id}&key=${key}';
+                location.href='<%=request.getContextPath()%>/payment/paySuccess?amount=${amount}&key=${key}';
             } else {
                 msg = '결제에 실패하였습니다.';
                 msg += '에러내용 : ' + rsp.error_msg;

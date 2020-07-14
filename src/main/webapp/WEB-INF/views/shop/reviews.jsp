@@ -24,6 +24,10 @@ border-right: 2px solid black;
 border-top: 2px solid black;
 }
 
+#redd{
+color: red;
+}
+
 </style>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -32,16 +36,17 @@ border-top: 2px solid black;
 
 <body>
 <c:import url="../template/woozoo_nav.jsp"></c:import>
+<h2></h2>
 <c:import url="../template/shopmain.jsp"></c:import>
 
 	<div class="container">
-		<div style="border: 1px solid black; width: 1024px;  min-height: 340px;">
+		<div style="border: 1px solid black; width: 1024px;  min-height: 340px; border-color: rgba(0,0,0,0.25);">
 			<!-- 각자 페이지에 하나씩 생성  -->
 			<!--버튼 감싸는 div  -->
 			<div>
 			<!-- 이동버튼  -->
 			<hr>
-			<table border="1" style="height: 80px;">
+			<table border="1" style="height: 80px; border-color: rgba(0,0,0,0.25);">
 				<tr>
 				<td bgcolor="#f2f2f2"><a href="./myshop?mem_storeNum=${mem_storeNum}">상품&nbsp;&nbsp;   ${prodco}</a></td>
 				<td bgcolor="#f2f2f2"><a href="./comments?mem_storeNum=${mem_storeNum}">상점문의 &nbsp;&nbsp;${coco}</a></td>
@@ -61,18 +66,19 @@ border-top: 2px solid black;
 
 
 			<div>
-				<h2>${mem_storeName } 의 리뷰목록</h2>
+				<h2>인증후기&nbsp;<a id="redd">${reco}</a></h2>
+				<hr>
 			<c:forEach items="${relist}" var="vo" varStatus="i">
 				 <!-- 리스트 감쌀디아이브이  -->
-				<div style="border: 1px solid ; min-height: 150px; overflow: auto;">
+				<div style="border-top: 1px solid gray ; min-height: 150px; overflow: auto; background-color: #f0f0f5">
 				
 				<div style="float: left; width: 80px; height: 250px;">
 					<img alt="" src="${pageContext.request.contextPath}/resources/images/user11.png" width="80px;">			
 				</div><!-- 왼쪽 옆에 이미지 박스  -->
 				
 				<div style="font-size: large;">
-				<a href="./myshop?mem_storeNum=${vo.re_storeNum}">	${vo.re_storeName}</a>  <button class="btn btn-sm btn-info">인증</button>
-				<span style="float: right;">${vo.re_wDate}</span>
+				<a href="./myshop?mem_storeNum=${vo.re_storeNum}">	${vo.re_storeName}</a>
+				<span style="float: right;" class="badge pull-right">${vo.re_wDate}</span>
 				<%-- ${vo.re_storeNum}  리뷰남김사람 번호 --%>
 				</div>
 				<%-- 리뷰번호 :${vo.re_num} 지울떄 사용--%>
@@ -87,8 +93,9 @@ border-top: 2px solid black;
 				<br>
 				
 				<div>
-				<button class="btn-default">${vo.sell_product}</button>
+				<button class="btn-default go" title="${vo.sell_num }">${vo.sell_product}</button>
 				</div>
+				<hr>
 				<br>
 				
 				<div>
@@ -113,12 +120,8 @@ border-top: 2px solid black;
 							<a href="./setDeleteReview?re_num=${vo.re_num}&mem_storeNum=${vo.mem_storeNum}"	class="btn btn-danger pull-right"><span	class="	glyphicon glyphicon-remove-sign"></span>Delete</a>
 				</c:if>
 				
-				
-				
-				
-				
-				
 				</div>  <!-- 리스트 감쌀디아이브이  -->
+				<hr>
 			</c:forEach>
 				</div>
 
@@ -127,5 +130,19 @@ border-top: 2px solid black;
 		</div><!-- 버튼, 내용 끝  -->
 
 	</div><!-- 컨테이너 끝  -->
+	
+	<script type="text/javascript">
+		$(".go").click(function(){
+		var tt=	$(this).attr("title");
+			console.log(tt);
+			location.href = "../product/productSelect?sell_num="+tt;
+
+
+			
+			});
+
+	</script>
+	
+	
 </body>
 </html>
