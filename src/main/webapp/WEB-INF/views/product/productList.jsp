@@ -18,6 +18,7 @@
 	width: 194px;
 	background-size: cover;
 }
+
 .img-cover {
 	position: absolute;
 	height: 100%;
@@ -25,6 +26,7 @@
 	background-color: rgba(0, 0, 0, 0.7);
 	z-index: 1;
 }
+
 .img .content {
 	position: absolute;
 	top: 50%;
@@ -35,6 +37,7 @@
 	z-index: 2;
 	text-align: center;
 }
+
 </style>
 
 </head>
@@ -125,7 +128,7 @@
 
 					<div class="qqq" title="${vo.sell_num}"
 						style="height: 194px; width: 194px; cursor: pointer;"
-						onclick="location.href='../product/productSelect?sell_num=${vo.sell_num}'">
+						onclick="location.href='./product/productSelect?sell_num=${vo.sell_num}'">
 
 
 						<%-- 						<img style="height: 194px; width: 194px; cursor: pointer;" alt=""
@@ -152,9 +155,14 @@
 						<div style="width: 194px; background-color: white;border: 1px solid #e5e5e5">
 
 							<div style="height: 80px;">
-								<div style="width:194px; overflow:hidden;white-space:nowrap; text-overflow:ellipsis">
+
+								<div>
 									<br> <font
 										style="font-size: 14px; font-weight: 700; margin-left: 8px;">${vo.sell_product}</font>
+
+								<div style="width:194px; overflow:hidden;white-space:nowrap; text-overflow:ellipsis;" ><br>
+									<font style="font-size: 14px;font-weight: 700;margin-left: 8px;">${vo.sell_product}</font>
+
 								</div>
 								<div
 									style="text-align: left;; line-height: 40px; margin-left: 8px;">
@@ -162,11 +170,15 @@
 									<font style="font-weight: bold;">원</font>
 								</div>
 							</div>
+
 							<div
-								style="height: 40px; border-top: solid 1px #e4e4e4; text-align: left; line-height: 40px;width:194px; overflow:hidden;white-space:nowrap; text-overflow:ellipsis">
-								<img
-									style="margin-left: 8px; width: 16px; height: 20px; margin-bottom: 3px;"
-									alt=""
+								style="height: 40px; border-top: solid 1px #e4e4e4; text-align: left; line-height: 40px;">
+								<img style="margin-left: 8px; width: 16px; height: 20px; margin-bottom: 3px;"
+									alt="">
+
+							<div style="height: 40px; border-top: solid 1px #e4e4e4;text-align: left;line-height: 40px;width:194px; overflow:hidden;white-space:nowrap; text-overflow:ellipsis;">
+								<img style="margin-left: 8px;width: 16px; height: 20px; margin-bottom: 3px;" alt="" 
+
 									src="${pageContext.request.contextPath}/resources/images/ad_logo.png">
 								<font style="font-weight: 600; font-size: 12px; color: gray;">${vo.mem_address}</font>
 							</div>
@@ -184,6 +196,7 @@
 				<ul class="pagination" >
 
 					<c:if test="${pager.curBlock gt 1}">
+					
 						<li><a
 							href="./productList?curPage=${pager.startNum-1}&kind=${pager.kind}&search=${pager.search}">이전</a></li>
 					</c:if>
@@ -213,6 +226,7 @@
 <c:import url="../template/footer.jsp"></c:import>
 
 	<script type="text/javascript">
+
 		$(".qqq").click(function() {
 			var sell_num = $(this).prop("title");
 			var myCookie = getCookie("recentSearch");
@@ -224,6 +238,7 @@
 				setCookie("recentSearch", sell_num, 1)
 			}
 		})
+
 		function setCookie(key, value, expiredays) {
 			var todayDate = new Date();
 			todayDate.setDate(todayDate.getDate() + expiredays);
@@ -245,6 +260,7 @@
 			}
 			return null;
 		}
+
 	</script>
 
 

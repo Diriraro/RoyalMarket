@@ -28,6 +28,7 @@ public class MemberService {
 		String api_key = "NCS4BQJGFWZTDPCY";
 		String api_secret = "UCUVOSZN6GWTUM4TIHD9Q2HDQONA2XSX";
 
+
 		Message coolsms = new Message(api_key, api_secret);
 		String error_count = "1";
 
@@ -184,6 +185,74 @@ public class MemberService {
 		return result;
 	}
 
+	public boolean kakaoMemberUpdateCheck(MemberVO memberVO, BindingResult bindingResult, String checkNum)
+			throws Exception {
+		boolean result = false;
+		result = bindingResult.hasErrors();
+
+		System.out.println(bindingResult.getAllErrors());
+
+		List<MemberVO> ar = memberRepository.selectMemberUpdate(memberVO);
+
+		for (int i = 0; i < ar.size(); i++) {
+			if (memberVO.getMem_phone().equals(ar.get(i).getMem_phone())) {
+				bindingResult.rejectValue("mem_phone", "memberVO.mem_phone.unique");
+				result = true;
+				break;
+			}
+		}
+
+		if (!memberVO.getPhoneCheck().equals(checkNum)) {
+			bindingResult.rejectValue("phoneCheck", "memberVO.phoneCheck.notEqual");
+			result = true;
+		}
+
+		return result;
+	}
+
+	public boolean memberUpdateCheck(MemberVO memberVO, BindingResult bindingResult, String checkNum) throws Exception {
+		boolean result = false;
+
+		result = bindingResult.hasErrors();
+
+		System.out.println(bindingResult.getAllErrors());
+
+		// 2.pw가 일치하는 지 검증
+		if (!memberVO.getMem_pw().equals(memberVO.getPwCheck())) {
+			bindingResult.rejectValue("pwCheck", "memberVO.mem_pw.notEqual");
+			result = true;
+		}
+
+		List<MemberVO> ar = memberRepository.selectMemberUpdate(memberVO);
+
+		for (int i = 0; i < ar.size(); i++) {
+			if (memberVO.getMem_phone().equals(ar.get(i).getMem_phone())) {
+				bindingResult.rejectValue("mem_phone", "memberVO.mem_phone.unique");
+				result = true;
+				break;
+			}
+		}
+
+		for (int i = 0; i < ar.size(); i++) {
+			if (memberVO.getMem_email().equals(ar.get(i).getMem_email())) {
+				bindingResult.rejectValue("mem_email", "memberVO.mem_email.unique");
+				result = true;
+				break;
+			}
+		}
+
+		if (!memberVO.getPhoneCheck().equals(checkNum)) {
+			bindingResult.rejectValue("phoneCheck", "memberVO.phoneCheck.notEqual");
+			result = true;
+		}
+
+		return result;
+	};
+
+	public List<MemberVO> selectMemberUpdate(MemberVO memberVO) throws Exception {
+		return memberRepository.selectMemberUpdate(memberVO);
+	}
+
 	public boolean kakaoMemberCheck(MemberVO memberVO, BindingResult bindingResult, String checkNum) throws Exception {
 		boolean result = false; // false 에러X, true 에러O
 
@@ -229,30 +298,32 @@ public class MemberService {
 		return memberRepository.kakaoLogin(memberVO);
 	}
 
-	
-	//shop
-	public String getregDate(long mem_storeNum) throws Exception{
-		
+	// shop
+	public String getregDate(long mem_storeNum) throws Exception {
+
 		return memberRepository.getregDate(mem_storeNum);
 	}
-	
-	//mdata 
-	public MemberVO mdata(long mem_storeNum) throws Exception{
-		
+
+	// mdata
+	public MemberVO mdata(long mem_storeNum) throws Exception {
+
 		return memberRepository.mdata(mem_storeNum);
 	}
-	
-	public MemberVO selectMemberByStoreName(MemberVO memberVO) throws Exception{
+
+	public MemberVO selectMemberByStoreName(MemberVO memberVO) throws Exception {
 		return memberRepository.selectMemberByStoreName(memberVO);
 	}
-	
-	public int updateStoreName(MemberVO memberVO3)throws Exception{
+
+	public int updateStoreName(MemberVO memberVO3) throws Exception {
 		return memberRepository.updateStoreName(memberVO3);
 	}
-	
-	public int memberDelete(MemberVO memberVO)throws Exception{
+
+	public int memberDelete(MemberVO memberVO) throws Exception {
 		return memberRepository.memberDelete(memberVO);
 	}
-	
-	
+
+	public int memberUpdate(MemberVO memberVO) throws Exception {
+		return memberRepository.memberUpdate(memberVO);
+	}
+
 }

@@ -127,7 +127,7 @@ body {
 	height: 56px;
 	text-align: center;
 	font-size: 18px;
-	background: rgb(247, 47, 51);
+	background: rgb(102, 0, 102);
 	margin-top: 30px;
 }
 
@@ -138,7 +138,7 @@ body {
 }
 
 #ViewTimer {
-	margin: 0px 7px 0px 140px;
+	margin: 0px 7px 0px 210px;
 }
 
 .ubhSQ {
@@ -603,6 +603,12 @@ iframe {
 		var check = false;
 		var SetTime = 300;		// 최초 설정 시간(기본 : 초)
 		var tid = 0;
+
+		var again = "${again}";
+
+		if(again=="again"){
+				alert("입력정보가 틀립니다. 인증번호를 재발급하고 다시 시도해주세요!")
+			}
 		
 		
 		

@@ -9,7 +9,6 @@
 	alert('${result}');
 	location.href="${path}";
 
-
 </script>
 
 </head>
