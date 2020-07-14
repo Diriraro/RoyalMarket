@@ -72,7 +72,7 @@
 </style>
 
 <c:import url="../template/boot.jsp"></c:import>
-<c:import url="../template/style.jsp"></c:import>
+<c:import url="../template/style_pn.jsp"></c:import> 
 
 </head>
 <body>
