@@ -377,7 +377,6 @@ a:hover { text-decoration:none !important }
 					$(".listBox").on("click",".qqq",function() {
 						var sell_num = $(this).prop("title");
  						var myCookie = getCookie("recentSearch");
- 						alert(myCookie);
 						if (myCookie == null) {
 							setCookie("recentSearch", sell_num, 1)
 						} else {

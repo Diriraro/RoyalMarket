@@ -322,52 +322,61 @@ button {
 						<font style="margin-left: 25px;; font-weight: 800;">전체 카테고리</font>
 					</div>
 
-					<a href="../payment/buy_History">
+					<a href="../product/productList?kind=sk&search=패션잡화">
 						<button type="button" class="kind" value="패션잡화"
 							style="width: 280px; height: 40px; outline: 0; border: 0px;">
 							<font style="margin-right: 170px;">패션잡화</font>
 						</button>
 					</a>
 
+					<a href="../product/productList?kind=sk&search=여성의류">
 					<button type="button" class="kind" value="여성의류"
 						style="width: 280px; height: 40px; outline: 0; border: 0px;">
 						<font style="margin-right: 170px;">여성의류</font>
 					</button>
+					</a>
 
+					<a href="../product/productList?kind=sk&search=남성의류">
 					<button type="button" class="kind" value="남성의류"
 						style="width: 280px; height: 40px; outline: 0; border: 0px;">
 						<font style="margin-right: 170px;">남성의류</font>
 					</button>
+					</a>
 
+					<a href="../product/productList?kind=sk&search=디지털/가전">
 					<button type="button" class="kind" value="디지털/가전"
 						style="width: 280px; height: 40px; outline: 0; border: 0px;">
 						<font style="margin-right: 152px;">디지털/가전</font>
 					</button>
+					</a>
 
-					<button type="button" class="kind" value="생활/문구/가구/식품"
-						style="width: 280px; height: 40px; outline: 0; border: 0px;">
-						<font style="margin-right: 98px;">생활/문구/가구/식품</font>
-					</button>
-
-					<button type="button" class="kind" value="유아동/출산"
-						style="width: 280px; height: 40px; outline: 0; border: 0px;">
-						<font style="margin-right: 152px;">유아동/출산</font>
-					</button>
-
+					<a href="../product/productList?kind=sk&search=스타굿즈">
 					<button type="button" class="kind" value="스타굿즈"
 						style="width: 280px; height: 40px; outline: 0; border: 0px;">
 						<font style="margin-right: 170px;">스타굿즈</font>
 					</button>
-
+					</a>
+					
+					<a href="../product/productList?kind=sk&search=스포츠/레저">
 					<button type="button" class="kind" value="스포츠/레저"
 						style="width: 280px; height: 40px; outline: 0; border: 0px;">
 						<font style="margin-right: 152px;">스포츠/레저</font>
 					</button>
-
+					</a>
+					
+					<a href="../product/productList?kind=sk&search=뷰티/미용">
 					<button type="button" class="kind" value="뷰티/미용"
 						style="width: 280px; height: 40px; outline: 0; border: 0px;">
 						<font style="margin-right: 166px;">뷰티/미용</font>
 					</button>
+					</a>
+					
+					<a href="../product/productList?kind=sk&search=기타">
+					<button type="button" class="kind" value="기타"
+						style="width: 280px; height: 40px; outline: 0; border: 0px;">
+						<font style="margin-right: 166px;">기타</font>
+					</button>
+					</a>
 
 				</ul>
 			</div>

@@ -2,6 +2,11 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
+
 <div style="width: 1045px;height: 400px;margin-left: 440px;">
 
 
@@ -34,7 +39,9 @@
 									<font style="font-size: 14px;font-weight: 700;margin-left: 8px;">${vo.sell_product}</font>
 								</div>
 								<div style="text-align: left;; line-height: 40px;margin-left: 8px;">
-									<font style="font-size: 18px;font-weight: bold;">${vo.sell_price}</font>
+									<font style="font-size: 18px;font-weight: bold;">
+									<fmt:formatNumber> ${vo.sell_price} </fmt:formatNumber>
+									</font>
 									<font style="font-weight: bold;">원</font>
 								</div>
 							</div>
