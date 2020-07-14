@@ -43,4 +43,8 @@
 	<select id="qnaNACount" resultType="Long">
 		SELECT COUNT(*) FROM qna WHERE qna_check=0
 	</select>
+	
+	<select id="qnaAdminList2" parameterType="java.lang.String" resultType="com.iu.s1.qna.QnaVO">
+		SELECT * FROM qna WHERE qna_kind like CONCAT ('%', #{search}, '%') ORDER BY qna_check ASC, qna_regDate ASC
+	</select>
 </mapper>

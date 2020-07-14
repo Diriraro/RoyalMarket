@@ -87,4 +87,8 @@ public class QnaService {
 		return qnaRepository.qnaMemberSearch(mem_id);
 	}
 	
+	public List<QnaVO> qnaAdminList2(String search)throws Exception{
+		return qnaRepository.qnaAdminList2(search);
+	}
+	
 }

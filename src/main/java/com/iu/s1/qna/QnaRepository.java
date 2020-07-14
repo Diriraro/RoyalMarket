@@ -25,5 +25,7 @@ public interface QnaRepository {
 	
 	public long qnaTotalCount()throws Exception;
 	public long qnaNACount()throws Exception;
+	
+	public List<QnaVO> qnaAdminList2(String search)throws Exception;
 
 }
