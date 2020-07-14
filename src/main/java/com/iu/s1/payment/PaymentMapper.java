@@ -51,6 +51,8 @@ public interface PaymentMapper {
 	
 	public TradingVO tradingSelect(long trading_num)throws Exception;
 	
+	public TradingVO tradingSellNumSelect(long sell_num)throws Exception;
+	
 	public int tradingDelete(long trading_num)throws Exception;
 	
 	public List<Sell_HistoryVO> seller_check(String seller_id)throws Exception;

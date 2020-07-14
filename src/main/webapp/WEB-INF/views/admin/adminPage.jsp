@@ -614,9 +614,9 @@
 				})
 				})
 			}
-		function compulsionCancel(sell_num) {
+		function compulsionCancel(trading_num) {
 			$("#content").empty();
-			$.get("./result/compulsionTrans?sell_num="+sell_num+"&behavior=2", function() {
+			$.get("./result/compulsionTrans?trading_num="+trading_num+"&behavior=2", function() {
 				$
 				.ajax({
 					type : "GET",

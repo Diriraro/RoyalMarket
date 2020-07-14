@@ -90,9 +90,14 @@
  		update sell_history set status=#{status}, sell_check=#{sell_check} where sell_history_num=#{sell_history_num} and sell_check=0
  	</update>
  	
- 	<!-- trading Select -->
+ 	<!-- trading Select with trading_num -->
  	<select id="tradingSelect" parameterType="java.lang.Long" resultType="com.iu.s1.trading.TradingVO">
  		select * from trading where trading_num=#{trading_num}
+ 	</select>
+ 	
+ 	 <!-- trading Select with sell_num -->
+ 	<select id="tradingSellNumSelect" parameterType="java.lang.Long" resultType="com.iu.s1.trading.TradingVO">
+ 		select * from trading where sell_num=#{sell_num}
  	</select>
  	
  	<!--  trading Delete -->

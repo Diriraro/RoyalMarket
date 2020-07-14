@@ -202,7 +202,7 @@ public class PaymentController {
 //		long sell_price = Long.parseLong(request.getParameter("sell_price"));
 		
 		// 결제 진행 테이블 입력
-		TradingVO tradingVO = paymentService.tradingSelect(sell_num);
+		TradingVO tradingVO = paymentService.tradingSellNumSelect(sell_num);
 		
 		if(tradingVO==null) {
 			tradingVO = new TradingVO();
@@ -729,16 +729,6 @@ public class PaymentController {
 		mv.addObject("sum", sum);
 		mv.addObject("memberVO", memberVO);
 		mv.setViewName("/payment/phone");
-		return mv;
-	}
-	
-	//예외 처리 메서드
-	@ExceptionHandler(NullPointerException.class)
-	public ModelAndView error() {
-		ModelAndView mv = new ModelAndView();
-			
-		mv.setViewName("error/serverError");
-			
 		return mv;
 	}
 	
