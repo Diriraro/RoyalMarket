@@ -49,12 +49,12 @@
   </select>
   
   <!-- recheck -->
-  <select id="recheck" parameterType="Long" resultType="com.iu.s1.shop.review.StoreReviewVO">
+  <select id="recheck" parameterType="Long" resultType="java.lang.Double">
   		select sell_num from store_review where sell_num = #{sell_num}
   </select>
   
   <!-- 팔로잉 페이지는 takestorenum으로 별점  출력 -->
-  <select id="take_rate" parameterType="Long" resultType="com.iu.s1.shop.review.StoreReviewVO">
+  <select id="take_rate" parameterType="Long" resultType="java.lang.Double">
   select avg(re_rate) from store_review where mem_storeNum=#{take_storeNum}
   </select>
   
