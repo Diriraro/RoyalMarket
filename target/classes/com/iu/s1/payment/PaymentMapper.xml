@@ -72,7 +72,7 @@
  	
  	<!-- 인수 업데이트 -->
  	<update id="tradingReceiveUp" parameterType="com.iu.s1.trading.TradingVO">
- 		update trading set receive=#{receive} where sell_num=#{sell_num}
+ 		update trading set receive=#{receive} where trading_num=#{trading_num}
  	</update>
  	
  	<!-- 인수 업데이트2 -->
@@ -82,7 +82,7 @@
  	
  	<!-- 인계 업데이트 -->
  	<update id="tradingGiveUp" parameterType="com.iu.s1.trading.TradingVO">
- 		update trading set give=#{give} where sell_num=#{sell_num}
+ 		update trading set give=#{give} where trading_num=#{trading_num}
  	</update>
  	
  	<!-- 인수 업데이트2 -->
@@ -90,14 +90,19 @@
  		update sell_history set status=#{status}, sell_check=#{sell_check} where sell_history_num=#{sell_history_num} and sell_check=0
  	</update>
  	
- 	<!-- trading Select -->
+ 	<!-- trading Select with trading_num -->
  	<select id="tradingSelect" parameterType="java.lang.Long" resultType="com.iu.s1.trading.TradingVO">
  		select * from trading where trading_num=#{trading_num}
  	</select>
  	
+ 	 <!-- trading Select with sell_num -->
+ 	<select id="tradingSellNumSelect" parameterType="java.lang.Long" resultType="com.iu.s1.trading.TradingVO">
+ 		select * from trading where sell_num=#{sell_num}
+ 	</select>
+ 	
  	<!--  trading Delete -->
  	<delete id="tradingDelete" parameterType="java.lang.Long">
- 		delete from trading where sell_num=#{sell_num} 
+ 		delete from trading where trading_num=#{trading_num} 
  	</delete>
  	
  	<!-- trading List -->
@@ -189,14 +194,13 @@
   	</select>
   	
   	<!-- trading buy_cancel Up -->
-  	<update id="buy_cancelUp" parameterType="com.iu.s1.trading.TradingVO">
-  		update trading set buy_cancel=#{buy_cancel} where trading_num = #{trading_num}
-  		
+  	<update id="buy_cancelUp" parameterType="java.lang.Long">
+  		update trading set buy_cancel=#{buy_cancel}
   	</update>
   	
   	<!-- trading sell_cancel Up -->
-  	<update id="sell_cancelUp" parameterType="com.iu.s1.trading.TradingVO">
-  		update trading set sell_cancel=#{sell_cancel} where trading_num = #{trading_num}
+  	<update id="sell_cancelUp" parameterType="java.lang.Long">
+  		update trading set sell_cancel=#{sell_cancel}
   	</update>
   	
   	<update id="product_cancel_status" parameterType="java.lang.Long">
