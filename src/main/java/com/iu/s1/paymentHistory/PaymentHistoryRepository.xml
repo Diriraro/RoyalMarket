@@ -16,12 +16,12 @@
 	</select>
 	<select id="getProfit" resultType="Long">
   	<![CDATA[
-		SELECT sum(sell_commition) from paystats where sell_date >= #{sell_date2} and sell_date < #{sell_date1}
+		SELECT sum(sell_commition) from paystats where sell_date between #{sell_date2} and #{sell_date1}
   		]]>
 	</select>
 	<select id="getRateForTradeCountYD" resultType="Long">
-  	<![CDATA[
-  		SELECT count(*) from paystats where sell_date >= #{sell_date2} and sell_date < #{sell_date1}
+  		  	<![CDATA[
+		SELECT count(*) from paystats where sell_date >= #{sell_date2} and sell_date < #{sell_date1}
   		]]>
 	</select>
 </mapper>

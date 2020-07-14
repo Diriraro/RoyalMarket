@@ -38,7 +38,7 @@
 
 </head>
 <body>
-	<c:import url="../template/nav.jsp"></c:import>
+	<c:import url="../template/woozoo_nav.jsp"></c:import>
 	<div style="width: 1024px; margin-left: 440px; margin-top:50px;">
 	<form action="productUpdate" method="post" enctype="multipart/form-data">
 
@@ -81,16 +81,14 @@
 				<font style="margin-right: 170px;">남성의류</font></button>
 				<button type="button" class="kind" value="디지털/가전" style="width: 280px;height: 40px;outline: 0;border: 0px;">
 				<font style="margin-right: 152px;">디지털/가전</font></button>
-				<button type="button" class="kind" value="생활/문구/가구/식품" style="width: 280px;height: 40px;outline: 0;border: 0px;">
-				<font style="margin-right: 98px;">생활/문구/가구/식품</font></button>
-				<button type="button" class="kind" value="유아동/출산" style="width: 280px;height: 40px;outline: 0;border: 0px;">
-				<font style="margin-right: 152px;">유아동/출산</font></button>
 				<button type="button" class="kind" value="스타굿즈" style="width: 280px;height: 40px;outline: 0;border: 0px;">
 				<font style="margin-right: 170px;">스타굿즈</font></button>
 				<button type="button" class="kind" value="스포츠/레저" style="width: 280px;height: 40px;outline: 0;border: 0px;">
 				<font style="margin-right: 152px;">스포츠/레저</font></button>
 				<button type="button" class="kind" value="뷰티/미용" style="width: 280px;height: 40px;outline: 0;border: 0px;">
 				<font style="margin-right: 166px;">뷰티/미용</font></button>
+				<button type="button" class="kind" value="기타" style="width: 280px;height: 40px;outline: 0;border: 0px;">
+				<font style="margin-right: 200px;">기타</font></button>
 
 		</div>
 		<font style="font-size: 15px;color: #5c2392;font-weight: 400;">선택한 카테고리 : </font>

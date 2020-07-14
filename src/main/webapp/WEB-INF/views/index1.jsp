@@ -11,7 +11,6 @@
 <c:import url="./template/style.jsp"></c:import>
 
 <style type="text/css">
-
 .cbtn{
 width: 128.5555555px;
 height:50px;
@@ -23,19 +22,18 @@ background-color: white;
 color: #888888;
 font-weight: 600;
 }
-
 .cbtn:hover {
 	background-color: #5c2392;
 	color: white;
 }
 a:hover { text-decoration:none !important }
-
 </style>
 
 
 </head>
 <body>
 	<c:import url="./template/woozoo_nav.jsp"></c:import>
+	<input type="hidden" value="${member.mem_id}" id="memberID">
 
 
 	<!-- 메인페이지시작 -->
@@ -44,11 +42,11 @@ a:hover { text-decoration:none !important }
 	<div id="myCarousel" class="carousel slide" data-ride="carousel">
   <!-- Indicators -->
   <ol class="carousel-indicators">
-    <li data-target="#myCarousel" data-slide-to="1" class="active"></li>
+    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+    <li data-target="#myCarousel" data-slide-to="1"></li>
     <li data-target="#myCarousel" data-slide-to="2"></li>
     <li data-target="#myCarousel" data-slide-to="3"></li>
     <li data-target="#myCarousel" data-slide-to="4"></li>
-    <li data-target="#myCarousel" data-slide-to="5"></li>
   </ol>
 
   <!-- Wrapper for slides -->
@@ -85,12 +83,13 @@ a:hover { text-decoration:none !important }
   </a>
 	</div>
 	
-	<div id="rec" style=""></div>
+	<div id="rec" class="listBox" style=""></div>
 	
 
 	
 </div>
-	<div style="background-color: #f9f9f9;">
+	<div id="searchbody"></div>
+	<div id="listbody" style="background-color: #f9f9f9;">
 	<br><br>
 	<font style="margin-left: 440px;font-size: 25px;font-weight: 500;color: black;">카테고리별 상품</font>
 	<div style="width: 1030px; height:20px; margin-left: 440px;margin-top: 20px;">
@@ -111,7 +110,7 @@ a:hover { text-decoration:none !important }
 	<font style="font-size: 20px;font-weight:bold; ;color: #cccccc;">&nbsp;전체보기</font></a>
 	</div>
 	<br>
-	<div id="c0" style="height: 650px;"></div>
+	<div id="c0" class="listBox" style="height: 650px;"></div>
 	
 	<div id="c1_title" style="width: 1030px; height:20px; margin-left: 440px; margin-top:50px;border-top: 1px solid #e5e5e5;">
 	<br><br>
@@ -120,7 +119,7 @@ a:hover { text-decoration:none !important }
 	<font style="font-size: 20px;font-weight:bold; ;color: #cccccc;">&nbsp;전체보기</font></a>
 	</div>
 	<br><br><br>
-	<div id="c1" style="height: 650px;"></div>
+	<div id="c1" class="listBox" style="height: 650px;"></div>
 	
 	<div id="c2_title" style="width: 1030px; margin-left: 440px; margin-top:50px;border-top: 1px solid #e5e5e5;">
 	<br><br>
@@ -129,7 +128,7 @@ a:hover { text-decoration:none !important }
 	<font style="font-size: 20px;font-weight:bold; ;color: #cccccc;">&nbsp;전체보기</font></a>
 	</div>
 	<br><br><br>
-	<div id="c2" style="height: 650px;"></div>
+	<div id="c2" class="listBox" style="height: 650px;"></div>
 	
 	<div id="c3_title" style="width: 1030px; margin-left: 440px; margin-top:50px;border-top: 1px solid #e5e5e5;">
 	<br><br>
@@ -138,7 +137,7 @@ a:hover { text-decoration:none !important }
 	<font style="font-size: 20px;font-weight:bold; ;color: #cccccc;">&nbsp;전체보기</font></a>
 	</div>
 	<br><br><br>
-	<div id="c3" style="height: 650px;"></div>
+	<div id="c3" class="listBox" style="height: 650px;"></div>
 	
 	<div id="c6_title" style="width: 1030px; margin-left: 440px; margin-top:50px;border-top: 1px solid #e5e5e5;">
 	<br><br>
@@ -147,7 +146,7 @@ a:hover { text-decoration:none !important }
 	<font style="font-size: 20px;font-weight:bold; ;color: #cccccc;">&nbsp;전체보기</font></a>
 	</div>
 	<br><br><br>
-	<div id="c6" style="height: 650px;"></div>
+	<div id="c6" class="listBox" style="height: 650px;"></div>
 	
 	<div id="c7_title" style="width: 1030px; margin-left: 440px; margin-top:50px;border-top: 1px solid #e5e5e5;">
 	<br><br>
@@ -156,7 +155,7 @@ a:hover { text-decoration:none !important }
 	<font style="font-size: 20px;font-weight:bold; ;color: #cccccc;">&nbsp;전체보기</font></a>
 	</div>
 	<br><br><br>
-	<div id="c7" style="height: 650px;"></div>
+	<div id="c7" class="listBox" style="height: 650px;"></div>
 	
 	<div id="c8_title" style="width: 1030px; margin-left: 440px; margin-top:50px;border-top: 1px solid #e5e5e5;">
 	<br><br>
@@ -165,7 +164,7 @@ a:hover { text-decoration:none !important }
 	<font style="font-size: 20px;font-weight:bold; ;color: #cccccc;">&nbsp;전체보기</font></a>
 	</div>
 	<br><br><br>
-	<div id="c8" style="height: 650px;"></div>
+	<div id="c8" class="listBox" style="height: 650px;"></div>
 	
 	<div id="c4_title" style="width: 1030px; margin-left: 440px; margin-top:50px;border-top: 1px solid #e5e5e5;">
 	<br><br>
@@ -174,7 +173,7 @@ a:hover { text-decoration:none !important }
 	<font style="font-size: 20px;font-weight:bold; ;color: #cccccc;">&nbsp;전체보기</font></a>
 	</div>
 	<br><br><br>
-	<div id="c4" style="height: 650px;"></div>
+	<div id="c4" class="listBox" style="height: 650px;"></div>
 	
 	</div>
 	<c:import url="./template/footer.jsp"></c:import>
@@ -182,9 +181,7 @@ a:hover { text-decoration:none !important }
 
 
 	<script type="text/javascript">
-
 		$(".carousel").carousel({interval:3000});
-
   		  $(document).ready(function(){
 		    	
 		        $.ajax({
@@ -200,7 +197,6 @@ a:hover { text-decoration:none !important }
 		             
 		        });
 		    }); 
-
 		  $(document).ready(function(){
 		    	
 		        $.ajax({
@@ -216,7 +212,6 @@ a:hover { text-decoration:none !important }
 		             
 		        });
 		    });
-
 		  $(document).ready(function(){
 		    	
 		        $.ajax({
@@ -232,8 +227,6 @@ a:hover { text-decoration:none !important }
 		             
 		        });
 		    });
-
-
 		  $(document).ready(function(){
 		    	
 		        $.ajax({
@@ -249,7 +242,6 @@ a:hover { text-decoration:none !important }
 		             
 		        });
 		    });
-
 		  $(document).ready(function(){
 		    	
 		        $.ajax({
@@ -265,8 +257,6 @@ a:hover { text-decoration:none !important }
 		             
 		        });
 		    });
-
-
 		  $(document).ready(function(){
 		    	
 		        $.ajax({
@@ -282,7 +272,6 @@ a:hover { text-decoration:none !important }
 		             
 		        });
 		    });
-
 		  $(document).ready(function(){
 		    	
 		        $.ajax({
@@ -298,7 +287,6 @@ a:hover { text-decoration:none !important }
 		             
 		        });
 		    });
-
 		  $(document).ready(function(){
 		    	
 		        $.ajax({
@@ -314,7 +302,6 @@ a:hover { text-decoration:none !important }
 		             
 		        });
 		    }); 
-
 		  $(document).ready(function(){
 		    	
 		        $.ajax({
@@ -331,84 +318,89 @@ a:hover { text-decoration:none !important }
 		        });
 		    });
 		        
-
 		        $("#c0_btn").on("click",function(){
 		        var menuHeight = document.querySelector("#header_wrap").offsetHeight;
-
 		        var location = document.querySelector("#c0_title").offsetTop;
-
 		        window.scrollTo({top:location - menuHeight, behavior:'smooth'});
 		        });
-
 		        $("#c1_btn").on("click",function(){
 			        var menuHeight = document.querySelector("#header_wrap").offsetHeight;
-
 			        var location = document.querySelector("#c1_title").offsetTop;
-
 			        window.scrollTo({top:location - menuHeight, behavior:'smooth'});
 			        });
-
 		        $("#c2_btn").on("click",function(){
 			        var menuHeight = document.querySelector("#header_wrap").offsetHeight;
-
 			        var location = document.querySelector("#c2_title").offsetTop;
-
 			        window.scrollTo({top:location - menuHeight, behavior:'smooth'});
 			        });
-
 		        $("#c3_btn").on("click",function(){
 			        var menuHeight = document.querySelector("#header_wrap").offsetHeight;
-
 			        var location = document.querySelector("#c3_title").offsetTop;
-
 			        window.scrollTo({top:location - menuHeight, behavior:'smooth'});
 			        });
-
 		        $("#c4_btn").on("click",function(){
 			        var menuHeight = document.querySelector("#header_wrap").offsetHeight;
-
 			        var location = document.querySelector("#c4_title").offsetTop;
-
 			        window.scrollTo({top:location - menuHeight, behavior:'smooth'});
 			        });
-
 		        $("#c5_btn").on("click",function(){
 			        var menuHeight = document.querySelector("#header_wrap").offsetHeight;
-
 			        var location = document.querySelector("#c5_title").offsetTop;
-
 			        window.scrollTo({top:location - menuHeight, behavior:'smooth'});
 			        });
-
 		        $("#c6_btn").on("click",function(){
 			        var menuHeight = document.querySelector("#header_wrap").offsetHeight;
-
 			        var location = document.querySelector("#c6_title").offsetTop;
-
 			        window.scrollTo({top:location - menuHeight, behavior:'smooth'});
 			        });
-
 		        $("#c7_btn").on("click",function(){
 			        var menuHeight = document.querySelector("#header_wrap").offsetHeight;
-
 			        var location = document.querySelector("#c7_title").offsetTop;
-
 			        window.scrollTo({top:location - menuHeight, behavior:'smooth'});
 			        });
-
 		        $("#c8_btn").on("click",function(){
 			        var menuHeight = document.querySelector("#header_wrap").offsetHeight;
-
 			        var location = document.querySelector("#c8_title").offsetTop;
-
 			        window.scrollTo({top:location - menuHeight, behavior:'smooth'});
 			        });
+		        $(function() {
+			        var member = $("#memberID").val().trim();
+			        if(member != ""){
+					$(".listBox").on("click",".qqq",function() {
+						var sell_num = $(this).prop("title");
+ 						var myCookie = getCookie("recentSearch");
+						if (myCookie == null) {
+							setCookie("recentSearch", sell_num, 1)
+						} else {
+							sell_num += "/" + myCookie;
+							setCookie("recentSearch", sell_num, 1)
+						} 
+					})
+			        }
 
+				})
 
+				function setCookie(key, value, expiredays) {
+					var todayDate = new Date();
+					todayDate.setDate(todayDate.getDate() + expiredays);
+					document.cookie = key + "=" + escape(value) + "; path=/; expires="
+							+ todayDate.toGMTString() + ";"
+				}
+				function getCookie(cname) {
+					var name = cname + "=";
+					var decodedCookie = decodeURIComponent(document.cookie);
+					var ca = decodedCookie.split(';');
+					for (var i = 0; i < ca.length; i++) {
+						var c = ca[i];
+						while (c.charAt(0) == ' ') {
+							c = c.substring(1);
+						}
+						if (c.indexOf(name) == 0) {
+							return c.substring(name.length, c.length);
+						}
+					}
+					return null;
+				}
 		    </script>
-
-
-
-
 </body>
 </html>

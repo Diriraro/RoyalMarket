@@ -5,6 +5,7 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -19,8 +20,10 @@ import com.iu.s1.member.MemberRepository;
 import com.iu.s1.member.MemberVO;
 import com.iu.s1.notice.NoticeRepository;
 import com.iu.s1.notice.NoticeVO;
+import com.iu.s1.payment.PayStatsVO;
 import com.iu.s1.payment.PaymentMapper;
 import com.iu.s1.paymentHistory.PaymentHistoryRepository;
+import com.iu.s1.paymentHistory.ProfitVO;
 import com.iu.s1.product.ProductMapper;
 import com.iu.s1.product.ProductVO;
 import com.iu.s1.qna.QnaRepository;
@@ -54,12 +57,20 @@ public class AdminService {
 	private PaymentMapper paymentMapper;
 
 	public List<MemberVO> getMemberList(long mem_access) throws Exception {
+		List<MemberVO> ar = new ArrayList<MemberVO>();
 		if (mem_access == 1) {
-			return memberRepository.getMemberList(mem_access); // mem_access = 0 인 멤버 검색
+			ar = memberRepository.getMemberList(mem_access); // mem_access = 0 인 멤버 검색
 		} else {
-			return memberRepository.getMemberList(mem_access); // mem_access = 1 인 멤버 검색
+			ar = memberRepository.getMemberList(mem_access); // mem_access = 1 인 멤버 검색
 		}
+		for(int i = 0 ; i < ar.size(); i++ ) {
+			String pw = ar.get(i).getMem_pw();
+			pw = pw.replaceAll("(?<=.{3})." , "*");
+			ar.get(i).setMem_pw(pw);
+		}
+		return ar;
 	}
+
 	public List<MemberVO> getMemberSearchList(String kind, String search, int mem_access) throws Exception {
 		MemberVO memberVO = new MemberVO();
 		memberVO.setMem_access(mem_access);
@@ -67,10 +78,12 @@ public class AdminService {
 		memberVO.setSearch(search);
 		return memberRepository.getMemberSearchList(memberVO);
 	}
+
 	// DashBoard need Data
 	public long getMemberCount() throws Exception {
 		return memberRepository.memberCount();
 	}
+
 	public long getDailyNewMember() throws Exception {
 		// 현재 시간 (년 월 일 시 분 초 )
 		Date date = new Date();
@@ -84,11 +97,15 @@ public class AdminService {
 		List<MemberVO> ar = memberRepository.getDailyNewMember(memberVO);
 		return ar.size();
 	}
+
 	public List<NoticeVO> getNoticeList() throws Exception {
+		return noticeRepository.findAllByOrderByNonumAsc();
+	}
+	public List<NoticeVO> getNoticeList2() throws Exception {
 		return noticeRepository.findAllByOrderByNonumDesc();
 	}
-	
-	public List<NoticeVO> noticeTitleSearch(String search)throws Exception{
+
+	public List<NoticeVO> noticeTitleSearch(String search) throws Exception {
 		return noticeRepository.findByNotitleContainingOrderByNonumDesc(search);
 	}
 
@@ -160,6 +177,7 @@ public class AdminService {
 	public long qnaNACount() throws Exception {
 		return qnaRepository.qnaNACount();
 	}
+
 	public Long getRateForTradeCountYD() throws Exception {
 		Calendar cal = Calendar.getInstance();
 		// 오늘
@@ -202,8 +220,9 @@ public class AdminService {
 
 	public List<Map.Entry<String, Long>> getLocateTradeCount() throws Exception {
 		Map<String, Long> map = new HashMap<String, Long>();
-		// 행정구 추가가 필요하면 locate[]에 추가 
-		String[] locate = { "서울", "경기", "경상남도", "경상북도", "전라남도", "전라북도", "충청남도", "충청북도", "강원", "제주", "인천", "세종", "대전", "울산", "부산", "광주", "대구"}; 
+		// 행정구 추가가 필요하면 locate[]에 추가
+		String[] locate = { "서울", "경기", "경상남도", "경상북도", "전라남도", "전라북도", "충청남도", "충청북도", "강원", "제주", "인천", "세종", "대전",
+				"울산", "부산", "광주", "대구" };
 		for (int i = 0; i < locate.length; i++) {
 			long count = 0;
 			if (paymentHistoryRepository.getLocateTradeCount(locate[i]) != 0) {
@@ -218,28 +237,36 @@ public class AdminService {
 		Collections.sort(list, new Comparator<Map.Entry<String, Long>>() {
 			@Override
 			public int compare(Map.Entry<String, Long> s1, Map.Entry<String, Long> s2) {
-				int comparision = (int) (s1.getValue() - s2.getValue())*-1;
+				int comparision = (int) (s1.getValue() - s2.getValue()) * -1;
 				return comparision == 0 ? s1.getKey().compareTo(s2.getKey()) : comparision;
 			}
 		});
 		return list;
 	}
 
-	public Long getProfit() throws Exception {
-		Calendar cal = Calendar.getInstance();
-		int year1 = cal.getTime().getYear() + 1900;
-		int month1 = cal.getTime().getMonth() + 1;
-		int day1 = cal.getActualMaximum(cal.DAY_OF_MONTH);
-		//요번달 마지막일
-		String sell_date1 = year1 + "/" + month1 + "/" + day1;
-		int year2 = cal.getTime().getYear() + 1900;
-		int month2 = cal.getTime().getMonth() + 1;
-		int day2 = 1;
-		// 요번달 1일
-		String sell_date2 = year2 + "/" + month2 + "/" + day2;
-		return paymentHistoryRepository.getProfit( sell_date1, sell_date2);
+	public List<ProfitVO> getProfit() throws Exception {
+		List<ProfitVO> ar = new ArrayList<ProfitVO>();
+		Date date = new Date();
+		for (int i = 0; i < date.getMonth() + 1; i++) {
+			Calendar cal1 = new GregorianCalendar(date.getYear() + 1900, i, 1);
+			int year = cal1.getTime().getYear() + 1900;
+			int month = cal1.getTime().getMonth() + 1;
+			int day = cal1.getActualMaximum(Calendar.DAY_OF_MONTH);
+			String sell_date = year + "/" + month + "/" + day;
+			String sell_date1 = year + "/" + month + "/" + 1;
+			Long result = paymentHistoryRepository.getProfit(sell_date, sell_date1);
+			if (result == null) {
+				result = 0L;
+			}
+			ProfitVO profitVO = new ProfitVO();
+			profitVO.setProfit(result);
+			profitVO.setProfitRate((long) (((double) result / 1000000) * 100));
+			ar.add(profitVO);
+		}
+
+		return ar;
 	}
-	
+
 	public List<ProductVO> productRecentList() throws Exception {
 		Pager pager = new Pager();
 		pager.setCurPage(1L);
@@ -248,19 +275,20 @@ public class AdminService {
 		pager.makePage(totalCount);
 		return productMapper.productList(pager);
 	}
-	
+
 	public List<ProductVO> productList(Pager pager) throws Exception {
 		pager.makeRow();
 		long totalCount = productMapper.productCount(pager);
 		pager.makePage(totalCount);
-		return  productMapper.productList(pager);
+		return productMapper.productList(pager);
 	}
+
 	public int productDelete(ProductVO productVO) throws Exception {
 		return productMapper.productDelete(productVO);
 	}
-	
+
 	public List<TradingVO> tradingList(Pager pager) throws Exception {
 		return paymentMapper.tradingList(pager);
 	}
-	
+
 }
