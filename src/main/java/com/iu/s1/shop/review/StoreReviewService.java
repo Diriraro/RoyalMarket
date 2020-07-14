@@ -35,6 +35,7 @@ public class StoreReviewService {
 	//파일과 함께 리뷰인설트
 	public int setInsertReview(StoreReviewVO storeReviewVO,MultipartFile[] files) throws Exception{
 		File file = filePathGenerator.getUseClassPathResource(filePath);
+		System.out.println(filePath+" 경로확인");
 		
 		int result = storeReviewRepository.setInsertReview(storeReviewVO);
 		
