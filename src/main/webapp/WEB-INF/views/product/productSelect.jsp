@@ -194,7 +194,7 @@
 	
 	<div style="width: 348px;margin-left: 440px;margin-top:100px;" > </div>
 	
-	<div style="width: 1024px; height: 360px; margin-left: 440px;">
+	<div style="width: 1024px;margin-left: 440px;">
 	
 	<div style="float:left; height: 50px;width: 348px;
 	border-left:solid 1px black;border-right:solid 1px black;border-top:solid 1px black;
@@ -205,8 +205,10 @@
 	<br><br><br><br><br>
 	<font style="font-size: 18px;font-weight: 900;">상품정보</font>
 	<hr><br>
-	<pre style="background-color: white; border-color: white;">${vo.sell_info}</pre>
-	<br><br><hr>
+	<div >
+	<pre  style="background-color: white; border-color: white;">${vo.sell_info}</pre>
+	<hr>
+	</div>
 	
 	<div style="float:left; height: 70px;width: 341px;">
 	<img style="margin-left: 120px; width: 16px;height: 18px;" alt="" src="${pageContext.request.contextPath}/resources/images/ad_logo.png">
@@ -233,12 +235,14 @@
 	
 	<!-- 상품정보 끝 -->
 
-		
+
 		
 		
 	<!--  상품문의  -->
-	<br>
-	<hr style="width: 1024px;">
+	<hr style="width: 1024px;margin-top:  105px;">
+	
+				
+	
 	<div style="width: 663px; margin-left:440px;float: left;border-right: solid 1px #e4e4e4;">
 	<font style="font-size: 18px;font-weight: 900;">상품문의</font>
 	<hr style="width: 630px;">
@@ -309,7 +313,7 @@
 	</div>
 	<!-- 상점정보끝 -->
 	<div style="height: 10px;width:1024px; background-color: white;display: inline-block;"></div>
-	<c:import url="../template/footer.jsp"></c:import>
+	
 
 	
 	
@@ -322,7 +326,7 @@
 				</div>
 			</div>
 
-
+<c:import url="../template/footer.jsp"></c:import>
 
 
 	
