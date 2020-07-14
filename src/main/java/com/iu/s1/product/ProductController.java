@@ -58,7 +58,7 @@ public class ProductController {
 			RedirectAttributes rd) throws Exception {
 
 		ModelAndView mv = new ModelAndView();
-
+		
 		if (bindingResult.hasErrors()) {
 			mv.setViewName("redirect:../");
 		} else {
