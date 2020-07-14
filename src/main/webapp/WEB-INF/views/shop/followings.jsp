@@ -76,12 +76,19 @@
 					</div>	
 					<h2></h2>
 					<div style="text-align: center;">
-							<a href="./myshop?mem_storeNum=${vo.take_storeNum }" class="btn btn-success">${vo.take_storeName }</a><br>
+							<c:forEach var="i" begin="1" end="${vo.re_rate}">
+							<img style="cursor: pointer; width: 15px; height: 15px;" alt=""
+							src="${pageContext.request.contextPath}/resources/images/star22.png">
+							</c:forEach>
+							<br>
+							<a href="./myshop?mem_storeNum=${vo.take_storeNum }" class="btn btn-success">${vo.take_storeName }</a>
+							
+							
+							
+							<br>
 					</div>					
 							<div style=" text-align: center; margin-top: 40px;" >
-							<c:if test="${vo.re_rate eq null}">
-							1111
-							</c:if>
+							
 							<span onclick="location.href='./myshop?mem_storeNum=${vo.take_storeNum }'">상품   ${vo.pco}</span>  |  <span onclick="location.href='./followers?mem_storeNum=${vo.take_storeNum }'">팔로워  ${vo.fco}</span><br>
 							
 							</div>

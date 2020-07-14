@@ -34,8 +34,8 @@ public interface StoreReviewRepository {
 	public StoreReviewVO recheck(long sell_num) throws Exception;
 	
 	//take_rate
-	public StoreReviewVO take_rate(long take_storeNum) throws Exception;
+	public double take_rate(long take_storeNum) throws Exception;
 	
 	//give_rate
-	public StoreReviewVO give_rate(long give_storeNum) throws Exception;
+	public double give_rate(long give_storeNum) throws Exception;
 }

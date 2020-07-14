@@ -55,12 +55,12 @@
   
   <!-- 팔로잉 페이지는 takestorenum으로 별점  출력 -->
   <select id="take_rate" parameterType="Long" resultType="java.lang.Double">
-  select avg(re_rate) from store_review where mem_storeNum=#{take_storeNum}
+  select  IFNULL(avg(re_rate), 0) from store_review where mem_storeNum= #{take_storeNum}
   </select>
   
   <!-- 팔로워 페이지는 givestoreNum으로 별점  출력 -->
-  <select id="give_rate" parameterType="Long" resultType="com.iu.s1.shop.review.StoreReviewVO">
-  select avg(re_rate) from store_review where mem_storeNum=#{give_storeNum}
+  <select id="give_rate" parameterType="Long" resultType="java.lang.Double">
+  select  IFNULL(avg(re_rate), 0) from store_review where mem_storeNum= #{give_storeNum}
   </select>
   
   

@@ -67,13 +67,18 @@
 					</div> --%>
 					
 					<div style="width: 198px; width: 130px; margin-top: 40px;  margin-left: 17%;border-radius: 70%;overflow: hidden;" onclick="location.href='./myshop?mem_storeNum=${vo.give_storeNum }'">
-					<!-- 카카오 이미지 확인  -->
 					<img alt="" src="${pageContext.request.contextPath}/resources/images/user11.png" style="width: 100%; height: 100%; background-color: gray;" >
 					</div>
 					<h2></h2>					
 					<div style="text-align: center;">
+					
+					<c:forEach var="i" begin="1" end="${vo.re_rate}">
+							<img style="cursor: pointer; width: 15px; height: 15px;" alt=""
+							src="${pageContext.request.contextPath}/resources/images/star22.png">
+							</c:forEach>
+							<br>
 				    <a href="./myshop?mem_storeNum=${vo.give_storeNum }" class="btn btn-success" >${vo.give_storeName}</a><br>
-				    <span>별점 : </span>
+				    
 					</div>
 							
 					<div style=" text-align: center; margin-top: 40px;" >

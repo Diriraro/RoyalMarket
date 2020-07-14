@@ -316,10 +316,13 @@ public class ShopController {
 			storeFollowVO3.setTake_storeName(storeFollowService.getSelecttakeStoreName(storeFollowVO3));// 작성자의 번호로 이름을 출력 한것을 ar안에 담고.
 			storeFollowVO3.setPco(productService.prodco(storeFollowVO3.getTake_storeNum())); // 내가 팔로우 한 사람의 상품수 출력
 			storeFollowVO3.setFco(storeFollowService.takeco(storeFollowVO3.getTake_storeNum())); // 내가 팔로우 한 사람의 팔로워 수 출력
-			// 점수 : 			
-		// double a =	(storeReviewService.take_rate(storeFollowVO3.getTake_storeNum())).getRe_rate();		 
-		//	System.out.println(a+"확인 ");			
-		//storeFollowVO3.setRe_rate((storeReviewService.take_rate(storeFollowVO3.getTake_storeNum())).getRe_rate());
+			// 점수는 나옴 
+			//storeFollowVO3.setRe_rate(storeReviewService.take_rate(storeFollowVO3.getTake_storeNum()));
+			//평균
+			double avg2 = (storeReviewService.take_rate(storeFollowVO3.getTake_storeNum()));
+			
+			int flo = (int)Math.floor(avg2); // 내림 정수
+			storeFollowVO3.setRe_rate(flo);
 			
 		
 		}
@@ -377,6 +380,11 @@ public class ShopController {
 			storeFollowVO3.setGive_storeName(storeFollowService.getSelectgiveStoreName(storeFollowVO3));// 작성자의 번호로 이름을 출력 한것을 ar안에 담고.
 			storeFollowVO3.setPco(productService.prodco(storeFollowVO3.getGive_storeNum()));
 			storeFollowVO3.setFco(storeFollowService.takeco(storeFollowVO3.getGive_storeNum()));
+			
+			double avg2 = (storeReviewService.take_rate(storeFollowVO3.getGive_storeNum()));
+			
+			int flo = (int)Math.floor(avg2); // 내림 정수
+			storeFollowVO3.setRe_rate(flo);
 		}	
 		// 팔로워 리스트 영역 끝
 		
