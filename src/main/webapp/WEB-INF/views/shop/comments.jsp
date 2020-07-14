@@ -102,7 +102,8 @@
 							<%-- <td>${vo.sq_num}</td>
 							<td>${vo.mem_storeNum }	</td> --%>
 							<%-- <td>${vo.sq_storeNum}작성자번호</td> --%>
-							<td> <a href="./myshop?mem_storeNum=${vo.sq_storeNum}" style="font-size: large;">${vo.mem_storeName } </a>
+							<br>
+							<td><a href="./myshop?mem_storeNum=${vo.sq_storeNum}" style="font-size: large;">${vo.mem_storeName } </a>
 							  <a >
        						  <span class = "badge pull-right">${vo.sq_regDate}</span>
     						  </a>

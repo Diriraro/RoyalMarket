@@ -9,6 +9,18 @@
 <head>
 <style type="text/css">
 
+.names{
+font-size: 17px;
+font-weight: bold;
+color: black;
+
+}
+
+.span2{
+font-weight: bold;
+}
+
+
 
 </style>
 <meta charset="UTF-8">
@@ -81,15 +93,15 @@
 							src="${pageContext.request.contextPath}/resources/images/star22.png">
 							</c:forEach>
 							<br>
-							<a href="./myshop?mem_storeNum=${vo.take_storeNum }" class="btn btn-success">${vo.take_storeName }</a>
+							<a href="./myshop?mem_storeNum=${vo.take_storeNum }" class="names">${vo.take_storeName }</a>
 							
 							
 							
 							<br>
 					</div>					
-							<div style=" text-align: center; margin-top: 40px;" >
+							<div style=" text-align: center; margin-top: 20px;" >
 							
-							<span onclick="location.href='./myshop?mem_storeNum=${vo.take_storeNum }'">상품   ${vo.pco}</span>  |  <span onclick="location.href='./followers?mem_storeNum=${vo.take_storeNum }'">팔로워  ${vo.fco}</span><br>
+							<span class="span2" onclick="location.href='./myshop?mem_storeNum=${vo.take_storeNum }'">상품   ${vo.pco}</span>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;<span class="span2" onclick="location.href='./followers?mem_storeNum=${vo.take_storeNum }'">팔로워  ${vo.fco}</span><br>
 							
 							</div>
 							

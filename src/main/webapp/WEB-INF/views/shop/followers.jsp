@@ -7,6 +7,17 @@
 <!DOCTYPE html>
 <html>
 <style type="text/css">
+.names{
+font-size: 17px;
+font-weight: bold;
+color: black;
+
+}
+
+.span2{
+font-weight: bold;
+}
+
 
 </style>
 <head>
@@ -77,12 +88,12 @@
 							src="${pageContext.request.contextPath}/resources/images/star22.png">
 							</c:forEach>
 							<br>
-				    <a href="./myshop?mem_storeNum=${vo.give_storeNum }" class="btn btn-success" >${vo.give_storeName}</a><br>
+				    <a href="./myshop?mem_storeNum=${vo.give_storeNum }" class="names" >${vo.give_storeName}</a><br>
 				    
 					</div>
 							
-					<div style=" text-align: center; margin-top: 40px;" >
-						<span>상품   ${vo.pco}</span> | <span>팔로워  ${vo.fco}</span><br>
+					<div style=" text-align: center; margin-top: 20px;" >
+						<span class="span2" onclick="location.href='./myshop?mem_storeNum=${vo.give_storeNum }'">상품   ${vo.pco}</span>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;<span class="span2" onclick="location.href='./followers?mem_storeNum=${vo.give_storeNum }'">팔로워  ${vo.fco}</span><br>
 					</div>
 					
 					

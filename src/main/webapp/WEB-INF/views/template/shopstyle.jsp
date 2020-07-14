@@ -20,8 +20,21 @@ border-top: 2px solid black;
 font-size: 20px;
 border-top:1px solid gray ; 
 border-color: rgba(0,0,0,0.25);
+}
+
+.s2{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 198px;
 
 }
+.s3{
+height: 40px;
+
+}
+
+
 .tds{
 color: black;
 }

@@ -4,6 +4,9 @@
 
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -133,14 +136,14 @@
 				</div>
 				</c:if>	
 				
-					<div class="s1">
-					<span style="font-size: 17px;">
+					<div class="s1 s2">
+					<span style="font-size: 17px;" class="s2">
 					${vo.sell_product }
 					</span>
 					</div>
-					<div class="s1">
+					<div class="s1 s3">
 					<span style="font-weight: bold;">
-					${vo.sell_price }
+					<fmt:formatNumber> ${vo.sell_price } </fmt:formatNumber>
 					</span>
 					<span style="font-weight: bold; font-size: 17px;">원</span>
 					<span class="badge" style="float: right; font-size: 13px;">
@@ -149,7 +152,7 @@
 					</div>
 					<div class="s1">
 					<span style="font-size: 17px;">
-					${vo.sell_kind}
+				 	# ${vo.sell_kind}
 					</span>
 					</div>
 					</div>
@@ -171,7 +174,6 @@
 	
 <c:import url="../template/footer.jsp"></c:import>
 	
-
 
 </body>
 </html>

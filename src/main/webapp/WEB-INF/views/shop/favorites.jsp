@@ -4,6 +4,9 @@
 
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -43,7 +46,14 @@ color: black;
          text-align: center;
   }
 
+/* 글자수 제한  */
+.fos2{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 270px;
 
+}
 
 
 
@@ -142,20 +152,20 @@ color: black;
 						
 						
 						<div style="border: 0px solid; width: 66%;height:100%; float: left;  background-color: #f0f0f5; font-size: 20px;">
-						   <button class="btn btn-danger del" style="float: right;"title="${vo.zzim_num}"> <a style="color: white;">찜 해제</a></button>
+						   <button class="btn btn-danger del" style="float: right;"title="${vo.zzim_num}"> <a style="color: white;">X</a></button>
 						   
 						   
-						<div style="border-top: 0px solid white; height: 40px;" class="pp2" title="${vo.sell_num }">
+						<div style="border-top: 0px solid white; height: 40px;" class="pp2 fos2" title="${vo.sell_num }">
 						<font style="color: #b1b1b1; font-size: 15px; font-weight: 600;">·&nbsp;상품명 :&nbsp;&nbsp;</font> <a class="fo1">${vo.sell_product}</a>						
 					
 						</div>
 						
 						<div style="border: 0px solid; height: 40px;" class="pp2" title="${vo.sell_num }">
 																	
-						<font style="color: #b1b1b1; font-size: 15px; font-weight: 600;">·&nbsp;가격 :&nbsp;&nbsp;</font> <a class="fo1">${vo.sell_price}  원</a>
+						<font style="color: #b1b1b1; font-size: 15px; font-weight: 600;">·&nbsp;가격 :&nbsp;&nbsp;</font> <a class="fo1" style="font-weight: bold;"><fmt:formatNumber> ${vo.sell_price } </fmt:formatNumber>  원</a>
 						</div> 
 						
-						<div style="border: 0px solid; min-height: 40px; overflow: auto;" class="pp2" title="${vo.sell_num }">
+						<div style="border: 0px solid; min-height: 40px; class="pp2 fos2" title="${vo.sell_num }">
 					
 						<font style="color: #b1b1b1; font-size: 15px; font-weight: 600;">·&nbsp;지역&nbsp;&nbsp;</font>
 						 <img	style="width: 16px; height: 20px; margin-bottom: 3px;" alt=""	src="${pageContext.request.contextPath}/resources/images/ad_logo.png">
@@ -189,7 +199,7 @@ color: black;
 $(".del").click(function(){
 	var ss = $(this).attr("title");
 	console.log(ss);
-	 if (confirm("정말 삭제하시겠습니까??") == true){    //확인
+	 if (confirm("찜목록에서 삭제하시겠습니까?") == true){    //확인
 
 	 location.href="../product/zzimDelete?zzim_num="+ss;
 			console.log("지우기");
