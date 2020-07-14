@@ -167,13 +167,13 @@ public class MemberController {
 		} else {
 			now_now = now - (long) session.getAttribute("now");
 		}
-
+		
 		boolean result = memberService.memberCheck(memberVO, bindingResult, checkNum);
 
 		if (result) {
 			mv.addObject("again", "again");
 			mv.setViewName("member/memberJoin");
-			session.invalidate();
+			//session.invalidate();
 		} else if (now_now > 300000) {
 			mv.addObject("result", "인증번호 유효기간이 지났습니다.");
 			mv.addObject("path", "./memberJoin");
@@ -188,7 +188,6 @@ public class MemberController {
 			}
 			session.invalidate();
 		}
-
 		return mv;
 	}
 
@@ -309,7 +308,7 @@ public class MemberController {
 				System.out.println("sendSMS" + now);
 				checkNum = numStr;
 
-				session.setAttribute("numStr", numStr);
+				
 				session.setAttribute("now", now);
 
 				System.out.println("수신자 번호 : " + phoneNumber);
