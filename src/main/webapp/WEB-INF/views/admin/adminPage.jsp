@@ -229,12 +229,12 @@
 		})
 		
 		$("#content").on("click", "#compulsionTrans", function() {
-			var sell_num = $(this).prop("title");
-			compulsionTrans(sell_num);
+			var trading_num = $(this).prop("title");
+			compulsionTrans(trading_num);
 			})
 		$("#content").on("click", "#compulsionCancel", function() {
-			var sell_num = $(this).prop("title");
-			compulsionCancel(sell_num);
+			var trading_num = $(this).prop("title");
+			compulsionCancel(trading_num);
 			})
 		$("#content").on("click",".w3-circle", function() {
 			var num = $(this).attr("title").trim();
@@ -592,9 +592,9 @@
 						}
 					})
 		}
-		function compulsionTrans(sell_num) {
+		function compulsionTrans(trading_num) {
 			$("#content").empty();
-			$.get("./result/compulsionTrans?sell_num="+sell_num+"&behavior=1", function() {
+			$.get("./result/compulsionTrans?trading_num="+trading_num+"&behavior=1", function() {
 				$
 				.ajax({
 					type : "GET",
