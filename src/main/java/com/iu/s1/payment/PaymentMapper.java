@@ -96,4 +96,6 @@ public interface PaymentMapper {
 	public int product_cancel_status(long sell_num)throws Exception;
 	
 	public long auto_incrementNum ()throws Exception;
+	
+	public PayVO paymentHistory(long trading_num)throws Exception;
 }

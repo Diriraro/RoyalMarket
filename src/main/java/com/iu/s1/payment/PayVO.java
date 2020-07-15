@@ -9,8 +9,15 @@ public class PayVO {
 	private String mem_id;
 	private long point_rest;
 	private long pay_cash;
+	private long buy_history_num;
 	
 	
+	public long getBuy_history_num() {
+		return buy_history_num;
+	}
+	public void setBuy_history_num(long buy_history_num) {
+		this.buy_history_num = buy_history_num;
+	}
 	public long getPay_cash() {
 		return pay_cash;
 	}

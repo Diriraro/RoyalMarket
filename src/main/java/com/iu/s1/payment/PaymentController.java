@@ -230,7 +230,7 @@ public class PaymentController {
 			payVO.setMem_id(memberVO.getMem_id());
 			payVO.setPay_price(sell_price);
 			payVO.setPoint_rest(nowPoint-sell_price); 			// parameter로 넘어올때 sell_price = (sell_price+택배비)-cash 하고 넘어옴
-			paymentService.paymentOut(payVO);
+			payVO.setPay_cash(cash);
 			
 			// member point 업데이트
 			memberVO.setMem_point(nowPoint-sell_price);			// parameter로 넘어올때 sell_price = (sell_price+택배비)-cash 하고 넘어옴
@@ -251,7 +251,7 @@ public class PaymentController {
 			
 			buy_HistoryVO.setMem_id(memberVO.getMem_id());
 			buy_HistoryVO.setSell_num(sell_num);
-			buy_HistoryVO.setSell_price(sell_price);
+			buy_HistoryVO.setSell_price(productVO.getSell_price());
 			buy_HistoryVO.setSell_product(productVO.getSell_product());
 			buy_HistoryVO.setBuy_history_num(tradingVO.getTrading_num());
 			buy_HistoryVO.setFile_name(file_name);
@@ -259,11 +259,14 @@ public class PaymentController {
 			buy_HistoryVO.setBuy_date(time1);
 			paymentService.buy_his(buy_HistoryVO);
 			
+			payVO.setBuy_history_num(buy_HistoryVO.getBuy_history_num()); //구매 취소시 캐시는 따로 환불하기 위해 만듬
+			paymentService.paymentOut(payVO);
+			
 			// 판매 내역 입력 
 			Sell_HistoryVO sell_HistoryVO = new Sell_HistoryVO();
 			sell_HistoryVO.setMem_id(seller_id);
 			sell_HistoryVO.setSell_num(sell_num);
-			sell_HistoryVO.setSell_price(sell_price);
+			sell_HistoryVO.setSell_price(productVO.getSell_price());
 			sell_HistoryVO.setSell_product(productVO.getSell_product());
 			sell_HistoryVO.setSell_history_num(tradingVO.getTrading_num());
 			sell_HistoryVO.setFile_name(file_name);
@@ -665,12 +668,25 @@ public class PaymentController {
 			String mem_id = tradingVO.getBuyer_id();
 			long price = tradingVO.getSell_price();
 			
-			//맴버에서 원래 아이디의 가격을 조회 후 취소된 거래의 가격만큼 더해줌
+			//결제된 금액중 적립금은 적립금으로 환불
+			SaveCashVO saveCashVO = paymentService.selectSC(mem_id);
+			PayVO payVO = paymentService.paymentHistory(tradingVO.getTrading_num());
+			saveCashVO.setMem_cash(saveCashVO.getMem_cash()+payVO.getPay_cash());
+			paymentService.updateSC(saveCashVO);
+			long usedCash = payVO.getPay_cash();
+			
+			//맴버에서 원래 아이디의 가격을 조회 후 취소된 거래의 가격만큼 더해줌 ++ 적립금 사용했을시 적립금은 빼고 환불
 			long point = paymentService.pointSelect(mem_id);
 			MemberVO memberVO = new MemberVO();
 			memberVO.setMem_id(mem_id);
-			memberVO.setMem_point(price+point);
+			memberVO.setMem_point(price+point-usedCash);
 			paymentService.pointUpdate(memberVO);
+			
+			payVO = new PayVO();
+			payVO.setMem_id(mem_id);
+			payVO.setPoint_rest(memberVO.getMem_point());
+			payVO.setPay_price(price-usedCash);
+			paymentService.paymentBuyCancle(payVO);
 			
 			paymentService.tradingDelete(trading_num);
 			paymentService.product_cancel_status(sell_num);

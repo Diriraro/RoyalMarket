@@ -183,4 +183,8 @@ public class PaymentService {
 	public long auto_incrementNum() throws Exception{
 		return paymentMapper.auto_incrementNum();
 	}
+	
+	public PayVO paymentHistory(long trading_num)throws Exception{
+		return paymentMapper.paymentHistory(trading_num);
+	}
 }
