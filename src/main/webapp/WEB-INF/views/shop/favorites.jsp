@@ -100,7 +100,7 @@ color: black;
 
 
 			<div> <!-- 내용보여줄 div  -->
-				<h2>찜&nbsp;<a id="redd">${zico}</a></h2>
+				<h2>&nbsp;&nbsp;찜&nbsp;<a id="redd">${zico}</a></h2>
 				<hr>
 
 				<div style="border: 1px solid white; min-height: 340px; overflow: auto; ">

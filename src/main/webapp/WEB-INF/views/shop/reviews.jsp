@@ -10,7 +10,11 @@
 <html>
 <head>
 <style type="text/css">
+.names3{
+color: black;
+font-weight: bold;
 
+}
 </style>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -54,7 +58,7 @@
 
 
 			<div>
-				<h2>인증후기&nbsp;<a id="redd">${reco}</a></h2>
+				<h2>&nbsp;&nbsp;인증후기&nbsp;<a id="redd">${reco}</a></h2>
 				<hr>
 			<c:forEach items="${relist}" var="vo" varStatus="i">
 				 <!-- 리스트 감쌀디아이브이  -->
@@ -65,15 +69,15 @@
 				</div><!-- 왼쪽 옆에 이미지 박스  -->
 				
 				<div style="font-size: large;">
-				<a href="./myshop?mem_storeNum=${vo.re_storeNum}">	${vo.re_storeName}</a>
+				<a href="./myshop?mem_storeNum=${vo.re_storeNum}" class="names3">&nbsp;	${vo.re_storeName}</a>
 				<span style="float: right;" class="badge pull-right">${vo.re_wDate}</span>
 				<%-- ${vo.re_storeNum}  리뷰남김사람 번호 --%>
 				</div>
 				<%-- 리뷰번호 :${vo.re_num} 지울떄 사용--%>
 				<div>
-				<%-- 점수 : ${vo.re_rate} --%>
+				<%-- 점수 : ${vo.re_rate} --%>&nbsp;&nbsp;
 				<c:forEach var="i" begin="1" end="${vo.re_rate}">
-					<a><img style="cursor: pointer; width: 14px; height: 15px;" alt=""
+					<a><img class="imgsh2" style="cursor: pointer; width: 24px; height: 25px;" alt=""
 					src="${pageContext.request.contextPath}/resources/images/star22.png"></a>
 				</c:forEach>
 				
@@ -81,23 +85,20 @@
 				<br>
 				
 				<div>
-				<button class="btn-default go" title="${vo.sell_num }">${vo.sell_product}</button>
+				&nbsp;&nbsp;<button class="btn-default go" title="${vo.sell_num }">${vo.sell_product}</button>
 				</div>
 				<hr>
-				<br>
-				
 				<div>
 					<p style="font-size: large;">
 					${vo.re_context}
 					</p>
 				</div>
 				
-				
 				<c:forEach items="${pfile}" var="pfile" varStatus="status" >
 				
 				<c:if test="${vo.re_num eq pfile.re_num}">
-				<div>
-					<img src="../upload/review/${pfile.file_name}"	alt="${pfile.ori_name}"	style="overflow: hidden; display: flex; align-items: center; justify-content: center; width: 70px; height: 70px; float: left;">
+				<div style="width: 150px; width: 150px; margin-top: 40px; border-radius: 20%;overflow: hidden;">
+					<img src="../upload/review/${pfile.file_name}"	alt="${pfile.ori_name}"	style="overflow: hidden; display: flex; align-items: center; justify-content: center; width: 150px; height: 150px; float: left;">
 				</div>
 				
 				</c:if>

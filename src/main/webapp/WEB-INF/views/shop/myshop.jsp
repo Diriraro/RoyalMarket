@@ -15,7 +15,7 @@
 .img{
         position: relative;                                   
         height: 190px;
-        width: 197px;
+        width: 218px;
         background-size: cover;
     }
 
@@ -83,7 +83,7 @@
 			</div>
 		
 			<div>  <!-- 내용보여줄 div -->
-				<h2>상품&nbsp;<a id="redd">${prodco}</a></h2>
+				<h2>&nbsp;&nbsp;상품&nbsp;<a id="redd">${prodco}</a></h2>
 				<hr>
 				
 				<div style="border: 1px solid white; min-height: 340px; overflow: auto;"  >
@@ -92,12 +92,12 @@
 					<c:forEach items="${mylist }" var="vo">
 					
 					
-					<div style="width: 200px; height: 300px; border: 1px solid gray ; float: left; margin-left: 4px; margin-bottom: 4px;  background-color: #f0f0f5; border-color: rgba(0,0,0,0.25);"  onclick="location.href='../product/productSelect?sell_num=${vo.sell_num}'">
+					<div class="box1" style="width: 218px; height: 300px; border: 1px solid gray ; float: left; margin-left: 30px; margin-bottom: 30px;  background-color: #f0f0f5; border-color: rgba(0,0,0,0.25);"  onclick="location.href='../product/productSelect?sell_num=${vo.sell_num}'">
 					
 				<!--status 2이면   판매완료 -->	
 				<c:if test="${vo.sell_status eq 2}">
 					
-				<div style="width: 198px;">
+				<div style="width: 218px;">
 				<c:forEach items="${pfile}" var="pfile" varStatus="status" >
 				
 				<c:if test="${vo.sell_num eq pfile.sell_num}">
@@ -106,7 +106,7 @@
 					<%-- <img  src="../upload/product/${pfile.file_name}"	alt="${pfile.ori_name}"	style="overflow: hidden; display: flex; align-items: center; justify-content: center; width: 197px; height: 190px;"> --%>
 				<!--  -->
 				
-					<div class=img style="height: 190px; width:197px;float: left;  background-size: 197px 190px; background-image: url('${pageContext.request.contextPath}/upload/product/${pfile.file_name}');">
+					<div class="img "  style="height: 190px; width:218px;float: left;  background-size: 218px 190px; background-image: url('${pageContext.request.contextPath}/upload/product/${pfile.file_name}');">
 						<div class="content">
 							<h5 style="margin-bottom: 30px;">판매 <br> 완료</h5>
 						</div>
@@ -124,11 +124,11 @@
 				<!--0,1 일떄 판매중  -->
 					<c:if test="${vo.sell_status ne 2}">
 					
-				<div style="width: 198px;">
+				<div style="width: 218px;">
 				<c:forEach items="${pfile}" var="pfile" varStatus="status" >
 				
 				<c:if test="${vo.sell_num eq pfile.sell_num}">
-					<img  src="../upload/product/${pfile.file_name}"	alt="${pfile.ori_name}"	style="overflow: hidden; display: flex; align-items: center; justify-content: center; width: 197px; height: 190px;">
+					<img  src="../upload/product/${pfile.file_name}"	alt="${pfile.ori_name}"	style="overflow: hidden; display: flex; align-items: center; justify-content: center; width: 216px; height: 190px;">
 				</c:if>
 				
 				
@@ -136,23 +136,23 @@
 				</div>
 				</c:if>	
 				
-					<div class="s1 s2">
-					<span style="font-size: 17px;" class="s2">
-					${vo.sell_product }
+					<div class="s1 s2 box1">
+					<span style="font-size: 17px; font-weight: 700;" class="s2">
+					&nbsp;${vo.sell_product }
 					</span>
 					</div>
-					<div class="s1 s3">
+					<div class="s1 s3 box1">
 					<span style="font-weight: bold;">
-					<fmt:formatNumber> ${vo.sell_price } </fmt:formatNumber>
+					&nbsp;<fmt:formatNumber> ${vo.sell_price } </fmt:formatNumber>
 					</span>
 					<span style="font-weight: bold; font-size: 17px;">원</span>
 					<span class="badge" style="float: right; font-size: 13px;">
-					${vo.sell_date }
+					&nbsp;${vo.sell_date }
 					</span>
 					</div>
 					<div class="s1">
-					<span style="font-size: 17px;">
-				 	# ${vo.sell_kind}
+					<span style="font-size: 17px; font-weight: 700">
+				 	&nbsp;# ${vo.sell_kind}
 					</span>
 					</div>
 					</div>

@@ -26,13 +26,28 @@ border-color: rgba(0,0,0,0.25);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  width: 198px;
+  width: 217px;
 
 }
 .s3{
 height: 40px;
 
 }
+.imgsh{
+filter: drop-shadow(5px 5px 5px #000);
+
+}
+.imgsh2{
+filter: drop-shadow(1px 1px 1px #000);
+
+}
+.box1{
+box-shadow: 1px 1px 1px 1px gray;
+}
+.box2{
+box-shadow: 5px 5px 5px 5px gray;
+}
+
 
 
 .tds{

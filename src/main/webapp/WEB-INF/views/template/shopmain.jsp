@@ -8,6 +8,24 @@
 .update_form{
 	display: none;
 }
+
+.imgsh{
+filter: drop-shadow(5px 5px 5px #000);
+
+}
+
+.button4{
+  background-color: white;
+  color: black;
+  border: 2px solid #e7e7e7;
+  font-size: 25px;
+  color: black;
+
+}
+
+
+.button4:hover {background-color: #e7e7e7;}
+
 </style>
 
 <!-- shop 페이지가 공통으로 가져갈곳  -->
@@ -25,25 +43,23 @@
 				<!-- 사진  -->
 				<div style="width: 130px; width: 130px; margin-top: 40px;  margin-left: 30%;border-radius: 70%;overflow: hidden;">
 					<!-- 카카오 이미지 확인  -->
-					<img alt="" src="${pageContext.request.contextPath}/resources/images/user11.png" style="width: 100%; height: 100%;">
+					<img class="imgsh" alt="" src="${pageContext.request.contextPath}/resources/images/user11.png" style="width: 100%; height: 100%;">
 				</div>
 				
 				<!--별점  -->
 					<div style=" text-align: center; margin-top: 22px;">
 				<c:forEach var="i" begin="1" end="${flo}">
-					<a><img style="cursor: pointer; width: 22px; height: 20px;" alt=""
+					<a><img class="imgsh" style="cursor: pointer; width: 22px; height: 20px;" alt=""
 					src="${pageContext.request.contextPath}/resources/images/star22.png"></a>
 				</c:forEach>
 				<c:if test="${substar eq 1}">
-					<a><img style="cursor: pointer; width: 22px; height: 20px;" alt=""
+					<a><img class="imgsh" style="cursor: pointer; width: 22px; height: 20px;" alt=""
 					src="${pageContext.request.contextPath}/resources/images/star23.png"></a>
 				</c:if>
 					</div>
 				
 				<div style=" height: 100px; margin-top: 60px; text-align: center;">
-					
-					<a class="zzimbtn btn" style=" font-size: 25px; color: white;"  href="../product/myProductList?kind=sp&mem_storeNum=${member.mem_storeNum}">
-				 상품관리</a>
+				<button class="button4"><a style="color: black" href="../product/myProductList?kind=sp&mem_storeNum=${member.mem_storeNum}">상품관리</a></button>
 				
 				
 				</div>
@@ -70,7 +86,7 @@
 			<div style="border: 1px solid white; height: 80px; margin-bottom: 1px; margin-top: 2px;">
 
 			<div style="margin-top: 3%;">
-				<span style="font-size: 17px;"><img alt="" src="${pageContext.request.contextPath}/resources/images/date_logo.png" width="19px;" height="19px;"> ${getregDate} </span>
+				<span style="font-size: 17px;"><img class="imgsh2" alt="" src="${pageContext.request.contextPath}/resources/images/date_logo.png" width="19px;" height="19px;"> ${getregDate} </span>
 			</div>			
 			<hr>
 			</div>
@@ -92,7 +108,7 @@
 			<div style="border: 1px solid white; height: 80px; margin-bottom: 1px; margin-top: 2px;">
 			<div style="margin-top: 3%;">
 			<span style="font-size: 22px;">
-			<img alt="" src="${pageContext.request.contextPath}/resources/images/ad_logo.png" width="25px;" height="25px;">	${mdata.mem_address}
+			<img class="imgsh2" alt="" src="${pageContext.request.contextPath}/resources/images/ad_logo.png" width="25px;" height="25px;">	${mdata.mem_address}
 			</span>
 			<hr>
 			</div>	
@@ -124,11 +140,11 @@
 				<!--별점  -->
 					<div style=" text-align: center; margin-top: 30px;">
 				<c:forEach var="i" begin="1" end="${flo}">
-					<a><img style="cursor: pointer; width: 22px; height: 20px;" alt=""
+					<a><img class="imgsh" style="cursor: pointer; width: 22px; height: 20px;" alt=""
 					src="${pageContext.request.contextPath}/resources/images/star22.png"></a>
 				</c:forEach>
 				<c:if test="${substar eq 1}">
-					<a><img style="cursor: pointer; width: 22px; height: 20px;" alt=""
+					<a><img class="imgsh" style="cursor: pointer; width: 22px; height: 20px;" alt=""
 					src="${pageContext.request.contextPath}/resources/images/star23.png"></a>
 				</c:if>
 					</div>
@@ -143,7 +159,7 @@
 				<c:if test="${fonum.follow_Num eq null}">
 				<div>
 					<a href="./setinsertFollow?give_storeNum=${msnum}&take_storeNum=${mem_storeNum}&mem_storeNum=${mem_storeNum}"
-						class="btn" id="pi" style="font-size:25px; color: white; font-weight: bold;"><img alt="" src="${pageContext.request.contextPath}/resources/images/ff1.png"> 팔로우 </a>
+						class="btn tex" id="pi" style="font-size:25px; color: white; font-weight: bold; "><img class="imgsh" alt="" src="${pageContext.request.contextPath}/resources/images/ff1.png"> 팔로우 </a>
 				</div>
 				</c:if>
 				
@@ -152,7 +168,7 @@
 				<c:if test="${fonum.follow_Num ne null}">
 				<div>
 				<a href="./setDeleteFollow?follow_Num=${fonum.follow_Num}&mem_storeNum=${mem_storeNum}"
-						class="btn" id="mi"style="font-size:25px; color: white; font-weight: bold;" ><img alt="" src="${pageContext.request.contextPath}/resources/images/ff2.png">팔로잉    </a>
+						class="btn" id="mi"style="font-size:25px; color: white; font-weight: bold;" ><img class="imgsh" alt="" src="${pageContext.request.contextPath}/resources/images/ff2.png">팔로잉    </a>
 				</div>
 				</c:if>
 	
@@ -183,7 +199,7 @@
 
 			<div style="border: 1px solid white; height: 80px; margin-bottom: 1px; margin-top: 2px;">
 			<div style="margin-top: 3%;">
-				<span style="font-size: 17px;"><img alt="" src="${pageContext.request.contextPath}/resources/images/date_logo.png" width="19px;" height="19px;"> ${getregDate} </span>
+				<span style="font-size: 17px;"><img class="imgsh2" alt="" src="${pageContext.request.contextPath}/resources/images/date_logo.png" width="19px;" height="19px;"> ${getregDate} </span>
 			</div>	
 			<hr>
 			</div>
@@ -206,7 +222,7 @@
 			<c:if test="${mdata.mem_access eq 0}">
 			<div style="margin-top: 3%;">
 			<span style="font-size: 22px;">
-			<img alt="" src="${pageContext.request.contextPath}/resources/images/ad_logo.png" width="25px;" height="25px;">	${mdata.mem_address}
+			<img class="imgsh2" alt="" src="${pageContext.request.contextPath}/resources/images/ad_logo.png" width="25px;" height="25px;">	${mdata.mem_address}
 			</span>
 			</div>	
 			</c:if>
@@ -244,6 +260,13 @@ function update_storeName(){
 	$(".update_form").css("display","block");
 	
 }
+
+
+$(".button4").click(function(){
+console.log("ff");
+var num = $(this).attr("title");
+	
+});
 
 
 

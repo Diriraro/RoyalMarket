@@ -19,6 +19,7 @@ font-weight: bold;
 }
 
 
+
 </style>
 <head>
 <meta charset="UTF-8">
@@ -61,7 +62,7 @@ font-weight: bold;
 			</div>
 
 				<div>  <!-- 내용보여줄 div -->
-				<h2>팔로워&nbsp;<a id="redd">${takeco}</a></h2>
+				<h2>&nbsp;&nbsp;팔로워&nbsp;<a id="redd">${takeco}</a></h2>
 				<hr>
 				
 				<div style="border: 0px solid red; min-height: 340px; overflow: auto;" >
@@ -71,7 +72,7 @@ font-weight: bold;
 							<%-- <td>${vo.take_storeNum}</td> --%>
 						
 					
-					<div style="width: 200px; height: 320px; border: 1px solid gray; float: left; margin-left: 4px; margin-bottom: 4px; overflow: auto; background-color: #f0f0f5">
+					<div class="fst" style="width: 200px; height: 320px; border: 1px solid gray; float: left; margin-left: 4px; margin-bottom: 4px; overflow: auto; border-color: rgba(0,0,0,0.25); background-color: #f0f0f5">
 					
 				<%-- 	<div style="width: 198px;">
 					<img src="${pageContext.request.contextPath}/resources/images/showimage.png" alt="main" style="width: 197px; height: 190px;">
@@ -84,7 +85,7 @@ font-weight: bold;
 					<div style="text-align: center;">
 					
 					<c:forEach var="i" begin="1" end="${vo.re_rate}">
-							<img style="cursor: pointer; width: 15px; height: 15px;" alt=""
+							<img class="imgsh2" style="cursor: pointer; width: 15px; height: 15px;" alt=""
 							src="${pageContext.request.contextPath}/resources/images/star22.png">
 							</c:forEach>
 							<br>

@@ -56,7 +56,7 @@
 
 
 			<div>
-				<h2>상점문의&nbsp;<a id="redd">${coco}</a></h2>
+				<h2>&nbsp;&nbsp;상점문의&nbsp;<a id="redd">${coco}</a></h2>
 				<hr>
 
 				<%--  <c:import url="../template/comentsForm.jsp"></c:import>  --%>
@@ -97,30 +97,33 @@
 					</c:if> --%>
 				
 					
-					<div style=" border-top: 1px solid gray; border-bottom:1px solid gray; height: 100px;  background-color: #f0f0f5; border-color: rgba(0,0,0,0.25);">
+					<div style=" border-top: 1px solid gray; border-bottom:1px solid gray; min-height: 120px;  background-color: #f0f0f5; border-color: rgba(0,0,0,0.25); overflow: auto;">
 						<tr>
 							<%-- <td>${vo.sq_num}</td>
 							<td>${vo.mem_storeNum }	</td> --%>
 							<%-- <td>${vo.sq_storeNum}작성자번호</td> --%>
-							<br>
-							<td><a href="./myshop?mem_storeNum=${vo.sq_storeNum}" style="font-size: large;">${vo.mem_storeName } </a>
+							<td><a href="./myshop?mem_storeNum=${vo.sq_storeNum}" style="font-size: 25px; font-weight: 700;color: black;">&nbsp; ${vo.mem_storeName } </a>
 							  <a >
        						  <span class = "badge pull-right">${vo.sq_regDate}</span>
     						  </a>
 							</td>
 						
 							<br>
-							<td>${vo.sq_contents}</td>
+							<td>
+							<p style="font-size: 19px;">
+							&nbsp;${vo.sq_contents}
+							</p>							 
+							</td>
 							<br>
 							<td>
-						<button class="dae" title="${vo.mem_storeName }">댓글작성</button>	
+						&nbsp; <button class="dae" title="${vo.mem_storeName }">댓글작성</button>	
 							
 							
 					<!--본인이 작성한 댓글 또는  상점 주인만 삭제하는 쿼리 작성  -->
 						<c:if test="${msnum eq vo.sq_storeNum or msnum eq vo.mem_storeNum}">
-							<a href="./setDelete?sq_num=${vo.sq_num}&mem_storeNum=${vo.mem_storeNum}"
-						class="btn btn-danger btn-sm"><span
-						class="	glyphicon glyphicon-remove-sign"></span>Delete</a>
+						
+							&nbsp;<a href="./setDelete?sq_num=${vo.sq_num}&mem_storeNum=${vo.mem_storeNum}" class="btn btn-danger btn-sm">
+							<span class="glyphicon glyphicon-remove-sign"></span>Delete</a>
 						</c:if>
 							
 							</td>
