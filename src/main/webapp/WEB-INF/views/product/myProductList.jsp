@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -64,7 +69,7 @@
 							src="${pageContext.request.contextPath}/upload/product/${myfile[i.index]}"></td>
 							
 					<td style="line-height: 152px;"><a href="./productSelect?sell_num=${vo.sell_num}">${vo.sell_product}</a></td>
-					<td style="line-height: 152px;">${vo.sell_price}원</td>
+					<td style="line-height: 152px;"><fmt:formatNumber> ${vo.sell_price} </fmt:formatNumber>원</td>
 					<td style="line-height: 152px;">${vo.sell_hit}</td>
 					<td style="line-height: 152px;">${vo.sell_date}</td>
 					<td >
@@ -100,8 +105,7 @@
 			if(strReferer == null){ 
 			%>
 			<script type="text/javascript">
-			document.location.href="http://localhost:8080/";
- 			alert("정상적인 경로를 통해 다시 접근해 주세요");
+			document.location.href="http://localhost:8080/error/error";
 
 			</script>
 			<%

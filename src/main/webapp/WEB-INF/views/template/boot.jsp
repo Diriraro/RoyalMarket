@@ -9,3 +9,6 @@
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
+<link rel="shortcut icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/images/favi_logo.png" >
+
+

@@ -2,6 +2,11 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+
+
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -119,7 +124,7 @@
 
 		<div style="display: inline-block; margin-left: 50px; width: 545px;">
 			<font style="font-size: 25px; font-weight: 800;">${vo.sell_product}</font>
-			<br> <br> <font style="font-size: 45px">${vo.sell_price}</font><font
+			<br> <br> <font style="font-size: 45px"><fmt:formatNumber> ${vo.sell_price} </fmt:formatNumber></font><font
 				style="font-size: 26px;">원</font>
 			<hr>
 			<img style="width: 20px; height: 20px" alt=""
