@@ -38,8 +38,17 @@ public class PaymentService {
 	public int paymentCharge(PayVO payVO)throws Exception{
 		return paymentMapper.paymentCharge(payVO);
 	}
+	public int paymentSell(PayVO payVO)throws Exception{
+		return paymentMapper.paymentSell(payVO);
+	}
+	public int paymentBuyCancle(PayVO payVO)throws Exception{
+		return paymentMapper.paymentBuyCancle(payVO);
+	}
 	public int paymentOut(PayVO payVO)throws Exception{
 		return paymentMapper.paymentOut(payVO);
+	}
+	public int paymentCalculate(PayVO payVO)throws Exception{
+		return paymentMapper.paymentCalculate(payVO);
 	}
 	
 	public List<PayVO> pointManage(String mem_id)throws Exception{

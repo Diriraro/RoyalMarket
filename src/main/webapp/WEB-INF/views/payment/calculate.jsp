@@ -27,12 +27,12 @@
 		
 			
 	
-		<form action="/payment/pay" method="get" id="frm">
+		<form action="/payment/calculate" method="post" id="frm">
 			<div style=" height: 20px; width: 70px; margin-top: 35px; float: left; display: inline-block;"><b>출금 계좌</b> </div>
-			<div style="display: inline-block;"><input type="text" id="account" name="amount" style="height:40px; border-radius: 4px; margin-top:30px;" title="${point}"></div>
+			<div style="display: inline-block;"><input type="text" id="account" name="account" style="height:40px; border-radius: 4px; margin-top:30px;" title="${point}" placeholder="숫자만 입력해 주세요"></div>
 			
 			<div style=" height: 20px; width: 60px; margin-top: 35px; margin-left:15px; display: inline-block;"><b>출금 은행</b> </div>
-			<div style="display: inline-block;"><input type="text" id="bank_num" name="amount" style="height:40px; border-radius: 4px; margin-top:30px; width: 80px;"></div>
+			<div style="display: inline-block;"><input type="text" id="bank_num" name="bank_num" style="height:40px; border-radius: 4px; margin-top:30px; width: 80px;"></div>
 			<br>
 			
 			<div style=" height: 20px; width: 70px; margin-top: 35px; float: left;"><b>출금 금액</b> </div>
@@ -44,7 +44,7 @@
 			<div><input class="check" type="checkbox" id="check2">&nbsp; 우주마켓 포인트 이용 약관에 동의합니다.</div>
 
 			<div style="text-align: center;">
-				<button type="submit" style="background-color: #5c2392; width:100px; height: 30px; color: white; margin-top:15px; display: inline-block; border:1px solid white; border-radius: 10px;"  id="goCharge">충전하기</button>
+				<button type="submit" style="background-color: #5c2392; width:100px; height: 30px; color: white; margin-top:15px; display: inline-block; border:1px solid white; border-radius: 10px;"  id="goCharge">출금하기</button>
 				<button type="submit" style="background-color: #5c2392; width:100px; height: 30px; color: white; margin-top:15px; display: inline-block; border:1px solid white; border-radius: 10px;"  id="Cancel">취소하기</button>
 			</div>
 			
@@ -63,10 +63,10 @@
 
 	//포인트 초과했을때 alert 띄우기 ()
 	$("#amount").on("blur", function() {
-		  console.log($(this).attr("title"));
-		  alert("Tq");
+		  //console.log($(this).attr("title"));
 		    if($(this).val>$(this).attr("title")){
 				alert("보유 포인트 초과");
+				$(this).val("");
 			    }
 		})
 	$("#account").on("keyup", function() {
@@ -112,8 +112,11 @@
 			alert("이용약관을 모두 체크해 주세요");
 			 return false;
 			}
-		else if(amount==""){
-			alert("충전할 금액을 입력하세요");
+		else if(amount=="" || amount=="0"){
+			alert("정산할 금액을 입력하세요");
+			return false;
+		}else if(amount<1000){
+			alert("1000원 이상부터 정산이 가능합니다")
 			return false;
 		}else{
 			$("#frm").submit();

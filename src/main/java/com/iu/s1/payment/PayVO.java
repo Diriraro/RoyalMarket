@@ -8,8 +8,15 @@ public class PayVO {
 	private long pay_out;
 	private String mem_id;
 	private long point_rest;
+	private long pay_cash;
 	
 	
+	public long getPay_cash() {
+		return pay_cash;
+	}
+	public void setPay_cash(long pay_cash) {
+		this.pay_cash = pay_cash;
+	}
 	public long getPoint_rest() {
 		return point_rest;
 	}
