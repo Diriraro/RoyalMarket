@@ -159,7 +159,7 @@ filter: drop-shadow(5px 5px 5px #000);
 				<c:if test="${fonum.follow_Num eq null}">
 				<div>
 					<a href="./setinsertFollow?give_storeNum=${msnum}&take_storeNum=${mem_storeNum}&mem_storeNum=${mem_storeNum}"
-						class="btn tex" id="pi" style="font-size:25px; color: white; font-weight: bold; "><img class="imgsh" alt="" src="${pageContext.request.contextPath}/resources/images/ff1.png"> 팔로우 </a>
+						class="btn tex" id="pi" style="font-size:25px; color: white; font-weight: bold; "><img class="imgsh" alt="" src="${pageContext.request.contextPath}/resources/images/ff1.png"> <font style="text-shadow:3px 3px 3px rgb(0,0,0);">팔로우</font> </a>
 				</div>
 				</c:if>
 				
@@ -168,7 +168,7 @@ filter: drop-shadow(5px 5px 5px #000);
 				<c:if test="${fonum.follow_Num ne null}">
 				<div>
 				<a href="./setDeleteFollow?follow_Num=${fonum.follow_Num}&mem_storeNum=${mem_storeNum}"
-						class="btn" id="mi"style="font-size:25px; color: white; font-weight: bold;" ><img class="imgsh" alt="" src="${pageContext.request.contextPath}/resources/images/ff2.png">팔로잉    </a>
+						class="btn" id="mi"style="font-size:25px; color: white; font-weight: bold;" ><img class="imgsh" alt="" src="${pageContext.request.contextPath}/resources/images/ff2.png"><font style="text-shadow:3px 3px 3px rgb(0,0,0);">팔로잉</font>   </a>
 				</div>
 				</c:if>
 	
