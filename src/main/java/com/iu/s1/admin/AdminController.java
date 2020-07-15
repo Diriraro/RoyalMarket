@@ -320,7 +320,7 @@ public class AdminController {
 	@GetMapping("compulsionTrans")
 	public void compulsionTrans(TradingVO tradingVO, long behavior, Model model) throws Exception {
 		TradingVO traVO = new TradingVO();
-		traVO = paymentService.tradingSelect(tradingVO.getSell_num());
+		traVO = paymentService.tradingSelect(tradingVO.getTrading_num());
 		
 		
 		// 거래 인수
@@ -375,7 +375,7 @@ public class AdminController {
 
 			// 포인트 업데이트 및 trading에서 삭제
 			paymentService.pointUpdate(memberVO);
-			paymentService.tradingDelete(tradingVO.getSell_num());
+			paymentService.tradingDelete(tradingVO.getTrading_num());
 			
 			
 			// 거래 취소
@@ -404,8 +404,9 @@ public class AdminController {
 			MemberVO memberVO = new MemberVO();
 			memberVO.setMem_id(mem_id);
 			memberVO.setMem_point(price + point);
+			paymentService.product_cancel_status(traVO.getSell_num());
 			paymentService.pointUpdate(memberVO);
-			paymentService.tradingDelete(tradingVO.getSell_num());
+			paymentService.tradingDelete(tradingVO.getTrading_num());
 		}
 		System.out.println("behavior : " + behavior);
 	}

@@ -80,8 +80,8 @@
 		var check = confirm("상품 인계완료를 하시겠습니까?");
 		var num = $("#productGive").attr("title");
 		if(check){
-		location.href="./productGive?sell_num="+num;
-		
+		var sell_history_num= ${sell_history_num};
+		location.href="./productGive?sell_num="+num+"&sell_history_num="+sell_history_num;
 		}
 	});
 </script>
