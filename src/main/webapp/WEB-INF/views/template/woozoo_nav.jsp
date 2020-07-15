@@ -10,17 +10,13 @@
 #recentBox {
 	position: fixed;
 	right: calc(50% - 830px);
-	top:200px;
+	top: 185px;
 	width: 200px;
 	text-align: center;
-	border-top: 1px solid rgb(204, 204, 204);
-	border-left: 1px solid rgb(204, 204, 204);
-	border-right: 1px solid rgb(204, 204, 204);
-	border-bottom: 1px solid rgb(204, 204, 204);
-	padding: 10px;
-	overflow: hidden;
-	padding: 10px;
+	border: 1px solid rgb(204, 204, 204);
+	padding: 3px 10px;
 	box-sizing: border-box;
+	background-color: white;
 }
 
 .recentSearchContainer {
@@ -30,6 +26,7 @@
 .recentSearchContainer>img {
 	border-radius: 50%;
 	width: 100px;
+	height : 90px;
 }
 
 #header_top {
@@ -146,24 +143,30 @@ button {
 }
 
 .dropdown:hover .dropdown-menu {
-    display: block;
-    margin-top: 0; 
-    // remove the gap so it doesn't close
-    
- }
- 
- .glyphicon:hover{
- 	color: #5c2392;
- }
- .kind{
- color: #212121;
- }
- 
-  .kind:hover{
- 	background-color: #5c2392;
- 	color: white;
- }
+	display: block;
+	margin-top: 0;
+	//
+	remove
+	the
+	gap
+	so
+	it
+	doesn't
+	close
+}
 
+.glyphicon:hover {
+	color: #5c2392;
+}
+
+.kind {
+	color: #212121;
+}
+
+.kind:hover {
+	background-color: #5c2392;
+	color: white;
+}
 </style>
 <div class="n">
 	<header>
@@ -193,7 +196,8 @@ button {
 					</div>
 				</c:if>
 
-				<c:if test="${not empty sessionScope.member}">
+				<c:if
+					test="${not empty sessionScope.member && member.mem_id ne 'admin'}">
 					<div style="margin-right: 250px; margin-top: 9px;">
 						<a href="${pageContext.request.contextPath}/member/memberLogout">
 							<font style="font-weight: 800; font-size: 13px; color: #666666;">로그아웃</font>
@@ -201,6 +205,21 @@ button {
 							href="${pageContext.request.contextPath}/shop/myshop?mem_storeNum=${member.mem_storeNum}">
 							<font style="font-weight: 800; font-size: 13px; color: #666666;">내
 								상점</font>
+						</a> <font>&nbsp;ㅣ&nbsp;</font> <a
+							href="${pageContext.request.contextPath}/member/memberUpdate">
+							<font style="font-weight: 800; font-size: 13px; color: #666666;">계정설정</font>
+						</a>
+					</div>
+				</c:if>
+				
+				<c:if
+					test="${not empty sessionScope.member && member.mem_id eq 'admin'}">
+					<div style="margin-right: 250px; margin-top: 9px;">
+						<a href="${pageContext.request.contextPath}/member/memberLogout">
+							<font style="font-weight: 800; font-size: 13px; color: #666666;">로그아웃</font>
+						</a> <font>&nbsp;ㅣ&nbsp;</font> <a
+							href="${pageContext.request.contextPath}/admin/adminPage">
+							<font style="font-weight: 800; font-size: 13px; color: #666666;">관리자 페이지</font>
 						</a> <font>&nbsp;ㅣ&nbsp;</font> <a
 							href="${pageContext.request.contextPath}/member/memberUpdate">
 							<font style="font-weight: 800; font-size: 13px; color: #666666;">계정설정</font>
@@ -222,14 +241,12 @@ button {
 					src="${pageContext.request.contextPath}/resources/images/nav_logo2.png"
 					alt="로고"></a>
 				<!-- 검색창 -->
+
 			<div style="margin-left: 90px; display: inline-block;">
+
 					<form action="/product/productList" class="form-inline">
 						<div class="input-group input-group-sm col-xs-2"
-							style="display: inline-block;border-radius:3px 3px 3px 3px; width:90px;
-							border-bottom: solid 2px #5c2392; 
-							border-left: solid 2px #5c2392; 
-							border-right: solid 2px #5c2392; 
-							border-top: solid 2px #5c2392;">
+							style="display: inline-block; border-radius: 3px 3px 3px 3px; width: 90px; border-bottom: solid 2px #5c2392; border-left: solid 2px #5c2392; border-right: solid 2px #5c2392; border-top: solid 2px #5c2392;">
 							<select class="form-control" id="sel1" name="kind"
 								style="height: 36px;">
 								<option value="sp">제품명</option>
@@ -274,7 +291,9 @@ button {
 				    <li><a href="../shop/myshop?mem_storeNum=${member.mem_storeNum}">내상점</a></li>
 				    <li><a href="../payment/buy_History">구매내역</a></li>
 				    <li><a href="../payment/sell_History">판매내역</a></li>
+				    <li><a href="../payment/pointManage">나의 포인트</a></li>
 				  </ul>
+
 
 				</div>
 				<%-- 	<a style="margin-right: ;" href="../shop/myshop?mem_storeNum=${member.mem_storeNum}"><img
@@ -284,51 +303,74 @@ button {
 				<font>&nbsp;&nbsp;&nbsp;ㅣ&nbsp;</font> <a style="margin-right:;"
 					href="javascript:popup()"><img
 					src="${pageContext.request.contextPath}/resources/images/pointCharge22.jpg"
-					width="45" height="30" alt=포인트 충전이미지"> &nbsp;<font
+					width="45" height="30" alt=포인트충전이미지"> &nbsp;<font
 					style="color: #2a2a2a; font-size: 13px; font-weight: 600;">포인트
 						충전</font></a>
 
 
 			</div>
 			<!-- 카테고리 드롭다운  -->
-			<div class="dropdown"style="display: inline-block;margin-left: 410px;margin-top: 18px;">
-				  <button  class="btn btn-lg dropdown-toggle" type="button" data-toggle="dropdown" >
-				    <span  class="	glyphicon glyphicon-menu-hamburger"></span>
-				  </button>
-				  <ul class="dropdown-menu">
-				   <div style="border-bottom: solid 1px #e5e5e5;height: 40px;text-align: left;line-height: 40px;">
-				    <font style="margin-left:25px;;font-weight: 800;">전체 카테고리</font></div>
-				    
-				<a href="../payment/buy_History">
-				<button type="button" class="kind" value="패션잡화" style="width: 280px;height: 40px;outline: 0;border: 0px;">
-				<font style="margin-right: 170px;">패션잡화</font></button></a>
-				
-				<button type="button" class="kind" value="여성의류" style="width: 280px;height: 40px;outline: 0;border: 0px;">
-				<font style="margin-right: 170px;">여성의류</font></button>
-				
-				<button type="button" class="kind" value="남성의류" style="width: 280px;height: 40px;outline: 0;border: 0px;">
-				<font style="margin-right: 170px;">남성의류</font></button>
-				
-				<button type="button" class="kind" value="디지털/가전" style="width: 280px;height: 40px;outline: 0;border: 0px;">
-				<font style="margin-right: 152px;">디지털/가전</font></button>
-				
-				<button type="button" class="kind" value="생활/문구/가구/식품" style="width: 280px;height: 40px;outline: 0;border: 0px;">
-				<font style="margin-right: 98px;">생활/문구/가구/식품</font></button>
-				
-				<button type="button" class="kind" value="유아동/출산" style="width: 280px;height: 40px;outline: 0;border: 0px;">
-				<font style="margin-right: 152px;">유아동/출산</font></button>
-				
-				<button type="button" class="kind" value="스타굿즈" style="width: 280px;height: 40px;outline: 0;border: 0px;">
-				<font style="margin-right: 170px;">스타굿즈</font></button>
-				
-				<button type="button" class="kind" value="스포츠/레저" style="width: 280px;height: 40px;outline: 0;border: 0px;">
-				<font style="margin-right: 152px;">스포츠/레저</font></button>
-				
-				<button type="button" class="kind" value="뷰티/미용" style="width: 280px;height: 40px;outline: 0;border: 0px;">
-				<font style="margin-right: 166px;">뷰티/미용</font></button>
-				    
-				  </ul>
-				</div>
+			<div class="dropdown"
+				style="display: inline-block; margin-left: 410px; margin-top: 18px;">
+				<button class="btn btn-lg dropdown-toggle" type="button"
+					data-toggle="dropdown">
+					<span class="	glyphicon glyphicon-menu-hamburger"></span>
+				</button>
+				<ul class="dropdown-menu">
+					<div
+						style="border-bottom: solid 1px #e5e5e5; height: 40px; text-align: left; line-height: 40px;">
+						<font style="margin-left: 25px;; font-weight: 800;">전체 카테고리</font>
+					</div>
+
+					<a href="../payment/buy_History">
+						<button type="button" class="kind" value="패션잡화"
+							style="width: 280px; height: 40px; outline: 0; border: 0px;">
+							<font style="margin-right: 170px;">패션잡화</font>
+						</button>
+					</a>
+
+					<button type="button" class="kind" value="여성의류"
+						style="width: 280px; height: 40px; outline: 0; border: 0px;">
+						<font style="margin-right: 170px;">여성의류</font>
+					</button>
+
+					<button type="button" class="kind" value="남성의류"
+						style="width: 280px; height: 40px; outline: 0; border: 0px;">
+						<font style="margin-right: 170px;">남성의류</font>
+					</button>
+
+					<button type="button" class="kind" value="디지털/가전"
+						style="width: 280px; height: 40px; outline: 0; border: 0px;">
+						<font style="margin-right: 152px;">디지털/가전</font>
+					</button>
+
+					<button type="button" class="kind" value="생활/문구/가구/식품"
+						style="width: 280px; height: 40px; outline: 0; border: 0px;">
+						<font style="margin-right: 98px;">생활/문구/가구/식품</font>
+					</button>
+
+					<button type="button" class="kind" value="유아동/출산"
+						style="width: 280px; height: 40px; outline: 0; border: 0px;">
+						<font style="margin-right: 152px;">유아동/출산</font>
+					</button>
+
+					<button type="button" class="kind" value="스타굿즈"
+						style="width: 280px; height: 40px; outline: 0; border: 0px;">
+						<font style="margin-right: 170px;">스타굿즈</font>
+					</button>
+
+					<button type="button" class="kind" value="스포츠/레저"
+						style="width: 280px; height: 40px; outline: 0; border: 0px;">
+						<font style="margin-right: 152px;">스포츠/레저</font>
+					</button>
+
+					<button type="button" class="kind" value="뷰티/미용"
+						style="width: 280px; height: 40px; outline: 0; border: 0px;">
+						<font style="margin-right: 166px;">뷰티/미용</font>
+					</button>
+
+				</ul>
+			</div>
 		</nav>
 	</header>
 </div>
@@ -405,7 +447,6 @@ button {
 			$('#header_wrap').css("top", "39px").css("position", "absolute");
 		}
 	});
-
 </script>
 
 
@@ -483,9 +524,10 @@ button {
 						$("#recent").append(result);
 					})
 		} else {
+			$("#recent").css("height", "200px")
 			$("#recent")
 					.append(
-							'<label>최근본 상품</label> <div style="padding-top : 5px;margin-top : 5px; border-top : 0.5px dotted black;"> 최근 본 상품이 없습니다.</div>');
+							'<label>최근본 상품</label> <div style="line-height : 50px; padding-top : 5px;margin-top : 5px; border-top : 0.5px dotted black;"><img src="data:image/png;base64,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"><p>최근 본 상품이 없습니다.</p></div>');
 		}
 
 	})
