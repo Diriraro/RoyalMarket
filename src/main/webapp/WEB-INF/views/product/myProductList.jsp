@@ -10,7 +10,7 @@
 </head>
 <body>
 	<c:import url="../template/woozoo_nav.jsp"></c:import>
-	
+	<c:import url="../template/style.jsp"></c:import>
 	
 	
 <div style="margin-left:440px; width: 1024px;">
@@ -116,6 +116,9 @@
 <!-- <script type="text/javascript">
  history.replaceState({}, null, location.pathname); 
 </script> -->
+<br>
+<br>
+<c:import url="../template/footer.jsp"></c:import>
 <script type="text/javascript">
 $(".del").click(function(){
     if(confirm("정말 삭제하시겠습니까 ?") == true){
