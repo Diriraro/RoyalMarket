@@ -89,9 +89,9 @@ public interface PaymentMapper {
 	
 	public Sell_HistoryVO sell_Sel(long trading_num)throws Exception;
 	
-	public int buy_cancelUp(long buy_cancel)throws Exception;
+	public int buy_cancelUp(TradingVO tradingVO)throws Exception;
 	
-	public int sell_cancelUp(long sell_cancel)throws Exception;
+	public int sell_cancelUp(TradingVO tradingVO)throws Exception;
 	
 	public int product_cancel_status(long sell_num)throws Exception;
 	

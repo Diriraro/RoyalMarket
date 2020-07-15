@@ -51,7 +51,7 @@
 	<div class="container">
 		<div style="text-align: center;"><h2><b>거래내역</b></h2></div>
 		<div>
-			<button type="button" data-index="0" class="buttons" style="margin-left: 257px; border-bottom: 2px solid red;" id="buy_his"><b style="color: red">구매 내역</b></button>
+			<button type="button" data-index="0" class="buttons" style="margin-left: 257px; border-bottom: 2px solid #5c2392;" id="buy_his"><b style="color: #5c2392">구매 내역</b></button>
 			<button type="button" data-index="0" class="buttons" id="sell_his">판매 내역</button>
 		</div>
 		<c:forEach items="${buy}" var="vo">
@@ -89,7 +89,7 @@
 					</c:if>
 					<c:if test="${vo.status eq 3}">
 						<div style="display: inline-block;">취소된 거래입니다.</div>
-						<button class="btn btn-primary buyDelete" id="buyDelete"  title="${vo.buy_history_num}" style="background-color: white; border: white;"><font style="color: red;">삭제하기</font></button>
+						<button class="btn btn-primary buyDelete" id="buyDelete"  title="${vo.buy_history_num}" style="background-color: white; border: white;"><font style="color: #5c2392;">삭제하기</font></button>
 					</c:if>		
 				</div>
 			</div>

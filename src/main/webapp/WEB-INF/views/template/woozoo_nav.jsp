@@ -168,6 +168,18 @@ button {
 	background-color: #5c2392;
 	color: white;
 }
+
+.mypage:hover {
+	background-color: #5c2392;
+	color: white;
+}
+.mypage {
+	color: #212121;
+}
+.mypage:hover {
+	background-color: #5c2392;
+	color: white;
+}
 </style>
 <div class="n">
 	<header>
@@ -288,11 +300,25 @@ button {
 				  <button class="btn dropdown-toggle" type="button" data-toggle="dropdown" style="width: 50px; height: 50px;margin-right: 10px;">
 					<font style="color: #2a2a2a; font-size: 13px; font-weight: 600;">내 상점</font>
 				  <span class="caret"></span></button>
-				  <ul style="width: 51px;" class="dropdown-menu"> 
-				    <li><a href="../shop/myshop?mem_storeNum=${member.mem_storeNum}">내상점</a></li>
-				    <li><a href="../payment/buy_History">구매내역</a></li>
-				    <li><a href="../payment/sell_History">판매내역</a></li>
-				    <li><a href="../payment/pointManage">나의 포인트</a></li>
+				  
+				  <ul class="dropdown-menu"> 
+				  
+				  <a href="../shop/myshop?mem_storeNum=${member.mem_storeNum}">
+				<button type="button" class="mypage" value="내상점" style="width:160px; height: 40px;outline: 0;border: 0px;border-bottom: solid 1px #e5e5e5;">
+				<font style="margin-right: 75px;">내상점</font></button></a>
+				
+				<a href="../payment/buy_History">
+				<button type="button" class="mypage" value="구매내역" style="width:160px; height: 40px;outline: 0;border: 0px;border-bottom: solid 1px #e5e5e5;">
+				<font style="margin-right: 62px;">구매내역</font></button></a>
+				
+				<a href="../payment/sell_History">
+				<button type="button" class="mypage" value="판매내역" style="width:160px; height: 40px;outline: 0;border: 0px;border-bottom: solid 1px #e5e5e5;">
+				<font style="margin-right: 62px;">판매내역</font></button></a>
+				
+				<a href="../payment/pointManage">
+				<button type="button" class="mypage" value="나의 포인트" style="width:160px; height: 40px;outline: 0;border: 0px;">
+				<font style="margin-right: 44px;">나의 포인트</font></button></a>
+
 				  </ul>
 
 

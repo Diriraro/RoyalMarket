@@ -25,10 +25,10 @@
 	-webkit-box-shadow: 0 0 1px 1px rgba(0, 0, 0, .3);
 	display: inline-block;
 }
-.kind {
+.pkind {
 	background-color: white;
 }
-.kind:hover {
+.pkind:hover {
 	background-color: #e6dffe;
 }
 </style>
@@ -73,21 +73,21 @@
 		<br>
 		<div style="overflow-y: scroll; width: 300px; height: 200px;font-size: 15px;font-weight: 400;border: solid 1px #e4e4e4;">
 
-				<button type="button" class="kind" value="패션잡화" style="width: 280px;height: 40px;outline: 0;border: 0px;">
+				<button type="button" class="pkind" value="패션잡화" style="width: 280px;height: 40px;outline: 0;border: 0px;">
 				<font style="margin-right: 170px;">패션잡화</font></button>
-				<button type="button" class="kind" value="여성의류" style="width: 280px;height: 40px;outline: 0;border: 0px;">
+				<button type="button" class="pkind" value="여성의류" style="width: 280px;height: 40px;outline: 0;border: 0px;">
 				<font style="margin-right: 170px;">여성의류</font></button>
-				<button type="button" class="kind" value="남성의류" style="width: 280px;height: 40px;outline: 0;border: 0px;">
+				<button type="button" class="pkind" value="남성의류" style="width: 280px;height: 40px;outline: 0;border: 0px;">
 				<font style="margin-right: 170px;">남성의류</font></button>
-				<button type="button" class="kind" value="디지털/가전" style="width: 280px;height: 40px;outline: 0;border: 0px;">
+				<button type="button" class="pkind" value="디지털/가전" style="width: 280px;height: 40px;outline: 0;border: 0px;">
 				<font style="margin-right: 152px;">디지털/가전</font></button>
-				<button type="button" class="kind" value="스타굿즈" style="width: 280px;height: 40px;outline: 0;border: 0px;">
+				<button type="button" class="pkind" value="스타굿즈" style="width: 280px;height: 40px;outline: 0;border: 0px;">
 				<font style="margin-right: 170px;">스타굿즈</font></button>
-				<button type="button" class="kind" value="스포츠/레저" style="width: 280px;height: 40px;outline: 0;border: 0px;">
+				<button type="button" class="pkind" value="스포츠/레저" style="width: 280px;height: 40px;outline: 0;border: 0px;">
 				<font style="margin-right: 152px;">스포츠/레저</font></button>
-				<button type="button" class="kind" value="뷰티/미용" style="width: 280px;height: 40px;outline: 0;border: 0px;">
+				<button type="button" class="pkind" value="뷰티/미용" style="width: 280px;height: 40px;outline: 0;border: 0px;">
 				<font style="margin-right: 166px;">뷰티/미용</font></button>
-				<button type="button" class="kind" value="기타" style="width: 280px;height: 40px;outline: 0;border: 0px;">
+				<button type="button" class="pkind" value="기타" style="width: 280px;height: 40px;outline: 0;border: 0px;">
 				<font style="margin-right: 200px;">기타</font></button>
 
 		</div>
