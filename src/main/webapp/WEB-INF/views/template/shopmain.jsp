@@ -35,7 +35,7 @@ filter: drop-shadow(5px 5px 5px #000);
 	<%-- <h2>${mem_storeName}</h2>  --%> 
 	<%-- <h2>${msname}님 접속중 </h2> --%>
 		<c:if test="${msnum eq mem_storeNum }">
-	<div style="border: 1px solid black; width: 1024px; height: 340px; border-color: rgba(0,0,0,0.25);">
+	<div style="border: 1px solid black; width: 1024px; height: 340px; border-color: rgba(0,0,0,0.25); ">
 
 		<!-- div 1번 -->
 		<div style="width: 340px; float: left;">
@@ -59,7 +59,7 @@ filter: drop-shadow(5px 5px 5px #000);
 					</div>
 				
 				<div style=" height: 100px; margin-top: 60px; text-align: center;">
-				<button class="button4"><a style="color: black" href="../product/myProductList?kind=sp&mem_storeNum=${member.mem_storeNum}">상품관리</a></button>
+				<button class="button4"><a style="color: black; " href="../product/myProductList?kind=sp&mem_storeNum=${member.mem_storeNum}">상품관리</a></button>
 				
 				
 				</div>
@@ -86,7 +86,7 @@ filter: drop-shadow(5px 5px 5px #000);
 			<div style="border: 1px solid white; height: 80px; margin-bottom: 1px; margin-top: 2px;">
 
 			<div style="margin-top: 3%;">
-				<span style="font-size: 17px;"><img class="imgsh2" alt="" src="${pageContext.request.contextPath}/resources/images/date_logo.png" width="19px;" height="19px;"> ${getregDate} </span>
+				<span style="font-size: 17px;"><img class="imgsh2" alt="" src="${pageContext.request.contextPath}/resources/images/date_logo.png" width="19px;" height="19px;">&nbsp;가입일: ${getregDate} </span>
 			</div>			
 			<hr>
 			</div>
@@ -194,12 +194,23 @@ filter: drop-shadow(5px 5px 5px #000);
 				<h2>차단 회원 입니다.</h2>
 				</div>	
 				</c:if>
+				<c:if test="${mdata.mem_storeNum eq null}">
+				<div style="margin-top: 3%;">
+				<h2>Nan</h2>
+				</div>	
+				</c:if>
 		<hr>
 			</div>
 
 			<div style="border: 1px solid white; height: 80px; margin-bottom: 1px; margin-top: 2px;">
 			<div style="margin-top: 3%;">
-				<span style="font-size: 17px;"><img class="imgsh2" alt="" src="${pageContext.request.contextPath}/resources/images/date_logo.png" width="19px;" height="19px;"> ${getregDate} </span>
+				<span style="font-size: 17px;"><img class="imgsh2" alt="" src="${pageContext.request.contextPath}/resources/images/date_logo.png" width="19px;" height="19px;"> ${getregDate}
+				
+			<c:if test="${mdata.mem_storeNum eq null}">
+				<span>Nan</span>
+			</c:if>
+				
+				 </span>
 			</div>	
 			<hr>
 			</div>
@@ -207,7 +218,12 @@ filter: drop-shadow(5px 5px 5px #000);
 			<div style="border: 1px solid white; height: 80px; margin-bottom: 1px; margin-top: 2px;">
 			<c:if test="${avg eq 0.0}">
 			<div style="margin-top: 3%;">
+				<c:if test="${mdata.mem_storeNum eq null}">
+				<h2>Nan</h2>
+				</c:if>
+				<c:if test="${mdata.mem_storeNum ne null}">
 			<span style="font-size: 22px;"> 거래내역이 없습니다. </span>			
+				</c:if>
 			</div>	
 			</c:if>
 			

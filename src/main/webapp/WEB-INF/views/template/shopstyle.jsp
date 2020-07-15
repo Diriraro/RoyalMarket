@@ -49,13 +49,17 @@ box-shadow: 5px 5px 5px 5px gray;
 }
 .tds{
 color: black;
-font-size: 23px;
+font-size: 17px;
 
 }
 #redd{
 color: red;
 }
-
+#load{
+font-size: 20px;
+font-weight: 700;
+box-shadow: 1px 1px 1px 1px gray;
+}
 	
 </style>
     

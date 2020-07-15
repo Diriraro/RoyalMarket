@@ -17,7 +17,9 @@ color: black;
 .span2{
 font-weight: bold;
 }
-
+.lis2{
+display: none;
+}
 
 
 </style>
@@ -60,7 +62,8 @@ font-weight: bold;
 			</table>
 			<!--  -->
 			</div>
-
+			<!-- 회원가입 안한사람은 테이블 보여주지 않음  -->
+			<c:if test="${mdata.mem_storeNum ne null}">
 				<div>  <!-- 내용보여줄 div -->
 				<h2>&nbsp;&nbsp;팔로워&nbsp;<a id="redd">${takeco}</a></h2>
 				<hr>
@@ -72,7 +75,7 @@ font-weight: bold;
 							<%-- <td>${vo.take_storeNum}</td> --%>
 						
 					
-					<div class="fst" style="width: 200px; height: 320px; border: 1px solid gray; float: left; margin-left: 4px; margin-bottom: 4px; overflow: auto; border-color: rgba(0,0,0,0.25); background-color: #f0f0f5">
+					<div class="fst lis2" style="width: 200px; height: 320px; border: 1px solid gray; float: left; margin-left: 4px; margin-bottom: 4px; overflow: auto; border-color: rgba(0,0,0,0.25); background-color: #f0f0f5">
 					
 				<%-- 	<div style="width: 198px;">
 					<img src="${pageContext.request.contextPath}/resources/images/showimage.png" alt="main" style="width: 197px; height: 190px;">
@@ -96,22 +99,31 @@ font-weight: bold;
 					<div style=" text-align: center; margin-top: 20px;" >
 						<span class="span2" onclick="location.href='./myshop?mem_storeNum=${vo.give_storeNum }'">상품   ${vo.pco}</span>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;<span class="span2" onclick="location.href='./followers?mem_storeNum=${vo.give_storeNum }'">팔로워  ${vo.fco}</span><br>
 					</div>
-					
-					
 					</div>	
-									
-						
-						
 					</c:forEach>
 				</div>
+					<a class="btn btn-default pull-right " href="#" id="load">팔로워 더 보기</a>
 
 			</div>
-
+</c:if>
 		</div><!-- 버튼, 내용 끝  -->
 
 	</div><!-- 컨테이너 끝  -->
 	</c:if>
 	<c:import url="../template/footer.jsp"></c:import>
+
+<script type="text/javascript">
+$(function(){
+    $(".lis2").slice(0, 5).show(); 
+    $("#load").click(function(e){ 
+        e.preventDefault();
+        if($(".lis2:hidden").length == 0){ 
+        	alert("마지막항목입니다.");
+        }
+        $(".lis2:hidden").slice(0, 5).show(); 
+    });
+});
+</script>
 
 	
 </body>

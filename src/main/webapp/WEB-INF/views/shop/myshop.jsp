@@ -38,7 +38,9 @@
          text-align: center;
   }
 
-
+.lis2{
+display: none;
+}
 
 
 </style>
@@ -79,9 +81,10 @@
 				</tr>
 			
 			</table>
-			<!--  -->
 			</div>
-		
+			<!-- 회원가입 안한사람은 테이블 보여주지 않음  -->
+			<c:if test="${mdata.mem_storeNum ne null}">
+			
 			<div>  <!-- 내용보여줄 div -->
 				<h2>&nbsp;&nbsp;상품&nbsp;<a id="redd">${prodco}</a></h2>
 				<hr>
@@ -92,7 +95,7 @@
 					<c:forEach items="${mylist }" var="vo">
 					
 					
-					<div class="box1" style="width: 218px; height: 300px; border: 1px solid gray ; float: left; margin-left: 30px; margin-bottom: 30px;  background-color: #f0f0f5; border-color: rgba(0,0,0,0.25);"  onclick="location.href='../product/productSelect?sell_num=${vo.sell_num}'">
+					<div class="box1 lis2" style="width: 218px; height: 300px; border: 1px solid gray ; float: left; margin-left: 30px; margin-bottom: 30px;  background-color: #f0f0f5; border-color: rgba(0,0,0,0.25);"  onclick="location.href='../product/productSelect?sell_num=${vo.sell_num}'">
 					
 				<!--status 2이면   판매완료 -->	
 				<c:if test="${vo.sell_status eq 2}">
@@ -146,7 +149,7 @@
 					&nbsp;<fmt:formatNumber> ${vo.sell_price } </fmt:formatNumber>
 					</span>
 					<span style="font-weight: bold; font-size: 17px;">원</span>
-					<span class="badge" style="float: right; font-size: 13px;">
+					<span style="float: right; font-size: 17px; color: #999999; font-weight: 600;">
 					&nbsp;${vo.sell_date }
 					</span>
 					</div>
@@ -158,12 +161,9 @@
 					</div>
 					</c:forEach>
 				</div>
-
+		<a class="btn btn-default pull-right " href="#" id="load">상품 더 보기</a>
 			</div>
-		
-		
-		
-
+		</c:if>
 		</div><!-- 버튼, 내용 끝  -->
 
 	</div><!-- 컨테이너 끝  -->
@@ -174,6 +174,18 @@
 	
 <c:import url="../template/footer.jsp"></c:import>
 	
+	<script type="text/javascript">
+	$(function(){
+	    $(".lis2").slice(0, 8).show(); 
+	    $("#load").click(function(e){ 
+	        e.preventDefault();
+	        if($(".lis2:hidden").length == 0){ 
+	        	alert("마지막항목입니다.");
+	        }
+	        $(".lis2:hidden").slice(0, 8).show(); 
+	    });
+	});
+	</script>
 
 </body>
 </html>

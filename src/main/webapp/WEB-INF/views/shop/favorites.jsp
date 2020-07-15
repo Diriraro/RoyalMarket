@@ -46,6 +46,12 @@ color: black;
          text-align: center;
   }
 
+.lis2{
+display: none;
+
+}
+
+
 /* 글자수 제한  */
 .fos2{
   overflow: hidden;
@@ -105,7 +111,7 @@ color: black;
 
 				<div style="border: 1px solid white; min-height: 340px; overflow: auto; ">
 					<c:forEach items="${zilist }" var="vo">
-						<div style="border: 1px solid gray; width: 480px; height: 140px; float: left; margin-left: 2%; margin-top: 2%; margin-bottom: 2%; border-color: rgba(0,0,0,0.25);" >
+						<div class="lis2" style="border: 1px solid gray; width: 480px; height: 140px; float: left; margin-left: 2%; margin-top: 2%; margin-bottom: 2%; border-color: rgba(0,0,0,0.25);" >
 						<%-- <button>
 							${vo.mem_storeNum } <a>mem_storeNum</a>
 						</button>
@@ -144,15 +150,10 @@ color: black;
 						</div>
 						
 						</c:if>
-						
-						
-						
-						
-						
-						
-						
 						<div style="border: 0px solid; width: 66%;height:100%; float: left;  background-color: #f0f0f5; font-size: 20px;">
-						   <button class="btn btn-danger del" style="float: right;"title="${vo.zzim_num}"> <a style="color: white;">X</a></button>
+						   <button class="btn del" style="float: right;"title="${vo.zzim_num}"> <a style="color: gray;">
+						  <span class="glyphicon glyphicon-remove-sign"></span> 
+						   </a></button>
 						   
 						   
 						<div style="border-top: 0px solid white; height: 40px;" class="pp2 fos2" title="${vo.sell_num }">
@@ -180,8 +181,8 @@ color: black;
 						
 						</div>
 					</c:forEach>
-
 				</div>
+				<a class="btn btn-default pull-right " href="#" id="load">찜 더 보기</a>
 
 			</div> <!-- 내용 dv 끝  -->
 
@@ -217,5 +218,20 @@ $(".pp2").click(function(){
 	location.href = "../product/productSelect?sell_num="+title;
 		
 	});
+
+
+$(function(){
+    $(".lis2").slice(0, 4).show(); 
+    $("#load").click(function(e){
+        e.preventDefault();
+        
+        if($(".lis2:hidden").length == 0){ 
+           alert("마지막항목입니다.");
+        }
+        $(".lis2:hidden").slice(0, 4).show(); 
+    });
+});
+
+
 </script>
 </html>

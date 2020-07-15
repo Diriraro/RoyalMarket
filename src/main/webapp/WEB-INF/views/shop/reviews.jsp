@@ -13,6 +13,10 @@
 .names3{
 color: black;
 font-weight: bold;
+}
+
+.lis2{
+display: none;
 
 }
 </style>
@@ -55,14 +59,15 @@ font-weight: bold;
 			</table>
 			<!--  -->
 			</div>
-
+<!-- 회원가입 안한사람은 테이블 보여주지 않음  -->
+			<c:if test="${mdata.mem_storeNum ne null}">
 
 			<div>
 				<h2>&nbsp;&nbsp;인증후기&nbsp;<a id="redd">${reco}</a></h2>
 				<hr>
 			<c:forEach items="${relist}" var="vo" varStatus="i">
 				 <!-- 리스트 감쌀디아이브이  -->
-				<div style="border-top: 1px solid gray ; min-height: 150px; overflow: auto; background-color: #f0f0f5">
+				<div class="lis2" style="border-top: 1px solid gray ; min-height: 150px; overflow: auto; background-color: #f0f0f5">
 				
 				<div style="float: left; width: 80px; height: 250px;">
 					<img alt="" src="${pageContext.request.contextPath}/resources/images/user11.png" width="80px;">			
@@ -106,14 +111,17 @@ font-weight: bold;
 				
 				
 				<c:if test="${msnum eq vo.re_storeNum}">
-							<a href="./setDeleteReview?re_num=${vo.re_num}&mem_storeNum=${vo.mem_storeNum}"	class="btn btn-danger pull-right"><span	class="	glyphicon glyphicon-remove-sign"></span>Delete</a>
+							<a href="./setDeleteReview?re_num=${vo.re_num}&mem_storeNum=${vo.mem_storeNum}"	class="btn pull-right btn-default btn-sm"><span	class="	glyphicon glyphicon-remove-sign"></span>Delete</a>
+							
+							
 				</c:if>
 				
 				</div>  <!-- 리스트 감쌀디아이브이  -->
 				<hr>
 			</c:forEach>
+			<a class="btn btn-default pull-right " href="#" id="load">리뷰 더 보기</a>
 				</div>
-
+</c:if>
 			
 
 		</div><!-- 버튼, 내용 끝  -->
@@ -125,11 +133,20 @@ font-weight: bold;
 		var tt=	$(this).attr("title");
 			console.log(tt);
 			location.href = "../product/productSelect?sell_num="+tt;
-
-
-			
 			});
 
+		$(function(){
+		    $(".lis2").slice(0, 2).show(); 
+		    $("#load").click(function(e){
+		        e.preventDefault();
+		        if($(".lis2:hidden").length == 0){ 
+		        	alert("마지막항목입니다.");
+		        }
+		        $(".lis2:hidden").slice(0, 2).show(); 
+		    });
+		});
+
+		
 	</script>
 	
 		<c:import url="../template/footer.jsp"></c:import>

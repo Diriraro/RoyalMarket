@@ -8,7 +8,9 @@
 <html>
 <head>
 <style type="text/css">
-
+.lis2{
+display: none;
+}
 
 </style>
 <meta charset="UTF-8">
@@ -51,7 +53,8 @@
 			</table>
 			<!--  -->
 			</div>
-
+<!-- 회원가입 안한사람은 테이블 보여주지 않음  -->
+			<c:if test="${mdata.mem_storeNum ne null}">
 
 
 
@@ -66,8 +69,8 @@
 						
 			<div class="form-group">
 				<label for="sq_contents">Contents:</label>
-				<textarea rows="" cols="" class="form-control" id="sq_contents" name="sq_contents" placeholder="문의사항은 30자 이내에 작성해 주세요." style="width:990px; height: 100px;resize: none; "></textarea>
-				<span style="color:#aaa;" id="counter">(0 / 최대 30자)</span>
+				<textarea rows="" cols="" class="form-control" id="sq_contents" name="sq_contents" placeholder="문의사항은 50자 이내에 작성해 주세요." style="width:990px; height: 100px;resize: none;box-shadow: 1px 1px 1px 1px gray; "></textarea>
+				<span style="color:#aaa;" id="counter">(0 / 최대 50자)</span>
 			</div>
 			
 			<!--  작성자의 번호는 로그인한사람의 -->
@@ -84,12 +87,12 @@
 					placeholder="Enter writer" name="mem_storeNum">
 			</div>
 			<!--  추가한거. -->
-			<input type="button" id="btn" class="btn btn-default" value="Write">
+			<input type="button" id="btn" class="btn btn-default" value="Write" style="box-shadow: 1px 1px 1px 1px gray; ">
 			</form>
 <hr>
 				</div>
 
-				<div style="border: 1px solid white; margin-top: 30px; border-bottom: ">
+				<div style="border: 1px solid white; margin-top: 30px;">
 					<c:forEach items="${colist}" var="vo">
 					
 					<%-- <c:if test="${msnum eq vo.sq_storeNum }">
@@ -97,12 +100,12 @@
 					</c:if> --%>
 				
 					
-					<div style=" border-top: 1px solid gray; border-bottom:1px solid gray; min-height: 120px;  background-color: #f0f0f5; border-color: rgba(0,0,0,0.25); overflow: auto;">
+					<div class="lis2" style=" border-top: 1px solid gray; border-bottom:1px solid gray; min-height: 120px;  background-color: #f0f0f5; border-color: rgba(0,0,0,0.25); overflow: auto; margin-bottom: 10px;">
 						<tr>
 							<%-- <td>${vo.sq_num}</td>
 							<td>${vo.mem_storeNum }	</td> --%>
 							<%-- <td>${vo.sq_storeNum}작성자번호</td> --%>
-							<td><a href="./myshop?mem_storeNum=${vo.sq_storeNum}" style="font-size: 25px; font-weight: 700;color: black;">&nbsp; ${vo.mem_storeName } </a>
+							<td><a href="./myshop?mem_storeNum=${vo.sq_storeNum}" style="font-size: 18px; font-weight: 700;color: black;">&nbsp; ${vo.mem_storeName } </a>
 							  <a >
        						  <span class = "badge pull-right">${vo.sq_regDate}</span>
     						  </a>
@@ -122,25 +125,18 @@
 					<!--본인이 작성한 댓글 또는  상점 주인만 삭제하는 쿼리 작성  -->
 						<c:if test="${msnum eq vo.sq_storeNum or msnum eq vo.mem_storeNum}">
 						
-							&nbsp;<a href="./setDelete?sq_num=${vo.sq_num}&mem_storeNum=${vo.mem_storeNum}" class="btn btn-danger btn-sm">
+							&nbsp;<a href="./setDelete?sq_num=${vo.sq_num}&mem_storeNum=${vo.mem_storeNum}" class="btn btn-default btn-sm">
 							<span class="glyphicon glyphicon-remove-sign"></span>Delete</a>
 						</c:if>
-							
 							</td>
-							 
 						</tr>
-				
 					</div>
-					
-					
-						
-						<br>
-						<br>
 					</c:forEach>
+					<a class="btn btn-default pull-right" href="#" id="load">문의 더 보기</a>
 				</div>
 
 			</div>
-
+</c:if>
 		</div>
 		<!-- 버튼, 내용 끝  -->
 
@@ -154,7 +150,7 @@
 		console.log(content);
 		console.log(content.length);
 		
-		 	if (content.length >0 && content.length<31) {
+		 	if (content.length >0 && content.length<51) {
 				console.log("적정값");
 				$("#form").submit();
 				
@@ -168,12 +164,12 @@
 
 	$('#sq_contents').keyup(function (e){
 	    var content = $(this).val();
-	    $('#counter').html("("+content.length+" / 최대 30자)");    //글자수 실시간 카운팅
+	    $('#counter').html("("+content.length+" / 최대 50자)");    //글자수 실시간 카운팅
 
-	    if (content.length > 30){
+	    if (content.length > 50){
 	        alert("최대 30자까지 입력 가능합니다.");
-	        $(this).val(content.substring(0, 30));
-	        $('#counter').html("(30 / 최대 30자)");
+	        $(this).val(content.substring(0, 50));
+	        $('#counter').html("(50 / 최대 50자)");
 	    }
 	});
 
@@ -192,6 +188,17 @@
 		
 		});
 
+	
+	$(function(){
+	    $(".lis2").slice(0, 3).show(); 
+	    $("#load").click(function(e){ 
+	        e.preventDefault();
+	        if($(".lis2:hidden").length == 0){ 
+	        	alert("마지막항목입니다.");
+	        }
+	        $(".lis2:hidden").slice(0, 3).show();
+	    });
+	});
 
 	
 
