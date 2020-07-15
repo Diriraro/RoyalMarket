@@ -25,6 +25,12 @@ public interface PaymentMapper {
 	
 	public int paymentCharge(PayVO payVO)throws Exception;
 	
+	public int paymentSell(PayVO payVO)throws Exception;
+	
+	public int paymentBuyCancle(PayVO payVO)throws Exception;
+	
+	public int paymentCalculate(PayVO payVO)throws Exception;
+	
 	public List<PayVO> pointManage(String mem_id)throws Exception;
 	
 	public int tradingInsert(TradingVO tradingVO)throws Exception;
