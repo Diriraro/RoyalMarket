@@ -7,11 +7,11 @@
 		<form action="./comments" id="frm" method="post">
 						
 			<div class="form-group">
-				<label for="sq_contents">Contents:</label>
+				<label for="sq_contents">Contents::</label>
 				<textarea rows="" cols="" class="form-control" id="sq_contents" name="sq_contents" style="width:900px; height: 150px; "></textarea>
 			</div>
 			
-			<input type="button" id="btn" class="btn btn-default" value="Write">
+			<input type="button" id="btn" class="btn btn-default" value="Writes">
 		</form>
 
 	</div>

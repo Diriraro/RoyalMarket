@@ -117,10 +117,10 @@ public class ShopController {
 		mv.addObject("fonum",storeFollowVO); // 팔로우번호 있으면 전송 없으면 null
 		
 		// 공통데이터
-					countall(mv,mem_storeNum);
-					grade(mv, mem_storeNum);
-					getregDate(mv, mem_storeNum);
-					mdata(mv, mem_storeNum);
+			countall(mv,mem_storeNum);
+			grade(mv, mem_storeNum);
+			getregDate(mv, mem_storeNum);
+			mdata(mv, mem_storeNum);
 		
 		mv.addObject("mem_storeName",para); 
 		mv.addObject("msname",msname);
@@ -188,7 +188,7 @@ public class ShopController {
 		grade(mv, mem_storeNum);
 		getregDate(mv, mem_storeNum);
 		mdata(mv, mem_storeNum);
-				// 
+		// 
 		
 		
 		
@@ -222,10 +222,10 @@ public class ShopController {
 			
 		// 공통데이터
 					
-					grade(mv, mem_storeNum);
-					countall(mv,mem_storeNum);
-					getregDate(mv, mem_storeNum);
-					mdata(mv, mem_storeNum);
+			grade(mv, mem_storeNum);
+			countall(mv,mem_storeNum);
+			getregDate(mv, mem_storeNum);
+			mdata(mv, mem_storeNum);
 		
 		mv.addObject("mem_storeName",para); 
 		mv.addObject("mem_storeNum",mem_storeNum);
@@ -267,12 +267,11 @@ public class ShopController {
 			storeFollowVO3.setRe_rate(flo);
 		
 		}
-		// 팔로우 리스트 영역 끝
 		// 공통데이터
-					countall(mv,mem_storeNum);
-					grade(mv, mem_storeNum);
-					getregDate(mv, mem_storeNum);
-					mdata(mv, mem_storeNum);
+			countall(mv,mem_storeNum);
+			grade(mv, mem_storeNum);
+			getregDate(mv, mem_storeNum);
+			mdata(mv, mem_storeNum);
 				// 
 
 		mv.addObject("mem_storeName",para); 
@@ -323,10 +322,10 @@ public class ShopController {
 		}	
 		
 		// 공통데이터
-					countall(mv,mem_storeNum);
-					grade(mv, mem_storeNum);
-					getregDate(mv, mem_storeNum);
-					mdata(mv, mem_storeNum);
+			countall(mv,mem_storeNum);
+			grade(mv, mem_storeNum);
+			getregDate(mv, mem_storeNum);
+			mdata(mv, mem_storeNum);
 				// 
 		
 		
@@ -460,7 +459,5 @@ public class ShopController {
 			
 		return mv;
 	}
-	
-	
-	
+
 }

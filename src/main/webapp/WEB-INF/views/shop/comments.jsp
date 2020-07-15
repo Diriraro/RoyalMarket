@@ -3,15 +3,14 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html>
 <head>
 <style type="text/css">
-.lis2{
-display: none;
+.lis2 {
+	display: none;
 }
-
 </style>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -26,184 +25,178 @@ display: none;
 	<c:import url="../template/woozoo_nav.jsp"></c:import>
 	<h2></h2>
 	<c:import url="../template/shopmain.jsp"></c:import>
-<c:if test="${mdata.mem_access ne 1}">
+	<c:if test="${mdata.mem_access ne 1}">
 
-	<div class="container">
-		<div
-			style="border: 1px solid black; width: 1024px; min-height: 340px; border-color: rgba(0,0,0,0.25);">
-			<!-- 각자 페이지에 하나씩 생성  -->
-			<!--버튼 감싸는 div  -->
-			<div>
-			<!-- 이동버튼  -->
-			<hr>
-			<table border="1" style="height: 80px; border-color: rgba(0,0,0,0.25);">
-				<tr>
-				<td bgcolor="#f2f2f2"><a class="tds" href="./myshop?mem_storeNum=${mem_storeNum}">상품&nbsp;&nbsp;   ${prodco}</a></td>
-				<td class="td1"><a class="tds" href="./comments?mem_storeNum=${mem_storeNum}">상점문의 &nbsp;&nbsp;${coco}</a></td>
-				<c:if test="${msnum eq mem_storeNum }">
-				<td bgcolor="#f2f2f2">
-					<a class="tds" href="./favorites?mem_storeNum=${mem_storeNum}"> 찜&nbsp;&nbsp; ${zico}</a>
-				</td>
-				</c:if>
-				<td bgcolor="#f2f2f2"><a class="tds" href="./reviews?mem_storeNum=${mem_storeNum}">상점후기&nbsp;&nbsp;  ${reco }</a></td>
-				<td bgcolor="#f2f2f2"> <a class="tds" href="./followings?mem_storeNum=${mem_storeNum}">팔로잉&nbsp;&nbsp;  ${giveco}</a></td>
-				<td bgcolor="#f2f2f2"><a class="tds" href="./followers?mem_storeNum=${mem_storeNum}">팔로워 &nbsp;&nbsp;  ${takeco} </a></td>
-				</tr>
-			
-			</table>
-			<!--  -->
-			</div>
-<!-- 회원가입 안한사람은 테이블 보여주지 않음  -->
-			<c:if test="${mdata.mem_storeNum ne null}">
-
-
-
-			<div>
-				<h2>&nbsp;&nbsp;상점문의&nbsp;<a id="redd">${coco}</a></h2>
-				<hr>
-
-				<%--  <c:import url="../template/comentsForm.jsp"></c:import>  --%>
-				<div class="container"> <!-- 폼태그  -->
-
-			<form action="./comments" id="form" name=from method="post">
-						
-			<div class="form-group">
-				<label for="sq_contents">Contents:</label>
-				<textarea rows="" cols="" class="form-control" id="sq_contents" name="sq_contents" placeholder="문의사항은 50자 이내에 작성해 주세요." style="width:990px; height: 100px;resize: none;box-shadow: 1px 1px 1px 1px gray; "></textarea>
-				<span style="color:#aaa;" id="counter">(0 / 최대 50자)</span>
-			</div>
-			
-			<!--  작성자의 번호는 로그인한사람의 -->
-			<div class="form-group">
-				<input type="hidden" class="form-control" style="width: 342px;"
-					id="sq_storeNum"  value="${msnum}"
-					placeholder="Enter writer" name="sq_storeNum">
-			</div>
-			
-			<!-- 답글 작성하는곳의 번호는 파라미터 받아와서.  -->
-			<div class="form-group">
-				<input type="hidden" class="form-control" style="width: 342px;"
-					id="mem_storeNum"  value="${mem_storeNum}"
-					placeholder="Enter writer" name="mem_storeNum">
-			</div>
-			<!--  추가한거. -->
-			<input type="button" id="btn" class="btn btn-default" value="Write" style="box-shadow: 1px 1px 1px 1px gray; ">
-			</form>
-<hr>
-				</div>
-
-				<div style="border: 1px solid white; margin-top: 30px;">
-					<c:forEach items="${colist}" var="vo">
-					
-					<%-- <c:if test="${msnum eq vo.sq_storeNum }">
-						<a class="btn btn-info">내글</a><br>
-					</c:if> --%>
-				
-					
-					<div class="lis2" style=" border-top: 1px solid gray; border-bottom:1px solid gray; min-height: 120px;  background-color: #f0f0f5; border-color: rgba(0,0,0,0.25); overflow: auto; margin-bottom: 10px;">
+		<div class="container">
+			<div
+				style="border: 1px solid black; width: 1024px; min-height: 340px; border-color: rgba(0, 0, 0, 0.25);">
+				<!-- 각자 페이지에 하나씩 생성  -->
+				<div>
+					<!-- 이동버튼  -->
+					<hr>
+					<table border="1"
+						style="height: 80px; border-color: rgba(0, 0, 0, 0.25);">
 						<tr>
-							<%-- <td>${vo.sq_num}</td>
-							<td>${vo.mem_storeNum }	</td> --%>
-							<%-- <td>${vo.sq_storeNum}작성자번호</td> --%>
-							<td><a href="./myshop?mem_storeNum=${vo.sq_storeNum}" style="font-size: 18px; font-weight: 700;color: black;">&nbsp; ${vo.mem_storeName } </a>
-							  <a >
-       						  <span class = "badge pull-right">${vo.sq_regDate}</span>
-    						  </a>
-							</td>
-						
-							<br>
-							<td>
-							<p style="font-size: 19px;">
-							&nbsp;${vo.sq_contents}
-							</p>							 
-							</td>
-							<br>
-							<td>
-						&nbsp; <button class="dae" title="${vo.mem_storeName }">댓글작성</button>	
-							
-							
-					<!--본인이 작성한 댓글 또는  상점 주인만 삭제하는 쿼리 작성  -->
-						<c:if test="${msnum eq vo.sq_storeNum or msnum eq vo.mem_storeNum}">
-						
-							&nbsp;<a href="./setDelete?sq_num=${vo.sq_num}&mem_storeNum=${vo.mem_storeNum}" class="btn btn-default btn-sm">
-							<span class="glyphicon glyphicon-remove-sign"></span>Delete</a>
-						</c:if>
-							</td>
+							<td bgcolor="#f2f2f2"><a class="tds"
+								href="./myshop?mem_storeNum=${mem_storeNum}">상품&nbsp;&nbsp;
+									${prodco}</a></td>
+							<td class="td1"><a class="tds"
+								href="./comments?mem_storeNum=${mem_storeNum}">상점문의
+									&nbsp;&nbsp;${coco}</a></td>
+							<c:if test="${msnum eq mem_storeNum }">
+								<td bgcolor="#f2f2f2"><a class="tds"
+									href="./favorites?mem_storeNum=${mem_storeNum}">
+										찜&nbsp;&nbsp; ${zico}</a></td>
+							</c:if>
+							<td bgcolor="#f2f2f2"><a class="tds"
+								href="./reviews?mem_storeNum=${mem_storeNum}">상점후기&nbsp;&nbsp;
+									${reco }</a></td>
+							<td bgcolor="#f2f2f2"><a class="tds"
+								href="./followings?mem_storeNum=${mem_storeNum}">팔로잉&nbsp;&nbsp;
+									${giveco}</a></td>
+							<td bgcolor="#f2f2f2"><a class="tds"
+								href="./followers?mem_storeNum=${mem_storeNum}">팔로워
+									&nbsp;&nbsp; ${takeco} </a></td>
 						</tr>
-					</div>
-					</c:forEach>
-					<a class="btn btn-default pull-right" href="#" id="load">문의 더 보기</a>
+					</table>
+					<!--  -->
 				</div>
+				<!-- 회원가입 안한사람은 테이블 보여주지 않음  -->
+				<c:if test="${mdata.mem_storeNum ne null}">
+					<div>
+						<h2>
+							&nbsp;&nbsp;상점문의&nbsp;<a id="redd">${coco}</a>
+						</h2>
+						<hr>
+						<div class="container">
 
+							<form action="./comments" id="form" name=from method="post">
+
+								<div class="form-group">
+									<label for="sq_contents">Contents:</label>
+									<textarea rows="" cols="" class="form-control" id="sq_contents"
+										name="sq_contents" placeholder="문의사항은 50자 이내에 작성해 주세요."
+										style="width: 990px; height: 100px; resize: none; box-shadow: 1px 1px 1px 1px gray;"></textarea>
+									<span style="color: #aaa;" id="counter">(0 / 최대 50자)</span>
+								</div>
+
+								<div class="form-group">
+									<input type="hidden" class="form-control" style="width: 342px;"
+										id="sq_storeNum" value="${msnum}" placeholder="Enter writer"
+										name="sq_storeNum">
+								</div>
+
+
+								<div class="form-group">
+									<input type="hidden" class="form-control" style="width: 342px;"
+										id="mem_storeNum" value="${mem_storeNum}"
+										placeholder="Enter writer" name="mem_storeNum">
+								</div>
+
+								<input type="button" id="btn" class="btn btn-default"
+									value="Write" style="box-shadow: 1px 1px 1px 1px gray;">
+							</form>
+							<hr>
+						</div>
+
+						<div style="border: 1px solid white; margin-top: 30px;">
+							<c:forEach items="${colist}" var="vo">
+
+
+								<div class="lis2"
+									style="border-top: 1px solid gray; border-bottom: 1px solid gray; min-height: 120px; background-color: #f0f0f5; border-color: rgba(0, 0, 0, 0.25); overflow: auto; margin-bottom: 10px;">
+									<tr>
+
+										<td><a href="./myshop?mem_storeNum=${vo.sq_storeNum}"
+											style="font-size: 18px; font-weight: 700; color: black;">&nbsp;
+												${vo.mem_storeName } </a> <a> <span
+												class="badge pull-right">${vo.sq_regDate}</span>
+										</a></td>
+
+										<br>
+										<td>
+											<p style="font-size: 19px;">&nbsp;${vo.sq_contents}</p>
+										</td>
+										<br>
+										<td>&nbsp;
+											<button class="dae" title="${vo.mem_storeName }">댓글작성</button>
+
+											<!--본인이 작성한 또는 상점 주인만 글삭제 --> <c:if
+												test="${msnum eq vo.sq_storeNum or msnum eq vo.mem_storeNum}">
+						
+							&nbsp;<a
+													href="./setDelete?sq_num=${vo.sq_num}&mem_storeNum=${vo.mem_storeNum}"
+													class="btn btn-default btn-sm"> <span
+													class="glyphicon glyphicon-remove-sign"></span>Delete
+												</a>
+											</c:if>
+										</td>
+									</tr>
+								</div>
+							</c:forEach>
+							<a class="btn btn-default pull-right" href="#" id="load">문의 더
+								보기</a>
+						</div>
+
+					</div>
+				</c:if>
 			</div>
-</c:if>
-		</div>
-		<!-- 버튼, 내용 끝  -->
 
-	</div>
+		</div>
 	</c:if>
-	<!-- 컨테이너 끝  -->
-	
+
 	<script type="text/javascript">
-	$("#btn").click(function() {
-		var content = $('#sq_contents').val();
-		console.log(content);
-		console.log(content.length);
-		
-		 	if (content.length >0 && content.length<51) {
+		$("#btn").click(function() {
+			var content = $('#sq_contents').val();
+			console.log(content);
+			console.log(content.length);
+
+			if (content.length > 0 && content.length < 51) {
 				console.log("적정값");
 				$("#form").submit();
-				
+
 			} else {
 				alert("규격에 맞게 작성하세요");
-				 event.preventDefault();//이벤트 막기
-			} 
+				event.preventDefault();//이벤트 막기
+			}
 
-	});
-
-
-	$('#sq_contents').keyup(function (e){
-	    var content = $(this).val();
-	    $('#counter').html("("+content.length+" / 최대 50자)");    //글자수 실시간 카운팅
-
-	    if (content.length > 50){
-	        alert("최대 30자까지 입력 가능합니다.");
-	        $(this).val(content.substring(0, 50));
-	        $('#counter').html("(50 / 최대 50자)");
-	    }
-	});
-
-
-
-	$('.dae').click(function(){
-		var name = $(this).attr('title');
-		console.log(name);
-
-		
-		$("#sq_contents").val("@"+name+"::");
-		
-		var content = $("#sq_contents").val();
-		console.log(content);
-		$("#sq_contents").focus();
-		
 		});
 
-	
-	$(function(){
-	    $(".lis2").slice(0, 3).show(); 
-	    $("#load").click(function(e){ 
-	        e.preventDefault();
-	        if($(".lis2:hidden").length == 0){ 
-	        	alert("마지막항목입니다.");
-	        }
-	        $(".lis2:hidden").slice(0, 3).show();
-	    });
-	});
+		$('#sq_contents').keyup(function(e) {
+			var content = $(this).val();
+			$('#counter').html("(" + content.length + " / 최대 50자)"); //글자수 실시간 카운팅
 
-	
+			if (content.length > 50) {
+				alert("최대 30자까지 입력 가능합니다.");
+				$(this).val(content.substring(0, 50));
+				$('#counter').html("(50 / 최대 50자)");
+			}
+		});
 
+		$('.dae').click(function() {
+			var name = $(this).attr('title');
+			console.log(name);
+
+			$("#sq_contents").val("@" + name + "::");
+
+			var content = $("#sq_contents").val();
+			console.log(content);
+			$("#sq_contents").focus();
+
+		});
+
+		$(function() {
+			$(".lis2").slice(0, 3).show();
+			$("#load").click(function(e) {
+				e.preventDefault();
+				if ($(".lis2:hidden").length == 0) {
+					alert("마지막항목입니다.");
+				}
+				$(".lis2:hidden").slice(0, 3).show();
+			});
+		});
 	</script>
-		<c:import url="../template/footer.jsp"></c:import>
-	
+	<c:import url="../template/footer.jsp"></c:import>
+
 </body>
 </html>
