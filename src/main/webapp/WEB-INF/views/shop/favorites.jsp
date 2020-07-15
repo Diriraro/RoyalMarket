@@ -136,7 +136,7 @@
 								<c:if test="${vo.sell_status ne 2 }">
 
 									<div
-										style="border: 0px solid; width: 34%; height: 100%; float: left; background-color: #f0f0f5"
+										style="border: 0px solid; width: 34%; height: 100%; float: left; background-color: white;"
 										class="pp2" title="${vo.sell_num }">
 
 										<div class="img"
@@ -148,7 +148,7 @@
 
 								</c:if>
 								<div
-									style="border: 0px solid; width: 66%; height: 100%; float: left; background-color: #f0f0f5; font-size: 20px;">
+									style="border: 0px solid; width: 66%; height: 100%; float: left; background-color: #f2f2f2; font-size: 20px;">
 									<button class="btn del" style="float: right;"
 										title="${vo.zzim_num}">
 										<a style="color: gray;"> <span

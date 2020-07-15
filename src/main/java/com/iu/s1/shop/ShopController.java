@@ -265,6 +265,9 @@ public class ShopController {
 			double avg2 = (storeReviewService.take_rate(storeFollowVO3.getTake_storeNum()));
 			int flo = (int)Math.floor(avg2); 
 			storeFollowVO3.setRe_rate(flo);
+			double mi = avg2 - flo;
+			int substar = (int)Math.round(mi);
+			storeFollowVO3.setSub_star(substar);
 		
 		}
 		// 공통데이터
@@ -319,6 +322,10 @@ public class ShopController {
 			
 			int flo = (int)Math.floor(avg2); 
 			storeFollowVO3.setRe_rate(flo);
+			
+			double mi = avg2 - flo;
+			int substar = (int)Math.round(mi);
+			storeFollowVO3.setSub_star(substar);
 		}	
 		
 		// 공통데이터

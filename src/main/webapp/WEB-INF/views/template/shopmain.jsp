@@ -33,7 +33,6 @@ filter: drop-shadow(5px 5px 5px #000);
 <div class="container">
 <!-- 모든 컨트롤에서는 이름을 출력해줘야함.  -->
 	<%-- <h2>${mem_storeName}</h2>  --%> 
-	<%-- <h2>${msname}님 접속중 </h2> --%>
 		<c:if test="${msnum eq mem_storeNum }">
 	<div style="border: 1px solid black; width: 1024px; height: 340px; border-color: rgba(0,0,0,0.25); ">
 
@@ -42,8 +41,16 @@ filter: drop-shadow(5px 5px 5px #000);
 			<div style="border: 1px solid white; width: 330px; height: 330px; background-size : cover;  background-image: url('${pageContext.request.contextPath}/resources/images/shopback2.jpg');">
 				<!-- 사진  -->
 				<div style="width: 130px; width: 130px; margin-top: 40px;  margin-left: 30%;border-radius: 70%;overflow: hidden;">
-					<!-- 카카오 이미지 확인  -->
-					<img class="imgsh" alt="" src="${pageContext.request.contextPath}/resources/images/user11.png" style="width: 100%; height: 100%;">
+					
+					<c:if test="${flo eq 0}">
+					<img class="imgsh" alt="" src="${pageContext.request.contextPath}/resources/images/user112.png" style="width: 100%; height: 100%;">
+					</c:if>
+					
+					<c:if test="${flo ne 0}">
+					<img class="imgsh" alt="" src="${pageContext.request.contextPath}/resources/images/user114.jpg" style="width: 100%; height: 100%;">
+					</c:if>
+					
+					
 				</div>
 				
 				<!--별점  -->
@@ -128,8 +135,11 @@ filter: drop-shadow(5px 5px 5px #000);
 			<div style="border: 1px solid white; width: 330px; height: 330px; background-size : cover;  background-image: url('${pageContext.request.contextPath}/resources/images/shopback2.jpg');">
 				<!-- 사진  -->
 				<div style="width: 130px; width: 130px; margin-top: 40px;  margin-left: 30%;border-radius: 70%;overflow: hidden;">
-					<c:if test="${mdata.mem_access eq 0}">
-					<img alt="" src="${pageContext.request.contextPath}/resources/images/user11.png" style="width: 100%; height: 100%;">
+					<c:if test="${flo eq 0 and mdata.mem_access eq 0}">
+					<img class="imgsh" alt="" src="${pageContext.request.contextPath}/resources/images/user112.png" style="width: 100%; height: 100%;">
+					</c:if>
+					<c:if test="${flo ne 0 and mdata.mem_access eq 0}">
+					<img class="imgsh" alt="" src="${pageContext.request.contextPath}/resources/images/user114.jpg" style="width: 100%; height: 100%;">
 					</c:if>
 					<c:if test="${mdata.mem_access eq 1}">
 					<img alt="" src="${pageContext.request.contextPath}/resources/images/bb1.png" style="width: 100%; height: 100%;">

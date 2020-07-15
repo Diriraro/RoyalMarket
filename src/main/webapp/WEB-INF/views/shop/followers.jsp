@@ -81,23 +81,39 @@
 							style="border: 0px solid red; min-height: 340px; overflow: auto;">
 							<c:forEach items="${owelist}" var="vo">
 								<div class="fst lis2"
-									style="width: 200px; height: 320px; border: 1px solid gray; float: left; margin-left: 4px; margin-bottom: 4px; overflow: auto; border-color: rgba(0, 0, 0, 0.25); background-color: #f0f0f5">
+									style="width: 218px; height: 320px; border: 1px solid gray; float: left; margin-left: 30px; margin-bottom: 30px; overflow: auto; border-color: rgba(0, 0, 0, 0.25); background-color: #f0f0f5">
 
 									<div
-										style="width: 198px; width: 130px; margin-top: 40px; margin-left: 17%; border-radius: 70%; overflow: hidden;"
+										style="width: 198px; width: 130px; margin-top: 40px; margin-left: 21%; border-radius: 70%; overflow: hidden;"
 										onclick="location.href='./myshop?mem_storeNum=${vo.give_storeNum }'">
+										
+									<c:if test="${vo.re_rate eq 0}">
 										<img alt=""
-											src="${pageContext.request.contextPath}/resources/images/user11.png"
-											style="width: 100%; height: 100%; background-color: gray;">
+											src="${pageContext.request.contextPath}/resources/images/user113.jpg"
+											style="width: 100%; height: 100%;">
+										</c:if>
+										
+										<c:if test="${vo.re_rate ne 0}">
+										<img alt=""
+											src="${pageContext.request.contextPath}/resources/images/user114.jpg"
+											style="width: 100%; height: 100%;">
+										</c:if>
+											
+											
 									</div>
 									<h2></h2>
 									<div style="text-align: center;">
 
 										<c:forEach var="i" begin="1" end="${vo.re_rate}">
 											<img class="imgsh2"
-												style="cursor: pointer; width: 15px; height: 15px;" alt=""
+												style="cursor: pointer; width: 20px; height: 20px;" alt=""
 												src="${pageContext.request.contextPath}/resources/images/star22.png">
 										</c:forEach>
+										<c:if test="${vo.sub_star eq 1}">
+										<img class="imgsh2"
+												style="cursor: pointer; width: 20px; height: 20px;" alt=""
+												src="${pageContext.request.contextPath}/resources/images/star23.png">
+										</c:if>
 										<br> <a href="./myshop?mem_storeNum=${vo.give_storeNum }"
 											class="names">${vo.give_storeName}</a><br>
 
@@ -126,13 +142,13 @@
 
 	<script type="text/javascript">
 		$(function() {
-			$(".lis2").slice(0, 5).show();
+			$(".lis2").slice(0, 4).show();
 			$("#load").click(function(e) {
 				e.preventDefault();
 				if ($(".lis2:hidden").length == 0) {
 					alert("마지막항목입니다.");
 				}
-				$(".lis2:hidden").slice(0, 5).show();
+				$(".lis2:hidden").slice(0, 4).show();
 			});
 		});
 	</script>

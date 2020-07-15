@@ -103,7 +103,7 @@
 							<c:forEach items="${mylist }" var="vo">
 
 								<div class="box1 lis2"
-									style="width: 218px; height: 300px; border: 1px solid gray; float: left; margin-left: 30px; margin-bottom: 30px; background-color: #f0f0f5; border-color: rgba(0, 0, 0, 0.25);"
+									style="width: 218px; height: 300px; border: 1px solid gray; float: left; margin-left: 30px; margin-bottom: 30px; background-color: white; border-color: rgba(0, 0, 0, 0.25);"
 									onclick="location.href='../product/productSelect?sell_num=${vo.sell_num}'">
 
 									<!--status 2이면   판매완료 -->

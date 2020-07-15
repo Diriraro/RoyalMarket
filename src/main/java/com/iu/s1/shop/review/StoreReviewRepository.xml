@@ -53,12 +53,12 @@
   		select sell_num from store_review where sell_num = #{sell_num}
   </select>
   
-  <!-- 팔로잉 페이지는 takestorenum으로 별점  출력 -->
+  <!-- 팔로잉 페이지는 take_storenum으로 별점  출력 널값은 0으로 -->
   <select id="take_rate" parameterType="Long" resultType="java.lang.Double">
   select  IFNULL(avg(re_rate), 0) from store_review where mem_storeNum= #{take_storeNum}
   </select>
   
-  <!-- 팔로워 페이지는 givestoreNum으로 별점  출력 -->
+  <!-- 팔로워 페이지는 give_storeNum으로 별점  출력 널값은 0으로 -->
   <select id="give_rate" parameterType="Long" resultType="java.lang.Double">
   select  IFNULL(avg(re_rate), 0) from store_review where mem_storeNum= #{give_storeNum}
   </select>

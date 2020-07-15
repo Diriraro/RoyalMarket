@@ -104,11 +104,11 @@
 
 
 								<div class="lis2"
-									style="border-top: 1px solid gray; border-bottom: 1px solid gray; min-height: 120px; background-color: #f0f0f5; border-color: rgba(0, 0, 0, 0.25); overflow: auto; margin-bottom: 10px;">
+									style="border-top: 1px solid gray; border-bottom: 1px solid gray; min-height: 120px; background-color: white; border-color: rgba(0, 0, 0, 0.25); overflow: auto; margin-bottom: 10px;">
 									<tr>
 
 										<td><a href="./myshop?mem_storeNum=${vo.sq_storeNum}"
-											style="font-size: 18px; font-weight: 700; color: black;">&nbsp;
+											style="font-size: 15px; color: #999999;">&nbsp;
 												${vo.mem_storeName } </a> <a> <span
 												class="badge pull-right">${vo.sq_regDate}</span>
 										</a></td>
