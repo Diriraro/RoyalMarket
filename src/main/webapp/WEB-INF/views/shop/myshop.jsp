@@ -99,7 +99,9 @@
 
 						<div
 							style="border: 1px solid white; min-height: 340px; overflow: auto;">
-
+							<c:if test="${prodco eq 0 }">
+							<p style="color: gray;">등록된 상품이 없습니다.</p>
+							</c:if>
 							<c:forEach items="${mylist }" var="vo">
 
 								<div class="box1 lis2"
@@ -109,7 +111,7 @@
 									<!--status 2이면   판매완료 -->
 									<c:if test="${vo.sell_status eq 2}">
 
-										<div style="width: 218px;">
+										<div style="width: 218px; background-color: #f0f0f5;">
 											<c:forEach items="${pfile}" var="pfile" varStatus="status">
 
 												<c:if test="${vo.sell_num eq pfile.sell_num}">
@@ -134,13 +136,13 @@
 									<!--0,1 일떄 판매중  -->
 									<c:if test="${vo.sell_status ne 2}">
 
-										<div style="width: 218px;">
+										<div style="width: 218px; background-color: #f0f0f5;">
 											<c:forEach items="${pfile}" var="pfile" varStatus="status">
 
 												<c:if test="${vo.sell_num eq pfile.sell_num}">
 													<img src="../upload/product/${pfile.file_name}"
 														alt="${pfile.ori_name}"
-														style="overflow: hidden; display: flex; align-items: center; justify-content: center; width: 216px; height: 190px;">
+														style="overflow: hidden; display: flex; align-items: center; justify-content: center; width: 218px; height: 190px;">
 												</c:if>
 
 
@@ -165,8 +167,10 @@
 								</div>
 							</c:forEach>
 						</div>
+						<c:if test="${prodco ne 0}">
 						<a class="btn btn-default pull-right " href="#" id="load">상품 더
 							보기</a>
+							</c:if>
 					</div>
 				</c:if>
 			</div>
@@ -183,13 +187,14 @@
 
 	<script type="text/javascript">
 		$(function() {
-			$(".lis2").slice(0, 8).show();
+			$(".lis2").slice(0, 4).show();
 			$("#load").click(function(e) {
 				e.preventDefault();
 				if ($(".lis2:hidden").length == 0) {
 					alert("마지막항목입니다.");
+					$("#load").hide();
 				}
-				$(".lis2:hidden").slice(0, 8).show();
+				$(".lis2:hidden").slice(0, 4).show();
 			});
 		});
 	</script>

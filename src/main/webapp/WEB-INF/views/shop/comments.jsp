@@ -98,7 +98,12 @@
 							</form>
 							<hr>
 						</div>
-
+						
+						<c:if test="${coco eq 0 }">
+							<p style="color: gray;">등록된 문의가 없습니다. 첫 상품문의를 등록해보세요!</p>
+							</c:if>
+						
+						
 						<div style="border: 1px solid white; margin-top: 30px;">
 							<c:forEach items="${colist}" var="vo">
 
@@ -134,8 +139,12 @@
 									</tr>
 								</div>
 							</c:forEach>
+							
+							<c:if test="${coco ne 0}">
 							<a class="btn btn-default pull-right" href="#" id="load">문의 더
 								보기</a>
+							</c:if>
+								
 						</div>
 
 					</div>
@@ -191,6 +200,7 @@
 				e.preventDefault();
 				if ($(".lis2:hidden").length == 0) {
 					alert("마지막항목입니다.");
+					$("#load").hide();
 				}
 				$(".lis2:hidden").slice(0, 3).show();
 			});

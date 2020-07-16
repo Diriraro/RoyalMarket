@@ -75,6 +75,9 @@
 							&nbsp;&nbsp;인증후기&nbsp;<a id="redd">${reco}</a>
 						</h2>
 						<hr>
+						<c:if test="${reco eq 0 }">
+							<p style="color: gray;">상점후기가 없습니다.</p>
+							</c:if>
 						<c:forEach items="${relist}" var="vo" varStatus="i">
 							<div class="lis2"
 								style="border-top: 1px solid gray; min-height: 150px; overflow: auto; background-color: #f0f0f5">
@@ -139,8 +142,11 @@
 							</div>
 							<hr>
 						</c:forEach>
+						
+						<c:if test="${reco ne 0}">
 						<a class="btn btn-default pull-right " href="#" id="load">리뷰 더
 							보기</a>
+							</c:if>
 					</div>
 				</c:if>
 
@@ -162,6 +168,7 @@
 				e.preventDefault();
 				if ($(".lis2:hidden").length == 0) {
 					alert("마지막항목입니다.");
+					$("#load").hide();
 				}
 				$(".lis2:hidden").slice(0, 2).show();
 			});

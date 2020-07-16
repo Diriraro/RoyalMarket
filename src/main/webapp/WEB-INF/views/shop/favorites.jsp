@@ -109,6 +109,11 @@
 
 					<div
 						style="border: 1px solid white; min-height: 340px; overflow: auto;">
+						
+							<c:if test="${zico eq 0 }">
+							<p style="color: gray;">찜한 상품이 없습니다.</p>
+							</c:if>
+						
 						<c:forEach items="${zilist }" var="vo">
 							<div class="lis2"
 								style="border: 1px solid gray; width: 480px; height: 140px; float: left; margin-left: 2%; margin-top: 2%; margin-bottom: 2%; border-color: rgba(0, 0, 0, 0.25);">
@@ -136,7 +141,7 @@
 								<c:if test="${vo.sell_status ne 2 }">
 
 									<div
-										style="border: 0px solid; width: 34%; height: 100%; float: left; background-color: white;"
+										style="border: 0px solid; width: 34%; height: 100%; float: left; background-color: #f0f0f5;"
 										class="pp2" title="${vo.sell_num }">
 
 										<div class="img"
@@ -194,8 +199,10 @@
 							</div>
 						</c:forEach>
 					</div>
+					<c:if test="${zico ne 0}">
 					<a class="btn btn-default pull-right " href="#" id="load">찜 더
 						보기</a>
+							</c:if>
 
 				</div>
 
@@ -238,6 +245,7 @@
 
 			if ($(".lis2:hidden").length == 0) {
 				alert("마지막항목입니다.");
+				$("#load").hide();
 			}
 			$(".lis2:hidden").slice(0, 4).show();
 		});

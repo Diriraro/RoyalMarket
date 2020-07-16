@@ -79,9 +79,15 @@
 							&nbsp;&nbsp;팔로잉&nbsp;<a id="redd">${giveco}</a>
 						</h2>
 						<hr>
-
+							
 						<div
 							style="border: 0px solid white; min-height: 340px; overflow: auto; border-color: rgba(0, 0, 0, 0.25);">
+							
+							<c:if test="${giveco eq 0 }">
+							<p style="color: gray;">아직 팔로우한 사람이 없습니다.</p>
+							</c:if>
+							
+							
 							<c:forEach items="${owilist}" var="vo" varStatus="status">
 								<div class="fst lis2"
 									style="width: 218px; height: 320px; border: 1px solid gray; float: left; margin-left: 30px; margin-bottom: 30px; overflow: auto; border-color: rgba(0, 0, 0, 0.25); background-color: #f0f0f5">
@@ -131,8 +137,11 @@
 								</div>
 							</c:forEach>
 						</div>
+						
+						<c:if test="${giveco ne 0}">
 						<a class="btn btn-default pull-right " href="#" id="load">팔로잉
 							더 보기</a>
+							</c:if>
 
 					</div>
 				</c:if>
@@ -149,6 +158,7 @@
 				e.preventDefault();
 				if ($(".lis2:hidden").length == 0) {
 					alert("마지막항목입니다.");
+					$("#load").hide();
 				}
 				$(".lis2:hidden").slice(0, 4).show();
 			});
