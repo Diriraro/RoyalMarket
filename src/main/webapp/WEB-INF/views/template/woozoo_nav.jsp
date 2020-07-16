@@ -250,7 +250,7 @@ button {
 		style="border-bottom: solid 1px #e4e4e4; border-top: solid 1px #e4e4e4;">
 		<nav class="nav navbar-nav">
 			<div style="margin-top: 30px; margin-left: 430px;">
-				<a href="../"><img
+				<a href="/"><img
 					src="${pageContext.request.contextPath}/resources/images/nav_logo2.png"
 					alt="로고"></a>
 				<!-- 검색창 -->
@@ -388,9 +388,11 @@ button {
 	</header>
 </div>
 
-<div id="recentBox">
+<div id="recentBox" style="width: 180px;">
 	<div id="recent"></div>
+	<button id="top" style="width: 160px;height: 35px;border: solid 1px #cccccc;margin-right: 110px;margin-bottom: 5px;"><b style="color: #a8a8a8;">TOP</b></button>
 </div>
+
 
 <div class="modal fade" id="myModal" role="dialog">
 	<div class="modal-dialog">
@@ -567,4 +569,10 @@ button {
 		var option = "width = 500, height = 500, top = 100, left = 200, location = no"
 		window.open(url, name, option);
 	}
+
+    $("#top").on("click",function(){
+        var menuHeight = document.querySelector("#header_wrap").offsetHeight;
+        var location = document.querySelector("#header_top").offsetTop;
+        window.scrollTo({top:location - menuHeight, behavior:'smooth'});
+        });
 </script>

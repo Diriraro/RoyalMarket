@@ -378,6 +378,8 @@ a:hover { text-decoration:none !important }
 			        var location = document.querySelector("#c8_title").offsetTop;
 			        window.scrollTo({top:location - menuHeight, behavior:'smooth'});
 			        });
+
+		        
 		        $(function() {
 			        var member = $("#memberID").val().trim();
 			        if(member != ""){
