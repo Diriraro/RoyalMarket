@@ -44,11 +44,11 @@ color: red;
     }
 
 .img-cover{
-
+   
        height: 100%;
        width: 100%;
        background-color: rgba(0, 0, 0, 0.7);                                                                 
-       z-index:1;
+       z-index:0;
     }
 
 .img .content{
@@ -58,7 +58,7 @@ color: red;
          transform: translate(-50%, -50%);                                                                   
          font-size:1rem;
          color: white;
-         z-index: 2;
+         z-index: 0;
          text-align: center;
   }
 
@@ -129,7 +129,7 @@ color: red;
 				
 					<div class=img style="height: 190px; width:197px;float: left;  background-size: 197px 190px; background-image: url('${pageContext.request.contextPath}/upload/product/${pfile.file_name}');">
 						<div class="content">
-							<h5 style="margin-bottom: 30px;">판매 <br> 완료</h5>
+							<h5 style="margin-bottom: 30	px;">판매 <br> 완료</h5>
 						</div>
 						<div class="img-cover">
 						</div>

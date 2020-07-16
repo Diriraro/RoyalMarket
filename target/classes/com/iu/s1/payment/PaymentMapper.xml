@@ -161,8 +161,8 @@
  	</delete>
  	
  	<!-- 거래를 시작 할때 예약중으로 바꾸기 -->
- 	<update id="product_sell_statusUp" parameterType="java.lang.Long">
- 		update store_product set sell_status=1 where sell_num=#{sell_num};
+ 	<update id="product_sell_statusUp" parameterType="com.iu.s1.product.ProductVO">
+ 		update store_product set sell_status=#{sell_status} where sell_num=#{sell_num};
  	</update>
  	
  	<!-- paycheckId 생성 -->

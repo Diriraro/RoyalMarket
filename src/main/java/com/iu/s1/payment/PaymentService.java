@@ -121,8 +121,8 @@ public class PaymentService {
 		return paymentMapper.del_sellHistory(trading_num);
 	}
 	
-	public int product_sell_statusUp(long sell_num)throws Exception{
-		return paymentMapper.product_sell_statusUp(sell_num);
+	public int product_sell_statusUp(ProductVO productVO)throws Exception{
+		return paymentMapper.product_sell_statusUp(productVO);
 	}
 	public int paycheckInsert(PayCheckVO payCheckVO)throws Exception{
 		return paymentMapper.paycheckInsert(payCheckVO);
