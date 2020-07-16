@@ -308,9 +308,9 @@ public class PaymentController {
 		MemberVO memberVO = (MemberVO)request.getSession().getAttribute("member");
 	
 		
+		pager.setSearch(memberVO.getMem_id());
 		List<PayVO> ar =paymentService.paymentList(pager);
 		mv.addObject("list", ar);
-		pager.setSearch(memberVO.getMem_id());
 		mv.addObject("pager", pager);
 		mv.setViewName("/payment/pointManage");
 		

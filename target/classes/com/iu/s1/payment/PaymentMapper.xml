@@ -238,11 +238,11 @@
 
 	<select id="paymentList" parameterType="Pager"
 		resultType="com.iu.s1.payment.PayVO">
-		select * from payment where mem_id=#{search} limit #{startRow},10
+		select * from payment where mem_id=#{search} order by pay_num desc limit #{startRow},10 
 	</select>
 	<!-- payment Pager 끝 -->
   	<select id="paymentHistory" parameterType="Long" resultType="com.iu.s1.payment.PayVO">
-  		SELECT * FROM payment WHERE buy_history_num=#{buy_history_num}
+  		SELECT * FROM payment WHERE buy_history_num=#{buy_history_num} 
   	</select>
 
   	

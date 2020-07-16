@@ -56,26 +56,26 @@
 				</tr>
 			</c:forEach>
 		</table>
-	</div>
-	
-	
 			<div class="p" style="width: 1024px;height: 40px;float: left;">
 				<ul class="pagination" >
 
 					<c:if test="${pager.curBlock gt 1}">
 						<li><a
-							href="./productList?curPage=${pager.startNum-1}&kind=${pager.kind}&search=${pager.search}">이전</a></li>
+							href="./pointManage?curPage=${pager.startNum-1}">이전</a></li>
 					</c:if>
 					<c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
 						<li><a
-							href="./productList?curPage=${i}&kind=${pager.kind}&search=${pager.search}">${i}</a></li>
+							href="./pointManage?curPage=${i}">${i}</a></li>
 					</c:forEach>
 					<c:if test="${pager.curBlock lt pager.totalBlock}">
 						<li><a
-							href="./productList?curPage=${pager.lastNum+1}&kind=${pager.kind}&search=${pager.search}">다음</a></li>
+							href="./pointManage?curPage=${pager.lastNum+1}">다음</a></li>
 					</c:if>
 				</ul>
 			</div>
+	</div>
+	
+	
 	
 	<div>
 		<a href="javascript:popup_cal()">정산하기 </a>
