@@ -209,4 +209,18 @@
 		WHERE table_name = 'trading'
 		AND table_schema = DATABASE( ) ;
   	</select>
+  	
+  	
+  	<!-- payment Pager 시작 -->
+  	<select id="paymentCount" parameterType="Pager"
+		resultType="java.lang.Long">
+		select count(mem_id) from payment where mem_id = #{search}
+	</select>
+
+	<select id="paymentList" parameterType="Pager"
+		resultType="com.iu.s1.payment.PayVO">
+		select * from payment where mem_id=#{search} limit #{startRow},10
+	</select>
+	<!-- payment Pager 끝 -->
+  	
  </mapper>

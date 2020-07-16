@@ -88,4 +88,8 @@ public interface PaymentMapper {
 	public int product_cancel_status(long sell_num)throws Exception;
 	
 	public long auto_incrementNum ()throws Exception;
+	
+	public long paymentCount(Pager pager)throws Exception;
+	
+	public List<PayVO> paymentList(Pager pager)throws Exception;
 }

@@ -30,6 +30,7 @@ import com.iu.s1.shop.review.StoreReviewVO;
 
 
 import com.iu.s1.trading.TradingVO;
+import com.iu.s1.util.Pager;
 
 @Controller
 @RequestMapping("/payment/**")
@@ -299,13 +300,15 @@ public class PaymentController {
 	}
 	// 회원 포인트 관리 
 	@GetMapping("pointManage")
-	public ModelAndView pointManage(HttpServletRequest request)throws Exception{
+	public ModelAndView pointManage(HttpServletRequest request,Pager pager)throws Exception{
 		ModelAndView mv = new ModelAndView();
 		MemberVO memberVO = (MemberVO)request.getSession().getAttribute("member");
 	
 		
-		List<PayVO> ar =paymentService.pointManage(memberVO.getMem_id());
-		mv.addObject("payVO", ar);
+		List<PayVO> ar =paymentService.paymentList(pager);
+		mv.addObject("list", ar);
+		pager.setSearch(memberVO.getMem_id());
+		mv.addObject("pager", pager);
 		mv.setViewName("/payment/pointManage");
 		
 		return mv;

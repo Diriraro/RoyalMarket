@@ -13,6 +13,7 @@ import com.iu.s1.product.ProductVO;
 import com.iu.s1.saveCash.SaveCashRepository;
 import com.iu.s1.saveCash.SaveCashVO;
 import com.iu.s1.trading.TradingVO;
+import com.iu.s1.util.Pager;
 
 @Service
 public class PaymentService {
@@ -22,6 +23,7 @@ public class PaymentService {
 	
 	@Autowired
 	private SaveCashRepository saveCashRepository;		//적립금
+	
 	
 	public int pointUpdate(MemberVO memberVO)throws Exception{
 		return paymentMapper.pointUpdate(memberVO);
@@ -169,4 +171,12 @@ public class PaymentService {
 	public long auto_incrementNum() throws Exception{
 		return paymentMapper.auto_incrementNum();
 	}
+	public List<PayVO> paymentList(Pager pager) throws Exception {
+		pager.makeRow();
+		long totalCount = paymentMapper.paymentCount(pager);
+		pager.makePage(totalCount);
+		return paymentMapper.paymentList(pager);
+	}
+
+	
 }
