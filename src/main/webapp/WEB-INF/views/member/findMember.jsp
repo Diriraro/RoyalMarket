@@ -540,7 +540,6 @@ input {
 					</div>
 					<form:errors path="mem_email" class="error_msg"></form:errors>
 
-
 				</form:form>
 
 			</div>
@@ -553,10 +552,6 @@ input {
 
 
 			<div><h3>PASSWORD</h3></div>
-
-
-
-
 
 			<h4 id="show3" class="sh box">SMS인증으로 비밀번호 찾기</h4>
 			<div class="show3" style="display: none;">
@@ -654,7 +649,7 @@ input {
 			<h4 id="show4" class="sh box">E-MAIL인증으로 비밀번호 찾기</h4>
 			<div class="show4" style="display: none;">
 				<form:form modelAttribute="memberVO" action="./findPwByEmail"
-					method="post">
+					method="post" name="findPwByEmail">
 					<input name="mem_name" value="이름" type="hidden">
 					<input name="road_address" value="도로명 주소" type="hidden">
 
@@ -672,7 +667,6 @@ input {
 					<form:errors path="mem_id" class="error_msg"></form:errors>
 
 
-
 					<div class="sc-lhLRcH csuEuq">
 						<div class="sc-jMtzgO liBHhX">
 							<div class="sc-kAKrxA kVlvmu">
@@ -688,9 +682,6 @@ input {
 						</div>
 					</div>
 					<form:errors path="mem_email" class="error_msg"></form:errors>
-
-
-
 
 					<div class="sc-lhLRcH csuEuq">
 						<div class="sc-jMtzgO liBHhX">
@@ -721,9 +712,6 @@ input {
 					</div>
 					<form:errors path="mem_pw" class="error_msg"></form:errors>
 					
-
-					
-
 					<div class="sc-lhLRcH csuEuq">
 						<div class="sc-jMtzgO liBHhX">
 							<div class="sc-kAKrxA kVlvmu">
@@ -806,6 +794,7 @@ input {
 			}
 
 		});
+
 
 		$("#show4").click(function() {
 			if ($(this).prop("title") == "hide") {
@@ -935,10 +924,6 @@ input {
 					}
 				})
 			}
-
-
-
-			
 
 
 			function checkPhone3(result2) {

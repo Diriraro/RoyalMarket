@@ -185,18 +185,21 @@ public class MemberController {
 		boolean result = memberService.memberCheck(memberVO, bindingResult, random);
 		System.out.println("DDDDDD"+session.getAttribute("now"));
 		System.out.println("DDDDDD"+session.getAttribute("numStr"));
+		
+		
 
 		if (result) {
 			session.removeAttribute("numStr");
 			session.removeAttribute("now");
 			mv.addObject("wrong","wrong");
 			mv.setViewName("member/memberJoin");
-		} else if (now_now > 300000) {
+		}else if (now_now > 300000) {
 			session.removeAttribute("numStr");
 			session.removeAttribute("now");
 			mv.addObject("result", "인증번호 유효기간이 지났습니다.");
 			mv.addObject("path", "./memberJoin");
 			mv.setViewName("common/result");
+
 		} else {
 			session.removeAttribute("numStr");
 			session.removeAttribute("now");
@@ -207,7 +210,6 @@ public class MemberController {
 				mv.addObject("path", "../");
 				mv.setViewName("common/result");
 			}
-			session.invalidate();
 		}
 		return mv;
 	}
