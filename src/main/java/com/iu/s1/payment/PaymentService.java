@@ -40,8 +40,17 @@ public class PaymentService {
 	public int paymentCharge(PayVO payVO)throws Exception{
 		return paymentMapper.paymentCharge(payVO);
 	}
+	public int paymentSell(PayVO payVO)throws Exception{
+		return paymentMapper.paymentSell(payVO);
+	}
+	public int paymentBuyCancle(PayVO payVO)throws Exception{
+		return paymentMapper.paymentBuyCancle(payVO);
+	}
 	public int paymentOut(PayVO payVO)throws Exception{
 		return paymentMapper.paymentOut(payVO);
+	}
+	public int paymentCalculate(PayVO payVO)throws Exception{
+		return paymentMapper.paymentCalculate(payVO);
 	}
 	
 	public List<PayVO> pointManage(String mem_id)throws Exception{
@@ -91,20 +100,25 @@ public class PaymentService {
 	public TradingVO tradingSelect(long trading_num)throws Exception{
 		return paymentMapper.tradingSelect(trading_num);
 	}
-	public int tradingDelete(long sell_num)throws Exception{
-		return paymentMapper.tradingDelete(sell_num);
+	
+	public TradingVO tradingSellNumSelect(long sell_num)throws Exception{
+		return paymentMapper.tradingSellNumSelect(sell_num);
+	}
+	
+	public int tradingDelete(long trading_num)throws Exception{
+		return paymentMapper.tradingDelete(trading_num);
 	}
 	
 	public List<Sell_HistoryVO>  seller_check(String seller_id)throws Exception{
 		return paymentMapper.seller_check(seller_id);
 	}
 	
-	public int del_buyHistory(long sell_num)throws Exception{
-		return paymentMapper.del_buyHistory(sell_num);
+	public int del_buyHistory(long trading_num)throws Exception{
+		return paymentMapper.del_buyHistory(trading_num);
 	}
 	
-	public int del_sellHistory(long sell_num)throws Exception{
-		return paymentMapper.del_sellHistory(sell_num);
+	public int del_sellHistory(long trading_num)throws Exception{
+		return paymentMapper.del_sellHistory(trading_num);
 	}
 	
 	public int product_sell_statusUp(long sell_num)throws Exception{
@@ -128,20 +142,20 @@ public class PaymentService {
 		return paymentMapper.paystatsInsert(payStatsVO);
 	}
 	
-	public long buy_status(long sell_num)throws Exception{
-		return paymentMapper.buy_status(sell_num);
+	public long buy_status(long trading_num)throws Exception{
+		return paymentMapper.buy_status(trading_num);
 	}
 	
-	public long sell_status(long sell_num)throws Exception{
-		return paymentMapper.sell_status(sell_num);
+	public long sell_status(long trading_num)throws Exception{
+		return paymentMapper.sell_status(trading_num);
 	}
 	
-	public Buy_HistoryVO buy_Sel(long sell_num)throws Exception{
-		return paymentMapper.buy_Sel(sell_num);
+	public Buy_HistoryVO buy_Sel(long trading_num)throws Exception{
+		return paymentMapper.buy_Sel(trading_num);
 	}
 	
-	public Sell_HistoryVO sell_Sel(long sell_num)throws Exception{
-		return paymentMapper.sell_Sel(sell_num);
+	public Sell_HistoryVO sell_Sel(long trading_num)throws Exception{
+		return paymentMapper.sell_Sel(trading_num);
 	}
 	
 	
@@ -178,5 +192,8 @@ public class PaymentService {
 		return paymentMapper.paymentList(pager);
 	}
 
-	
+		
+	public PayVO paymentHistory(long trading_num)throws Exception{
+		return paymentMapper.paymentHistory(trading_num);
+	}
 }

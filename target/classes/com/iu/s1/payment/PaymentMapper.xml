@@ -21,12 +21,27 @@
  	
  	<!-- 입금 입력-->
  	<insert id="paymentCharge" parameterType="com.iu.s1.payment.PayVO">
- 		insert into payment values(0,#{pay_price},1,0,#{mem_id},#{point_rest})
+ 		insert into payment values(0,#{pay_price},1,0,#{mem_id},#{point_rest},#{pay_cash},#{buy_history_num})
+ 	</insert>
+ 	
+ 	<!-- 상품판매 입력-->
+ 	<insert id="paymentSell" parameterType="com.iu.s1.payment.PayVO">
+ 		insert into payment values(0,#{pay_price},2,0,#{mem_id},#{point_rest},#{pay_cash},#{buy_history_num})
+ 	</insert>
+ 	
+ 	<!-- 구매/판매 취소시 구매자에게 원래 금액 입력-->
+ 	<insert id="paymentBuyCancle" parameterType="com.iu.s1.payment.PayVO">
+ 		insert into payment values(0,#{pay_price},3,0,#{mem_id},#{point_rest},#{pay_cash},#{buy_history_num})
  	</insert>
  	
  	<!-- 출금 입력 -->
  	<insert id="paymentOut" parameterType="com.iu.s1.payment.PayVO">
- 		insert into payment values(0,#{pay_price},0,1,#{mem_id},#{point_rest})
+ 		insert into payment values(0,#{pay_price},0,1,#{mem_id},#{point_rest},#{pay_cash},#{buy_history_num})
+ 	</insert>
+ 	
+ 	<!-- 정산 입력-->
+ 	<insert id="paymentCalculate" parameterType="com.iu.s1.payment.PayVO">
+ 		insert into payment values(0,#{pay_price},0,2,#{mem_id},#{point_rest},#{pay_cash},#{buy_history_num})
  	</insert>
  	
  	<!-- 입출금 거래 내역 검색 -->
@@ -72,7 +87,7 @@
  	
  	<!-- 인수 업데이트 -->
  	<update id="tradingReceiveUp" parameterType="com.iu.s1.trading.TradingVO">
- 		update trading set receive=#{receive} where sell_num=#{sell_num}
+ 		update trading set receive=#{receive} where trading_num=#{trading_num}
  	</update>
  	
  	<!-- 인수 업데이트2 -->
@@ -82,7 +97,7 @@
  	
  	<!-- 인계 업데이트 -->
  	<update id="tradingGiveUp" parameterType="com.iu.s1.trading.TradingVO">
- 		update trading set give=#{give} where sell_num=#{sell_num}
+ 		update trading set give=#{give} where trading_num=#{trading_num}
  	</update>
  	
  	<!-- 인수 업데이트2 -->
@@ -90,14 +105,19 @@
  		update sell_history set status=#{status}, sell_check=#{sell_check} where sell_history_num=#{sell_history_num} and sell_check=0
  	</update>
  	
- 	<!-- trading Select -->
+ 	<!-- trading Select with trading_num -->
  	<select id="tradingSelect" parameterType="java.lang.Long" resultType="com.iu.s1.trading.TradingVO">
  		select * from trading where trading_num=#{trading_num}
  	</select>
  	
+ 	 <!-- trading Select with sell_num -->
+ 	<select id="tradingSellNumSelect" parameterType="java.lang.Long" resultType="com.iu.s1.trading.TradingVO">
+ 		select * from trading where sell_num=#{sell_num}
+ 	</select>
+ 	
  	<!--  trading Delete -->
  	<delete id="tradingDelete" parameterType="java.lang.Long">
- 		delete from trading where sell_num=#{sell_num} 
+ 		delete from trading where trading_num=#{trading_num} 
  	</delete>
  	
  	<!-- trading List -->
@@ -200,17 +220,16 @@
   	</update>
   	
   	<update id="product_cancel_status" parameterType="java.lang.Long">
- 		update store_product set sell_status=0 where sell_num=#{sell_num};
+ 		update store_product set sell_status=0 where sell_num=#{sell_num}
  	</update>
  	<!-- AI 현재 증가값 -->
   	<select id="auto_incrementNum" resultType="Long">
   		SELECT AUTO_INCREMENT
 		FROM information_schema.tables
 		WHERE table_name = 'trading'
-		AND table_schema = DATABASE( ) ;
+		AND table_schema = DATABASE( ) 
   	</select>
-  	
-  	
+  	  	
   	<!-- payment Pager 시작 -->
   	<select id="paymentCount" parameterType="Pager"
 		resultType="java.lang.Long">
@@ -222,5 +241,9 @@
 		select * from payment where mem_id=#{search} limit #{startRow},10
 	</select>
 	<!-- payment Pager 끝 -->
+  	<select id="paymentHistory" parameterType="Long" resultType="com.iu.s1.payment.PayVO">
+  		SELECT * FROM payment WHERE buy_history_num=#{buy_history_num}
+  	</select>
+
   	
  </mapper>

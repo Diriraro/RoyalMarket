@@ -74,7 +74,7 @@
 				
 				<div style="height: 100px; display: inline-block; margin-left: 10px;">
 					<div style="display: inline-block;"><font style="font-size: large;"><a href="./buyer_page?sell_num=${vo.sell_num}&buy_history_num=${vo.buy_history_num}">${vo.sell_product}</a></font></div><br>
-					<div style="display: inline-block;"><font style="font-size: large;"><b>${vo.sell_price-2500} 원</b></font></div><br>
+					<div style="display: inline-block;"><font style="font-size: large;"><b>${vo.sell_price} 원</b></font></div><br>
 					<div style="display: inline-block;">${vo.seller_id}</div><br>
 					<div style="display: inline-block;">${vo.buy_date}</div><br>
 					<c:if test="${vo.status eq 0}">

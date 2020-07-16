@@ -24,13 +24,31 @@
 					<c:if test="${vo.pay_in eq 1}">
 						<td>입금</td>
 					</c:if>
+					<c:if test="${vo.pay_in eq 2}">
+						<td>상품 판매</td>	
+					</c:if>
+					<c:if test="${vo.pay_in eq 3}">
+						<td>구매 취소</td>	
+					</c:if>
 					<c:if test="${vo.pay_out eq 1}">
 						<td>상품 구매</td>	
+					</c:if>
+					<c:if test="${vo.pay_out eq 2}">
+						<td>정산</td>	
 					</c:if>
 					<c:if test="${vo.pay_in eq 1}">
 						<td>+${vo.pay_price}</td>
 					</c:if>
+					<c:if test="${vo.pay_in eq 2}">
+						<td>+${vo.pay_price}</td>
+					</c:if>
+					<c:if test="${vo.pay_in eq 3}">
+						<td>+${vo.pay_price}</td>
+					</c:if>
 					<c:if test="${vo.pay_out eq 1}">
+						<td>-${vo.pay_price}</td>
+					</c:if>
+					<c:if test="${vo.pay_out eq 2}">
 						<td>-${vo.pay_price}</td>
 					</c:if>
 					
