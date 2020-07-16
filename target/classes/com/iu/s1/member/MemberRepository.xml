@@ -90,6 +90,16 @@
 		delete from member where mem_storeNum=#{mem_storeNum}
 	</delete>
 	
+	<update id="memberUpdate" parameterType="memberVO">
+		update member set mem_pw=#{mem_pw}, mem_phone=#{mem_phone}, mem_address=#{mem_address}, mem_email=#{mem_email} where mem_id=#{mem_id}
+	</update>
+	
+	<select id="selectMemberUpdate" resultType="MemberVO" parameterType="MemberVO">
+		select * from member where mem_id != #{mem_id}
+	</select>
+	
+	
+	
 	
 	
 	

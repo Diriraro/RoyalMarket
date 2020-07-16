@@ -24,26 +24,18 @@
     }
 
 .img-cover{
+	      
+       height: 100px;
+       width: 100px;
 
-       height: 100%;
-       width: 100%;
        background-color: rgba(0, 0, 0, 0.7);                                                                 
-       z-index:1;
+       z-index:0;
     }
 
-.img .content{
-         position: absolute;
-         top:50%;
-         left:50%;
-         transform: translate(-50%, -50%);                                                                   
-         font-size:1rem;
-         color: white;
-         z-index: 2;
-         text-align: center;
- }
+
 </style>
 <c:import url="../template/boot.jsp"></c:import>
-<c:import url="../template/style.jsp"></c:import>
+<c:import url="../template/style_pn.jsp"></c:import>
 </head>
 <body>
 	<c:import url="../template/woozoo_nav.jsp"></c:import>
@@ -51,7 +43,7 @@
 	<div class="container">
 		<div style="text-align: center;"><h2><b>거래내역</b></h2></div>
 		<div>
-			<button type="button" data-index="0" class="buttons" style="margin-left: 257px; border-bottom: 2px solid red;" id="buy_his"><b style="color: red">구매 내역</b></button>
+			<button type="button" data-index="0" class="buttons" style="margin-left: 257px; border-bottom: 2px solid #5c2392;" id="buy_his"><b style="color: #5c2392">구매 내역</b></button>
 			<button type="button" data-index="0" class="buttons" id="sell_his">판매 내역</button>
 		</div>
 		<c:forEach items="${buy}" var="vo">
@@ -59,11 +51,11 @@
 				<c:if test="${vo.status eq 2}">
 					<div class=img style="height: 100px; width:100px;float: left;  background-size: 100px 100px; background-image: url('${pageContext.request.contextPath}/upload/product/${vo.file_name}');">
 						<a href="./buyer_page?sell_num=${vo.sell_num}&buy_history_num=${vo.buy_history_num}"><div class="content">
-							<h5 style="margin-bottom: 30px;">구매 <br> 완료</h5>
+							<!-- <h5 style="margin-bottom: 30px;">구매 <br> 완료</h5> -->
 						</div></a>
 						
 						<a href="./buyer_page?sell_num=${vo.sell_num}&buy_history_num=${vo.buy_history_num}">
-							<div class="img-cover"></div>
+							<div class="img-cover"><font style="text-align: center;line-height: 100px;margin-left: 20px;color: white;">구매완료</font></div>
 						</a>
 					</div>
 				</c:if>
@@ -73,7 +65,7 @@
 				</c:if>
 				
 				<div style="height: 100px; display: inline-block; margin-left: 10px;">
-					<div style="display: inline-block;"><font style="font-size: large;"><a href="./buyer_page?sell_num=${vo.sell_num}&buy_history_num=${vo.buy_history_num}">${vo.sell_product}</a></font></div><br>
+					<div style="display: inline-block;"><font style="font-size: large;"><a href="./buyer_page?sell_num=${vo.sell_num}&buy_history_num=${vo.buy_history_num}&seller_id=${vo.seller_id}">${vo.sell_product}</a></font></div><br>
 					<div style="display: inline-block;"><font style="font-size: large;"><b>${vo.sell_price} 원</b></font></div><br>
 					<div style="display: inline-block;">${vo.seller_id}</div><br>
 					<div style="display: inline-block;">${vo.buy_date}</div><br>
@@ -89,7 +81,7 @@
 					</c:if>
 					<c:if test="${vo.status eq 3}">
 						<div style="display: inline-block;">취소된 거래입니다.</div>
-						<button class="btn btn-primary buyDelete" id="buyDelete"  title="${vo.buy_history_num}" style="background-color: white; border: white;"><font style="color: red;">삭제하기</font></button>
+						<button class="btn btn-primary buyDelete" id="buyDelete"  title="${vo.buy_history_num}" style="background-color: white; border: white;"><font style="color: #5c2392;">삭제하기</font></button>
 					</c:if>		
 				</div>
 			</div>

@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>취향을 잇는 거래, 우주장터</title>
 <c:import url="./template/boot.jsp"></c:import>
 <c:import url="./template/style.jsp"></c:import>
 
@@ -182,24 +182,45 @@ a:hover { text-decoration:none !important }
 
 	<script type="text/javascript">
 		$(".carousel").carousel({interval:3000});
-  		  $(document).ready(function(){
+
+		  $(document).ready(function(){
 		    	
 		        $.ajax({
 		            type : "GET", //전송방식을 지정한다 (POST,GET)
-		            url : "product/homeProductList?curPage=1&kind=sk&search=패션잡화",//호출 URL을 설정한다. GET방식일경우 뒤에 파라티터를 붙여서 사용해도된다.
+		            url : "product/recProductList",//호출 URL을 설정한다. GET방식일경우 뒤에 파라티터를 붙여서 사용해도된다.
+		            dataType : "text",//호출한 페이지의 형식이다. xml,json,html,text등의 여러 방식을 사용할 수 있다.
+		            error : function(){
+		                alert("통신실패9");
+		            },
+		           beforeSend : function() {
+						var loadingHtml = '<div id="loading" style="z-index: 1005;position: fixed; top:50%;left:50%; text-align:center;"> ';
+						loadingHtml += '<div class="loading_box"><img src="${pageContext.request.contextPath}/resources/images/loading.gif">"</div></div>';
+						$('#rec').fadeTo("fast", 0.4).append(
+								loadingHtml);
+					},
+		            success : function(Parse_data){
+		            	$('#rec').fadeTo("slow", 1).find('#loading')
+						.remove();
+		                $("#rec").html(Parse_data); //div에 받아온 값을 넣는다.
+		            }
+		             
+		        });
+		    });
+
+
+		
+  		$(document).ready(function(){
+		    	
+		        $.ajax({
+		            type : "GET", //전송방식을 지정한다 (POST,GET)
+		            url : "product/homeProductList?kind=sk&search=패션잡화",//호출 URL을 설정한다. GET방식일경우 뒤에 파라티터를 붙여서 사용해도된다.
 		            dataType : "text",//호출한 페이지의 형식이다. xml,json,html,text등의 여러 방식을 사용할 수 있다.
 		            error : function(){
 		                alert("통신실패1");
 		            },
-		            beforeSend : function() {
-						var loadingHtml = '<div id="loading" style="z-index: 1005;position: fixed; top:50%;left:50%; text-align:center;"> ';
-						loadingHtml += '<div class="loading_box"><img src="${pageContext.request.contextPath}/resources/images/loading.gif">"</div></div>';
-						$('#c0').fadeTo("fast", 0.4).append(
-								loadingHtml);
-					},
+		           
 		            success : function(Parse_data){
-		            	$('#c0').fadeTo("slow", 1).find('#loading')
-						.remove();
+		            	
 		                $("#c0").html(Parse_data); //div에 받아온 값을 넣는다.
 		            }
 		             
@@ -310,21 +331,7 @@ a:hover { text-decoration:none !important }
 		             
 		        });
 		    }); 
-		  $(document).ready(function(){
-		    	
-		        $.ajax({
-		            type : "GET", //전송방식을 지정한다 (POST,GET)
-		            url : "product/recProductList",//호출 URL을 설정한다. GET방식일경우 뒤에 파라티터를 붙여서 사용해도된다.
-		            dataType : "text",//호출한 페이지의 형식이다. xml,json,html,text등의 여러 방식을 사용할 수 있다.
-		            error : function(){
-		                alert("통신실패9");
-		            },
-		            success : function(Parse_data){
-		                $("#rec").html(Parse_data); //div에 받아온 값을 넣는다.
-		            }
-		             
-		        });
-		    });
+
 		        
 		        $("#c0_btn").on("click",function(){
 		        var menuHeight = document.querySelector("#header_wrap").offsetHeight;
@@ -371,6 +378,8 @@ a:hover { text-decoration:none !important }
 			        var location = document.querySelector("#c8_title").offsetTop;
 			        window.scrollTo({top:location - menuHeight, behavior:'smooth'});
 			        });
+
+		        
 		        $(function() {
 			        var member = $("#memberID").val().trim();
 			        if(member != ""){

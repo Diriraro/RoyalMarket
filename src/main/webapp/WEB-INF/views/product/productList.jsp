@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -76,15 +81,13 @@
 						<li><a
 							href="${pageContext.request.contextPath}/product/productList?kind=sk&search=디지털/가전">디지털/가전</a></li>
 						<li><a
-							href="${pageContext.request.contextPath}/product/productList?kind=sk&search=생활/문구/가구/식품">생활/문구/가구/식품</a></li>
-						<li><a
-							href="${pageContext.request.contextPath}/product/productList?kind=sk&search=유아동/출산">유아동/출산</a></li>
-						<li><a
 							href="${pageContext.request.contextPath}/product/productList?kind=sk&search=스타굿즈">스타굿즈</a></li>
 						<li><a
 							href="${pageContext.request.contextPath}/product/productList?kind=sk&search=스포츠/레저">스포츠/레저</a></li>
 						<li><a
 							href="${pageContext.request.contextPath}/product/productList?kind=sk&search=뷰티/미용">뷰티/미용</a></li>
+						<li><a
+							href="${pageContext.request.contextPath}/product/productList?kind=sk&search=기타">기타</a></li>
 					</ul>
 				</div>
 
@@ -153,12 +156,13 @@
 
 							<div style="height: 80px;">
 								<div style="text-overflow: ellipsis; overflow: hidden; width: 192px; height: 40px; white-space: nowrap;">
+
 									<br> <font
 										style="font-size: 14px; font-weight: 700; margin-left: 8px;">${vo.sell_product}</font>
 								</div>
 								<div
 									style="text-align: left; line-height: 40px; margin-left: 8px;">
-									<font style="font-size: 18px; font-weight: bold;">${vo.sell_price}</font>
+									<font style="font-size: 18px; font-weight: bold;"><fmt:formatNumber> ${vo.sell_price} </fmt:formatNumber></font>
 									<font style="font-weight: bold;">원</font>
 								</div>
 							</div>

@@ -3,115 +3,166 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html>
 <style type="text/css">
-td{
-width: 220px;
-font-size: large;
-text-align: center;
-font-weight: bold;
-
+.names {
+	font-size: 17px;
+	font-weight: bold;
+	color: black;
 }
 
-.td1{
-border-bottom: 2px solid white;
-border-left: 2px solid black;
-border-right: 2px solid black;
-border-top: 2px solid black;
-
+.span2 {
+	font-weight: bold;
 }
 
-#redd{
-color: red;
+.lis2 {
+	display: none;
 }
-
 </style>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <c:import url="../template/boot.jsp"></c:import>
+<c:import url="../template/style.jsp"></c:import>
+<c:import url="../template/shopstyle.jsp"></c:import>
+
 </head>
 <body>
-<c:import url="../template/woozoo_nav.jsp"></c:import>
-<h2></h2>
-		
-		<c:import url="../template/shopmain.jsp"></c:import>
+	<c:import url="../template/woozoo_nav.jsp"></c:import>
+	<h2></h2>
 
-	<div class="container">
-		<div style="border: 1px solid black; width: 1024px; min-height: 340px; border-color: rgba(0,0,0,0.25);">
-			<!-- 각자 페이지에 하나씩 생성  -->
-			<!--버튼 감싸는 div  -->
-			<div>
-			<!-- 이동버튼  -->
-			<hr>
-			<table border="1" style="height: 80px; border-color: rgba(0,0,0,0.25);">
-				<tr>
-				<td bgcolor="#f2f2f2" ><a href="./myshop?mem_storeNum=${mem_storeNum}">상품&nbsp;&nbsp;   ${prodco}</a></td>
-				<td bgcolor="#f2f2f2"><a href="./comments?mem_storeNum=${mem_storeNum}">상점문의 &nbsp;&nbsp;${coco}</a></td>
-				<c:if test="${msnum eq mem_storeNum }">
-				<td bgcolor="#f2f2f2">
-					<a href="./favorites?mem_storeNum=${mem_storeNum}">찜&nbsp;&nbsp; ${zico}</a>
-				</td>
-				</c:if>
-				<td bgcolor="#f2f2f2"><a href="./reviews?mem_storeNum=${mem_storeNum}">상점후기&nbsp;&nbsp;  ${reco }</a></td>
-				<td bgcolor="#f2f2f2"><a href="./followings?mem_storeNum=${mem_storeNum}">팔로잉&nbsp;&nbsp;  ${giveco}</a></td>
-				<td class="td1"><a href="./followers?mem_storeNum=${mem_storeNum}">팔로워 &nbsp;&nbsp;  ${takeco} </a></td>
-				</tr>
-			
-			</table>
-			<!--  -->
-			</div>
+	<c:import url="../template/shopmain.jsp"></c:import>
+	<c:if test="${mdata.mem_access ne 1}">
 
-				<div>  <!-- 내용보여줄 div -->
-				<h2>팔로워&nbsp;<a id="redd">${takeco}</a></h2>
-				<hr>
-				
-				<div style="border: 0px solid red; min-height: 340px; overflow: auto;" >
-					<c:forEach items="${owelist}" var="vo">
-							<%--<td>${vo.follow_Num}</td> --%>
-							<%-- <td>${vo.give_storeNum}</td> --%>
-							<%-- <td>${vo.take_storeNum}</td> --%>
-						
-					
-					<div style="width: 200px; height: 320px; border: 1px solid gray; float: left; margin-left: 4px; margin-bottom: 4px; overflow: auto; background-color: #f0f0f5" onclick="location.href='./myshop?mem_storeNum=${vo.give_storeNum }'">
-					
-				<%-- 	<div style="width: 198px;">
-					<img src="${pageContext.request.contextPath}/resources/images/showimage.png" alt="main" style="width: 197px; height: 190px;">
-					</div> --%>
-					
-					<div style="width: 198px; width: 130px; margin-top: 40px;  margin-left: 17%;border-radius: 70%;overflow: hidden;">
-					<!-- 카카오 이미지 확인  -->
-					<img alt="" src="${pageContext.request.contextPath}/resources/images/user11.png" style="width: 100%; height: 100%; background-color: gray;" >
-					</div>					
-					
-					
-							
-					<br>
-					<div style=" text-align: center; margin-top: 40px;" >
-						<span>상품   ${vo.pco} | 팔로워  ${vo.fco}</span><br>
-				    <a href="./myshop?mem_storeNum=${vo.give_storeNum }" class="btn btn-success" >${vo.give_storeName}</a>
-					</div>
-					
-					
-					</div>	
-									
-						
-						
-					</c:forEach>
+		<div class="container">
+			<div
+				style="border: 1px solid black; width: 1024px; min-height: 340px; border-color: rgba(0, 0, 0, 0.25);">
+				<div>
+					<hr>
+					<table border="1"
+						style="height: 80px; border-color: rgba(0, 0, 0, 0.25);">
+						<tr>
+							<td bgcolor="#f2f2f2"><a class="tds"
+								href="./myshop?mem_storeNum=${mem_storeNum}">상품&nbsp;&nbsp;
+									${prodco}</a></td>
+							<td bgcolor="#f2f2f2"><a class="tds"
+								href="./comments?mem_storeNum=${mem_storeNum}">상점문의
+									&nbsp;&nbsp;${coco}</a></td>
+							<c:if test="${msnum eq mem_storeNum }">
+								<td bgcolor="#f2f2f2"><a class="tds"
+									href="./favorites?mem_storeNum=${mem_storeNum}">찜&nbsp;&nbsp;
+										${zico}</a></td>
+							</c:if>
+							<td bgcolor="#f2f2f2"><a class="tds"
+								href="./reviews?mem_storeNum=${mem_storeNum}">상점후기&nbsp;&nbsp;
+									${reco }</a></td>
+							<td bgcolor="#f2f2f2"><a class="tds"
+								href="./followings?mem_storeNum=${mem_storeNum}">팔로잉&nbsp;&nbsp;
+									${giveco}</a></td>
+							<td class="td1"><a class="tds"
+								href="./followers?mem_storeNum=${mem_storeNum}">팔로워
+									&nbsp;&nbsp; ${takeco} </a></td>
+						</tr>
+
+					</table>
+					<!--  -->
 				</div>
+				<!-- 회원가입 안한사람은 테이블 보여주지 않음  -->
+				<c:if test="${mdata.mem_storeNum ne null}">
+					<div>
+						<h2>
+							&nbsp;&nbsp;팔로워&nbsp;<a id="redd">${takeco}</a>
+						</h2>
+						<hr>
 
+						<div
+							style="border: 0px solid red; min-height: 340px; overflow: auto;">
+							
+							<c:if test="${takeco eq 0 }">
+							<p style="color: gray;">아직 이 상점을 팔로우한 사람이 없습니다.</p>
+							</c:if>
+							
+							
+							<c:forEach items="${owelist}" var="vo">
+								<div class="fst lis2"
+									style="width: 218px; height: 320px; border: 1px solid gray; float: left; margin-left: 30px; margin-bottom: 30px; overflow: auto; border-color: rgba(0, 0, 0, 0.25); background-color: #f0f0f5">
+
+									<div
+										style="width: 198px; width: 130px; margin-top: 40px; margin-left: 21%; border-radius: 70%; overflow: hidden;"
+										onclick="location.href='./myshop?mem_storeNum=${vo.give_storeNum }'">
+										
+									<c:if test="${vo.re_rate eq 0}">
+										<img alt=""
+											src="${pageContext.request.contextPath}/resources/images/user113.jpg"
+											style="width: 100%; height: 100%;">
+										</c:if>
+										
+										<c:if test="${vo.re_rate ne 0}">
+										<img alt=""
+											src="${pageContext.request.contextPath}/resources/images/user114.jpg"
+											style="width: 100%; height: 100%;">
+										</c:if>
+											
+											
+									</div>
+									<h2></h2>
+									<div style="text-align: center;">
+
+										<c:forEach var="i" begin="1" end="${vo.re_rate}">
+											<img class="imgsh2"
+												style="cursor: pointer; width: 20px; height: 20px;" alt=""
+												src="${pageContext.request.contextPath}/resources/images/star22.png">
+										</c:forEach>
+										<c:if test="${vo.sub_star eq 1}">
+										<img class="imgsh2"
+												style="cursor: pointer; width: 20px; height: 20px;" alt=""
+												src="${pageContext.request.contextPath}/resources/images/star23.png">
+										</c:if>
+										<br> <a href="./myshop?mem_storeNum=${vo.give_storeNum }"
+											class="names">${vo.give_storeName}</a><br>
+
+									</div>
+
+									<div style="text-align: center; margin-top: 20px;">
+										<span class="span2"
+											onclick="location.href='./myshop?mem_storeNum=${vo.give_storeNum }'">상품
+											${vo.pco}</span>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;<span class="span2"
+											onclick="location.href='./followers?mem_storeNum=${vo.give_storeNum }'">팔로워
+											${vo.fco}</span><br>
+									</div>
+								</div>
+							</c:forEach>
+						</div>
+						
+						<c:if test="${takeco ne 0}">
+						<a class="btn btn-default pull-right " href="#" id="load">팔로워
+							더 보기</a>
+							</c:if>
+
+					</div>
+				</c:if>
 			</div>
 
-		</div><!-- 버튼, 내용 끝  -->
+		</div>
+	</c:if>
+	<c:import url="../template/footer.jsp"></c:import>
 
-	</div><!-- 컨테이너 끝  -->
-	
-	<div>
-		<h1>footer</h1>
-	</div>
-	
-	
+	<script type="text/javascript">
+		$(function() {
+			$(".lis2").slice(0, 4).show();
+			$("#load").click(function(e) {
+				e.preventDefault();
+				if ($(".lis2:hidden").length == 0) {
+					alert("마지막항목입니다.");
+					$("#load").hide();
+				}
+				$(".lis2:hidden").slice(0, 4).show();
+			});
+		});
+	</script>
+
+
 </body>
 </html>

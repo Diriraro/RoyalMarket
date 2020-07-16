@@ -2,12 +2,17 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
+
 <div style="width: 1045px;height: 400px;margin-left: 440px;">
 
 
 		<c:forEach items="${list}" var="vo" varStatus="i">
 				<div style="float: left; margin-left: 9px; margin-bottom: 129px;">
-					<div class="qqq" title="${vo.sell_num}" style="height: 194px; width: 194px; cursor: pointer;" 
+					<div class="qqq" style="height: 194px; width: 194px; cursor: pointer;" title="${vo.sell_num}"
 						onclick="location.href='../product/productSelect?sell_num=${vo.sell_num}'">
 
 
@@ -30,16 +35,19 @@
 							
 						<div style="width: 194px; background-color: white;border: 1px solid #e5e5e5">
 							<div style="height: 80px;">
-								<div style="text-overflow: ellipsis; overflow: hidden; width: 192px; height: 40px; white-space: nowrap;"><br>
+								<div style="width:194px; overflow:hidden;white-space:nowrap; text-overflow:ellipsis;"><br>
+
 									<font style="font-size: 14px;font-weight: 700;margin-left: 8px;">${vo.sell_product}</font>
 								</div>
 								<div style="text-align: left;; line-height: 40px;margin-left: 8px;">
-									<font style="font-size: 18px;font-weight: bold;">${vo.sell_price}</font>
+									<font style="font-size: 18px;font-weight: bold;">
+									<fmt:formatNumber> ${vo.sell_price} </fmt:formatNumber>
+									</font>
 									<font style="font-weight: bold;">원</font>
 								</div>
 							</div>
-							<div style="height: 40px; border-top: solid 1px #e4e4e4;text-align: left;line-height: 40px;
-								text-overflow: ellipsis; overflow: hidden;white-space: nowrap; width: 192px;">
+							<div style="height: 40px; border-top: solid 1px #e4e4e4;text-align: left;line-height: 40px;width:194px; overflow:hidden;white-space:nowrap; text-overflow:ellipsis;">
+
 								<img style="margin-left: 8px;width: 16px; height: 20px; margin-bottom: 3px;" alt="" 
 									src="${pageContext.request.contextPath}/resources/images/ad_logo.png">
 								<font style="font-weight: 600; font-size: 12px;color: gray;">${vo.mem_address}</font>

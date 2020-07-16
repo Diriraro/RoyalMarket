@@ -58,7 +58,7 @@ public class ProductController {
 			RedirectAttributes rd) throws Exception {
 
 		ModelAndView mv = new ModelAndView();
-
+		
 		if (bindingResult.hasErrors()) {
 			mv.setViewName("redirect:../");
 		} else {
@@ -272,7 +272,7 @@ public class ProductController {
 		ModelAndView mv = new ModelAndView();
 		int result = productService.productDelete(productVO);
 		rd.addFlashAttribute("result", result);
-		mv.setViewName("redirect:../");
+		mv.setViewName("redirect:./product/myProductList?kind=sp&mem_storeNum=1");
 		return mv;
 
 	}

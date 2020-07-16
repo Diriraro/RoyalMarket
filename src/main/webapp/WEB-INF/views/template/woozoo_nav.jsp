@@ -100,6 +100,7 @@ body {
 	background: rgb(102, 0, 102);
 	border-radius: 4px;
 	border: none;
+	font-family: "Noto Sans KR", sans-serif;
 }
 
 button {
@@ -164,6 +165,18 @@ button {
 }
 
 .kind:hover {
+	background-color: #5c2392;
+	color: white;
+}
+
+.mypage:hover {
+	background-color: #5c2392;
+	color: white;
+}
+.mypage {
+	color: #212121;
+}
+.mypage:hover {
 	background-color: #5c2392;
 	color: white;
 }
@@ -237,7 +250,7 @@ button {
 		style="border-bottom: solid 1px #e4e4e4; border-top: solid 1px #e4e4e4;">
 		<nav class="nav navbar-nav">
 			<div style="margin-top: 30px; margin-left: 430px;">
-				<a href="../"><img
+				<a href="/"><img
 					src="${pageContext.request.contextPath}/resources/images/nav_logo2.png"
 					alt="로고"></a>
 				<!-- 검색창 -->
@@ -287,11 +300,25 @@ button {
 				  <button class="btn dropdown-toggle" type="button" data-toggle="dropdown" style="width: 50px; height: 50px;margin-right: 10px;">
 					<font style="color: #2a2a2a; font-size: 13px; font-weight: 600;">내 상점</font>
 				  <span class="caret"></span></button>
-				  <ul style="width: 51px;" class="dropdown-menu"> 
-				    <li><a href="../shop/myshop?mem_storeNum=${member.mem_storeNum}">내상점</a></li>
-				    <li><a href="../payment/buy_History">구매내역</a></li>
-				    <li><a href="../payment/sell_History">판매내역</a></li>
-				    <li><a href="../payment/pointManage">나의 포인트</a></li>
+				  
+				  <ul class="dropdown-menu"> 
+				  
+				  <a href="../shop/myshop?mem_storeNum=${member.mem_storeNum}">
+				<button type="button" class="mypage" value="내상점" style="width:160px; height: 40px;outline: 0;border: 0px;border-bottom: solid 1px #e5e5e5;">
+				<font style="margin-right: 75px;">내상점</font></button></a>
+				
+				<a href="../payment/buy_History">
+				<button type="button" class="mypage" value="구매내역" style="width:160px; height: 40px;outline: 0;border: 0px;border-bottom: solid 1px #e5e5e5;">
+				<font style="margin-right: 62px;">구매내역</font></button></a>
+				
+				<a href="../payment/sell_History">
+				<button type="button" class="mypage" value="판매내역" style="width:160px; height: 40px;outline: 0;border: 0px;border-bottom: solid 1px #e5e5e5;">
+				<font style="margin-right: 62px;">판매내역</font></button></a>
+				
+				<a href="../payment/pointManage">
+				<button type="button" class="mypage" value="나의 포인트" style="width:160px; height: 40px;outline: 0;border: 0px;">
+				<font style="margin-right: 44px;">나의 포인트</font></button></a>
+
 				  </ul>
 
 
@@ -310,74 +337,63 @@ button {
 
 			</div>
 			<!-- 카테고리 드롭다운  -->
-			<div class="dropdown"
-				style="display: inline-block; margin-left: 410px; margin-top: 18px;">
-				<button class="btn btn-lg dropdown-toggle" type="button"
-					data-toggle="dropdown">
-					<span class="	glyphicon glyphicon-menu-hamburger"></span>
-				</button>
-				<ul class="dropdown-menu">
-					<div
-						style="border-bottom: solid 1px #e5e5e5; height: 40px; text-align: left; line-height: 40px;">
-						<font style="margin-left: 25px;; font-weight: 800;">전체 카테고리</font>
-					</div>
 
-					<a href="../payment/buy_History">
-						<button type="button" class="kind" value="패션잡화"
-							style="width: 280px; height: 40px; outline: 0; border: 0px;">
-							<font style="margin-right: 170px;">패션잡화</font>
-						</button>
-					</a>
+			<div class="dropdown"style="display: inline-block;margin-left: 410px;margin-top: 18px;">
+				  <button  class="btn btn-lg dropdown-toggle" type="button" data-toggle="dropdown" >
+				    <span  class="	glyphicon glyphicon-menu-hamburger"></span>
+				  </button>
+				  <ul class="dropdown-menu">
 
-					<button type="button" class="kind" value="여성의류"
-						style="width: 280px; height: 40px; outline: 0; border: 0px;">
-						<font style="margin-right: 170px;">여성의류</font>
-					</button>
+				   <div style="border-bottom: solid 1px #e5e5e5;height: 40px;text-align: left;line-height: 40px;">
+				    <font style="margin-left:25px;;font-weight: 800;">전체 카테고리</font></div>
 
-					<button type="button" class="kind" value="남성의류"
-						style="width: 280px; height: 40px; outline: 0; border: 0px;">
-						<font style="margin-right: 170px;">남성의류</font>
-					</button>
+				 
 
-					<button type="button" class="kind" value="디지털/가전"
-						style="width: 280px; height: 40px; outline: 0; border: 0px;">
-						<font style="margin-right: 152px;">디지털/가전</font>
-					</button>
+				    
+				<a href="../product/productList?kind=sk&search=패션잡화">
+				<button type="button" class="kind" value="패션잡화" style="width: 280px;height: 40px;outline: 0;border: 0px;">
+				<font style="margin-right: 170px;">패션잡화</font></button></a>
+				
+				<a href="../product/productList?kind=sk&search=여성의류">
+				<button type="button" class="kind" value="여성의류" style="width: 280px;height: 40px;outline: 0;border: 0px;">
+				<font style="margin-right: 170px;">여성의류</font></button></a>
+				
+				<a href="../product/productList?kind=sk&search=남성의류">
+				<button type="button" class="kind" value="남성의류" style="width: 280px;height: 40px;outline: 0;border: 0px;">
+				<font style="margin-right: 170px;">남성의류</font></button></a>
+				
+				<a href="../product/productList?kind=sk&search=디지털/가전">
+				<button type="button" class="kind" value="디지털/가전" style="width: 280px;height: 40px;outline: 0;border: 0px;">
+				<font style="margin-right: 152px;">디지털/가전</font></button></a>
+				
+				<a href="../product/productList?kind=sk&search=스타굿즈">
+				<button type="button" class="kind" value="스타굿즈" style="width: 280px;height: 40px;outline: 0;border: 0px;">
+				<font style="margin-right: 170px;">스타굿즈</font></button></a>
+				
+				<a href="../product/productList?kind=sk&search=스포츠/레저">
+				<button type="button" class="kind" value="스포츠/레저" style="width: 280px;height: 40px;outline: 0;border: 0px;">
+				<font style="margin-right: 152px;">스포츠/레저</font></button></a>
+				
+				<a href="../product/productList?kind=sk&search=뷰티/미용">
+				<button type="button" class="kind" value="뷰티/미용" style="width: 280px;height: 40px;outline: 0;border: 0px;">
+				<font style="margin-right: 166px;">뷰티/미용</font></button></a>
+				
+				<a href="../product/productList?kind=sk&search=기타">
+				<button type="button" class="kind" value="생활/문구/가구/식품" style="width: 280px;height: 40px;outline: 0;border: 0px;">
+				<font style="margin-right: 200px;">기타</font></button></a>
+				    
+				  </ul>
+				</div>
 
-					<button type="button" class="kind" value="생활/문구/가구/식품"
-						style="width: 280px; height: 40px; outline: 0; border: 0px;">
-						<font style="margin-right: 98px;">생활/문구/가구/식품</font>
-					</button>
-
-					<button type="button" class="kind" value="유아동/출산"
-						style="width: 280px; height: 40px; outline: 0; border: 0px;">
-						<font style="margin-right: 152px;">유아동/출산</font>
-					</button>
-
-					<button type="button" class="kind" value="스타굿즈"
-						style="width: 280px; height: 40px; outline: 0; border: 0px;">
-						<font style="margin-right: 170px;">스타굿즈</font>
-					</button>
-
-					<button type="button" class="kind" value="스포츠/레저"
-						style="width: 280px; height: 40px; outline: 0; border: 0px;">
-						<font style="margin-right: 152px;">스포츠/레저</font>
-					</button>
-
-					<button type="button" class="kind" value="뷰티/미용"
-						style="width: 280px; height: 40px; outline: 0; border: 0px;">
-						<font style="margin-right: 166px;">뷰티/미용</font>
-					</button>
-
-				</ul>
-			</div>
 		</nav>
 	</header>
 </div>
 
-<div id="recentBox">
+<div id="recentBox" style="width: 180px;">
 	<div id="recent"></div>
+	<button id="top" style="width: 160px;height: 35px;border: solid 1px #cccccc;margin-right: 110px;margin-bottom: 5px;"><b style="color: #a8a8a8;">TOP</b></button>
 </div>
+
 
 <div class="modal fade" id="myModal" role="dialog">
 	<div class="modal-dialog">
@@ -504,6 +520,7 @@ button {
 				}
 			});
 
+
 	var openWin;
 	function openChild() {
 		// window.name = "부모창 이름"; 
@@ -554,4 +571,10 @@ button {
 		var option = "width = 500, height = 500, top = 100, left = 200, location = no"
 		window.open(url, name, option);
 	}
+
+    $("#top").on("click",function(){
+        var menuHeight = document.querySelector("#header_wrap").offsetHeight;
+        var location = document.querySelector("#header_top").offsetTop;
+        window.scrollTo({top:location - menuHeight, behavior:'smooth'});
+        });
 </script>

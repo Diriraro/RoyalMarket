@@ -48,10 +48,29 @@
   		select COUNT(*) FROM store_review where mem_storeNum=#{mem_storeNum}
   </select>
   
-  <!-- recheck -->
+  <!-- 작성할수있는지 검증 recheck -->
   <select id="recheck" parameterType="Long" resultType="com.iu.s1.shop.review.StoreReviewVO">
   		select sell_num from store_review where sell_num = #{sell_num}
   </select>
+  
+   <select id="recheck2" parameterType="Long" resultType="Long">
+  		select IFNULL(count(sell_num), 0) from store_review where sell_num = #{sell_num}
+  </select>
+  
+  <!-- 팔로잉 페이지는 take_storenum으로 별점  출력 널값은 0으로 -->
+  <select id="take_rate" parameterType="Long" resultType="java.lang.Double">
+  select  IFNULL(avg(re_rate), 0) from store_review where mem_storeNum= #{take_storeNum}
+  </select>
+  
+  <!-- 팔로워 페이지는 give_storeNum으로 별점  출력 널값은 0으로 -->
+  <select id="give_rate" parameterType="Long" resultType="java.lang.Double">
+  select  IFNULL(avg(re_rate), 0) from store_review where mem_storeNum= #{give_storeNum}
+  </select>
+  
+  
+  
+  
+  
   
   
   </mapper>

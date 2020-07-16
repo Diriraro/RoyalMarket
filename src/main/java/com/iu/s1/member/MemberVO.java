@@ -9,9 +9,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.UniqueElements;
 
 import lombok.Data;
 
@@ -39,6 +42,7 @@ public class MemberVO {
 	@Column
 	@NotEmpty
 	@Email
+
 	private String mem_email;
 	
 	@Size(min = 10, max = 11)
