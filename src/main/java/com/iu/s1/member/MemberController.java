@@ -81,17 +81,21 @@ public class MemberController {
 		} else {
 			now_now = now - (long) session.getAttribute("now");
 		}
+		
+		String random =(String)session.getAttribute("numStr");
 
-		boolean result = memberService.findPwByEmail(memberVO, bindingResult, checkNum);
+		boolean result = memberService.findPwByEmail(memberVO, bindingResult, random);
 
 		if (result) {
+			session.removeAttribute("numStr");
+			session.removeAttribute("now");
 			mv.addObject("show4", result);
-			mv.setViewName("member/findMember");
 			mv.addObject("again", "again");
-			session.invalidate();
+			mv.setViewName("member/findMember");
 
 		} else if (now_now > 300000) {
-
+			session.removeAttribute("numStr");
+			session.removeAttribute("now");
 			mv.addObject("result", "인증번호 유효기간이 지났습니다.");
 			mv.addObject("path", "./findMember");
 
@@ -99,6 +103,8 @@ public class MemberController {
 		} else {
 			int result2 = memberService.memberPwUpdate(memberVO);
 			if (result2 > 0) {
+				session.removeAttribute("numStr");
+				session.removeAttribute("now");
 				mv.addObject("result", "비밀번호가 변경되었습니다. 다시 로그인 해주세요");
 				mv.addObject("path", "../");
 				mv.addObject("close", 1);
@@ -123,16 +129,21 @@ public class MemberController {
 		} else {
 			now_now = now - (long) session.getAttribute("now");
 		}
-
-		boolean result = memberService.findPwByPhone(memberVO, bindingResult, checkNum);
+		
+		String random = (String)session.getAttribute("numStr");
+		boolean result = memberService.findPwByPhone(memberVO, bindingResult, random);
 
 		if (result) {
 			// model.addAttribute("result","인증번호를 다시 확인해주세요");
-			mv.setViewName("member/findMember");
+			session.removeAttribute("numStr");
+			session.removeAttribute("now");
 			mv.addObject("show3", result);
 			mv.addObject("again", "again");
-			session.invalidate();
+			mv.setViewName("member/findMember");
+			
 		} else if (now_now > 300000) {
+			session.removeAttribute("numStr");
+			session.removeAttribute("now");
 			mv.addObject("result", "인증번호 유효기간이 지났습니다.");
 			mv.addObject("path", "./findMember");
 
@@ -141,6 +152,8 @@ public class MemberController {
 			int result2 = memberService.memberPwUpdate(memberVO);
 			if (result2 > 0) {
 				// model.addAttribute("result","비밀번호가 성공적으로 변경되었습니다.");
+				session.removeAttribute("numStr");
+				session.removeAttribute("now");
 				mv.addObject("result", "비밀번호가 변경되었습니다. 다시 로그인 해주세요");
 				mv.addObject("path", "../");
 				mv.addObject("close", 1);
@@ -159,7 +172,8 @@ public class MemberController {
 
 		Calendar cal = Calendar.getInstance();
 		long now = cal.getTimeInMillis();
-		
+		String random = (String)session.getAttribute("numStr");
+	
 		long now_now;
 
 		if (session.getAttribute("now") == null) {
@@ -167,18 +181,25 @@ public class MemberController {
 		} else {
 			now_now = now - (long) session.getAttribute("now");
 		}
-
-		boolean result = memberService.memberCheck(memberVO, bindingResult, checkNum);
+		
+		boolean result = memberService.memberCheck(memberVO, bindingResult, random);
+		System.out.println("DDDDDD"+session.getAttribute("now"));
+		System.out.println("DDDDDD"+session.getAttribute("numStr"));
 
 		if (result) {
-			mv.addObject("again", "again");
+			session.removeAttribute("numStr");
+			session.removeAttribute("now");
+			mv.addObject("wrong","wrong");
 			mv.setViewName("member/memberJoin");
-			session.invalidate();
 		} else if (now_now > 300000) {
+			session.removeAttribute("numStr");
+			session.removeAttribute("now");
 			mv.addObject("result", "인증번호 유효기간이 지났습니다.");
 			mv.addObject("path", "./memberJoin");
 			mv.setViewName("common/result");
 		} else {
+			session.removeAttribute("numStr");
+			session.removeAttribute("now");
 			// 정상작동
 			int result2 = memberService.memberJoin(memberVO);
 			if (result2 > 0) {
@@ -188,7 +209,6 @@ public class MemberController {
 			}
 			session.invalidate();
 		}
-
 		return mv;
 	}
 
@@ -198,8 +218,6 @@ public class MemberController {
 		mv.addObject("memberVO", new MemberVO());
 		mv.setViewName("member/memberJoin");
 
-		session.setAttribute("numStr", "");
-		session.setAttribute("now", 0L);
 
 		return mv;
 	}
@@ -311,6 +329,7 @@ public class MemberController {
 
 				session.setAttribute("numStr", numStr);
 				session.setAttribute("now", now);
+				
 
 				System.out.println("수신자 번호 : " + phoneNumber);
 				System.out.println("인증번호 : " + numStr);
@@ -449,6 +468,7 @@ public class MemberController {
 					PASSWORD += ran;
 				}
 				System.out.println(PASSWORD);
+				
 				checkNum = PASSWORD;
 
 				Calendar nowCal = Calendar.getInstance();
@@ -616,6 +636,15 @@ public class MemberController {
 				email = cookies[i].getValue();
 			}
 		}
+		
+		Calendar cal = Calendar.getInstance();
+		long now = cal.getTimeInMillis();
+		long now_now;
+		if (session.getAttribute("now") == null) {
+			now_now = 400000L;
+		} else {
+			now_now = now - (long) session.getAttribute("now");
+		}
 
 		memberVO.setMem_name(name);
 		memberVO.setMem_id(email);
@@ -624,12 +653,24 @@ public class MemberController {
 		memberVO.setMem_kakao(1);
 
 		ModelAndView mv = new ModelAndView();
-		boolean result = memberService.kakaoMemberCheck(memberVO, bindingResult, checkNum);
+		String random = (String)session.getAttribute("numStr");
+		boolean result = memberService.kakaoMemberCheck(memberVO, bindingResult, random);
 		System.out.println(result);
 		if (result) {
+			session.removeAttribute("numStr");
+			session.removeAttribute("now");
+			mv.addObject("again", "again");
 			mv.setViewName("member/kakaoMemberJoin");
-		} else {
+		}else if (now_now > 300000) {
+			session.removeAttribute("numStr");
+			session.removeAttribute("now");
+			mv.addObject("result", "인증번호 유효기간이 지났습니다.");
+			mv.addObject("path", "./kakaoMemberJoin");
+			mv.setViewName("common/result");
+		}else {
 			// 정상작동
+			session.removeAttribute("numStr");
+			session.removeAttribute("now");
 			int result2 = memberService.memberJoin(memberVO);
 			if (result2 > 0) {
 				mv.addObject("result", "회원가입 성공");
@@ -742,26 +783,36 @@ public class MemberController {
 		long now = cal.getTimeInMillis();
 		long now_now;
 		if(session.getAttribute("now")==null) {
-			now_now = 0L;
+			now_now = 400000L;
 		}else {
 			now_now = now - (long) session.getAttribute("now");
 		}
+		
 	
 		memberVO.setMem_address(memberVO.getRoad_address() + " " + memberVO.getDetail_address());
+		String random = (String)session.getAttribute("numStr");
+		
+		
 
-		boolean result = memberService.memberUpdateCheck(memberVO, bindingResult, checkNum);
-		System.out.println(result);
+		boolean result = memberService.memberUpdateCheck(memberVO, bindingResult, random);
 
 		if (result) {
+			mv.addObject("again", "again");
+			session.removeAttribute("numStr");
+			session.removeAttribute("now");
 			mv.setViewName("member/memberUpdatePage");
 		} else if (now_now > 300000) {
-			mv.addObject("result", "인증번호 유효기간이 지났습니다.");
+			session.removeAttribute("numStr");
+			session.removeAttribute("now");
+			mv.addObject("result", "인증번호 유효기간이 지났습니다. 인증번호를 재발급해주세요");
 			mv.addObject("path", "./memberUpdatePage");
 			mv.setViewName("common/result");
 		} else {
 			// 정상작동
 			int result2 = memberService.memberUpdate(memberVO);
 			if (result2 > 0) {
+				session.removeAttribute("numStr");
+				session.removeAttribute("now");
 				mv.addObject("result", "회원정보가 수정되었습니다");
 				mv.addObject("path", "../");
 				mv.setViewName("common/result");
@@ -787,27 +838,35 @@ public class MemberController {
 		long now = cal.getTimeInMillis();
 		long now_now;
 		if (session.getAttribute("now") == null) {
-			now_now = 0L;
+			now_now = 400000L;
 		} else {
 			now_now = now - (long) session.getAttribute("now");
 		}
+	
 		
-
+		String random = (String)session.getAttribute("numStr");
 		memberVO.setMem_address(memberVO.getRoad_address() + " " + memberVO.getDetail_address());
 
-		boolean result = memberService.kakaoMemberUpdateCheck(memberVO, bindingResult, checkNum);
+		boolean result = memberService.kakaoMemberUpdateCheck(memberVO, bindingResult, random);
 		System.out.println(result);
 
 		if (result) {
+			mv.addObject("again", "again");
+			session.removeAttribute("numStr");
+			session.removeAttribute("now");
 			mv.setViewName("member/kakaoMemberUpdate");
 		} else if (now_now > 300000) {
-			mv.addObject("result", "인증번호 유효기간이 지났습니다.");
+			session.removeAttribute("numStr");
+			session.removeAttribute("now");
+			mv.addObject("result", "인증번호 유효기간이 지났습니다. 인증번호를 재발급해주세요");
 			mv.addObject("path", "./kakaoMemberUpdate");
 			mv.setViewName("common/result");
 		} else {
 			// 정상작동
 			int result2 = memberService.memberUpdate(memberVO);
 			if (result2 > 0) {
+				session.removeAttribute("numStr");
+				session.removeAttribute("now");
 				mv.addObject("result", "회원정보가 수정되었습니다");
 				mv.addObject("path", "../");
 				mv.setViewName("common/result");

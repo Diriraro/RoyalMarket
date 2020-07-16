@@ -56,7 +56,7 @@ public class ProductService {
 	public int productInsert(ProductVO productVO, MultipartFile[] files) throws Exception {
 
 		File file = filePathGenerator.getUseClassPathResource(filePath);
-		System.out.println("path!!!!!!!!!!!!!!"+file);
+
 		int result = productMapper.productInsert(productVO);
 
 		for (MultipartFile multipartFile : files) {
