@@ -156,6 +156,7 @@
 
 							<div style="height: 80px;">
 								<div style="text-overflow: ellipsis; overflow: hidden; width: 192px; height: 40px; white-space: nowrap;">
+
 									<br> <font
 										style="font-size: 14px; font-weight: 700; margin-left: 8px;">${vo.sell_product}</font>
 								</div>

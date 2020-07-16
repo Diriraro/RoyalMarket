@@ -36,6 +36,7 @@
 						<div style="width: 194px; background-color: white;border: 1px solid #e5e5e5">
 							<div style="height: 80px;">
 								<div style="width:194px; overflow:hidden;white-space:nowrap; text-overflow:ellipsis;"><br>
+
 									<font style="font-size: 14px;font-weight: 700;margin-left: 8px;">${vo.sell_product}</font>
 								</div>
 								<div style="text-align: left;; line-height: 40px;margin-left: 8px;">
@@ -46,6 +47,7 @@
 								</div>
 							</div>
 							<div style="height: 40px; border-top: solid 1px #e4e4e4;text-align: left;line-height: 40px;width:194px; overflow:hidden;white-space:nowrap; text-overflow:ellipsis;">
+
 								<img style="margin-left: 8px;width: 16px; height: 20px; margin-bottom: 3px;" alt="" 
 									src="${pageContext.request.contextPath}/resources/images/ad_logo.png">
 								<font style="font-weight: 600; font-size: 12px;color: gray;">${vo.mem_address}</font>

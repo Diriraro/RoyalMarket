@@ -337,6 +337,7 @@ button {
 
 			</div>
 			<!-- 카테고리 드롭다운  -->
+
 			<div class="dropdown"style="display: inline-block;margin-left: 410px;margin-top: 18px;">
 				  <button  class="btn btn-lg dropdown-toggle" type="button" data-toggle="dropdown" >
 				    <span  class="	glyphicon glyphicon-menu-hamburger"></span>
@@ -518,6 +519,7 @@ button {
 				fail : function(err) {
 				}
 			});
+
 
 	var openWin;
 	function openChild() {

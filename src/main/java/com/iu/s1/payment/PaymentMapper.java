@@ -67,7 +67,7 @@ public interface PaymentMapper {
 	
 	public int del_sellHistory(long trading_num)throws Exception;
 	
-	public int product_sell_statusUp(long sell_num)throws Exception;
+	public int product_sell_statusUp(ProductVO productVO)throws Exception;
 	
 	public int paycheckInsert(PayCheckVO payCheckVO)throws Exception;
 	
@@ -96,4 +96,10 @@ public interface PaymentMapper {
 	public int product_cancel_status(long sell_num)throws Exception;
 	
 	public long auto_incrementNum ()throws Exception;
+	
+	public long paymentCount(Pager pager)throws Exception;
+	
+	public List<PayVO> paymentList(Pager pager)throws Exception;
+	
+	public PayVO paymentHistory(long trading_num)throws Exception;
 }

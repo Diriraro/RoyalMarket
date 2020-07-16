@@ -161,8 +161,8 @@
  	</delete>
  	
  	<!-- 거래를 시작 할때 예약중으로 바꾸기 -->
- 	<update id="product_sell_statusUp" parameterType="java.lang.Long">
- 		update store_product set sell_status=1 where sell_num=#{sell_num};
+ 	<update id="product_sell_statusUp" parameterType="com.iu.s1.product.ProductVO">
+ 		update store_product set sell_status=#{sell_status} where sell_num=#{sell_num};
  	</update>
  	
  	<!-- paycheckId 생성 -->
@@ -229,4 +229,21 @@
 		WHERE table_name = 'trading'
 		AND table_schema = DATABASE( ) 
   	</select>
+  	  	
+  	<!-- payment Pager 시작 -->
+  	<select id="paymentCount" parameterType="Pager"
+		resultType="java.lang.Long">
+		select count(mem_id) from payment where mem_id = #{search}
+	</select>
+
+	<select id="paymentList" parameterType="Pager"
+		resultType="com.iu.s1.payment.PayVO">
+		select * from payment where mem_id=#{search} order by pay_num desc limit #{startRow},10 
+	</select>
+	<!-- payment Pager 끝 -->
+  	<select id="paymentHistory" parameterType="Long" resultType="com.iu.s1.payment.PayVO">
+  		SELECT * FROM payment WHERE buy_history_num=#{buy_history_num} 
+  	</select>
+
+  	
  </mapper>

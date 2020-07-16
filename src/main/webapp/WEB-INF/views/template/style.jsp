@@ -163,36 +163,6 @@ a.blog span {
 .guide p {
   padding: 0;
 }
-
- 
- .img{
-        position: relative;
-        background-image: url('${pageContext.request.contextPath}/upload/product/${file[i.index]}');                                                               
-        height: 194px;
-        width: 194px;
-        background-size: cover;
-    }
-
-    .img-cover{
-       position: absolute;
-       height: 100%;
-       width: 100%;
-       background-color: rgba(0, 0, 0, 0.7);                                                                 
-       z-index:1;
-    }
-
-    .img .content{
-         position: absolute;
-         top:50%;
-         left:50%;
-         transform: translate(-50%, -50%);                                                                   
-         font-size:1rem;
-         color: white;
-         z-index: 2;
-         text-align: center;
-    }
-	
-
 	
 </style>
     

@@ -70,8 +70,8 @@
 				</c:if>
 				
 				<div style="height: 100px; display: inline-block; margin-left: 10px;">
-					<div style="display: inline-block;"><font style="font-size: large;"><a href="./seller_page?sell_num=${vo.sell_num}&sell_history_num=${vo.sell_history_num}">${vo.sell_product}</a></font></div><br>
-					<div style="display: inline-block;"><font style="font-size: large;"><b>${vo.sell_price-2500} 원</b></font></div><br>
+					<div style="display: inline-block;"><font style="font-size: large;"><a href="./seller_page?sell_num=${vo.sell_num}&sell_history_num=${vo.sell_history_num}&buyer_id=${vo.buyer_id}">${vo.sell_product}</a></font></div><br>
+					<div style="display: inline-block;"><font style="font-size: large;"><b>${vo.sell_price} 원</b></font></div><br>
 					<div style="display: inline-block;">${vo.buyer_id}</div><br>
 					<div style="display: inline-block;">${vo.sell_date}</div><br>
 					<c:if test="${vo.status eq 0}">

@@ -162,7 +162,7 @@
 	
 	<!--shop에서 쓸꺼  -->
 	<select id="myList" parameterType="Long" resultType="ProductVO">
-	select * from store_product where mem_storeNum = #{mem_storeNum}
+	select * from store_product where mem_storeNum = #{mem_storeNum} order by sell_num desc;
 	
 	</select>
 	
@@ -185,7 +185,10 @@
 	<select id="getmem_storeNum" parameterType="com.iu.s1.product.zzim.ZzimVO" resultType="Long">
 		select mem_storeNum from store_product where sell_num = #{sell_num}  
 	</select>
-	
+	<!-- myselco shop에서 보여줄 상품판매 갯수  -->
+	<select id="myselco" parameterType="Long" resultType="Long">
+		select count(*) from store_product where mem_storeNum = #{mem_storeNum} and sell_status = 2
+	</select>
 
 
 	<delete id="productDelete" parameterType="ProductVO">
