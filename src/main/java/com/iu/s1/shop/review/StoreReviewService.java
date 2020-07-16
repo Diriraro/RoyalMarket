@@ -108,6 +108,12 @@ public class StoreReviewService {
 		
 	}
 	
+	// recheck2
+	public long recheck2(long sell_num) throws Exception{
+		return storeReviewRepository.recheck2(sell_num);
+		
+	}
+	
 	//take_rate
 	public double take_rate(long take_storeNum)throws Exception {
 		return storeReviewRepository.take_rate(take_storeNum);

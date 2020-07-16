@@ -22,7 +22,7 @@
 	height: 100%;
 	width: 100%;
 	background-color: rgba(0, 0, 0, 0.7);
-	z-index: 1;
+	z-index: 0;
 }
 
 .img .content {
@@ -32,7 +32,7 @@
 	transform: translate(-50%, -50%);
 	font-size: 1rem;
 	color: white;
-	z-index: 2;
+	z-index: 0;
 	text-align: center;
 }
 

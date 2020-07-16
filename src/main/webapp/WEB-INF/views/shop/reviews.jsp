@@ -82,7 +82,7 @@
 							<div class="lis2"
 								style="border-top: 1px solid gray; min-height: 150px; overflow: auto; background-color: #f0f0f5">
 
-								<div style="float: left; width: 80px; height: 250px;">
+								<div style="float: left; width: 80px; height: 383px;">
 									<img alt=""
 										src="${pageContext.request.contextPath}/resources/images/user11.png"
 										width="80px;">
@@ -112,12 +112,11 @@
 									<button class="btn-default go" title="${vo.sell_num }">${vo.sell_product}</button>
 								</div>
 								<hr>
-								<div>
-									<p style="font-size: large;">${vo.re_context}</p>
-								</div>
-
+								
+									<textarea  style="font-size: large;background-color: #f0f0f5; border-color: #f0f0f5; width:940px;
+									resize: none;"disabled="disabled">${vo.re_context}</textarea>
+			
 								<c:forEach items="${pfile}" var="pfile" varStatus="status">
-
 									<c:if test="${vo.re_num eq pfile.re_num}">
 										<div
 											style="width: 150px; width: 150px; margin-top: 40px; border-radius: 20%; overflow: hidden;">
@@ -129,8 +128,8 @@
 									</c:if>
 								</c:forEach>
 
-
 								<c:if test="${msnum eq vo.re_storeNum}">
+								
 									<a
 										href="./setDeleteReview?re_num=${vo.re_num}&mem_storeNum=${vo.mem_storeNum}"
 										class="btn pull-right btn-default btn-sm"><span

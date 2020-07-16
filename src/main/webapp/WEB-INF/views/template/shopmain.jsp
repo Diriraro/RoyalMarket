@@ -96,10 +96,10 @@ filter: drop-shadow(5px 5px 5px #000);
 				<span style="font-size: 17px;" class="days" title="${getregDate}">
 				<img class="imgsh2" alt="" src="${pageContext.request.contextPath}/resources/images/shopopen.png" width="19px;" height="19px;">
 				&nbsp;상점오픈일 : <span class="ddays"></span>&nbsp;&nbsp;&nbsp;&nbsp;
+				 </span>
 				<img class="imgsh2" alt="" src="${pageContext.request.contextPath}/resources/images/shopsell.png" width="19px;" height="19px;">
 				&nbsp;상품판매 : ${myselco} 회
 				 <!-- store_product sell_status = 2인것  -->
-				 </span>
 			</div>			
 			<hr>
 			</div>
@@ -165,12 +165,10 @@ filter: drop-shadow(5px 5px 5px #000);
 				</c:if>
 					</div>
 				
-				
-				
 				<!-- 팔로우가 아니면 팔로우버튼 출력 -->
 				<c:if test="${mdata.mem_access eq 0}">
 				
-				<div style=" height: 100px; margin-top: 60px; text-align: center;">
+				<div style=" height: 100px; margin-top: 30px; text-align: center;">
 				
 				<c:if test="${fonum.follow_Num eq null}">
 				<div>

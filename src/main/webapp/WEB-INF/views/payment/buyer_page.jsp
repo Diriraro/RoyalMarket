@@ -11,14 +11,7 @@
 <c:import url="../template/style.jsp"></c:import>
 </head>
 <body>
-	<c:if test="${recheck ne null }">
-		<button> 이미 작성함.</button>
-	</c:if>
 	
-	<c:if test="${recheck eq null }">
-		<button> 작성가능</button>
-	</c:if>
-
 	<c:import url="../template/woozoo_nav.jsp"></c:import>
 	<div class="container"> 
 		<h2><b>주문 상세정보</b></h2>
