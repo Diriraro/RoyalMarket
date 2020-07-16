@@ -389,13 +389,15 @@ public class ShopController {
 				long prodco = productService.prodco(mem_storeNum);
 				long zico = productService.zico(mem_storeNum);
 				long coco = storeQnaService.coco(mem_storeNum);
+				long myselco = productService.myselco(mem_storeNum);
 				
-				mv.addObject("coco",coco);
-				mv.addObject("reco",reco);
-				mv.addObject("giveco",giveco);
+				mv.addObject("coco",coco); // comment count
+				mv.addObject("reco",reco); // review count
+				mv.addObject("giveco",giveco); 
 				mv.addObject("takeco",takeco);
-				mv.addObject("prodco",prodco);
-				mv.addObject("zico",zico);
+				mv.addObject("prodco",prodco); // product count
+				mv.addObject("zico",zico); //zzim count
+				mv.addObject("myselco",myselco); // my sell product count
 		
 		return mv;
 	}
@@ -466,5 +468,9 @@ public class ShopController {
 			
 		return mv;
 	}
+	
+
+	
+	
 
 }

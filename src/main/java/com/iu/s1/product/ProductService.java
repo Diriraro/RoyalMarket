@@ -165,6 +165,10 @@ public class ProductService {
 	public long getmem_storeNum(ZzimVO zzimVO) throws Exception{
 		return productMapper.getmem_storeNum(zzimVO);
 	}
+	//shop 에서 쓸 myselco
+	public long myselco(long mem_storeNum) throws Exception{
+		return productMapper.myselco(mem_storeNum);
+	}
 	
 	
 	

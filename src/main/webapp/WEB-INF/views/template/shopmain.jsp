@@ -93,7 +93,13 @@ filter: drop-shadow(5px 5px 5px #000);
 			<div style="border: 1px solid white; height: 80px; margin-bottom: 1px; margin-top: 2px;">
 
 			<div style="margin-top: 3%;">
-				<span style="font-size: 17px;"><img class="imgsh2" alt="" src="${pageContext.request.contextPath}/resources/images/date_logo.png" width="19px;" height="19px;">&nbsp;가입일: ${getregDate} </span>
+				<span style="font-size: 17px;" class="days" title="${getregDate}">
+				<img class="imgsh2" alt="" src="${pageContext.request.contextPath}/resources/images/shopopen.png" width="19px;" height="19px;">
+				&nbsp;상점오픈일 : <span class="ddays"></span>&nbsp;&nbsp;&nbsp;&nbsp;
+				<img class="imgsh2" alt="" src="${pageContext.request.contextPath}/resources/images/shopsell.png" width="19px;" height="19px;">
+				&nbsp;상품판매 : ${myselco} 회
+				 <!-- store_product sell_status = 2인것  -->
+				 </span>
 			</div>			
 			<hr>
 			</div>
@@ -214,11 +220,12 @@ filter: drop-shadow(5px 5px 5px #000);
 
 			<div style="border: 1px solid white; height: 80px; margin-bottom: 1px; margin-top: 2px;">
 			<div style="margin-top: 3%;">
-				<span style="font-size: 17px;"><img class="imgsh2" alt="" src="${pageContext.request.contextPath}/resources/images/date_logo.png" width="19px;" height="19px;"> ${getregDate}
-				
-			<c:if test="${mdata.mem_storeNum eq null}">
-				<span>Nan</span>
-			</c:if>
+				<span style="font-size: 17px;" class="days" title="${getregDate}">
+				<img class="imgsh2" alt="" src="${pageContext.request.contextPath}/resources/images/shopopen.png" width="19px;" height="19px;">
+				 &nbsp;상점오픈일 : <span class="ddays"></span>&nbsp;&nbsp;&nbsp;&nbsp;
+				 <img class="imgsh2" alt="" src="${pageContext.request.contextPath}/resources/images/shopsell.png" width="19px;" height="19px;">
+				 &nbsp;상품판매 : ${myselco} 회
+				 
 				
 				 </span>
 			</div>	
@@ -244,7 +251,7 @@ filter: drop-shadow(5px 5px 5px #000);
 			</c:if>
 			<hr>
 			</div>
-			<div style="border: 1px solid white; height: 80px; margin-bottom: 1px; margin-top: 2px; overflow: auto;">
+			<div style="border: 1px solid white; height: 80px; margin-bottom: 1px; margin-top: 2px;">
 			<c:if test="${mdata.mem_access eq 0}">
 			<div style="margin-top: 3%;">
 			<span style="font-size: 22px;">
@@ -295,9 +302,34 @@ var num = $(this).attr("title");
 });
 
 
+/* 날짜 계산  */
+var days = $(".days").attr("title");
+var date = new Date(); 
+var year = date.getFullYear(); 
+var month = new String(date.getMonth()+1); 
+var day = new String(date.getDate()); 
+
+// 한자리수일 경우 0을 채워준다. 
+if(month.length == 1){ 
+  month = "0" + month; 
+} 
+if(day.length == 1){ 
+  day = "0" + day; 
+} 
 
 
+var tod = year + "-" + month + "-" + day;
+console.log(days);
+console.log(tod);
 
+var nal = new Date(tod) - new Date(days);
+console.log(nal);
 
+var cho = 24 * 60 * 60 * 1000;
+console.log(parseInt(nal / cho)+"일");
+
+$(".ddays").text(parseInt(nal / cho)+"일 전");
+
+// 날짜계산
 
 </script>
