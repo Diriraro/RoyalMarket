@@ -4,12 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.security.auth.message.callback.PrivateKeyCallback.Request;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import org.apache.commons.lang.ArrayUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,10 +39,10 @@ public class ProductController {
 
 	@Autowired
 	private ProductService productService;
-	
+
 	@Autowired
 	private StoreQnaService storeQnaService;
-	
+
 	@Autowired
 	private StoreFollowService storeFollowService;
 
@@ -48,7 +52,7 @@ public class ProductController {
 		mv.addObject("productVO", new ProductVO());
 		return mv;
 	}
-
+	 
 	@PostMapping("productNew")
 	public ModelAndView productInsert(@Valid ProductVO productVO, BindingResult bindingResult, MultipartFile[] files,
 			RedirectAttributes rd) throws Exception {
@@ -85,6 +89,7 @@ public class ProductController {
 
 		}
 		
+
 		mv.addObject("file", ar2);
 
 		mv.addObject("pager", pager);
@@ -93,6 +98,54 @@ public class ProductController {
 		return mv;
 	}
 	
+	@GetMapping("recProductList")
+	public ModelAndView recProductList(ProductVO productVO, Pager pager) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		List<ProductVO> ar = productService.recProductList(pager);
+		mv.addObject("list", ar);
+
+		List<String> ar2 = new ArrayList<String>();
+		int index = 0;
+		for (ProductVO productVOs : ar) {
+			long sell_num = productVOs.getSell_num();
+			ar2.add(productService.selectFileName(sell_num));
+			productVOs.setMem_address(productService.productAddress(sell_num).getMem_address());
+			index++;
+
+		}
+		
+		mv.addObject("file", ar2);
+
+		mv.addObject("pager", pager);
+		mv.setViewName("product/recProductList");
+
+		return mv;
+	}
+	
+	@GetMapping("homeProductList")
+	public ModelAndView homeProductList(ProductVO productVO, Pager pager) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		List<ProductVO> ar = productService.homeProductList(pager);
+		mv.addObject("list", ar);
+
+		List<String> ar2 = new ArrayList<String>();
+		int index = 0;
+		for (ProductVO productVOs : ar) {
+			long sell_num = productVOs.getSell_num();
+			ar2.add(productService.selectFileName(sell_num));
+			productVOs.setMem_address(productService.productAddress(sell_num).getMem_address());
+			index++;
+
+		}
+		
+		mv.addObject("file", ar2);
+
+		mv.addObject("pager", pager);
+		mv.setViewName("product/homeProductList");
+
+		return mv;
+	}
+
 	@GetMapping("myProductList")
 	public ModelAndView myProductList(ProductVO productVO, Pager pager) throws Exception {
 		ModelAndView mv = new ModelAndView();
@@ -108,7 +161,7 @@ public class ProductController {
 			index++;
 
 		}
-		
+
 		mv.addObject("myfile", ar2);
 
 		mv.addObject("pager", pager);
@@ -118,7 +171,7 @@ public class ProductController {
 	}
 
 	@GetMapping("productSelect")
-	public ModelAndView productSelect(long sell_num,HttpSession session) throws Exception {
+	public ModelAndView productSelect(long sell_num, HttpSession session) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		ProductVO productVO = productService.productSelect(sell_num);
 		mv.addObject("vo", productVO);
@@ -127,36 +180,34 @@ public class ProductController {
 		MemberVO memberVO = productService.productAddress(sell_num);
 		mv.addObject("mvo", memberVO);
 		mv.setViewName("product/productSelect");
-		
+
 		sell_num = productVO.getSell_num();
 		MemberVO memberVOs = productService.productStoreName(sell_num);
 		mv.addObject("mvo2", memberVOs);
 		mv.setViewName("product/productSelect");
-		
+
 		List<ProductQnaVO> ar = productService.qnaList2(sell_num);
 		mv.addObject("qnalist", ar);
-		
 
-		long msnum = ((MemberVO)session.getAttribute("member")).getMem_storeNum();
+		long msnum = ((MemberVO) session.getAttribute("member")).getMem_storeNum();
 
 		/// 팔로우영역
-		long give_storeNum=msnum;
-		long take_storeNum=productVO.getMem_storeNum();
-		
+		long give_storeNum = msnum;
+		long take_storeNum = productVO.getMem_storeNum();
+
 		StoreFollowVO storeFollowVO = new StoreFollowVO();
-		storeFollowVO = storeFollowService.selectnum(give_storeNum,take_storeNum);
-		//System.out.println(storeFollowVO+"::::::: 팔로우 번호 확인  없으면 널 있으면 번호생성");
-		
-		mv.addObject("fonum",storeFollowVO); // 팔로우번호 있으면 전송 없으면 null
-	
-		
+		storeFollowVO = storeFollowService.selectnum(give_storeNum, take_storeNum);
+		// System.out.println(storeFollowVO+"::::::: 팔로우 번호 확인 없으면 널 있으면 번호생성");
+
+		mv.addObject("fonum", storeFollowVO); // 팔로우번호 있으면 전송 없으면 null
+
 		List<ProductFileVO> productFileVOs = productService.productFileSelect(sell_num);
 		mv.addObject("pfile", productFileVOs); // store 사진 출력
-		
-		long mem_storeNum = ((MemberVO)session.getAttribute("member")).getMem_storeNum();
-		ZzimVO zzimVO = productService.zzimCheck(mem_storeNum,sell_num);
+
+		long mem_storeNum = ((MemberVO) session.getAttribute("member")).getMem_storeNum();
+		ZzimVO zzimVO = productService.zzimCheck(mem_storeNum, sell_num);
 		mv.addObject("zc", zzimVO);
-		
+
 		long zcount = productService.zzimCount(sell_num);
 		mv.addObject("zcount", zcount);
 
@@ -201,28 +252,31 @@ public class ProductController {
 		mv.setViewName("redirect:./productSelect?sell_num=" + productVO.getSell_num());
 		return mv;
 	}
-	
+
 	@GetMapping("zzimDelete")
-	public ModelAndView zzimDelete(ZzimVO zzimVO, ProductVO productVO,RedirectAttributes rd,HttpServletRequest request) throws Exception{
+	public ModelAndView zzimDelete(ZzimVO zzimVO, ProductVO productVO, RedirectAttributes rd,
+			HttpServletRequest request) throws Exception {
 		ModelAndView mv = new ModelAndView();
 		int result = productService.zzimDelete(zzimVO);
 		String old_url = request.getHeader("referer");
 		System.out.println(old_url);
 		rd.addFlashAttribute("result", result);
-		mv.setViewName("redirect:"+old_url);
+		mv.setViewName("redirect:" + old_url);
 		return mv;
-		
+
 	}
-	
+
 	@GetMapping("productDelete")
-	public ModelAndView productDelete(ProductVO productVO,RedirectAttributes rd,HttpServletRequest request) throws Exception{
+	public ModelAndView productDelete(ProductVO productVO, RedirectAttributes rd, HttpServletRequest request)
+			throws Exception {
 		ModelAndView mv = new ModelAndView();
 		int result = productService.productDelete(productVO);
 		rd.addFlashAttribute("result", result);
 		mv.setViewName("redirect:../");
 		return mv;
-		
+
 	}
+
 
 	//예외 처리 메서드
 	@ExceptionHandler(NullPointerException.class)
@@ -234,5 +288,39 @@ public class ProductController {
 		return mv;
 	}
 
+	@GetMapping("recentSearchProduct")
+	public void recentSearchProduct(String sell_num, Model model) throws Exception {
+		if (!sell_num.equals("null")) {
+			String sell_number[] = sell_num.split("/");
+			for (int i = 1; i < sell_number.length; i++) {
+				if (sell_number[0].equals(sell_number[i])) {
+					sell_number = (String[]) ArrayUtils.remove(sell_number, 0);
+				}
+			}
+			String sell_numSub = "";
+			for (int i = 0; i < sell_number.length; i++) {
+				if (i == 0) {
+					sell_numSub = sell_number[0];
+				} else if (i < 5){
+					sell_numSub += "/" + sell_number[i];
+				}
+			}
+			
+			List<ProductVO> ar = productService.productSelectList(sell_numSub);
+			List<String> ar2 = new ArrayList<String>();
+			int index = 0;
+			for (ProductVO productVOs : ar) {
+				long sell_num1 = productVOs.getSell_num();
+				ar2.add(productService.selectFileName(sell_num1));
+				productVOs.setMem_address(productService.productAddress(sell_num1).getMem_address());
+				index++;
+			}
+			model.addAttribute("cookieValue", sell_numSub);
+			model.addAttribute("recentSearch", ar);
+			model.addAttribute("file", ar2);
+		}
+
+
+	}
 
 }

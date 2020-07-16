@@ -28,7 +28,9 @@
 			<!-- 목록을 제외한 다른 호출은 각 Controller로 보내서 처리 -->
 			<div style="font-size: 13px;">MENU</div>
 			<div class="info">
-				<label class="focus"><i class="far fa-folder"></i> 회원 관리 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-caret-down"></i></label>
+				<label class="focus"><i class="far fa-folder"></i> 회원 관리
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i
+					class="fa fa-caret-down"></i></label>
 				<div class="contents">
 					<a href="#" class="check" title="MemberList"><i
 						class="far fa-file-alt"></i> 일반 회원 관리</a> <a href="#" class="check"
@@ -37,7 +39,9 @@
 				</div>
 			</div>
 			<div class="info">
-				<label class="focus"><i class="far fa-folder"></i> 상품 관리  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-caret-down"></i></label>
+				<label class="focus"><i class="far fa-folder"></i> 상품 관리
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i
+					class="fa fa-caret-down"></i></label>
 				<div class="contents">
 					<a href="#" class="check" title="ProductList"><i
 						class="far fa-file-alt"></i> 상품 정보 관리</a> <a href="#" class="check"
@@ -45,7 +49,8 @@
 				</div>
 			</div>
 			<div class="info">
-				<label class="focus"><i class="far fa-folder"></i> 공지사항 관리 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-caret-down"></i></label>
+				<label class="focus"><i class="far fa-folder"></i> 공지사항 관리
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-caret-down"></i></label>
 				<div class="contents">
 					<a href="#" class="check" title="NoticeList"><i
 						class="far fa-file-alt"></i> 공지 사항 목록</a> <a href="#" class="check"
@@ -72,12 +77,10 @@
 				</div>
 			</div>
 			<div id="admin_set">
-				관리자 님
-				<!-- ${member.mem_id} == admin 추후 설정 -->
-				<i class="fas fa-user-cog"></i>
+				${member.mem_id}님 <i class="fas fa-user-cog"></i>
 			</div>
 			<div id="QnaAndManToMan">
-				<a title="manToman" class="check"> 질문과 답변 및 1:1문의 </a>
+				<a title="manToman" class="check"> 1:1문의 </a>
 			</div>
 			<div class="new">
 				<span id="new">new</span> <i class="fas fa-envelope"></i>
@@ -89,6 +92,7 @@
 	</section>
 	<script type="text/javascript">
 		var check = $("#NAcheck").val();
+		var s
 		if (check == 'true') {
 			// 미답변 문의가 있으면
 			$(".new").children(".fas").removeClass("fa-envelope");
@@ -101,7 +105,7 @@
 			$(".new").children(".fas").css("color", "#26004d");
 		}
 
-		$(function() {
+		$(function() { // 페이지 로딩이후 동작
 			// section 2
 			$(".adminMenu").click(function() {
 				if ($("#mySidenav").css("width") == "0px") {
@@ -205,7 +209,8 @@
 			if (path == 'qna') {
 				getQnaList();
 			} else if (path == 'manToman') {
-				getManToManList();
+				var search="";
+				getManToManList(search);
 			} else if (path == 'NoticeSelect') {
 				var nonum = $(this).attr("id");
 				getNoticeSelect(nonum);
@@ -223,6 +228,19 @@
 				getNoticeWrite();
 			}
 		})
+		
+		$("#content").on("click", "#compulsionTrans", function() {
+			var trading_num = $(this).prop("title");
+			compulsionTrans(trading_num);
+			})
+		$("#content").on("click", "#compulsionCancel", function() {
+			var trading_num = $(this).prop("title");
+			compulsionCancel(trading_num);
+			})
+		$("#content").on("click",".w3-circle", function() {
+			var num = $(this).attr("title").trim();
+			location.href="../product/productSelect?sell_num="+num
+			})
 		$("#content").on(
 				"click",
 				"#productSearchbtn",
@@ -276,6 +294,12 @@
 		$("#content").on("click", "#qnaMemSearch", function() { // 글 목록에서 작성자 아이디 검색
 			var search = $("#qnaSearch").val(); // 아이디 변수로 받아옴
 			getQnaMemSearch(search); // 함수로 보냄
+		})
+		$("#content").on("click", "#qnaKind", function(){
+			var search = $("#qnaKind option:selected").val();
+			if(search != ""){
+				getManToManList(search);
+			}
 		})
 
 		$("#content").on("click", "#noticeSubmit", function() {
@@ -340,10 +364,13 @@
 		}
 
 		// qna
-		function getManToManList() {
+		function getManToManList(search) {
 			$
 					.ajax({
 						type : "GET",
+						data : {
+							search : search
+						},
 						url : "./list/getManToManList",
 						beforeSend : function() {
 							var loadingHtml = '<div id="loading" style="z-index: 1005;position: absolute; top:50%;left:50%; text-align:center;"> ';
@@ -575,6 +602,51 @@
 						}
 					})
 		}
+		function compulsionTrans(trading_num) {
+			$("#content").empty();
+			$.get("./result/compulsionTrans?trading_num="+trading_num+"&behavior=1", function() {
+				$
+				.ajax({
+					type : "GET",
+					url : "./list/getTradingProductList",
+					beforeSend : function() {
+						var loadingHtml = '<div id="loading" style="z-index: 1005;position: absolute; top:50%;left:50%; text-align:center;"> ';
+						loadingHtml += '<div class="loading_box"><img src="${pageContext.request.contextPath}/resources/images/loading.gif">"</div></div>';
+						$('#content').fadeTo("fast", 0.4).append(
+								loadingHtml);
+					},
+					success : function(result) {
+						$('#content').fadeTo("slow", 1).find('#loading')
+								.remove();
+						alert("인수인계가 정상적으로 처리되었습니다.");
+						getTradingProductList();
+					}
+				})
+				})
+			}
+		function compulsionCancel(trading_num) {
+			$("#content").empty();
+			$.get("./result/compulsionTrans?trading_num="+trading_num+"&behavior=2", function() {
+				$
+				.ajax({
+					type : "GET",
+					url : "./list/getTradingProductList",
+					beforeSend : function() {
+						var loadingHtml = '<div id="loading" style="z-index: 1005;position: absolute; top:50%;left:50%; text-align:center;"> ';
+						loadingHtml += '<div class="loading_box"><img src="${pageContext.request.contextPath}/resources/images/loading.gif">"</div></div>';
+						$('#content').fadeTo("fast", 0.4).append(
+								loadingHtml);
+					},
+					success : function(result) {
+						$('#content').fadeTo("slow", 1).find('#loading')
+								.remove();
+						alert("상품거래가 정상적으로 취소되었습니다.");
+						getTradingProductList();
+					}
+				})
+				})
+			}
+		
 		function getNoticeDelete(nonum) {
 			$("#content").empty();
 			$.get("../notice/noticeDelete?nonum=" + nonum, function(result) {

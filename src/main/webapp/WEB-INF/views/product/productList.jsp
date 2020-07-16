@@ -7,51 +7,49 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <c:import url="../template/boot.jsp"></c:import>
+
 <c:import url="../template/style.jsp"></c:import>
-<link href="./css/test.css" rel="stylesheet" type="text/css">
-
 <style type="text/css">
-
-.img{
-        position: relative;
-        background-image: url('${pageContext.request.contextPath}/upload/product/${file[i.index]}');                                                               
-        height: 194px;
-        width: 194px;
-        background-size: cover;
-    }
-
-    .img-cover{
-       position: absolute;
-       height: 100%;
-       width: 100%;
-       background-color: rgba(0, 0, 0, 0.7);                                                                 
-       z-index:1;
-    }
-
-    .img .content{
-         position: absolute;
-         top:50%;
-         left:50%;
-         transform: translate(-50%, -50%);                                                                   
-         font-size:1rem;
-         color: white;
-         z-index: 2;
-         text-align: center;
-    }
-	
+.img {
+	position: relative;
+	background-image:
+		url('${pageContext.request.contextPath}/upload/product/${file[i.index]}');
+	height: 194px;
+	width: 194px;
+	background-size: cover;
+}
+.img-cover {
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	background-color: rgba(0, 0, 0, 0.7);
+	z-index: 1;
+}
+.img .content {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	font-size: 1rem;
+	color: white;
+	z-index: 2;
+	text-align: center;
+}
 </style>
 
 </head>
-<body style="background-color: #fafafd;">
+<body style="background-color: #f9f9f9;">
 	<c:import url="../template/woozoo_nav.jsp"></c:import>
 	<!-- 전체시작 -->
 	<div style="height: 88px;">
 
-		<div
-			style="width: 1024px; margin-left: 440px; ">
+
+		<div style="width: 1024px; margin-left: 440px; ">
+
 			
 			<c:if test="${param.kind eq 'sk'}">
 			<div class="c" style="width: 1024px; height: 90px;">
+
 				<img
 					style="width: 20px; height: 20px; float: left; margin-top: 30px;"
 					alt="홈이미지"
@@ -94,6 +92,7 @@
 			</c:if>
 			
 			<div style="width: 1024px;">
+
 			<c:if test="${param.kind eq 'sk'}">
 			<div class="cc">
 			<font style="color: #ff5d4a; font-size: 15px;font-weight: 600;">${param.search}</font>
@@ -107,7 +106,7 @@
 			<font style="font-size: 15px;font-weight: 600">의 검색결과</font>
 			</c:if>
 
-			<c:if test="${empty list and param.kind eq 'sp'}">
+			<c:if test="${empty list and ( param.kind eq 'sp'or param.kind eq 'sk'or param.kind eq 'st')}">
 			<br><br><br><br><br>
 			<font style="color: #ff5d4a; font-size: 40px;font-weight: 600;">${param.search}</font>
 			<font style="font-size: 20px;font-weight: 600">에 대한 검색결과가 없습니다</font>
@@ -117,46 +116,59 @@
 - 검색어의 띄어쓰기를 다르게 해보세요<br><br>
 - 유해/금지어가 아닌지 확인해주세요 
 			</c:if>
+
 			</div>
 			<br>
 
 			<c:forEach items="${list}" var="vo" varStatus="i">
 				<div style="float: left; margin-left: 9px; margin-bottom: 129px;">
-					<div class="qqq" style="height: 194px; width: 194px; cursor: pointer;"
+
+					<div class="qqq" title="${vo.sell_num}"
+						style="height: 194px; width: 194px; cursor: pointer;"
 						onclick="location.href='../product/productSelect?sell_num=${vo.sell_num}'">
 
 
-<%-- 						<img style="height: 194px; width: 194px; cursor: pointer;" alt=""
+						<%-- 						<img style="height: 194px; width: 194px; cursor: pointer;" alt=""
 							src="${pageContext.request.contextPath}/upload/product/${file[i.index]}"> --%>
-							
- 				<c:if test="${vo.sell_status ne 0}">
- 				<div class="img">
-					<div class="content">
-						<h5 style="margin-bottom: 30px;">예약완료</h5>
-					</div>
-					<div class="img-cover"></div></div>
 
-				</c:if>
-				<c:if test="${vo.sell_status eq 0 }">
-				<img class="img" style="height: 194px; width: 194px; cursor: pointer;" alt=""
-							src="${pageContext.request.contextPath}/upload/product/${file[i.index]}">
-				</c:if>
-
-							
-						<div style="width: 194px; background-color: white;">
-							<div style="height: 80px;">
-								<div ><br>
-									<font style="font-size: 14px;font-weight: 700;margin-left: 8px;">${vo.sell_product}</font>
+						<c:if test="${vo.sell_status ne 0}">
+							<div class="img">
+								<div class="content">
+									<h5 style="margin-bottom: 30px;">예약완료</h5>
 								</div>
-								<div style="text-align: left;; line-height: 40px;margin-left: 8px;">
-									<font style="font-size: 18px;font-weight: bold;">${vo.sell_price}</font>
+								<div class="img-cover"></div>
+							</div>
+
+						</c:if>
+						<c:if test="${vo.sell_status eq 0 }">
+							<img class="img"
+								style="height: 194px; width: 194px; cursor: pointer;" alt=""
+								src="${pageContext.request.contextPath}/upload/product/${file[i.index]}">
+						</c:if>
+
+
+
+							
+						<div style="width: 194px; background-color: white;border: 1px solid #e5e5e5">
+
+							<div style="height: 80px;">
+								<div style="text-overflow: ellipsis; overflow: hidden; width: 192px; height: 40px; white-space: nowrap;">
+									<br> <font
+										style="font-size: 14px; font-weight: 700; margin-left: 8px;">${vo.sell_product}</font>
+								</div>
+								<div
+									style="text-align: left; line-height: 40px; margin-left: 8px;">
+									<font style="font-size: 18px; font-weight: bold;">${vo.sell_price}</font>
 									<font style="font-weight: bold;">원</font>
 								</div>
 							</div>
-							<div style="height: 40px; border-top: solid 1px #e4e4e4;text-align: left;line-height: 40px;">
-								<img style="margin-left: 8px;width: 16px; height: 20px; margin-bottom: 3px;" alt="" 
+							<div
+								style="height: 40px; border-top: solid 1px #e4e4e4; text-align: left; line-height: 40px;">
+								<img
+									style="margin-left: 8px; width: 16px; height: 20px; margin-bottom: 3px;"
+									alt=""
 									src="${pageContext.request.contextPath}/resources/images/ad_logo.png">
-								<font style="font-weight: 600; font-size: 12px;color: gray;">${vo.mem_address}</font>
+								<font style="font-weight: 600; font-size: 12px; color: gray;">${vo.mem_address}</font>
 							</div>
 
 						</div>
@@ -165,13 +177,12 @@
 				</div>
 
 			</c:forEach>
-			
-			<c:if test="${vo.sell_product ne null or param.kind eq 'sk'}">
-			
-			
-		
+
+			<c:if test="${not empty list and (param.kind eq 'sp'or param.kind eq 'sk'or param.kind eq 'st')}">
+
 			<div class="p" style="width: 1024px;height: 40px;float: left;">
 				<ul class="pagination" >
+
 					<c:if test="${pager.curBlock gt 1}">
 						<li><a
 							href="./productList?curPage=${pager.startNum-1}&kind=${pager.kind}&search=${pager.search}">이전</a></li>
@@ -202,11 +213,38 @@
 <c:import url="../template/footer.jsp"></c:import>
 
 	<script type="text/javascript">
-
-
-
-
-
+		$(".qqq").click(function() {
+			var sell_num = $(this).prop("title");
+			var myCookie = getCookie("recentSearch");
+			
+			if (myCookie == null) {
+				setCookie("recentSearch", sell_num, 1)
+			} else {
+				sell_num += "/" + myCookie;
+				setCookie("recentSearch", sell_num, 1)
+			}
+		})
+		function setCookie(key, value, expiredays) {
+			var todayDate = new Date();
+			todayDate.setDate(todayDate.getDate() + expiredays);
+			document.cookie = key + "=" + escape(value) + "; path=/; expires="
+					+ todayDate.toGMTString() + ";"
+		}
+		function getCookie(cname) {
+			var name = cname + "=";
+			var decodedCookie = decodeURIComponent(document.cookie);
+			var ca = decodedCookie.split(';');
+			for (var i = 0; i < ca.length; i++) {
+				var c = ca[i];
+				while (c.charAt(0) == ' ') {
+					c = c.substring(1);
+				}
+				if (c.indexOf(name) == 0) {
+					return c.substring(name.length, c.length);
+				}
+			}
+			return null;
+		}
 	</script>
 
 

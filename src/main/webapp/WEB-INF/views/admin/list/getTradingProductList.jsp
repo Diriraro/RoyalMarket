@@ -27,6 +27,8 @@
 				<th>구매자</th>
 				<th>판매자</th>
 				<th>상품가격</th>
+				<th>상품강제인수</th>
+				<th>상품강제취소</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -37,6 +39,8 @@
 					<td>${trading.buyer_id}</td>
 					<td>${trading.seller_id}</td>
 					<td>${trading.sell_price}</td>
+					<td width="50px"><button id="compulsionTrans" title="${trading.trading_num}" class="btn btn-danger"> 강제인수 </button> <!-- ${trading.trading_num} 파라미터 넘기기-->
+					<td width="50px"><button id="compulsionCancel" title="${trading.trading_num}" class="btn btn-normal"> 강제취소 </button> <!-- ${trading.trading_num} 파라미터 넘기기-->
 				</tr>
 			</c:forEach>
 		</tbody>

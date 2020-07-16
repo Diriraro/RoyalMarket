@@ -13,6 +13,7 @@ import com.iu.s1.product.ProductVO;
 import com.iu.s1.saveCash.SaveCashRepository;
 import com.iu.s1.saveCash.SaveCashVO;
 import com.iu.s1.trading.TradingVO;
+import com.iu.s1.util.Pager;
 
 @Service
 public class PaymentService {
@@ -22,6 +23,7 @@ public class PaymentService {
 	
 	@Autowired
 	private SaveCashRepository saveCashRepository;		//적립금
+	
 	
 	public int pointUpdate(MemberVO memberVO)throws Exception{
 		return paymentMapper.pointUpdate(memberVO);
@@ -38,8 +40,17 @@ public class PaymentService {
 	public int paymentCharge(PayVO payVO)throws Exception{
 		return paymentMapper.paymentCharge(payVO);
 	}
+	public int paymentSell(PayVO payVO)throws Exception{
+		return paymentMapper.paymentSell(payVO);
+	}
+	public int paymentBuyCancle(PayVO payVO)throws Exception{
+		return paymentMapper.paymentBuyCancle(payVO);
+	}
 	public int paymentOut(PayVO payVO)throws Exception{
 		return paymentMapper.paymentOut(payVO);
+	}
+	public int paymentCalculate(PayVO payVO)throws Exception{
+		return paymentMapper.paymentCalculate(payVO);
 	}
 	
 	public List<PayVO> pointManage(String mem_id)throws Exception{
@@ -86,23 +97,28 @@ public class PaymentService {
 		return paymentMapper.sell_statusUp(sell_HistoryVO);
 	}
 	
-	public TradingVO tradingSelect(long sell_num)throws Exception{
-		return paymentMapper.tradingSelect(sell_num);
+	public TradingVO tradingSelect(long trading_num)throws Exception{
+		return paymentMapper.tradingSelect(trading_num);
 	}
-	public int tradingDelete(long sell_num)throws Exception{
-		return paymentMapper.tradingDelete(sell_num);
+	
+	public TradingVO tradingSellNumSelect(long sell_num)throws Exception{
+		return paymentMapper.tradingSellNumSelect(sell_num);
+	}
+	
+	public int tradingDelete(long trading_num)throws Exception{
+		return paymentMapper.tradingDelete(trading_num);
 	}
 	
 	public List<Sell_HistoryVO>  seller_check(String seller_id)throws Exception{
 		return paymentMapper.seller_check(seller_id);
 	}
 	
-	public int del_buyHistory(long sell_num)throws Exception{
-		return paymentMapper.del_buyHistory(sell_num);
+	public int del_buyHistory(long trading_num)throws Exception{
+		return paymentMapper.del_buyHistory(trading_num);
 	}
 	
-	public int del_sellHistory(long sell_num)throws Exception{
-		return paymentMapper.del_sellHistory(sell_num);
+	public int del_sellHistory(long trading_num)throws Exception{
+		return paymentMapper.del_sellHistory(trading_num);
 	}
 	
 	public int product_sell_statusUp(long sell_num)throws Exception{
@@ -126,29 +142,29 @@ public class PaymentService {
 		return paymentMapper.paystatsInsert(payStatsVO);
 	}
 	
-	public long buy_status(long sell_num)throws Exception{
-		return paymentMapper.buy_status(sell_num);
+	public long buy_status(long trading_num)throws Exception{
+		return paymentMapper.buy_status(trading_num);
 	}
 	
-	public long sell_status(long sell_num)throws Exception{
-		return paymentMapper.sell_status(sell_num);
+	public long sell_status(long trading_num)throws Exception{
+		return paymentMapper.sell_status(trading_num);
 	}
 	
-	public Buy_HistoryVO buy_Sel(long sell_num)throws Exception{
-		return paymentMapper.buy_Sel(sell_num);
+	public Buy_HistoryVO buy_Sel(long trading_num)throws Exception{
+		return paymentMapper.buy_Sel(trading_num);
 	}
 	
-	public Sell_HistoryVO sell_Sel(long sell_num)throws Exception{
-		return paymentMapper.sell_Sel(sell_num);
+	public Sell_HistoryVO sell_Sel(long trading_num)throws Exception{
+		return paymentMapper.sell_Sel(trading_num);
 	}
 	
 	
-	public int buy_cancelUp(long buy_cancel)throws Exception{
-		return paymentMapper.buy_cancelUp(buy_cancel);
+	public int buy_cancelUp(TradingVO tradingVO)throws Exception{
+		return paymentMapper.buy_cancelUp(tradingVO);
 	}
 	
-	public int sell_cancelUp(long cell_cancel)throws Exception{
-		return paymentMapper.sell_cancelUp(cell_cancel);
+	public int sell_cancelUp(TradingVO tradingVO)throws Exception{
+		return paymentMapper.sell_cancelUp(tradingVO);
 	}
 
 	public SaveCashVO selectSC(String mem_id)throws Exception{
@@ -161,5 +177,23 @@ public class PaymentService {
 	
 	public int updateSC(SaveCashVO saveCashVO)throws Exception{
 		return saveCashRepository.updateSC(saveCashVO);
+	}
+	
+	public int product_cancel_status(long sell_num)throws Exception{
+		return paymentMapper.product_cancel_status(sell_num);
+	}
+	public long auto_incrementNum() throws Exception{
+		return paymentMapper.auto_incrementNum();
+	}
+	public List<PayVO> paymentList(Pager pager) throws Exception {
+		pager.makeRow();
+		long totalCount = paymentMapper.paymentCount(pager);
+		pager.makePage(totalCount);
+		return paymentMapper.paymentList(pager);
+	}
+
+		
+	public PayVO paymentHistory(long trading_num)throws Exception{
+		return paymentMapper.paymentHistory(trading_num);
 	}
 }

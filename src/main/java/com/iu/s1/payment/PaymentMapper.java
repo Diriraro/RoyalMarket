@@ -25,6 +25,12 @@ public interface PaymentMapper {
 	
 	public int paymentCharge(PayVO payVO)throws Exception;
 	
+	public int paymentSell(PayVO payVO)throws Exception;
+	
+	public int paymentBuyCancle(PayVO payVO)throws Exception;
+	
+	public int paymentCalculate(PayVO payVO)throws Exception;
+	
 	public List<PayVO> pointManage(String mem_id)throws Exception;
 	
 	public int tradingInsert(TradingVO tradingVO)throws Exception;
@@ -49,15 +55,17 @@ public interface PaymentMapper {
 	
 	public int sell_statusUp(Sell_HistoryVO sell_HistoryVO)throws Exception;
 	
-	public TradingVO tradingSelect(long sell_num)throws Exception;
+	public TradingVO tradingSelect(long trading_num)throws Exception;
 	
-	public int tradingDelete(long sell_num)throws Exception;
+	public TradingVO tradingSellNumSelect(long sell_num)throws Exception;
+	
+	public int tradingDelete(long trading_num)throws Exception;
 	
 	public List<Sell_HistoryVO> seller_check(String seller_id)throws Exception;
 	
-	public int del_buyHistory(long sell_num)throws Exception;
+	public int del_buyHistory(long trading_num)throws Exception;
 	
-	public int del_sellHistory(long sell_num)throws Exception;
+	public int del_sellHistory(long trading_num)throws Exception;
 	
 	public int product_sell_statusUp(long sell_num)throws Exception;
 	
@@ -71,17 +79,27 @@ public interface PaymentMapper {
 	
 	public int paystatsInsert(PayStatsVO payStatsVO) throws Exception;
 	
-	public long buy_status(long sell_num)throws Exception;
+	public long buy_status(long trading_num)throws Exception;
 	
 	public List<TradingVO> tradingList(Pager pager) throws Exception;
 	
-	public long sell_status(long sell_num)throws Exception;
+	public long sell_status(long trading_num)throws Exception;
 	
-	public Buy_HistoryVO buy_Sel(long sell_num)throws Exception;
+	public Buy_HistoryVO buy_Sel(long trading_num)throws Exception;
 	
-	public Sell_HistoryVO sell_Sel(long sell_num)throws Exception;
+	public Sell_HistoryVO sell_Sel(long trading_num)throws Exception;
 	
-	public int buy_cancelUp(long buy_cancel)throws Exception;
+	public int buy_cancelUp(TradingVO tradingVO)throws Exception;
 	
-	public int sell_cancelUp(long cell_cancel)throws Exception;
+	public int sell_cancelUp(TradingVO tradingVO)throws Exception;
+	
+	public int product_cancel_status(long sell_num)throws Exception;
+	
+	public long auto_incrementNum ()throws Exception;
+	
+	public long paymentCount(Pager pager)throws Exception;
+	
+	public List<PayVO> paymentList(Pager pager)throws Exception;
+	
+	public PayVO paymentHistory(long trading_num)throws Exception;
 }

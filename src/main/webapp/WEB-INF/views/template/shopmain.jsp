@@ -232,7 +232,7 @@ filter: drop-shadow(5px 5px 5px #000);
 			<hr>
 			</div>
 
-			<div style="border: 1px solid white; height: 80px; margin-bottom: 1px; margin-top: 2px;">
+			<div style="border: 1px solid white; height: 80px; margin-bottom: 1px; margin-top: 2px; " >
 			<c:if test="${avg eq 0.0}">
 			<div style="margin-top: 3%;">
 				<c:if test="${mdata.mem_storeNum eq null}">
@@ -243,7 +243,7 @@ filter: drop-shadow(5px 5px 5px #000);
 				</c:if>
 			</div>	
 			</c:if>
-			
+			  
 			<c:if test="${avg ne 0.0}">
 			<div style="margin-top: 3%;">
 			<span style="font-size: 22px;">평점 :  <span style="color: blue;">${avg}</span> </span>
@@ -251,7 +251,8 @@ filter: drop-shadow(5px 5px 5px #000);
 			</c:if>
 			<hr>
 			</div>
-			<div style="border: 1px solid white; height: 80px; margin-bottom: 1px; margin-top: 2px;">
+
+			<div style="border: 1px solid white; height: 80px; margin-bottom: 1px; margin-top: 2px; overflow: none;">
 			<c:if test="${mdata.mem_access eq 0}">
 			<div style="margin-top: 3%;">
 			<span style="font-size: 22px;">
@@ -261,16 +262,19 @@ filter: drop-shadow(5px 5px 5px #000);
 			</c:if>
 			<c:if test="${mdata.mem_access eq 1}">
 			
-			<span class="btn btn-danger"data-toggle="collapse" data-target="#phone"style="font-size: 40px;">전화번호
-			 <span id="phone" class="collapse" style="float: right; font-size: 40px;">
+			<h6><font color="red"><b>※ 신고누적으로 인한 차단으로 전화번호와 이메일이 공개 됩니다. (버튼을 누르세요)</b></font></h6>
+			
+			<span class="btn"data-toggle="collapse" data-target="#phone"style="font-size: 20px;">전화번호
+			 <span id="phone" class="collapse" style="float: right; font-size: 20px;">
     			: ${mdata.mem_phone}
 			 </span>
 			 </span>
-			<br>
-			<span class="btn btn-danger"data-toggle="collapse" data-target="#email" style="font-size: 40px;">이메일
-			 <span id="email" class="collapse" style="float: right; font-size: 40px;">
+			
+			
+			<span class="btn"data-toggle="collapse" data-target="#email" style="font-size: 20px;">이메일
+			 <span id="email" class="collapse" style="float: right; font-size: 20px;">
     			 : ${mdata.mem_email} 
-			 </sapn>
+			</span>
 			</span>
 			
 			</c:if>

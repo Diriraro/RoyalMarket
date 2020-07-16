@@ -164,7 +164,24 @@ a.blog span {
   padding: 0;
 }
 
-.img .content{
+ 
+ .img{
+        position: relative;
+        background-image: url('${pageContext.request.contextPath}/upload/product/${file[i.index]}');                                                               
+        height: 194px;
+        width: 194px;
+        background-size: cover;
+    }
+
+    .img-cover{
+       position: absolute;
+       height: 100%;
+       width: 100%;
+       background-color: rgba(0, 0, 0, 0.7);                                                                 
+       z-index:1;
+    }
+
+    .img .content{
          position: absolute;
          top:50%;
          left:50%;
@@ -173,7 +190,8 @@ a.blog span {
          color: white;
          z-index: 2;
          text-align: center;
- }
+    }
+	
 
 	
 </style>

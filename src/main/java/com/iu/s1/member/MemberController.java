@@ -49,13 +49,16 @@ public class MemberController {
 	private JavaMailSender mailSender;
 
 	private String checkNum = "";
-	
+
+
+	@Autowired
+	private PaymentService paymentService;
+
+
 	@GetMapping("memberUpdate")
 	public void memberUpdate()throws Exception{
 		
 	}
-	@Autowired
-	private PaymentService paymentService;
 
 	@GetMapping("findPwByEmail")
 	public ModelAndView findPwByEmail(HttpSession session, MemberVO memberVO) throws Exception {

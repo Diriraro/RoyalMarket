@@ -76,7 +76,7 @@
 				
 				<div style="height: 100px; display: inline-block; margin-left: 10px;">
 					<div style="display: inline-block;"><font style="font-size: large;"><a href="./seller_page?sell_num=${vo.sell_num}&sell_history_num=${vo.sell_history_num}">${vo.sell_product}</a></font></div><br>
-					<div style="display: inline-block;"><font style="font-size: large;"><b>${vo.sell_price-2500} 원</b></font></div><br>
+					<div style="display: inline-block;"><font style="font-size: large;"><b>${vo.sell_price} 원</b></font></div><br>
 					<div style="display: inline-block;">${vo.buyer_id}</div><br>
 					<div style="display: inline-block;">${vo.sell_date}</div><br>
 					<c:if test="${vo.status eq 0}">
@@ -90,7 +90,7 @@
 					</c:if>
 					<c:if test="${vo.status eq 3}">
 						<div style="display: inline-block;">취소된 거래입니다.</div>
-						<button class="btn btn-primary sellDelete" id="buyDelete"  title="${vo.sell_num}" style="background-color: white; border: white;"><font style="color: red;">삭제하기</font></button>
+						<button class="btn btn-primary sellDelete" id="buyDelete"  title="${vo.sell_history_num}" style="background-color: white; border: white;"><font style="color: red;">삭제하기</font></button>
 					</c:if>		
 				</div>
 			</div>
@@ -105,8 +105,8 @@
 		
 	}); 
  	$(".sellDelete").click(function() {	
-		var num = $(this).attr("title");
-		location.href="./sellDelete?sell_num="+num;
+		var sell_history_num = $(this).attr("title");
+		location.href="./sellDelete?sell_history_num="+sell_history_num;
 		
 	}); 
 	

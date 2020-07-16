@@ -1,9 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<!-- icon font -->
 
+<!-- icon font -->
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css?family=Raleway">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -61,11 +59,9 @@ section {
 }
 
 #kCalendar {
-	position: fixed;
-	left: 15px;
-	top: 450px;
-	margin-top: 200px;
-	width: 220px;
+	margin-top: 65px;
+	margin-left: -5px;
+	width: 100%;
 	height: 300px;
 	border: 1px solid black;
 	background-color: white;
@@ -92,7 +88,7 @@ section {
 #kCalendar
  
 table {
-	width: 220px;
+	width: 100%;
 	height: 200px;
 }
 
@@ -882,6 +878,18 @@ input
 	font-weight: bold;
 }
 
+.w3-circle {
+cursor: pointer;
+}
+
+/* Vertical Bar Graph */
+.vGraph{ padding:20px 0;}
+.vGraph ul{ margin:0; padding:0; height:200px; border:1px solid #ddd; border-top:0; border-right:0; font-size:11px; font-family:Tahoma, Geneva, sans-serif; list-style:none;}
+.vGraph ul:after{ content:""; display:block; clear:both;}
+.vGraph li{ float:left; display:inline; width:8%; height:100%; margin:0 3%; position:relative; text-align:center; white-space:nowrap;}
+.vGraph .gTerm{ position:relative; display:inline-block; width:100%; height:20px; line-height:20px; margin:0 -100% -20px 0; padding:200px 0 0 0; vertical-align:bottom; color:#767676; font-weight:bold;}
+.vGraph .gBar{ position:relative; display:inline-block; width:100%; margin:-1px 0 0 0; border:1px solid #ccc; border-bottom:0; background:#e9e9e9; vertical-align:bottom;}
+.vGraph .gBar span{ position:absolute; width:100%; top:-20px; left:0; color:#767676;}
 /* Section 3 Dash board */
 
 /* ==================== getList Search Form ==================== */

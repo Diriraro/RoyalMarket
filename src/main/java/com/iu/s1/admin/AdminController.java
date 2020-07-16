@@ -11,18 +11,26 @@ import org.springframework.boot.context.properties.bind.DefaultValue;
 //import java.util.List;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.iu.s1.member.MemberService;
 import com.iu.s1.member.MemberVO;
 import com.iu.s1.notice.NoticeVO;
+import com.iu.s1.payment.PayStatsVO;
+import com.iu.s1.payment.PaymentService;
+import com.iu.s1.paymentHistory.Buy_HistoryVO;
+import com.iu.s1.paymentHistory.ProfitVO;
+import com.iu.s1.paymentHistory.Sell_HistoryVO;
 import com.iu.s1.product.ProductService;
 import com.iu.s1.product.ProductVO;
 import com.iu.s1.qna.QnaService;
 import com.iu.s1.qna.QnaVO;
 import com.iu.s1.qna.file.QnaFileVO;
+import com.iu.s1.saveCash.SaveCashVO;
 import com.iu.s1.trading.TradingVO;
 import com.iu.s1.util.Pager;
 import com.iu.s1.visitor.VisitorVO;
@@ -36,6 +44,10 @@ public class AdminController {
 	private AdminService adminService;
 	@Autowired
 	private QnaService qnaService;
+	@Autowired
+	private PaymentService paymentService;
+	@Autowired
+	private MemberService memberService;
 
 	@GetMapping("adminPage")
 	public String adminPage(Model model) throws Exception {
@@ -76,7 +88,7 @@ public class AdminController {
 		} else {
 			rate2 = (long) ((visitorVO.getCount() * 100) / visitorVO2.getCount());
 		}
-		if ( rate2 > 100) {
+		if (rate2 > 100) {
 			rate2 = 100;
 		}
 		model.addAttribute("visitors", visitorVO.getCount());
@@ -90,36 +102,31 @@ public class AdminController {
 		model.addAttribute("qnaNACount", qnaNACount);
 
 		// 당일 거래량 및 지역별 거래량, 총 회사 수익
+		List<Map.Entry<String, Long>> tradeAr = adminService.getLocateTradeCount();
+		List<ProfitVO> profitAr = new ArrayList<ProfitVO>();
+		profitAr = adminService.getProfit();
+
 		long tradeCount = 0;
 		if (adminService.getDailyTradeCount() != null) {
 			tradeCount = adminService.getDailyTradeCount();
 		}
-		List<Map.Entry<String, Long>> tradeAr = adminService.getLocateTradeCount();
-		long profit = 0;
-		long profitRate = 0;
-		if (adminService.getProfit() != null) {
-			profit = adminService.getProfit();
-			profitRate = (long)(profit/1000000)*100;
-		}
 		long tradeCountYD = 0;
-		if(adminService.getRateForTradeCountYD() != null) {
+		if (adminService.getRateForTradeCountYD() != null) {
 			tradeCountYD = adminService.getRateForTradeCountYD();
 		}
 		long tradeRate = 0;
-		if(tradeCountYD != 0 && tradeCount != 0) {
-			tradeRate= (tradeCount / tradeCountYD) * 100;
+		if (tradeCountYD != 0 && tradeCount != 0) {
+			tradeRate = (long) (((double) tradeCount / (double) tradeCountYD) * 100);
 		} else if (tradeCountYD == 0 && tradeCount > 0) {
 			tradeRate = 100;
 		}
 		if (tradeRate > 100) {
 			tradeRate = 100;
 		}
-
 		model.addAttribute("tradeRate", tradeRate);
 		model.addAttribute("tradeCount", tradeCount);
 		model.addAttribute("tradeAr", tradeAr);
-		model.addAttribute("profit", profit);
-		model.addAttribute("profitRate",profitRate);
+		model.addAttribute("profitAr", profitAr);
 
 		// 상품
 		List<ProductVO> proList = adminService.productRecentList();
@@ -184,24 +191,24 @@ public class AdminController {
 
 	// Product
 	@GetMapping("getProductList")
-	public void productList(Model model,@DefaultValue(value = "1") long curPage, Pager pager) throws Exception {
+	public void productList(Model model, @DefaultValue(value = "1") long curPage, Pager pager) throws Exception {
 		pager.setCurPage(curPage);
 		List<ProductVO> ar = new ArrayList<ProductVO>();
 		ar = adminService.productList(pager);
 		model.addAttribute("list", ar);
 	}
+
 	@GetMapping("productDelete")
 	public void productDelete(ProductVO productVO, Model model) throws Exception {
-		int result = adminService.productDelete(productVO); 
+		int result = adminService.productDelete(productVO);
 		model.addAttribute("result", result);
 	}
-	
+
 	@GetMapping("getTradingProductList")
 	public void tradingList(Model model, Pager pager) throws Exception {
 		List<TradingVO> tradeVO = adminService.tradingList(pager);
 		model.addAttribute("list", tradeVO);
 	}
-	
 
 	// Qna
 	@GetMapping("getQnaList")
@@ -225,26 +232,54 @@ public class AdminController {
 	public void qnaAnswer(QnaVO qnaVO, Model model) throws Exception {
 		int result = qnaService.qnaAnswer(qnaVO);
 	}
+	
+	@GetMapping("showQnaFile")
+	public void showQnaFile(long qna_num, Model model)throws Exception{
+		List<QnaFileVO> qnaFileVOs = qnaService.selectQnaFile(qna_num);
+		model.addAttribute("qfvo", qnaFileVOs);
+	}
 
 	@GetMapping("getManToManList")
-	public void getManToManList(Model model) throws Exception {
+	public void getManToManList(Model model, String search) throws Exception {
 		List<MemberVO> ar = new ArrayList<MemberVO>();
 //		ar = adminService.getManToManList();
-		List<QnaVO> ar2 = qnaService.qnaAdminList();
-		for (QnaVO qnaVO : ar2) {
-			int fileCheck = qnaService.fileCheck(qnaVO.getQna_num());
-			qnaVO.setFileCheck(fileCheck);
+		if(search==null) {
+			search="";
 		}
-		long qnaNACount = adminService.qnaNACount();
-
-		boolean check = false;
-		if (qnaNACount > 0) {
-			check = true;
+		if(search.equals("")) {			
+			List<QnaVO> ar2 = qnaService.qnaAdminList();
+			for (QnaVO qnaVO : ar2) {
+				int fileCheck = qnaService.fileCheck(qnaVO.getQna_num());
+				qnaVO.setFileCheck(fileCheck);
+			}
+			long qnaNACount = adminService.qnaNACount();
+			
+			boolean check = false;
+			if (qnaNACount > 0) {
+				check = true;
+			}
+			
+			model.addAttribute("check", check);
+			model.addAttribute("qna_adlist", ar2);
+			model.addAttribute("list", ar);
+		}else {
+			System.out.println("123821093821038129038219048129038120938120938");
+			List<QnaVO> ar2 = qnaService.qnaAdminList2(search);
+			for (QnaVO qnaVO : ar2) {
+				int fileCheck = qnaService.fileCheck(qnaVO.getQna_num());
+				qnaVO.setFileCheck(fileCheck);
+			}
+			long qnaNACount = adminService.qnaNACount();
+			
+			boolean check = false;
+			if (qnaNACount > 0) {
+				check = true;
+			}
+			
+			model.addAttribute("check", check);
+			model.addAttribute("qna_adlist", ar2);
+			model.addAttribute("list", ar);
 		}
-
-		model.addAttribute("check",check);
-		model.addAttribute("qna_adlist", ar2);
-		model.addAttribute("list", ar);
 	}
 
 	@PostMapping("getManToManList")
@@ -267,7 +302,7 @@ public class AdminController {
 	@GetMapping("getNoticeList")
 	public void getNoticeList(Model model) throws Exception {
 		List<NoticeVO> ar = new ArrayList<NoticeVO>();
-		ar = adminService.getNoticeList();
+		ar = adminService.getNoticeList2();
 		model.addAttribute("list", ar);
 	}
 
@@ -278,5 +313,101 @@ public class AdminController {
 		}
 		List<NoticeVO> ar = adminService.noticeTitleSearch(search);
 		model.addAttribute("list", ar);
+	}
+
+	// Trading
+	@Transactional
+	@GetMapping("compulsionTrans")
+	public void compulsionTrans(TradingVO tradingVO, long behavior, Model model) throws Exception {
+		TradingVO traVO = new TradingVO();
+		traVO = paymentService.tradingSelect(tradingVO.getTrading_num());
+		
+		
+		// 거래 인수
+		if (behavior == 1) {
+			// 상품 거래중인 정보
+			// 구매자의 구매내역에 해당 상품 추가
+
+			long curPoint = paymentService.pointSelect(traVO.getSeller_id());
+			long total = curPoint + (traVO.getSell_price() - 2500);
+			MemberVO memberVO = new MemberVO();
+			memberVO.setMem_id(traVO.getSeller_id());
+			PayStatsVO payStatsVO = new PayStatsVO();
+
+			// 판매자 아이디 조회후 paystatus에 인서트
+			MemberVO memberVO2 = paymentService.memberVOSel(traVO.getSeller_id());
+			payStatsVO.setSeller_address(memberVO2.getMem_address());
+
+			// 수익 계산
+			long profit = (traVO.getSell_price() - 2500) / 10;
+			long commition = (traVO.getSell_price() - 2500) / 10;
+			payStatsVO.setSell_commition(commition);
+			memberVO.setMem_point(total - profit + 2500);
+			System.out.println(total - profit + 2500);
+			// 판매 통계 업데이트
+			paymentService.paystatsInsert(payStatsVO);
+
+			// buy상태 sell상태 바꾸기
+			Buy_HistoryVO buy_HistoryVO = new Buy_HistoryVO();
+			buy_HistoryVO.setBuy_history_num(traVO.getTrading_num());
+			buy_HistoryVO.setStatus(2);
+			buy_HistoryVO.setBuy_check(0);
+			paymentService.buy_statusUp(buy_HistoryVO);
+
+			Sell_HistoryVO sell_HistoryVO = new Sell_HistoryVO();
+			sell_HistoryVO = new Sell_HistoryVO();
+			sell_HistoryVO.setSell_history_num(traVO.getTrading_num());
+			sell_HistoryVO.setStatus(2);
+			sell_HistoryVO.setSell_check(0);
+			paymentService.sell_statusUp(sell_HistoryVO);
+
+			// 1% 적립금 추가
+			SaveCashVO saveCashVO = new SaveCashVO();
+			saveCashVO = paymentService.selectSC(traVO.getBuyer_id());
+
+			ProductVO productVO = paymentService.productSelect(traVO.getSell_num());
+			long sc = productVO.getSell_price();
+			sc = (long) (sc * 0.01); // 1%
+			sc = Math.round(sc * 0.1) * 10; // 1원단위 반올림
+			sc = sc + saveCashVO.getMem_cash();
+			saveCashVO.setMem_cash(sc);
+			paymentService.updateSC(saveCashVO);
+
+			// 포인트 업데이트 및 trading에서 삭제
+			paymentService.pointUpdate(memberVO);
+			paymentService.tradingDelete(tradingVO.getTrading_num());
+			
+			
+			// 거래 취소
+		} else if (behavior == 2) {
+			// 트레이딩 테이블에서 가격과 판매자 아이디를 조회해서 다시 판매자에게 돈을 돌려줌
+			Buy_HistoryVO buy_HistoryVO = new Buy_HistoryVO();
+			buy_HistoryVO.setBuy_history_num(traVO.getTrading_num());
+			buy_HistoryVO.setStatus(3);
+			buy_HistoryVO.setBuy_check(1);
+			paymentService.buy_statusUp(buy_HistoryVO);
+			
+			Sell_HistoryVO sell_HistoryVO = new Sell_HistoryVO();
+			sell_HistoryVO.setSell_history_num(traVO.getTrading_num());
+			sell_HistoryVO.setStatus(3);
+			sell_HistoryVO.setSell_check(1);
+			paymentService.sell_statusUp(sell_HistoryVO);
+
+			String mem_id = traVO.getBuyer_id();
+			long price = traVO.getSell_price();
+
+			// 맴버에서 원래 아이디의 가격을 조회 후 취소된 거래의 가격만큼 더해줌
+			
+			
+			/* 취소후 store_product 판매상태 status = 0 으로 update 하는 서비스 호출 추후 작성*/
+			long point = paymentService.pointSelect(mem_id);
+			MemberVO memberVO = new MemberVO();
+			memberVO.setMem_id(mem_id);
+			memberVO.setMem_point(price + point);
+			paymentService.product_cancel_status(traVO.getSell_num());
+			paymentService.pointUpdate(memberVO);
+			paymentService.tradingDelete(tradingVO.getTrading_num());
+		}
+		System.out.println("behavior : " + behavior);
 	}
 }
