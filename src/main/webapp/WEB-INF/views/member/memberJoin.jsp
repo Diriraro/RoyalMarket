@@ -599,18 +599,18 @@ iframe {
 	</form:form>
 
 	<script type="text/javascript">
+
+	var wrong = "${wrong}";
+		
+		if(wrong=="wrong"){
+				alert("입력정보가 틀립니다. 인증번호를 재발급하고 다시 시도해주세요!");
+				console.log("입력정보가 틀립니다. 인증번호를 재발급하고 다시 시도해주세요!");
+			}
 	
 		var check = false;
 		var SetTime = 300;		// 최초 설정 시간(기본 : 초)
 		var tid = 0;
 
-		var again = "${again}";
-
-				
-		if(again=="again"){
-				alert("입력정보가 틀립니다. 인증번호를 재발급하고 다시 시도해주세요!");
-				console.log("입력정보가 틀립니다. 인증번호를 재발급하고 다시 시도해주세요!");
-			}
 		
 		
 		

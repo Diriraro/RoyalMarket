@@ -262,6 +262,8 @@ body {
 		</div>
 	</div>
 <script type="text/javascript">
+
+
  function goBack(){
 	window.history.back();
 	 }

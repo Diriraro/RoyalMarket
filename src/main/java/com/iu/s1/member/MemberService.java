@@ -90,14 +90,14 @@ public class MemberService {
 		return memberRepository.memberJoin(memberVO);
 	}
 
-	public boolean findPwByPhone(MemberVO memberVO, BindingResult bindingResult, String checkNum) throws Exception {
+	public boolean findPwByPhone(MemberVO memberVO, BindingResult bindingResult, String random) throws Exception {
 		boolean result = bindingResult.hasErrors();
 		// 인증번호가 맞는지 확인
 
 		List<ObjectError> err = bindingResult.getAllErrors();
 		System.out.println(err);
 		if (!result) {
-			if (!memberVO.getPhoneCheck().equals(checkNum)) {
+			if (!memberVO.getPhoneCheck().equals(random)) {
 				bindingResult.rejectValue("phoneCheck", "memberVO.phoneCheck.notEqual");
 				result = true;
 			}
@@ -110,7 +110,7 @@ public class MemberService {
 		return result;
 	}
 
-	public boolean findPwByEmail(MemberVO memberVO, BindingResult bindingResult, String checkNum) throws Exception {
+	public boolean findPwByEmail(MemberVO memberVO, BindingResult bindingResult, String random) throws Exception {
 
 		List<ObjectError> err = bindingResult.getAllErrors();
 		System.out.println(err);
@@ -119,7 +119,7 @@ public class MemberService {
 
 		// 인증번호가 맞는지 확인
 		if (!result) {
-			if (!memberVO.getPhoneCheck().equals(checkNum)) {
+			if (!memberVO.getPhoneCheck().equals(random)) {
 				bindingResult.rejectValue("phoneCheck", "memberVO.phoneCheck.notEqual");
 				result = true;
 
@@ -137,7 +137,7 @@ public class MemberService {
 	}
 
 	// 검증 메서드
-	public boolean memberCheck(MemberVO memberVO, BindingResult bindingResult, String checkNum) throws Exception {
+	public boolean memberCheck(MemberVO memberVO, BindingResult bindingResult, String random) throws Exception {
 		boolean result = false; // false 에러X, true 에러O
 
 		// 1. 기본어노테이션 제공 검증 실행
@@ -177,7 +177,7 @@ public class MemberService {
 		 */
 
 		// 인증번호가 맞는지 확인
-		if (!memberVO.getPhoneCheck().equals(checkNum)) {
+		if (!memberVO.getPhoneCheck().equals(random)) {
 			bindingResult.rejectValue("phoneCheck", "memberVO.phoneCheck.notEqual");
 			result = true;
 		}
@@ -185,7 +185,7 @@ public class MemberService {
 		return result;
 	}
 
-	public boolean kakaoMemberUpdateCheck(MemberVO memberVO, BindingResult bindingResult, String checkNum)
+	public boolean kakaoMemberUpdateCheck(MemberVO memberVO, BindingResult bindingResult, String random)
 			throws Exception {
 		boolean result = false;
 		result = bindingResult.hasErrors();
@@ -202,7 +202,7 @@ public class MemberService {
 			}
 		}
 
-		if (!memberVO.getPhoneCheck().equals(checkNum)) {
+		if (!memberVO.getPhoneCheck().equals(random)) {
 			bindingResult.rejectValue("phoneCheck", "memberVO.phoneCheck.notEqual");
 			result = true;
 		}
@@ -210,7 +210,7 @@ public class MemberService {
 		return result;
 	}
 
-	public boolean memberUpdateCheck(MemberVO memberVO, BindingResult bindingResult, String checkNum) throws Exception {
+	public boolean memberUpdateCheck(MemberVO memberVO, BindingResult bindingResult, String random) throws Exception {
 		boolean result = false;
 
 		result = bindingResult.hasErrors();
@@ -241,7 +241,7 @@ public class MemberService {
 			}
 		}
 
-		if (!memberVO.getPhoneCheck().equals(checkNum)) {
+		if (!memberVO.getPhoneCheck().equals(random)) {
 			bindingResult.rejectValue("phoneCheck", "memberVO.phoneCheck.notEqual");
 			result = true;
 		}
@@ -253,7 +253,7 @@ public class MemberService {
 		return memberRepository.selectMemberUpdate(memberVO);
 	}
 
-	public boolean kakaoMemberCheck(MemberVO memberVO, BindingResult bindingResult, String checkNum) throws Exception {
+	public boolean kakaoMemberCheck(MemberVO memberVO, BindingResult bindingResult, String random) throws Exception {
 		boolean result = false; // false 에러X, true 에러O
 
 		// 1. 기본어노테이션 제공 검증 실행
@@ -269,7 +269,7 @@ public class MemberService {
 			}
 
 			// 인증번호가 맞는지 확인
-			if (!memberVO.getPhoneCheck().equals(checkNum)) {
+			if (!memberVO.getPhoneCheck().equals(random)) {
 				bindingResult.rejectValue("phoneCheck", "memberVO.phoneCheck.notEqual");
 				result = true;
 			}
