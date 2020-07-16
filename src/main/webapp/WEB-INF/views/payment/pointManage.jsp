@@ -9,10 +9,26 @@
 <c:import url="../template/boot.jsp"></c:import>
 
 <c:import url="../template/style.jsp"></c:import>
+<style type="text/css">
+.buttons{ 
+	border: 1px solid white; 
+	background-color: rgba(0,0,0,0);  
+	padding: 5px; 
+	display: inline-block;
+	width: 300px;
+	margin-top: 50px;
+}
+
+</style>
 </head>
 <body>
 	<c:import url="../template/woozoo_nav.jsp"></c:import>
 	<div class="container">
+		<div style="text-align: center;"><h2><b>포인트 관리</b></h2></div>
+		<div>
+			<button type="button" data-index="0" class="buttons" style="margin-left: 257px; border-bottom: 2px solid #5c2392;" id="buy_his"><b style="color: #5c2392">포인트 사용 내역</b></button>
+			<button type="button" data-index="0" class="buttons" id="calcul">정산하기</button>
+		</div>
 		<table class="table table-hover" style="margin-top: 30px;">
 			<tr>
 				<td>구분</td>
@@ -76,12 +92,14 @@
 	</div>
 	
 	
-	
-	<div>
-		<a href="javascript:popup_cal()">정산하기 </a>
-	</div>
+
 	
 	<script type="text/javascript">
+
+	$("#calcul").click(function(){
+		location.href="javascript:popup_cal()";
+		
+		});
 	
 		function popup_cal() {
 		var url = "../payment/calculate";

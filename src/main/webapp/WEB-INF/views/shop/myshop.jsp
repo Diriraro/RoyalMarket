@@ -39,6 +39,7 @@
 .lis2 {
 	display: none;
 }
+
 </style>
 
 <meta charset="UTF-8">
@@ -166,6 +167,7 @@
 									</div>
 								</div>
 							</c:forEach>
+
 						</div>
 						<c:if test="${prodco ne 0}">
 						<a class="btn btn-default pull-right " href="#" id="load">상품 더
