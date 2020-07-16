@@ -40,9 +40,7 @@
 														+ "../shop/myshop?mem_storeNum="+pqsnum
 														+ ' style="color: #ababab; font-size: 14px; font-weight: 600;">'
 														+ value.pq_storeName
-														+ '  </a>'
-														+ value.pq_regDate
-														+ ' ';
+														+ '  </a><font style="color: #ababab;margin-left:480px;">'+ value.pq_regDate+ '</font> ';
 												a += '<input type="hidden" id="pq_storeNum" value="'+pqsnum+'" />'
 												a += '<input type="hidden" id="mem_storeNum" value="${member.mem_storeNum}" />'
 												
@@ -108,6 +106,8 @@
 				type : 'post',
 				success : function(data) {
 					if (data == 1)
+						if(confirm("정말 삭제하시겠습니까 ?") == true){
+					    }
 						qnaList(sell_num); //댓글 삭제후 목록 출력 
 				}
 			});
@@ -118,6 +118,7 @@
 		$(document).ready(function() {
 			qnaList(); //페이지 로딩시 댓글 목록 출력 
 		});
+
 	</script>
 
 </body>

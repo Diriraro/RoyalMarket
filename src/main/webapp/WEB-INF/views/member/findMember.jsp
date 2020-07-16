@@ -17,21 +17,35 @@
 	text-align: center;
 	margin-top: 50px;
 	margin-bottom: 50px;
+
 }
 
 #find_id {
-	margin-bottom: 100px;
+	text-align:center;
+	background-color: white;
+	padding-bottom: 10px;
+	
+
+}
+
+#find_pw{
+	text-align:center;
+	background-color: white;
+	padding-bottom: 10px;
 }
 
 h3 {
+	text-align: center;
 	color: rgb(102, 0, 102);
-	font-weight: bold;
+	font-family: "Noto Sans KR", sans-serif;
+    font-weight: 1000;
 }
 
 h4 {
-	
-	font-weight: bold;
+
 	cursor: pointer;
+	font-family: "Noto Sans KR", sans-serif;
+    font-weight: 1000;
 }
 
 body {
@@ -185,6 +199,15 @@ body {
 	margin: 0px 7px 0px 40px;
 	background: rgb(102, 0, 102);
 }
+
+.mail:hover{
+	background-color: rgb(102, 0, 102);
+	color: white; 
+}
+
+
+
+
 
 #address {
 	width: 100px;
@@ -406,11 +429,31 @@ iframe {
 input {
 	width: 100%;
 }
+
+.jRNgFE {
+    background: rgb(249, 249, 249);
+}
+
+.isYAvJ {
+	text-align: center;
+	margin-top: 100px;
+	margin-left : 
+	height:500px;
+    padding: 60px;
+    background: rgb(255, 255, 255);
+}
+
+.box{
+	padding:3px;
+	background: rgb(244, 244, 250);
+	margin: 10px 10px 10px 10px;
+}
 </style>
 </head>
 
 <body>
 
+<div class="jRNgFE">
 
 	<div class="logo">
 		<img src="../../resources/images/logo4.JPG" class="sc-fYiAbW knQFFQ">
@@ -418,9 +461,9 @@ input {
 
 	<div style="padding: 0 20% 0% 20%">
 		<div id="find_id">
-			<h3>아이디 찾기</h3>
+			<h3>ID</h3>
 
-			<h4 id="show1" class="sh" title="hide">등록된 전화번호로 아이디 찾기</h4>
+			<h4 id="show1" class="sh box" title="hide">SMS로 아이디 찾기</h4>
 			<div class="show1" style="display: none;">
 				<form:form modelAttribute="memberVO" action="./findIdByEmail"
 					method="post">
@@ -449,10 +492,11 @@ input {
 									width="17" height="20">
 							</div>
 							<form:input path="mem_phone" type="text" id="mem_phone"
-								placeholder="휴대폰 번호(숫자만 허용)" />
+								placeholder="휴대폰 번호" />
 
-							<input type="button" value="아이디 찾기" class="btn btn-default"
+							<input type="button" value="아이디 찾기" class="btn btn-default phone"
 								id="rq_num" onclick="checkPhone()">
+								
 						</div>
 					</div>
 					<form:errors path="mem_phone" class="error_msg"></form:errors>
@@ -460,7 +504,7 @@ input {
 				</form:form>
 			</div>
 
-			<h4 id="show2" class="sh">등록된 이메일로 아이디 찾기</h4>
+			<h4 id="show2" class="sh box">E-MAIL로 아이디 찾기</h4>
 			<div class="show2" style="display: none;">
 				<form:form modelAttribute="memberVO" action="./findIdByEmail"
 					method="post">
@@ -502,17 +546,19 @@ input {
 			</div>
 
 		</div>
-
+		
+		<div style="height: 50px;"></div>
+		
 		<div id="find_pw">
 
 
-			<h3>비밀번호 찾기</h3>
+			<div><h3>PASSWORD</h3></div>
 
 
 
 
 
-			<h4 id="show3" class="sh">등록된 전화번호로 비밀번호 찾기</h4>
+			<h4 id="show3" class="sh box">SMS인증으로 비밀번호 찾기</h4>
 			<div class="show3" style="display: none;">
 				<form:form modelAttribute="memberVO" action="./findPwByPhone"
 					method="post">
@@ -542,9 +588,9 @@ input {
 									width="17" height="20">
 							</div>
 							<form:input path="mem_phone" type="text" id="mem_phone3"
-								placeholder="휴대폰 번호(숫자만 허용)" />
+								placeholder="휴대폰 번호" />
 
-							<input type="button" value="인증번호 요청" class="btn btn-default"
+							<input type="button" value="인증번호 요청" class="btn btn-default phone"
 								id="rq_num" onclick="checkPhone3()">
 						</div>
 					</div>
@@ -603,12 +649,9 @@ input {
 				</form:form>
 				
 
-			
-
-
 			</div>
 
-			<h4 id="show4" class="sh">등록된 이메일로 비밀번호 찾기</h4>
+			<h4 id="show4" class="sh box">E-MAIL인증으로 비밀번호 찾기</h4>
 			<div class="show4" style="display: none;">
 				<form:form modelAttribute="memberVO" action="./findPwByEmail"
 					method="post">
@@ -677,6 +720,9 @@ input {
 						</div>
 					</div>
 					<form:errors path="mem_pw" class="error_msg"></form:errors>
+					
+
+					
 
 					<div class="sc-lhLRcH csuEuq">
 						<div class="sc-jMtzgO liBHhX">
@@ -693,7 +739,7 @@ input {
 
 					<div class="form-group">
 						<div class="col-sm-offset-2 col-sm-10">
-							<button type="submit" class="btn btn-default"  value="확인"   style="width: 100%; background:rgb(102, 0, 102); color: white; margin-top: 10px;">확인</button>
+							<button type="submit" class="btn btn-default"  value="확인"   style="width: 100%; background:rgb(102, 0, 102); color: white; margin-top: 10px;" onclick="timeSend();">확인</button>
 						</div>
 					</div>
 				</form:form>
@@ -701,13 +747,20 @@ input {
 
 		</div>
 	</div>
-					<img alt="dd" src="../../resources/images/find2.png">
+					
 	
 
 
 
 
 	<script type="text/javascript">
+	/*  var time = "${time}";
+
+	 if(time=="time"){
+		TimerStart4();
+	}   */
+	
+	
 	var name="";
 		$("#show1").click(function() {
 			if ($(this).prop("title") == "hide") {
@@ -768,6 +821,7 @@ input {
 			}
 		});
 
+		
 		function checkEmail() {
 			var email = $('#mem_email').val();
 			var name = $('#mem_name1').val();
@@ -795,8 +849,8 @@ input {
 			window.close();
 		}
 
-
-		var SetTime = 300;	
+		var SetTime = 300;
+		
 		var tid=0;
 
 		function msg_time3() {	// 1초씩 카운트
@@ -808,13 +862,14 @@ input {
 			document.all.ViewTimer3.innerHTML = msg;		// div 영역에 보여줌 
 					
 			SetTime--;					// 1초씩 감소
+
+			$("#time").val(SetTime);
 			
 			if (SetTime < 0) {			// 시간이 종료 되었으면..
 				clearInterval(tid);		// 타이머 해제
 				alert("인증번호가 만료되었습니다.");
 			}
 		}
-		
 		
 		
 		function msg_time4() {	// 1초씩 카운트
@@ -826,6 +881,8 @@ input {
 			document.all.ViewTimer4.innerHTML = msg;		// div 영역에 보여줌 
 					
 			SetTime--;					// 1초씩 감소
+
+			$("#time").val(SetTime);
 			
 			if (SetTime < 0) {			// 시간이 종료 되었으면..
 				clearInterval(tid);		// 타이머 해제
@@ -842,6 +899,11 @@ input {
 		
 		var show3 = "${show3}";
 		var show4 = "${show4}";
+		var again = "${again}";
+
+		if(again=="again"){
+				alert("입력정보가 틀립니다. 인증번호를 재발급하고 다시 시도해주세요!")
+			}
 	
 
 		if(show4){
@@ -854,10 +916,10 @@ input {
 		
 			function checkEmail4(result2) {
 				
-				SetTime=300;
 				var email = $('#mem_email4').val();
 				var id = $('#mem_id4').val();
-				$(".pw").css("display", "block")
+				$(".pw").css("display", "block");
+				SetTime= 300;
 
 				$.post("./check/sendEmail", {
 					id : id,
@@ -881,10 +943,10 @@ input {
 
 			function checkPhone3(result2) {
 				var phoneNumber = $('#mem_phone3').val();
-				SetTime=300;
 				var id = $('#mem_id3').val();
 				$(".pw").css("display", "block")
-
+				SetTime= 300;
+	
 				$.post("./check/sendSMS", {
 					id : id,
 					phoneNumber : phoneNumber
@@ -900,12 +962,15 @@ input {
 				})
 			}
 
+	
+
 		
 	
 		
 		
 		
 	</script>
+	</div>
 
 </body>
 
