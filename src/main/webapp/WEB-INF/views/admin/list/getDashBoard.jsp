@@ -133,10 +133,8 @@
 							style="width: 96px; height: 96px" title="${list.sell_num}">
 					</div>
 					<div class="w3-col m10 w3-container">
-					<span class="w3-opacity w3-medium">${list.sell_date}</span>
-						<h4>
-							${list.sell_product} 
-						</h4>
+						<span class="w3-opacity w3-medium">${list.sell_date}</span>
+						<h4>${list.sell_product}</h4>
 						<p>${list.sell_info}</p>
 						<br>
 					</div>
@@ -203,10 +201,12 @@
 		<div class="vGraph">
 			<ul>
 				<c:forEach items="${profitAr}" var="profit" varStatus="i">
-					<li><span class="gTerm">${i.index+1}월 매출</span><span><span
-							class="gBar"
-							style="height:${profit.profitRate}%; background-color : purple; color : white;"><span>${profit.profitRate}%</span>${profit.profit}
-								/ 1,000,000 원</span></span></li>
+					<c:if test="${profit.profitRate gt 0}">
+						<li><span class="gTerm">${i.index+1}월 매출</span><span><span
+								class="gBar"
+								style="height:${profit.profitRate}%; background-color : purple; color : white;"><span>${profit.profitRate}%</span>${profit.profit}
+									/ 1,000,000 원</span></span></li>
+					</c:if>
 				</c:forEach>
 			</ul>
 		</div>
