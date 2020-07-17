@@ -133,8 +133,9 @@
 							style="width: 96px; height: 96px" title="${list.sell_num}">
 					</div>
 					<div class="w3-col m10 w3-container">
+					<span class="w3-opacity w3-medium">${list.sell_date}</span>
 						<h4>
-							${list.sell_product} <span class="w3-opacity w3-medium">${list.sell_date}</span>
+							${list.sell_product} 
 						</h4>
 						<p>${list.sell_info}</p>
 						<br>
