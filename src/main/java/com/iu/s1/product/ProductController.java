@@ -1,5 +1,6 @@
 package com.iu.s1.product;
 
+import java.nio.channels.SeekableByteChannel;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -204,7 +205,7 @@ public class ProductController {
 		List<ProductFileVO> productFileVOs = productService.productFileSelect(sell_num);
 		mv.addObject("pfile", productFileVOs); // store 사진 출력
 
-		long mem_storeNum = ((MemberVO) session.getAttribute("member")).getMem_storeNum();
+		long mem_storeNum = ((MemberVO)session.getAttribute("member")).getMem_storeNum();
 		ZzimVO zzimVO = productService.zzimCheck(mem_storeNum, sell_num);
 		mv.addObject("zc", zzimVO);
 
@@ -267,12 +268,13 @@ public class ProductController {
 	}
 
 	@GetMapping("productDelete")
-	public ModelAndView productDelete(ProductVO productVO, RedirectAttributes rd, HttpServletRequest request)
+	public ModelAndView productDelete(ProductVO productVO, RedirectAttributes rd, HttpServletRequest request,MemberVO memberVO,HttpSession session)
 			throws Exception {
 		ModelAndView mv = new ModelAndView();
 		int result = productService.productDelete(productVO);
 		rd.addFlashAttribute("result", result);
-		mv.setViewName("redirect:../");
+		long mem_storeNum = ((MemberVO)session.getAttribute("member")).getMem_storeNum();
+		mv.setViewName("redirect:./myProductList?kind=sp&mem_storeNum=" + mem_storeNum);
 		return mv;
 
 	}

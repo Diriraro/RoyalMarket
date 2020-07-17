@@ -11,7 +11,7 @@ if (request.getProtocol().equals("HTTP/1.1"))
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>결제 성공 - 우주장터</title>
 </head>
 <body>
 	<h1>결제 성공</h1>

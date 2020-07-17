@@ -2,6 +2,11 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+
+
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,7 +32,8 @@
 <body>
 	<c:import url="../template/woozoo_nav.jsp"></c:import>
 
-	<div style="border-bottom: solid 1px black; width: 1024px; margin-left: 440px; height: 78px;">
+	<div
+		style="border-bottom: solid 1px black; width: 1024px; margin-left: 440px; height: 78px;">
 		<div style="width: 300px; height: 300px;">
 			<img style="width: 20px;height: 20px;float: left;margin-top: 30px;" alt="홈이미지" src="${pageContext.request.contextPath}/resources/images/home_logo.png">
 			<font style="float: left;color: #4d555e;margin-top: 31px;">&nbsp;홈&nbsp;&nbsp;</font>
@@ -118,7 +124,7 @@
 
 		<div style="display: inline-block; margin-left: 50px; width: 545px;">
 			<font style="font-size: 25px; font-weight: 800;">${vo.sell_product}</font>
-			<br> <br> <font style="font-size: 45px">${vo.sell_price}</font><font
+			<br> <br> <font style="font-size: 45px"><fmt:formatNumber> ${vo.sell_price} </fmt:formatNumber></font><font
 				style="font-size: 26px;">원</font>
 			<hr>
 			<img style="width: 20px; height: 20px" alt=""
@@ -193,9 +199,7 @@
 	
 	<div style="width: 348px;margin-left: 440px;margin-top:100px;" > </div>
 	
-
 	<div style="width: 1024px;margin-left: 440px;">
-
 	
 	<div style="float:left; height: 50px;width: 348px;
 	border-left:solid 1px black;border-right:solid 1px black;border-top:solid 1px black;
@@ -362,6 +366,6 @@
 	<%@ include file="productQna.jsp"%>
 
 
-<c:import url="../template/footer.jsp"></c:import>
+
 </body>
 </html>

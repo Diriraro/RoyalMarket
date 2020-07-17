@@ -67,7 +67,7 @@ public interface PaymentMapper {
 	
 	public int del_sellHistory(long trading_num)throws Exception;
 	
-	public int product_sell_statusUp(long sell_num)throws Exception;
+	public int product_sell_statusUp(ProductVO productVO)throws Exception;
 	
 	public int paycheckInsert(PayCheckVO payCheckVO)throws Exception;
 	

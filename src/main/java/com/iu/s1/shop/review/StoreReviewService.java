@@ -35,6 +35,7 @@ public class StoreReviewService {
 	//파일과 함께 리뷰인설트
 	public int setInsertReview(StoreReviewVO storeReviewVO,MultipartFile[] files) throws Exception{
 		File file = filePathGenerator.getUseClassPathResource(filePath);
+		System.out.println(filePath+" 경로확인");
 		
 		int result = storeReviewRepository.setInsertReview(storeReviewVO);
 		
@@ -104,6 +105,24 @@ public class StoreReviewService {
 	// recheck
 	public StoreReviewVO recheck(long sell_num) throws Exception{
 		return storeReviewRepository.recheck(sell_num);
+		
+	}
+	
+	// recheck2
+	public long recheck2(long sell_num) throws Exception{
+		return storeReviewRepository.recheck2(sell_num);
+		
+	}
+	
+	//take_rate
+	public double take_rate(long take_storeNum)throws Exception {
+		return storeReviewRepository.take_rate(take_storeNum);
+	}
+	
+	//give_rate
+	
+	public double give_rate(long give_storeNum)throws Exception{
+		return storeReviewRepository.give_rate(give_storeNum);
 		
 	}
 	

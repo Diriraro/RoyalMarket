@@ -5,25 +5,18 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>${productVO.sell_product} 구매 상세정보  - 우주장터</title>
 
 <c:import url="../template/boot.jsp"></c:import>
 <c:import url="../template/style.jsp"></c:import>
 </head>
 <body>
-	<c:if test="${recheck ne null }">
-		<button> 이미 작성함.</button>
-	</c:if>
 	
-	<c:if test="${recheck eq null }">
-		<button> 작성가능</button>
-	</c:if>
-
 	<c:import url="../template/woozoo_nav.jsp"></c:import>
 	<div class="container"> 
 		<h2><b>주문 상세정보</b></h2>
 		<div style="width: 100%; height: 50px; border: 4px solid #cccccc;">
-			<div style="display: inline-block; margin-top: 10px;margin-left: 20px;"><b style="font-size: large;">주문자</b> <font style="font-size: large;">: ${mem_id }</font></div>
+			<div style="display: inline-block; margin-top: 10px;margin-left: 20px;"><b style="font-size: large;">판매자</b> <font style="font-size: large;">: ${seller_id }</font></div>
 			<div style="display: inline-block; margin-left: 100px;"><b style="font-size: large;">주문 일자</b> <font style="font-size: large;">: ${buy_date}</font></div>
 			<div style="display: inline-block; margin-left: 100px;"><b style="font-size: large;">주문 번호</b> <font style="font-size: large;">: ${productVO.sell_num }</font></div>
 		</div>

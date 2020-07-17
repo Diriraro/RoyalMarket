@@ -27,6 +27,7 @@ import com.iu.s1.product.ProductVO;
 import com.iu.s1.saveCash.SaveCashVO;
 import com.iu.s1.shop.review.StoreReviewService;
 import com.iu.s1.shop.review.StoreReviewVO;
+import com.iu.s1.shop.review.reviewFile.StoreReviewFileVO;
 
 
 import com.iu.s1.trading.TradingVO;
@@ -42,7 +43,6 @@ public class PaymentController {
 	private ProductService productService;
 	@Autowired
 	private StoreReviewService storeReviewService;
-
 	//결제로 들어가는 페이지
 	@GetMapping("pay")
 	public ModelAndView pay(long amount,HttpServletRequest request) throws Exception{
@@ -164,31 +164,45 @@ public class PaymentController {
 		String sell_product = request.getParameter("sell_product");
 		long sell_price = Long.parseLong(request.getParameter("sell_price"));
 		long sell_num = Long.parseLong(request.getParameter("sell_num"));
+		ProductVO productVO = productService.productSelect(sell_num);
 		
-		//페이지 진입시 savecash에 아이디가 있는지 확인 / 없으면 생성후 cash 불러오기 / 있으면 cash 불러오기
-		SaveCashVO saveCashVO = new SaveCashVO();
-		saveCashVO = paymentService.selectSC(memberVO.getMem_id());
-		if(saveCashVO==null) {
-			paymentService.createSC(memberVO.getMem_id());
+		if(productVO.getSell_status()==0) {
+			
+			//페이지 진입시 savecash에 아이디가 있는지 확인 / 없으면 생성후 cash 불러오기 / 있으면 cash 불러오기
+			SaveCashVO saveCashVO = new SaveCashVO();
 			saveCashVO = paymentService.selectSC(memberVO.getMem_id());
+			if(saveCashVO==null) {
+				paymentService.createSC(memberVO.getMem_id());
+				saveCashVO = paymentService.selectSC(memberVO.getMem_id());
+			}
+			mv.addObject("cash", saveCashVO);
+			
+			
+			//맴버테이블에서 포인트 조회
+			String mem_id = memberVO.getMem_id();
+			long point = paymentService.pointSelect(mem_id);
+			
+			String image = productService.selectFileName(sell_num);
+			
+			mv.addObject("image", image);
+			mv.addObject("point", point);
+			mv.addObject("sell_product", sell_product);
+			mv.addObject("sell_price", sell_price);
+			mv.addObject("sell_num",sell_num);
+			
+			mv.setViewName("/payment/productPay");
+			
+		}else if(productVO.getSell_status()==1){
+			
+			mv.addObject("result", "거래중인 상품입니다.");
+			mv.addObject("path", "../");
+			mv.setViewName("/common/result");
+			
+		}else if(productVO.getSell_status()==2) {
+			mv.addObject("result", "구매 완료 된 상품입니다.");
+			mv.addObject("path", "../");
+			mv.setViewName("/common/result");
 		}
-		mv.addObject("cash", saveCashVO);
-		
-		
-		//맴버테이블에서 포인트 조회
-		String mem_id = memberVO.getMem_id();
-		long point = paymentService.pointSelect(mem_id);
-		
-		String image = productService.selectFileName(sell_num);
-		
-		mv.addObject("image", image);
-		mv.addObject("point", point);
-		mv.addObject("sell_product", sell_product);
-		mv.addObject("sell_price", sell_price);
-		mv.addObject("sell_num",sell_num);
-		
-		mv.setViewName("/payment/productPay");
-		
 		return mv;
 	}
 	
@@ -207,7 +221,10 @@ public class PaymentController {
 		
 		if(tradingVO==null) {
 			tradingVO = new TradingVO();
-			paymentService.product_sell_statusUp(sell_num);
+			ProductVO productVO = new ProductVO();
+			productVO.setSell_status(1l);
+			productVO.setSell_num(sell_num);
+			paymentService.product_sell_statusUp(productVO);
 			MemberVO memberVO = (MemberVO)request.getSession().getAttribute("member");
 			tradingVO.setSell_price(sell_price+cash);		// 이미 sell_price가 jsp에서 cash만큼 빠져서 넘어오기 때문에 더해줌 / 
 			tradingVO.setSell_num(sell_num);
@@ -241,7 +258,7 @@ public class PaymentController {
 			Buy_HistoryVO buy_HistoryVO = new Buy_HistoryVO();
 			
 			// 상품이름 검색
-			ProductVO productVO = paymentService.productSelect(sell_num);
+			productVO = paymentService.productSelect(sell_num);
 			String file_name=productService.selectFileName(sell_num);
 			
 			// 날짜 설정 
@@ -376,6 +393,12 @@ public class PaymentController {
 		
 		//인수 인계가 모두 1이면 판매자 포인트 업데이트
 		if(receive==1 && give==1) {		
+			//sellStatus 업데이트
+			ProductVO productVO = new ProductVO();
+			productVO.setSell_status(2l);
+			productVO.setSell_num(sell_num);
+			paymentService.product_sell_statusUp(productVO);
+			
 			long total=curPoint+(tradingVO.getSell_price()-2500);
 			MemberVO memberVO = new MemberVO();
 			memberVO.setMem_id(seller_id);
@@ -412,7 +435,7 @@ public class PaymentController {
 			
 			// 1% 적립금 추가
 			SaveCashVO saveCashVO = new SaveCashVO();
-			ProductVO productVO =paymentService.productSelect(tradingVO.getSell_num());
+			productVO =paymentService.productSelect(tradingVO.getSell_num());
 			int sc = productVO.getSell_price();
 			sc= (int) (sc*0.01);
 			saveCashVO.setMem_cash(sc);
@@ -460,6 +483,12 @@ public class PaymentController {
 		
 		//인수 인계가 모두 1이면 판매자 포인트 업데이트
 		if(receive==1 && give==1) {		
+			//sellStatus 업데이트
+			ProductVO productVO = new ProductVO();
+			productVO.setSell_status(2l);
+			productVO.setSell_num(sell_num);
+			paymentService.product_sell_statusUp(productVO);
+			
 			
 			long total=curPoint+(tradingVO.getSell_price()-2500);	//판매자 원래포인트+(판매물건가격-배송비)
 			MemberVO memberVO = new MemberVO();
@@ -502,7 +531,7 @@ public class PaymentController {
 			SaveCashVO saveCashVO = new SaveCashVO();
 			saveCashVO = paymentService.selectSC(tradingVO.getBuyer_id());
 			
-			ProductVO productVO =paymentService.productSelect(tradingVO.getSell_num());
+			productVO =paymentService.productSelect(tradingVO.getSell_num());
 			long sc = productVO.getSell_price();
 			sc = (long) (sc*0.01);				//1%
 			sc = Math.round(sc*0.1) *10;		//1원단위 반올림
@@ -527,6 +556,7 @@ public class PaymentController {
 		long sell_num = Long.parseLong(request.getParameter("sell_num"));
 		long buy_history_num = Long.parseLong(request.getParameter("buy_history_num"));
 		
+		
 		// productVo 가져오기
 		ProductVO productVO =paymentService.productSelect(sell_num);
 		// 이미지 불러오기
@@ -534,7 +564,7 @@ public class PaymentController {
 		// status(주문상태 가져오기 )
 		long status = paymentService.buy_status(buy_history_num);
 		// 주문자추가
-		String mem_id=memberVO.getMem_id();
+		String seller_id = request.getParameter("seller_id");
 		//날짜 가져오기
 		Buy_HistoryVO buy_HistoryVO= paymentService.buy_Sel(buy_history_num);
 		
@@ -547,7 +577,7 @@ public class PaymentController {
 		////
 		
 		mv.addObject("buy_date", buy_HistoryVO.getBuy_date());
-		mv.addObject("mem_id", mem_id);
+		mv.addObject("seller_id", seller_id);
 		mv.addObject("status", status);
 		mv.addObject("buy_history_num", buy_history_num);
 		mv.addObject("image", image);
@@ -575,7 +605,8 @@ public class PaymentController {
 		//날짜 가져오기
 		Sell_HistoryVO sell_HistoryVO = paymentService.sell_Sel(sell_history_num);
 		// 구매자 전화번호와 주소 검색
-		String buyer_id = sell_HistoryVO.getMem_id();
+		String buyer_id = request.getParameter("buyer_id");
+		System.out.println(buyer_id);
 		MemberVO memberVO2=paymentService.memberVOSel(buyer_id);
 		
 		mv.addObject("memberVO", memberVO2);

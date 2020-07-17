@@ -15,5 +15,7 @@ public class StoreFollowVO {
 	
 	private long pco; // 상품갯수
 	private long fco; // 팔로워 수
+	private int re_rate; // 별점 모을곳.
+	private int sub_star;// 반별
 	
 }

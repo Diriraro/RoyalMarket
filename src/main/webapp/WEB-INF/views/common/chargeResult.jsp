@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Waiting..</title>
 <script type="text/javascript">
 	alert('${result}');
 	location.href="${path}";

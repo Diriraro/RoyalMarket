@@ -48,7 +48,9 @@ public class MemberController {
 	@Autowired
 	private JavaMailSender mailSender;
 
+
 	private String checkNum = "checkNum";
+
 
 	@Autowired
 	private PaymentService paymentService;
@@ -57,7 +59,9 @@ public class MemberController {
 	@GetMapping("memberUpdate")
 	public void memberPage() throws Exception {
 
+
 	}
+
 
 	@GetMapping("findPwByEmail")
 	public ModelAndView findPwByEmail(HttpSession session, MemberVO memberVO) throws Exception {

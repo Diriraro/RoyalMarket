@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,7 +15,7 @@
 </head>
 <body>
 	<c:import url="../template/woozoo_nav.jsp"></c:import>
-	
+	<c:import url="../template/style.jsp"></c:import>
 	
 	
 <div style="margin-left:440px; width: 1024px;">
@@ -64,7 +69,7 @@
 							src="${pageContext.request.contextPath}/upload/product/${myfile[i.index]}"></td>
 							
 					<td style="line-height: 152px;"><a href="./productSelect?sell_num=${vo.sell_num}">${vo.sell_product}</a></td>
-					<td style="line-height: 152px;">${vo.sell_price}원</td>
+					<td style="line-height: 152px;"><fmt:formatNumber> ${vo.sell_price} </fmt:formatNumber>원</td>
 					<td style="line-height: 152px;">${vo.sell_hit}</td>
 					<td style="line-height: 152px;">${vo.sell_date}</td>
 					<td >
@@ -81,33 +86,33 @@
 				<ul class="pagination" >
 					<c:if test="${pager.curBlock gt 1}">
 						<li><a
-							href="./myProductList?curPage=${pager.startNum-1}&kind=${pager.kind}&search=${pager.search}">이전</a></li>
+							href="./myProductList?curPage=${pager.startNum-1}&kind=${pager.kind}&mem_storeNum=${member.mem_storeNum}">이전</a></li>
 					</c:if>
 					<c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
 						<li><a
-							href="./myProductList?curPage=${i}&kind=${pager.kind}&search=${pager.search}">${i}</a></li>
+							href="./myProductList?curPage=${i}&kind=${pager.kind}&mem_storeNum=${member.mem_storeNum}">${i}</a></li>
 					</c:forEach>
 					<c:if test="${pager.curBlock lt pager.totalBlock}">
 						<li><a
-							href="./myProductList?curPage=${pager.lastNum+1}&kind=${pager.kind}&search=${pager.search}">다음</a></li>
+							href="./myProductList?curPage=${pager.lastNum+1}&kind=${pager.kind}&mem_storeNum=${member.mem_storeNum}">다음</a></li>
 					</c:if>
 				</ul>
 			</div>
 			
-			<% 
+<%-- 			<% 
 			String strReferer = request.getHeader("referer");
 			request.getMethod().equals("GET");
 			if(strReferer == null){ 
 			%>
 			<script type="text/javascript">
-			document.location.href="http://localhost:8080/";
- 			alert("정상적인 경로를 통해 다시 접근해 주세요");
+
+			document.location.href="http://localhost:8080/error/error";
 
 			</script>
 			<%
 			return;
 			}
-			%>
+			%> --%>
 			
 
 
@@ -116,6 +121,9 @@
 <!-- <script type="text/javascript">
  history.replaceState({}, null, location.pathname); 
 </script> -->
+<br>
+<br>
+<c:import url="../template/footer.jsp"></c:import>
 <script type="text/javascript">
 $(".del").click(function(){
     if(confirm("정말 삭제하시겠습니까 ?") == true){

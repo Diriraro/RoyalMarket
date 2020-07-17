@@ -33,6 +33,12 @@ public interface StoreReviewRepository {
 	// 작성했는지 안했는지 검사 상품번호와 리뷰는 1대1
 	public StoreReviewVO recheck(long sell_num) throws Exception;
 	
+	//recheck2
+	public long recheck2(long sell_num) throws Exception;
 	
+	//take_rate
+	public double take_rate(long take_storeNum) throws Exception;
 	
+	//give_rate
+	public double give_rate(long give_storeNum) throws Exception;
 }

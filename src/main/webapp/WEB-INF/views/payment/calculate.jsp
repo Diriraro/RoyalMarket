@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Test님의 코인 충전</title>
+<title>${member.mem_id}님의 포인트 정산 - 우주장터</title>
 <c:import url="../template/boot.jsp"></c:import>
 <style type="text/css">
 .wrap1{
@@ -29,14 +29,27 @@
 	
 		<form action="/payment/calculate" method="post" id="frm">
 			<div style=" height: 20px; width: 70px; margin-top: 35px; float: left; display: inline-block;"><b>출금 계좌</b> </div>
-			<div style="display: inline-block;"><input type="text" id="account" name="account" style="height:40px; border-radius: 4px; margin-top:30px;" title="${point}" placeholder="숫자만 입력해 주세요"></div>
+			<div style="display: inline-block;"><input type="text" id="account" name="account" style="height:40px; border-radius: 4px; margin-top:30px;"  placeholder="숫자만 입력해 주세요"></div>
 			
 			<div style=" height: 20px; width: 60px; margin-top: 35px; margin-left:15px; display: inline-block;"><b>출금 은행</b> </div>
-			<div style="display: inline-block;"><input type="text" id="bank_num" name="bank_num" style="height:40px; border-radius: 4px; margin-top:30px; width: 80px;"></div>
+			<div style="display: inline-block;">
+				<select name="searchYear" id="searchYear">
+					<option value="국민은행">국민은행</option>
+					<option value="신한은행">신한은행</option>
+					<option value="우리은행">우리은행</option>
+					<option value="기업은행">기업은행</option>
+					<option value="농협">농협</option>
+					<option value="수협">수협</option>
+					<option value="카카오뱅크">카카오뱅크</option>
+					<option value="KEB하나은행">KEB하나은행</option>
+					<option value="SC제일은행">SC제일은행</option>
+				</select>
+
+			</div>
 			<br>
 			
 			<div style=" height: 20px; width: 70px; margin-top: 35px; float: left;"><b>출금 금액</b> </div>
-			<div><input type="text" id="amount" name="amount" style="height:40px; border-radius: 4px; margin-top:30px;"></div>
+			<div><input type="text" id="amount" name="amount" style="height:40px; border-radius: 4px; margin-top:30px; " title="${point}"></div>
 			
 			<hr>
 		
@@ -62,13 +75,25 @@
 	});
 
 	//포인트 초과했을때 alert 띄우기 ()
-	$("#amount").on("blur", function() {
+/* 	$("#amount").on("blur", function() {
 		  //console.log($(this).attr("title"));
 		    if($(this).val>$(this).attr("title")){
 				alert("보유 포인트 초과");
 				$(this).val("");
 			    }
+		}); */
+
+	$("#amount").blur(function(){
+		var a = $("#amount").attr("title");
+		var b = $("#amount").val();
+
+		if(b>a){
+				alert("보유 포인트를 초과합니다.");
+				$("#amount").value="";
+				$("#amount").val('');
+			}
 		})
+	
 	$("#account").on("keyup", function() {
 		
 	    $(this).val($(this).val().replace(/[^0-9]/g,""));
