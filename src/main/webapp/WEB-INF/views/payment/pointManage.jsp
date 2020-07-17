@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>내 포인트 현황 - 우주장터</title>
 <c:import url="../template/boot.jsp"></c:import>
 
 <c:import url="../template/style.jsp"></c:import>

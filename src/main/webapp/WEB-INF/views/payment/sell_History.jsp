@@ -6,7 +6,7 @@
 <html style="height: 100%;">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>내 판매 내역 - 우주장터</title>
 <style type="text/css">
 
 .buttons{ 
