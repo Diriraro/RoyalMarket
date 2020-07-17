@@ -29,16 +29,17 @@
 			<button type="button" data-index="0" class="buttons" style="margin-left: 257px; border-bottom: 2px solid #5c2392;" id="buy_his"><b style="color: #5c2392">포인트 사용 내역</b></button>
 			<button type="button" data-index="0" class="buttons" id="calcul">정산하기</button>
 		</div>
-		<table class="table table-hover" style="margin-top: 30px;">
+		<table class="table table-hover" style="margin-top: 30px; width: 850px; text-align: center; align-content: center; margin-left: 145px;">
 			<tr>
-				<td>구분</td>
-				<td>포인트량</td>
-				<td>잔여 포인트</td>
+				<td style="width: 85px;">구분</td>
+				<td style="width: 120px;">날짜</td>
+				<td style="width: 322.5px">포인트량</td>
+				<td style="width: 322.5px">잔여 포인트</td>
 			</tr>
 			<c:forEach items="${list}" var="vo">
 				<tr>
 					<c:if test="${vo.pay_in eq 1}">
-						<td>입금</td>
+						<td>충전</td>
 					</c:if>
 					<c:if test="${vo.pay_in eq 2}">
 						<td>상품 판매</td>	
@@ -52,6 +53,11 @@
 					<c:if test="${vo.pay_out eq 2}">
 						<td>정산</td>	
 					</c:if>
+					
+					<td>
+						${vo.pay_date}
+					</td>
+					
 					<c:if test="${vo.pay_in eq 1}">
 						<td>+${vo.pay_price}</td>
 					</c:if>
@@ -72,7 +78,7 @@
 				</tr>
 			</c:forEach>
 		</table>
-			<div class="p" style="width: 1024px;height: 40px;float: left;">
+			<div class="p" style="width: 1024px;height: 40px;float: left; margin-left: 70px;"align="center">
 				<ul class="pagination" >
 
 					<c:if test="${pager.curBlock gt 1}">

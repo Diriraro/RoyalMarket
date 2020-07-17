@@ -8,6 +8,7 @@ import com.iu.s1.interceptor.AdminInterceptor;
 import com.iu.s1.interceptor.BuyerPageInterceptor;
 import com.iu.s1.interceptor.ProductCancelInterceptor;
 import com.iu.s1.interceptor.ProductInterceptor;
+import com.iu.s1.interceptor.ProductPayInterceptor;
 import com.iu.s1.interceptor.ReviewInterceptor;
 import com.iu.s1.interceptor.SellerPageInterceptor;
 
@@ -33,6 +34,9 @@ public class InterceptorConfig implements WebMvcConfigurer {
 	@Autowired
 	private ReviewInterceptor reviewInterceptor;
 	
+	@Autowired
+	private ProductPayInterceptor productPayInterceptor;
+	
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		
@@ -57,6 +61,7 @@ public class InterceptorConfig implements WebMvcConfigurer {
 		.excludePathPatterns("/product/productList")
 		.excludePathPatterns("/product/homeProductList")
 		.excludePathPatterns("/product/recProductList")
+		.excludePathPatterns("/product/productPay")
 		.excludePathPatterns("/qna/qnaAdminList")
 		.excludePathPatterns("/qna/qnaAnswer")
 		.excludePathPatterns("/product/recentSearchProduct");
@@ -72,6 +77,9 @@ public class InterceptorConfig implements WebMvcConfigurer {
 
 		registry.addInterceptor(reviewInterceptor)
 		.addPathPatterns("/shop/rei");
+		
+		registry.addInterceptor(productPayInterceptor)
+		.addPathPatterns("/product/productPay");
 
 		//적용할 Interceptor 등록
 		//registry.addInterceptor(productQnaInterceptor)
