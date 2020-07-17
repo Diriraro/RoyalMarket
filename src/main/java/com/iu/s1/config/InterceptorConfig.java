@@ -68,12 +68,11 @@ public class InterceptorConfig implements WebMvcConfigurer {
 		
 		registry.addInterceptor(adminInterceptor)
 		.addPathPatterns("/admin/*")
-		.addPathPatterns("/notice/*")
+		.addPathPatterns("/notice/noticeDelete")
+		.addPathPatterns("/notice/noticeUpdate")
+		.addPathPatterns("/notice/noticeWrite")
 		.addPathPatterns("/qna/qnaAdminList")
-		.addPathPatterns("/qna/qnaAnswer")
-		.excludePathPatterns("/notice/noticeList")
-		.excludePathPatterns("/notice/policy")
-		.excludePathPatterns("/notice/ban");
+		.addPathPatterns("/qna/qnaAnswer");
 
 		registry.addInterceptor(reviewInterceptor)
 		.addPathPatterns("/shop/rei");

@@ -192,6 +192,7 @@ body {
 </style>
 </head>
 <body>
+	<c:if test="${member.mem_id ne 'admin'}">
 
 	<div class="sc-dfRKBO hDxWCi">
 		<header class="sc-iqtXtF gFPFTs">
@@ -261,6 +262,25 @@ body {
 			</div>
 		</div>
 	</div>
+	</c:if>
+	<c:if test="${member.mem_id eq 'admin'}">
+		<div class="sc-dfRKBO hDxWCi">
+		<header class="sc-iqtXtF gFPFTs">
+			<a href="javascript:history.back();" class="sc-jiTwWT kEHDol">
+				<img
+					src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmlld0JveD0iMCAwIDIwIDIwIj4KICAgIDxwYXRoIGZpbGw9IiMxRTFEMjkiIGZpbGwtcnVsZT0iZXZlbm9kZCIgZD0iTTE5IDguOTk2SDMuNjZMOS42NTcgMy43NWExIDEgMCAwIDAtMS4zMTYtMS41MDZsLTggN2MtLjAwOC4wMDctLjAxLjAxOC0uMDE5LjAyNWEuOTc1Ljk3NSAwIDAgMC0uMTc3LjI0Yy0uMDE4LjAzLS4wNDUuMDU0LS4wNTkuMDg3YS45NzUuOTc1IDAgMCAwIDAgLjgwMmMuMDE0LjAzMy4wNDEuMDU3LjA2LjA4OC4wNS4wODcuMTAzLjE3LjE3Ni4yMzkuMDA4LjAwNy4wMTEuMDE4LjAyLjAyNWw4IDdhLjk5Ni45OTYgMCAwIDAgMS40MS0uMDk1IDEgMSAwIDAgMC0uMDk1LTEuNDExTDMuNjYgMTAuOTk2SDE5YTEgMSAwIDEgMCAwLTIiLz4KPC9zdmc+Cg=="
+					alt="back" width="20" height="20">
+			</a>
+			계정설정
+		</header>
+
+
+		<div class="sc-jtEaiv hnoHdo">
+			<a href="./memberLogout" style="text-decoration: none; height: 70px" class="aa">&nbsp;&nbsp;로그아웃</a> 
+			<a href="./memberUpdatePage" style="text-decoration: none; height: 70px;">&nbsp;&nbsp;관리자 정보수정</a> 
+		</div>
+	</div>
+	</c:if>
 <script type="text/javascript">
 
 
