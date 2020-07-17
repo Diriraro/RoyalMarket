@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>상품 업데이트 - 우주장터</title>
 <style type="text/css">
 .imagePreview {
 	width: 180px;

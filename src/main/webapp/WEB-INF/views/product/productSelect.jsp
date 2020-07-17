@@ -11,7 +11,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>${vo.sell_product} - 우주장터</title>
 <c:import url="../template/boot.jsp"></c:import>
 
 <style type="text/css">

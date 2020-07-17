@@ -10,7 +10,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>${pager.search} - 우주장터</title>
 <c:import url="../template/boot.jsp"></c:import>
 
 <c:import url="../template/style.jsp"></c:import>
