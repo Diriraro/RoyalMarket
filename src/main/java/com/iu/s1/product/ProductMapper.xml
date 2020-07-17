@@ -108,8 +108,15 @@
 	<select id="myProductCount" parameterType="Pager"
 		resultType="java.lang.Long">
 		select count(sell_num) from store_product where
-		mem_storeNum=#{mem_storeNum}
-		like concat('%',#{search},'%')
+		<choose>
+			<when test="kind=='sp'">
+				sell_product
+			</when>
+			<otherwise>
+				mem_storeNum
+			</otherwise>
+		</choose>
+		like concat('%',#{search},'%') and mem_storeNum=#{mem_storeNum}
 	</select>
 
 	<select id="myProductList" parameterType="Pager" resultType="ProductVO">
