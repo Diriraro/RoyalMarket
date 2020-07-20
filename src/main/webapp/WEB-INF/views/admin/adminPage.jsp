@@ -92,7 +92,6 @@
 	</section>
 	<script type="text/javascript">
 		var check = $("#NAcheck").val();
-		var s
 		if (check == 'true') {
 			// 미답변 문의가 있으면
 			$(".new").children(".fas").removeClass("fa-envelope");
@@ -723,6 +722,16 @@
 		}
 
 
+		// dateformat
+		function getFormatDate(date){
+		    var year = date.getFullYear();              
+		    var month = (1 + date.getMonth());       
+		    month = month >= 10 ? month : '0' + month;  
+		    var day = date.getDate();                   
+		    day = day >= 10 ? day : '0' + day;          
+		    return  year + '-' + month + '-' + day;       
+		}
+		
 		// Calendar
 		function kCalendar(id, date) {
 	var kCalendar = document.getElementById(id);
@@ -782,7 +791,7 @@
 	calendar += '			<span id="date">' + currentYear + '년 ' + currentMonth + '월</span>';
 	calendar += '			<span><a href="#" class="button right" onclick="kCalendar(\'' + id + '\', \'' + nextDate + '\')">></a></span>';
 	calendar += '		</div>';
-	calendar += '			<b style="text-align : center;">Dday : ' + (realdate.getYear()+1900) + '년 ' + (realdate.getMonth()+1) + '월 '+ currentDate+'일</b>'
+	calendar += '			<div style="text-align : center; font-weight : bold;"><span> 오늘 : ' + (realdate.getYear()+1900) + '년 ' + (realdate.getMonth()+1) + '월 '+ currentDate+'일</span> </div>'
 	calendar += '		<table border="0" cellspacing="0" cellpadding="0">';
 	calendar += '			<caption>' + currentYear + '년 ' + currentMonth + '월 달력</caption>';
 	calendar += '				<tr>';
@@ -797,7 +806,9 @@
 	calendar += '			<tbody>';
 	
 	var dateNum = 1 - currentDay;
-	
+	var daily = new Date();
+	daily = getFormatDate(daily);
+	var dday = "";
 	for(var i = 0; i < week; i++) {
 		calendar += '			<tr>';
 		for(var j = 0; j < 7; j++, dateNum++) {
@@ -805,12 +816,14 @@
 				calendar += '				<td class="' + dateString[j] + ' "> </td>';
 				continue;
 			}
-			if(dateNum == currentDate) {
+		dday = currentYear + "-" + currentMonth + "-" + dateNum;
+			if(daily == dday) {
 				calendar += '				<td style="background-color : red;"class="' + dateString[j] + ' ">' + dateNum + '</td>';
 					} else {
 			calendar += '				<td class="' + dateString[j] + ' ">' + dateNum + '</td>';
 					}
 		}
+		
 		calendar += '			</tr>';
 	}
 	
