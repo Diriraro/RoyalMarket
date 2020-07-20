@@ -30,13 +30,31 @@
 <script
 	src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 <style>
+.active {
+	background-color: #b366ff !important;
+}
+
+table {
+	border : 0.1px solid #e6e6e6;
+}
+
 thead {
+	text-align: center;
 	font-weight: bold;
 	background-color: #e6e6e6;
+}
+table > thead > tr > th {
+	text-align: center;
+	border : 0.1px solid #e6e6e6 !important;
 }
 
 tbody {
 	background-color: none;
+}
+
+table > tbody > tr >td {
+	text-align: center;
+	border : 0.1px solid #e6e6e6 !important;
 }
 
 body {

@@ -80,7 +80,7 @@
 				${member.mem_id}님 <i class="fas fa-user-cog"></i>
 			</div>
 			<div id="QnaAndManToMan">
-				<a title="manToman" class="check"> 1:1문의 </a>
+				<a title="manToman" class="check" style="color : black !important;"> 1:1문의 </a>
 			</div>
 			<div class="new">
 				<span id="new">new</span> <i class="fas fa-envelope"></i>
@@ -97,12 +97,14 @@
 			// 미답변 문의가 있으면
 			$(".new").children(".fas").removeClass("fa-envelope");
 			$(".new").children(".fas").addClass("fa-envelope-open-text");
+			$("#QnaAndManToMan").children(".check").css("color","red");
 		} else {
 			// 미답변 문의가 없을시
 			$(".new").children("#new").remove();
 			$(".new").children(".fas").removeClass("fa-envelope-open-text")
 			$(".new").children(".fas").addClass("fa-envelope");
 			$(".new").children(".fas").css("color", "#26004d");
+			$("#QnaAndManToMan").children(".check").css("color","black");
 		}
 
 		$(function() { // 페이지 로딩이후 동작

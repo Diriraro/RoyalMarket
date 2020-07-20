@@ -49,7 +49,7 @@
 			<tr>
 				<td colspan="7">
 					<div style="width: 1024px; height: 40px; float: left;">
-						<ul class="pagination">
+						<ul class="pagination" style="margin : 0;">
 							<c:if test="${pager.curBlock gt 1}">
 								<li><a
 									title="./list/getProductList?curPage=${pager.startNum-1}&kind=${pager.kind}&search=${pager.search}">이전</a></li>
