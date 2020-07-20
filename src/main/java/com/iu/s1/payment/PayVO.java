@@ -10,8 +10,14 @@ public class PayVO {
 	private long point_rest;
 	private long pay_cash;
 	private long buy_history_num;
+	private String pay_date;
 	
-	
+	public String getPay_date() {
+		return pay_date;
+	}
+	public void setPay_date(String pay_date) {
+		this.pay_date = pay_date;
+	}
 	public long getBuy_history_num() {
 		return buy_history_num;
 	}

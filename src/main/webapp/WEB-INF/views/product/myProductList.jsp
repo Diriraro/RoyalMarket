@@ -86,20 +86,20 @@
 				<ul class="pagination" >
 					<c:if test="${pager.curBlock gt 1}">
 						<li><a
-							href="./myProductList?curPage=${pager.startNum-1}&kind=${pager.kind}&search=${pager.search}">이전</a></li>
+							href="./myProductList?curPage=${pager.startNum-1}&kind=${pager.kind}&mem_storeNum=${member.mem_storeNum}">이전</a></li>
 					</c:if>
 					<c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
 						<li><a
-							href="./myProductList?curPage=${i}&kind=${pager.kind}&search=${pager.search}">${i}</a></li>
+							href="./myProductList?curPage=${i}&kind=${pager.kind}&mem_storeNum=${member.mem_storeNum}">${i}</a></li>
 					</c:forEach>
 					<c:if test="${pager.curBlock lt pager.totalBlock}">
 						<li><a
-							href="./myProductList?curPage=${pager.lastNum+1}&kind=${pager.kind}&search=${pager.search}">다음</a></li>
+							href="./myProductList?curPage=${pager.lastNum+1}&kind=${pager.kind}&mem_storeNum=${member.mem_storeNum}">다음</a></li>
 					</c:if>
 				</ul>
 			</div>
 			
-			<% 
+<%-- 			<% 
 			String strReferer = request.getHeader("referer");
 			request.getMethod().equals("GET");
 			if(strReferer == null){ 
@@ -112,7 +112,7 @@
 			<%
 			return;
 			}
-			%>
+			%> --%>
 			
 
 

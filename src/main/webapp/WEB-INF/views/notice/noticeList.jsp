@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>공지사항 - 우주장터</title>
 <c:import url="../template/boot.jsp"></c:import>
 </head>
 <body style="background-color: #f5f0f5;">

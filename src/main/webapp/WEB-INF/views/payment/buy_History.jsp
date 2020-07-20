@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>내 구매내역 - 우주장터</title>
 <style type="text/css">
 .buttons{ 
 	border: 1px solid white; 
