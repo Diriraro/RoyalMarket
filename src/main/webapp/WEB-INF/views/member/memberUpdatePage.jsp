@@ -357,7 +357,7 @@ iframe {
 													width="16" height="20">
 											</div>
 											<form:input path="mem_pw" type="password" id="mem_pw"
-												placeholder="비밀번호 6-16자" value="${member.mem_pw}"/>
+												placeholder="비밀번호 6-16자"/>
 
 										</div>
 									</div>

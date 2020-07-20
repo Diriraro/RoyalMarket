@@ -188,6 +188,22 @@ body {
 	background: rgb(102, 0, 102);
 }
 
+#back {
+	width: 100px;
+	height: 32px;
+	flex-shrink: 0;
+	text-align: center;
+	color: rgb(255, 255, 255);
+	font-size: 13px;
+	border-radius: 2px;
+	margin: 0px 7px 0px 30px;
+	background: rgb(102, 0, 102);
+	margin-left: 80%;
+	border-radius: 10px;
+	font-weight: bold;
+	margin-top: 20px;
+}
+
 .mail {
 	width: 100px;
 	height: 32px;
@@ -449,56 +465,200 @@ input {
 	margin: 10px 10px 10px 10px;
 }
 
-a{
-	text-decoration: none;
-	color: black;
+body{
+	padding: 0 10%;
+}
+
+.box{
+	margin-top: 50px;
 }
 </style>
 </head>
-
 <body>
 
-<div class="jRNgFE">
 
-	<div class="logo">
-		<img src="../../resources/images/logo4.JPG" class="sc-fYiAbW knQFFQ">
-	</div>
+	<h4 id="show1" class="sh box" title="hide">SMS로 아이디 찾기</h4>
+			<div class="show1">
+				<form:form modelAttribute="memberVO" action="./findIdByEmail"
+					method="post">
+					<input name="mem_name" value="" type="hidden">
+					<input name="road_address" value="" type="hidden">
 
-	<div style="padding: 0 20% 0% 20%">
-		<div id="find_id">
-			<h3>ID</h3>
-	
+					<div class="sc-lhLRcH csuEuq">
+						<div class="sc-jMtzgO liBHhX">
+							<div class="sc-kAKrxA kVlvmu">
+								<i class="glyphicon glyphicon-user"
+									style="width: 20; height: 20; color: gray"></i>
+							</div>
+							<form:input path="mem_name" type="text" id="mem_name"
+								placeholder="이름" />
 
-			<h4 class="sh box"><a href="./findIdByPhone" style="text-decoration: none;">SMS로 아이디 찾기</a></h4>
+						</div>
+					</div>
+					<form:errors path="mem_name" class="error_msg"></form:errors>
+
+
+					<div class="sc-lhLRcH csuEuq">
+						<div class="sc-jMtzgO liBHhX">
+							<div class="sc-kAKrxA kVlvmu">
+								<img alt="휴대폰 번호 Input 아이콘"
+									src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAAAoCAYAAACb3CikAAAAAXNSR0IArs4c6QAAAKJJREFUWAntmNEKgCAUQ7vRh/vnFcHtYbAUssuC9WLTl3m2QIvW2r4IPKuAh8vClkZOMpHvlWMmIkPERjD+uyO4kNnh/FvNuigTDSWSO2c7yPXRsUdYhoiNYKQmYiJIALU7YiJIALU7YiJIALU7YiJIAPXImbXkbixTVkpk1ukdI2BahoiMkadoPikpi/wXREp/3MgQkTESvVs6++5nz8sQOQDArxrcaIpJNgAAAABJRU5ErkJggg=="
+									width="17" height="20">
+							</div>
+							<form:input path="mem_phone" type="text" id="mem_phone"
+								placeholder="휴대폰 번호" />
+
+							<input type="button" value="아이디 찾기" class="btn btn-default phone"
+								id="rq_num" onclick="checkPhone()">
+								
+						</div>
+					</div>
+					<form:errors path="mem_phone" class="error_msg"></form:errors>
+
+				</form:form>
+			</div>
 			
-			<h4 class="sh box"><a href="./findIdByEmail"  style="text-decoration: none;">E-MAIL로 아이디 찾기</a></h4>
+			<a class="btn btn-default" id="back" href="./findMember">뒤로가기</a>
+		<script type="text/javascript">
 	
-
-		</div>
+	
+	var name="";
 		
-		<div style="height: 50px;"></div>
+
 		
+		function checkEmail() {
+			var email = $('#mem_email').val();
+			var name = $('#mem_name1').val();
+			$.post("./check/findIdByEmail", {
+				name : name,
+				email : email,
+			}, function(result) {
+				alert(result.trim())
+			})
+		}
 		
-		<div id="find_pw">
+		function checkPhone() {
+			var phoneNumber = $('#mem_phone').val();
+			var name = $('#mem_name').val();
+			$.post("./check/findIdByPhone", {
+				name : name,
+				phoneNumber : phoneNumber,
+			}, function(result) {
+				alert(result.trim())
+			})
+		}
 
+		function setParentText() {
 
-			<div><h3>PASSWORD</h3></div>
+			window.close();
+		}
 
-			<h4 class="sh box"><a href="./findPwByPhone"  style="text-decoration: none;">SMS인증으로 비밀번호 찾기</a></h4>
+		var SetTime = 300;
+		
+		var tid=0;
+
+		function msg_time3() {	// 1초씩 카운트
 			
-
-			<h4 class="sh box"><a href="./findPwByEmail"  style="text-decoration: none;">E-MAIL인증으로 비밀번호 찾기</a></h4>
-
-		</div>
-	</div>
+			m = Math.floor(SetTime / 60) + ":" + (SetTime % 60);	// 남은 시간 계산
+			
+			var msg = "<font color='red'>" + m + "</font>";
+			
+			document.all.ViewTimer3.innerHTML = msg;		// div 영역에 보여줌 
 					
+			SetTime--;					// 1초씩 감소
+
+			$("#time").val(SetTime);
+			
+			if (SetTime < 0) {			// 시간이 종료 되었으면..
+				clearInterval(tid);		// 타이머 해제
+				alert("인증번호가 만료되었습니다.");
+			}
+		}
+		
+		
+		function msg_time4() {	// 1초씩 카운트
+			
+			m = Math.floor(SetTime / 60) + ":" + (SetTime % 60);	// 남은 시간 계산
+			
+			var msg = "<font color='red'>" + m + "</font>";
+			
+			document.all.ViewTimer4.innerHTML = msg;		// div 영역에 보여줌 
+					
+			SetTime--;					// 1초씩 감소
+
+			$("#time").val(SetTime);
+			
+			if (SetTime < 0) {			// 시간이 종료 되었으면..
+				clearInterval(tid);		// 타이머 해제
+				alert("인증번호가 만료되었습니다.");
+			}
+			
+		}
+
+
+
+		function TimerStart3(){ tid=setInterval('msg_time3()',1000) };
+
+		function TimerStart4(){ tid=setInterval('msg_time4()',1000) };
+		
+		
+		var again = "${again}";
+
+		if(again=="again"){
+				alert("입력정보가 틀립니다. 인증번호를 재발급하고 다시 시도해주세요!")
+			}
 	
 
+		
+			function checkEmail4(result2) {
+				
+				var email = $('#mem_email4').val();
+				var id = $('#mem_id4').val();
+				$(".pw").css("display", "block");
+				SetTime= 300;
+
+				$.post("./check/sendEmail", {
+					id : id,
+					email : email,
+				},function(result) {
+					alert(result.trim());
+					
+					if(result.trim()=="인증 메일을 전송했습니다") {
+						clearInterval(tid);
+						TimerStart4();
+					} else {
+						return;
+					}
+				})
+			}
 
 
-	</div>
+			function checkPhone3(result2) {
+				var phoneNumber = $('#mem_phone3').val();
+				var id = $('#mem_id3').val();
+				$(".pw").css("display", "block")
+				SetTime= 300;
+	
+				$.post("./check/sendSMS", {
+					id : id,
+					phoneNumber : phoneNumber
+				}, function(result) {
+					
+					alert(result.trim());
+					if(result.trim()=="인증 메세지를 전송했습니다") {
+						clearInterval(tid);
+						TimerStart3();
+					} else {
+						return;
+					}
+				})
+			}
+
+	
+
+	
+	</script>		
+			
 
 </body>
-
-
 </html>
