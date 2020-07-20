@@ -66,6 +66,31 @@ public class MemberController {
 		mv.setViewName("member/findPwByEmail");
 		return mv;
 	}
+	
+	@GetMapping("findPwByPhone")
+	public ModelAndView findPwByPhone(HttpSession session, MemberVO memberVO) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("memberVO", new MemberVO());
+		mv.setViewName("member/findPwByPhone");
+		return mv;
+	}
+	
+	@GetMapping("findIdByPhone")
+	public ModelAndView findIdByPhone(HttpSession session, MemberVO memberVO) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("memberVO", new MemberVO());
+		mv.setViewName("member/findIdByPhone");
+		return mv;
+	}
+	
+	@GetMapping("findIdByEmail")
+	public ModelAndView findIdByEmail(HttpSession session, MemberVO memberVO) throws Exception {
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("memberVO", new MemberVO());
+		mv.setViewName("member/findIdByEmail");
+		return mv;
+	}
+	
 
 	@PostMapping("findPwByEmail")
 	public ModelAndView findPwByEmail(@Valid MemberVO memberVO, BindingResult bindingResult, HttpSession session)
@@ -91,13 +116,13 @@ public class MemberController {
 			session.removeAttribute("now");
 			mv.addObject("show4", result);
 			mv.addObject("again", "again");
-			mv.setViewName("member/findMember");
+			mv.setViewName("member/findPwByEmail");
 
 		} else if (now_now > 300000) {
 			session.removeAttribute("numStr");
 			session.removeAttribute("now");
 			mv.addObject("result", "인증번호 유효기간이 지났습니다.");
-			mv.addObject("path", "./findMember");
+			mv.addObject("path", "./findPwByEmail");
 
 			mv.setViewName("common/result");
 		} else {
@@ -139,13 +164,13 @@ public class MemberController {
 			session.removeAttribute("now");
 			mv.addObject("show3", result);
 			mv.addObject("again", "again");
-			mv.setViewName("member/findMember");
+			mv.setViewName("member/findPwByPhone");
 			
 		} else if (now_now > 300000) {
 			session.removeAttribute("numStr");
 			session.removeAttribute("now");
 			mv.addObject("result", "인증번호 유효기간이 지났습니다.");
-			mv.addObject("path", "./findMember");
+			mv.addObject("path", "./findPwByPhone");
 
 			mv.setViewName("common/result");
 		} else {
@@ -183,8 +208,6 @@ public class MemberController {
 		}
 		
 		boolean result = memberService.memberCheck(memberVO, bindingResult, random);
-		System.out.println("DDDDDD"+session.getAttribute("now"));
-		System.out.println("DDDDDD"+session.getAttribute("numStr"));
 		
 		
 
@@ -199,7 +222,7 @@ public class MemberController {
 			mv.addObject("result", "인증번호 유효기간이 지났습니다.");
 			mv.addObject("path", "./memberJoin");
 			mv.setViewName("common/result");
-
+                                              
 		} else {
 			session.removeAttribute("numStr");
 			session.removeAttribute("now");
