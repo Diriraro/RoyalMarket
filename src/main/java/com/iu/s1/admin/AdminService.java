@@ -1,5 +1,6 @@
 package com.iu.s1.admin;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -258,8 +259,9 @@ public class AdminService {
 			if (result == null) {
 				result = 0L;
 			}
+			NumberFormat nf = NumberFormat.getInstance();
 			ProfitVO profitVO = new ProfitVO();
-			profitVO.setProfit(result);
+			profitVO.setProfit(nf.format(result));
 			profitVO.setProfitRate((long) (((double) result / 1000000) * 100));
 			if(profitVO.getProfitRate()>100L) {
 				profitVO.setProfitRate(100L);
@@ -281,7 +283,7 @@ public class AdminService {
 
 	public List<ProductVO> productList(Pager pager) throws Exception {
 		pager.makeRow();
-		long totalCount = productMapper.productCount(pager);
+		long totalCount = productMapper.productCountStatus0(pager);
 		pager.makePage(totalCount);
 		return productMapper.productList(pager);
 	}

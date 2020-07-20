@@ -26,6 +26,7 @@ public interface ProductMapper {
 	public long myProductCount(Pager pager) throws Exception;
 	
 	public long productCount(Pager pager) throws Exception;
+	public long productCountStatus0(Pager pager) throws Exception;
 	
 	public String selectFileName(long sell_num) throws Exception;
 	

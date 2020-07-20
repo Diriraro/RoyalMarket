@@ -200,12 +200,12 @@
 		</c:forEach> --%>
 		<div class="vGraph">
 			<ul>
-				<c:forEach items="${profitAr}" var="profit" varStatus="i">
+				<c:forEach items="${profitAr}" var="profit" varStatus="i" begin="${profitAr.size()-7}" end="${profitAr.size()}">
 					<c:if test="${profit.profitRate gt 0}">
-						<li><span class="gTerm">${i.index+1}월 매출</span><span><span
+						<li><span class="gTerm">${i.index+1}월 매출 <br><span>${profit.profit}
+									/ 1,000,000 원</span><br></span><span
 								class="gBar"
-								style="height:${profit.profitRate}%; background-color : purple; color : white;"><span>${profit.profitRate}%</span>${profit.profit}
-									/ 1,000,000 원</span></span></li>
+								style="height:${profit.profitRate}%; background-color : purple; color : white;"><span>${profit.profitRate}%</span></span></li>
 					</c:if>
 				</c:forEach>
 			</ul>

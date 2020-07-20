@@ -803,7 +803,11 @@
 				calendar += '				<td class="' + dateString[j] + ' "> </td>';
 				continue;
 			}
+			if(dateNum == currentDate) {
+				calendar += '				<td style="background-color : red;"class="' + dateString[j] + ' ">' + dateNum + '</td>';
+					} else {
 			calendar += '				<td class="' + dateString[j] + ' ">' + dateNum + '</td>';
+					}
 		}
 		calendar += '			</tr>';
 	}
