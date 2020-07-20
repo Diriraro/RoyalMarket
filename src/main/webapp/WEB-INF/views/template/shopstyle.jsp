@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <style type="text/css">
+
+
+
 td{
 width: 220px;
 font-size: large;
@@ -50,10 +53,12 @@ box-shadow: 5px 5px 5px 5px gray;
 .tds{
 color: black;
 font-size: 17px;
+text-decoration: none;
 
 }
 #redd{
 color: red;
+text-decoration: none;
 }
 #load{
 font-size: 20px;
