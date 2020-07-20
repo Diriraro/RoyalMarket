@@ -10,6 +10,7 @@ import com.iu.s1.interceptor.ProductCancelInterceptor;
 import com.iu.s1.interceptor.ProductInterceptor;
 import com.iu.s1.interceptor.ReviewInterceptor;
 import com.iu.s1.interceptor.SellerPageInterceptor;
+import com.iu.s1.interceptor.SgminnInterceptor;
 
 
 @Configuration
@@ -33,8 +34,14 @@ public class InterceptorConfig implements WebMvcConfigurer {
 	@Autowired
 	private ReviewInterceptor reviewInterceptor;
 	
+	@Autowired
+	private SgminnInterceptor sgminnInterceptor;
+	
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
+		
+		registry.addInterceptor(sgminnInterceptor)
+		.addPathPatterns("/product/productDelete");
 		
 		registry.addInterceptor(buyerPageInterceptor)
 		.addPathPatterns("/payment/buyer_page")

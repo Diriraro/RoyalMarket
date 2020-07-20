@@ -138,7 +138,20 @@
 		</div>
 		<div style="background-color: white;"></div>
 
+			<% 
+			String strReferer = request.getHeader("referer");
+			request.getMethod().equals("GET");
+			if(strReferer == null){ 
+			%>
+			<script type="text/javascript">
+			document.location.href="http://localhost:8080/error/error";
 
+			</script>
+			<%
+			return;
+			}
+			%>
+			
 
 		
 <c:import url="../template/footer.jsp"></c:import>
