@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>취향을 잇는 거래, 우주장터</title>
 <c:import url="../template/boot.jsp"></c:import>
 <script src='https://kit.fontawesome.com/a076d05399.js'></script>
 <script

@@ -11,7 +11,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>취향을 잇는 거래, 우주장터</title>
 <style type="text/css">
 .dJCpmB {
 	min-width: 1236px;

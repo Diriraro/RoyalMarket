@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>회원정보 찾기</title>
 <c:import url="../template/boot.jsp"></c:import>
 <script src='https://kit.fontawesome.com/a076d05399.js'></script>
 <script
@@ -451,7 +451,7 @@ input {
 
 a{
 	text-decoration: none;
-	color: black;
+	color: black !important;
 }
 </style>
 </head>
