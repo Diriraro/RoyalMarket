@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+	<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>(우주마켓)${code}</title>
+<title>(우주마켓) ${code}</title>
 <link rel="stylesheet"
 	href="https://fonts.googleapis.com/css?family=Raleway">
 <link rel="stylesheet"
@@ -175,7 +175,8 @@ button {
 				src="${pageContext.request.contextPath}/resources/images/error.png">
 			<p>에러 발생 !! : ${code}
 			<p>에러 발생 시간 : ${timestamp}</p>
-			<a id="getHome">우주마켓 홈페이지로 가기! <i class="fas fa-home"></i></a>
+			<br>
+			<a id="getHome">우주마켓 홈으로 가기! <i class="fas fa-home"></i></a>
 		</div>
 	</section>
 	

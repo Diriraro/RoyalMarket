@@ -167,7 +167,7 @@
 								</div>
 							</div>
 							<div
-								style="height: 40px; border-top: solid 1px #e4e4e4; text-align: left; line-height: 40px;">
+								style="height: 40px; border-top: solid 1px #e4e4e4; text-align: left; line-height: 40px; ">
 								<img
 									style="margin-left: 8px; width: 16px; height: 20px; margin-bottom: 3px;"
 									alt=""
