@@ -605,11 +605,9 @@ iframe {
 		var tid = 0;
 
 		var wrong = "${wrong}";
-
-				
+			
 		if(wrong=="wrong"){
 				alert("입력정보가 틀립니다. 인증번호를 재발급하고 다시 시도해주세요!");
-				console.log("입력정보가 틀립니다. 인증번호를 재발급하고 다시 시도해주세요!");
 			}
 		
 		
