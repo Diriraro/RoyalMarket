@@ -51,9 +51,14 @@ box-shadow: 1px 1px 1px 1px gray;
 box-shadow: 5px 5px 5px 5px gray;
 }
 .tds{
-color: black;
+color: black ;
 font-size: 17px;
-text-decoration: none;
+text-decoration: none !important;
+
+}
+.tds:hover{
+color: black ;
+text-decoration: none !important;
 
 }
 #redd{
