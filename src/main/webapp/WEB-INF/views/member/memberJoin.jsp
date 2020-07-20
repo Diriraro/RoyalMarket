@@ -587,7 +587,7 @@ iframe {
 									</div>
 								</div>
 
-								<button type="submit" class="gqqaLP" id="btn_submit">가입하기</button>
+								<button type="submit" class="gqqaLP" id="btn_submit" >가입하기</button>
 
 							</div>
 
@@ -599,18 +599,16 @@ iframe {
 	</form:form>
 
 	<script type="text/javascript">
-
-	var wrong = "${wrong}";
-		
-		if(wrong=="wrong"){
-				alert("입력정보가 틀립니다. 인증번호를 재발급하고 다시 시도해주세요!");
-				console.log("입력정보가 틀립니다. 인증번호를 재발급하고 다시 시도해주세요!");
-			}
 	
 		var check = false;
 		var SetTime = 300;		// 최초 설정 시간(기본 : 초)
 		var tid = 0;
 
+		var wrong = "${wrong}";
+			
+		if(wrong=="wrong"){
+				alert("입력정보가 틀립니다. 인증번호를 재발급하고 다시 시도해주세요!");
+			}
 		
 		
 		
@@ -731,14 +729,16 @@ iframe {
 			
 			})
 			
-		$("#btn_submit").click(function(){
-			if($(check1).attr("class")!="ivGQtp" || $(check2).attr("class")!="ivGQtp"){
+ 		$("#btn_submit").click(function(){
+			if($("#check1").attr("class")!="ivGQtp" || $("#check2").attr("class")!="ivGQtp"){
+			console.log("필수 항목에 동의해주세요");
 					alert("필수 항목에 동의해주세요")
-					$("#btn_submit").prop("type","button");
-			}else{
+				 	$("#btn_submit").prop("type","button"); 
+			} else{
 				$("#btn_submit").prop("type","submit");
-				}
-		});
+				} 
+		}); 
+
 
 		$("#show1").click(function(){
 			if($(this).prop("title")=="hide"){
