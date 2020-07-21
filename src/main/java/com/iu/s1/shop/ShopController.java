@@ -458,19 +458,5 @@ public class ShopController {
 		mv.addObject("mdata", memberService.mdata(mem_sotreNum));
 		return mv;
 	}
-	
-	//예외 처리 메서드
-	@ExceptionHandler(Exception.class)
-	public ModelAndView error() {
-		ModelAndView mv = new ModelAndView();
-			
-		mv.setViewName("error/serverError");
-			
-		return mv;
-	}
-	
-
-	
-	
 
 }

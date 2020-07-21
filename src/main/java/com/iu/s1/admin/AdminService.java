@@ -248,6 +248,8 @@ public class AdminService {
 	public List<ProfitVO> getProfit() throws Exception {
 		List<ProfitVO> ar = new ArrayList<ProfitVO>();
 		Date date = new Date();
+		
+		// date.getMonth() > 6때
 		for (int i = 0; i < date.getMonth() + 1; i++) {
 			Calendar cal1 = new GregorianCalendar(date.getYear() + 1900, i, 1);
 			int year = cal1.getTime().getYear() + 1900;
@@ -268,6 +270,8 @@ public class AdminService {
 			}
 			ar.add(profitVO);
 		}
+		
+		//date.getMonth() <= 6 때
 
 		return ar;
 	}

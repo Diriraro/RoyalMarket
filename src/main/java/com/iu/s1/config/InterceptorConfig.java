@@ -6,6 +6,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.iu.s1.interceptor.AdminInterceptor;
 import com.iu.s1.interceptor.BuyerPageInterceptor;
+import com.iu.s1.interceptor.MemberInterceptor;
 import com.iu.s1.interceptor.ProductCancelInterceptor;
 import com.iu.s1.interceptor.ProductInterceptor;
 import com.iu.s1.interceptor.ProductPayInterceptor;
@@ -36,6 +37,9 @@ public class InterceptorConfig implements WebMvcConfigurer {
 	
 	@Autowired
 	private ProductPayInterceptor productPayInterceptor;
+	
+	@Autowired
+	private MemberInterceptor memberInterceptor;
 	
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
@@ -80,6 +84,15 @@ public class InterceptorConfig implements WebMvcConfigurer {
 		registry.addInterceptor(productPayInterceptor)
 		.addPathPatterns("/product/productPay");
 
+		registry.addInterceptor(memberInterceptor)
+		.addPathPatterns("/member/memberLogout")
+		.addPathPatterns("/member/updateStoreName")
+		.addPathPatterns("/member/memberDelete")
+		.addPathPatterns("/member/memberUpdatePage")
+		.addPathPatterns("/member/memberUpdate")
+		.addPathPatterns("/member/kakaoMemberUpdate");
+		
+		
 		//적용할 Interceptor 등록
 		//registry.addInterceptor(productQnaInterceptor)
 		//Interceptor를 사용할 URL 등록

@@ -16,6 +16,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import com.iu.s1.admin.AdminService;
 import com.iu.s1.paymentHistory.PaymentHistoryRepository;
 import com.iu.s1.paymentHistory.ProfitVO;
+import com.iu.s1.product.ProductService;
 
 @SpringBootTest
 class RoyalMarketApplicationTests {
@@ -25,18 +26,15 @@ class RoyalMarketApplicationTests {
 	}
 
 	@Autowired
+	private ProductService productService;
+	@Autowired
 	private AdminService adminService;
 	@Autowired
 	private PaymentHistoryRepository paymentHistoryRepository;
 	
-//	@Test
-//	void test() throws Exception{
-//		List<Map.Entry<String, Long>> list = adminService.getLocateTradeCount();
-//		for ( int i = 0 ; i < list.size(); i++) {
-//			System.out.println(list.get(i).getKey()+"," + list.get(i).getValue());
-//		}
-//		
-//		// 결과물 서울 : 2 경기 1 나머지 0 
-//	}
+	@Test
+	void test() throws Exception{
+		System.out.println(productService.productSelect2(178));
+	}
 
 }
