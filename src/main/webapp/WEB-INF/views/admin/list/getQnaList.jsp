@@ -8,12 +8,10 @@
 		<a class="check active" title="qna" style="cursor: pointer;">질문과
 			답변</a>
 		<div class="search-container">
-			<form action="/">
-				<input type="text" placeholder="MemberName..." name="search">
-				<button type="submit">
-					<i class="fa fa-search"></i>
-				</button>
-			</form>
+			<input type="text" placeholder="MemberName..." name="search">
+			<button type="submit">
+				<i class="fa fa-search"></i>
+			</button>
 		</div>
 	</div>
 	<table class="table">
