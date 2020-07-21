@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.security.auth.message.callback.PrivateKeyCallback.Request;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -268,13 +269,24 @@ public class ProductController {
 	}
 
 	@GetMapping("productDelete")
-	public ModelAndView productDelete(ProductVO productVO, RedirectAttributes rd, HttpServletRequest request,MemberVO memberVO,HttpSession session)
+	public ModelAndView productDelete(ProductVO productVO, RedirectAttributes rd, HttpServletRequest request,HttpServletResponse response,MemberVO memberVO,HttpSession session)
 			throws Exception {
 		ModelAndView mv = new ModelAndView();
-		int result = productService.productDelete(productVO);
-		rd.addFlashAttribute("result", result);
 		long mem_storeNum = ((MemberVO)session.getAttribute("member")).getMem_storeNum();
-		mv.setViewName("redirect:./myProductList?kind=sp&mem_storeNum=" + mem_storeNum);
+		if (request.getHeader("REFERER") != null){
+			int result = productService.productDelete(productVO);
+			rd.addFlashAttribute("result", result);
+			mv.setViewName("redirect:./myProductList?kind=sp&mem_storeNum=" + mem_storeNum);
+		}else {
+			request.setAttribute("result", "잘못된 접근입니다.");
+			request.setAttribute("path", "../");
+			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/common/result.jsp");
+			view.forward(request, response);
+			mv.setViewName("redirect:../");
+		}
+
+		
+
 		return mv;
 
 	}
