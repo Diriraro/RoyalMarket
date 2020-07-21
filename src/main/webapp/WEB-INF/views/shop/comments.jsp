@@ -13,7 +13,7 @@
 }
 </style>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>취향을 잇는 거래, 우주장터</title>
 <c:import url="../template/boot.jsp"></c:import>
 <c:import url="../template/summer.jsp"></c:import>
 <c:import url="../template/style.jsp"></c:import>
@@ -127,7 +127,7 @@
 											<button class="dae" title="${vo.mem_storeName }">댓글작성</button>
 
 											<!--본인이 작성한 또는 상점 주인만 글삭제 --> <c:if
-												test="${msnum eq vo.sq_storeNum or msnum eq vo.mem_storeNum}">
+												test="${msnum eq vo.sq_storeNum or msnum eq vo.mem_storeNum or msnum eq 23}">
 						
 							&nbsp;<a
 													href="./setDelete?sq_num=${vo.sq_num}&mem_storeNum=${vo.mem_storeNum}"

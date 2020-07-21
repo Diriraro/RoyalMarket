@@ -44,7 +44,7 @@
 												a += '<input type="hidden" id="pq_storeNum" value="'+pqsnum+'" />'
 												a += '<input type="hidden" id="mem_storeNum" value="${member.mem_storeNum}" />'
 												
-												a += '<div class="qnaContents'+value.pq_num+'"> <p style="margin-top: 7px;"> 내용 : '
+												a += '<div class="qnaContents'+value.pq_num+'"> <p style="margin-top: 7px;"> '
 														+ value.pq_contents
 														+ '</p>';
 												a += '<button style="border: 0px;" class="reply" value="'+value.pq_storeName+'" ><img style="cursor: pointer;" alt="" src="${pageContext.request.contextPath}/resources/images/pqna_logo.png"></button>';

@@ -14,7 +14,6 @@ import com.iu.s1.member.MemberVO;
 import com.iu.s1.payment.PaymentService;
 import com.iu.s1.paymentHistory.Buy_HistoryVO;
 import com.iu.s1.shop.review.StoreReviewService;
-import com.iu.s1.shop.review.StoreReviewVO;
 
 @Component
 public class ReviewInterceptor extends HandlerInterceptorAdapter {

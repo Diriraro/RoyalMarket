@@ -6,12 +6,17 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.iu.s1.interceptor.AdminInterceptor;
 import com.iu.s1.interceptor.BuyerPageInterceptor;
+
+import com.iu.s1.interceptor.FavoritesInterceptor;
+import com.iu.s1.interceptor.FollowInterceptor;
+import com.iu.s1.interceptor.FollowInterceptors2;
 import com.iu.s1.interceptor.MemberInterceptor;
 import com.iu.s1.interceptor.ProductCancelInterceptor;
 import com.iu.s1.interceptor.ProductInterceptor;
 import com.iu.s1.interceptor.ProductPayInterceptor;
 import com.iu.s1.interceptor.ReviewInterceptor;
 import com.iu.s1.interceptor.SellerPageInterceptor;
+
 
 
 @Configuration
@@ -34,15 +39,28 @@ public class InterceptorConfig implements WebMvcConfigurer {
 	
 	@Autowired
 	private ReviewInterceptor reviewInterceptor;
+
 	
 	@Autowired
 	private ProductPayInterceptor productPayInterceptor;
 	
 	@Autowired
+
+	private FavoritesInterceptor favoritesInterceptor;
+	
+	@Autowired
+	private FollowInterceptor followInterceptor;
+	
+	@Autowired
+	private FollowInterceptors2 followInterceptors2;
+
+	@Autowired
 	private MemberInterceptor memberInterceptor;
+
 	
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
+
 		
 		registry.addInterceptor(buyerPageInterceptor)
 		.addPathPatterns("/payment/buyer_page")
@@ -81,8 +99,17 @@ public class InterceptorConfig implements WebMvcConfigurer {
 		registry.addInterceptor(reviewInterceptor)
 		.addPathPatterns("/shop/rei");
 		
+		registry.addInterceptor(favoritesInterceptor)
+		.addPathPatterns("/shop/favorites");
+		
+		registry.addInterceptor(followInterceptor)
+		.addPathPatterns("/shop/setinsertFollow");
+		
 		registry.addInterceptor(productPayInterceptor)
 		.addPathPatterns("/product/productPay");
+		
+		registry.addInterceptor(followInterceptors2)
+		.addPathPatterns("/shop/setDeleteFollow");
 
 		registry.addInterceptor(memberInterceptor)
 		.addPathPatterns("/member/memberLogout")

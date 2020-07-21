@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>상품 업데이트 - 우주장터</title>
 <style type="text/css">
 .imagePreview {
 	width: 180px;
@@ -138,7 +138,20 @@
 		</div>
 		<div style="background-color: white;"></div>
 
+			<% 
+			String strReferer = request.getHeader("referer");
+			request.getMethod().equals("GET");
+			if(strReferer == null){ 
+			%>
+			<script type="text/javascript">
+			document.location.href="http://localhost:8080/error/error";
 
+			</script>
+			<%
+			return;
+			}
+			%>
+			
 
 		
 <c:import url="../template/footer.jsp"></c:import>

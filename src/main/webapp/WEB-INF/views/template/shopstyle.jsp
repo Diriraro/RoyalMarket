@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <style type="text/css">
+
+
+
 td{
 width: 220px;
 font-size: large;
@@ -48,18 +51,37 @@ box-shadow: 1px 1px 1px 1px gray;
 box-shadow: 5px 5px 5px 5px gray;
 }
 .tds{
-color: black;
+color: black ;
 font-size: 17px;
+text-decoration: none !important;
+
+}
+.tds:hover{
+color: black ;
+font-size : 17.5px;
+text-decoration: none !important;
 
 }
 #redd{
 color: red;
+text-decoration: none;
 }
 #load{
 font-size: 20px;
 font-weight: 700;
 box-shadow: 1px 1px 1px 1px gray;
 }
+
+
+.folls{
+
+}
+
+.folls:hover{
+
+font-size: 27.5px;
+}
+
 	
 </style>
     

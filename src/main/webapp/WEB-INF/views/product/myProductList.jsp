@@ -10,7 +10,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>나의 상품 관리 - 우주장터</title>
 <c:import url="../template/boot.jsp"></c:import>
 </head>
 <body>
@@ -83,6 +83,7 @@
 			</table>
 			
 						<div style="width: 1024px;height: 40px;float: left;">
+				<c:if test="${not empty mylist}">
 				<ul class="pagination" >
 					<c:if test="${pager.curBlock gt 1}">
 						<li><a
@@ -97,9 +98,10 @@
 							href="./myProductList?curPage=${pager.lastNum+1}&kind=${pager.kind}&mem_storeNum=${member.mem_storeNum}">다음</a></li>
 					</c:if>
 				</ul>
+				</c:if>
 			</div>
 			
-<%-- 			<% 
+			<% 
 			String strReferer = request.getHeader("referer");
 			request.getMethod().equals("GET");
 			if(strReferer == null){ 
@@ -112,7 +114,7 @@
 			<%
 			return;
 			}
-			%> --%>
+			%>
 			
 
 
