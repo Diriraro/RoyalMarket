@@ -470,7 +470,7 @@ public class ShopController {
 	}
 	
 
-	
+	// 승범, 동윤 ,성민 합침
 	
 
 }
