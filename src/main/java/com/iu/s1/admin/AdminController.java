@@ -106,6 +106,11 @@ public class AdminController {
 		List<Map.Entry<String, Long>> tradeAr = adminService.getLocateTradeCount();
 		List<ProfitVO> profitAr = new ArrayList<ProfitVO>();
 		profitAr = adminService.getProfit();
+		if(profitAr.size() > 7) {
+			for(int i = 0 ; i < profitAr.size()-7; i++) {
+				profitAr.remove(i);
+			}
+		}
 
 		long tradeCount = 0;
 		if (adminService.getDailyTradeCount() != null) {
