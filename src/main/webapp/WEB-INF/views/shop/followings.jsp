@@ -92,7 +92,7 @@
 								<div class="fst lis2"
 									style="width: 218px; height: 320px; border: 1px solid gray; float: left; margin-left: 30px; margin-bottom: 30px; overflow: auto; border-color: rgba(0, 0, 0, 0.25); background-color: #f0f0f5">
 <c:if test="${msnum eq mem_storeNum}">
-	<a href="./setDeleteFollow?follow_Num=${vo.follow_Num}&mem_storeNum=${msnum}"><button class="unpal btn-default pull-right" title="${vo.follow_Num}">X</button></a>
+	<a href="./setDeleteFollow?follow_Num=${vo.follow_Num}&mem_storeNum=${vo.take_storeNum}"><button class="unpal btn-default pull-right" title="${vo.follow_Num}">X</button></a>
 </c:if>
 									<div
 										style="width: 198px; width: 130px; margin-top: 40px; margin-left: 21%; border-radius: 70%; overflow: hidden; background-color: gray;"

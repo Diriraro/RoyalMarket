@@ -29,11 +29,11 @@ public class FollowInterceptor extends HandlerInterceptorAdapter {
 		
 		// 아닐떄 
 		if (session != give_storeNum) {
-			 check1 = false;
 				request.setAttribute("result", "잘못된 접근입니다.");
 				request.setAttribute("path", "../");
 				RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/common/result.jsp");
 				view.forward(request, response);			
+				check1 = false;
 		}
 		if (session == give_storeNum) {
 			check1 = true;			

@@ -8,6 +8,7 @@ import com.iu.s1.interceptor.AdminInterceptor;
 import com.iu.s1.interceptor.BuyerPageInterceptor;
 import com.iu.s1.interceptor.FavoritesInterceptor;
 import com.iu.s1.interceptor.FollowInterceptor;
+import com.iu.s1.interceptor.FollowInterceptors2;
 import com.iu.s1.interceptor.ProductCancelInterceptor;
 import com.iu.s1.interceptor.ProductInterceptor;
 import com.iu.s1.interceptor.ProductPayInterceptor;
@@ -44,6 +45,9 @@ public class InterceptorConfig implements WebMvcConfigurer {
 	
 	@Autowired
 	private FollowInterceptor followInterceptor;
+	
+	@Autowired
+	private FollowInterceptors2 followInterceptors2;
 	
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
@@ -93,6 +97,9 @@ public class InterceptorConfig implements WebMvcConfigurer {
 		
 		registry.addInterceptor(productPayInterceptor)
 		.addPathPatterns("/product/productPay");
+		
+		registry.addInterceptor(followInterceptors2)
+		.addPathPatterns("/shop/setDeleteFollow");
 
 		//적용할 Interceptor 등록
 		//registry.addInterceptor(productQnaInterceptor)

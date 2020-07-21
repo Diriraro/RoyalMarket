@@ -464,7 +464,7 @@ public class ShopController {
 	public ModelAndView error() {
 		ModelAndView mv = new ModelAndView();
 			
-		mv.setViewName("error/serverError");
+		mv.setViewName("error/error");
 			
 		return mv;
 	}
