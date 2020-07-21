@@ -163,7 +163,6 @@ public class ProductController {
 			index++;
 
 		}
-
 		mv.addObject("myfile", ar2);
 
 		mv.addObject("pager", pager);
@@ -292,15 +291,6 @@ public class ProductController {
 	}
 
 
-	//예외 처리 메서드
-	@ExceptionHandler(NullPointerException.class)
-	public ModelAndView error() {
-		ModelAndView mv = new ModelAndView();
-			
-		mv.setViewName("error/serverError");
-			
-		return mv;
-	}
 
 	@GetMapping("recentSearchProduct")
 	public void recentSearchProduct(String sell_num, Model model) throws Exception {
