@@ -101,7 +101,7 @@
 		</div>
 		
 		<div style="width: 856px;height:113px; float: left;border-top:solid 1px #dcdbe4;">
-		<input style="margin-top: 32px;width: 240px;height: 48px;float: left;" class="form-control" type="text" name="sell_price" id="sell_price"
+		<input style="margin-top: 32px;width: 240px;height: 48px;float: left;" class="form-control" type="text" maxlength="7"  name="sell_price" id="sell_price"
 		value="${vvo.sell_price}">
 		<font style="text-align: center;line-height: 113px;font-size: 18px;font-weight: 900;">원</font> 
 		</div>
