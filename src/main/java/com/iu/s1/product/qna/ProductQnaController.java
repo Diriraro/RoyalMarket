@@ -25,24 +25,11 @@ public class ProductQnaController {
 	
 	@Autowired
 	private ProductQnaService qnaService;
-	
-//	@GetMapping("qnaInsert")
-//	public ModelAndView qnaInsert(ModelAndView mv)throws Exception{
-//
-//		mv.addObject("qnaVO", new QnaVO());
-//		return mv;
-//	}
-//	
-//	@PostMapping("qnaInsert")
-//	public ModelAndView qnaInsert(QnaVO qnaVO,RedirectAttributes rd)throws Exception{
-//		int result = qnaService.qnaInsert(qnaVO);
-//		rd.addFlashAttribute("result",result);
-//		return mv;
-//	}
 
     @RequestMapping("/qnaInsert") //댓글 작성 
     @ResponseBody
-    private long qnaInsert(@RequestParam long sell_num,@RequestParam long pq_storeNum, @RequestParam String pq_contents,@RequestParam String pq_storeName) throws Exception{
+    private long qnaInsert(@RequestParam long sell_num,@RequestParam long pq_storeNum, 
+    		@RequestParam String pq_contents,@RequestParam String pq_storeName) throws Exception{
         
         ProductQnaVO qnaVO = new ProductQnaVO();
         qnaVO.setSell_num(sell_num);
@@ -66,13 +53,6 @@ public class ProductQnaController {
     private List<ProductQnaVO> qnaList(Model model,@RequestParam long sell_num) throws Exception{
         return qnaService.qnaList(sell_num);
     }
-    
-	/*
-	 * @RequestMapping("/qnaList") //댓글 리스트
-	 * 
-	 * @ResponseBody private void qnaList2(Model model,long sell_num) throws
-	 * Exception{ List<ProductQnaVO> ar = qnaService.qnaList(sell_num);
-	 * model.addAttribute("qlist", ar); }
-	 */
+
 
 }

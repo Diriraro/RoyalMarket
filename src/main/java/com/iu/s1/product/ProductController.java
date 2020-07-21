@@ -170,17 +170,6 @@ public class ProductController {
 		return mv;
 	}
 	
-	/*
-	 * //예외 처리 메서드
-	 * 
-	 * @ExceptionHandler(NullPointerException.class) public ModelAndView error() {
-	 * ModelAndView mv = new ModelAndView();
-	 * 
-	 * mv.setViewName("error/serverError");
-	 * 
-	 * return mv; }
-	 */
-
 	@GetMapping("productSelect")
 	public ModelAndView productSelect(long sell_num, HttpSession session) throws Exception {
 		ModelAndView mv = new ModelAndView();
@@ -279,7 +268,8 @@ public class ProductController {
 
 	@GetMapping("productDelete")
 
-	public ModelAndView productDelete(ProductVO productVO, RedirectAttributes rd, HttpServletRequest request,HttpServletResponse response,MemberVO memberVO,HttpSession session)
+	public ModelAndView productDelete(ProductVO productVO, RedirectAttributes rd, HttpServletRequest request,
+			HttpServletResponse response,MemberVO memberVO,HttpSession session)
 			throws Exception {
 		ModelAndView mv = new ModelAndView();
 		long mem_storeNum = ((MemberVO)session.getAttribute("member")).getMem_storeNum();
