@@ -58,6 +58,7 @@ text-decoration: none !important;
 }
 .tds:hover{
 color: black ;
+font-size : 17.5px;
 text-decoration: none !important;
 
 }
@@ -70,6 +71,17 @@ font-size: 20px;
 font-weight: 700;
 box-shadow: 1px 1px 1px 1px gray;
 }
+
+
+.folls{
+
+}
+
+.folls:hover{
+
+font-size: 27.5px;
+}
+
 	
 </style>
     

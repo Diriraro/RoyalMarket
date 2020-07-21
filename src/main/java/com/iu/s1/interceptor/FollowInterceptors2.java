@@ -34,28 +34,13 @@ public class FollowInterceptors2 extends HandlerInterceptorAdapter {
 		boolean check1 = false; // false 팅김
 		long session = memberVO.getMem_storeNum();
 		
-		System.out.println(session);
-		System.out.println(mem_storeNum);
-		System.out.println(follow_Num);
+		// 쿼리문 /setDeleteFollow?follow_Num=239&mem_storeNum=2
 		
-		// /setDeleteFollow?follow_Num=239&mem_storeNum=2
-		/*
-		 * 들어올떄 followNum 파라미터 받아온거 출력하고 저장 
-		 *  follow num 검색하는 쿼리로 mem_storeNum 과
-		 * session 번호 집어넣어서 출력
-		 * 
-		 * 해서 파라미터 번호 == follownum 검색 결과 일치하면 지워
-		 */
-		
-//		System.out.println(storeFollowService.selectnum(session, mem_storeNum));
-//		System.out.println(follow_Num +" 받아온 파라미터" );
-		
-//		System.out.println(check1);
-		// 아닐떄 
+//		 1 followNum 파라미터 받아 저장 
+//		 2 followNum 검색하는 쿼리로 mem_storeNum session 번호 집어넣어서 출력
+//		 3  파라미터 followNum == storeFollowService.selectnum(session, mem_storeNum) 검색 결과 일치하면 지우기
 		StoreFollowVO storeFollowVO = new StoreFollowVO();
 		storeFollowVO = storeFollowService.selectnum(session, mem_storeNum);
-		System.out.println(storeFollowVO.getFollow_Num());
-		
 			if (follow_Num != storeFollowVO.getFollow_Num()) {
 						request.setAttribute("result", "잘못된 접근입니다.");
 						request.setAttribute("path", "../");
