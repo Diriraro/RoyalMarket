@@ -38,6 +38,26 @@
 		</choose>
 		like concat('%',#{search},'%')
 	</select>
+	
+	<select id="productCountStatus0" parameterType="Pager"
+		resultType="java.lang.Long">
+		select count(sell_num) from store_product where
+		<choose>
+			<when test="kind=='sp'">
+				sell_product
+			</when>
+			<when test="kind=='sk'">
+				sell_kind
+			</when>
+			<when test="kind=='smn'">
+				mem_storeNum
+			</when>
+			<otherwise>
+				sell_tag
+			</otherwise>
+		</choose>
+		like concat('%',#{search},'%') and sell_status = 0
+	</select>
 
 	<select id="productList" parameterType="Pager"
 		resultType="ProductVO">

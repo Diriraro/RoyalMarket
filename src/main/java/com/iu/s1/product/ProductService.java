@@ -208,6 +208,10 @@ public class ProductService {
 		}
 		return ar;
 	}
+	
+	public ProductVO productSelect2(long sell_num) throws Exception {
+		return productMapper.productSelect(sell_num);
+	}
 
 
 }

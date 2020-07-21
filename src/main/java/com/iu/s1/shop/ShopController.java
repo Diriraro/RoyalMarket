@@ -458,6 +458,7 @@ public class ShopController {
 		mv.addObject("mdata", memberService.mdata(mem_sotreNum));
 		return mv;
 	}
+
 	
 	/*
 	 * //예외 처리 메서드
@@ -472,5 +473,6 @@ public class ShopController {
 	 * 
 	 * // 승범, 동윤 ,성민 합침
 	 */	
+
 
 }
