@@ -6,10 +6,15 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.iu.s1.interceptor.AdminInterceptor;
 import com.iu.s1.interceptor.BuyerPageInterceptor;
+import com.iu.s1.interceptor.FavoritesInterceptor;
+import com.iu.s1.interceptor.FollowInterceptor;
+import com.iu.s1.interceptor.FollowInterceptors2;
 import com.iu.s1.interceptor.ProductCancelInterceptor;
 import com.iu.s1.interceptor.ProductInterceptor;
+import com.iu.s1.interceptor.ProductPayInterceptor;
 import com.iu.s1.interceptor.ReviewInterceptor;
 import com.iu.s1.interceptor.SellerPageInterceptor;
+
 
 
 @Configuration
@@ -32,9 +37,23 @@ public class InterceptorConfig implements WebMvcConfigurer {
 	
 	@Autowired
 	private ReviewInterceptor reviewInterceptor;
+
+	
+	@Autowired
+	private ProductPayInterceptor productPayInterceptor;
+	
+	@Autowired
+	private FavoritesInterceptor favoritesInterceptor;
+	
+	@Autowired
+	private FollowInterceptor followInterceptor;
+	
+	@Autowired
+	private FollowInterceptors2 followInterceptors2;
 	
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
+
 		
 		registry.addInterceptor(buyerPageInterceptor)
 		.addPathPatterns("/payment/buyer_page")
@@ -48,7 +67,6 @@ public class InterceptorConfig implements WebMvcConfigurer {
 		.addPathPatterns("/payment/productCancel");
 		
 		// Product랑 Shop에 대해 로그인 해야 들어 갈수 있는 Interceptor
-
 		registry.addInterceptor(productInterceptor)
 		.addPathPatterns("/shop/*")
 		.addPathPatterns("/payment/*")
@@ -58,21 +76,33 @@ public class InterceptorConfig implements WebMvcConfigurer {
 		.excludePathPatterns("/product/productList")
 		.excludePathPatterns("/product/homeProductList")
 		.excludePathPatterns("/product/recProductList")
+		.excludePathPatterns("/product/productPay")
 		.excludePathPatterns("/qna/qnaAdminList")
 		.excludePathPatterns("/qna/qnaAnswer")
 		.excludePathPatterns("/product/recentSearchProduct");
 		
 		registry.addInterceptor(adminInterceptor)
 		.addPathPatterns("/admin/*")
-		.addPathPatterns("/notice/*")
+		.addPathPatterns("/notice/noticeDelete")
+		.addPathPatterns("/notice/noticeUpdate")
+		.addPathPatterns("/notice/noticeWrite")
 		.addPathPatterns("/qna/qnaAdminList")
-		.addPathPatterns("/qna/qnaAnswer")
-		.excludePathPatterns("/notice/noticeList")
-		.excludePathPatterns("/notice/policy")
-		.excludePathPatterns("/notice/ban");
+		.addPathPatterns("/qna/qnaAnswer");
 
 		registry.addInterceptor(reviewInterceptor)
 		.addPathPatterns("/shop/rei");
+		
+		registry.addInterceptor(favoritesInterceptor)
+		.addPathPatterns("/shop/favorites");
+		
+		registry.addInterceptor(followInterceptor)
+		.addPathPatterns("/shop/setinsertFollow");
+		
+		registry.addInterceptor(productPayInterceptor)
+		.addPathPatterns("/product/productPay");
+		
+		registry.addInterceptor(followInterceptors2)
+		.addPathPatterns("/shop/setDeleteFollow");
 
 		//적용할 Interceptor 등록
 		//registry.addInterceptor(productQnaInterceptor)

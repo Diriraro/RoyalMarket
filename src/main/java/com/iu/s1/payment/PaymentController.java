@@ -164,31 +164,45 @@ public class PaymentController {
 		String sell_product = request.getParameter("sell_product");
 		long sell_price = Long.parseLong(request.getParameter("sell_price"));
 		long sell_num = Long.parseLong(request.getParameter("sell_num"));
+		ProductVO productVO = productService.productSelect(sell_num);
 		
-		//페이지 진입시 savecash에 아이디가 있는지 확인 / 없으면 생성후 cash 불러오기 / 있으면 cash 불러오기
-		SaveCashVO saveCashVO = new SaveCashVO();
-		saveCashVO = paymentService.selectSC(memberVO.getMem_id());
-		if(saveCashVO==null) {
-			paymentService.createSC(memberVO.getMem_id());
+		if(productVO.getSell_status()==0) {
+			
+			//페이지 진입시 savecash에 아이디가 있는지 확인 / 없으면 생성후 cash 불러오기 / 있으면 cash 불러오기
+			SaveCashVO saveCashVO = new SaveCashVO();
 			saveCashVO = paymentService.selectSC(memberVO.getMem_id());
+			if(saveCashVO==null) {
+				paymentService.createSC(memberVO.getMem_id());
+				saveCashVO = paymentService.selectSC(memberVO.getMem_id());
+			}
+			mv.addObject("cash", saveCashVO);
+			
+			
+			//맴버테이블에서 포인트 조회
+			String mem_id = memberVO.getMem_id();
+			long point = paymentService.pointSelect(mem_id);
+			
+			String image = productService.selectFileName(sell_num);
+			
+			mv.addObject("image", image);
+			mv.addObject("point", point);
+			mv.addObject("sell_product", sell_product);
+			mv.addObject("sell_price", sell_price);
+			mv.addObject("sell_num",sell_num);
+			
+			mv.setViewName("/payment/productPay");
+			
+		}else if(productVO.getSell_status()==1){
+			
+			mv.addObject("result", "거래중인 상품입니다.");
+			mv.addObject("path", "../");
+			mv.setViewName("/common/result");
+			
+		}else if(productVO.getSell_status()==2) {
+			mv.addObject("result", "구매 완료 된 상품입니다.");
+			mv.addObject("path", "../");
+			mv.setViewName("/common/result");
 		}
-		mv.addObject("cash", saveCashVO);
-		
-		
-		//맴버테이블에서 포인트 조회
-		String mem_id = memberVO.getMem_id();
-		long point = paymentService.pointSelect(mem_id);
-		
-		String image = productService.selectFileName(sell_num);
-		
-		mv.addObject("image", image);
-		mv.addObject("point", point);
-		mv.addObject("sell_product", sell_product);
-		mv.addObject("sell_price", sell_price);
-		mv.addObject("sell_num",sell_num);
-		
-		mv.setViewName("/payment/productPay");
-		
 		return mv;
 	}
 	

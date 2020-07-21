@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>거래 금지 품목 - 우주장터</title>
 <c:import url="../template/boot.jsp"></c:import>
 <style type="text/css">
 	.banlist{

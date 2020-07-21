@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>결제 실패 - 우주장터</title>
 <c:import url="../template/boot.jsp"></c:import>
 </head>
 <body>

@@ -23,7 +23,7 @@
 }
 </style>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>취향을 잇는 거래, 우주장터</title>
 <c:import url="../template/boot.jsp"></c:import>
 <c:import url="../template/style.jsp"></c:import>
 <c:import url="../template/shopstyle.jsp"></c:import>
@@ -79,35 +79,42 @@
 							&nbsp;&nbsp;팔로잉&nbsp;<a id="redd">${giveco}</a>
 						</h2>
 						<hr>
-							
+
 						<div
 							style="border: 0px solid white; min-height: 340px; overflow: auto; border-color: rgba(0, 0, 0, 0.25);">
-							
+
 							<c:if test="${giveco eq 0 }">
-							<p style="color: gray;">아직 팔로우한 사람이 없습니다.</p>
+								<p style="color: gray;">아직 팔로우한 사람이 없습니다.</p>
 							</c:if>
-							
-							
+
+
 							<c:forEach items="${owilist}" var="vo" varStatus="status">
 								<div class="fst lis2"
 									style="width: 218px; height: 320px; border: 1px solid gray; float: left; margin-left: 30px; margin-bottom: 30px; overflow: auto; border-color: rgba(0, 0, 0, 0.25); background-color: #f0f0f5">
-
+									<c:if test="${msnum eq mem_storeNum}">
+										<button class="btn" style="float: right;">
+											<a style="color: gray;"
+												href="./setDeleteFollow?follow_Num=${vo.follow_Num}&mem_storeNum=${vo.take_storeNum}">
+												<span class="glyphicon glyphicon-remove-sign"></span>
+											</a>
+										</button>
+									</c:if>
 									<div
 										style="width: 198px; width: 130px; margin-top: 40px; margin-left: 21%; border-radius: 70%; overflow: hidden; background-color: gray;"
 										onclick="location.href='./myshop?mem_storeNum=${vo.take_storeNum }'">
-										
+
 										<c:if test="${vo.re_rate eq 0}">
-										<img alt=""
-											src="${pageContext.request.contextPath}/resources/images/user113.jpg"
-											style="width: 100%; height: 100%;">
+											<img alt=""
+												src="${pageContext.request.contextPath}/resources/images/user113.jpg"
+												style="width: 100%; height: 100%;">
 										</c:if>
-										
+
 										<c:if test="${vo.re_rate ne 0}">
-										<img alt=""
-											src="${pageContext.request.contextPath}/resources/images/user114.jpg"
-											style="width: 100%; height: 100%;">
+											<img alt=""
+												src="${pageContext.request.contextPath}/resources/images/user114.jpg"
+												style="width: 100%; height: 100%;">
 										</c:if>
-											
+
 									</div>
 									<h2></h2>
 									<div style="text-align: center;">
@@ -117,12 +124,12 @@
 												src="${pageContext.request.contextPath}/resources/images/star22.png">
 										</c:forEach>
 										<c:if test="${vo.sub_star eq 1}">
-										<img class="imgsh2"
+											<img class="imgsh2"
 												style="cursor: pointer; width: 20px; height: 20px;" alt=""
 												src="${pageContext.request.contextPath}/resources/images/star23.png">
 										</c:if>
-										
-										
+
+
 										<br> <a href="./myshop?mem_storeNum=${vo.take_storeNum }"
 											class="names">${vo.take_storeName }</a> <br>
 									</div>
@@ -137,11 +144,11 @@
 								</div>
 							</c:forEach>
 						</div>
-						
+
 						<c:if test="${giveco ne 0}">
-						<a class="btn btn-default pull-right " href="#" id="load">팔로잉
-							더 보기</a>
-							</c:if>
+							<a class="btn btn-default pull-right " href="#" id="load">팔로잉
+								더 보기</a>
+						</c:if>
 
 					</div>
 				</c:if>

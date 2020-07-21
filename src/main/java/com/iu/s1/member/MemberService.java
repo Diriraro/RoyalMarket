@@ -96,7 +96,7 @@ public class MemberService {
 
 		List<ObjectError> err = bindingResult.getAllErrors();
 		System.out.println(err);
-		if (!result) {
+		
 			if (!memberVO.getPhoneCheck().equals(random)) {
 				bindingResult.rejectValue("phoneCheck", "memberVO.phoneCheck.notEqual");
 				result = true;
@@ -106,7 +106,7 @@ public class MemberService {
 				bindingResult.rejectValue("pwCheck", "memberVO.mem_pw.notEqual");
 				result = true;
 			}
-		}
+		
 		return result;
 	}
 
@@ -118,7 +118,7 @@ public class MemberService {
 		boolean result = bindingResult.hasErrors();
 
 		// 인증번호가 맞는지 확인
-		if (!result) {
+		
 			if (!memberVO.getPhoneCheck().equals(random)) {
 				bindingResult.rejectValue("phoneCheck", "memberVO.phoneCheck.notEqual");
 				result = true;
@@ -131,7 +131,7 @@ public class MemberService {
 
 			}
 
-		}
+		
 
 		return result;
 	}

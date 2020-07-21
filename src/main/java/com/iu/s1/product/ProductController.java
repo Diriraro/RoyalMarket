@@ -1,9 +1,11 @@
 package com.iu.s1.product;
 
+import java.nio.channels.SeekableByteChannel;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.security.auth.message.callback.PrivateKeyCallback.Request;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -161,7 +163,6 @@ public class ProductController {
 			index++;
 
 		}
-
 		mv.addObject("myfile", ar2);
 
 		mv.addObject("pager", pager);
@@ -169,6 +170,17 @@ public class ProductController {
 
 		return mv;
 	}
+	
+	/*
+	 * //예외 처리 메서드
+	 * 
+	 * @ExceptionHandler(NullPointerException.class) public ModelAndView error() {
+	 * ModelAndView mv = new ModelAndView();
+	 * 
+	 * mv.setViewName("error/serverError");
+	 * 
+	 * return mv; }
+	 */
 
 	@GetMapping("productSelect")
 	public ModelAndView productSelect(long sell_num, HttpSession session) throws Exception {
@@ -204,7 +216,7 @@ public class ProductController {
 		List<ProductFileVO> productFileVOs = productService.productFileSelect(sell_num);
 		mv.addObject("pfile", productFileVOs); // store 사진 출력
 
-		long mem_storeNum = ((MemberVO) session.getAttribute("member")).getMem_storeNum();
+		long mem_storeNum = ((MemberVO)session.getAttribute("member")).getMem_storeNum();
 		ZzimVO zzimVO = productService.zzimCheck(mem_storeNum, sell_num);
 		mv.addObject("zc", zzimVO);
 
@@ -267,26 +279,29 @@ public class ProductController {
 	}
 
 	@GetMapping("productDelete")
-	public ModelAndView productDelete(ProductVO productVO, RedirectAttributes rd, HttpServletRequest request)
+	public ModelAndView productDelete(ProductVO productVO, RedirectAttributes rd, HttpServletRequest request,HttpServletResponse response,MemberVO memberVO,HttpSession session)
 			throws Exception {
 		ModelAndView mv = new ModelAndView();
-		int result = productService.productDelete(productVO);
-		rd.addFlashAttribute("result", result);
-		mv.setViewName("redirect:../");
+		long mem_storeNum = ((MemberVO)session.getAttribute("member")).getMem_storeNum();
+		if (request.getHeader("REFERER") != null){
+			int result = productService.productDelete(productVO);
+			rd.addFlashAttribute("result", result);
+			mv.setViewName("redirect:./myProductList?kind=sp&mem_storeNum=" + mem_storeNum);
+		}else {
+			request.setAttribute("result", "잘못된 접근입니다.");
+			request.setAttribute("path", "../");
+			RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/common/result.jsp");
+			view.forward(request, response);
+			mv.setViewName("redirect:../");
+		}
+
+		
+
 		return mv;
 
 	}
 
 
-	//예외 처리 메서드
-	@ExceptionHandler(NullPointerException.class)
-	public ModelAndView error() {
-		ModelAndView mv = new ModelAndView();
-			
-		mv.setViewName("error/serverError");
-			
-		return mv;
-	}
 
 	@GetMapping("recentSearchProduct")
 	public void recentSearchProduct(String sell_num, Model model) throws Exception {

@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Test님의 코인 충전</title>
+<title>${member.mem_id}님의 포인트 충전 - 우주장터</title>
 <c:import url="../template/boot.jsp"></c:import>
 <style type="text/css">
 .wrap1{
