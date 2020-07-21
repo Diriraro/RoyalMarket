@@ -545,7 +545,8 @@ button {
 	}
 	$(function() {
 		var cookie = getCookie("recentSearch");
-		if (cookie != null) {
+		alert(cookie);
+		if (cookie != null && cookie != "") {
 			$.get(
 					"${pageContext.request.contextPath}/product/recentSearchProduct?sell_num="
 							+ cookie, function(result) {

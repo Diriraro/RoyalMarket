@@ -146,14 +146,5 @@ public class NoticeController {
 		
 		return mv;
 	}
-	//예외 처리 메서드
-	@ExceptionHandler(NullPointerException.class)
-	public ModelAndView error() {
-		ModelAndView mv = new ModelAndView();
-			
-		mv.setViewName("error/serverError");
-			
-		return mv;
-	}
 
 }

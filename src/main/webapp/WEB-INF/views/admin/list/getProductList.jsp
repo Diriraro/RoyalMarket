@@ -4,8 +4,8 @@
 
 <div class="w3-container">
 	<div class="topnav">
-		<a class="check active" title="ProductList">상품 정보 관리</a>
-		<a class="check " title="TradingList">상품 거래 관리</a>
+		<a class="check active" title="ProductList">상품 정보 관리</a> <a
+			class="check " title="TradingList">상품 거래 관리</a>
 		<div class="search-container">
 			<select id="sel1" name="kind">
 				<option value="sp">상품명</option>
@@ -32,24 +32,24 @@
 		</thead>
 		<tbody>
 			<c:forEach items="${list}" var="product">
-				<tr>
-					<td>${product.sell_num}</td>
-					<td>${product.mem_storeNum}</td>
-					<td><a
-						href="../product/productSelect?sell_num=${product.sell_num}">${product.sell_product}</a></td>
-					<td>${product.sell_price}</td>
-					<td>${product.sell_kind}</td>
-					<td>${product.sell_date}</td>
-					<td><button type="button" class="deletebtn btn btn-danger"
-							title="./result/productDelete?sell_num=${product.sell_num}">삭제</button></td>
-				</tr>
+					<tr>
+						<td>${product.sell_num}</td>
+						<td>${product.mem_storeNum}</td>
+						<td><a
+							href="../product/productSelect?sell_num=${product.sell_num}">${product.sell_product}</a></td>
+						<td>${product.sell_price}</td>
+						<td>${product.sell_kind}</td>
+						<td>${product.sell_date}</td>
+						<td><button type="button" class="deletebtn btn btn-danger"
+								title="./result/productDelete?sell_num=${product.sell_num}">삭제</button></td>
+					</tr>
 			</c:forEach>
 		</tbody>
 		<tfoot>
 			<tr>
 				<td colspan="7">
 					<div style="width: 1024px; height: 40px; float: left;">
-						<ul class="pagination">
+						<ul class="pagination" style="margin : 0;">
 							<c:if test="${pager.curBlock gt 1}">
 								<li><a
 									title="./list/getProductList?curPage=${pager.startNum-1}&kind=${pager.kind}&search=${pager.search}">이전</a></li>

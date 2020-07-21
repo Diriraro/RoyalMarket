@@ -1,5 +1,6 @@
 package com.iu.s1.admin;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -247,6 +248,8 @@ public class AdminService {
 	public List<ProfitVO> getProfit() throws Exception {
 		List<ProfitVO> ar = new ArrayList<ProfitVO>();
 		Date date = new Date();
+		
+		// date.getMonth() > 6때
 		for (int i = 0; i < date.getMonth() + 1; i++) {
 			Calendar cal1 = new GregorianCalendar(date.getYear() + 1900, i, 1);
 			int year = cal1.getTime().getYear() + 1900;
@@ -258,14 +261,17 @@ public class AdminService {
 			if (result == null) {
 				result = 0L;
 			}
+			NumberFormat nf = NumberFormat.getInstance();
 			ProfitVO profitVO = new ProfitVO();
-			profitVO.setProfit(result);
+			profitVO.setProfit(nf.format(result));
 			profitVO.setProfitRate((long) (((double) result / 1000000) * 100));
 			if(profitVO.getProfitRate()>100L) {
 				profitVO.setProfitRate(100L);
 			}
 			ar.add(profitVO);
 		}
+		
+		//date.getMonth() <= 6 때
 
 		return ar;
 	}
@@ -281,7 +287,7 @@ public class AdminService {
 
 	public List<ProductVO> productList(Pager pager) throws Exception {
 		pager.makeRow();
-		long totalCount = productMapper.productCount(pager);
+		long totalCount = productMapper.productCountStatus0(pager);
 		pager.makePage(totalCount);
 		return productMapper.productList(pager);
 	}

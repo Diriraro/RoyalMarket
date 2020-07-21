@@ -27,8 +27,8 @@
 				<th>구매자</th>
 				<th>판매자</th>
 				<th>상품가격</th>
-				<th>상품강제인수</th>
-				<th>상품강제취소</th>
+				<th>상품인수</th>
+				<th>상품취소</th>
 			</tr>
 		</thead>
 		<tbody>
