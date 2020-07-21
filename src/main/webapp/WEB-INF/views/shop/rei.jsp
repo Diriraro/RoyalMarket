@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>취향을 잇는 거래, 우주장터</title>
 <style type="text/css">
 .imagePreview {
 	width: 100px;
@@ -391,7 +391,7 @@ iframe {
 					<div class="sc-kvkilB fSETiC">
 						<div class="sc-cANqwJ wmnsE" style="overflow: auto;">
 							<div class="sc-clWJBl biGiRA">
-								<h2>리뷰 작성</h2>
+								<h2> ${sell_product }</h2>
 								<br>
 							</div>
 							
@@ -499,7 +499,7 @@ iframe {
 								</div>
 								
 										<button style="margin-top: 36px; width: 160px;height: 56px;border: 0px;background-image: url('${pageContext.request.contextPath}/resources/images/regi_logo.png');" type="submit" class="btn btn-default btn pull-right" id="rei"></button>
-<a id="tests"> ccc</a>
+
 
 							</div>
 
@@ -589,7 +589,7 @@ iframe {
 			}
 		});
 
-		$("#tests").click(function() {
+	/* 	$("#tests").click(function() {
 			var files = $("#files").val();
 			var files2 = $("#files2").val();
 			var t1 = $("#mem_storeNum").val();
@@ -610,7 +610,7 @@ iframe {
 
 			
 			
-		});
+		}); */
 
 
 

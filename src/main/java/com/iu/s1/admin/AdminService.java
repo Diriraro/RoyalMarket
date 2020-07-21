@@ -261,6 +261,9 @@ public class AdminService {
 			ProfitVO profitVO = new ProfitVO();
 			profitVO.setProfit(result);
 			profitVO.setProfitRate((long) (((double) result / 1000000) * 100));
+			if(profitVO.getProfitRate()>100L) {
+				profitVO.setProfitRate(100L);
+			}
 			ar.add(profitVO);
 		}
 

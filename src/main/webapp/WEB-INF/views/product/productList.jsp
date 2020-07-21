@@ -167,8 +167,9 @@
 								</div>
 							</div>
 							<div
+
 								style="height: 40px; border-top: solid 1px #e4e4e4; text-align: left; line-height: 40px;width:194px; overflow:hidden;white-space:nowrap; text-overflow:ellipsis;">
-								<img
+			<img
 									style="margin-left: 8px; width: 16px; height: 20px; margin-bottom: 3px;"
 									alt=""
 									src="${pageContext.request.contextPath}/resources/images/ad_logo.png">

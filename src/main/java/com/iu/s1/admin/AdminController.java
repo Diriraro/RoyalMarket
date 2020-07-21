@@ -21,6 +21,7 @@ import com.iu.s1.member.MemberService;
 import com.iu.s1.member.MemberVO;
 import com.iu.s1.notice.NoticeVO;
 import com.iu.s1.payment.PayStatsVO;
+import com.iu.s1.payment.PayVO;
 import com.iu.s1.payment.PaymentService;
 import com.iu.s1.paymentHistory.Buy_HistoryVO;
 import com.iu.s1.paymentHistory.ProfitVO;
@@ -360,6 +361,12 @@ public class AdminController {
 			sell_HistoryVO.setStatus(2);
 			sell_HistoryVO.setSell_check(0);
 			paymentService.sell_statusUp(sell_HistoryVO);
+			
+			PayVO payVO = new PayVO();
+			payVO.setMem_id(memberVO2.getMem_id());
+			payVO.setPoint_rest(memberVO2.getMem_point());	//위에 저장한 포인트가져오기
+			payVO.setPay_price(memberVO2.getMem_point()-curPoint);
+			paymentService.paymentSell(payVO);
 
 			// 1% 적립금 추가
 			SaveCashVO saveCashVO = new SaveCashVO();
@@ -396,15 +403,26 @@ public class AdminController {
 			String mem_id = traVO.getBuyer_id();
 			long price = traVO.getSell_price();
 
-			// 맴버에서 원래 아이디의 가격을 조회 후 취소된 거래의 가격만큼 더해줌
+			// 결제된 금액중 적립금은 적립금으로 환불
+			SaveCashVO saveCashVO = paymentService.selectSC(mem_id);
+			PayVO payVO = paymentService.paymentHistory(tradingVO.getTrading_num());
+			saveCashVO.setMem_cash(saveCashVO.getMem_cash()+payVO.getPay_cash());
+			paymentService.updateSC(saveCashVO);
+			long usedCash = payVO.getPay_cash();
 			
 			
-			/* 취소후 store_product 판매상태 status = 0 으로 update 하는 서비스 호출 추후 작성*/
 			long point = paymentService.pointSelect(mem_id);
 			MemberVO memberVO = new MemberVO();
 			memberVO.setMem_id(mem_id);
 			memberVO.setMem_point(price + point);
 			paymentService.product_cancel_status(traVO.getSell_num());
+			
+			payVO = new PayVO();
+			payVO.setMem_id(mem_id);
+			payVO.setPoint_rest(memberVO.getMem_point());
+			payVO.setPay_price(price-usedCash);
+			paymentService.paymentBuyCancle(payVO);
+			
 			paymentService.pointUpdate(memberVO);
 			paymentService.tradingDelete(tradingVO.getTrading_num());
 		}

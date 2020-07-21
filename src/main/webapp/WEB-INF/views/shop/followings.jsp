@@ -23,7 +23,7 @@
 }
 </style>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>취향을 잇는 거래, 우주장터</title>
 <c:import url="../template/boot.jsp"></c:import>
 <c:import url="../template/style.jsp"></c:import>
 <c:import url="../template/shopstyle.jsp"></c:import>
@@ -91,7 +91,9 @@
 							<c:forEach items="${owilist}" var="vo" varStatus="status">
 								<div class="fst lis2"
 									style="width: 218px; height: 320px; border: 1px solid gray; float: left; margin-left: 30px; margin-bottom: 30px; overflow: auto; border-color: rgba(0, 0, 0, 0.25); background-color: #f0f0f5">
-
+<c:if test="${msnum eq mem_storeNum}">
+	<a href="./setDeleteFollow?follow_Num=${vo.follow_Num}&mem_storeNum=${vo.take_storeNum}"><button class="unpal btn-default pull-right" title="${vo.follow_Num}">X</button></a>
+</c:if>
 									<div
 										style="width: 198px; width: 130px; margin-top: 40px; margin-left: 21%; border-radius: 70%; overflow: hidden; background-color: gray;"
 										onclick="location.href='./myshop?mem_storeNum=${vo.take_storeNum }'">
@@ -163,6 +165,8 @@
 				$(".lis2:hidden").slice(0, 4).show();
 			});
 		});
+
+
 	</script>
 
 </body>

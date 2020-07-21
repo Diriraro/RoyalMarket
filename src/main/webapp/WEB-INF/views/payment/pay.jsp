@@ -15,7 +15,7 @@ if (request.getProtocol().equals("HTTP/1.1"))
 
 <meta charset="UTF-8">
 <%-- <title>/${member.id} 님의 결제  </title> --%>
-<title>Test 결제창</title>
+<title>결제 - 우주장터</title>
 <c:import url="../template/boot.jsp"></c:import>
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>

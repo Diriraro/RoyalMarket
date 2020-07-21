@@ -51,7 +51,7 @@ public class StoreReviewService {
 			vo.setOri_name(multipartFile.getOriginalFilename());
 			
 			result = storeReviewFileRepository.reviewFileInsert(vo);
-			System.out.println(fileName+" 리뷰파이리 름확임");
+			System.out.println(fileName+" 리뷰파일이름확임");
 			
 		}
 		return result;

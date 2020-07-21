@@ -107,6 +107,7 @@
 			if(strReferer == null){ 
 			%>
 			<script type="text/javascript">
+
 			document.location.href="http://localhost:8080/error/error";
 
 			</script>

@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>${sell_product}주문/결제 - 우주장터</title>
 <c:import url="../template/boot.jsp"></c:import>
 </head>
 <body style="background-color: #f9f9f9;">

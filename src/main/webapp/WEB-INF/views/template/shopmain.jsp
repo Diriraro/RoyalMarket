@@ -181,6 +181,7 @@ filter: drop-shadow(5px 5px 5px #000);
 				<!-- 팔로우 상태라면 언팔버튼 출력  -->
 				<c:if test="${fonum.follow_Num ne null}">
 				<div>
+				
 				<a href="./setDeleteFollow?follow_Num=${fonum.follow_Num}&mem_storeNum=${mem_storeNum}"
 						class="btn" id="mi"style="font-size:25px; color: white; font-weight: bold;" ><img class="imgsh" alt="" src="${pageContext.request.contextPath}/resources/images/ff2.png"><font style="text-shadow:3px 3px 3px rgb(0,0,0);">팔로잉</font>   </a>
 				</div>

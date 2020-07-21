@@ -163,6 +163,7 @@ a.blog span {
 .guide p {
   padding: 0;
 }
+
 	
 </style>
     
