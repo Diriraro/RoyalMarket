@@ -34,10 +34,10 @@ public class BuyerPageInterceptor extends HandlerInterceptorAdapter {
 			if (memberVO != null) {
 				for (int i = 0; i < buy_history.size(); i++) {
 
-					System.out.println(buy_history.get(i).getSell_num());
+					// buyer page 접근 조건
 					if (buy_history.get(i).getSell_num() == sell_num) {
 						check1 = true;
-						System.out.println(check1);
+					
 					}
 				}
 

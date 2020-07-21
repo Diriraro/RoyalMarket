@@ -288,7 +288,7 @@ button {
 
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	
 			<a style="margin-right:;" href="../product/productNew"><img
 				src="${pageContext.request.contextPath}/resources/images/pn_logo.png"
 				width="23" height="26" alt="판매하기 이미지"> &nbsp;<font
