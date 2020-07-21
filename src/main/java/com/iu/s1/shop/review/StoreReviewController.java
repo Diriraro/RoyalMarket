@@ -72,15 +72,16 @@ public class StoreReviewController {
 		return mv;
 	}
 	
-	//예외 처리 메서드
-		@ExceptionHandler(Exception.class)
-		public ModelAndView error() {
-			ModelAndView mv = new ModelAndView();
-				
-			mv.setViewName("error/error");
-				
-			return mv;
-		}
+	/*
+	 * //예외 처리 메서드
+	 * 
+	 * @ExceptionHandler(Exception.class) public ModelAndView error() { ModelAndView
+	 * mv = new ModelAndView();
+	 * 
+	 * mv.setViewName("error/error");
+	 * 
+	 * return mv; }
+	 */
 	
 	
 	

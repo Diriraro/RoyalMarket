@@ -459,18 +459,18 @@ public class ShopController {
 		return mv;
 	}
 	
-	//예외 처리 메서드
-	@ExceptionHandler(Exception.class)
-	public ModelAndView error() {
-		ModelAndView mv = new ModelAndView();
-			
-		mv.setViewName("error/error");
-			
-		return mv;
-	}
-	
-
-	// 승범, 동윤 ,성민 합침
-	
+	/*
+	 * //예외 처리 메서드
+	 * 
+	 * @ExceptionHandler(Exception.class) public ModelAndView error() { ModelAndView
+	 * mv = new ModelAndView();
+	 * 
+	 * mv.setViewName("error/error");
+	 * 
+	 * return mv; }
+	 * 
+	 * 
+	 * // 승범, 동윤 ,성민 합침
+	 */	
 
 }
