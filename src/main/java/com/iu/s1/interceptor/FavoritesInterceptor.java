@@ -30,7 +30,7 @@ public class FavoritesInterceptor extends HandlerInterceptorAdapter {
 		// 아닐떄 
 		if (session != mem_storeNum) {
 			 check1 = false;
-				request.setAttribute("result", "잘못된 접근입니다.");
+				request.setAttribute("result", "내것만 볼수 있어요.");
 				request.setAttribute("path", "../");
 				RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/common/result.jsp");
 				view.forward(request, response);			

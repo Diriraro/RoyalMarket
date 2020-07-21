@@ -80,7 +80,7 @@
 							</c:if>
 						<c:forEach items="${relist}" var="vo" varStatus="i">
 							<div class="lis2"
-								style="border-top: 1px solid gray; min-height: 150px; overflow: auto; background-color: #f0f0f5">
+								style="border-top: 1px solid gray; min-height: 150px; overflow: auto; margin-bottom:20px; background-color: #f0f0f5">
 
 								<div style="float: left; width: 80px; height: 383px;">
 									<img alt=""
@@ -137,18 +137,15 @@
 
 
 								</c:if>
-
 							</div>
-							<hr>
 						</c:forEach>
-						
+							<hr>
 						<c:if test="${reco ne 0}">
 						<a class="btn btn-default pull-right " href="#" id="load">리뷰 더
 							보기</a>
 							</c:if>
 					</div>
 				</c:if>
-
 
 			</div>
 
