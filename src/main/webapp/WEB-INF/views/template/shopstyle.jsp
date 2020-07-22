@@ -45,10 +45,10 @@ filter: drop-shadow(1px 1px 1px #000);
 
 }
 .box1{
-box-shadow: 1px 1px 1px 1px gray;
+/* box-shadow: 1px 1px 1px 1px gray; */
 }
 .box2{
-box-shadow: 5px 5px 5px 5px gray;
+/* box-shadow: 5px 5px 5px 5px gray; */
 }
 .tds{
 color: black ;

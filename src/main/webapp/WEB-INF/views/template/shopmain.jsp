@@ -31,8 +31,6 @@ filter: drop-shadow(5px 5px 5px #000);
 <!-- shop 페이지가 공통으로 가져갈곳  -->
 
 <div class="container">
-<!-- 모든 컨트롤에서는 이름을 출력해줘야함.  -->
-	<%-- <h2>${mem_storeName}</h2>  --%> 
 		<c:if test="${msnum eq mem_storeNum }">
 	<div style="border: 1px solid black; width: 1024px; height: 340px; border-color: rgba(0,0,0,0.25); ">
 
@@ -174,7 +172,8 @@ filter: drop-shadow(5px 5px 5px #000);
 				<c:if test="${fonum.follow_Num eq null}">
 				<div>
 					<a href="./setinsertFollow?give_storeNum=${msnum}&take_storeNum=${mem_storeNum}&mem_storeNum=${mem_storeNum}"
-						class="btn tex" id="pi" style="font-size:25px; color: white; font-weight: bold; "><img class="imgsh" alt="" src="${pageContext.request.contextPath}/resources/images/ff1.png"> <font style="text-shadow:3px 3px 3px rgb(0,0,0);" class="folls">팔 로 우</font> </a>
+						class="btn tex" id="pi" style="font-size:25px; color: white; font-weight: bold; ">
+						<img class="imgsh" alt="" src="${pageContext.request.contextPath}/resources/images/ff1.png"> <font style="text-shadow:3px 3px 3px rgb(0,0,0);" class="folls">팔 로 우</font> </a>
 				</div>
 				</c:if>
 				

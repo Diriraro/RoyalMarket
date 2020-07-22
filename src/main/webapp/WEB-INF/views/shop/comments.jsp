@@ -176,7 +176,7 @@
 			$('#counter').html("(" + content.length + " / 최대 50자)"); //글자수 실시간 카운팅
 
 			if (content.length > 50) {
-				alert("최대 30자까지 입력 가능합니다.");
+				alert("최대 50자까지 입력 가능합니다.");
 				$(this).val(content.substring(0, 50));
 				$('#counter').html("(50 / 최대 50자)");
 			}
