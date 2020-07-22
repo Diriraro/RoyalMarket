@@ -27,11 +27,15 @@ public class FavoritesInterceptor extends HandlerInterceptorAdapter {
 		System.out.println(session);
 		System.out.println(mem_storeNum);
 		
+		
+		String referer = request.getHeader("referer");
+		System.out.println(referer);
+		
 		// 아닐떄 
 		if (session != mem_storeNum) {
 			 check1 = false;
 				request.setAttribute("result", "내것만 볼수 있어요.");
-				request.setAttribute("path", "../");
+				request.setAttribute("path", "../shop/myshop/?mem_storeNum="+session);
 				RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/common/result.jsp");
 				view.forward(request, response);			
 		}
