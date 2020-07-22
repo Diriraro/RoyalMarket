@@ -571,7 +571,7 @@ public class PaymentController {
 		///
 		StoreReviewVO reviewVO = new StoreReviewVO();
 		reviewVO = storeReviewService.recheck(sell_num);
-		System.out.println(reviewVO+"확인 ㄱㄷㄱㄷㄱㄷㄱㄷ");
+
 		
 		mv.addObject("recheck",reviewVO);
 		////

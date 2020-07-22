@@ -32,8 +32,7 @@ public class SellerPageInterceptor extends HandlerInterceptorAdapter{
 		
 		if(memberVO!=null) {	
 			for(int i=0;i<sell_history.size();i++) {
-				
-				System.out.println(sell_history.get(i).getSell_num());
+				//seller page 접근 조건
 				if(sell_history.get(i).getSell_num()==sell_num) {
 					check = true;
 		
