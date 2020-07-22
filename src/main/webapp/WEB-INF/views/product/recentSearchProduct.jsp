@@ -32,6 +32,8 @@
 	var cookieValue = '${cookieValue}';
 	if (cookieValue != null) {
 		setCookie("recentSearch", cookieValue, 1);
+	} else {
+		setCookie("recentSearch", cookieValue, 0);
 	}
 
 </script>

@@ -2,12 +2,12 @@ package com.iu.s1.paymentHistory;
 
 public class ProfitVO {
 
-	private long profit;
+	private String profit;
 	private long profitRate;
-	public long getProfit() {
+	public String getProfit() {
 		return profit;
 	}
-	public void setProfit(long profit) {
+	public void setProfit(String profit) {
 		this.profit = profit;
 	}
 	public long getProfitRate() {
