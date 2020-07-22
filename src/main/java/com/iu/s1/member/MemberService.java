@@ -24,7 +24,6 @@ public class MemberService {
 
 	public String certifiedPhoneNumber(String phoneNumber, String numStr) {
 
-
 		String api_key = "NCS4BQJGFWZTDPCY";
 		String api_secret = "UCUVOSZN6GWTUM4TIHD9Q2HDQONA2XSX";
 
@@ -169,12 +168,6 @@ public class MemberService {
 			bindingResult.rejectValue("mem_email", "memberVO.mem_email.same");
 			result = true;
 		}
-
-		/*
-		 * // 3.phone 중복검사 MemberVO memberVO3 = memberRepository.selectMember(memberVO);
-		 * if (memberVO3 != null) { bindingResult.rejectValue("mem_id",
-		 * "memberVO.mem_id.same"); result = true; }
-		 */
 
 		// 인증번호가 맞는지 확인
 		if (!memberVO.getPhoneCheck().equals(random)) {
