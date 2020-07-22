@@ -302,7 +302,6 @@ public class ShopController {
 		mv.addObject("fonum",storeFollowVO); 
 			
 		///  팔로워영역
-		
 		StoreFollowVO storeFollowVO2 = new StoreFollowVO();
 		storeFollowVO2.setTake_storeNum(mem_storeNum); //파라미터의 번호로 팔로워 리스트 확인
 		// 나를 팔로우한 사람 give_storeNum 의 데이터를 출력
