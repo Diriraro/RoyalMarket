@@ -2,60 +2,71 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-  <mapper namespace="com.iu.s1.shop.follow.StoreFollowRepository">
-  <!-- 팔로우  -->
-   <insert id="setInsertFollow" parameterType="com.iu.s1.shop.follow.StoreFollowVO" useGeneratedKeys="true" keyProperty="follow_Num">
-  		insert into follow values(0,#{give_storeNum},#{take_storeNum})
-  </insert> 
-  
-  <!-- 팔로우 해제 -->
-   <delete id="setDeleteFollow" parameterType="com.iu.s1.shop.follow.StoreFollowVO">
-  	delete from follow where follow_Num = #{follow_Num}
-  </delete>
-   
-  <!-- 팔로워 리스트 -->
-   <select id="getSelectListFollowers" resultType="com.iu.s1.shop.follow.StoreFollowVO">
+<mapper namespace="com.iu.s1.shop.follow.StoreFollowRepository">
+	<!-- 팔로우 -->
+	<insert id="setInsertFollow"
+		parameterType="com.iu.s1.shop.follow.StoreFollowVO"
+		useGeneratedKeys="true" keyProperty="follow_Num">
+		insert into follow values(0,#{give_storeNum},#{take_storeNum})
+	</insert>
+
+	<!-- 팔로우 해제 -->
+	<delete id="setDeleteFollow"
+		parameterType="com.iu.s1.shop.follow.StoreFollowVO">
+		delete from follow where follow_Num = #{follow_Num}
+	</delete>
+
+	<!-- 팔로워 리스트 -->
+	<select id="getSelectListFollowers"
+		resultType="com.iu.s1.shop.follow.StoreFollowVO">
 		select * from follow where give_storeNum = #{give_storeNum}
-  </select> 
-  
-  <!-- 팔로잉 리스트   나를 건사람들 리스트확인 -->
-   <select id="getSelectListFollowings" resultType="com.iu.s1.shop.follow.StoreFollowVO">
-  		select * from follow where take_storeNum = #{take_storeNum}
-  </select> 
-  
-  <!-- 팔로우 검증. -->
-	<!-- <select id="SelectOneFollow">
-	
-	</select> -->
-	
-	
-<!-- 번호 검색 -->	
-	<select id="selectnum" parameterType="com.iu.s1.shop.follow.StoreFollowVO" resultType="com.iu.s1.shop.follow.StoreFollowVO">
-		select follow_Num from follow where give_storeNum = #{give_storeNum} and take_storeNum = #{take_storeNum};
 	</select>
 
-<!-- take 이름 검색  -->	
-	<select id="getSelecttakeStoreName" parameterType="com.iu.s1.shop.follow.StoreFollowVO" resultType="String">
-		SELECT mem_storeName FROM member WHERE mem_storeNum=#{take_storeNum}
-	</select>
-	
-	
-	<!-- give 이름 검색  -->	
-	<select id="getSelectgiveStoreName" parameterType="com.iu.s1.shop.follow.StoreFollowVO" resultType="String">
-		SELECT mem_storeName FROM member WHERE mem_storeNum=#{give_storeNum}
-	</select>
-	
-<!-- giveco  -->
-	<select id="giveco" parameterType="com.iu.s1.shop.follow.StoreFollowVO" resultType="Long">
-		select count(*) from follow where give_storeNum = #{mem_storeNum}
+	<!-- 팔로잉 리스트 나를 건사람들 리스트확인 -->
+	<select id="getSelectListFollowings"
+		resultType="com.iu.s1.shop.follow.StoreFollowVO">
+		select * from follow where take_storeNum = #{take_storeNum}
 	</select>
 
-	
-<!-- takeco  -->	
-	<select id="takeco" parameterType="com.iu.s1.shop.follow.StoreFollowVO" resultType="Long">
-	select count(*) from follow where take_storeNum =  #{mem_storeNum}
+	<!-- 번호 검색 -->
+	<select id="selectnum"
+		parameterType="com.iu.s1.shop.follow.StoreFollowVO"
+		resultType="com.iu.s1.shop.follow.StoreFollowVO">
+		select follow_Num from follow where give_storeNum =
+		#{give_storeNum} and take_storeNum = #{take_storeNum};
 	</select>
-	
-	  
-  </mapper>
+
+	<!-- take 이름 검색 -->
+	<select id="getSelecttakeStoreName"
+		parameterType="com.iu.s1.shop.follow.StoreFollowVO"
+		resultType="String">
+		SELECT mem_storeName FROM member WHERE
+		mem_storeNum=#{take_storeNum}
+	</select>
+
+
+	<!-- give 이름 검색 -->
+	<select id="getSelectgiveStoreName"
+		parameterType="com.iu.s1.shop.follow.StoreFollowVO"
+		resultType="String">
+		SELECT mem_storeName FROM member WHERE
+		mem_storeNum=#{give_storeNum}
+	</select>
+
+	<!-- giveco -->
+	<select id="giveco"
+		parameterType="com.iu.s1.shop.follow.StoreFollowVO" resultType="Long">
+		select
+		count(*) from follow where give_storeNum = #{mem_storeNum}
+	</select>
+
+
+	<!-- takeco -->
+	<select id="takeco"
+		parameterType="com.iu.s1.shop.follow.StoreFollowVO" resultType="Long">
+		select count(*) from follow where take_storeNum = #{mem_storeNum}
+	</select>
+
+
+</mapper>
  

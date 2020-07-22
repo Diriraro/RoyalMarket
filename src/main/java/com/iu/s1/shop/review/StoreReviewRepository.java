@@ -22,9 +22,9 @@ public interface StoreReviewRepository {
 	
 	public String selectFileName(long re_num) throws Exception;
 	
-	// 1 번 sell_num 으로 store_product 검색해서 mem_storeNum 가져오기
+	// 1 번 sell_num 으로 store_product 검색해서 mem_storeNum
 	public long getSelectsell_num_mem_storeNum(long sell_num)throws Exception; 
-	// 2번 sell_num 으로 store_product 검색해서 sell_product 가져오기
+	// 2번 sell_num 으로 store_product 검색해서 sell_product
 	public String getSelectSell_num_sell_product(long sell_num) throws Exception;
 	
 	// 갯수
