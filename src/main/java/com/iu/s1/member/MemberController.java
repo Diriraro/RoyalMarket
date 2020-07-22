@@ -385,7 +385,7 @@ public class MemberController {
 	public void sendSMS2(String phoneNumber, Model model, HttpSession session, String id, String update)
 			throws Exception {
 		String msg = "";
-		System.out.println("upupup" + update);
+
 		if (update == null) {
 			update = "0";
 		}
@@ -619,7 +619,6 @@ public class MemberController {
 			HttpServletResponse response) throws Exception {
 
 		/* memberVO.setKind(profile); */
-
 		Cookie kakao_email = new Cookie("kakao_email", memberVO.getMem_email());
 		Cookie kakao_name = new Cookie("kakao_name", memberVO.getMem_name());
 		kakao_email.setMaxAge(600);
