@@ -46,12 +46,9 @@ public class ShopController {
 	private ProductService productService;
 	@Autowired
 	private MemberService memberService;
-	
-			
-	// 내상점 누르면 기본으로 상품페이지 출력
+	// 내상점 
 	@GetMapping("myshop")
 	public ModelAndView myshop(ModelAndView mv,HttpSession session,long mem_storeNum) throws Exception {
-		
 		StoreQnaVO qnaVO = new StoreQnaVO();
 		String msname = ((MemberVO)session.getAttribute("member")).getMem_storeName();
 		long msnum = ((MemberVO)session.getAttribute("member")).getMem_storeNum();
@@ -64,7 +61,6 @@ public class ShopController {
 		
 		StoreFollowVO storeFollowVO = new StoreFollowVO();
 		storeFollowVO = storeFollowService.selectnum(give_storeNum,take_storeNum);
-		//System.out.println(storeFollowVO+"::::::: 팔로우 번호 확인  없으면 널 있으면 번호생성");
 		mv.addObject("fonum",storeFollowVO); // 팔로우번호 있으면 전송 없으면 null
 		
 		// 상품 리스트 영역
@@ -131,14 +127,14 @@ public class ShopController {
 		return mv;
 	}
 	
-	//상점문의  post
+	//상점문의 하기
 	@PostMapping("comments")
 	public ModelAndView setInsertQna(ModelAndView mv,StoreQnaVO storeQnaVO,long mem_storeNum) throws Exception {
 		int result = storeQnaService.setInsertQna(storeQnaVO);
 		mv.setViewName("redirect:./comments?mem_storeNum="+mem_storeNum);
 		return mv;
 	}
-	
+	// 상점 문의 삭제
 	@RequestMapping(value = "setDelete", method = RequestMethod.GET)
 	public ModelAndView setDeleteQna(long sq_num,long mem_storeNum, ModelAndView mv)throws Exception{
 		
@@ -165,7 +161,6 @@ public class ShopController {
 		long take_storeNum=mem_storeNum;
 		StoreFollowVO storeFollowVO = new StoreFollowVO();
 		storeFollowVO = storeFollowService.selectnum(give_storeNum,take_storeNum);
-		//System.out.println(storeFollowVO+"::::::: 팔로우 번호 확인  없으면 널 있으면 번호생성");
 		mv.addObject("fonum",storeFollowVO); // 팔로우번호 있으면 전송 없으면 null
 			
 		// 찜 리스트
@@ -189,9 +184,6 @@ public class ShopController {
 		getregDate(mv, mem_storeNum);
 		mdata(mv, mem_storeNum);
 		// 
-		
-		
-		
 		mv.addObject("zilist",zar);
 		mv.addObject("mem_storeName",para); 
 		mv.addObject("mem_storeNum",mem_storeNum);
@@ -259,9 +251,11 @@ public class ShopController {
 		
 		List<StoreFollowVO> owiar = storeFollowService.getSelectListFollowers(storeFollowVO2);
 		for (StoreFollowVO storeFollowVO3 :owiar) {
+			// 상점번호 =  Give_storeNum 의 take_storeNum의 정보 조회
 			storeFollowVO3.setTake_storeName(storeFollowService.getSelecttakeStoreName(storeFollowVO3));
 			storeFollowVO3.setPco(productService.prodco(storeFollowVO3.getTake_storeNum())); 
 			storeFollowVO3.setFco(storeFollowService.takeco(storeFollowVO3.getTake_storeNum()));
+			//내가 팔로우한 상점의 점수를 계산
 			double avg2 = (storeReviewService.take_rate(storeFollowVO3.getTake_storeNum()));
 			int flo = (int)Math.floor(avg2); 
 			storeFollowVO3.setRe_rate(flo);
@@ -275,7 +269,7 @@ public class ShopController {
 			grade(mv, mem_storeNum);
 			getregDate(mv, mem_storeNum);
 			mdata(mv, mem_storeNum);
-				// 
+		// 
 
 		mv.addObject("mem_storeName",para); 
 		mv.addObject("mem_storeNum",mem_storeNum);
@@ -307,11 +301,11 @@ public class ShopController {
 		
 		mv.addObject("fonum",storeFollowVO); 
 			
-		///  팔로우영역
+		///  팔로워영역
 		
 		StoreFollowVO storeFollowVO2 = new StoreFollowVO();
-		storeFollowVO2.setTake_storeNum(mem_storeNum); //파라미터의 번호로 팔로우 리스트 확인
-		
+		storeFollowVO2.setTake_storeNum(mem_storeNum); //파라미터의 번호로 팔로워 리스트 확인
+		// 나를 팔로우한 사람 give_storeNum 의 데이터를 출력
 		List<StoreFollowVO> owear = storeFollowService.getSelectListFollowings(storeFollowVO2);
 		for (StoreFollowVO storeFollowVO3 :owear) {
 			storeFollowVO3.setGive_storeName(storeFollowService.getSelectgiveStoreName(storeFollowVO3));
@@ -333,8 +327,7 @@ public class ShopController {
 			grade(mv, mem_storeNum);
 			getregDate(mv, mem_storeNum);
 			mdata(mv, mem_storeNum);
-				// 
-		
+		// 
 		
 		mv.addObject("mem_storeName",para); 
 		mv.addObject("mem_storeNum",mem_storeNum);
@@ -346,7 +339,7 @@ public class ShopController {
 		return mv;
 	}
 	
-	// 팔로우	
+	// 팔로우	할때
 	@RequestMapping(value = "setinsertFollow", method = RequestMethod.GET)
 	public ModelAndView setInsertFollow(long give_storeNum,long take_storeNum,long mem_storeNum, ModelAndView mv,HttpServletRequest request)throws Exception{
 		// 이전페이지 주소찾기
@@ -365,6 +358,7 @@ public class ShopController {
 		return mv;
 	}
 	
+	// 언팔로우 할때
 	@RequestMapping(value = "setDeleteFollow", method = RequestMethod.GET)
 	public ModelAndView setDeleteFollow(long mem_storeNum, ModelAndView mv,long follow_Num,HttpServletRequest request)throws Exception{
 		
@@ -403,18 +397,14 @@ public class ShopController {
 	}
 	// 평점구하기 or 사진
 	public ModelAndView grade(ModelAndView mv, long mem_storeNum)throws Exception{
-		
 		// 리뷰 리스트 확인    ******
 				StoreReviewVO storeReviewVO = new StoreReviewVO();
 				storeReviewVO.setMem_storeNum(mem_storeNum);
 				List<StoreReviewVO> rear = storeReviewService.getSelectListReview(storeReviewVO);
-				
 				List<StoreReviewFileVO> storeReviewFileVOs = new ArrayList<StoreReviewFileVO>();
-				
 				double sum = 0.0;
 				double avg = 0.0;
 				int check = 0;
-				
 				for (StoreReviewVO storeReviewVO2 :rear) {
 					long sss= storeReviewVO2.getRe_num();
 					storeReviewFileVOs.addAll(storeReviewService.reviewFileSelect(sss));
@@ -428,19 +418,14 @@ public class ShopController {
 				
 				int ban = (int)Math.round(avg);
 				int flo = (int)Math.floor(avg); // 내림 정수
-				
-				// avg 0.0 - flo2 0.0  
+				// 예) 평균 4.6 - 내림 4 = (0.6) 반올림했을때  0일시 별안찍고 1일때 반별찍음
 				double flo2 = 0.0;
 				flo2 = Math.round(avg-flo);
-				
 				int flo3 = (int)Math.round(flo2);
-				
-				
-				mv.addObject("flo",flo); // 내림
-				mv.addObject("ban",ban); // 반올림
-				mv.addObject("avg",avg); // 평균
+				mv.addObject("flo",flo); // 내림    : 온전한 별갯수 출력
+				mv.addObject("ban",ban); // 반올림  
+				mv.addObject("avg",avg); // 평균    : 평점
 				mv.addObject("substar",flo3);// 반별
-				
 				mv.addObject("pfile", storeReviewFileVOs); // store 사진 출력
 				mv.addObject("relist",rear);
 		return mv;
@@ -458,21 +443,5 @@ public class ShopController {
 		mv.addObject("mdata", memberService.mdata(mem_sotreNum));
 		return mv;
 	}
-
-	
-	/*
-	 * //예외 처리 메서드
-	 * 
-	 * @ExceptionHandler(Exception.class) public ModelAndView error() { ModelAndView
-	 * mv = new ModelAndView();
-	 * 
-	 * mv.setViewName("error/error");
-	 * 
-	 * return mv; }
-	 * 
-	 * 
-	 * // 승범, 동윤 ,성민 합침
-	 */	
-
 
 }
