@@ -161,7 +161,7 @@
 
 
 	<script type="text/javascript">
-		$(".kind").click(function() {
+		$(".pkind").click(function() {
 			$("#sell_kind").val($(this).val());
 		});
 
