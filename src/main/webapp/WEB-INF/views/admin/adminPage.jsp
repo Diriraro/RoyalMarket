@@ -497,14 +497,24 @@
 		}
 
 		function getMemberSearchList(kind, search, mem_access) {
-			$.post("./list/getMemberList", {
-				mem_access : mem_access,
-				kind : kind,
-				search : search
-			}, function(result) {
-				$("#content").empty();
-				$("#content").append(result);
-			})
+				$
+					.ajax({
+						type : "POST",
+						url : "./list/getMemberList",
+						data : {mem_access : mem_access, kind : kind, search : search},
+						beforeSend : function() {
+							var loadingHtml = '<div id="loading" style="z-index: 1005;position: absolute; top:50%;left:50%; text-align:center;"> ';
+							loadingHtml += '<div class="loading_box"><img src="${pageContext.request.contextPath}/resources/images/loading.gif">"</div></div>';
+							$('#content').fadeTo("fast", 0.4).append(
+									loadingHtml);
+						},
+						success : function(result) {
+							$('#content').fadeTo("slow", 1).find('#loading')
+									.remove();
+							$("#content").empty();
+							$("#content").append(result);
+						}
+					})
 		}
 
 		// product

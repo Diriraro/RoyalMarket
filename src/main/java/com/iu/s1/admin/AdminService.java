@@ -13,6 +13,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.regex.Pattern;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -64,20 +65,39 @@ public class AdminService {
 		} else {
 			ar = memberRepository.getMemberList(mem_access); // mem_access = 1 인 멤버 검색
 		}
-		for(int i = 0 ; i < ar.size(); i++ ) {
+		for (int i = 0; i < ar.size(); i++) {
 			String pw = ar.get(i).getMem_pw();
-			pw = pw.replaceAll("(?<=.{3})." , "*");
+			pw = pw.replaceAll("(?<=.{3}).", "*");
 			ar.get(i).setMem_pw(pw);
+			String phone = ar.get(i).getMem_phone();
+			String s = phone.substring(0, 3)+"-";
+			String s2 = phone.substring(3, phone.length()-4)+"-";
+			String s3 = phone.substring(phone.length()-4, phone.length());
+			phone = s+s2+s3;
+			ar.get(i).setMem_phone(phone);
 		}
 		return ar;
 	}
 
 	public List<MemberVO> getMemberSearchList(String kind, String search, int mem_access) throws Exception {
+		
 		MemberVO memberVO = new MemberVO();
 		memberVO.setMem_access(mem_access);
 		memberVO.setKind(kind);
 		memberVO.setSearch(search);
-		return memberRepository.getMemberSearchList(memberVO);
+		List<MemberVO> ar = memberRepository.getMemberSearchList(memberVO);
+		for (int i = 0; i < ar.size(); i++) {
+			String pw = ar.get(i).getMem_pw();
+			pw = pw.replaceAll("(?<=.{3}).", "*");
+			ar.get(i).setMem_pw(pw);
+			String phone = ar.get(i).getMem_phone();
+			String s = phone.substring(0, 3)+"-";
+			String s2 = phone.substring(3, phone.length()-4)+"-";
+			String s3 = phone.substring(phone.length()-4, phone.length());
+			phone = s+s2+s3;
+			ar.get(i).setMem_phone(phone);
+		}
+		return ar;
 	}
 
 	// DashBoard need Data
@@ -102,6 +122,7 @@ public class AdminService {
 	public List<NoticeVO> getNoticeList() throws Exception {
 		return noticeRepository.findAllByOrderByNonumAsc();
 	}
+
 	public List<NoticeVO> getNoticeList2() throws Exception {
 		return noticeRepository.findAllByOrderByNonumDesc();
 	}
@@ -248,7 +269,7 @@ public class AdminService {
 	public List<ProfitVO> getProfit() throws Exception {
 		List<ProfitVO> ar = new ArrayList<ProfitVO>();
 		Date date = new Date();
-		
+
 		// date.getMonth() > 6때
 		for (int i = 0; i < date.getMonth() + 1; i++) {
 			Calendar cal1 = new GregorianCalendar(date.getYear() + 1900, i, 1);
@@ -265,13 +286,13 @@ public class AdminService {
 			ProfitVO profitVO = new ProfitVO();
 			profitVO.setProfit(nf.format(result));
 			profitVO.setProfitRate((long) (((double) result / 1000000) * 100));
-			if(profitVO.getProfitRate()>100L) {
+			if (profitVO.getProfitRate() > 100L) {
 				profitVO.setProfitRate(100L);
 			}
 			ar.add(profitVO);
 		}
-		
-		//date.getMonth() <= 6 때
+
+		// date.getMonth() <= 6 때
 
 		return ar;
 	}
