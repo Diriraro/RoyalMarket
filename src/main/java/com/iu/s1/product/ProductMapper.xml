@@ -187,6 +187,12 @@
 		where sell_num=#{sell_num}
 	</update>
 	
+		<delete id="productDelete" parameterType="ProductVO">
+		delete from
+		store_product where sell_num=#{sell_num}
+	</delete>
+	
+	
 	<!--shop에서 쓸꺼  -->
 	<select id="myList" parameterType="Long" resultType="ProductVO">
 	select * from store_product where mem_storeNum = #{mem_storeNum} order by sell_num desc;
@@ -218,9 +224,5 @@
 	</select>
 
 
-	<delete id="productDelete" parameterType="ProductVO">
-		delete from
-		store_product where sell_num=#{sell_num}
-	</delete>
 
 </mapper>
