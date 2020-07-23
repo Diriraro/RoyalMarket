@@ -24,13 +24,13 @@ public class ProductPayInterceptor extends HandlerInterceptorAdapter{
 		MemberVO memberVO = (MemberVO)request.getSession().getAttribute("member");
 		long sell_num = Long.parseLong(request.getParameter("sell_num"));
 		ProductVO productVO = productService.productSelect(sell_num);
-		String sell_product = request.getParameter("sell_product");
+
 		boolean check =false;
-		long sell_price = Long.parseLong(request.getParameter("sell_price"));
+
 		
 		if(memberVO!=null) {
 			if(productVO.getSell_status()==0) {
-				if(sell_price!=productVO.getSell_price()&&sell_product!=productVO.getSell_product()) {
+				if(sell_num!=productVO.getSell_num()) {
 					request.setAttribute("result", "잘못된 접근입니다.");
 					request.setAttribute("path", "../");
 					RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/common/result.jsp");
