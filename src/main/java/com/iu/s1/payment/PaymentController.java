@@ -119,7 +119,8 @@ public class PaymentController {
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("result", "포인트 충전을 실패 하였습니다.");
 		mv.addObject("path", "/");
-		mv.setViewName("common/result");
+		mv.addObject("close", 1);
+		mv.setViewName("common/result2");
 		
 		return mv;
 	}
@@ -680,7 +681,7 @@ public class PaymentController {
 		}
 		
 
-		// 트레이딩 테이블에서 가격과 판매자 아이디를 조회해서 다시 판매자에게 돈을 돌려줌
+	
 		TradingVO tradingVO =paymentService.tradingSelect(trading_num);
 		
 		if(tradingVO.getBuy_cancel()==1 && tradingVO.getSell_cancel()==1) {
