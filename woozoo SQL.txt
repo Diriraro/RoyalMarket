@@ -1,0 +1,246 @@
+CREATE TABLE `member` (
+  `mem_id` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '회원아이디',
+  `mem_pw` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '회원비밀번호',
+  `mem_name` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '이름',
+  `mem_email` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '이메일',
+  `mem_phone` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '전화번호',
+  `mem_storeNum` bigint NOT NULL AUTO_INCREMENT COMMENT '상점번호',
+  `mem_storeName` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '상점명',
+  `mem_address` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '주소',
+  `mem_point` bigint NOT NULL COMMENT '결제 포인트',
+  `mem_access` int NOT NULL COMMENT '로그인 제한관련',
+  `mem_regDate` date NOT NULL COMMENT '가입?날짜',
+  `mem_kakao` int NOT NULL COMMENT '카카오 회원가입확인',
+  `kind` varchar(255) DEFAULT NULL,
+  `search` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`mem_id`),
+  UNIQUE KEY `mem_storeNum` (`mem_storeNum`),
+  UNIQUE KEY `mem_storeName` (`mem_storeName`),
+  UNIQUE KEY `mem_email_UNIQUE` (`mem_email`),
+  UNIQUE KEY `mem_phone_UNIQUE` (`mem_phone`)
+) ENGINE=InnoDB AUTO_INCREMENT=88 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `notice` (
+  `no_num` bigint NOT NULL AUTO_INCREMENT,
+  `no_title` varchar(255) NOT NULL,
+  `no_regDate` date NOT NULL,
+  `no_contents` varchar(2000) NOT NULL,
+  PRIMARY KEY (`no_num`)
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `payment` (
+  `pay_num` bigint NOT NULL AUTO_INCREMENT COMMENT 'pay번호',
+  `pay_price` bigint NOT NULL COMMENT '금액',
+  `pay_in` bigint NOT NULL COMMENT '입금',
+  `pay_out` bigint NOT NULL COMMENT '출금',
+  `mem_id` varchar(45) NOT NULL COMMENT '회원 아이디',
+  `point_rest` bigint NOT NULL,
+  `pay_cash` bigint DEFAULT NULL COMMENT '결제시 cash 사용 여부/ 미사용시 null',
+  `buy_history_num` bigint NOT NULL COMMENT '히스토리 구매번호(적립금때문에 필수)',
+  `pay_date` date NOT NULL,
+  PRIMARY KEY (`pay_num`),
+  KEY `FK_payment_memID_idx` (`mem_id`),
+  CONSTRAINT `FK_payment_memID` FOREIGN KEY (`mem_id`) REFERENCES `member` (`mem_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=401 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='결제';
+
+CREATE TABLE `store_product` (
+  `sell_num` bigint NOT NULL AUTO_INCREMENT COMMENT '상품번호',
+  `mem_storeNum` bigint NOT NULL COMMENT '상점번호',
+  `sell_product` varchar(45) NOT NULL COMMENT '상품명',
+  `sell_price` varchar(45) NOT NULL COMMENT '가격',
+  `sell_info` varchar(4000) NOT NULL COMMENT '상품정보',
+  `sell_kind` varchar(45) NOT NULL COMMENT '카테고리',
+  `sell_tag` varchar(100) NOT NULL COMMENT '태그',
+  `sell_date` date NOT NULL COMMENT '날짜',
+  `sell_status` bigint NOT NULL,
+  `sell_hit` bigint NOT NULL,
+  PRIMARY KEY (`sell_num`),
+  KEY `FK_store_product_mem_storeNum_Member_mem_storeNum_idx` (`mem_storeNum`),
+  CONSTRAINT `FK_store_product_mem_storeNum_Member_mem_storeNum` FOREIGN KEY (`mem_storeNum`) REFERENCES `member` (`mem_storeNum`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=217 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `store_qna` (
+  `sq_num` bigint NOT NULL AUTO_INCREMENT COMMENT '문의번호',
+  `mem_storeNum` bigint NOT NULL COMMENT '상점번호',
+  `sq_storeNum` bigint NOT NULL COMMENT '작성자 상점명',
+  `sq_contents` varchar(500) NOT NULL COMMENT '상점 문의내용',
+  `sq_regDate` date DEFAULT NULL COMMENT '작성날짜',
+  PRIMARY KEY (`sq_num`),
+  KEY `FK_store_qna_mem_storeNum_Member_mem_storeNum_idx` (`mem_storeNum`),
+  CONSTRAINT `FK_sq_storeNum_mem_storeNum_Member_mem_storeNum` FOREIGN KEY (`mem_storeNum`) REFERENCES `member` (`mem_storeNum`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `FK_store_qna_mem_storeNum_Member_mem_storeNum` FOREIGN KEY (`mem_storeNum`) REFERENCES `member` (`mem_storeNum`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=114 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='상점문의';
+
+CREATE TABLE `store_review` (
+  `re_num` bigint NOT NULL AUTO_INCREMENT COMMENT '후기번호',
+  `mem_storeNum` bigint NOT NULL COMMENT '상점번호',
+  `sell_product` varchar(45) NOT NULL COMMENT '상품',
+  `re_context` varchar(2000) NOT NULL COMMENT '후기내용',
+  `re_rate` bigint NOT NULL COMMENT '평점',
+  `re_wDate` date NOT NULL COMMENT '작성날짜',
+  `re_storeName` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '작성자 상점이름',
+  `re_storeNum` bigint NOT NULL COMMENT '작성자 상점번호',
+  `sell_num` bigint NOT NULL COMMENT '상품번호',
+  PRIMARY KEY (`re_num`),
+  UNIQUE KEY `sell_num_UNIQUE` (`sell_num`),
+  KEY `FK_store_review_mem_storeNum_Member_mem_storeNum_idx` (`mem_storeNum`),
+  KEY `FK_storeReview_reStoreName_idx` (`re_storeName`),
+  KEY `FK_storeReview_reStoreNum_idx` (`re_storeNum`),
+  KEY `FK_storeReview_sellNum_idx` (`sell_num`),
+  CONSTRAINT `FK_store_review_mem_storeNum_Member_mem_storeNum` FOREIGN KEY (`mem_storeNum`) REFERENCES `member` (`mem_storeNum`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `FK_storeReview_reStoreName` FOREIGN KEY (`re_storeName`) REFERENCES `member` (`mem_storeName`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `FK_storeReview_reStoreNum` FOREIGN KEY (`re_storeNum`) REFERENCES `member` (`mem_storeNum`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `FK_storeReview_sellNum` FOREIGN KEY (`sell_num`) REFERENCES `store_product` (`sell_num`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=69 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='상점후기';
+
+CREATE TABLE `trading` (
+  `sell_num` bigint NOT NULL,
+  `sell_price` bigint NOT NULL,
+  `buyer_id` varchar(45) NOT NULL,
+  `seller_id` varchar(45) NOT NULL,
+  `receive` bigint NOT NULL,
+  `give` bigint NOT NULL,
+  `trading_num` bigint NOT NULL AUTO_INCREMENT,
+  `buy_cancel` bigint NOT NULL COMMENT '구매측 취소',
+  `sell_cancel` bigint NOT NULL COMMENT '판매측 취소',
+  PRIMARY KEY (`trading_num`)
+) ENGINE=InnoDB AUTO_INCREMENT=278 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `paycheck` (
+  `mem_id` varchar(45) NOT NULL COMMENT '회원 아이디',
+  `pay_checkId` varchar(1000) NOT NULL COMMENT '결제 유효 번호',
+  PRIMARY KEY (`mem_id`),
+  CONSTRAINT `FK_paycheck_mem_id_Member_mem_id` FOREIGN KEY (`mem_id`) REFERENCES `member` (`mem_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='결제 유효성';
+
+CREATE TABLE `paystats` (
+  `paystatsnum` bigint NOT NULL AUTO_INCREMENT,
+  `sell_date` date DEFAULT NULL,
+  `seller_address` varchar(45) DEFAULT NULL,
+  `sell_commition` bigint DEFAULT NULL,
+  PRIMARY KEY (`paystatsnum`)
+) ENGINE=InnoDB AUTO_INCREMENT=96 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `product_qna` (
+  `pq_num` bigint NOT NULL AUTO_INCREMENT COMMENT '상품문의번호',
+  `sell_num` bigint NOT NULL COMMENT '상품번호',
+  `pq_storeNum` bigint NOT NULL COMMENT '작성자 상점번호',
+  `pq_contents` varchar(60) NOT NULL COMMENT '상품 문의내용',
+  `pq_regDate` date NOT NULL COMMENT '작성날짜',
+  `pq_storeName` varchar(45) NOT NULL,
+  PRIMARY KEY (`pq_num`),
+  KEY `FK_productqna_mem_storeNum_idx` (`pq_storeNum`),
+  KEY `FK_productqna_sellNum_idx` (`sell_num`),
+  KEY `fk_pq_storeName` (`pq_storeName`),
+  CONSTRAINT `fk_pq_storeName` FOREIGN KEY (`pq_storeName`) REFERENCES `member` (`mem_storeName`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `FK_productqna_mem_storeNum` FOREIGN KEY (`pq_storeNum`) REFERENCES `member` (`mem_storeNum`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `FK_productqna_sellNum` FOREIGN KEY (`sell_num`) REFERENCES `store_product` (`sell_num`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=226 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='판매-상품문의';
+
+CREATE TABLE `follow` (
+  `follow_Num` int NOT NULL AUTO_INCREMENT COMMENT 'pk',
+  `give_storeNum` bigint NOT NULL COMMENT 'give',
+  `take_storeNum` bigint NOT NULL COMMENT 'take',
+  PRIMARY KEY (`follow_Num`),
+  KEY `FK_follow_give_storeNum` (`give_storeNum`),
+  KEY `FK_follow_take_storeNum` (`take_storeNum`),
+  CONSTRAINT `FK_follow_give_storeNum` FOREIGN KEY (`give_storeNum`) REFERENCES `member` (`mem_storeNum`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `FK_follow_take_storeNum` FOREIGN KEY (`take_storeNum`) REFERENCES `member` (`mem_storeNum`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=273 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `sell_file` (
+  `sefile_num` bigint NOT NULL AUTO_INCREMENT COMMENT '판매사진번호',
+  `sell_num` bigint NOT NULL COMMENT '상품번호',
+  `file_name` varchar(200) NOT NULL COMMENT '파일이름',
+  `ori_name` varchar(200) NOT NULL COMMENT '파일원래이름',
+  PRIMARY KEY (`sefile_num`),
+  KEY `FK_sellFile_sellNum_idx` (`sell_num`),
+  CONSTRAINT `FK_sellFile_sellNum` FOREIGN KEY (`sell_num`) REFERENCES `store_product` (`sell_num`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=327 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='판매사진저장';
+
+CREATE TABLE `sell_history` (
+  `mem_id` varchar(45) NOT NULL,
+  `sell_num` bigint NOT NULL,
+  `sell_price` bigint NOT NULL,
+  `status` bigint NOT NULL,
+  `sell_history_num` bigint NOT NULL AUTO_INCREMENT,
+  `sell_product` varchar(45) NOT NULL,
+  `file_name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `buyer_id` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `sell_date` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `sell_check` int NOT NULL,
+  PRIMARY KEY (`sell_history_num`)
+) ENGINE=InnoDB AUTO_INCREMENT=278 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `savecash` (
+  `mem_id` varchar(45) NOT NULL COMMENT '회원아이디',
+  `mem_cash` bigint NOT NULL COMMENT '적립금',
+  PRIMARY KEY (`mem_id`),
+  CONSTRAINT `FK_savingcash_memId` FOREIGN KEY (`mem_id`) REFERENCES `member` (`mem_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='회원별 적립금';
+
+CREATE TABLE `qna` (
+  `qna_num` bigint NOT NULL AUTO_INCREMENT COMMENT 'qna번호',
+  `qna_kind` varchar(45) NOT NULL COMMENT '카테고리',
+  `mem_id` varchar(45) NOT NULL COMMENT '회원 아이디',
+  `qna_contents` varchar(2000) NOT NULL COMMENT '상담내용',
+  `qna_regDate` date NOT NULL COMMENT '상담날짜',
+  `qna_check` int NOT NULL COMMENT '완료체크',
+  `qna_checkDate` date DEFAULT NULL,
+  `qna_title` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  PRIMARY KEY (`qna_num`),
+  KEY `FK_qna_mem_id_idx` (`mem_id`),
+  CONSTRAINT `FK_qna_mem_id` FOREIGN KEY (`mem_id`) REFERENCES `member` (`mem_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='1:1 상담하기';
+
+CREATE TABLE `qna_file` (
+  `qfile_num` bigint NOT NULL AUTO_INCREMENT COMMENT '상담사진번호',
+  `qna_num` bigint NOT NULL COMMENT 'qna번호',
+  `file_name` varchar(200) NOT NULL COMMENT '파일이름',
+  `ori_name` varchar(200) NOT NULL COMMENT '파일원래이름',
+  PRIMARY KEY (`qfile_num`),
+  KEY `FK_qnaFile_qnaNum_idx` (`qna_num`),
+  CONSTRAINT `FK_qnaFile_qnaNum` FOREIGN KEY (`qna_num`) REFERENCES `qna` (`qna_num`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='상담사진첨부';
+
+CREATE TABLE `review_file` (
+  `refile_num` bigint NOT NULL AUTO_INCREMENT COMMENT '후기 사진번호',
+  `re_num` bigint NOT NULL COMMENT '후기번호',
+  `file_name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '파일이름',
+  `ori_name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '파일원래이름',
+  PRIMARY KEY (`refile_num`),
+  KEY `FK_reviewFile_reNum_idx` (`re_num`),
+  CONSTRAINT `FK_reviewFile_reNum` FOREIGN KEY (`re_num`) REFERENCES `store_review` (`re_num`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=73 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='후기 사진 저장';
+
+CREATE TABLE `visitor` (
+  `day` varchar(45) NOT NULL,
+  `count` int DEFAULT NULL,
+  PRIMARY KEY (`day`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+CREATE TABLE `zzim` (
+  `mem_storeNum` bigint NOT NULL COMMENT '찜을 한 사람의 상점번호',
+  `sell_num` bigint NOT NULL COMMENT '상품번호',
+  `zzim_num` bigint NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`zzim_num`),
+  KEY `FK_zzim_memStoreNum_idx` (`mem_storeNum`),
+  KEY `FK_zzim_sellNum_idx` (`sell_num`),
+  CONSTRAINT `FK_zzim_memStoreNum` FOREIGN KEY (`mem_storeNum`) REFERENCES `member` (`mem_storeNum`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `FK_zzim_sellNum` FOREIGN KEY (`sell_num`) REFERENCES `store_product` (`sell_num`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=243 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci COMMENT='찜';
+
+CREATE TABLE `buy_history` (
+  `mem_id` varchar(45) NOT NULL,
+  `sell_num` bigint NOT NULL,
+  `sell_price` bigint NOT NULL,
+  `status` bigint NOT NULL,
+  `buy_history_num` bigint NOT NULL,
+  `sell_product` varchar(45) NOT NULL,
+  `file_name` varchar(200) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `seller_id` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `buy_date` varchar(45) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `buy_check` int NOT NULL,
+  PRIMARY KEY (`buy_history_num`),
+  UNIQUE KEY `buy_history_num_UNIQUE` (`buy_history_num`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
