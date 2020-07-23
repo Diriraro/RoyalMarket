@@ -106,6 +106,11 @@ public class AdminController {
 		List<Map.Entry<String, Long>> tradeAr = adminService.getLocateTradeCount();
 		List<ProfitVO> profitAr = new ArrayList<ProfitVO>();
 		profitAr = adminService.getProfit();
+		if(profitAr.size() > 7) {
+			for(int i = 0 ; i < profitAr.size()-7; i++) {
+				profitAr.remove(i);
+			}
+		}
 
 		long tradeCount = 0;
 		if (adminService.getDailyTradeCount() != null) {
@@ -380,6 +385,9 @@ public class AdminController {
 			saveCashVO.setMem_cash(sc);
 			paymentService.updateSC(saveCashVO);
 
+			// 상품 status 업데이트 
+			productVO.setSell_status(2l);
+			paymentService.product_sell_statusUp(productVO);
 			// 포인트 업데이트 및 trading에서 삭제
 			paymentService.pointUpdate(memberVO);
 			paymentService.tradingDelete(tradingVO.getTrading_num());

@@ -99,8 +99,7 @@
 			<b>지역별 거래량</b>
 		</h3>
 		<br>
-		<table
-			class="table">
+		<table class="table">
 			<thead>
 				<tr>
 					<th>지역</th>
@@ -161,7 +160,8 @@
 				</thead>
 				<tbody>
 					<c:catch>
-						<c:forEach items="${list}" var="li" begin="${list.size()-2}" end="${list.size()}">
+						<c:forEach items="${list}" var="li" begin="${list.size()-2}"
+							end="${list.size()}">
 							<tr>
 								<td>${li.nonum}</td>
 								<td><a href="#" title="NoticeSelect"
@@ -200,11 +200,10 @@
 		</c:forEach> --%>
 		<div class="vGraph">
 			<ul>
-				<c:forEach items="${profitAr}" var="profit" varStatus="i" begin="${profitAr.size()-7}" end="${profitAr.size()}">
-						<li><span class="gTerm">${i.index+1}월 매출 <br><span>${profit.profit}
-									/ 1,000,000 원</span><br></span><span
-								class="gBar"
-								style="height:${profit.profitRate}%; background-color : purple; color : white;"><span>${profit.profitRate}%</span></span></li>
+				<c:forEach items="${profitAr}" var="profit" varStatus="i">
+					<li><span class="gTerm">${i.index+1}월 매출 <br> <span>${profit.profit}
+								/ 1,000,000 원</span><br></span><span class="gBar"
+						style="height:${profit.profitRate}%; background-color : purple; color : white;"><span>${profit.profitRate}%</span></span></li>
 				</c:forEach>
 			</ul>
 		</div>

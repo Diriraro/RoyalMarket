@@ -641,15 +641,6 @@ iframe {
 					"width=570, height=350, resizable = no, scrollbars = no");
 		}
 
-		function getText(obj) {
-			if (obj.options[obj.selectedIndex].text == "직접입력") {
-				$("#email").css("display", "block");
-			}else{
-				$("#email").css("display", "none");
-				}
-			
-		}
-
 
 		function msg_time() {	// 1초씩 카운트
 			
