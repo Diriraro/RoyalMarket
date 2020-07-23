@@ -248,7 +248,6 @@ public class AdminController {
 	@GetMapping("getManToManList")
 	public void getManToManList(Model model, String search) throws Exception {
 		List<MemberVO> ar = new ArrayList<MemberVO>();
-//		ar = adminService.getManToManList();
 		if(search==null) {
 			search="";
 		}
@@ -269,7 +268,6 @@ public class AdminController {
 			model.addAttribute("qna_adlist", ar2);
 			model.addAttribute("list", ar);
 		}else {
-			System.out.println("123821093821038129038219048129038120938120938");
 			List<QnaVO> ar2 = qnaService.qnaAdminList2(search);
 			for (QnaVO qnaVO : ar2) {
 				int fileCheck = qnaService.fileCheck(qnaVO.getQna_num());
@@ -294,12 +292,10 @@ public class AdminController {
 			search = "";
 		}
 		List<QnaVO> ar = qnaService.qnaMemberSearch(search);
-//		List<QnaVO> ar2 = qnaService.qnaAdminList();
-//		for (QnaVO qnaVO : ar2) {
-//			int fileCheck = qnaService.fileCheck(qnaVO.getQna_num());
-//			qnaVO.setFileCheck(fileCheck);
-//		}
-//		model.addAttribute("list", ar);
+		for (QnaVO qnaVO : ar) {
+			int fileCheck = qnaService.fileCheck(qnaVO.getQna_num());
+			qnaVO.setFileCheck(fileCheck);
+		}
 
 		model.addAttribute("qna_adlist", ar);
 	}

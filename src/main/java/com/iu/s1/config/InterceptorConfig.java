@@ -83,7 +83,7 @@ public class InterceptorConfig implements WebMvcConfigurer {
 		.excludePathPatterns("/product/productList")
 		.excludePathPatterns("/product/homeProductList")
 		.excludePathPatterns("/product/recProductList")
-		.excludePathPatterns("/product/productPay")
+		.excludePathPatterns("/payment	/productPay")
 		.excludePathPatterns("/qna/qnaAdminList")
 		.excludePathPatterns("/qna/qnaAnswer")
 		.excludePathPatterns("/product/recentSearchProduct");
@@ -106,7 +106,7 @@ public class InterceptorConfig implements WebMvcConfigurer {
 		.addPathPatterns("/shop/setinsertFollow");
 		
 		registry.addInterceptor(productPayInterceptor)
-		.addPathPatterns("/product/productPay");
+		.addPathPatterns("/payment/productPay");
 		
 		registry.addInterceptor(followInterceptors2)
 		.addPathPatterns("/shop/setDeleteFollow");
