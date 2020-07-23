@@ -22,13 +22,23 @@ public class ProductPayInterceptor extends HandlerInterceptorAdapter{
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		MemberVO memberVO = (MemberVO)request.getSession().getAttribute("member");
-		long sell_num = Long.parseLong(request.getParameter("sell_name"));
+		long sell_num = Long.parseLong(request.getParameter("sell_num"));
 		ProductVO productVO = productService.productSelect(sell_num);
+		String sell_product = request.getParameter("sell_product");
 		boolean check =false;
+		long sell_price = Long.parseLong(request.getParameter("sell_price"));
 		
 		if(memberVO!=null) {
-			if(productVO.getSell_status()==0) {				
-				check=true;
+			if(productVO.getSell_status()==0) {
+				if(sell_price!=productVO.getSell_price()&&sell_product!=productVO.getSell_product()) {
+					request.setAttribute("result", "잘못된 접근입니다.");
+					request.setAttribute("path", "../");
+					RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/common/result.jsp");
+					view.forward(request, response);
+				}else {
+					check=true;
+				}
+				
 			}else {
 				request.setAttribute("result", "현재 구매가능한 상품이 아닙니다.");
 				request.setAttribute("path", "../");
