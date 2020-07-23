@@ -28,12 +28,8 @@ public class BuyerPageInterceptor extends HandlerInterceptorAdapter {
 		long sell_num = Long.parseLong(request.getParameter("sell_num"));
 		List<Buy_HistoryVO> buy_history = paymentService.buy_hisSelect(memberVO.getMem_id());
 		boolean check1 = false;
-
-
-
 			if (memberVO != null) {
 				for (int i = 0; i < buy_history.size(); i++) {
-
 					// buyer page 접근 조건
 					if (buy_history.get(i).getSell_num() == sell_num) {
 						check1 = true;
