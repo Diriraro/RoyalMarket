@@ -163,7 +163,7 @@
 						src="${pageContext.request.contextPath}/resources/images/phone_button.png"></a> --%>
 						<img style="margin-top: 65px; cursor: pointer;" alt="" id="phone" data-toggle="modal" data-target="#my2Modal" 
 							src="${pageContext.request.contextPath}/resources/images/phone_button.png">
-					<a href="../payment/productPay?sell_product=${vo.sell_product}&sell_price=${vo.sell_price}&sell_num=${vo.sell_num}"><img style="margin-top: 65px; cursor: pointer;" alt=""
+					<a href="../payment/productPay?sell_num=${vo.sell_num}"><img style="margin-top: 65px; cursor: pointer;" alt=""
 						src="${pageContext.request.contextPath}/resources/images/buy_button.png"></a>
 				</c:if> 
 			</form>

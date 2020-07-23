@@ -162,8 +162,6 @@ public class PaymentController {
 	public ModelAndView productPay(HttpServletRequest request)throws Exception{
 		ModelAndView mv = new ModelAndView();
 		MemberVO memberVO = (MemberVO)request.getSession().getAttribute("member");
-		String sell_product = request.getParameter("sell_product");
-		long sell_price = Long.parseLong(request.getParameter("sell_price"));
 		long sell_num = Long.parseLong(request.getParameter("sell_num"));
 		ProductVO productVO = productService.productSelect(sell_num);
 		
@@ -183,13 +181,13 @@ public class PaymentController {
 			String mem_id = memberVO.getMem_id();
 			long point = paymentService.pointSelect(mem_id);
 			
-			String image = productService.selectFileName(sell_num);
+			String image = productService.selectFileName(productVO.getSell_num());
 			
 			mv.addObject("image", image);
 			mv.addObject("point", point);
-			mv.addObject("sell_product", sell_product);
-			mv.addObject("sell_price", sell_price);
-			mv.addObject("sell_num",sell_num);
+			mv.addObject("sell_product", productVO.getSell_product());
+			mv.addObject("sell_price", productVO.getSell_price());
+			mv.addObject("sell_num",productVO.getSell_num());
 			
 			mv.setViewName("/payment/productPay");
 			
@@ -209,7 +207,7 @@ public class PaymentController {
 	
 	// 상풀결제 중간 페이지
 	@PostMapping("productTrading")
-	public ModelAndView productTrading(HttpServletRequest request, long sell_num, long sell_price, long cash)throws Exception{
+	public ModelAndView productTrading(HttpServletRequest request, ProductVO productVO, long cash)throws Exception{
 		// 상품의 가격만큼 포인트 차감
 		ModelAndView mv = new ModelAndView();
 		
@@ -218,19 +216,17 @@ public class PaymentController {
 //		long sell_price = Long.parseLong(request.getParameter("sell_price"));
 		
 		// 결제 진행 테이블 입력
-		TradingVO tradingVO = paymentService.tradingSellNumSelect(sell_num);
+		TradingVO tradingVO = paymentService.tradingSellNumSelect(productVO.getSell_num());
 		
 		if(tradingVO==null) {
 			tradingVO = new TradingVO();
-			ProductVO productVO = new ProductVO();
 			productVO.setSell_status(1l);
-			productVO.setSell_num(sell_num);
 			paymentService.product_sell_statusUp(productVO);
 			MemberVO memberVO = (MemberVO)request.getSession().getAttribute("member");
-			tradingVO.setSell_price(sell_price+cash);		// 이미 sell_price가 jsp에서 cash만큼 빠져서 넘어오기 때문에 더해줌 / 
-			tradingVO.setSell_num(sell_num);
+			tradingVO.setSell_price(productVO.getSell_price()+cash);		// 이미 sell_price가 jsp에서 cash만큼 빠져서 넘어오기 때문에 더해줌 / 
+			tradingVO.setSell_num(productVO.getSell_num());
 			tradingVO.setBuyer_id(memberVO.getMem_id());
-			String seller_id=paymentService.seller_id_select(sell_num);
+			String seller_id=paymentService.seller_id_select(productVO.getSell_num());
 			tradingVO.setSeller_id(seller_id);
 			paymentService.tradingInsert(tradingVO);
 			// 사용한 적립금 빼기
@@ -247,20 +243,20 @@ public class PaymentController {
 			long nowPoint = paymentService.pointSelect(memberVO.getMem_id());
 			System.out.println(nowPoint);
 			payVO.setMem_id(memberVO.getMem_id());
-			payVO.setPay_price(sell_price);
-			payVO.setPoint_rest(nowPoint-sell_price); 			// parameter로 넘어올때 sell_price = (sell_price+택배비)-cash 하고 넘어옴
+			payVO.setPay_price(productVO.getSell_price());
+			payVO.setPoint_rest(nowPoint-productVO.getSell_price()); 			// parameter로 넘어올때 sell_price = (sell_price+택배비)-cash 하고 넘어옴
 			payVO.setPay_cash(cash);
 			
 			// member point 업데이트
-			memberVO.setMem_point(nowPoint-sell_price);			// parameter로 넘어올때 sell_price = (sell_price+택배비)-cash 하고 넘어옴
+			memberVO.setMem_point(nowPoint-productVO.getSell_price());			// parameter로 넘어올때 sell_price = (sell_price+택배비)-cash 하고 넘어옴
 			paymentService.pointUpdate(memberVO);
 			
 			// 구매내역 입력 
 			Buy_HistoryVO buy_HistoryVO = new Buy_HistoryVO();
 			
 			// 상품이름 검색
-			productVO = paymentService.productSelect(sell_num);
-			String file_name=productService.selectFileName(sell_num);
+			productVO = paymentService.productSelect(productVO.getSell_num());
+			String file_name=productService.selectFileName(productVO.getSell_num());
 			
 			// 날짜 설정 
 			SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -269,7 +265,7 @@ public class PaymentController {
 		
 			
 			buy_HistoryVO.setMem_id(memberVO.getMem_id());
-			buy_HistoryVO.setSell_num(sell_num);
+			buy_HistoryVO.setSell_num(productVO.getSell_num());
 			buy_HistoryVO.setSell_price(productVO.getSell_price());
 			buy_HistoryVO.setSell_product(productVO.getSell_product());
 			buy_HistoryVO.setBuy_history_num(tradingVO.getTrading_num());
@@ -284,7 +280,7 @@ public class PaymentController {
 			// 판매 내역 입력 
 			Sell_HistoryVO sell_HistoryVO = new Sell_HistoryVO();
 			sell_HistoryVO.setMem_id(seller_id);
-			sell_HistoryVO.setSell_num(sell_num);
+			sell_HistoryVO.setSell_num(productVO.getSell_num());
 			sell_HistoryVO.setSell_price(productVO.getSell_price());
 			sell_HistoryVO.setSell_product(productVO.getSell_product());
 			sell_HistoryVO.setSell_history_num(tradingVO.getTrading_num());
