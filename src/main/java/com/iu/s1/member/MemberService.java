@@ -24,8 +24,8 @@ public class MemberService {
 
 	public String certifiedPhoneNumber(String phoneNumber, String numStr) {
 
-		String api_key = "NCS4BQJGFWZTDPCY";
-		String api_secret = "UCUVOSZN6GWTUM4TIHD9Q2HDQONA2XSX";
+		String api_key = "NCSSPTUQNJEDBXUC";
+		String api_secret = "6EOYRUEOV9I7NEMVQJRACCBXZPKCMILS";
 
 
 		Message coolsms = new Message(api_key, api_secret);
@@ -35,7 +35,7 @@ public class MemberService {
 		HashMap<String, String> params = new HashMap<String, String>();
 		params.put("to", phoneNumber); // 수신전화번호
 
-		params.put("from", "01020819512"); // 발신전화번호. 테스트시에는 발신,수신 둘다 본인 번호로 하면 됨
+		params.put("from", "01041537706"); // 발신전화번호. 테스트시에는 발신,수신 둘다 본인 번호로 하면 됨
 
 		params.put("type", "SMS");
 		params.put("text", "인증번호는" + "[" + numStr + "]" + "입니다.");
@@ -55,15 +55,15 @@ public class MemberService {
 
 	public String findIdByPhone(String phoneNumber, String id) {
 
-		String api_key = "NCS4BQJGFWZTDPCY";
-		String api_secret = "UCUVOSZN6GWTUM4TIHD9Q2HDQONA2XSX";
+		String api_key = "NCSSPTUQNJEDBXUC";
+		String api_secret = "6EOYRUEOV9I7NEMVQJRACCBXZPKCMILS";
 		Message coolsms = new Message(api_key, api_secret);
 		String error_count = "1";
 
 		// 4 params(to, from, type, text) are mandatory. must be filled
 		HashMap<String, String> params = new HashMap<String, String>();
 		params.put("to", phoneNumber); // 수신전화번호
-		params.put("from", "01020819512"); // 발신전화번호. 테스트시에는 발신,수신 둘다 본인 번호로 하면 됨
+		params.put("from", "01041537706"); // 발신전화번호. 테스트시에는 발신,수신 둘다 본인 번호로 하면 됨
 		params.put("type", "SMS");
 		params.put("text", "회원님의 아이디는" + "[" + id + "]" + "입니다.");
 		params.put("app_version", "test app 2.2"); // application name and version
