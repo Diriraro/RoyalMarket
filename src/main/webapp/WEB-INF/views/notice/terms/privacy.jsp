@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>개인정보 처리방침 - 우주장터</title>
 <c:import url="../../template/boot.jsp"></c:import>
 
 <c:import url="../../template/style.jsp"></c:import>
